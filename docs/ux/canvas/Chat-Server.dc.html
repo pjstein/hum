@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Context chat: channels</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 920px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; padding: 16px 20px 24px 20px; gap: 16px">
+  <div style="display: flex; justify-content: space-between; align-items: center">
+    <span style="display: flex; align-items: center; gap: 12px">
+      <a href="B-Home.dc.html" aria-label="Back" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 22px; background: #181B21; color: #F3F1EA">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></a>
+      <span style="display: flex; flex-direction: column">
+        <span style="font-size: 20px; font-weight: 800">Millbrook Tenants Union</span>
+        <span style="font-size: 12px; color: #B9BDC4">1,240 members · 86 online</span>
+      </span>
+    </span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #181B21; border-radius: 12px">
+    <a href="B-Home.dc.html" style="display: flex; align-items: center; justify-content: center; height: 38px; border-radius: 9px; color: #F3F1EA; font-size: 14px; font-weight: 700; text-decoration: none">Deck</a>
+    <span style="display: flex; align-items: center; justify-content: center; height: 38px; border-radius: 9px; background: #F3F1EA; color: #0F1115; font-size: 14px; font-weight: 800">Chat</span>
+    <a href="IBIS-Map.dc.html" style="display: flex; align-items: center; justify-content: center; height: 38px; border-radius: 9px; color: #F3F1EA; font-size: 14px; font-weight: 700; text-decoration: none">Map</a>
+  </div>
+
+  <a href="Chat-Privacy.dc.html" style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #6EA8FF; text-decoration: none">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+    End-to-end encrypted · what the server sees</a>
+
+  <section style="display: flex; flex-direction: column; gap: 6px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Issues</span>
+    <sc-for list="{{issues}}" as="c" hint-placeholder-count="3">
+      <a href="{{c.href}}" style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px; background: #181B21; border-radius: 12px; color: #F3F1EA; text-decoration: none">
+        <span style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 11px; background: {{c.dot}}; color: #0F1115; font-size: 12px; font-weight: 800">?</span>
+        <span style="flex: 1; font-size: 15px; font-weight: {{c.weight}}">#{{c.name}}</span>
+        <span style="font-size: 11px; font-weight: 800; padding: 3px 7px; border-radius: 6px; background: {{c.tagBg}}; color: {{c.tagFg}}">{{c.status}}</span>
+        <sc-if value="{{c.hasUnread}}" hint-placeholder-val="{{false}}">
+          <span style="min-width: 22px; height: 22px; box-sizing: border-box; padding: 0 6px; border-radius: 11px; background: #F3F1EA; color: #0F1115; font-family: 'DM Mono', monospace; font-size: 12px; display: inline-flex; align-items: center; justify-content: center">{{c.unread}}</span>
+        </sc-if>
+      </a>
+    </sc-for>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 2px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4; margin-bottom: 4px">Channels</span>
+    <sc-for list="{{channels}}" as="c" hint-placeholder-count="4">
+      <span style="display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; color: {{c.color}}">
+        <span style="font-family: 'DM Mono', monospace; color: #8D939C">#</span>
+        <span style="flex: 1; font-size: 15px; font-weight: {{c.weight}}">{{c.name}}</span>
+        <span style="font-size: 12px; color: #8D939C">{{c.meta}}</span>
+      </span>
+    </sc-for>
+    <span style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; margin-top: 4px; background: #181B21; border-radius: 12px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8D44D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10v4h3l6 4V6l-6 4z M16 9a4 4 0 0 1 0 6"></path></svg>
+      <span style="flex: 1; font-size: 15px; font-weight: 700">Thursday meeting</span>
+      <span style="font-size: 12px; color: #E8D44D">voice · 12 in</span>
+    </span>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 2px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4; margin-bottom: 4px">Organizers</span>
+    <span style="display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; color: #B9BDC4">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+      <span style="flex: 1; font-size: 15px">organizers</span>
+      <span style="font-size: 12px; color: #8D939C">3 members</span>
+    </span>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const st = {
+      deck: { tagBg: '#E8D44D', tagFg: '#0F1115', dot: '#E8D44D' },
+      map: { tagBg: '#20242B', tagFg: '#F3F1EA', dot: '#B9BDC4' },
+      out: { tagBg: '#20242B', tagFg: '#6EA8FF', dot: '#6EA8FF' }
+    };
+    return {
+      issues: [
+        Object.assign({ name: 'repairs', status: 'Deck open', unread: 14, hasUnread: true, weight: 800, href: 'Chat-Channel.dc.html' }, st.deck),
+        Object.assign({ name: 'dues', status: 'Mapping', unread: 3, hasUnread: true, weight: 800, href: 'IBIS-Map.dc.html' }, st.map),
+        Object.assign({ name: 'elections', status: 'Released', unread: 0, hasUnread: false, weight: 500, href: 'B-Release.dc.html' }, st.out)
+      ],
+      channels: [
+        { name: 'general', meta: '', color: '#F3F1EA', weight: 800 },
+        { name: 'building-2', meta: '214', color: '#B9BDC4', weight: 500 },
+        { name: 'building-4', meta: '187', color: '#F3F1EA', weight: 800 },
+        { name: 'childcare-swap', meta: '', color: '#B9BDC4', weight: 500 }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

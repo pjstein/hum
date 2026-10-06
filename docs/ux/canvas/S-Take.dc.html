@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>A published take</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 1200px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; padding: 14px 20px 24px 20px; gap: 18px">
+  <a href="S-Gallery.dc.html" aria-label="Back to gallery" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 22px; background: #181B21; color: #F3F1EA">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></a>
+
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #6EA8FF">✓ Millbrook · Release 3 · ledger #b7e4…3fa0</span>
+    <h1 style="margin: 0; font-size: 32px; line-height: 1.02; font-weight: 800; letter-spacing: -0.02em">The electoral question splits the union</h1>
+    <span style="font-size: 13px; color: #B9BDC4"><span style="font-family: 'DM Mono', monospace">@millbrook.weekly</span> · Oct 2</span>
+  </div>
+
+  <section style="padding: 18px; background: #181B21; border-radius: 18px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline">
+      <span style="font-size: 14px; font-weight: 800">Agree share by opinion group</span>
+      <span style="display: flex; gap: 10px; font-size: 12px; color: #B9BDC4">
+        <span style="display: inline-flex; align-items: center; gap: 4px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #6EA8FF"></span>A</span>
+        <span style="display: inline-flex; align-items: center; gap: 4px"><span style="width: 10px; height: 10px; border-radius: 2px; background: #3E6DB3"></span>B</span>
+      </span>
+    </div>
+    <sc-for list="{{rows}}" as="r" hint-placeholder-count="3">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 13px; line-height: 1.35">{{r.text}}</span>
+        <sc-for list="{{r.series}}" as="s" hint-placeholder-count="2">
+          <div style="display: flex; align-items: center; gap: 8px">
+            <span style="width: 14px; font-size: 11px; font-weight: 800; color: #B9BDC4">{{s.label}}</span>
+            <div style="position: relative; flex: 1; height: 12px; background: #22262C; border-radius: 3px">
+              <div style="width: {{s.w}}; height: 12px; background: {{s.c}}; border-radius: 3px"></div>
+              <div style="position: absolute; left: {{s.lo}}; width: {{s.ci}}; top: 2px; height: 8px; border-left: 2px solid #F3F1EA; border-right: 2px solid #F3F1EA; box-sizing: border-box"></div>
+            </div>
+            <span style="width: 34px; text-align: right; font-family: 'DM Mono', monospace; font-size: 12px">{{s.v}}%</span>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <span style="font-size: 12px; color: #8D939C">Gray: the A–B difference is within noise.</span>
+  </section>
+
+  <p style="margin: 0; font-size: 17px; line-height: 1.5">Group A wants the union to endorse candidates and is ready to strike over repairs. Group B wants to stay out of elections. On online meetings, the two are indistinguishable.</p>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Is this a fair reading?</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <button type="button" style="height: 56px; border: 2px solid #FF9351; border-radius: 14px; background: transparent; color: #FF9351; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">← Misleading</button>
+      <button type="button" style="height: 56px; border: 2px solid #6EA8FF; border-radius: 14px; background: transparent; color: #6EA8FF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Fair →</button>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px; padding: 14px; background: #181B21; border-radius: 14px">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 13px">
+        <span style="width: 62px; color: #B9BDC4">Group A</span>
+        <div style="flex: 1; height: 6px; background: #2A2F37; border-radius: 3px"><div style="width: 64%; height: 6px; background: #E8D44D; border-radius: 3px"></div></div>
+        <span style="width: 64px; text-align: right; font-family: 'DM Mono', monospace; font-size: 12px">64% fair</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 13px">
+        <span style="width: 62px; color: #B9BDC4">Group B</span>
+        <div style="flex: 1; height: 6px; background: #2A2F37; border-radius: 3px"><div style="width: 58%; height: 6px; background: #E8D44D; border-radius: 3px"></div></div>
+        <span style="width: 64px; text-align: right; font-family: 'DM Mono', monospace; font-size: 12px">58% fair</span>
+      </div>
+      <span style="font-size: 12px; line-height: 1.45; color: #8D939C">Both groups call it fair, so it ranks high. Ratings are private and noised.</span>
+    </div>
+  </section>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+    <a href="S-Studio.dc.html" style="display: flex; align-items: center; justify-content: center; height: 52px; border-radius: 14px; background: #E8D44D; color: #0F1115; font-size: 15px; font-weight: 800; text-decoration: none">Fork this take</a>
+    <button type="button" style="height: 52px; border: 1px solid #3A404A; border-radius: 14px; background: transparent; color: #F3F1EA; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">View data</button>
+  </div>
+
+  <section style="display: flex; flex-direction: column; gap: 8px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">7 forks</span>
+    <div style="display: flex; justify-content: space-between; padding: 12px 14px; background: #181B21; border-radius: 12px; font-size: 14px"><span>Same split, by ward</span><span style="font-family: 'DM Mono', monospace; color: #8D939C">@rosa.m</span></div>
+    <div style="display: flex; justify-content: space-between; padding: 12px 14px; background: #181B21; border-radius: 12px; font-size: 14px"><span>Has the split grown since winter?</span><span style="font-family: 'DM Mono', monospace; color: #8D939C">@jt.o</span></div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const ser = (label, v, c) => ({ label, v, w: v + '%', lo: (v - 2) + '%', ci: '4%', c });
+    const row = (text, a, b) => {
+      const noise = Math.abs(a - b) < 4;
+      return { text, series: [ser('A', a, noise ? '#5B616B' : '#6EA8FF'), ser('B', b, noise ? '#5B616B' : '#3E6DB3')] };
+    };
+    return {
+      rows: [
+        row('Endorse candidates in local elections', 79, 17),
+        row('Rent strike if repairs are ignored for 60 days', 74, 28),
+        row('Half of general meetings online', 45, 43)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Create a context</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 1260px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; padding: 14px 20px 24px 20px; gap: 22px">
+  <div style="display: flex; justify-content: space-between; align-items: center">
+    <a href="B-Home.dc.html" style="min-height: 44px; display: inline-flex; align-items: center; color: #B9BDC4; font-size: 15px; text-decoration: none">Cancel</a>
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #B9BDC4">New context</span>
+    <a href="O-Members.dc.html" style="min-height: 44px; display: inline-flex; align-items: center; font-size: 15px; font-weight: 800; text-decoration: none">Create</a>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px">
+    <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #B9BDC4">Name
+      <input type="text" value="Millbrook Tenants Union" style="height: 52px; box-sizing: border-box; padding: 0 14px; border: 1px solid #3A404A; border-radius: 12px; background: #181B21; font-family: inherit; font-size: 20px; font-weight: 800; color: #F3F1EA">
+    </label>
+    <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #B9BDC4">What it's for
+      <textarea rows="3" style="box-sizing: border-box; padding: 12px 14px; border: 1px solid #3A404A; border-radius: 12px; background: #181B21; font-family: inherit; font-size: 15px; line-height: 1.45; color: #F3F1EA; resize: none">Renters in the Millbrook buildings, deciding together what we push for next.</textarea>
+    </label>
+  </div>
+
+  <fieldset style="margin: 0; padding: 0; border: none; display: flex; flex-direction: column; gap: 10px">
+    <legend style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4; margin-bottom: 10px">Who can join</legend>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <sc-for list="{{join}}" as="o" hint-placeholder-count="4">
+        <button type="button" style="min-height: 96px; box-sizing: border-box; padding: 12px; border-radius: 14px; border: {{o.border}}; background: #181B21; color: #F3F1EA; font-family: inherit; text-align: left; display: flex; flex-direction: column; gap: 4px; cursor: pointer">
+          <span style="font-size: 15px; font-weight: 800">{{o.label}}</span>
+          <span style="font-size: 12px; line-height: 1.35; color: #B9BDC4">{{o.hint}}</span>
+        </button>
+      </sc-for>
+    </div>
+  </fieldset>
+
+  <sc-for list="{{segs}}" as="g" hint-placeholder-count="3">
+    <fieldset style="margin: 0; padding: 0; border: none; display: flex; flex-direction: column; gap: 10px">
+      <legend style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4; margin-bottom: 10px">{{g.title}}</legend>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #181B21; border-radius: 12px">
+        <sc-for list="{{g.opts}}" as="o" hint-placeholder-count="3">
+          <button type="button" style="height: 42px; border: none; border-radius: 9px; background: {{o.bg}}; color: {{o.fg}}; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer">{{o.label}}</button>
+        </sc-for>
+      </div>
+      <sc-if value="{{g.hasNote}}" hint-placeholder-val="{{false}}">
+        <span style="font-size: 13px; line-height: 1.45; color: #8D939C">{{g.note}}</span>
+      </sc-if>
+    </fieldset>
+  </sc-for>
+
+  <label style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; background: #181B21; border-radius: 14px; cursor: pointer">
+    <span style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 15px; font-weight: 800">Mix in Global cards</span>
+      <span style="font-size: 13px; line-height: 1.4; color: #B9BDC4">Shared statements put this context on the global map.</span>
+    </span>
+    <input type="checkbox" checked style="flex: none; width: 22px; height: 22px; accent-color: #E8D44D">
+  </label>
+
+  <section style="padding: 16px; border: 1px dashed #3A404A; border-radius: 14px; display: flex; flex-direction: column; gap: 8px">
+    <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>House rules</span>
+    <sc-for list="{{rules}}" as="r" hint-placeholder-count="4">
+      <div style="display: flex; justify-content: space-between; font-size: 14px"><span style="color: #B9BDC4">{{r.k}}</span><span style="font-family: 'DM Mono', monospace">{{r.v}}</span></div>
+    </sc-for>
+    <span style="font-size: 12px; color: #8D939C">They protect your members. No context can loosen them.</span>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1260}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const on = { bg: '#F3F1EA', fg: '#0F1115' }, off = { bg: 'transparent', fg: '#F3F1EA' };
+    const seg = (title, labels, pick, note) => ({
+      title, note: note || '', hasNote: !!note,
+      opts: labels.map((l, i) => Object.assign({ label: l }, i === pick ? on : off))
+    });
+    return {
+      join: [
+        { label: 'Anyone', hint: 'Open; verified and unverified shown apart', on: false },
+        { label: 'Invite link', hint: 'Share wherever you organize', on: false },
+        { label: 'People you approve', hint: 'Invites go to a list you manage', on: true },
+        { label: 'Verified residents', hint: 'Resident cards for an area', on: false }
+      ].map((o) => Object.assign({}, o, { border: o.on ? '2px solid #E8D44D' : '1px solid #3A404A' })),
+      segs: [
+        seg('Who writes cards', ['Organizers', 'Members*', 'Anyone in'], 1, '*Members suggest; organizers deal them into the deck.'),
+        seg('Who sees results', ['Everyone', 'Members', 'Organizers'], 0, 'Members-only results get the same noise. Members know each other, so it matters more.'),
+        seg('Member list visible to', ['No one', 'Organizers', 'Members'], 1, '')
+      ],
+      rules: [
+        { k: 'Nothing published under', v: '100 voters' },
+        { k: 'Privacy spend per release', v: 'ε 4.0' },
+        { k: 'Releases per deck', v: '1' },
+        { k: 'Yearly shield per person', v: 'ε 20' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

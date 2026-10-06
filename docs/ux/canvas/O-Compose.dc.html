@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Build the deck</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 1280px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; padding: 14px 20px 24px 20px; gap: 20px">
+  <div style="display: flex; justify-content: space-between; align-items: center">
+    <a href="O-Plan.dc.html" style="min-height: 44px; display: inline-flex; align-items: center; color: #B9BDC4; font-size: 15px; text-decoration: none">Close</a>
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #B9BDC4">Build the deck</span>
+    <a href="O-Plan.dc.html" style="min-height: 44px; display: inline-flex; align-items: center; font-size: 15px; font-weight: 800; text-decoration: none">Schedule</a>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <input type="text" value="Fall check-in" aria-label="Deck title" style="height: 48px; box-sizing: border-box; padding: 0; border: none; border-bottom: 2px solid #3A404A; background: transparent; font-family: inherit; font-size: 32px; font-weight: 800; color: #F3F1EA">
+    <span style="font-family: 'DM Mono', monospace; font-size: 13px; color: #B9BDC4">Deals Oct 1 · closes Oct 21</span>
+  </div>
+
+  <section style="display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Deck balance</span>
+      <span style="font-family: 'DM Mono', monospace; font-size: 14px">{{count}}/30 cards</span>
+    </div>
+    <div style="display: flex; height: 14px; gap: 3px">
+      <sc-for list="{{themes}}" as="t" hint-placeholder-count="4">
+        <div style="flex: {{t.n}}; background: {{t.c}}; border-radius: 3px"></div>
+      </sc-for>
+    </div>
+    <div style="display: flex; justify-content: space-between; font-size: 12px; color: #B9BDC4">
+      <sc-for list="{{themes}}" as="t" hint-placeholder-count="4">
+        <span>{{t.label}} <span style="font-family: 'DM Mono', monospace; color: #F3F1EA">{{t.n}}</span></span>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 10px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Member suggestions · {{left}} waiting</span>
+    <sc-if value="{{hasSug}}" hint-placeholder-val="{{true}}">
+      <div style="position: relative; height: 200px">
+        <div style="position: absolute; inset: 0; transform: translate(8px, 8px) rotate(2deg); border-radius: 18px; background: #22262C"></div>
+        <article style="position: absolute; inset: 0; box-sizing: border-box; padding: 18px; border-radius: 18px; background: #F3F1EA; color: #0F1115; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: #4A4F57">
+            <span>A member suggests</span><span style="letter-spacing: 0.1em; text-transform: uppercase">{{sug.theme}}</span>
+          </div>
+          <span style="font-size: 21px; line-height: 1.15; font-weight: 800">{{sug.text}}</span>
+          <sc-if value="{{sug.dup}}" hint-placeholder-val="{{false}}">
+            <span style="align-self: flex-start; font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: #F6DCCB; color: #6E2F0E">Close to a card already in the deck</span>
+          </sc-if>
+        </article>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+        <button type="button" onClick="{{decline}}" style="height: 48px; border: 2px solid #FF9351; border-radius: 12px; background: transparent; color: #FF9351; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer">Decline</button>
+        <button type="button" onClick="{{merge}}" style="height: 48px; border: 2px solid #7D848E; border-radius: 12px; background: transparent; color: #F3F1EA; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer">Merge</button>
+        <button type="button" onClick="{{add}}" style="height: 48px; border: 2px solid #6EA8FF; border-radius: 12px; background: transparent; color: #6EA8FF; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer">Deal in</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{noSug}}" hint-placeholder-val="{{false}}">
+      <div style="padding: 18px; border: 1px dashed #3A404A; border-radius: 16px; font-size: 15px; color: #B9BDC4">All caught up. {{added}} dealt in, {{merged}} merged.</div>
+    </sc-if>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 8px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">In the deck</span>
+    <sc-for list="{{deck}}" as="d" hint-placeholder-count="5">
+      <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #181B21; border-left: 4px solid {{d.c}}; border-radius: 10px">
+        <span style="flex: 1; font-size: 14px; line-height: 1.35">{{d.text}}</span>
+        <span style="font-size: 11px; color: #8D939C">{{d.source}}</span>
+      </div>
+    </sc-for>
+    <span style="font-size: 13px; color: #8D939C">+ {{hidden}} more, 4 of them from Global</span>
+  </section>
+
+  <section style="padding: 18px; background: #181B21; border-radius: 16px; display: flex; flex-direction: column; gap: 12px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #E8D44D">Precision per card</span>
+    <div style="display: flex; align-items: baseline; gap: 8px">
+      <span style="font-family: 'DM Mono', monospace; font-size: 44px; line-height: 1">±{{err}}</span>
+      <span style="font-size: 15px; color: #B9BDC4">pts</span>
+    </div>
+    <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: #B9BDC4">
+      <span>Members likely to play: <strong style="font-family: 'DM Mono', monospace; color: #F3F1EA">{{nLabel}}</strong></span>
+      <input type="range" min="100" max="2000" step="50" value="{{n}}" onChange="{{setN}}" style="width: 100%; accent-color: #E8D44D">
+    </label>
+    <span style="font-size: 14px; line-height: 1.45">{{unlock}}</span>
+    <span style="font-size: 12px; color: #8D939C">More cards add a little noise. Fewer players add a lot.</span>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1280}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { n: 1200, si: 0, added: [], merged: 0 };
+  }
+  renderVals() {
+    const colors = { Housing: '#6EA8FF', Money: '#E8D44D', Politics: '#FF9351', Union: '#B9BDC4' };
+    const sugs = [
+      { text: 'Chapter meetings should happen every month.', theme: 'Union', dup: true },
+      { text: 'We should publish a landlord repair scorecard.', theme: 'Housing', dup: false },
+      { text: 'Dues should be optional for members over 70.', theme: 'Money', dup: false }
+    ];
+    const s = this.state;
+    const base = { Housing: 5, Money: 4, Politics: 4, Union: 5 };
+    s.added.forEach((t) => { base[t] += 1; });
+    const count = 18 + s.added.length;
+    const themes = ['Housing', 'Money', 'Politics', 'Union'].map((k) => ({ label: k, n: base[k], c: colors[k] }));
+    const deck = [
+      { text: 'Local government listens to people like me.', theme: 'Politics', source: 'Global' },
+      { text: 'We should negotiate as a bloc with our largest landlord.', theme: 'Housing', source: 'Organizers' },
+      { text: 'Dues should fund a legal defense pool for members.', theme: 'Money', source: 'Member' },
+      { text: 'Meetings should offer childcare.', theme: 'Union', source: 'Member' }
+    ].map((d) => Object.assign({}, d, { c: colors[d.theme] }));
+    const has = s.si < sugs.length;
+    const next = (extra) => () => this.setState(Object.assign({ si: s.si + 1 }, extra));
+    const err = 300 * Math.sqrt(count + 1) / s.n;
+    let unlock = 'Above 800 players: tallies, common ground and the opinion map.';
+    if (s.n < 800) unlock = 'Under 800 players: tallies and common ground. The map unlocks at 800.';
+    if (s.n < 300) unlock = 'Under 300 players: tallies only. Consider a smaller deck.';
+    return {
+      count, themes, deck, hidden: count - deck.length,
+      sug: has ? sugs[s.si] : sugs[0], hasSug: has, noSug: !has, left: sugs.length - s.si,
+      added: s.added.length, merged: s.merged,
+      decline: next({}),
+      merge: next({ merged: s.merged + 1 }),
+      add: has ? next({ added: s.added.concat([sugs[s.si].theme]) }) : () => {},
+      n: s.n, nLabel: s.n.toLocaleString('en-US'),
+      err: err < 10 ? err.toFixed(1) : String(Math.round(err)),
+      unlock,
+      setN: (e) => this.setState({ n: Number(e.target.value) })
+    };
+  }
+}
+</script>
+</body>
+</html>

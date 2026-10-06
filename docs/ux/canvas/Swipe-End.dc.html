@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deck sorted</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; padding: 16px 20px 24px 20px; gap: 22px">
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <a href="B-Home.dc.html" aria-label="Close" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 22px; background: #181B21; color: #F3F1EA">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Fall check-in</span>
+    <span style="width: 44px"></span>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px">
+    <span style="font-family: 'DM Mono', monospace; font-size: 56px; line-height: 1; color: #E8D44D">18/18</span>
+    <h1 style="margin: 0; font-size: 36px; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em">That's the deck.</h1>
+    <p style="margin: 0; font-size: 16px; line-height: 1.45; color: #B9BDC4">You can re-sort any card until Oct 21.</p>
+  </div>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Your hand</span>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+      <sc-for list="{{piles}}" as="p" hint-placeholder-count="3">
+        <div style="position: relative; height: 150px">
+          <div style="position: absolute; inset: 0; transform: translate(6px, 6px) rotate(4deg); border-radius: 14px; background: #22262C"></div>
+          <div style="position: absolute; inset: 0; transform: translate(3px, 3px) rotate(2deg); border-radius: 14px; background: #2C3139"></div>
+          <div style="position: absolute; inset: 0; box-sizing: border-box; border-radius: 14px; background: #F3F1EA; color: #0F1115; border-top: 6px solid {{p.c}}; padding: 12px; display: flex; flex-direction: column; justify-content: space-between">
+            <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: {{p.ink}}">{{p.label}}</span>
+            <span style="font-family: 'DM Mono', monospace; font-size: 40px; line-height: 1">{{p.n}}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding: 18px; background: #181B21; border-radius: 16px; display: flex; flex-direction: column; gap: 8px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #E8D44D">Dealt Oct 22</span>
+    <span style="font-size: 20px; line-height: 1.2; font-weight: 800">A results deck: one card per statement, your vote next to everyone's.</span>
+    <span style="font-size: 14px; line-height: 1.45; color: #B9BDC4">Your phone does the matching. Your hand never leaves it.</span>
+  </section>
+
+  <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px">
+    <a href="Swipe-Reveal.dc.html" style="display: flex; align-items: center; justify-content: center; height: 54px; border-radius: 14px; background: #E8D44D; color: #0F1115; font-size: 16px; font-weight: 800; text-decoration: none">Preview: last release's results deck</a>
+    <a href="Swipe-Deck.dc.html" style="display: flex; align-items: center; justify-content: center; height: 48px; border-radius: 14px; border: 1px solid #3A404A; color: #F3F1EA; font-size: 15px; font-weight: 600; text-decoration: none">Re-sort a card</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      piles: [
+        { label: 'Agree', n: 10, c: '#6EA8FF', ink: '#1F5FCC' },
+        { label: 'Disagree', n: 5, c: '#FF9351', ink: '#B24A0C' },
+        { label: 'Unsure', n: 3, c: '#7D848E', ink: '#4A4F57' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

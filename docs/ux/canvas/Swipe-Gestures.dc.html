@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gesture states</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 1330px; height: 844px; box-sizing: border-box; background: #08090B; display: flex; gap: 80px; font-family: 'Archivo', system-ui, sans-serif">
+  <sc-for list="{{frames}}" as="f" hint-placeholder-count="3">
+    <div style="position: relative; width: 390px; height: 844px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; display: flex; flex-direction: column; padding: 16px 20px 20px 20px; gap: 14px; overflow: hidden">
+      <div style="display: flex; justify-content: space-between; align-items: center; height: 44px">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">{{f.caption}}</span>
+        <span style="font-family: 'DM Mono', monospace; font-size: 14px; color: #B9BDC4">12/18</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 10px 6px 12px 6px; background: #181B21; border-radius: 14px">
+        <sc-for list="{{f.meters}}" as="m" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px">
+            <div style="width: 6px; height: 6px; border-radius: 3px; background: #E8D44D; opacity: {{m.dot}}"></div>
+            <span style="font-size: 11px; color: {{m.color}}; font-weight: 700">{{m.label}}</span>
+            <div style="width: 100%; height: 4px; border-radius: 2px; background: #2A2F37"><div style="width: {{m.w}}; height: 4px; border-radius: 2px; background: #F3F1EA"></div></div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="position: relative; flex: 1; display: flex; align-items: center; justify-content: center">
+        <div style="position: absolute; width: 300px; height: 420px; border-radius: 22px; background: #22262C; transform: translateY(22px) scale(0.9)"></div>
+        <div style="position: absolute; width: 300px; height: 420px; border-radius: 22px; background: #2C3139; transform: translateY(11px) scale(0.95)"></div>
+        <article style="position: absolute; width: 300px; height: 420px; box-sizing: border-box; padding: 22px; border-radius: 22px; background: #F3F1EA; color: #0F1115; display: flex; flex-direction: column; gap: 16px; transform: {{f.transform}}">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <span style="width: 26px; height: 26px; box-sizing: border-box; border-radius: 50%; background: #F3F1EA; border: 3px solid #0F1115"></span>
+            <span style="font-size: 13px; font-weight: 600; color: #4A4F57">From Global</span>
+            <span style="margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #4A4F57">Politics</span>
+          </div>
+          <p style="margin: auto 0; font-size: 29px; line-height: 1.15; font-weight: 800">Local government listens to people like me.</p>
+          <span style="font-size: 13px; color: #4A4F57">Drag right to agree, left to disagree, up if unsure</span>
+          <span style="position: absolute; left: 18px; top: 58px; padding: 4px 10px; border: 3px solid #1F5FCC; border-radius: 8px; color: #1F5FCC; font-size: 22px; font-weight: 800; letter-spacing: 0.08em; transform: rotate(-12deg); opacity: {{f.agree}}">AGREE</span>
+          <span style="position: absolute; right: 18px; top: 58px; padding: 4px 10px; border: 3px solid #B24A0C; border-radius: 8px; color: #B24A0C; font-size: 22px; font-weight: 800; letter-spacing: 0.08em; transform: rotate(12deg); opacity: {{f.disagree}}">DISAGREE</span>
+          <span style="position: absolute; left: 50%; bottom: 64px; margin-left: -64px; width: 128px; text-align: center; padding: 4px 0; border: 3px solid #4A4F57; border-radius: 8px; color: #4A4F57; font-size: 22px; font-weight: 800; letter-spacing: 0.08em; opacity: {{f.pass}}">UNSURE</span>
+        </article>
+      </div>
+      <p style="margin: 0; min-height: 66px; font-size: 14px; line-height: 1.45; color: #B9BDC4">{{f.note}}</p>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1330,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const meters = (lit) => [
+      { label: 'Housing', w: '60%' }, { label: 'Money', w: '75%' }, { label: 'Politics', w: '50%' }, { label: 'Union', w: '60%' }
+    ].map((m) => Object.assign({}, m, { dot: m.label === 'Politics' ? lit : '0', color: m.label === 'Politics' && lit !== '0' ? '#E8D44D' : '#B9BDC4' }));
+    return {
+      frames: [
+        { caption: 'Leaning right', transform: 'translate(70px, 6px) rotate(4deg)', agree: '0.85', disagree: '0', pass: '0', meters: meters('0.85'),
+          note: 'The AGREE stamp fades in with the lean. The dot over Politics shows which theme this card touches, never which way anyone else went.' },
+        { caption: 'Leaning left', transform: 'translate(-70px, 6px) rotate(-4deg)', agree: '0', disagree: '0.85', pass: '0', meters: meters('0.85'),
+          note: 'Past the line, letting go commits. Short of it, the card springs back. Buttons below do the same thing for anyone who can’t drag.' },
+        { caption: 'Pushing up', transform: 'translate(0px, -70px) rotate(0deg)', agree: '0', disagree: '0', pass: '0.85', meters: meters('0.85'),
+          note: 'Unsure is a full answer, not a skip. It’s one easy gesture, so nobody is nudged into picking a side.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

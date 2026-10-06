@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ledger: voting on a set</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2B5BA8}a:hover{color:#1E4380}
+</style>
+</helmet>
+<div style="width: 390px; height: 1060px; box-sizing: border-box; background: #F3F4F1; color: #15202B; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; flex-direction: column; gap: 10px; padding: 16px 20px 16px 20px; background: #FFFFFF; border-bottom: 1px solid #D9DDD8">
+    <a href="Main.dc.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 32px; font-size: 14px; text-decoration: none; color: #2B5BA8">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Millbrook Tenants Union</a>
+    <div style="display: flex; justify-content: space-between; align-items: baseline">
+      <h1 style="margin: 0; font-size: 22px; font-weight: 600">Fall check-in</h1>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5561">{{voted}} of 18</span>
+    </div>
+    <div style="height: 4px; background: #E6E9E4; border-radius: 2px; overflow: hidden">
+      <div style="width: {{pct}}; height: 4px; background: #15202B"></div>
+    </div>
+  </header>
+
+  <div style="display: flex; gap: 10px; align-items: flex-start; margin: 16px 20px 4px 20px; padding: 12px 14px; background: #E9EEF5; border-radius: 10px; font-size: 13px; line-height: 1.45; color: #23364F">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+    <span>Your votes are encrypted on this phone. Organizers never see them; only noisy totals are published after Oct 21.</span>
+  </div>
+
+  <ol style="list-style: none; margin: 0; padding: 12px 20px; display: flex; flex-direction: column; gap: 12px">
+    <sc-for list="{{items}}" as="item" hint-placeholder-count="8">
+      <li style="background: #FFFFFF; border: 1px solid #D9DDD8; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; gap: 10px; align-items: flex-start">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5F6973; padding-top: 3px; min-width: 18px">{{item.num}}</span>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <p style="margin: 0; font-size: 16px; line-height: 1.4">{{item.text}}</p>
+            <sc-if value="{{item.shared}}" hint-placeholder-val="{{false}}">
+              <span style="align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #4A5561; border: 1px solid #C9CED2; border-radius: 999px; padding: 2px 8px">Shared with Global</span>
+            </sc-if>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+          <button type="button" onClick="{{item.agree}}" aria-pressed="{{item.isAgree}}" style="height: 44px; border-radius: 8px; border: 1px solid {{item.aBorder}}; background: {{item.aBg}}; color: {{item.aFg}}; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Agree</button>
+          <button type="button" onClick="{{item.disagree}}" aria-pressed="{{item.isDisagree}}" style="height: 44px; border-radius: 8px; border: 1px solid {{item.dBorder}}; background: {{item.dBg}}; color: {{item.dFg}}; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Disagree</button>
+          <button type="button" onClick="{{item.pass}}" aria-pressed="{{item.isPass}}" style="height: 44px; border-radius: 8px; border: 1px solid {{item.pBorder}}; background: {{item.pBg}}; color: {{item.pFg}}; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Pass</button>
+        </div>
+      </li>
+    </sc-for>
+  </ol>
+
+  <div style="margin: 0 20px; display: flex; flex-direction: column; gap: 10px">
+    <button type="button" style="height: 44px; border-radius: 10px; border: 1px dashed #A9B0B6; background: transparent; color: #15202B; font-family: inherit; font-size: 14px; cursor: pointer">Show 10 more statements</button>
+    <button type="button" style="height: 44px; border-radius: 10px; border: 1px solid #D9DDD8; background: #FFFFFF; color: #2B5BA8; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Suggest a statement</button>
+  </div>
+
+  <div style="margin-top: auto; padding: 14px 20px 20px 20px; background: #FFFFFF; border-top: 1px solid #D9DDD8; display: flex; gap: 12px; align-items: center">
+    <span style="flex: 1; font-size: 13px; color: #4A5561; line-height: 1.4">You can change any vote until the set closes.</span>
+    <a href="A-Release.dc.html" style="display: flex; align-items: center; justify-content: center; height: 48px; padding: 0 20px; background: #15202B; color: #FFFFFF; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none">Done for now</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { votes: { 1: 'agree', 2: 'agree', 3: 'agree', 4: 'pass', 5: 'agree' } };
+  }
+  renderVals() {
+    const statements = [
+      { id: 1, text: 'The repair hotline has gotten better since spring.' },
+      { id: 2, text: 'We should hire a part-time organizer with dues money.' },
+      { id: 3, text: 'Rent increases should be capped by law.', shared: true },
+      { id: 4, text: 'Building chapters should meet monthly instead of quarterly.' },
+      { id: 5, text: 'Dues should pause for members who lose income.' },
+      { id: 6, text: 'Local government listens to people like me.', shared: true },
+      { id: 7, text: 'We should negotiate as a bloc with our largest landlord.' },
+      { id: 8, text: 'Members should be able to post statements without organizer review.' }
+    ];
+    const votes = this.state.votes;
+    const set = (id, v) => () => {
+      const next = Object.assign({}, this.state.votes);
+      if (next[id] === v) { delete next[id]; } else { next[id] = v; }
+      this.setState({ votes: next });
+    };
+    const off = { bg: '#FFFFFF', fg: '#15202B', border: '#C9CED2' };
+    const on = {
+      agree: { bg: '#2B5BA8', fg: '#FFFFFF', border: '#2B5BA8' },
+      disagree: { bg: '#B34A16', fg: '#FFFFFF', border: '#B34A16' },
+      pass: { bg: '#4A5561', fg: '#FFFFFF', border: '#4A5561' }
+    };
+    const items = statements.map((s) => {
+      const v = votes[s.id];
+      const a = v === 'agree' ? on.agree : off;
+      const d = v === 'disagree' ? on.disagree : off;
+      const p = v === 'pass' ? on.pass : off;
+      return {
+        num: String(s.id).padStart(2, '0'), text: s.text, shared: !!s.shared,
+        agree: set(s.id, 'agree'), disagree: set(s.id, 'disagree'), pass: set(s.id, 'pass'),
+        isAgree: v === 'agree' ? 'true' : 'false', isDisagree: v === 'disagree' ? 'true' : 'false', isPass: v === 'pass' ? 'true' : 'false',
+        aBg: a.bg, aFg: a.fg, aBorder: a.border,
+        dBg: d.bg, dFg: d.fg, dBorder: d.border,
+        pBg: p.bg, pFg: p.fg, pBorder: p.border
+      };
+    });
+    const voted = 6 + Object.keys(votes).length;
+    return { items, voted, pct: Math.round((voted / 18) * 100) + '%' };
+  }
+}
+</script>
+</body>
+</html>

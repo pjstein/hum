@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Position card with arguments on the back</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; padding: 16px 20px 20px 20px; gap: 14px; overflow: hidden">
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <a href="B-Home.dc.html" aria-label="Close" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 22px; background: #181B21; color: #F3F1EA">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Fall check-in</span>
+    <span style="font-family: 'DM Mono', monospace; font-size: 14px; color: #B9BDC4; min-width: 44px; text-align: right">9/18</span>
+  </div>
+  <a href="IBIS-Map.dc.html" style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #181B21; border-radius: 12px; font-size: 13px; color: #B9BDC4; text-decoration: none">
+    <span style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 11px; background: #E8D44D; color: #0F1115; font-weight: 800">?</span>
+    <span style="flex: 1">Ignored repair requests: what do we do?</span>
+    <span style="font-weight: 700; color: #E8D44D">Map</span>
+  </a>
+
+  <div style="flex: 1; display: flex; align-items: center; justify-content: center; perspective: 1200px">
+    <div style="position: relative; width: 310px; height: 430px; transform-style: preserve-3d; transition: transform 520ms ease; transform: rotateY({{deg}}deg)">
+      <article style="position: absolute; inset: 0; box-sizing: border-box; padding: 22px; border-radius: 22px; background: #F3F1EA; color: #0F1115; display: flex; flex-direction: column; gap: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden">
+        <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: #4A4F57">
+          <span style="width: 22px; height: 22px; box-sizing: border-box; border-radius: 50%; background: #6EA8FF; border: 3px solid #0F1115"></span>Position · from a member
+          <span style="margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase">Housing</span>
+        </div>
+        <p style="margin: auto 0; font-size: 29px; line-height: 1.12; font-weight: 800">If repairs are ignored for 60 days, we should organize a rent strike.</p>
+        <span style="font-size: 13px; line-height: 1.4; color: #4A4F57">Vote, then the card flips to show the strongest case each way.</span>
+      </article>
+      <article style="position: absolute; inset: 0; box-sizing: border-box; padding: 20px; border-radius: 22px; background: #F3F1EA; color: #0F1115; display: flex; flex-direction: column; gap: 12px; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg)">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.12em">STRONGEST CASES</span>
+          <sc-if value="{{hasVote}}" hint-placeholder-val="{{false}}">
+            <span style="padding: 2px 8px; border: 2px solid {{voteInk}}; border-radius: 6px; color: {{voteInk}}; font-size: 12px; font-weight: 800; transform: rotate(-4deg)">YOU: {{voteLabel}}</span>
+          </sc-if>
+        </div>
+        <span style="font-size: 12px; color: #4A4F57">Ranked by how fair both groups found them</span>
+        <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-left: 5px solid #1F5FCC; border-radius: 6px; background: #E6E3D9">
+          <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: #1F5FCC">PRO</span>
+          <span style="font-size: 16px; line-height: 1.3; font-weight: 700">Escrowing rent keeps it legal and shows landlords we're serious.</span>
+          <span style="font-family: 'DM Mono', monospace; font-size: 11px; color: #4A4F57">fair to A 66% · B 58%</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-left: 5px solid #B24A0C; border-radius: 6px; background: #E6E3D9">
+          <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: #B24A0C">CON</span>
+          <span style="font-size: 16px; line-height: 1.3; font-weight: 700">Strikers risk eviction filings, and not everyone can absorb that.</span>
+          <span style="font-family: 'DM Mono', monospace; font-size: 11px; color: #4A4F57">fair to A 61% · B 83%</span>
+        </div>
+        <a href="IBIS-Map.dc.html" style="margin-top: auto; font-size: 13px; font-weight: 700; color: #1F5FCC; text-decoration: none">+ 2 more arguments in the issue map</a>
+      </article>
+    </div>
+  </div>
+
+  <sc-if value="{{askVote}}" hint-placeholder-val="{{true}}">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="text-align: center; font-size: 13px; color: #B9BDC4">{{voteHeading}}</span>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+        <button type="button" onClick="{{vDisagree}}" style="height: 54px; border: 2px solid #FF9351; border-radius: 14px; background: #181B21; color: #FF9351; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Disagree</button>
+        <button type="button" onClick="{{vPass}}" style="height: 54px; border: 2px solid #7D848E; border-radius: 14px; background: #181B21; color: #F3F1EA; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Unsure</button>
+        <button type="button" onClick="{{vAgree}}" style="height: 54px; border: 2px solid #6EA8FF; border-radius: 14px; background: #181B21; color: #6EA8FF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Agree</button>
+      </div>
+      <sc-if value="{{canPeek}}" hint-placeholder-val="{{true}}">
+        <button type="button" onClick="{{peek}}" style="height: 40px; border: none; background: transparent; color: #B9BDC4; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">{{peekLabel}}</button>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{askChange}}" hint-placeholder-val="{{false}}">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="text-align: center; font-size: 15px; font-weight: 700">Did either case change your mind?</span>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <button type="button" onClick="{{keep}}" style="height: 52px; border: 1px solid #3A404A; border-radius: 14px; background: transparent; color: #F3F1EA; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Keep my vote</button>
+        <button type="button" onClick="{{change}}" style="height: 52px; border: none; border-radius: 14px; background: #E8D44D; color: #0F1115; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Change it</button>
+      </div>
+      <span style="text-align: center; font-size: 12px; color: #8D939C">Only noised totals of who moved are ever published</span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{finished}}" hint-placeholder-val="{{false}}">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="text-align: center; font-size: 13px; line-height: 1.4; color: #B9BDC4">{{finishNote}}</span>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <button type="button" onClick="{{reset}}" style="height: 52px; border: 1px solid #3A404A; border-radius: 14px; background: transparent; color: #F3F1EA; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Replay card</button>
+        <a href="Swipe-Deck.dc.html" style="display: flex; align-items: center; justify-content: center; height: 52px; border-radius: 14px; background: #E8D44D; color: #0F1115; font-size: 15px; font-weight: 800; text-decoration: none">Next card</a>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { flipped: false, vote: null, readFirst: false, phase: 'vote', changed: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const labels = { agree: 'AGREE', disagree: 'DISAGREE', pass: 'UNSURE' };
+    const inks = { agree: '#1F5FCC', disagree: '#B24A0C', pass: '#4A4F57' };
+    const cast = (v) => () => {
+      if (s.phase === 'revote') this.setState({ vote: v, phase: 'done', changed: true, flipped: true });
+      else this.setState({ vote: v, flipped: true, phase: s.readFirst ? 'done' : 'ask' });
+    };
+    const askVote = s.phase === 'vote' || s.phase === 'revote';
+    let finishNote = 'Kept. Your vote counts toward the release, and toward how much this card moved people.';
+    if (s.changed) finishNote = 'Changed. The release will count you as someone the arguments moved, in noised totals only.';
+    if (s.readFirst && !s.changed) finishNote = 'You read the arguments first, so this vote counts in the tallies but not in the “who moved” stats.';
+    return {
+      deg: s.flipped ? 180 : 0,
+      hasVote: !!s.vote, voteLabel: s.vote ? labels[s.vote] : '', voteInk: s.vote ? inks[s.vote] : '#4A4F57',
+      askVote, askChange: s.phase === 'ask', finished: s.phase === 'done',
+      voteHeading: s.phase === 'revote' ? 'Your new vote' : (s.flipped ? 'Read both sides? Now vote.' : 'Your vote'),
+      canPeek: s.phase === 'vote',
+      peekLabel: s.flipped ? 'Flip back to the position' : 'Read the arguments first',
+      finishNote,
+      vAgree: cast('agree'), vDisagree: cast('disagree'), vPass: cast('pass'),
+      peek: () => this.setState({ flipped: !s.flipped, readFirst: true }),
+      keep: () => this.setState({ phase: 'done' }),
+      change: () => this.setState({ phase: 'revote' }),
+      reset: () => this.setState({ flipped: false, vote: null, readFirst: false, phase: 'vote', changed: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

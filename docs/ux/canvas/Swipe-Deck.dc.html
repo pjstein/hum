@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Swipe deck</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; padding: 16px 20px 20px 20px; gap: 14px; overflow: hidden">
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <a href="B-Home.dc.html" aria-label="Close" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 22px; background: #181B21; color: #F3F1EA">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Fall check-in</span>
+    <span style="font-family: 'DM Mono', monospace; font-size: 14px; color: #B9BDC4; min-width: 44px; text-align: right">{{position}}/18</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 10px 6px 12px 6px; background: #181B21; border-radius: 14px">
+    <sc-for list="{{meters}}" as="m" hint-placeholder-count="4">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px">
+        <div style="width: 6px; height: 6px; border-radius: 3px; background: #E8D44D; opacity: {{m.dot}}"></div>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{m.stroke}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{m.d}}"></path></svg>
+        <div style="width: 100%; height: 4px; border-radius: 2px; background: #2A2F37"><div style="width: {{m.w}}; height: 4px; border-radius: 2px; background: #F3F1EA"></div></div>
+        <span style="font-size: 11px; color: #B9BDC4">{{m.label}}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="position: relative; flex: 1; display: flex; align-items: center; justify-content: center">
+    <span style="position: absolute; left: -6px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-size: 12px; font-weight: 800; letter-spacing: 0.16em; color: #FF9351; opacity: {{edgeLeft}}">DISAGREE</span>
+    <span style="position: absolute; right: -2px; top: 50%; transform: translateY(-50%) rotate(90deg); font-size: 12px; font-weight: 800; letter-spacing: 0.16em; color: #6EA8FF; opacity: {{edgeRight}}">AGREE</span>
+
+    <sc-if value="{{notDone}}" hint-placeholder-val="{{true}}">
+      <div style="position: absolute; width: 300px; height: 420px; border-radius: 22px; background: #22262C; transform: translateY(22px) scale(0.9)"></div>
+      <div style="position: absolute; width: 300px; height: 420px; border-radius: 22px; background: #2C3139; transform: translateY(11px) scale(0.95)"></div>
+      <article onPointerDown="{{down}}" onPointerMove="{{move}}" onPointerUp="{{up}}" onPointerCancel="{{up}}" style="position: absolute; width: 300px; height: 420px; box-sizing: border-box; padding: 22px; border-radius: 22px; background: #F3F1EA; color: #0F1115; display: flex; flex-direction: column; gap: 16px; touch-action: none; user-select: none; cursor: grab; transform: {{cardTransform}}; transition: {{cardTransition}}; opacity: {{cardOpacity}}">
+        <div style="display: flex; align-items: center; gap: 10px">
+          <span style="width: 26px; height: 26px; box-sizing: border-box; border-radius: {{card.avR}}; background: {{card.avBg}}; border: 3px solid #0F1115"></span>
+          <span style="font-size: 13px; font-weight: 600; color: #4A4F57">{{card.source}}</span>
+          <span style="margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #4A4F57">{{card.theme}}</span>
+        </div>
+        <p style="margin: auto 0; font-size: 29px; line-height: 1.15; font-weight: 800; letter-spacing: -0.01em">{{card.text}}</p>
+        <span style="font-size: 13px; color: #4A4F57">Drag right to agree, left to disagree, up if unsure</span>
+        <span style="position: absolute; left: 18px; top: 58px; padding: 4px 10px; border: 3px solid #1F5FCC; border-radius: 8px; color: #1F5FCC; font-size: 22px; font-weight: 800; letter-spacing: 0.08em; transform: rotate(-12deg); opacity: {{agreeO}}">AGREE</span>
+        <span style="position: absolute; right: 18px; top: 58px; padding: 4px 10px; border: 3px solid #B24A0C; border-radius: 8px; color: #B24A0C; font-size: 22px; font-weight: 800; letter-spacing: 0.08em; transform: rotate(12deg); opacity: {{disagreeO}}">DISAGREE</span>
+        <span style="position: absolute; left: 50%; bottom: 64px; margin-left: -64px; width: 128px; text-align: center; padding: 4px 0; border: 3px solid #4A4F57; border-radius: 8px; color: #4A4F57; font-size: 22px; font-weight: 800; letter-spacing: 0.08em; opacity: {{passO}}">UNSURE</span>
+      </article>
+    </sc-if>
+
+    <sc-if value="{{done}}" hint-placeholder-val="{{false}}">
+      <a href="Swipe-End.dc.html" style="width: 300px; height: 420px; box-sizing: border-box; padding: 26px; border-radius: 22px; background: #181B21; border: 2px dashed #3A404A; display: flex; flex-direction: column; justify-content: center; gap: 12px; text-decoration: none; color: #F3F1EA">
+        <span style="font-family: 'DM Mono', monospace; font-size: 56px; line-height: 1; color: #E8D44D">18/18</span>
+        <span style="font-size: 28px; line-height: 1.1; font-weight: 800">That's the deck.</span>
+        <span style="font-size: 15px; color: #B9BDC4">See your hand</span>
+      </a>
+    </sc-if>
+  </div>
+
+  <div style="display: flex; justify-content: center; align-items: center; gap: 22px">
+    <button type="button" onClick="{{undo}}" aria-label="Undo last card" style="width: 44px; height: 44px; border-radius: 22px; border: 1px solid #3A404A; background: transparent; color: #B9BDC4; cursor: pointer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"></path><path d="M4 9h11a5 5 0 0 1 0 10h-3"></path></svg></button>
+    <button type="button" onClick="{{tapDisagree}}" aria-label="Disagree" style="width: 64px; height: 64px; border-radius: 32px; border: 2px solid #FF9351; background: #181B21; color: #FF9351; cursor: pointer">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    <button type="button" onClick="{{tapPass}}" aria-label="Unsure" style="width: 52px; height: 52px; border-radius: 26px; border: 2px solid #7D848E; background: #181B21; color: #B9BDC4; cursor: pointer">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
+    <button type="button" onClick="{{tapAgree}}" aria-label="Agree" style="width: 64px; height: 64px; border-radius: 32px; border: 2px solid #6EA8FF; background: #181B21; color: #6EA8FF; cursor: pointer">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg></button>
+    <span style="width: 44px"></span>
+  </div>
+  <span style="display: inline-flex; justify-content: center; align-items: center; gap: 6px; font-size: 12px; color: #8D939C">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Your hand stays encrypted on this phone</span>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { answers: [], dx: 0, dy: 0, drag: false, noAnim: false, leaving: null };
+    this.sx = 0; this.sy = 0;
+  }
+  componentWillUnmount() { clearTimeout(this.t1); clearTimeout(this.t2); }
+  commit(v) {
+    if (this.state.leaving || this.state.answers.length >= 7) return;
+    const fly = v === 'agree' ? { dx: 520, dy: this.state.dy + 40 } : v === 'disagree' ? { dx: -520, dy: this.state.dy + 40 } : { dx: 0, dy: -760 };
+    this.setState({ drag: false, dx: fly.dx, dy: fly.dy, leaving: v });
+    clearTimeout(this.t1); clearTimeout(this.t2);
+    this.t1 = setTimeout(() => {
+      this.setState({ answers: this.state.answers.concat([v]), dx: 0, dy: 0, leaving: null, noAnim: true });
+      this.t2 = setTimeout(() => this.setState({ noAnim: false }), 40);
+    }, 240);
+  }
+  renderVals() {
+    const deck = [
+      { text: 'Local government listens to people like me.', theme: 'Politics', source: 'From Global', kind: 'global' },
+      { text: 'We should negotiate as a bloc with our largest landlord.', theme: 'Housing', source: 'Organizers ask', kind: 'org' },
+      { text: 'Dues should fund a legal defense pool for members.', theme: 'Money', source: 'A member asks', kind: 'member' },
+      { text: 'Meetings should offer childcare.', theme: 'Union', source: 'A member asks', kind: 'member' },
+      { text: 'We should join the citywide tenants’ coalition.', theme: 'Politics', source: 'Organizers ask', kind: 'org' },
+      { text: 'I’d feel safe if my landlord knew I was in a tenants’ union.', theme: 'Housing', source: 'From Global', kind: 'global' },
+      { text: 'Members should be able to post statements without organizer review.', theme: 'Union', source: 'A member asks', kind: 'member' }
+    ];
+    const av = {
+      member: { avR: '50%', avBg: '#6EA8FF' },
+      org: { avR: '6px', avBg: '#FF9351' },
+      global: { avR: '50%', avBg: '#F3F1EA' }
+    };
+    const s = this.state;
+    const idx = s.answers.length;
+    const done = idx >= deck.length;
+    const raw = deck[Math.min(idx, deck.length - 1)];
+    const card = Object.assign({}, raw, av[raw.kind]);
+    const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+    const p = clamp(s.dx / 110, -1, 1);
+    const up = clamp(-s.dy / 110, 0, 1) * (1 - Math.abs(p));
+    const lean = Math.max(Math.abs(p), up);
+    const paths = {
+      Housing: 'M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
+      Money: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z M14.5 9.5c0-1-1-1.7-2.5-1.7s-2.5.7-2.5 1.7 1 1.5 2.5 1.8 2.5.8 2.5 1.8-1 1.7-2.5 1.7-2.5-.7-2.5-1.7 M12 6.5v1.3 M12 16.2v1.3',
+      Politics: 'M3 10v4h3l6 4V6l-6 4z M16 9a4 4 0 0 1 0 6 M19 6a8 8 0 0 1 0 12',
+      Union: 'M8 11a3 3 0 1 0 0-6a3 3 0 1 0 0 6z M16 11a3 3 0 1 0 0-6a3 3 0 1 0 0 6z M2 20c0-3 3-5 6-5s6 2 6 5 M10 20c0-3 3-5 6-5s6 2 6 5'
+    };
+    const totals = { Housing: 5, Money: 4, Politics: 4, Union: 5 };
+    const base = { Housing: 3, Money: 3, Politics: 2, Union: 3 };
+    deck.slice(0, idx).forEach((c) => { base[c.theme] += 1; });
+    const meters = ['Housing', 'Money', 'Politics', 'Union'].map((k) => ({
+      label: k, d: paths[k], w: Math.round((base[k] / totals[k]) * 100) + '%',
+      dot: (!done && card.theme === k ? lean : 0).toFixed(2),
+      stroke: !done && card.theme === k && lean > 0.1 ? '#E8D44D' : '#B9BDC4'
+    }));
+    const moving = s.drag || s.noAnim;
+    return {
+      card, done, notDone: !done, meters,
+      position: Math.min(18, 12 + idx),
+      cardTransform: 'translate(' + s.dx + 'px, ' + s.dy + 'px) rotate(' + (s.dx / 18).toFixed(1) + 'deg)',
+      cardTransition: moving ? 'none' : 'transform 240ms ease-out, opacity 240ms ease-out',
+      cardOpacity: s.leaving ? '0' : '1',
+      agreeO: Math.max(0, p).toFixed(2), disagreeO: Math.max(0, -p).toFixed(2), passO: up.toFixed(2),
+      edgeRight: (0.25 + 0.75 * Math.max(0, p)).toFixed(2), edgeLeft: (0.25 + 0.75 * Math.max(0, -p)).toFixed(2),
+      down: (e) => { if (s.leaving) return; this.sx = e.clientX; this.sy = e.clientY; try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {} this.setState({ drag: true, dx: 0, dy: 0 }); },
+      move: (e) => { if (!this.state.drag) return; this.setState({ dx: e.clientX - this.sx, dy: e.clientY - this.sy }); },
+      up: () => {
+        if (!this.state.drag) return;
+        const dx = this.state.dx, dy = this.state.dy;
+        if (dx > 110) this.commit('agree');
+        else if (dx < -110) this.commit('disagree');
+        else if (dy < -110) this.commit('pass');
+        else this.setState({ drag: false, dx: 0, dy: 0 });
+      },
+      tapAgree: () => this.commit('agree'),
+      tapDisagree: () => this.commit('disagree'),
+      tapPass: () => this.commit('pass'),
+      undo: () => { if (!this.state.leaving) this.setState({ answers: this.state.answers.slice(0, -1) }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

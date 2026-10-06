@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Add to an issue</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 980px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; padding: 14px 20px 24px 20px; gap: 18px">
+  <div style="display: flex; justify-content: space-between; align-items: center">
+    <a href="IBIS-Map.dc.html" style="min-height: 44px; display: inline-flex; align-items: center; color: #B9BDC4; font-size: 15px; text-decoration: none">Cancel</a>
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #B9BDC4">Add to the issue</span>
+    <a href="IBIS-Map.dc.html" style="min-height: 44px; display: inline-flex; align-items: center; font-size: 15px; font-weight: 800; text-decoration: none">Post</a>
+  </div>
+
+  <div style="display: flex; gap: 10px; align-items: center; padding: 12px 14px; background: #181B21; border-radius: 12px; font-size: 14px">
+    <span style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 11px; background: #E8D44D; color: #0F1115; font-weight: 800">?</span>
+    Ignored repair requests: what do we do?
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #181B21; border-radius: 12px">
+    <sc-for list="{{kinds}}" as="k" hint-placeholder-count="4">
+      <button type="button" onClick="{{k.pick}}" style="height: 42px; border: none; border-radius: 9px; background: {{k.bg}}; color: {{k.fg}}; font-family: inherit; font-size: 13px; font-weight: 800; cursor: pointer">{{k.label}}</button>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{needsTarget}}" hint-placeholder-val="{{true}}">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <span style="font-size: 13px; font-weight: 700; color: #B9BDC4">{{targetVerb}}</span>
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: #F3F1EA; color: #0F1115; border-left: 5px solid {{accent}}">
+        <span style="font-size: 15px; line-height: 1.3; font-weight: 700">If repairs are ignored for 60 days, organize a rent strike.</span>
+        <button type="button" style="flex: none; height: 32px; padding: 0 10px; border: 1px solid #0F1115; border-radius: 8px; background: transparent; font-family: inherit; font-size: 12px; font-weight: 700; color: #0F1115; cursor: pointer">Change</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: #B9BDC4">{{fieldLabel}}
+    <sc-if value="{{isPosition}}" hint-placeholder-val="{{false}}">
+      <textarea rows="4" style="box-sizing: border-box; padding: 12px 14px; border: 1px solid #3A404A; border-radius: 12px; background: #181B21; font-family: inherit; font-size: 17px; font-weight: 600; line-height: 1.4; color: #F3F1EA; resize: none">Set up a shared repair log so every building can see response times.</textarea>
+    </sc-if>
+    <sc-if value="{{isPro}}" hint-placeholder-val="{{false}}">
+      <textarea rows="4" style="box-sizing: border-box; padding: 12px 14px; border: 1px solid #3A404A; border-radius: 12px; background: #181B21; font-family: inherit; font-size: 17px; font-weight: 600; line-height: 1.4; color: #F3F1EA; resize: none">A firm deadline gives the city a reason to move before we have to.</textarea>
+    </sc-if>
+    <sc-if value="{{isCon}}" hint-placeholder-val="{{true}}">
+      <textarea rows="4" style="box-sizing: border-box; padding: 12px 14px; border: 1px solid #3A404A; border-radius: 12px; background: #181B21; font-family: inherit; font-size: 17px; font-weight: 600; line-height: 1.4; color: #F3F1EA; resize: none">Most of us are on month-to-month leases; a strike makes that risk real.</textarea>
+    </sc-if>
+    <sc-if value="{{isQuestion}}" hint-placeholder-val="{{false}}">
+      <textarea rows="4" style="box-sizing: border-box; padding: 12px 14px; border: 1px solid #3A404A; border-radius: 12px; background: #181B21; font-family: inherit; font-size: 17px; font-weight: 600; line-height: 1.4; color: #F3F1EA; resize: none">What happens to strikers who are already behind on rent?</textarea>
+    </sc-if>
+    <span style="font-size: 12px; font-weight: 400; color: #8D939C">One idea, stated so someone could agree or disagree with it.</span>
+  </label>
+
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid #FF9351; border-radius: 12px">
+    <span style="font-size: 13px; font-weight: 700; color: #FF9351">Close to an existing argument</span>
+    <span style="font-size: 14px; line-height: 1.35; color: #B9BDC4">"Withholding rent is the only leverage landlords respond to."</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <button type="button" style="height: 40px; border: 1px solid #3A404A; border-radius: 10px; background: transparent; color: #F3F1EA; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer">Merge into it</button>
+      <button type="button" style="height: 40px; border: 1px solid #3A404A; border-radius: 10px; background: transparent; color: #F3F1EA; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer">It's different</button>
+    </div>
+  </div>
+
+  <a href="S-Gallery.dc.html" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: #181B21; border-radius: 12px; font-size: 14px; font-weight: 700; text-decoration: none">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>
+    Back it up with a Studio take</a>
+
+  <fieldset style="margin: 0; padding: 0; border: none; display: flex; flex-direction: column; gap: 8px">
+    <legend style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4; margin-bottom: 8px">Post as</legend>
+    <label style="display: flex; gap: 12px; align-items: center; padding: 12px 14px; border: 2px solid #E8D44D; border-radius: 12px; cursor: pointer">
+      <input type="radio" name="as" checked style="width: 18px; height: 18px; accent-color: #E8D44D">
+      <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 700">@ana.p</span><span style="font-size: 12px; color: #B9BDC4">Your Millbrook chat name</span></span>
+    </label>
+    <label style="display: flex; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid #3A404A; border-radius: 12px; cursor: pointer">
+      <input type="radio" name="as" style="width: 18px; height: 18px; accent-color: #E8D44D">
+      <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 700">Unsigned</span><span style="font-size: 12px; color: #B9BDC4">Hidden from everyone, organizers included</span></span>
+    </label>
+    <span style="font-size: 12px; line-height: 1.4; color: #8D939C">Either way, what you write is never linked to how you vote.</span>
+  </fieldset>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { kind: 'con' };
+  }
+  renderVals() {
+    const k = this.state.kind;
+    const defs = [
+      { id: 'position', label: 'Position' }, { id: 'pro', label: 'Pro' },
+      { id: 'con', label: 'Con' }, { id: 'question', label: 'Question' }
+    ];
+    const kinds = defs.map((d) => ({
+      label: d.label, bg: d.id === k ? '#F3F1EA' : 'transparent', fg: d.id === k ? '#0F1115' : '#F3F1EA',
+      pick: () => this.setState({ kind: d.id })
+    }));
+    const copy = {
+      position: { field: 'Your position', draft: 'Set up a shared repair log so every building can see response times.', verb: '' },
+      pro: { field: 'Your argument for it', draft: 'A firm deadline gives the city a reason to move before we have to.', verb: 'Supports' },
+      con: { field: 'Your argument against it', draft: 'Most of us are on month-to-month leases; a strike makes that risk real.', verb: 'Objects to' },
+      question: { field: 'Your question', draft: 'What happens to strikers who are behind on rent already?', verb: 'Asks about' }
+    }[k];
+    return {
+      kinds, needsTarget: k !== 'position', targetVerb: copy.verb,
+      fieldLabel: copy.field,
+      isPosition: k === 'position', isPro: k === 'pro', isCon: k === 'con', isQuestion: k === 'question',
+      accent: k === 'pro' ? '#1F5FCC' : k === 'con' ? '#B24A0C' : '#4A4F57'
+    };
+  }
+}
+</script>
+</body>
+</html>

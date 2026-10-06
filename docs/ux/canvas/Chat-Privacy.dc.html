@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>What chat keeps private</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 1080px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; padding: 16px 20px 24px 20px; gap: 16px">
+  <div style="display: flex; align-items: center; gap: 12px">
+    <a href="Chat-Server.dc.html" aria-label="Back" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 22px; background: #181B21; color: #F3F1EA">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></a>
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #B9BDC4">Millbrook chat</span>
+  </div>
+  <h1 style="margin: 0; font-size: 32px; line-height: 1.02; font-weight: 800; letter-spacing: -0.02em">What stays private in chat</h1>
+
+  <section style="padding: 16px; background: #181B21; border-radius: 16px; display: flex; flex-direction: column; gap: 10px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6EA8FF">Only members' phones can read</span>
+    <span style="font-size: 15px; line-height: 1.45">Messages, files, reactions, voice, and the issue map's drafts. Every channel is its own encrypted group, and keys change whenever someone joins or leaves.</span>
+  </section>
+
+  <section style="padding: 16px; background: #181B21; border-radius: 16px; display: flex; flex-direction: column; gap: 10px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">What our servers see</span>
+    <sc-for list="{{sees}}" as="r" hint-placeholder-count="5">
+      <div style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.4">
+        <span style="flex: none; width: 20px; height: 20px; border-radius: 10px; background: {{r.bg}}; color: #0F1115; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800">{{r.mark}}</span>
+        <span style="color: {{r.ink}}">{{r.text}}</span>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="padding: 16px; border: 1px solid #E8D44D; border-radius: 16px; display: flex; flex-direction: column; gap: 8px">
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #E8D44D">Two separate identities</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <div style="padding: 12px; border-radius: 12px; background: #F3F1EA; color: #0F1115; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em">CHAT</span>
+        <span style="font-size: 16px; font-weight: 800">@ana.p</span>
+        <span style="font-size: 12px; color: #4A4F57">What you say, signed</span>
+      </div>
+      <div style="padding: 12px; border-radius: 12px; background: #20242B; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: #B9BDC4">VOTES</span>
+        <span style="font-family: 'DM Mono', monospace; font-size: 14px">7Kq2…e91</span>
+        <span style="font-size: 12px; color: #B9BDC4">How you vote, unlinkable</span>
+      </div>
+    </div>
+    <span style="font-size: 13px; line-height: 1.45; color: #B9BDC4">Different keys, never linked, not even by us. What you say about your own vote in chat is up to you.</span>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 10px">
+    <sc-for list="{{faq}}" as="f" hint-placeholder-count="3">
+      <div style="padding: 14px 16px; background: #181B21; border-radius: 14px; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 15px; font-weight: 800">{{f.q}}</span>
+        <span style="font-size: 14px; line-height: 1.45; color: #B9BDC4">{{f.a}}</span>
+      </div>
+    </sc-for>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1080}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const yes = { mark: '!', bg: '#FF9351', ink: '#F3F1EA' }, no = { mark: '✕', bg: '#6EA8FF', ink: '#B9BDC4' };
+    return {
+      sees: [
+        Object.assign({ text: 'That an encrypted message arrived for a channel, and when' }, yes),
+        Object.assign({ text: 'Roughly how big it was (we pad sizes)' }, yes),
+        Object.assign({ text: 'Not what it says, or which file it was' }, no),
+        Object.assign({ text: 'Not who’s in a channel: membership is proven with anonymous credentials' }, no),
+        Object.assign({ text: 'Not who sent it, where the protocol lets us hide that' }, no)
+      ],
+      faq: [
+        { q: 'I just joined. Why is #repairs empty?', a: 'New members see messages from when they joined. An organizer can share recent history, encrypted to your phone.' },
+        { q: 'How does anyone moderate?', a: 'A report carries cryptographic proof the message was really sent, so moderators act on what’s reported without reading everything.' },
+        { q: 'How do I know it’s really Lin?', a: 'Compare safety codes in person. A change means a new device or something worse.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

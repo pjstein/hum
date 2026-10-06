@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Members and invites</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 1060px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; padding: 20px; gap: 18px">
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <a href="O-Plan.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 32px; font-size: 14px; font-weight: 700; text-decoration: none">← Unlocks</a>
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #B9BDC4">Millbrook · Organizer</span>
+    <h1 style="margin: 0; font-size: 34px; line-height: 1.02; font-weight: 800; letter-spacing: -0.02em">Members</h1>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+    <div style="padding: 14px 12px; background: #181B21; border-radius: 14px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'DM Mono', monospace; font-size: 24px">1,240</span><span style="font-size: 12px; color: #B9BDC4">joined</span></div>
+    <div style="padding: 14px 12px; background: #181B21; border-radius: 14px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'DM Mono', monospace; font-size: 24px">76</span><span style="font-size: 12px; color: #B9BDC4">invites out</span></div>
+    <div style="padding: 14px 12px; background: #181B21; border-radius: 14px; display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'DM Mono', monospace; font-size: 24px">3</span><span style="font-size: 12px; color: #B9BDC4">organizers</span></div>
+  </div>
+
+  <div style="display: flex; gap: 10px; align-items: center; padding: 12px 14px; border: 1px solid #E8D44D; border-radius: 12px; font-size: 14px; line-height: 1.4">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8D44D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M3 3l18 18"></path><path d="M10.6 5.1A10.4 10.4 0 0 1 12 5c5 0 9 4.5 10 7a12.6 12.6 0 0 1-2.4 3.4M6.6 6.6C4.3 8 2.7 10 2 12c1 2.5 5 7 10 7a10 10 0 0 0 5.4-1.6"></path></svg>
+    <span>You see who accepted an invite. Never who played a deck, or how.</span>
+  </div>
+
+  <div style="position: relative; height: 196px">
+    <div style="position: absolute; inset: 0; transform: translate(10px, 8px) rotate(3deg); border-radius: 18px; background: #22262C"></div>
+    <article style="position: absolute; inset: 0; box-sizing: border-box; padding: 18px; border-radius: 18px; background: #F3F1EA; color: #0F1115; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.14em">INVITE</span>
+        <span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #4A4F57">single use · 14 days</span>
+      </div>
+      <span style="font-size: 22px; line-height: 1.1; font-weight: 800">Deal someone into Millbrook</span>
+      <span style="font-family: 'DM Mono', monospace; font-size: 13px; padding: 10px 12px; border-radius: 8px; background: #E6E3D9; color: #4A4F57">[APP]/join/mtu-7Kq2…</span>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <button type="button" style="height: 40px; border: none; border-radius: 10px; background: #0F1115; color: #F3F1EA; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">Copy link</button>
+        <button type="button" style="height: 40px; border: 2px solid #0F1115; border-radius: 10px; background: transparent; color: #0F1115; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">Import a list</button>
+      </div>
+    </article>
+  </div>
+
+  <section style="display: flex; flex-direction: column; gap: 10px; margin-top: 6px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Recently joined</span>
+      <span style="font-size: 12px; color: #8D939C">Organizers only</span>
+    </div>
+    <div style="background: #181B21; border-radius: 14px; padding: 4px 14px">
+      <sc-for list="{{people}}" as="p" hint-placeholder-count="5">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid #2A2F37">
+          <span style="display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 700">{{p.name}}</span>
+            <span style="font-size: 12px; color: #B9BDC4">{{p.via}}</span>
+          </span>
+          <span style="font-family: 'DM Mono', monospace; font-size: 12px; color: #8D939C">{{p.when}}</span>
+        </div>
+      </sc-for>
+    </div>
+    <span style="font-size: 13px; line-height: 1.45; color: #8D939C">Removing someone stops their future cards. Past releases don't change.</span>
+    <a href="O-Compose.dc.html" style="display: flex; align-items: center; justify-content: center; height: 50px; margin-top: 4px; border-radius: 14px; background: #E8D44D; color: #0F1115; font-size: 15px; font-weight: 800; text-decoration: none">Build the next deck</a>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1060}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      people: [
+        { name: 'Ana P.', via: 'Invited by you', when: 'Oct 3' },
+        { name: 'Marcus T.', via: 'Building 4 list', when: 'Oct 2' },
+        { name: 'Lin W.', via: 'Invite link', when: 'Oct 2' },
+        { name: 'Unnamed member', via: 'Invite link, no name given', when: 'Sep 30' },
+        { name: 'Rosa M.', via: 'Building 2 list', when: 'Sep 28' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

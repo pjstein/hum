@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Signal: release</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 1420px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column; gap: 22px; padding: 18px 20px 28px 20px">
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <a href="B-Home.dc.html" aria-label="Back" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 22px; background: #181B21; color: #F3F1EA">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></a>
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Release 3 · May 30</span>
+    <span style="width: 44px"></span>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <h1 style="margin: 0; font-size: 40px; line-height: 1; font-weight: 800; letter-spacing: -0.02em">Spring priorities</h1>
+    <div style="display: flex; gap: 14px; font-family: 'DM Mono', monospace; font-size: 13px; color: #B9BDC4">
+      <span>1,243 voters</span><span>±1 pt</span><span>ε 4.0</span>
+    </div>
+  </div>
+
+  <section style="display: flex; flex-direction: column; gap: 10px">
+    <div style="position: relative; width: 100%; height: 230px; border-radius: 16px; background: #181B21; overflow: hidden">
+      <div style="display: grid; grid-template-columns: repeat(25, minmax(0, 1fr)); width: 100%; height: 100%">
+        <sc-for list="{{cells}}" as="cell" hint-placeholder-count="400">
+          <div style="background: #F3F1EA; opacity: {{cell.o}}"></div>
+        </sc-for>
+      </div>
+      <span style="position: absolute; left: 14px; top: 12px; font-size: 44px; font-weight: 800; line-height: 1; color: #F3F1EA">A</span>
+      <span style="position: absolute; right: 16px; top: 12px; font-size: 44px; font-weight: 800; line-height: 1; color: #F3F1EA">B</span>
+      <div style="position: absolute; left: 41%; top: 60%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: #E8D44D; border: 3px solid #0F1115"></div>
+      <span style="position: absolute; left: 45%; top: 66%; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; color: #0F1115; background: #E8D44D; border-radius: 4px; padding: 2px 6px">YOU</span>
+    </div>
+    <div style="display: flex; height: 8px; gap: 3px">
+      <div style="width: 58%; background: #F3F1EA; border-radius: 4px 0 0 4px"></div>
+      <div style="flex: 1; background: #5B616B; border-radius: 0 4px 4px 0"></div>
+    </div>
+    <div style="display: flex; justify-content: space-between; font-size: 13px; color: #B9BDC4">
+      <span>Group A · 58%</span><span>Group B · 42%</span>
+    </div>
+  </section>
+
+  <section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+    <div style="padding: 16px; background: #181B21; border-radius: 16px; display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Everyone agrees</span>
+      <span style="font-family: 'DM Mono', monospace; font-size: 40px; line-height: 1; color: #6EA8FF">86%</span>
+      <span style="font-size: 14px; line-height: 1.35">No-cause evictions come first</span>
+    </div>
+    <div style="padding: 16px; background: #181B21; border-radius: 16px; display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #B9BDC4">Biggest split</span>
+      <span style="font-family: 'DM Mono', monospace; font-size: 40px; line-height: 1; color: #FF9351">62 pts</span>
+      <span style="font-size: 14px; line-height: 1.35">Endorsing local candidates</span>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline">
+      <h2 style="margin: 0; font-size: 20px; font-weight: 800">Agree, by group</h2>
+      <div style="display: flex; gap: 12px; font-size: 12px; color: #B9BDC4">
+        <span style="display: inline-flex; align-items: center; gap: 5px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #F3F1EA"></span>A</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px"><span style="width: 8px; height: 8px; border-radius: 50%; border: 2px solid #F3F1EA"></span>B</span>
+      </div>
+    </div>
+    <sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+      <div style="display: flex; flex-direction: column; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid #2A2F37">
+        <div style="display: flex; justify-content: space-between; gap: 10px">
+          <p style="margin: 0; font-size: 15px; line-height: 1.35">{{r.text}}</p>
+          <sc-if value="{{r.noise}}" hint-placeholder-val="{{false}}">
+            <span style="flex: none; align-self: flex-start; font-size: 11px; font-weight: 700; color: #B9BDC4; border: 1px solid #3A404A; border-radius: 999px; padding: 2px 8px">within noise</span>
+          </sc-if>
+        </div>
+        <div style="position: relative; height: 18px">
+          <div style="position: absolute; left: 0; right: 0; top: 8px; height: 2px; background: #2A2F37"></div>
+          <div style="position: absolute; left: 50%; top: 2px; width: 1px; height: 14px; background: #3A404A"></div>
+          <div style="position: absolute; left: {{r.lo}}; width: {{r.span}}; top: 7px; height: 4px; background: #5B616B"></div>
+          <div style="position: absolute; left: {{r.al}}; top: 2px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #F3F1EA"></div>
+          <div style="position: absolute; left: {{r.bl}}; top: 2px; width: 10px; height: 10px; margin-left: -7px; border-radius: 50%; border: 2px solid #F3F1EA; background: #0F1115"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 12px; color: #8D939C">
+          <span>A {{r.a}}%</span><span>B {{r.b}}%</span>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+
+  <div style="display: flex; flex-direction: column; gap: 10px; margin-top: auto">
+    <a href="S-Studio.dc.html" style="display: flex; align-items: center; justify-content: center; height: 52px; border-radius: 14px; background: #E8D44D; color: #0F1115; font-size: 16px; font-weight: 800; text-decoration: none">Open in Studio</a>
+    <a href="P-Ledger.dc.html" style="text-align: center; font-family: 'DM Mono', monospace; font-size: 12px; min-height: 32px; text-decoration: none">Ledger #b7e4…3fa0 · your vote included ✓</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1420}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const rows = [
+      { text: 'Stopping no-cause evictions should come first this year.', a: 88, b: 83 },
+      { text: 'Each building chapter should control part of the budget.', a: 66, b: 71 },
+      { text: 'The union should endorse candidates in local elections.', a: 79, b: 17 },
+      { text: 'The union should stay out of electoral politics.', a: 18, b: 68 },
+      { text: 'If repairs are ignored for 60 days, we should organize a rent strike.', a: 74, b: 28 },
+      { text: 'At least half of general meetings should be online.', a: 45, b: 43 }
+    ].map((r) => {
+      const lo = Math.min(r.a, r.b), hi = Math.max(r.a, r.b);
+      return Object.assign({}, r, { al: r.a + '%', bl: r.b + '%', lo: lo + '%', span: (hi - lo) + '%', noise: hi - lo < 4 });
+    });
+    const cells = [];
+    const cols = 25, rws = 16;
+    for (let r = 0; r < rws; r++) {
+      for (let c = 0; c < cols; c++) {
+        const x = (c + 0.5) / cols, y = (r + 0.5) / rws;
+        const g = (cx, cy, sx, sy, w) => w * Math.exp(-(((x - cx) ** 2) / (2 * sx * sx) + ((y - cy) ** 2) / (2 * sy * sy)));
+        const v = g(0.3, 0.58, 0.12, 0.18, 1.0) + g(0.74, 0.5, 0.1, 0.17, 0.85) + g(0.5, 0.62, 0.07, 0.1, 0.12);
+        cells.push({ o: Math.min(0.7, v * 0.7).toFixed(2) });
+      }
+    }
+    return { rows, cells };
+  }
+}
+</script>
+</body>
+</html>

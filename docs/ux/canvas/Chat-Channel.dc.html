@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Issue channel</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#E8D44D}a:hover{color:#F4E57A}
+</style>
+</helmet>
+<div style="width: 390px; height: 960px; box-sizing: border-box; background: #0F1115; color: #F3F1EA; font-family: 'Archivo', system-ui, sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 12px 16px; border-bottom: 1px solid #2A2F37">
+    <div style="display: flex; align-items: center; gap: 10px">
+      <a href="Chat-Server.dc.html" aria-label="Back to channels" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 22px; background: #181B21; color: #F3F1EA">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></a>
+      <span style="display: flex; flex-direction: column">
+        <span style="font-size: 18px; font-weight: 800">#repairs</span>
+        <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: #6EA8FF">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>End-to-end encrypted</span>
+      </span>
+    </div>
+    <a href="IBIS-Map.dc.html" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #181B21; border-radius: 12px; text-decoration: none; color: #F3F1EA">
+      <span style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 11px; background: #E8D44D; color: #0F1115; font-weight: 800">?</span>
+      <span style="flex: 1; display: flex; flex-direction: column">
+        <span style="font-size: 13px; font-weight: 700">Ignored repair requests: what do we do?</span>
+        <span style="font-size: 12px; color: #B9BDC4">3 positions · 9 arguments · open the map</span>
+      </span>
+    </a>
+  </header>
+
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 14px 16px; overflow: hidden">
+    <sc-for list="{{before}}" as="m" hint-placeholder-count="2">
+      <div style="display: flex; gap: 10px">
+        <span style="flex: none; width: 34px; height: 34px; border-radius: 17px; background: {{m.av}}; color: #0F1115; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">{{m.ini}}</span>
+        <span style="display: flex; flex-direction: column; gap: 3px">
+          <span style="font-size: 13px"><strong>{{m.who}}</strong> <span style="font-family: 'DM Mono', monospace; font-size: 11px; color: #8D939C">{{m.time}}</span></span>
+          <span style="font-size: 15px; line-height: 1.4">{{m.text}}</span>
+        </span>
+      </div>
+    </sc-for>
+
+    <div style="position: relative; display: flex; gap: 10px; padding: 8px; margin: -8px; border-radius: 12px; background: {{hiBg}}">
+      <span style="flex: none; width: 34px; height: 34px; border-radius: 17px; background: #FF9351; color: #0F1115; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">LW</span>
+      <span style="flex: 1; display: flex; flex-direction: column; gap: 3px">
+        <span style="font-size: 13px"><strong>Lin W.</strong> <span style="font-family: 'DM Mono', monospace; font-size: 11px; color: #8D939C">7:42</span></span>
+        <span style="font-size: 15px; line-height: 1.4">If we strike, the rent has to go into escrow. Otherwise people get eviction filings and we lose them.</span>
+        <sc-if value="{{promoted}}" hint-placeholder-val="{{false}}">
+          <span style="align-self: flex-start; margin-top: 4px; font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 6px; background: #F3F1EA; color: #0F1115">{{badge}}</span>
+        </sc-if>
+      </span>
+      <button type="button" onClick="{{toggleMenu}}" aria-label="Message actions" style="flex: none; align-self: flex-start; width: 36px; height: 36px; border: none; border-radius: 10px; background: #20242B; color: #F3F1EA; font-family: inherit; font-size: 18px; font-weight: 800; cursor: pointer">⋯</button>
+      <sc-if value="{{menu}}" hint-placeholder-val="{{false}}">
+        <div style="position: absolute; right: 8px; top: 48px; z-index: 2; width: 240px; padding: 6px; background: #F3F1EA; color: #0F1115; border-radius: 14px; display: flex; flex-direction: column">
+          <span style="padding: 8px 10px 6px 10px; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: #4A4F57">ADD TO THE ISSUE MAP</span>
+          <sc-for list="{{actions}}" as="a" hint-placeholder-count="4">
+            <button type="button" onClick="{{a.go}}" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 10px; border: none; border-radius: 10px; background: transparent; font-family: inherit; font-size: 15px; font-weight: 700; color: #0F1115; text-align: left; cursor: pointer">
+              <span style="width: 22px; height: 22px; border-radius: 6px; background: {{a.c}}; display: inline-flex; align-items: center; justify-content: center; font-size: 13px">{{a.sign}}</span>{{a.label}}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 16px; background: #F3F1EA; color: #0F1115">
+      <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.12em">DECK DEALT · FALL CHECK-IN</span>
+      <span style="font-size: 17px; line-height: 1.2; font-weight: 800">18 cards, 3 from this issue. Closes Oct 21.</span>
+      <a href="Swipe-Deck.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 10px; background: #0F1115; color: #F3F1EA; font-size: 14px; font-weight: 800; text-decoration: none">Play your 7 left</a>
+    </div>
+
+    <sc-for list="{{after}}" as="m" hint-placeholder-count="1">
+      <div style="display: flex; gap: 10px">
+        <span style="flex: none; width: 34px; height: 34px; border-radius: 17px; background: {{m.av}}; color: #0F1115; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800">{{m.ini}}</span>
+        <span style="display: flex; flex-direction: column; gap: 3px">
+          <span style="font-size: 13px"><strong>{{m.who}}</strong> <span style="font-family: 'DM Mono', monospace; font-size: 11px; color: #8D939C">{{m.time}}</span></span>
+          <span style="font-size: 15px; line-height: 1.4">{{m.text}}</span>
+        </span>
+      </div>
+    </sc-for>
+
+    <sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}">
+      <span style="margin-top: auto; padding: 10px 12px; border: 1px solid #E8D44D; border-radius: 12px; font-size: 13px; line-height: 1.4; color: #E8D44D">{{toast}}</span>
+    </sc-if>
+  </div>
+
+  <div style="display: flex; gap: 8px; align-items: center; padding: 10px 12px 18px 12px; border-top: 1px solid #2A2F37">
+    <input type="text" aria-label="Message #repairs" placeholder="Message #repairs" style="flex: 1; height: 44px; box-sizing: border-box; padding: 0 14px; border: 1px solid #3A404A; border-radius: 22px; background: #181B21; font-family: inherit; font-size: 15px; color: #F3F1EA">
+    <a href="IBIS-Author.dc.html" style="display: inline-flex; align-items: center; height: 44px; padding: 0 14px; border-radius: 22px; background: #E8D44D; color: #0F1115; font-size: 14px; font-weight: 800; text-decoration: none">+ Map</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menu: false, kind: null };
+  }
+  renderVals() {
+    const s = this.state;
+    const kinds = {
+      position: { label: 'Make it a position', sign: 'P', c: '#E8D44D', badge: 'Proposed as a position · waiting on organizers' },
+      pro: { label: 'Add as a pro', sign: '+', c: '#6EA8FF', badge: 'Added as a pro to "Organize a rent strike"' },
+      con: { label: 'Add as a con', sign: '−', c: '#FF9351', badge: 'Added as a con to "Organize a rent strike"' },
+      question: { label: 'Ask as a sub-question', sign: '?', c: '#B9BDC4', badge: 'Added as a sub-question' }
+    };
+    const actions = ['position', 'pro', 'con', 'question'].map((k) => Object.assign({}, kinds[k], {
+      go: () => this.setState({ menu: false, kind: k })
+    }));
+    return {
+      before: [
+        { who: 'Marcus T.', ini: 'MT', av: '#6EA8FF', time: '7:31', text: 'Building 4 has had no heat repairs since March. Code enforcement keeps saying 90 days.' },
+        { who: 'Rosa M.', ini: 'RM', av: '#E8D44D', time: '7:38', text: 'Same in 2. I’m in for a deadline, but a strike scares half my floor.' }
+      ],
+      after: [
+        { who: 'Ana P.', ini: 'AP', av: '#B9BDC4', time: '8:05', text: 'Can someone add a sub-question on which buildings would actually join? That changes everything.' }
+      ],
+      actions, menu: s.menu,
+      toggleMenu: () => this.setState({ menu: !s.menu }),
+      promoted: !!s.kind, badge: s.kind ? kinds[s.kind].badge : '',
+      hiBg: s.menu ? '#181B21' : 'transparent',
+      hasToast: !!s.kind,
+      toast: 'Lin gets asked to confirm, since it’s their words. Once confirmed, it shows up in the map and can be dealt into the next deck.'
+    };
+  }
+}
+</script>
+</body>
+</html>
