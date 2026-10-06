@@ -1,0 +1,17 @@
+[package]
+name = "hum-sim"
+description = "Hum simulator: a headless world of simulated phones running the whole ratchet"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "sim"
+path = "src/main.rs"
+
+[dependencies]
+
+[lints]
+workspace = true

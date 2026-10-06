@@ -1,0 +1,17 @@
+[package]
+name = "hum-blob-store"
+description = "Hum service: blob-store (empty until wave 1)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "blob-store"
+path = "src/main.rs"
+
+[dependencies]
+
+[lints]
+workspace = true

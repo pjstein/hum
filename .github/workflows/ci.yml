@@ -1,0 +1,59 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  schedule:
+    # Nightly, 03:17 UTC.
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: "0"
+
+jobs:
+  check:
+    name: just check + sim-fast
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      # Reads the pin from rust-toolchain.toml.
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: services/ledger/go.mod
+          cache-dependency-path: services/ledger/go.sum
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: reference/uv.lock
+
+      - uses: extractions/setup-just@v2
+
+      - run: just setup
+      - run: just check
+      - run: just sim-fast
+
+  nightly:
+    name: just sim-full (nightly)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+      - uses: Swatinem/rust-cache@v2
+      - uses: extractions/setup-just@v2
+      - run: just sim-full

@@ -1,0 +1,13 @@
+[package]
+name = "hum-ballot"
+description = "Hum core: ballot (empty until wave 1)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+repository.workspace = true
+
+[dependencies]
+
+[lints]
+workspace = true

@@ -1,0 +1,35 @@
+# One Cargo workspace for the whole repo: core crates, Rust services and the
+# simulator. See docs/decisions/0001-repo-layout.md for why there is one and
+# not two.
+[workspace]
+resolver = "3"
+members = [
+  "core/crates/*",
+  "services/aggregator",
+  "services/issuer",
+  "services/verifier-host",
+  "services/delivery",
+  "services/blob-store",
+  "services/opendata",
+  "services/gallery",
+  "sim",
+]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.99"
+publish = false
+repository = "https://github.com/pjstein/hum"
+
+[workspace.dependencies]
+# Shared versions go here. Seam crates may only add dependencies with owner
+# approval (CLAUDE.md, "Security seams").
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "warn", priority = -1 }

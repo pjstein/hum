@@ -1,0 +1,17 @@
+[package]
+name = "hum-verifier-host"
+description = "Hum service: verifier-host (empty until wave 1)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "verifier-host"
+path = "src/main.rs"
+
+[dependencies]
+
+[lints]
+workspace = true

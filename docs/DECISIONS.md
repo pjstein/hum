@@ -33,6 +33,7 @@ New decisions go in `docs/decisions/NNNN-short-title.md` (context, decision, con
 
 ## Proposed (approve or replace in wave 0)
 
+- **One Cargo workspace at the repo root** for `core/crates/*`, the Rust services and `sim/`; Go ledger as its own module; `uv` project in `reference/`. See `docs/decisions/0001-repo-layout.md`.
 - **Rust core** shared by phones and services, exposed to the apps through uniffi; **SwiftUI** and **Jetpack Compose** apps on top. Over-the-air code updates stay off.
 - **Python reference implementation** that generates every test vector, independently of the Rust code.
 - **Go ledger on Tessera,** which also serves as the second, independent implementation of manifest verification.

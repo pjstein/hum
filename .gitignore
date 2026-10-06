@@ -1,0 +1,22 @@
+# Rust
+/target/
+**/target/
+# Go
+/services/ledger/bin/
+*.test
+*.out
+# Python (reference/)
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+/reference/dist/
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+# Local overrides
+.claude/settings.local.json
