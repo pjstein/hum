@@ -12,6 +12,18 @@ name = "sim"
 path = "src/main.rs"
 
 [dependencies]
+# Seeded randomness for scenarios and for the fake aggregator's Gaussian noise.
+# The fake aggregator is a port of docs/research/dp-polis/polis_dp.py and is
+# replaced by hum-release in wave 1; see docs/decisions/0090-w0-09-simulator-dependencies.md.
+rand = "0.9"
+rand_chacha = "0.9"
+rand_distr = "0.5"
+# Reports and scenario files.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# Polis open data (CSV with quoted free text).
+csv = "1"
+anyhow = "1"
 
 [lints]
 workspace = true
