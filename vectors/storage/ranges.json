@@ -1,0 +1,107 @@
+{
+ "spec": "storage",
+ "file": "ranges",
+ "notes": "\u00a71.4: P, n and C from size; content-length mismatch; an appended chunk.",
+ "cases": [
+  {
+   "id": "storage/ranges/range-c-from-size-001",
+   "description": "Expected lengths for a 0-byte plaintext",
+   "section": "1.4",
+   "inputs": {
+    "size": 0
+   },
+   "expected": {
+    "P": 1,
+    "n": 1,
+    "C": 18,
+    "C_format2": 34
+   }
+  },
+  {
+   "id": "storage/ranges/range-c-from-size-002",
+   "description": "Expected lengths for a 100-byte plaintext",
+   "section": "1.4",
+   "inputs": {
+    "size": 100
+   },
+   "expected": {
+    "P": 104,
+    "n": 1,
+    "C": 121,
+    "C_format2": 137
+   }
+  },
+  {
+   "id": "storage/ranges/range-c-from-size-003",
+   "description": "Expected lengths for a 65535-byte plaintext",
+   "section": "1.4",
+   "inputs": {
+    "size": 65535
+   },
+   "expected": {
+    "P": 65536,
+    "n": 1,
+    "C": 65553,
+    "C_format2": 65569
+   }
+  },
+  {
+   "id": "storage/ranges/range-c-from-size-004",
+   "description": "Expected lengths for a 65536-byte plaintext",
+   "section": "1.4",
+   "inputs": {
+    "size": 65536
+   },
+   "expected": {
+    "P": 67584,
+    "n": 2,
+    "C": 67617,
+    "C_format2": 67633
+   }
+  },
+  {
+   "id": "storage/ranges/range-c-from-size-005",
+   "description": "Expected lengths for a 150000-byte plaintext",
+   "section": "1.4",
+   "inputs": {
+    "size": 150000
+   },
+   "expected": {
+    "P": 151552,
+    "n": 3,
+    "C": 151601,
+    "C_format2": 151617
+   }
+  },
+  {
+   "id": "storage/ranges/range-content-length-mismatch-006",
+   "description": "A Content-Length that cannot hold a 100-byte blob fails with size-mismatch before any fetch",
+   "section": "1.4",
+   "inputs": {
+    "size": 100,
+    "content_length": 137
+   },
+   "rejection": {
+    "step": null,
+    "check": "content-length",
+    "reason": "size-mismatch"
+   }
+  },
+  {
+   "id": "storage/ranges/seal-appended-chunk-007",
+   "description": "A full 65,552-byte chunk appended after the last: n recomputes and the old last chunk fails",
+   "section": "1.4",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "ciphertext_sha256": "d704b66119a7fbba2d21073b8c1453b4d817db8086f6af055bca11d81dc608ec",
+    "ciphertext_length": 133169,
+    "ciphertext_rule": "seal-two-chunks followed by chunk 0 of seal(pattern(70000))"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "bad-tag"
+   }
+  }
+ ]
+}

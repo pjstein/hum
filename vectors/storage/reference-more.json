@@ -1,0 +1,411 @@
+{
+ "spec": "storage",
+ "file": "reference-more",
+ "notes": "\u00a73.1 rejections not in reference.json and the \u00a73.2 ExternalPart reverse rule.",
+ "cases": [
+  {
+   "id": "storage/reference-more/ref-media-too-long-001",
+   "description": "Reject: media type of 128 bytes",
+   "section": "3.1",
+   "inputs": {
+    "reference": "a90058210164c09ce134b803ecdc1193bcd28f8034e4ad6f49c6d5d2f64f5cb4e93465c46101010250000102030405060708090a0b0c0d0e0f03040478806d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d6d0565612e74787406582101982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1071a6adbf500096763617074696f6e"
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-reference",
+    "reason": "bad-reference"
+   }
+  },
+  {
+   "id": "storage/reference-more/ref-description-too-long-002",
+   "description": "Reject: description of 1,025 bytes",
+   "section": "3.1",
+   "inputs": {
+    "reference": "a90058210164c09ce134b803ecdc1193bcd28f8034e4ad6f49c6d5d2f64f5cb4e93465c46101010250000102030405060708090a0b0c0d0e0f0304046a746578742f706c61696e0565612e74787406582101982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1071a6adbf500097904016464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464"
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-reference",
+    "reason": "bad-reference"
+   }
+  },
+  {
+   "id": "storage/reference-more/ref-key-wrong-length-003",
+   "description": "Reject: 15-byte key",
+   "section": "3.1",
+   "inputs": {
+    "reference": "a90058210164c09ce134b803ecdc1193bcd28f8034e4ad6f49c6d5d2f64f5cb4e93465c4610101024f0000000000000000000000000000000304046a746578742f706c61696e0565612e74787406582101982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1071a6adbf500096763617074696f6e"
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-reference",
+    "reason": "bad-reference"
+   }
+  },
+  {
+   "id": "storage/reference-more/ref-unknown-key-004",
+   "description": "Reject: unknown map key 11",
+   "section": "3.1",
+   "inputs": {
+    "reference": "aa0058210164c09ce134b803ecdc1193bcd28f8034e4ad6f49c6d5d2f64f5cb4e93465c46101010250000102030405060708090a0b0c0d0e0f0304046a746578742f706c61696e0565612e74787406582101982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1071a6adbf500096763617074696f6e0b01"
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-reference",
+    "reason": "bad-reference"
+   }
+  },
+  {
+   "id": "storage/reference-more/ref-format-3-005",
+   "description": "Reject: format 3",
+   "section": "3.1",
+   "inputs": {
+    "reference": "a90058210164c09ce134b803ecdc1193bcd28f8034e4ad6f49c6d5d2f64f5cb4e93465c46101030250000102030405060708090a0b0c0d0e0f0304046a746578742f706c61696e0565612e74787406582101982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1071a6adbf500096763617074696f6e"
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-reference",
+    "reason": "bad-reference"
+   }
+  },
+  {
+   "id": "storage/reference-more/external-part-valid-006",
+   "description": "Forward mapping of a direct reference",
+   "section": "3.2",
+   "inputs": {
+    "reference": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "0164c09ce134b803ecdc1193bcd28f8034e4ad6f49c6d5d2f64f5cb4e93465c461"
+       }
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       4,
+       "text/plain"
+      ],
+      [
+       2,
+       {
+        "hex": "000102030405060708090a0b0c0d0e0f"
+       }
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       5,
+       "a.txt"
+      ],
+      [
+       6,
+       {
+        "hex": "01982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1"
+       }
+      ],
+      [
+       7,
+       1792800000
+      ],
+      [
+       9,
+       "caption"
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "external_part": [
+     1,
+     "",
+     2,
+     "text/plain",
+     "hum:blob:cafsmbhhbgs4ah3g4cgj3zuupqa2ojllpjhdnluxwj5olj2jumxcgc",
+     1792800000,
+     4,
+     1,
+     {
+      "hex": "000102030405060708090a0b0c0d0e0f"
+     },
+     {
+      "hex": ""
+     },
+     {
+      "hex": ""
+     },
+     1,
+     {
+      "hex": "982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1"
+     },
+     "caption",
+     "a.txt"
+    ]
+   }
+  },
+  {
+   "id": "storage/reference-more/external-part-bad-enc-alg-007",
+   "description": "Reverse rule: encAlg invalid",
+   "section": "3.2",
+   "inputs": {
+    "external_part": [
+     1,
+     "",
+     2,
+     "text/plain",
+     "hum:blob:cafsmbhhbgs4ah3g4cgj3zuupqa2ojllpjhdnluxwj5olj2jumxcgc",
+     1792800000,
+     4,
+     2,
+     {
+      "hex": "000102030405060708090a0b0c0d0e0f"
+     },
+     {
+      "hex": ""
+     },
+     {
+      "hex": ""
+     },
+     1,
+     {
+      "hex": "982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1"
+     },
+     "caption",
+     "a.txt"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "external-part",
+    "reason": "external-part-bad-enc-alg"
+   }
+  },
+  {
+   "id": "storage/reference-more/external-part-bad-hash-alg-008",
+   "description": "Reverse rule: hashAlg invalid",
+   "section": "3.2",
+   "inputs": {
+    "external_part": [
+     1,
+     "",
+     2,
+     "text/plain",
+     "hum:blob:cafsmbhhbgs4ah3g4cgj3zuupqa2ojllpjhdnluxwj5olj2jumxcgc",
+     1792800000,
+     4,
+     1,
+     {
+      "hex": "000102030405060708090a0b0c0d0e0f"
+     },
+     {
+      "hex": ""
+     },
+     {
+      "hex": ""
+     },
+     2,
+     {
+      "hex": "982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1"
+     },
+     "caption",
+     "a.txt"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "external-part",
+    "reason": "external-part-bad-hash-alg"
+   }
+  },
+  {
+   "id": "storage/reference-more/external-part-bad-key-length-009",
+   "description": "Reverse rule: key invalid",
+   "section": "3.2",
+   "inputs": {
+    "external_part": [
+     1,
+     "",
+     2,
+     "text/plain",
+     "hum:blob:cafsmbhhbgs4ah3g4cgj3zuupqa2ojllpjhdnluxwj5olj2jumxcgc",
+     1792800000,
+     4,
+     1,
+     {
+      "hex": "000000000000000000000000000000"
+     },
+     {
+      "hex": ""
+     },
+     {
+      "hex": ""
+     },
+     1,
+     {
+      "hex": "982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1"
+     },
+     "caption",
+     "a.txt"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "external-part",
+    "reason": "external-part-bad-key-length"
+   }
+  },
+  {
+   "id": "storage/reference-more/external-part-nonce-present-010",
+   "description": "Reverse rule: nonce invalid",
+   "section": "3.2",
+   "inputs": {
+    "external_part": [
+     1,
+     "",
+     2,
+     "text/plain",
+     "hum:blob:cafsmbhhbgs4ah3g4cgj3zuupqa2ojllpjhdnluxwj5olj2jumxcgc",
+     1792800000,
+     4,
+     1,
+     {
+      "hex": "000102030405060708090a0b0c0d0e0f"
+     },
+     {
+      "hex": "000000000000000000000000"
+     },
+     {
+      "hex": ""
+     },
+     1,
+     {
+      "hex": "982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1"
+     },
+     "caption",
+     "a.txt"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "external-part",
+    "reason": "external-part-nonce-present"
+   }
+  },
+  {
+   "id": "storage/reference-more/external-part-aad-present-011",
+   "description": "Reverse rule: aad invalid",
+   "section": "3.2",
+   "inputs": {
+    "external_part": [
+     1,
+     "",
+     2,
+     "text/plain",
+     "hum:blob:cafsmbhhbgs4ah3g4cgj3zuupqa2ojllpjhdnluxwj5olj2jumxcgc",
+     1792800000,
+     4,
+     1,
+     {
+      "hex": "000102030405060708090a0b0c0d0e0f"
+     },
+     {
+      "hex": ""
+     },
+     {
+      "hex": "78"
+     },
+     1,
+     {
+      "hex": "982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1"
+     },
+     "caption",
+     "a.txt"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "external-part",
+    "reason": "external-part-aad-present"
+   }
+  },
+  {
+   "id": "storage/reference-more/external-part-bad-hash-length-012",
+   "description": "Reverse rule: contentHash invalid",
+   "section": "3.2",
+   "inputs": {
+    "external_part": [
+     1,
+     "",
+     2,
+     "text/plain",
+     "hum:blob:cafsmbhhbgs4ah3g4cgj3zuupqa2ojllpjhdnluxwj5olj2jumxcgc",
+     1792800000,
+     4,
+     1,
+     {
+      "hex": "000102030405060708090a0b0c0d0e0f"
+     },
+     {
+      "hex": ""
+     },
+     {
+      "hex": ""
+     },
+     1,
+     {
+      "hex": "00000000000000000000000000000000000000000000000000000000000000"
+     },
+     "caption",
+     "a.txt"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "external-part",
+    "reason": "external-part-bad-hash-length"
+   }
+  },
+  {
+   "id": "storage/reference-more/external-part-bad-url-013",
+   "description": "Reverse rule: url invalid",
+   "section": "3.2",
+   "inputs": {
+    "external_part": [
+     1,
+     "",
+     2,
+     "text/plain",
+     "https://example.com/blob",
+     1792800000,
+     4,
+     1,
+     {
+      "hex": "000102030405060708090a0b0c0d0e0f"
+     },
+     {
+      "hex": ""
+     },
+     {
+      "hex": ""
+     },
+     1,
+     {
+      "hex": "982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1"
+     },
+     "caption",
+     "a.txt"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "external-part",
+    "reason": "external-part-bad-url"
+   }
+  }
+ ]
+}

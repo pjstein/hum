@@ -1,0 +1,999 @@
+{
+ "spec": "chat",
+ "file": "content",
+ "notes": "One valid body per Hum content type (section 5.2 to 5.16) and the generic rejections: unknown version, missing key, array over maximum, non-canonical, ExternalPart count, deck-dealt context lineage, release-digest deck mismatch. credential, exporter, frank, stamp, tokens, join, roles commit matrix, ignore, promote flow, directory replay, agent-limits, history, ds-api, no-votes: need an MLS implementation or ballot.md; which MLS stack is an open decision for the owner.",
+ "cases": [
+  {
+   "id": "chat/content/content-promote-proposal-001",
+   "description": "Valid promote-proposal",
+   "section": "5.2",
+   "inputs": {
+    "type": "promote-proposal",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       {
+        "hex": "014a502846d070e2088b7025abe80629830bf03d7ab5624d5e91f332bc9d049d3f"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "014a502846d070e2088b7025abe80629830bf03d7ab5624d5e91f332bc9d049d3f"
+       }
+      ],
+      [
+       4,
+       "Organize a rent strike after 60 days."
+      ],
+      [
+       5,
+       {
+        "hex": "1bf95055b6c86fe86c63da367ab991645f1841c5a75f04e215cbb5cd75daae3d"
+       }
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.promote-proposal+cbor",
+    "bytes": "a600010101025821014a502846d070e2088b7025abe80629830bf03d7ab5624d5e91f332bc9d049d3f035821014a502846d070e2088b7025abe80629830bf03d7ab5624d5e91f332bc9d049d3f0478254f7267616e697a6520612072656e7420737472696b6520616674657220363020646179732e0558201bf95055b6c86fe86c63da367ab991645f1841c5a75f04e215cbb5cd75daae3d"
+   }
+  },
+  {
+   "id": "chat/content/content-promote-confirm-002",
+   "description": "Valid promote-confirm",
+   "section": "5.2",
+   "inputs": {
+    "type": "promote-confirm",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "1bf95055b6c86fe86c63da367ab991645f1841c5a75f04e215cbb5cd75daae3d"
+       }
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "012958d416d08aa5a472d7b509036cb7eafd542add84527e66a145ea64cb4cdc75"
+       }
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.promote-confirm+cbor",
+    "bytes": "a400010158201bf95055b6c86fe86c63da367ab991645f1841c5a75f04e215cbb5cd75daae3d0201035821012958d416d08aa5a472d7b509036cb7eafd542add84527e66a145ea64cb4cdc75"
+   }
+  },
+  {
+   "id": "chat/content/content-merge-proposal-003",
+   "description": "Valid merge-proposal",
+   "section": "5.2",
+   "inputs": {
+    "type": "merge-proposal",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "019eb6203435cb3e0033f544e3bf6f1b74b138c765fc489a38a092e8f7adbd9638"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "017a01ac37408614bcf58069bb6b6a543f6c473cdded552c491de4eb36aacce235"
+       }
+      ],
+      [
+       3,
+       "Same idea."
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.merge-proposal+cbor",
+    "bytes": "a40001015821019eb6203435cb3e0033f544e3bf6f1b74b138c765fc489a38a092e8f7adbd9638025821017a01ac37408614bcf58069bb6b6a543f6c473cdded552c491de4eb36aacce235036a53616d6520696465612e"
+   }
+  },
+  {
+   "id": "chat/content/content-deck-dealt-004",
+   "description": "Valid deck-dealt",
+   "section": "5.2",
+   "inputs": {
+    "type": "deck-dealt",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "01d830325906c3d540ae219e6aba0f243d52cd708feea68355a3f63f76aff8da33"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ],
+      [
+       3,
+       "Spring priorities"
+      ],
+      [
+       4,
+       18
+      ],
+      [
+       5,
+       [
+        {
+         "hex": "01f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a"
+        }
+       ]
+      ],
+      [
+       6,
+       1792800000
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.deck-dealt+cbor",
+    "bytes": "a7000101582101d830325906c3d540ae219e6aba0f243d52cd708feea68355a3f63f76aff8da3302582101ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e40371537072696e67207072696f72697469657304120581582101f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a061a6adbf500"
+   }
+  },
+  {
+   "id": "chat/content/content-release-digest-005",
+   "description": "Valid release-digest",
+   "section": "5.2",
+   "inputs": {
+    "type": "release-digest",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "01a4d451ec23463726f72c43d64c710968f6b602cd653b4de8adee1b556240a829"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "01d830325906c3d540ae219e6aba0f243d52cd708feea68355a3f63f76aff8da33"
+       }
+      ],
+      [
+       3,
+       "Results are in."
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.release-digest+cbor",
+    "bytes": "a4000101582101a4d451ec23463726f72c43d64c710968f6b602cd653b4de8adee1b556240a82902582101d830325906c3d540ae219e6aba0f243d52cd708feea68355a3f63f76aff8da33036f526573756c74732061726520696e2e"
+   }
+  },
+  {
+   "id": "chat/content/content-file-op-006",
+   "description": "Valid file-op",
+   "section": "5.2",
+   "inputs": {
+    "type": "file-op",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       {
+        "hex": "b7c1c6fa0770aebe032ca070529a3b09"
+       }
+      ],
+      [
+       3,
+       "porch.png"
+      ],
+      [
+       4,
+       [
+        "photos"
+       ]
+      ]
+     ]
+    },
+    "external_parts": 1
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.file-op+cbor",
+    "bytes": "a5000101010250b7c1c6fa0770aebe032ca070529a3b090369706f7263682e706e6704816670686f746f73"
+   }
+  },
+  {
+   "id": "chat/content/content-folder-index-007",
+   "description": "Valid folder-index",
+   "section": "5.2",
+   "inputs": {
+    "type": "folder-index",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       12
+      ]
+     ]
+    },
+    "external_parts": 1
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.folder-index+cbor",
+    "bytes": "a20001010c"
+   }
+  },
+  {
+   "id": "chat/content/content-public-copy-008",
+   "description": "Valid public-copy",
+   "section": "5.2",
+   "inputs": {
+    "type": "public-copy",
+    "view": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "01c9d0036bed6744bcdf692fc980d8717d7e5f5a4f4e8266b4a84982602fb1cd09"
+       }
+      ],
+      [
+       1,
+       {
+        "hex": "01efa1f375d76194fa51a3556a97e641e61685f914d446979da50a551a4333ffd7"
+       }
+      ],
+      [
+       2,
+       "image/png"
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.public-copy+cbor",
+    "bytes": "a300582101c9d0036bed6744bcdf692fc980d8717d7e5f5a4f4e8266b4a84982602fb1cd0901582101efa1f375d76194fa51a3556a97e641e61685f914d446979da50a551a4333ffd70269696d6167652f706e67"
+   }
+  },
+  {
+   "id": "chat/content/content-keyring-share-009",
+   "description": "Valid keyring-share",
+   "section": "5.2",
+   "inputs": {
+    "type": "keyring-share",
+    "view": {
+     "map": [
+      [
+       0,
+       [
+        [
+         1,
+         4,
+         {
+          "hex": "000102030405060708090a0b0c0d0e0f"
+         }
+        ],
+        [
+         2,
+         9,
+         {
+          "hex": "101112131415161718191a1b1c1d1e1f"
+         }
+        ]
+       ]
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.keyring-share+cbor",
+    "bytes": "a1008283010450000102030405060708090a0b0c0d0e0f83020950101112131415161718191a1b1c1d1e1f"
+   }
+  },
+  {
+   "id": "chat/content/content-token-key-010",
+   "description": "Valid token-key",
+   "section": "5.2",
+   "inputs": {
+    "type": "token-key",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "01824d80d71985f082a26997a8db88b5d1dd45b777d73585d03d236303e21bde97"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "01020304"
+       }
+      ],
+      [
+       3,
+       1791259200
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.token-key+cbor",
+    "bytes": "a4000101582101824d80d71985f082a26997a8db88b5d1dd45b777d73585d03d236303e21bde97024401020304031a6ac47240"
+   }
+  },
+  {
+   "id": "chat/content/content-greeting-key-011",
+   "description": "Valid greeting-key",
+   "section": "5.2",
+   "inputs": {
+    "type": "greeting-key",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "2554d8e762afb02c92c66145d3d3172b13a322b4e0c3f660c02433e399742a5b"
+       }
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.greeting-key+cbor",
+    "bytes": "a3000101582101ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e40258202554d8e762afb02c92c66145d3d3172b13a322b4e0c3f660c02433e399742a5b"
+   }
+  },
+  {
+   "id": "chat/content/content-agent-membership-012",
+   "description": "Valid agent-membership",
+   "section": "5.2",
+   "inputs": {
+    "type": "agent-membership",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       {
+        "hex": "0113d853006f71ed7b6b092b7ec45dbdddcba22fbec5d04e0fb2b5fdb5b2704ce7"
+       }
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       5,
+       {
+        "hex": "3241a8783642f0f639e60f1208f6fc672f041ede7cb20dc0f34624d966939fa0"
+       }
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.agent-membership+cbor",
+    "bytes": "a6000101010258210113d853006f71ed7b6b092b7ec45dbdddcba22fbec5d04e0fb2b5fdb5b2704ce7030104070558203241a8783642f0f639e60f1208f6fc672f041ede7cb20dc0f34624d966939fa0"
+   }
+  },
+  {
+   "id": "chat/content/content-directory-013",
+   "description": "Valid directory",
+   "section": "5.2",
+   "inputs": {
+    "type": "directory",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "cb9ff9cdeb0abebd232fdcd5d77b7066f0d0bf033cec4534e3926536a56e7b6f"
+          }
+         ],
+         [
+          1,
+          "repairs"
+         ],
+         [
+          2,
+          2
+         ],
+         [
+          5,
+          true
+         ],
+         [
+          6,
+          1791259200
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.directory+cbor",
+    "bytes": "a400010103020103a5005820cb9ff9cdeb0abebd232fdcd5d77b7066f0d0bf033cec4534e3926536a56e7b6f016772657061697273020205f5061a6ac47240"
+   }
+  },
+  {
+   "id": "chat/content/content-checkpoint-014",
+   "description": "Valid checkpoint",
+   "section": "5.2",
+   "inputs": {
+    "type": "checkpoint",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53"
+       }
+      ],
+      [
+       2,
+       36
+      ],
+      [
+       3,
+       {
+        "hex": "149072689166ee7c902296a304cf2a4c7ecec34b4dbbbb2c438cefdba6024be8"
+       }
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.checkpoint+cbor",
+    "bytes": "a40001015821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53021824035820149072689166ee7c902296a304cf2a4c7ecec34b4dbbbb2c438cefdba6024be8"
+   }
+  },
+  {
+   "id": "chat/content/content-history-offer-015",
+   "description": "Valid history-offer",
+   "section": "5.2",
+   "inputs": {
+    "type": "history-offer",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "a700582101bc5b3dbf9d53813654a88ff773c7ceae318ca8273f7bbfabebb19d0571f0c6ce0101025017e8cc5e1e8dd5cd2ef2896b656515e4030a0469696d6167652f706e670569706f7263682e706e67065821014f85ab790f08374b7408ce7463ee3fe0d20fc8f7ab2a5df649f4dc53386eabc4"
+       }
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       400
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.history-offer+cbor",
+    "bytes": "a40001015875a700582101bc5b3dbf9d53813654a88ff773c7ceae318ca8273f7bbfabebb19d0571f0c6ce0101025017e8cc5e1e8dd5cd2ef2896b656515e4030a0469696d6167652f706e670569706f7263682e706e67065821014f85ab790f08374b7408ce7463ee3fe0d20fc8f7ab2a5df649f4dc53386eabc4020103190190"
+   }
+  },
+  {
+   "id": "chat/content/content-join-request-016",
+   "description": "Valid join-request",
+   "section": "5.2",
+   "inputs": {
+    "type": "join-request",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "cb9ff9cdeb0abebd232fdcd5d77b7066f0d0bf033cec4534e3926536a56e7b6f"
+       }
+      ],
+      [
+       2,
+       [
+        {
+         "hex": "6831"
+        },
+        {
+         "hex": "6832"
+        }
+       ]
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.join-request+cbor",
+    "bytes": "a30001015820cb9ff9cdeb0abebd232fdcd5d77b7066f0d0bf033cec4534e3926536a56e7b6f0282426831426832"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-version-017",
+   "description": "Reject: unknown version",
+   "section": "5.2",
+   "inputs": {
+    "type": "promote-proposal",
+    "bytes": "a600020101025821014a502846d070e2088b7025abe80629830bf03d7ab5624d5e91f332bc9d049d3f035821014a502846d070e2088b7025abe80629830bf03d7ab5624d5e91f332bc9d049d3f0478254f7267616e697a6520612072656e7420737472696b6520616674657220363020646179732e0558201bf95055b6c86fe86c63da367ab991645f1841c5a75f04e215cbb5cd75daae3d",
+    "external_parts": 0
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-content",
+    "reason": "unknown version"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-missing-key-018",
+   "description": "Reject: missing required key",
+   "section": "5.2",
+   "inputs": {
+    "type": "promote-proposal",
+    "bytes": "a500010101025821014a502846d070e2088b7025abe80629830bf03d7ab5624d5e91f332bc9d049d3f035821014a502846d070e2088b7025abe80629830bf03d7ab5624d5e91f332bc9d049d3f0558201bf95055b6c86fe86c63da367ab991645f1841c5a75f04e215cbb5cd75daae3d",
+    "external_parts": 0
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-content",
+    "reason": "missing required key"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-array-max-019",
+   "description": "Reject: array over maximum",
+   "section": "5.2",
+   "inputs": {
+    "type": "join-request",
+    "bytes": "a30001015820cb9ff9cdeb0abebd232fdcd5d77b7066f0d0bf033cec4534e3926536a56e7b6f0289416841684168416841684168416841684168",
+    "external_parts": 0
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-content",
+    "reason": "array over maximum"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-unknown-key-020",
+   "description": "Reject: unknown key",
+   "section": "5.2",
+   "inputs": {
+    "type": "checkpoint",
+    "bytes": "a50001015821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53021824035820149072689166ee7c902296a304cf2a4c7ecec34b4dbbbb2c438cefdba6024be80901",
+    "external_parts": 0
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-content",
+    "reason": "unknown key"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-file-op-no-part-021",
+   "description": "Reject: add without an ExternalPart",
+   "section": "5.2",
+   "inputs": {
+    "type": "file-op",
+    "bytes": "a5000101010250b7c1c6fa0770aebe032ca070529a3b090369706f7263682e706e6704816670686f746f73",
+    "external_parts": 0
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-content",
+    "reason": "add without an ExternalPart"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-file-op-extra-part-022",
+   "description": "Reject: rename with an ExternalPart",
+   "section": "5.2",
+   "inputs": {
+    "type": "file-op",
+    "bytes": "a4000101020250b7c1c6fa0770aebe032ca070529a3b09036178",
+    "external_parts": 1
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-content",
+    "reason": "rename with an ExternalPart"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-folder-index-no-part-023",
+   "description": "Reject: folder-index without its ExternalPart",
+   "section": "5.2",
+   "inputs": {
+    "type": "folder-index",
+    "bytes": "a20001010c",
+    "external_parts": 0
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-content",
+    "reason": "folder-index without its ExternalPart"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-non-canonical-024",
+   "description": "Reject: bytes that do not re-encode to themselves",
+   "section": "5.2",
+   "inputs": {
+    "type": "checkpoint",
+    "bytes": "a4180001015821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53021824035820149072689166ee7c902296a304cf2a4c7ecec34b4dbbbb2c438cefdba6024be8"
+   },
+   "rejection": {
+    "step": null,
+    "check": "decode-content",
+    "reason": "non-canonical"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-deck-dealt-foreign-context-025",
+   "description": "deck-dealt whose context is a version of another lineage than the group's",
+   "section": "5.6",
+   "inputs": {
+    "type": "deck-dealt",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "01d830325906c3d540ae219e6aba0f243d52cd708feea68355a3f63f76aff8da33"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ],
+      [
+       3,
+       "Spring priorities"
+      ],
+      [
+       4,
+       18
+      ],
+      [
+       5,
+       [
+        {
+         "hex": "01f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a"
+        }
+       ]
+      ],
+      [
+       6,
+       1792800000
+      ]
+     ]
+    },
+    "group_context_lineage": "01a0ea9dbd02e644ac8b827d193e75ab683c504116f714b1ed42471d930f2af3f0"
+   },
+   "rejection": {
+    "step": null,
+    "check": "deck-dealt-context",
+    "reason": "context not in the group's lineage"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-release-digest-deck-mismatch-026",
+   "description": "release-digest whose deck is not the release's refs['deck']",
+   "section": "5.6",
+   "inputs": {
+    "type": "release-digest",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "01a4d451ec23463726f72c43d64c710968f6b602cd653b4de8adee1b556240a829"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "01d830325906c3d540ae219e6aba0f243d52cd708feea68355a3f63f76aff8da33"
+       }
+      ],
+      [
+       3,
+       "Results are in."
+      ]
+     ]
+    },
+    "release_refs_deck": "0119a03fde69544827b2092cc660e727685f9aa28715c0f309b5b1f6f104c74edc"
+   },
+   "rejection": {
+    "step": null,
+    "check": "release-digest-deck",
+    "reason": "deck does not match the release"
+   }
+  },
+  {
+   "id": "chat/content/content-roles-signed-027",
+   "description": "A roles message signed by the context's a1+a2 under hum/chat-roles/1",
+   "section": "5.8",
+   "inputs": {
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda69"
+       }
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       [
+        [
+         {
+          "hex": "98fc970c704be07f25d61a082b63e9600e45ac34e3c672931940a5f8c1390d97"
+         },
+         1
+        ],
+        [
+         {
+          "hex": "dbdbbed0a8d539fc80cac45abd94f0eac0b77a91f74aeab70c21d18fe3ede9f8"
+         },
+         2
+        ]
+       ]
+      ],
+      [
+       6,
+       {
+        "map": [
+         [
+          {
+           "hex": "83b881b648d7b25c0f4ab1d65c6d8a99a3e40896a7a3f8fda5295609aaa195cd"
+          },
+          {
+           "hex": "02020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202"
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "signers": [
+     "a1",
+     "a2"
+    ]
+   },
+   "expected": {
+    "payload": "68756d2f636861742d726f6c65732f316b8daaeb2b9cda02c11d918ebac930ea08477ba53ab40a8ccc927cd3de23abe6",
+    "bytes": "a60001015821013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda690201038282582098fc970c704be07f25d61a082b63e9600e45ac34e3c672931940a5f8c1390d9701825820dbdbbed0a8d539fc80cac45abd94f0eac0b77a91f74aeab70c21d18fe3ede9f80206a1582083b881b648d7b25c0f4ab1d65c6d8a99a3e40896a7a3f8fda5295609aaa195cd58310202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020207589fd8628440a0f6828347a2012704426131a058405a5625c48041be3e32ba93a718991dccb0131a82d4493e46b1c69fd1c0c2af54cd993bf8cdaa2d3606930fb682be1781135dbcc36e815d955a48ec5b5c6d930b8347a2012704426132a0584093cc93763a67e43de9010a46c8b8f43c5a13fe3d1ffd642aadd8a2a81cd6cc2ea8c430543e1767347bd8f947231bc4322a97652e972847af9058c36c2b2f5f08",
+    "valid_signatures": 2
+   }
+  },
+  {
+   "id": "chat/content/content-roles-reject-bad-signature-028",
+   "description": "The same signature over serial 2",
+   "section": "5.8",
+   "inputs": {
+    "bytes": "a60001015821013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda690202038282582098fc970c704be07f25d61a082b63e9600e45ac34e3c672931940a5f8c1390d9701825820dbdbbed0a8d539fc80cac45abd94f0eac0b77a91f74aeab70c21d18fe3ede9f80206a1582083b881b648d7b25c0f4ab1d65c6d8a99a3e40896a7a3f8fda5295609aaa195cd58310202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020207589fd8628440a0f6828347a2012704426131a058405a5625c48041be3e32ba93a718991dccb0131a82d4493e46b1c69fd1c0c2af54cd993bf8cdaa2d3606930fb682be1781135dbcc36e815d955a48ec5b5c6d930b8347a2012704426132a0584093cc93763a67e43de9010a46c8b8f43c5a13fe3d1ffd642aadd8a2a81cd6cc2ea8c430543e1767347bd8f947231bc4322a97652e972847af9058c36c2b2f5f08"
+   },
+   "rejection": {
+    "step": null,
+    "check": "roles-verify",
+    "valid_signatures": 0
+   }
+  },
+  {
+   "id": "chat/content/external-part-029",
+   "description": "A direct reference as a draft-ietf-mimi-content-09 ExternalPart: one flat fifteen-element nestedPart array, disposition render (1), cardinality external (2)",
+   "section": "5.1",
+   "inputs": {
+    "reference": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "01bc5b3dbf9d53813654a88ff773c7ceae318ca8273f7bbfabebb19d0571f0c6ce"
+       }
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       4,
+       "image/png"
+      ],
+      [
+       2,
+       {
+        "hex": "17e8cc5e1e8dd5cd2ef2896b656515e4"
+       }
+      ],
+      [
+       3,
+       10
+      ],
+      [
+       5,
+       "porch.png"
+      ],
+      [
+       6,
+       {
+        "hex": "014f85ab790f08374b7408ce7463ee3fe0d20fc8f7ab2a5df649f4dc53386eabc4"
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "external_part": [
+     1,
+     "",
+     2,
+     "image/png",
+     "hum:blob:cag6fwpn7tvjycnsuvch7o46hz2xdddfie47xxp5l5oyz2blr6ddm4",
+     0,
+     10,
+     1,
+     {
+      "hex": "17e8cc5e1e8dd5cd2ef2896b656515e4"
+     },
+     {
+      "hex": ""
+     },
+     {
+      "hex": ""
+     },
+     1,
+     {
+      "hex": "4f85ab790f08374b7408ce7463ee3fe0d20fc8f7ab2a5df649f4dc53386eabc4"
+     },
+     "",
+     "porch.png"
+    ],
+    "bytes": "8f01600269696d6167652f706e67783f68756d3a626c6f623a636167366677706e3774766a79636e7375766368376f3436687a32786464646669653437787870356c356f797a32626c723664646d34000a015017e8cc5e1e8dd5cd2ef2896b656515e440400158204f85ab790f08374b7408ce7463ee3fe0d20fc8f7ab2a5df649f4dc53386eabc46069706f7263682e706e67"
+   }
+  }
+ ]
+}

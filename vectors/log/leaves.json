@@ -1,0 +1,271 @@
+{
+ "spec": "log",
+ "file": "leaves",
+ "notes": "Leaf bytes [cid, type, authority, lineage or null, version] and RFC 6962 leaf hashes for the test world, plus the entry bundle (uint16 length-prefixed records) of three leaves.",
+ "cases": [
+  {
+   "id": "log/leaves/leaf-001",
+   "description": "Leaf for keyset_log at index 0",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+    "type": "keyset",
+    "authority": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+    "lineage": null,
+    "version": 1
+   },
+   "expected": {
+    "leaf": "855821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53666b65797365745821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53f601",
+    "leaf_hash": "69db9be1e603b2236cb13abf6937555cdc94218382ace6bcc610cc4d25610492",
+    "view": [
+     {
+      "hex": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53"
+     },
+     "keyset",
+     {
+      "hex": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53"
+     },
+     null,
+     1
+    ]
+   }
+  },
+  {
+   "id": "log/leaves/leaf-002",
+   "description": "Leaf for keyset_a1 at index 1",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "type": "keyset",
+    "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "lineage": null,
+    "version": 1
+   },
+   "expected": {
+    "leaf": "85582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3666b6579736574582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601",
+    "leaf_hash": "beb3436f1a204f9625011bef71137da6bce096b9951c00f7473dac90abf3c935",
+    "view": [
+     {
+      "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+     },
+     "keyset",
+     {
+      "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+     },
+     null,
+     1
+    ]
+   }
+  },
+  {
+   "id": "log/leaves/leaf-003",
+   "description": "Leaf for context_v1 at index 2",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda69",
+    "type": "context",
+    "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "lineage": null,
+    "version": 1
+   },
+   "expected": {
+    "leaf": "855821013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda6967636f6e74657874582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601",
+    "leaf_hash": "9fd8d50174d6e5f3be7995d83255635469dd62e8b22fd073b9b6a4fa7bf34ddc",
+    "view": [
+     {
+      "hex": "013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda69"
+     },
+     "context",
+     {
+      "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+     },
+     null,
+     1
+    ]
+   }
+  },
+  {
+   "id": "log/leaves/leaf-004",
+   "description": "Leaf for deck_v1 at index 3",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "type": "deck",
+    "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "lineage": null,
+    "version": 1
+   },
+   "expected": {
+    "leaf": "85582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875646465636b582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601",
+    "leaf_hash": "c44209bacdd30de7a05a0401f42c1568abd4119cfc23af66c06ad379e9fc44c2",
+    "view": [
+     {
+      "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+     },
+     "deck",
+     {
+      "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+     },
+     null,
+     1
+    ]
+   }
+  },
+  {
+   "id": "log/leaves/leaf-005",
+   "description": "Leaf for deck_v2 at index 4",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "011c47461d9e4a6edb61c2abb8179babbf391e2ed88faa013dc6c800a6d38cdee0",
+    "type": "deck",
+    "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "lineage": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "version": 2
+   },
+   "expected": {
+    "leaf": "855821011c47461d9e4a6edb61c2abb8179babbf391e2ed88faa013dc6c800a6d38cdee0646465636b582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a487502",
+    "leaf_hash": "265b34a2025061be834dca0863f203364d4ca7c4fcc6e949360ec54832386b91",
+    "view": [
+     {
+      "hex": "011c47461d9e4a6edb61c2abb8179babbf391e2ed88faa013dc6c800a6d38cdee0"
+     },
+     "deck",
+     {
+      "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+     },
+     {
+      "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+     },
+     2
+    ]
+   }
+  },
+  {
+   "id": "log/leaves/leaf-006",
+   "description": "Leaf for deck_x at index 5",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "0103861e045ca3abc99fb4af055cd4646d8cfa5b1dd9b12ac93810e8cb64a092ce",
+    "type": "deck",
+    "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "lineage": null,
+    "version": 1
+   },
+   "expected": {
+    "leaf": "8558210103861e045ca3abc99fb4af055cd4646d8cfa5b1dd9b12ac93810e8cb64a092ce646465636b582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601",
+    "leaf_hash": "ee03158763a91b26794148cf197e81ad553748d614a0d3bd73e04af2faaaddfd",
+    "view": [
+     {
+      "hex": "0103861e045ca3abc99fb4af055cd4646d8cfa5b1dd9b12ac93810e8cb64a092ce"
+     },
+     "deck",
+     {
+      "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+     },
+     null,
+     1
+    ]
+   }
+  },
+  {
+   "id": "log/leaves/leaf-007",
+   "description": "Leaf for keyset_a2 at index 6",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "011d96d053da1c8a60d94a695e3f5255d3d90b9c3e4f1400489dc466cc4a2b7d63",
+    "type": "keyset",
+    "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "lineage": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "version": 2
+   },
+   "expected": {
+    "leaf": "855821011d96d053da1c8a60d94a695e3f5255d3d90b9c3e4f1400489dc466cc4a2b7d63666b6579736574582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a302",
+    "leaf_hash": "d448d7d7443171faa896ae848afdb9f203dce12162d075efa446dfad8aa1931c",
+    "view": [
+     {
+      "hex": "011d96d053da1c8a60d94a695e3f5255d3d90b9c3e4f1400489dc466cc4a2b7d63"
+     },
+     "keyset",
+     {
+      "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+     },
+     {
+      "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+     },
+     2
+    ]
+   }
+  },
+  {
+   "id": "log/leaves/leaf-008",
+   "description": "Leaf for deck_v3 at index 7",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "013ec7196e0d3415f7aeb081d4f5dbcd08492f9306b80c45951c5a58d84148b20c",
+    "type": "deck",
+    "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "lineage": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "version": 3
+   },
+   "expected": {
+    "leaf": "855821013ec7196e0d3415f7aeb081d4f5dbcd08492f9306b80c45951c5a58d84148b20c646465636b582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a487503",
+    "leaf_hash": "d1ea140303f1fafa336f652679c6dc25007035433473dcb22629c041bfd427f1",
+    "view": [
+     {
+      "hex": "013ec7196e0d3415f7aeb081d4f5dbcd08492f9306b80c45951c5a58d84148b20c"
+     },
+     "deck",
+     {
+      "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+     },
+     {
+      "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+     },
+     3
+    ]
+   }
+  },
+  {
+   "id": "log/leaves/leaf-009",
+   "description": "Leaf for keyset_b1 at index 8",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce",
+    "type": "keyset",
+    "authority": "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce",
+    "lineage": null,
+    "version": 1
+   },
+   "expected": {
+    "leaf": "855821011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce666b65797365745821011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfcef601",
+    "leaf_hash": "548873fc6a530b768c110dc3735160e712dce5fdc515fd15443c1e67719568b8",
+    "view": [
+     {
+      "hex": "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce"
+     },
+     "keyset",
+     {
+      "hex": "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce"
+     },
+     null,
+     1
+    ]
+   }
+  },
+  {
+   "id": "log/leaves/entry-bundle-010",
+   "description": "Entry bundle of leaves 0..2: big-endian uint16 length prefix per leaf",
+   "section": "Log and ledger",
+   "inputs": {
+    "leaves": [
+     "855821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53666b65797365745821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53f601",
+     "85582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3666b6579736574582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601",
+     "855821013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda6967636f6e74657874582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601"
+    ]
+   },
+   "expected": {
+    "entry_bundle": "0050855821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53666b65797365745821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53f601005085582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3666b6579736574582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f6010051855821013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda6967636f6e74657874582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601"
+   }
+  }
+ ]
+}

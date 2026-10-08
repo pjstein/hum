@@ -1,0 +1,66 @@
+{
+ "spec": "storage",
+ "file": "cid",
+ "notes": "\u00a72. Public CIDs, sealed CIDs, and the plaintext digest equal to the public CID.",
+ "cases": [
+  {
+   "id": "storage/cid/cid-public-001",
+   "description": "Public blob CID of empty",
+   "section": "2",
+   "inputs": {
+    "bytes": ""
+   },
+   "expected": {
+    "cid": "01e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "text": "cahr3brcctd6byfe27p2mrglpxescplsb4rsjxe2muskzsg3ykk4fk"
+   }
+  },
+  {
+   "id": "storage/cid/cid-public-002",
+   "description": "Public blob CID of hello",
+   "section": "2",
+   "inputs": {
+    "bytes": "68656c6c6f"
+   },
+   "expected": {
+    "cid": "012cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+    "text": "caewpetn2l6ykgdrg5a5svrnz4kpbwfq6lqp2oqs6omcdgyutromci"
+   }
+  },
+  {
+   "id": "storage/cid/cid-public-003",
+   "description": "Public blob CID of pattern-100",
+   "section": "2",
+   "inputs": {
+    "bytes": "030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca3aab1b8"
+   },
+   "expected": {
+    "cid": "015a2cda2351d1cdd9dd7957e57c0b3c8522451f25b6494569b7e94388c46f0980",
+    "text": "cafnczwrdkhi43wo5pfl6k7alhscseri7ew3esrljw7uuhcgen4eya"
+   }
+  },
+  {
+   "id": "storage/cid/cid-sealed-004",
+   "description": "Sealed CID of seal-small is over the whole blob, header included",
+   "section": "2",
+   "inputs": {
+    "ciphertext": "01608bece485c982de01bd158880f58ae0fbebb5d2a393f756854469c19efbfd4982d0ebc94c62c998b87fc9c93ed31d0bf3df806e64b6bd9af4adc7f6d6b93e1c5645ecf1c96f3c0f124bac6dfdf675eda617fc25cf5a29e907bfbbf513ce22b85052554a9ceb1b5817b852dda2464320854ce33b1fee0f63"
+   },
+   "expected": {
+    "cid": "01277a6612e1fd3c0cfe5286c6ef1d1104add6300cd76926f41b002ec5abf74ab1"
+   }
+  },
+  {
+   "id": "storage/cid/digest-equals-public-cid-005",
+   "description": "The plaintext digest of seal-small equals the public CID of its plaintext",
+   "section": "2",
+   "inputs": {
+    "plaintext": "030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca3aab1b8"
+   },
+   "expected": {
+    "digest": "015a2cda2351d1cdd9dd7957e57c0b3c8522451f25b6494569b7e94388c46f0980",
+    "public_cid": "015a2cda2351d1cdd9dd7957e57c0b3c8522451f25b6494569b7e94388c46f0980"
+   }
+  }
+ ]
+}

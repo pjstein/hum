@@ -1,0 +1,4425 @@
+{
+ "spec": "trust-list",
+ "file": "resolution",
+ "notes": "Rows a context's sources resolve to, sorted bytewise on canonical CBOR, and whether a credential satisfies a leaf (step 4 of the algorithm, rules 5 and 6). Verifier versions are the district lineage and the agent verifier from vectors/verifier.",
+ "cases": [
+  {
+   "id": "trust-list/resolution/trust-list-resolve-rows-001",
+   "description": "A context with one list source (core v3) and one direct issuer",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "trust_lists": [
+     {
+      "map": [
+       [
+        0,
+        "Hum core verifiers"
+       ],
+       [
+        1,
+        "Hum reference operator"
+       ],
+       [
+        2,
+        "en"
+       ],
+       [
+        3,
+        {
+         "map": [
+          [
+           0,
+           "core"
+          ],
+          [
+           2,
+           [
+            "person"
+           ]
+          ]
+         ]
+        }
+       ],
+       [
+        4,
+        [
+         {
+          "map": [
+           [
+            0,
+            {
+             "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+            }
+           ],
+           [
+            1,
+            [
+             "ward",
+             "area"
+            ]
+           ],
+           [
+            4,
+            [
+             {
+              "hex": "0119c2bd2e890e929a73fca82aad19a263536b96ea83acaf23c73b7497af59ae89"
+             }
+            ]
+           ],
+           [
+            5,
+            "District verifier. County voter file, reviewed 2026-09."
+           ]
+          ]
+         },
+         {
+          "map": [
+           [
+            0,
+            {
+             "hex": "019719596e59aa003c9a233ae359d715e395554701a3e298ee77e6fb6140839711"
+            }
+           ],
+           [
+            1,
+            [
+             "age-band"
+            ]
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            4,
+            [
+             {
+              "hex": "0110319d56719619fb28df8349da29df863ef2eb1e288e401f2455c8358b22acb4"
+             }
+            ]
+           ],
+           [
+            5,
+            "Age band from voter file or document."
+           ]
+          ]
+         },
+         {
+          "map": [
+           [
+            0,
+            {
+             "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+            }
+           ],
+           [
+            1,
+            [
+             "unique"
+            ]
+           ],
+           [
+            2,
+            3
+           ],
+           [
+            3,
+            2
+           ],
+           [
+            4,
+            [
+             {
+              "hex": "016ad7432c03969917f359bf54dbd05d2ff9daa8d96a152816665f4d5cb16cebe5"
+             }
+            ]
+           ],
+           [
+            5,
+            "Uniqueness. Version 1 had a dedup flaw; version 2 fixed it under a new issuer key."
+           ]
+          ]
+         }
+        ]
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        5,
+        [
+         {
+          "map": [
+           [
+            0,
+            {
+             "hex": "010490e1604cc2c85e0608513b3403a272b8478acfcbce1e35ddd7669c04deadaf"
+            }
+           ],
+           [
+            1,
+            "retired"
+           ],
+           [
+            2,
+            "Pilot district verifier, superseded."
+           ]
+          ]
+         }
+        ]
+       ],
+       [
+        7,
+        7776000
+       ]
+      ]
+     }
+    ],
+    "issuers": [
+     "0165cc35ac8a401e5d8b7f543b8977b2fae6a52edbd7bb902bf14011d3148bfe12"
+    ]
+   },
+   "expected": {
+    "tl/0": {
+     "rows": [
+      [
+       {
+        "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+       },
+       "unique",
+       3,
+       2,
+       [
+        "person"
+       ]
+      ],
+      [
+       {
+        "hex": "019719596e59aa003c9a233ae359d715e395554701a3e298ee77e6fb6140839711"
+       },
+       "age-band",
+       2,
+       1,
+       [
+        "person"
+       ]
+      ],
+      [
+       {
+        "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+       },
+       "area",
+       2,
+       1,
+       [
+        "person"
+       ]
+      ],
+      [
+       {
+        "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+       },
+       "ward",
+       2,
+       1,
+       [
+        "person"
+       ]
+      ]
+     ],
+     "canonical": [
+      "855821015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa66756e6971756503028166706572736f6e",
+      "855821019719596e59aa003c9a233ae359d715e395554701a3e298ee77e6fb6140839711686167652d62616e6402018166706572736f6e",
+      "85582101a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07646172656102018166706572736f6e",
+      "85582101a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07647761726402018166706572736f6e"
+     ]
+    },
+    "issuers/0": {
+     "rows": [
+      [
+       {
+        "hex": "0165cc35ac8a401e5d8b7f543b8977b2fae6a52edbd7bb902bf14011d3148bfe12"
+       },
+       "*",
+       0,
+       1,
+       [
+        "person",
+        "agent"
+       ]
+      ]
+     ],
+     "canonical": [
+      "8558210165cc35ac8a401e5d8b7f543b8977b2fae6a52edbd7bb902bf14011d3148bfe12612a00018266706572736f6e656167656e74"
+     ]
+    }
+   }
+  },
+  {
+   "id": "trust-list/resolution/trust-list-satisfies-ward-from-district-002",
+   "description": "credential_satisfies: ward-from-district",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "rows": [
+     [
+      {
+       "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+      },
+      "unique",
+      3,
+      2,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "019719596e59aa003c9a233ae359d715e395554701a3e298ee77e6fb6140839711"
+      },
+      "age-band",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "area",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "ward",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ]
+    ],
+    "attribute": "ward",
+    "verifier_authority": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07",
+    "verifier_env": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       6,
+       1791259200
+      ],
+      [
+       2,
+       {
+        "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       5,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Millbrook district verifier"
+         ],
+         [
+          1,
+          "Hum reference operator"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "district"
+         ],
+         [
+          4,
+          "person"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "7ed98e04a3e3d7f6"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "d46689265bca298b"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "d1cc3f1c09785b667b863247d9f4bd2f176a25dc81436e0a7fb1ba575c3cc0a7711796ac171eff00154c2432a9fe42c0a10c2adbd66deea33224be10ba20d3bff45ffb2c539af08b1a0313dfe67ac77864e087b017d48e10b7873d31718ca037"
+              }
+             ],
+             [
+              3,
+              4
+             ],
+             [
+              4,
+              2
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "43de5f9cbce0bdee"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "5212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a20"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "ward"
+             ],
+             [
+              1,
+              "Ward"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Ward 1"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Ward 2"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  3
+                 ],
+                 [
+                  1,
+                  "Ward 3"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  4
+                 ],
+                 [
+                  1,
+                  "Ward 4"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "area"
+             ],
+             [
+              1,
+              "Area"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Millbrook"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Outside Millbrook"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "match"
+             ],
+             [
+              1,
+              "voter-file"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "To find your ward in the county voter file"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          [
+           {
+            "map": [
+             [
+              0,
+              "evidence"
+             ],
+             [
+              1,
+              "match"
+             ],
+             [
+              2,
+              "One card per voter-file record"
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          15552000
+         ],
+         [
+          14,
+          2
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ],
+         [
+          10,
+          [
+           {
+            "map": [
+             [
+              0,
+              "voters"
+             ],
+             [
+              1,
+              "private"
+             ],
+             [
+              2,
+              {
+               "hex": "a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a16"
+              }
+             ],
+             [
+              3,
+              48210
+             ],
+             [
+              4,
+              "County voter file, 2026-09 extract"
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "wards"
+             ],
+             [
+              1,
+              "public"
+             ],
+             [
+              2,
+              {
+               "hex": "a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c"
+              }
+             ],
+             [
+              3,
+              3
+             ],
+             [
+              4,
+              "Ward boundaries, 2024 redistricting"
+             ]
+            ]
+           }
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "kid": "d46689265bca298b",
+    "use": "gate",
+    "policy": "entry"
+   },
+   "expected": {
+    "satisfies": true
+   }
+  },
+  {
+   "id": "trust-list/resolution/trust-list-satisfies-unique-kid-since-1-minversion-2-003",
+   "description": "credential_satisfies: unique-kid-since-1-minversion-2",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "rows": [
+     [
+      {
+       "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+      },
+      "unique",
+      3,
+      2,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "019719596e59aa003c9a233ae359d715e395554701a3e298ee77e6fb6140839711"
+      },
+      "age-band",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "area",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "ward",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ]
+    ],
+    "attribute": "unique",
+    "verifier_authority": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa",
+    "verifier_env": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       6,
+       1791259200
+      ],
+      [
+       2,
+       {
+        "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       5,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Millbrook district verifier"
+         ],
+         [
+          1,
+          "Hum reference operator"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "district"
+         ],
+         [
+          4,
+          "person"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "7ed98e04a3e3d7f6"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "d46689265bca298b"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "d1cc3f1c09785b667b863247d9f4bd2f176a25dc81436e0a7fb1ba575c3cc0a7711796ac171eff00154c2432a9fe42c0a10c2adbd66deea33224be10ba20d3bff45ffb2c539af08b1a0313dfe67ac77864e087b017d48e10b7873d31718ca037"
+              }
+             ],
+             [
+              3,
+              4
+             ],
+             [
+              4,
+              2
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "43de5f9cbce0bdee"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "5212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a20"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "ward"
+             ],
+             [
+              1,
+              "Ward"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Ward 1"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Ward 2"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  3
+                 ],
+                 [
+                  1,
+                  "Ward 3"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  4
+                 ],
+                 [
+                  1,
+                  "Ward 4"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "area"
+             ],
+             [
+              1,
+              "Area"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Millbrook"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Outside Millbrook"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "unique"
+             ],
+             [
+              1,
+              "Unique"
+             ],
+             [
+              2,
+              "bool"
+             ],
+             [
+              5,
+              "gate"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "match"
+             ],
+             [
+              1,
+              "voter-file"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "To find your ward in the county voter file"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          [
+           {
+            "map": [
+             [
+              0,
+              "evidence"
+             ],
+             [
+              1,
+              "match"
+             ],
+             [
+              2,
+              "One card per voter-file record"
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          15552000
+         ],
+         [
+          14,
+          3
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ],
+         [
+          10,
+          [
+           {
+            "map": [
+             [
+              0,
+              "voters"
+             ],
+             [
+              1,
+              "private"
+             ],
+             [
+              2,
+              {
+               "hex": "a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a16"
+              }
+             ],
+             [
+              3,
+              48210
+             ],
+             [
+              4,
+              "County voter file, 2026-09 extract"
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "wards"
+             ],
+             [
+              1,
+              "public"
+             ],
+             [
+              2,
+              {
+               "hex": "a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c"
+              }
+             ],
+             [
+              3,
+              3
+             ],
+             [
+              4,
+              "Ward boundaries, 2024 redistricting"
+             ]
+            ]
+           }
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "kid": "7ed98e04a3e3d7f6",
+    "use": "gate",
+    "policy": "vote"
+   },
+   "expected": {
+    "satisfies": false
+   }
+  },
+  {
+   "id": "trust-list/resolution/trust-list-satisfies-unique-kid-since-2-minversion-2-004",
+   "description": "credential_satisfies: unique-kid-since-2-minversion-2",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "rows": [
+     [
+      {
+       "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+      },
+      "unique",
+      3,
+      2,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "019719596e59aa003c9a233ae359d715e395554701a3e298ee77e6fb6140839711"
+      },
+      "age-band",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "area",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "ward",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ]
+    ],
+    "attribute": "unique",
+    "verifier_authority": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa",
+    "verifier_env": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       6,
+       1791259200
+      ],
+      [
+       2,
+       {
+        "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       5,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Millbrook district verifier"
+         ],
+         [
+          1,
+          "Hum reference operator"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "district"
+         ],
+         [
+          4,
+          "person"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "7ed98e04a3e3d7f6"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "d46689265bca298b"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "d1cc3f1c09785b667b863247d9f4bd2f176a25dc81436e0a7fb1ba575c3cc0a7711796ac171eff00154c2432a9fe42c0a10c2adbd66deea33224be10ba20d3bff45ffb2c539af08b1a0313dfe67ac77864e087b017d48e10b7873d31718ca037"
+              }
+             ],
+             [
+              3,
+              4
+             ],
+             [
+              4,
+              2
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "43de5f9cbce0bdee"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "5212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a20"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "ward"
+             ],
+             [
+              1,
+              "Ward"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Ward 1"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Ward 2"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  3
+                 ],
+                 [
+                  1,
+                  "Ward 3"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  4
+                 ],
+                 [
+                  1,
+                  "Ward 4"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "area"
+             ],
+             [
+              1,
+              "Area"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Millbrook"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Outside Millbrook"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "unique"
+             ],
+             [
+              1,
+              "Unique"
+             ],
+             [
+              2,
+              "bool"
+             ],
+             [
+              5,
+              "gate"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "match"
+             ],
+             [
+              1,
+              "voter-file"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "To find your ward in the county voter file"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          [
+           {
+            "map": [
+             [
+              0,
+              "evidence"
+             ],
+             [
+              1,
+              "match"
+             ],
+             [
+              2,
+              "One card per voter-file record"
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          15552000
+         ],
+         [
+          14,
+          3
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ],
+         [
+          10,
+          [
+           {
+            "map": [
+             [
+              0,
+              "voters"
+             ],
+             [
+              1,
+              "private"
+             ],
+             [
+              2,
+              {
+               "hex": "a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a16"
+              }
+             ],
+             [
+              3,
+              48210
+             ],
+             [
+              4,
+              "County voter file, 2026-09 extract"
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "wards"
+             ],
+             [
+              1,
+              "public"
+             ],
+             [
+              2,
+              {
+               "hex": "a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c"
+              }
+             ],
+             [
+              3,
+              3
+             ],
+             [
+              4,
+              "Ward boundaries, 2024 redistricting"
+             ]
+            ]
+           }
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "kid": "d46689265bca298b",
+    "use": "gate",
+    "policy": "vote"
+   },
+   "expected": {
+    "satisfies": true
+   }
+  },
+  {
+   "id": "trust-list/resolution/trust-list-satisfies-area-breakdown-use-005",
+   "description": "credential_satisfies: area-breakdown-use",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "rows": [
+     [
+      {
+       "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+      },
+      "unique",
+      3,
+      2,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "019719596e59aa003c9a233ae359d715e395554701a3e298ee77e6fb6140839711"
+      },
+      "age-band",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "area",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "ward",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ]
+    ],
+    "attribute": "area",
+    "verifier_authority": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07",
+    "verifier_env": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       6,
+       1791259200
+      ],
+      [
+       2,
+       {
+        "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       5,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Millbrook district verifier"
+         ],
+         [
+          1,
+          "Hum reference operator"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "district"
+         ],
+         [
+          4,
+          "person"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "7ed98e04a3e3d7f6"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "d46689265bca298b"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "d1cc3f1c09785b667b863247d9f4bd2f176a25dc81436e0a7fb1ba575c3cc0a7711796ac171eff00154c2432a9fe42c0a10c2adbd66deea33224be10ba20d3bff45ffb2c539af08b1a0313dfe67ac77864e087b017d48e10b7873d31718ca037"
+              }
+             ],
+             [
+              3,
+              4
+             ],
+             [
+              4,
+              2
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "43de5f9cbce0bdee"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "5212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a20"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "ward"
+             ],
+             [
+              1,
+              "Ward"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Ward 1"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Ward 2"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  3
+                 ],
+                 [
+                  1,
+                  "Ward 3"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  4
+                 ],
+                 [
+                  1,
+                  "Ward 4"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "area"
+             ],
+             [
+              1,
+              "Area"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Millbrook"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Outside Millbrook"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "match"
+             ],
+             [
+              1,
+              "voter-file"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "To find your ward in the county voter file"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          [
+           {
+            "map": [
+             [
+              0,
+              "evidence"
+             ],
+             [
+              1,
+              "match"
+             ],
+             [
+              2,
+              "One card per voter-file record"
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          15552000
+         ],
+         [
+          14,
+          2
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ],
+         [
+          10,
+          [
+           {
+            "map": [
+             [
+              0,
+              "voters"
+             ],
+             [
+              1,
+              "private"
+             ],
+             [
+              2,
+              {
+               "hex": "a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a16"
+              }
+             ],
+             [
+              3,
+              48210
+             ],
+             [
+              4,
+              "County voter file, 2026-09 extract"
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "wards"
+             ],
+             [
+              1,
+              "public"
+             ],
+             [
+              2,
+              {
+               "hex": "a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c"
+              }
+             ],
+             [
+              3,
+              3
+             ],
+             [
+              4,
+              "Ward boundaries, 2024 redistricting"
+             ]
+            ]
+           }
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "kid": "d46689265bca298b",
+    "use": "breakdown",
+    "policy": "entry"
+   },
+   "expected": {
+    "satisfies": true
+   }
+  },
+  {
+   "id": "trust-list/resolution/trust-list-satisfies-ward-wrong-authority-006",
+   "description": "credential_satisfies: ward-wrong-authority",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "rows": [
+     [
+      {
+       "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+      },
+      "unique",
+      3,
+      2,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "019719596e59aa003c9a233ae359d715e395554701a3e298ee77e6fb6140839711"
+      },
+      "age-band",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "area",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "ward",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ]
+    ],
+    "attribute": "ward",
+    "verifier_authority": "010490e1604cc2c85e0608513b3403a272b8478acfcbce1e35ddd7669c04deadaf",
+    "verifier_env": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       6,
+       1791259200
+      ],
+      [
+       2,
+       {
+        "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       5,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Millbrook district verifier"
+         ],
+         [
+          1,
+          "Hum reference operator"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "district"
+         ],
+         [
+          4,
+          "person"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "7ed98e04a3e3d7f6"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "d46689265bca298b"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "d1cc3f1c09785b667b863247d9f4bd2f176a25dc81436e0a7fb1ba575c3cc0a7711796ac171eff00154c2432a9fe42c0a10c2adbd66deea33224be10ba20d3bff45ffb2c539af08b1a0313dfe67ac77864e087b017d48e10b7873d31718ca037"
+              }
+             ],
+             [
+              3,
+              4
+             ],
+             [
+              4,
+              2
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "43de5f9cbce0bdee"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "5212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a20"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "ward"
+             ],
+             [
+              1,
+              "Ward"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Ward 1"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Ward 2"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  3
+                 ],
+                 [
+                  1,
+                  "Ward 3"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  4
+                 ],
+                 [
+                  1,
+                  "Ward 4"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "area"
+             ],
+             [
+              1,
+              "Area"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Millbrook"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Outside Millbrook"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "match"
+             ],
+             [
+              1,
+              "voter-file"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "To find your ward in the county voter file"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          [
+           {
+            "map": [
+             [
+              0,
+              "evidence"
+             ],
+             [
+              1,
+              "match"
+             ],
+             [
+              2,
+              "One card per voter-file record"
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          15552000
+         ],
+         [
+          14,
+          2
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ],
+         [
+          10,
+          [
+           {
+            "map": [
+             [
+              0,
+              "voters"
+             ],
+             [
+              1,
+              "private"
+             ],
+             [
+              2,
+              {
+               "hex": "a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a16"
+              }
+             ],
+             [
+              3,
+              48210
+             ],
+             [
+              4,
+              "County voter file, 2026-09 extract"
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "wards"
+             ],
+             [
+              1,
+              "public"
+             ],
+             [
+              2,
+              {
+               "hex": "a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c"
+              }
+             ],
+             [
+              3,
+              3
+             ],
+             [
+              4,
+              "Ward boundaries, 2024 redistricting"
+             ]
+            ]
+           }
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "kid": "d46689265bca298b",
+    "use": "gate",
+    "policy": "entry"
+   },
+   "expected": {
+    "satisfies": false
+   }
+  },
+  {
+   "id": "trust-list/resolution/trust-list-satisfies-attribute-not-declared-007",
+   "description": "credential_satisfies: attribute-not-declared",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "rows": [
+     [
+      {
+       "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+      },
+      "unique",
+      3,
+      2,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "019719596e59aa003c9a233ae359d715e395554701a3e298ee77e6fb6140839711"
+      },
+      "age-band",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "area",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "ward",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ]
+    ],
+    "attribute": "age-band",
+    "verifier_authority": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07",
+    "verifier_env": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       6,
+       1791259200
+      ],
+      [
+       2,
+       {
+        "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       5,
+       {
+        "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+       }
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Millbrook district verifier"
+         ],
+         [
+          1,
+          "Hum reference operator"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "district"
+         ],
+         [
+          4,
+          "person"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "7ed98e04a3e3d7f6"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "d46689265bca298b"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "d1cc3f1c09785b667b863247d9f4bd2f176a25dc81436e0a7fb1ba575c3cc0a7711796ac171eff00154c2432a9fe42c0a10c2adbd66deea33224be10ba20d3bff45ffb2c539af08b1a0313dfe67ac77864e087b017d48e10b7873d31718ca037"
+              }
+             ],
+             [
+              3,
+              4
+             ],
+             [
+              4,
+              2
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "43de5f9cbce0bdee"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "5212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a20"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "ward"
+             ],
+             [
+              1,
+              "Ward"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Ward 1"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Ward 2"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  3
+                 ],
+                 [
+                  1,
+                  "Ward 3"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  4
+                 ],
+                 [
+                  1,
+                  "Ward 4"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "area"
+             ],
+             [
+              1,
+              "Area"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Millbrook"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Outside Millbrook"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "match"
+             ],
+             [
+              1,
+              "voter-file"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "To find your ward in the county voter file"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          [
+           {
+            "map": [
+             [
+              0,
+              "evidence"
+             ],
+             [
+              1,
+              "match"
+             ],
+             [
+              2,
+              "One card per voter-file record"
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          15552000
+         ],
+         [
+          14,
+          2
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ],
+         [
+          10,
+          [
+           {
+            "map": [
+             [
+              0,
+              "voters"
+             ],
+             [
+              1,
+              "private"
+             ],
+             [
+              2,
+              {
+               "hex": "a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a16"
+              }
+             ],
+             [
+              3,
+              48210
+             ],
+             [
+              4,
+              "County voter file, 2026-09 extract"
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "wards"
+             ],
+             [
+              1,
+              "public"
+             ],
+             [
+              2,
+              {
+               "hex": "a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c"
+              }
+             ],
+             [
+              3,
+              3
+             ],
+             [
+              4,
+              "Ward boundaries, 2024 redistricting"
+             ]
+            ]
+           }
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "kid": "d46689265bca298b",
+    "use": "gate",
+    "policy": "entry"
+   },
+   "expected": {
+    "satisfies": false
+   }
+  },
+  {
+   "id": "trust-list/resolution/trust-list-satisfies-retired-lineage-008",
+   "description": "credential_satisfies: retired-lineage",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "rows": [
+     [
+      {
+       "hex": "015ae4aeaae698fb89ddc235636df6b583a8eb3f4e961860adf6556fbb33e3d0fa"
+      },
+      "unique",
+      3,
+      2,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "019719596e59aa003c9a233ae359d715e395554701a3e298ee77e6fb6140839711"
+      },
+      "age-band",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "area",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ],
+     [
+      {
+       "hex": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07"
+      },
+      "ward",
+      2,
+      1,
+      [
+       "person"
+      ]
+     ]
+    ],
+    "attribute": "ward",
+    "verifier_authority": "01a78f957cadf3b7fcfe695559b292d0a7cf070c96aa00eb6216e81535fd4dcf07",
+    "verifier_env": null,
+    "kid": "d46689265bca298b",
+    "use": "gate",
+    "policy": "entry"
+   },
+   "expected": {
+    "satisfies": false
+   }
+  },
+  {
+   "id": "trust-list/resolution/trust-list-satisfies-agent-list-entry-leaf-009",
+   "description": "credential_satisfies: agent-list-entry-leaf",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "rows": [
+     [
+      {
+       "hex": "0118d69e3f0a5d9c55b915cbd45b2fd7e8c41c7a892fc6cf2b832d86364de691e5"
+      },
+      "agent-sponsor",
+      1,
+      1,
+      [
+       "agent"
+      ]
+     ]
+    ],
+    "attribute": "agent-sponsor",
+    "verifier_authority": "0118d69e3f0a5d9c55b915cbd45b2fd7e8c41c7a892fc6cf2b832d86364de691e5",
+    "verifier_env": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791259200
+      ],
+      [
+       2,
+       {
+        "hex": "0118d69e3f0a5d9c55b915cbd45b2fd7e8c41c7a892fc6cf2b832d86364de691e5"
+       }
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Agent sponsor verifier"
+         ],
+         [
+          1,
+          "Hum reference operator"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "custom"
+         ],
+         [
+          4,
+          "agent"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "1d08c98a1b65de51"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "f3244082259b989d3d5c17d9ea1f6c93e5307b93d76e3fce27f1aba43f6a901325bd5a039b3073b1d6142888245d6f4933cfd6e8cd3b1104ecf862f23640621fbdf54eede5a0cbafc49a9c77acd78bf7a5cd0f0d39334bb7d1a739ea6c7acb81"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "f8f57b68c5bcc000"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "35d2fc04737df79e0ab18693a8e6adfd3aed97c773e89e2856dd59715c568a7d"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "agent-sponsor"
+             ],
+             [
+              1,
+              "Sponsored agent"
+             ],
+             [
+              2,
+              "bool"
+             ],
+             [
+              5,
+              "gate"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "org"
+             ],
+             [
+              1,
+              "other"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "Something else: the sponsoring organization's registration"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          []
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          7776000
+         ],
+         [
+          14,
+          1
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "a05e01c8638fb76d83fcf2b4af7468bd35a9a80fb968441b2322d1fa27e425e9"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "kid": "1d08c98a1b65de51",
+    "use": "gate",
+    "policy": "entry"
+   },
+   "expected": {
+    "satisfies": true
+   }
+  },
+  {
+   "id": "trust-list/resolution/trust-list-satisfies-agent-list-vote-leaf-010",
+   "description": "credential_satisfies: agent-list-vote-leaf",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "rows": [
+     [
+      {
+       "hex": "0118d69e3f0a5d9c55b915cbd45b2fd7e8c41c7a892fc6cf2b832d86364de691e5"
+      },
+      "agent-sponsor",
+      1,
+      1,
+      [
+       "agent"
+      ]
+     ]
+    ],
+    "attribute": "agent-sponsor",
+    "verifier_authority": "0118d69e3f0a5d9c55b915cbd45b2fd7e8c41c7a892fc6cf2b832d86364de691e5",
+    "verifier_env": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791259200
+      ],
+      [
+       2,
+       {
+        "hex": "0118d69e3f0a5d9c55b915cbd45b2fd7e8c41c7a892fc6cf2b832d86364de691e5"
+       }
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Agent sponsor verifier"
+         ],
+         [
+          1,
+          "Hum reference operator"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "custom"
+         ],
+         [
+          4,
+          "agent"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "1d08c98a1b65de51"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "f3244082259b989d3d5c17d9ea1f6c93e5307b93d76e3fce27f1aba43f6a901325bd5a039b3073b1d6142888245d6f4933cfd6e8cd3b1104ecf862f23640621fbdf54eede5a0cbafc49a9c77acd78bf7a5cd0f0d39334bb7d1a739ea6c7acb81"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "f8f57b68c5bcc000"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "35d2fc04737df79e0ab18693a8e6adfd3aed97c773e89e2856dd59715c568a7d"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "agent-sponsor"
+             ],
+             [
+              1,
+              "Sponsored agent"
+             ],
+             [
+              2,
+              "bool"
+             ],
+             [
+              5,
+              "gate"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "org"
+             ],
+             [
+              1,
+              "other"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "Something else: the sponsoring organization's registration"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          []
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          7776000
+         ],
+         [
+          14,
+          1
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "a05e01c8638fb76d83fcf2b4af7468bd35a9a80fb968441b2322d1fa27e425e9"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "kid": "1d08c98a1b65de51",
+    "use": "gate",
+    "policy": "vote"
+   },
+   "expected": {
+    "satisfies": false
+   }
+  },
+  {
+   "id": "trust-list/resolution/trust-list-satisfies-direct-issuer-wildcard-011",
+   "description": "credential_satisfies: direct-issuer-wildcard",
+   "section": "How a context uses trust lists",
+   "inputs": {
+    "rows": [
+     [
+      {
+       "hex": "0165cc35ac8a401e5d8b7f543b8977b2fae6a52edbd7bb902bf14011d3148bfe12"
+      },
+      "*",
+      0,
+      1,
+      [
+       "person",
+       "agent"
+      ]
+     ]
+    ],
+    "attribute": "approved",
+    "verifier_authority": "0165cc35ac8a401e5d8b7f543b8977b2fae6a52edbd7bb902bf14011d3148bfe12",
+    "verifier_env": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791259200
+      ],
+      [
+       2,
+       {
+        "hex": "0165cc35ac8a401e5d8b7f543b8977b2fae6a52edbd7bb902bf14011d3148bfe12"
+       }
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Millbrook approved list"
+         ],
+         [
+          1,
+          "Millbrook Tenants Union organizers"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "approved-list"
+         ],
+         [
+          4,
+          "person"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "5f54c88c849a975d"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "194227b6c566cecd04bb587c639029cb7ef569e931bfb1722cfd1fef41acda28953bc339ad1c28af608ae9f3a42e5fcc441868bb5841ce12827a9abf3122bf2b2579a3d3e2c2f5fd1f49c4acf3f0b3e267b4cdc353655808b12faaa40e8687e0"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "747199d94131d6bf"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "e98a00075e0be0cecb9b161465a688f70a9533d32a171359c3c9274a8674daed"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "approved"
+             ],
+             [
+              1,
+              "Approved"
+             ],
+             [
+              2,
+              "bool"
+             ],
+             [
+              5,
+              "gate"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "role"
+             ],
+             [
+              1,
+              "Role"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "gate"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Tenant"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Steward"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "roster"
+             ],
+             [
+              1,
+              "roster"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "A roster entry an organizer added for you"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "email"
+             ],
+             [
+              1,
+              "email"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "To match you to the roster entry"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          [
+           {
+            "map": [
+             [
+              0,
+              "evidence"
+             ],
+             [
+              1,
+              "roster"
+             ],
+             [
+              2,
+              "One card per roster row"
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          15552000
+         ],
+         [
+          14,
+          1
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "0b22182169d4c4bdbfcd32e4ad3f305146b31750c1354bba79f1184ebdb1e2d7"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ],
+         [
+          10,
+          [
+           {
+            "map": [
+             [
+              0,
+              "roster"
+             ],
+             [
+              1,
+              "private"
+             ],
+             [
+              2,
+              {
+               "hex": "dfce60385b8e2f50a49c35a2b5e297c4563f2c191063eab7acca1f425c28246c"
+              }
+             ],
+             [
+              3,
+              412
+             ],
+             [
+              4,
+              "Approved tenants, 2026-09"
+             ]
+            ]
+           }
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "kid": "5f54c88c849a975d",
+    "use": "gate",
+    "policy": "entry"
+   },
+   "expected": {
+    "satisfies": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,210 @@
+{
+ "spec": "services",
+ "file": "aggregator",
+ "notes": "Task ids, receipt signatures, receipt pages.",
+ "cases": [
+  {
+   "id": "services/aggregator/task-id-001",
+   "description": "taskId for round 0, part 0 (the round's first part in the full plan)",
+   "section": "Aggregator",
+   "inputs": {
+    "deck_lineage_cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "round": 0,
+    "part": 0
+   },
+   "expected": {
+    "task_id": "cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b8"
+   }
+  },
+  {
+   "id": "services/aggregator/task-id-002",
+   "description": "taskId for round 1, part 1 (the round's first part in the full plan)",
+   "section": "Aggregator",
+   "inputs": {
+    "deck_lineage_cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "round": 1,
+    "part": 1
+   },
+   "expected": {
+    "task_id": "6b3c140b7e544c87059a62d4eb64d396ecc5357afdd100f6b7d810231d876e67"
+   }
+  },
+  {
+   "id": "services/aggregator/task-id-003",
+   "description": "taskId for round 2, part 2 (the round's first part in the full plan)",
+   "section": "Aggregator",
+   "inputs": {
+    "deck_lineage_cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "round": 2,
+    "part": 2
+   },
+   "expected": {
+    "task_id": "f25b93ca30ee9b2e5724c995eaa28d884e1e02fdc00839e0b479217043ec105c"
+   }
+  },
+  {
+   "id": "services/aggregator/task-id-004",
+   "description": "taskId for round 3, part 3 (the round's first part in the full plan)",
+   "section": "Aggregator",
+   "inputs": {
+    "deck_lineage_cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "round": 3,
+    "part": 3
+   },
+   "expected": {
+    "task_id": "d2f8ae2e7f0fa94f819618ee3bf577b7fd04937cfdc38c3dafb92260da07efd0"
+   }
+  },
+  {
+   "id": "services/aggregator/task-id-005",
+   "description": "taskId is the same for every version of the deck lineage (lineage CID, not version CID)",
+   "section": "Aggregator",
+   "inputs": {
+    "deck_lineage_cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "other_version_cid": "013ec7196e0d3415f7aeb081d4f5dbcd08492f9306b80c45951c5a58d84148b20c",
+    "round": 0,
+    "part": 0
+   },
+   "expected": {
+    "task_id": "cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b8"
+   }
+  },
+  {
+   "id": "services/aggregator/receipt-valid-006",
+   "description": "Receipt signature over hum/receipt/1 || taskId(0) || leaf",
+   "section": "Aggregator",
+   "inputs": {
+    "seed": "fc29106ff24b7933c690560ad60800cb0e44cef4ce231f69834a46f3c96eb1ef",
+    "public": "a059c5d8cafb1b5a3bb40e9d687ff60ed9387fae0552f0771ccc21c3d57375dc",
+    "task_id": "cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b8",
+    "leaf": "b52a8566aaece89ae7529b217613820e9ead266fcf368cfbf5359bf07286a0c0"
+   },
+   "expected": {
+    "message": "68756d2f726563656970742f31cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b8b52a8566aaece89ae7529b217613820e9ead266fcf368cfbf5359bf07286a0c0",
+    "signature": "fb68626ed8be4242db1873f00d558c82e96c3107cd53b2a277852cba42bfed34ee53916d540db910ef11fa255489dbe5615e28d4619ea6e708c4594470c0cc07"
+   }
+  },
+  {
+   "id": "services/aggregator/receipt-reject-wrong-key-007",
+   "description": "Verified under another key",
+   "section": "Aggregator",
+   "inputs": {
+    "public": "88cad9af2416f9c7bd7bbd5fe67aad331251008615da4ba593231ddaf20c29c2",
+    "task_id": "cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b8",
+    "leaf": "b52a8566aaece89ae7529b217613820e9ead266fcf368cfbf5359bf07286a0c0",
+    "signature": "fb68626ed8be4242db1873f00d558c82e96c3107cd53b2a277852cba42bfed34ee53916d540db910ef11fa255489dbe5615e28d4619ea6e708c4594470c0cc07"
+   },
+   "rejection": {
+    "step": null,
+    "check": "receipt-verify",
+    "reason": "wrong-key"
+   }
+  },
+  {
+   "id": "services/aggregator/receipt-reject-other-round-008",
+   "description": "Verified under round 1's task id",
+   "section": "Aggregator",
+   "inputs": {
+    "public": "a059c5d8cafb1b5a3bb40e9d687ff60ed9387fae0552f0771ccc21c3d57375dc",
+    "task_id": "6b3c140b7e544c87059a62d4eb64d396ecc5357afdd100f6b7d810231d876e67",
+    "leaf": "b52a8566aaece89ae7529b217613820e9ead266fcf368cfbf5359bf07286a0c0",
+    "signature": "fb68626ed8be4242db1873f00d558c82e96c3107cd53b2a277852cba42bfed34ee53916d540db910ef11fa255489dbe5615e28d4619ea6e708c4594470c0cc07"
+   },
+   "rejection": {
+    "step": null,
+    "check": "receipt-verify",
+    "reason": "other-round"
+   }
+  },
+  {
+   "id": "services/aggregator/receipt-pages-100-009",
+   "description": "Pages for 100 padded leaves (leaf i = SHA-256('leaf' + decimal i))",
+   "section": "Aggregator",
+   "inputs": {
+    "leaf_rule": "SHA-256(b'leaf' + str(i))",
+    "count": 100,
+    "root_blob_encoding": "CBOR {0: k, 1: [page CID...]}"
+   },
+   "expected": {
+    "k": 0,
+    "page_count": 1,
+    "page_lengths": [
+     100
+    ],
+    "page_cids": [
+     "01c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2"
+    ],
+    "root": "a301ea70ae90880e6c3f2308fe9457f2afab140587239d4f8ecb46779a3fb16d",
+    "root_blob": "a200000181582101c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2",
+    "root_blob_cid": "0178849855ad71856ced38165afb17264b4fdf20b68fe265eb6ef4e477b4099e32",
+    "first_sorted_leaf": "0145d8f9599c301448dcdf7aca8ca040b1cced631ea2cf4f66e9a9d1e60dd155"
+   }
+  },
+  {
+   "id": "services/aggregator/receipt-pages-4096-010",
+   "description": "Pages for 4096 padded leaves (leaf i = SHA-256('leaf' + decimal i))",
+   "section": "Aggregator",
+   "inputs": {
+    "leaf_rule": "SHA-256(b'leaf' + str(i))",
+    "count": 4096,
+    "root_blob_encoding": "CBOR {0: k, 1: [page CID...]}"
+   },
+   "expected": {
+    "k": 0,
+    "page_count": 1,
+    "page_lengths": [
+     4096
+    ],
+    "page_cids": [
+     "01c131c3cb3f2e461fb7026a42f7cb16762c6d9576effd8d37e0209bcc23af8617"
+    ],
+    "root": "cc430ed98553b331c6c028887fa72a8d66953ace736543c10985dcd1c667207f",
+    "root_blob": "a200000181582101c131c3cb3f2e461fb7026a42f7cb16762c6d9576effd8d37e0209bcc23af8617",
+    "root_blob_cid": "01a023a679e2a17c9f388314e8fdb99437cc17b4f100ebc969e725c1c4dc0c9935",
+    "first_sorted_leaf": "0010c5c382811b228eb9d70038b451995b105cfc2a951226aa586cb9a48fde4d"
+   }
+  },
+  {
+   "id": "services/aggregator/receipt-pages-4097-011",
+   "description": "Pages for 4097 padded leaves (leaf i = SHA-256('leaf' + decimal i))",
+   "section": "Aggregator",
+   "inputs": {
+    "leaf_rule": "SHA-256(b'leaf' + str(i))",
+    "count": 4097,
+    "root_blob_encoding": "CBOR {0: k, 1: [page CID...]}"
+   },
+   "expected": {
+    "k": 1,
+    "page_count": 2,
+    "page_lengths": [
+     2029,
+     2068
+    ],
+    "page_cids": [
+     "016dcfd04766ef46e384df246a61f05093a69fb12962e7fb2cc481d92c33bb7e84",
+     "01a854e19ee559dffcfb4696742b4c7f15f5bc31a4f4c324b70cc689a7d22a627c"
+    ],
+    "root": "1f8b99e2d3051c6ededdf372d4c50f16d56bc14410ce5762527b9b52b4b4eb9f",
+    "root_blob": "a2000101825821016dcfd04766ef46e384df246a61f05093a69fb12962e7fb2cc481d92c33bb7e84582101a854e19ee559dffcfb4696742b4c7f15f5bc31a4f4c324b70cc689a7d22a627c",
+    "root_blob_cid": "01fc3a4c94359b214d2ac133db7398fcbe8cfe295bc24fe1dde29d6f84775babb4",
+    "first_sorted_leaf": "0010c5c382811b228eb9d70038b451995b105cfc2a951226aa586cb9a48fde4d"
+   }
+  },
+  {
+   "id": "services/aggregator/receipt-pages-1000000-012",
+   "description": "Pages for 1,000,000 leaves: k = 8, 256 pages",
+   "section": "Aggregator",
+   "inputs": {
+    "leaf_rule": "SHA-256(b'leaf' + str(i))",
+    "count": 1000000
+   },
+   "expected": {
+    "k": 8,
+    "page_count": 256,
+    "page_lengths_sha256": "e6c43536d2121b3656ea0227529f44c95dcd0198f04daa3534d19f1bbbda3117",
+    "root": "1635211c2302af2556f4361ed1c2c5f92c4098d1e52bf84aedba589a1befa3e3",
+    "root_blob_cid": "012eb1e963608e16cdf45583c5d54977185fda10e17ccc7a2cd2468d1b3a468298"
+   }
+  }
+ ]
+}

@@ -1,0 +1,300 @@
+{
+ "spec": "services",
+ "file": "errors",
+ "notes": "One CBOR error body per code, and the two bare forms (E-2).",
+ "cases": [
+  {
+   "id": "services/errors/error-malformed-001",
+   "description": "malformed -> HTTP 400",
+   "section": "Errors",
+   "inputs": {
+    "code": "malformed",
+    "detail": "encoding",
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 400,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a200696d616c666f726d65640168656e636f64696e67"
+   }
+  },
+  {
+   "id": "services/errors/error-too_large-002",
+   "description": "too_large -> HTTP 413",
+   "section": "Errors",
+   "inputs": {
+    "code": "too_large",
+    "detail": null,
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 413,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a10069746f6f5f6c61726765"
+   }
+  },
+  {
+   "id": "services/errors/error-unauthorized-003",
+   "description": "unauthorized -> HTTP 401",
+   "section": "Errors",
+   "inputs": {
+    "code": "unauthorized",
+    "detail": null,
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 401,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a1006c756e617574686f72697a6564"
+   }
+  },
+  {
+   "id": "services/errors/error-token_spent-004",
+   "description": "token_spent -> HTTP 401",
+   "section": "Errors",
+   "inputs": {
+    "code": "token_spent",
+    "detail": null,
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 401,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a1006b746f6b656e5f7370656e74"
+   }
+  },
+  {
+   "id": "services/errors/error-forbidden-005",
+   "description": "forbidden -> HTTP 403",
+   "section": "Errors",
+   "inputs": {
+    "code": "forbidden",
+    "detail": "secret",
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 403,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a20069666f7262696464656e0166736563726574"
+   }
+  },
+  {
+   "id": "services/errors/error-not_found-006",
+   "description": "not_found -> HTTP 404",
+   "section": "Errors",
+   "inputs": {
+    "code": "not_found",
+    "detail": null,
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 404,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a100696e6f745f666f756e64"
+   }
+  },
+  {
+   "id": "services/errors/error-rejected-007",
+   "description": "rejected -> HTTP 422",
+   "section": "Errors",
+   "inputs": {
+    "code": "rejected",
+    "detail": null,
+    "step": 7,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 422,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a2006872656a65637465640207"
+   }
+  },
+  {
+   "id": "services/errors/error-floor-008",
+   "description": "floor -> HTTP 422",
+   "section": "Errors",
+   "inputs": {
+    "code": "floor",
+    "detail": null,
+    "step": null,
+    "rule": "D10",
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 422,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a20065666c6f6f720363443130"
+   }
+  },
+  {
+   "id": "services/errors/error-conflict-009",
+   "description": "conflict -> HTTP 409",
+   "section": "Errors",
+   "inputs": {
+    "code": "conflict",
+    "detail": "cid_mismatch",
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 409,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a20068636f6e666c696374016c6369645f6d69736d61746368"
+   }
+  },
+  {
+   "id": "services/errors/error-not_padded-010",
+   "description": "not_padded -> HTTP 400",
+   "section": "Errors",
+   "inputs": {
+    "code": "not_padded",
+    "detail": null,
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 400,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a1006a6e6f745f706164646564"
+   }
+  },
+  {
+   "id": "services/errors/error-replay-011",
+   "description": "replay -> HTTP 409",
+   "section": "Errors",
+   "inputs": {
+    "code": "replay",
+    "detail": null,
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 409,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a100667265706c6179"
+   }
+  },
+  {
+   "id": "services/errors/error-closed-012",
+   "description": "closed -> HTTP 410",
+   "section": "Errors",
+   "inputs": {
+    "code": "closed",
+    "detail": "tombstoned",
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 410,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a20066636c6f736564016a746f6d6273746f6e6564"
+   }
+  },
+  {
+   "id": "services/errors/error-pending-013",
+   "description": "pending -> HTTP 202",
+   "section": "Errors",
+   "inputs": {
+    "code": "pending",
+    "detail": null,
+    "step": null,
+    "rule": null,
+    "retryAfter": 30
+   },
+   "expected": {
+    "status": 202,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a2006770656e64696e6704181e"
+   }
+  },
+  {
+   "id": "services/errors/error-rate_limited-014",
+   "description": "rate_limited -> HTTP 429",
+   "section": "Errors",
+   "inputs": {
+    "code": "rate_limited",
+    "detail": "quota_put",
+    "step": null,
+    "rule": null,
+    "retryAfter": 30
+   },
+   "expected": {
+    "status": 429,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a3006c726174655f6c696d69746564016971756f74615f70757404181e"
+   }
+  },
+  {
+   "id": "services/errors/error-unavailable-015",
+   "description": "unavailable -> HTTP 503",
+   "section": "Errors",
+   "inputs": {
+    "code": "unavailable",
+    "detail": null,
+    "step": null,
+    "rule": null,
+    "retryAfter": null
+   },
+   "expected": {
+    "status": 503,
+    "media_type": "application/vnd.hum.error+cbor",
+    "body": "a1006b756e617661696c61626c65"
+   }
+  },
+  {
+   "id": "services/errors/error-401-bare-016",
+   "description": "Bare unauthorized: the code and nothing else",
+   "section": "Errors",
+   "inputs": {
+    "code": "unauthorized"
+   },
+   "expected": {
+    "status": 401,
+    "body": "a1006c756e617574686f72697a6564"
+   }
+  },
+  {
+   "id": "services/errors/error-404-bare-017",
+   "description": "Bare not_found: the code and nothing else",
+   "section": "Errors",
+   "inputs": {
+    "code": "not_found"
+   },
+   "expected": {
+    "status": 404,
+    "body": "a100696e6f745f666f756e64"
+   }
+  },
+  {
+   "id": "services/errors/error-reject-detail-leak-018",
+   "description": "A detail that is not a fixed string (a CID text) is refused by the encoder (E-1)",
+   "section": "Errors",
+   "inputs": {
+    "code": "not_found",
+    "detail": "caewpetn2l6ykgdrg5a5svrnz4kpbwfq6lqp2oqs6omcdgyutromci-leak!"
+   },
+   "rejection": {
+    "step": null,
+    "check": "encode-error",
+    "rule": "E-1"
+   }
+  }
+ ]
+}

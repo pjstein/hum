@@ -1,0 +1,494 @@
+{
+ "spec": "log",
+ "file": "inclusion",
+ "notes": "Inclusion proofs (RFC 9162 section 2.1.3) over the CT test leaves.",
+ "cases": [
+  {
+   "id": "log/inclusion/prove-001",
+   "description": "Leaf 0 in a tree of size 1",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "index": 0,
+    "size": 1,
+    "root": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+   },
+   "expected": {
+    "proof": [],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-002",
+   "description": "Leaf 0 in a tree of size 2",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "index": 0,
+    "size": 2,
+    "root": "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125"
+   },
+   "expected": {
+    "proof": [
+     "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-003",
+   "description": "Leaf 1 in a tree of size 2",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+    "index": 1,
+    "size": 2,
+    "root": "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125"
+   },
+   "expected": {
+    "proof": [
+     "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-004",
+   "description": "Leaf 0 in a tree of size 3",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "index": 0,
+    "size": 3,
+    "root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77"
+   },
+   "expected": {
+    "proof": [
+     "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-005",
+   "description": "Leaf 1 in a tree of size 3",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+    "index": 1,
+    "size": 3,
+    "root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77"
+   },
+   "expected": {
+    "proof": [
+     "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-006",
+   "description": "Leaf 2 in a tree of size 3",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+    "index": 2,
+    "size": 3,
+    "root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77"
+   },
+   "expected": {
+    "proof": [
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-007",
+   "description": "Leaf 0 in a tree of size 5",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "index": 0,
+    "size": 5,
+    "root": "4e3bbb1f7b478dcfe71fb631631519a3bca12c9aefca1612bfce4c13a86264d4"
+   },
+   "expected": {
+    "proof": [
+     "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+     "5f083f0a1a33ca076a95279832580db3e0ef4584bdff1f54c8a360f50de3031e",
+     "bc1a0643b12e4d2d7c77918f44e0f4f79a838b6cf9ec5b5c283e1f4d88599e6b"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-008",
+   "description": "Leaf 1 in a tree of size 5",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+    "index": 1,
+    "size": 5,
+    "root": "4e3bbb1f7b478dcfe71fb631631519a3bca12c9aefca1612bfce4c13a86264d4"
+   },
+   "expected": {
+    "proof": [
+     "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+     "5f083f0a1a33ca076a95279832580db3e0ef4584bdff1f54c8a360f50de3031e",
+     "bc1a0643b12e4d2d7c77918f44e0f4f79a838b6cf9ec5b5c283e1f4d88599e6b"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-009",
+   "description": "Leaf 2 in a tree of size 5",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+    "index": 2,
+    "size": 5,
+    "root": "4e3bbb1f7b478dcfe71fb631631519a3bca12c9aefca1612bfce4c13a86264d4"
+   },
+   "expected": {
+    "proof": [
+     "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "bc1a0643b12e4d2d7c77918f44e0f4f79a838b6cf9ec5b5c283e1f4d88599e6b"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-010",
+   "description": "Leaf 3 in a tree of size 5",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+    "index": 3,
+    "size": 5,
+    "root": "4e3bbb1f7b478dcfe71fb631631519a3bca12c9aefca1612bfce4c13a86264d4"
+   },
+   "expected": {
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "bc1a0643b12e4d2d7c77918f44e0f4f79a838b6cf9ec5b5c283e1f4d88599e6b"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-011",
+   "description": "Leaf 4 in a tree of size 5",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "bc1a0643b12e4d2d7c77918f44e0f4f79a838b6cf9ec5b5c283e1f4d88599e6b",
+    "index": 4,
+    "size": 5,
+    "root": "4e3bbb1f7b478dcfe71fb631631519a3bca12c9aefca1612bfce4c13a86264d4"
+   },
+   "expected": {
+    "proof": [
+     "d37ee418976dd95753c1c73862b9398fa2a2cf9b4ff0fdfe8b30cd95209614b7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-012",
+   "description": "Leaf 0 in a tree of size 8",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "index": 0,
+    "size": 8,
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+     "5f083f0a1a33ca076a95279832580db3e0ef4584bdff1f54c8a360f50de3031e",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-013",
+   "description": "Leaf 1 in a tree of size 8",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+    "index": 1,
+    "size": 8,
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+     "5f083f0a1a33ca076a95279832580db3e0ef4584bdff1f54c8a360f50de3031e",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-014",
+   "description": "Leaf 2 in a tree of size 8",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+    "index": 2,
+    "size": 8,
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-015",
+   "description": "Leaf 3 in a tree of size 8",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+    "index": 3,
+    "size": 8,
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-016",
+   "description": "Leaf 4 in a tree of size 8",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "bc1a0643b12e4d2d7c77918f44e0f4f79a838b6cf9ec5b5c283e1f4d88599e6b",
+    "index": 4,
+    "size": 8,
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "4271a26be0d8a84f0bd54c8c302e7cb3a3b5d1fa6780a40bcce2873477dab658",
+     "ca854ea128ed050b41b35ffc1b87b8eb2bde461e9e3b5596ece6b9d5975a0ae0",
+     "d37ee418976dd95753c1c73862b9398fa2a2cf9b4ff0fdfe8b30cd95209614b7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-017",
+   "description": "Leaf 5 in a tree of size 8",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "4271a26be0d8a84f0bd54c8c302e7cb3a3b5d1fa6780a40bcce2873477dab658",
+    "index": 5,
+    "size": 8,
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "bc1a0643b12e4d2d7c77918f44e0f4f79a838b6cf9ec5b5c283e1f4d88599e6b",
+     "ca854ea128ed050b41b35ffc1b87b8eb2bde461e9e3b5596ece6b9d5975a0ae0",
+     "d37ee418976dd95753c1c73862b9398fa2a2cf9b4ff0fdfe8b30cd95209614b7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-018",
+   "description": "Leaf 6 in a tree of size 8",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "b08693ec2e721597130641e8211e7eedccb4c26413963eee6c1e2ed16ffb1a5f",
+    "index": 6,
+    "size": 8,
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "46f6ffadd3d06a09ff3c5860d2755c8b9819db7df44251788c7d8e3180de8eb1",
+     "0ebc5d3437fbe2db158b9f126a1d118e308181031d0a949f8dededebc558ef6a",
+     "d37ee418976dd95753c1c73862b9398fa2a2cf9b4ff0fdfe8b30cd95209614b7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/prove-019",
+   "description": "Leaf 7 in a tree of size 8",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "46f6ffadd3d06a09ff3c5860d2755c8b9819db7df44251788c7d8e3180de8eb1",
+    "index": 7,
+    "size": 8,
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "b08693ec2e721597130641e8211e7eedccb4c26413963eee6c1e2ed16ffb1a5f",
+     "0ebc5d3437fbe2db158b9f126a1d118e308181031d0a949f8dededebc558ef6a",
+     "d37ee418976dd95753c1c73862b9398fa2a2cf9b4ff0fdfe8b30cd95209614b7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/inclusion/reject-020",
+   "description": "Inclusion does not verify: wrong-leaf",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "bc1a0643b12e4d2d7c77918f44e0f4f79a838b6cf9ec5b5c283e1f4d88599e6b",
+    "index": 3,
+    "size": 8,
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4"
+    ],
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "wrong-leaf"
+   }
+  },
+  {
+   "id": "log/inclusion/reject-021",
+   "description": "Inclusion does not verify: wrong-index",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+    "index": 4,
+    "size": 8,
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4"
+    ],
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "wrong-index"
+   }
+  },
+  {
+   "id": "log/inclusion/reject-022",
+   "description": "Inclusion does not verify: size-too-small-for-proof",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+    "index": 3,
+    "size": 4,
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4"
+    ],
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "size-too-small-for-proof"
+   }
+  },
+  {
+   "id": "log/inclusion/reject-023",
+   "description": "Inclusion does not verify: index-past-size",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+    "index": 8,
+    "size": 8,
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4"
+    ],
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "index-past-size"
+   }
+  },
+  {
+   "id": "log/inclusion/reject-024",
+   "description": "Inclusion does not verify: short-proof",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+    "index": 3,
+    "size": 8,
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125"
+    ],
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "short-proof"
+   }
+  },
+  {
+   "id": "log/inclusion/reject-025",
+   "description": "Inclusion does not verify: long-proof",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+    "index": 3,
+    "size": 8,
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4",
+     "0000000000000000000000000000000000000000000000000000000000000000"
+    ],
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "long-proof"
+   }
+  },
+  {
+   "id": "log/inclusion/reject-026",
+   "description": "Inclusion does not verify: wrong-root",
+   "section": "RFC 9162 2.1.3",
+   "inputs": {
+    "leaf_hash": "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+    "index": 3,
+    "size": 8,
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4"
+    ],
+    "root": "0000000000000000000000000000000000000000000000000000000000000000"
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "wrong-root"
+   }
+  }
+ ]
+}

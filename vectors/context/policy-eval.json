@@ -1,0 +1,437 @@
+{
+ "spec": "context",
+ "file": "policy-eval",
+ "notes": "Policy evaluation on trees plus held (source, attribute, value) triples. These test the evaluator; a context holding the any, range or set trees is itself rejected by C5 or C16 in draft 0.1. Sources are given as resolved source ids [kind, index].",
+ "cases": [
+  {
+   "id": "context/policy-eval/context-policy-eval-all-two-credentials-001",
+   "description": "Policy evaluation: all-two-credentials",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     1,
+     [
+      [
+       3,
+       [
+        0,
+        0
+       ],
+       "area",
+       [
+        1,
+        [
+         1
+        ]
+       ]
+      ],
+      [
+       3,
+       [
+        0,
+        1
+       ],
+       "unique",
+       [
+        0
+       ]
+      ]
+     ]
+    ],
+    "held": [
+     {
+      "source": [
+       0,
+       0
+      ],
+      "attribute": "area",
+      "value": 1
+     },
+     {
+      "source": [
+       0,
+       1
+      ],
+      "attribute": "unique",
+      "value": 1
+     }
+    ]
+   },
+   "expected": {
+    "satisfied": true
+   }
+  },
+  {
+   "id": "context/policy-eval/context-policy-eval-all-missing-one-002",
+   "description": "Policy evaluation: all-missing-one",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     1,
+     [
+      [
+       3,
+       [
+        0,
+        0
+       ],
+       "area",
+       [
+        1,
+        [
+         1
+        ]
+       ]
+      ],
+      [
+       3,
+       [
+        0,
+        1
+       ],
+       "unique",
+       [
+        0
+       ]
+      ]
+     ]
+    ],
+    "held": [
+     {
+      "source": [
+       0,
+       0
+      ],
+      "attribute": "area",
+      "value": 1
+     }
+    ]
+   },
+   "expected": {
+    "satisfied": false
+   }
+  },
+  {
+   "id": "context/policy-eval/context-policy-eval-any-second-child-003",
+   "description": "Policy evaluation: any-second-child",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     2,
+     [
+      [
+       3,
+       [
+        1,
+        0
+       ],
+       "approved",
+       [
+        0
+       ]
+      ],
+      [
+       3,
+       [
+        0,
+        0
+       ],
+       "area",
+       [
+        1,
+        [
+         1
+        ]
+       ]
+      ]
+     ]
+    ],
+    "held": [
+     {
+      "source": [
+       0,
+       0
+      ],
+      "attribute": "area",
+      "value": 1
+     }
+    ]
+   },
+   "expected": {
+    "satisfied": true
+   }
+  },
+  {
+   "id": "context/policy-eval/context-policy-eval-any-neither-004",
+   "description": "Policy evaluation: any-neither",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     2,
+     [
+      [
+       3,
+       [
+        1,
+        0
+       ],
+       "approved",
+       [
+        0
+       ]
+      ],
+      [
+       3,
+       [
+        0,
+        0
+       ],
+       "area",
+       [
+        1,
+        [
+         1
+        ]
+       ]
+      ]
+     ]
+    ],
+    "held": [
+     {
+      "source": [
+       0,
+       0
+      ],
+      "attribute": "area",
+      "value": 2
+     }
+    ]
+   },
+   "expected": {
+    "satisfied": false
+   }
+  },
+  {
+   "id": "context/policy-eval/context-policy-eval-range-inside-005",
+   "description": "Policy evaluation: range-inside",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     3,
+     [
+      0,
+      0
+     ],
+     "ward",
+     [
+      2,
+      1,
+      3
+     ]
+    ],
+    "held": [
+     {
+      "source": [
+       0,
+       0
+      ],
+      "attribute": "ward",
+      "value": 2
+     }
+    ]
+   },
+   "expected": {
+    "satisfied": true
+   }
+  },
+  {
+   "id": "context/policy-eval/context-policy-eval-range-outside-006",
+   "description": "Policy evaluation: range-outside",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     3,
+     [
+      0,
+      0
+     ],
+     "ward",
+     [
+      2,
+      1,
+      3
+     ]
+    ],
+    "held": [
+     {
+      "source": [
+       0,
+       0
+      ],
+      "attribute": "ward",
+      "value": 4
+     }
+    ]
+   },
+   "expected": {
+    "satisfied": false
+   }
+  },
+  {
+   "id": "context/policy-eval/context-policy-eval-set-member-007",
+   "description": "Policy evaluation: set-member",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     3,
+     [
+      0,
+      0
+     ],
+     "ward",
+     [
+      1,
+      [
+       1,
+       2,
+       3
+      ]
+     ]
+    ],
+    "held": [
+     {
+      "source": [
+       0,
+       0
+      ],
+      "attribute": "ward",
+      "value": 3
+     }
+    ]
+   },
+   "expected": {
+    "satisfied": true
+   }
+  },
+  {
+   "id": "context/policy-eval/context-policy-eval-set-not-member-008",
+   "description": "Policy evaluation: set-not-member",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     3,
+     [
+      0,
+      0
+     ],
+     "ward",
+     [
+      1,
+      [
+       1,
+       2,
+       3
+      ]
+     ]
+    ],
+    "held": [
+     {
+      "source": [
+       0,
+       0
+      ],
+      "attribute": "ward",
+      "value": 5
+     }
+    ]
+   },
+   "expected": {
+    "satisfied": false
+   }
+  },
+  {
+   "id": "context/policy-eval/context-policy-eval-true-009",
+   "description": "Policy evaluation: true",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     0
+    ],
+    "held": []
+   },
+   "expected": {
+    "satisfied": true
+   }
+  },
+  {
+   "id": "context/policy-eval/context-policy-eval-nullifier-leaf-010",
+   "description": "Policy evaluation: nullifier-leaf",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     1,
+     [
+      [
+       0
+      ],
+      [
+       3,
+       [
+        0,
+        1
+       ],
+       "unique",
+       [
+        0
+       ]
+      ]
+     ]
+    ],
+    "held": [
+     {
+      "source": [
+       0,
+       1
+      ],
+      "attribute": "unique",
+      "value": 1
+     }
+    ]
+   },
+   "expected": {
+    "satisfied": true
+   }
+  },
+  {
+   "id": "context/policy-eval/context-policy-eval-wrong-source-011",
+   "description": "Policy evaluation: wrong-source",
+   "section": "Entry policy",
+   "inputs": {
+    "tree": [
+     3,
+     [
+      1,
+      0
+     ],
+     "approved",
+     [
+      0
+     ]
+    ],
+    "held": [
+     {
+      "source": [
+       0,
+       0
+      ],
+      "attribute": "approved",
+      "value": 1
+     }
+    ]
+   },
+   "expected": {
+    "satisfied": false
+   }
+  }
+ ]
+}

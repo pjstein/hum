@@ -1,0 +1,748 @@
+{
+ "spec": "verifier-runtime",
+ "file": "build",
+ "notes": "Build recipes per profile and rule 16: source, toolchain and lang equal the manifest's. The module bytes here are placeholders; CI rebuilds real modules.",
+ "cases": [
+  {
+   "id": "verifier-runtime/build/build-recipe-001",
+   "description": "Build recipe blob for the invite profile",
+   "section": "Reproducible builds",
+   "inputs": {
+    "profile": "invite",
+    "code_cid": "015108c72f4d44e29651bce188ca24faec6503ce5d66f8db3b16679d74a3b22e28"
+   },
+   "expected": {
+    "recipe": "a80058209ba0f2f7930637f9b7c2fa8f769259030fffe804a3152da9b6c7ee023e4e7d2501782568747470733a2f2f6578616d706c652e696e76616c69642f68756d2d766572696669657273027859676863722e696f2f68756d2f6275696c64407368613235363a38316363383434643037653431383266393234343830666636636330363464636239376237393666376339653138653139663465666535306566303530656663038765636172676f656275696c64692d2d72656c65617365682d2d7461726765746d7761736d33322d776173697032622d706f76657269666965722d696e766974650478317461726765742f7761736d33322d7761736970322f72656c656173652f76657269666965725f696e766974652e7761736d057822727573746320312e39392e302c20746172676574207761736d33322d7761736970320662656e0781a20018640178205468617420636f64652068617320616c7265616479206265656e20757365642e",
+    "view": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "9ba0f2f7930637f9b7c2fa8f769259030fffe804a3152da9b6c7ee023e4e7d25"
+       }
+      ],
+      [
+       1,
+       "https://example.invalid/hum-verifiers"
+      ],
+      [
+       2,
+       "ghcr.io/hum/build@sha256:81cc844d07e4182f924480ff6cc064dcb97b796f7c9e18e19f4efe50ef050efc"
+      ],
+      [
+       3,
+       [
+        "cargo",
+        "build",
+        "--release",
+        "--target",
+        "wasm32-wasip2",
+        "-p",
+        "verifier-invite"
+       ]
+      ],
+      [
+       4,
+       "target/wasm32-wasip2/release/verifier_invite.wasm"
+      ],
+      [
+       5,
+       "rustc 1.99.0, target wasm32-wasip2"
+      ],
+      [
+       6,
+       "en"
+      ],
+      [
+       7,
+       [
+        {
+         "map": [
+          [
+           0,
+           100
+          ],
+          [
+           1,
+           "That code has already been used."
+          ]
+         ]
+        }
+       ]
+      ]
+     ]
+    },
+    "cid": "012d1bc6b22c93b1f4a6cbeef16a40d2d2ec40bc22ce95145ef411c786b611fe67"
+   }
+  },
+  {
+   "id": "verifier-runtime/build/build-recipe-002",
+   "description": "Build recipe blob for the approved-list profile",
+   "section": "Reproducible builds",
+   "inputs": {
+    "profile": "approved-list",
+    "code_cid": "0150c5f911f8ea45d45ab8f2014ece0e0527764c502ed71cef23142fbc84ae083c"
+   },
+   "expected": {
+    "recipe": "a80058200b22182169d4c4bdbfcd32e4ad3f305146b31750c1354bba79f1184ebdb1e2d701782568747470733a2f2f6578616d706c652e696e76616c69642f68756d2d766572696669657273027859676863722e696f2f68756d2f6275696c64407368613235363a34313336653038613339626266346562353237376333336633626262363462396666333765626465333462356561653265653038373933356430666136663536038765636172676f656275696c64692d2d72656c65617365682d2d7461726765746d7761736d33322d776173697032622d707676657269666965722d617070726f7665642d6c6973740478387461726765742f7761736d33322d7761736970322f72656c656173652f76657269666965725f617070726f7665642d6c6973742e7761736d057822727573746320312e39392e302c20746172676574207761736d33322d7761736970320662656e0780",
+    "view": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "0b22182169d4c4bdbfcd32e4ad3f305146b31750c1354bba79f1184ebdb1e2d7"
+       }
+      ],
+      [
+       1,
+       "https://example.invalid/hum-verifiers"
+      ],
+      [
+       2,
+       "ghcr.io/hum/build@sha256:4136e08a39bbf4eb5277c33f3bbb64b9ff37ebde34b5eae2ee087935d0fa6f56"
+      ],
+      [
+       3,
+       [
+        "cargo",
+        "build",
+        "--release",
+        "--target",
+        "wasm32-wasip2",
+        "-p",
+        "verifier-approved-list"
+       ]
+      ],
+      [
+       4,
+       "target/wasm32-wasip2/release/verifier_approved-list.wasm"
+      ],
+      [
+       5,
+       "rustc 1.99.0, target wasm32-wasip2"
+      ],
+      [
+       6,
+       "en"
+      ],
+      [
+       7,
+       []
+      ]
+     ]
+    },
+    "cid": "012af3dfe4ffb37c581d152fa120696e026e3d4937501c1e082bb48884cd628dbd"
+   }
+  },
+  {
+   "id": "verifier-runtime/build/build-recipe-003",
+   "description": "Build recipe blob for the district profile",
+   "section": "Reproducible builds",
+   "inputs": {
+    "profile": "district",
+    "code_cid": "01c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d29"
+   },
+   "expected": {
+    "recipe": "a80058209ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda601782568747470733a2f2f6578616d706c652e696e76616c69642f68756d2d766572696669657273027859676863722e696f2f68756d2f6275696c64407368613235363a65326463626362333937366232326464653932326134383633313938636563363963643035366536323363633763616330393435353463303037343331343561038765636172676f656275696c64692d2d72656c65617365682d2d7461726765746d7761736d33322d776173697032622d707176657269666965722d64697374726963740478337461726765742f7761736d33322d7761736970322f72656c656173652f76657269666965725f64697374726963742e7761736d057822727573746320312e39392e302c20746172676574207761736d33322d7761736970320662656e0780",
+    "view": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6"
+       }
+      ],
+      [
+       1,
+       "https://example.invalid/hum-verifiers"
+      ],
+      [
+       2,
+       "ghcr.io/hum/build@sha256:e2dcbcb3976b22dde922a4863198cec69cd056e623cc7cac094554c00743145a"
+      ],
+      [
+       3,
+       [
+        "cargo",
+        "build",
+        "--release",
+        "--target",
+        "wasm32-wasip2",
+        "-p",
+        "verifier-district"
+       ]
+      ],
+      [
+       4,
+       "target/wasm32-wasip2/release/verifier_district.wasm"
+      ],
+      [
+       5,
+       "rustc 1.99.0, target wasm32-wasip2"
+      ],
+      [
+       6,
+       "en"
+      ],
+      [
+       7,
+       []
+      ]
+     ]
+    },
+    "cid": "01b3ef176c6c5f8a13ceba9b02ac76666dd746b6178a2dee9aa634ff3d495cd149"
+   }
+  },
+  {
+   "id": "verifier-runtime/build/build-recipe-004",
+   "description": "Build recipe blob for the age-band profile",
+   "section": "Reproducible builds",
+   "inputs": {
+    "profile": "age-band",
+    "code_cid": "014c5be64ebc8871184193cb098082849a26bfe6e36da1924774046df16ee8312e"
+   },
+   "expected": {
+    "recipe": "a80058204921defae5927f16ce97ff8e7b270cb0c61a6749ba3e7d0b3b0a9669d474927001782568747470733a2f2f6578616d706c652e696e76616c69642f68756d2d766572696669657273027859676863722e696f2f68756d2f6275696c64407368613235363a34343266613366653839306130643638663637363562343430303637653931363064616165316439616331663462373737656139636263313462613437633466038765636172676f656275696c64692d2d72656c65617365682d2d7461726765746d7761736d33322d776173697032622d707176657269666965722d6167652d62616e640478337461726765742f7761736d33322d7761736970322f72656c656173652f76657269666965725f6167652d62616e642e7761736d057822727573746320312e39392e302c20746172676574207761736d33322d7761736970320662656e0780",
+    "view": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "4921defae5927f16ce97ff8e7b270cb0c61a6749ba3e7d0b3b0a9669d4749270"
+       }
+      ],
+      [
+       1,
+       "https://example.invalid/hum-verifiers"
+      ],
+      [
+       2,
+       "ghcr.io/hum/build@sha256:442fa3fe890a0d68f6765b440067e9160daae1d9ac1f4b777ea9cbc14ba47c4f"
+      ],
+      [
+       3,
+       [
+        "cargo",
+        "build",
+        "--release",
+        "--target",
+        "wasm32-wasip2",
+        "-p",
+        "verifier-age-band"
+       ]
+      ],
+      [
+       4,
+       "target/wasm32-wasip2/release/verifier_age-band.wasm"
+      ],
+      [
+       5,
+       "rustc 1.99.0, target wasm32-wasip2"
+      ],
+      [
+       6,
+       "en"
+      ],
+      [
+       7,
+       []
+      ]
+     ]
+    },
+    "cid": "015188264653e56dff436a7aefaabcc220745f7ede1a8a5a6e2f3e886dec61e7c0"
+   }
+  },
+  {
+   "id": "verifier-runtime/build/build-recipe-005",
+   "description": "Build recipe blob for the uniqueness profile",
+   "section": "Reproducible builds",
+   "inputs": {
+    "profile": "uniqueness",
+    "code_cid": "01bca9cf67b9b313cb2167058de39afbf71315c3017ed3c3aa2830af8cf1da2963"
+   },
+   "expected": {
+    "recipe": "a8005820da38f05794bdef4a36c68a5b0ffa55826ac51d1102745c6ab8ba14b7351615d801782568747470733a2f2f6578616d706c652e696e76616c69642f68756d2d766572696669657273027859676863722e696f2f68756d2f6275696c64407368613235363a37306535623031393833303336303665643232313533306365326435366462373866643966663636333137373662306330353531353564373232383864326234038765636172676f656275696c64692d2d72656c65617365682d2d7461726765746d7761736d33322d776173697032622d707376657269666965722d756e697175656e6573730478357461726765742f7761736d33322d7761736970322f72656c656173652f76657269666965725f756e697175656e6573732e7761736d057822727573746320312e39392e302c20746172676574207761736d33322d7761736970320662656e0780",
+    "view": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "da38f05794bdef4a36c68a5b0ffa55826ac51d1102745c6ab8ba14b7351615d8"
+       }
+      ],
+      [
+       1,
+       "https://example.invalid/hum-verifiers"
+      ],
+      [
+       2,
+       "ghcr.io/hum/build@sha256:70e5b0198303606ed221530ce2d56db78fd9ff6631776b0c055155d72288d2b4"
+      ],
+      [
+       3,
+       [
+        "cargo",
+        "build",
+        "--release",
+        "--target",
+        "wasm32-wasip2",
+        "-p",
+        "verifier-uniqueness"
+       ]
+      ],
+      [
+       4,
+       "target/wasm32-wasip2/release/verifier_uniqueness.wasm"
+      ],
+      [
+       5,
+       "rustc 1.99.0, target wasm32-wasip2"
+      ],
+      [
+       6,
+       "en"
+      ],
+      [
+       7,
+       []
+      ]
+     ]
+    },
+    "cid": "01fe69a6dda0547eed3238486a9f75583fbad7bcd3773c84f02659b240fbfbdd27"
+   }
+  },
+  {
+   "id": "verifier-runtime/build/build-check-006",
+   "description": "The district recipe matches its manifest (rule 16)",
+   "section": "Reproducible builds",
+   "inputs": {
+    "recipe": "a80058209ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda601782568747470733a2f2f6578616d706c652e696e76616c69642f68756d2d766572696669657273027859676863722e696f2f68756d2f6275696c64407368613235363a65326463626362333937366232326464653932326134383633313938636563363963643035366536323363633763616330393435353463303037343331343561038765636172676f656275696c64692d2d72656c65617365682d2d7461726765746d7761736d33322d776173697032622d707176657269666965722d64697374726963740478337461726765742f7761736d33322d7761736970322f72656c656173652f76657269666965725f64697374726963742e7761736d057822727573746320312e39392e302c20746172676574207761736d33322d7761736970320662656e0780",
+    "manifest_view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791259200
+      ],
+      [
+       2,
+       {
+        "hex": "01cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811"
+       }
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Millbrook district verifier"
+         ],
+         [
+          1,
+          "Hum reference operator"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "district"
+         ],
+         [
+          4,
+          "person"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "7ed98e04a3e3d7f6"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "43de5f9cbce0bdee"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "5212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a20"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "ward"
+             ],
+             [
+              1,
+              "Ward"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Ward 1"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Ward 2"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  3
+                 ],
+                 [
+                  1,
+                  "Ward 3"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "area"
+             ],
+             [
+              1,
+              "Area"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Millbrook"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Outside Millbrook"
+                 ]
+                ]
+               }
+              ]
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "match"
+             ],
+             [
+              1,
+              "voter-file"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "To find your ward in the county voter file"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          [
+           {
+            "map": [
+             [
+              0,
+              "evidence"
+             ],
+             [
+              1,
+              "match"
+             ],
+             [
+              2,
+              "One card per voter-file record"
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          15552000
+         ],
+         [
+          14,
+          2
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ],
+         [
+          10,
+          [
+           {
+            "map": [
+             [
+              0,
+              "voters"
+             ],
+             [
+              1,
+              "private"
+             ],
+             [
+              2,
+              {
+               "hex": "a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a16"
+              }
+             ],
+             [
+              3,
+              48210
+             ],
+             [
+              4,
+              "County voter file, 2026-09 extract"
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "wards"
+             ],
+             [
+              1,
+              "public"
+             ],
+             [
+              2,
+              {
+               "hex": "a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c"
+              }
+             ],
+             [
+              3,
+              3
+             ],
+             [
+              4,
+              "Ward boundaries, 2024 redistricting"
+             ]
+            ]
+           }
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "problems": []
+   }
+  },
+  {
+   "id": "verifier-runtime/build/build-check-toolchain-007",
+   "description": "A recipe whose toolchain differs from code.toolchain fails rule 16",
+   "section": "Reproducible builds",
+   "inputs": {
+    "recipe": "a80058209ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda60161780263696d67038165636172676f04636f7574057822727573746320312e39382e302c20746172676574207761736d33322d7761736970320662656e0780",
+    "expected_toolchain": "rustc 1.99.0, target wasm32-wasip2"
+   },
+   "rejection": {
+    "step": null,
+    "check": "build-recipe",
+    "rule": "16",
+    "reason": "toolchain differs from code.toolchain"
+   }
+  }
+ ]
+}

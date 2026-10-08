@@ -1,0 +1,2281 @@
+{
+ "spec": "release",
+ "file": "plans",
+ "notes": "deck.md rules D8, D9 (data part), D10, D11 and D14: plans checked against a context's floors. Rules that need resolved refs (D5-D7, D9's argument refs, D15) are not here.",
+ "cases": [
+  {
+   "id": "release/plans/plan-001",
+   "description": "Plan full satisfies the floors",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "expected": {
+    "violations": []
+   }
+  },
+  {
+   "id": "release/plans/plan-002",
+   "description": "Plan tallies-only satisfies the floors",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 61,
+       "den": 250,
+       "rat": [
+        61,
+        250
+       ]
+      },
+      "4": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 30,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "expected": {
+    "violations": []
+   }
+  },
+  {
+   "id": "release/plans/plan-003",
+   "description": "Plan ibis satisfies the floors",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 3237,
+       "den": 100000,
+       "rat": [
+        3237,
+        100000
+       ]
+      },
+      "1": {
+       "num": 747,
+       "den": 10000,
+       "rat": [
+        747,
+        10000
+       ]
+      },
+      "2": {
+       "num": 3237,
+       "den": 100000,
+       "rat": [
+        3237,
+        100000
+       ]
+      },
+      "3": {
+       "num": 747,
+       "den": 10000,
+       "rat": [
+        747,
+        10000
+       ]
+      },
+      "5": {
+       "num": 249,
+       "den": 12500,
+       "rat": [
+        249,
+        12500
+       ]
+      },
+      "6": {
+       "num": 747,
+       "den": 50000,
+       "rat": [
+        747,
+        50000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536,
+     "capMovement": 10,
+     "capRatings": 10
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 12
+   },
+   "expected": {
+    "violations": []
+   }
+  },
+  {
+   "id": "release/plans/plan-004",
+   "description": "Plan under-stricter-context satisfies the floors",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 1,
+      "den": 10,
+      "rat": [
+       1,
+       10
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 10000000,
+      "rat": [
+       1,
+       10000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 57,
+       "den": 4000,
+       "rat": [
+        57,
+        4000
+       ]
+      },
+      "1": {
+       "num": 133,
+       "den": 4000,
+       "rat": [
+        133,
+        4000
+       ]
+      },
+      "2": {
+       "num": 57,
+       "den": 4000,
+       "rat": [
+        57,
+        4000
+       ]
+      },
+      "3": {
+       "num": 133,
+       "den": 4000,
+       "rat": [
+        133,
+        4000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 300,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536,
+     "gates": {
+      "0": 300
+     }
+    },
+    "floors": {
+     "rho": {
+      "num": 1,
+      "den": 10,
+      "rat": [
+       1,
+       10
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 10000000,
+      "rat": [
+       1,
+       10000000
+      ]
+     },
+     "minVoters": 300,
+     "releasesPerDeck": 1,
+     "minWitnesses": 3,
+     "rhoYear": {
+      "num": 1,
+      "den": 2,
+      "rat": [
+       1,
+       2
+      ]
+     }
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "expected": {
+    "violations": []
+   }
+  },
+  {
+   "id": "release/plans/reject-005",
+   "description": "Plan breaks D8-no-tallies",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "2": {
+       "num": 249,
+       "den": 1000,
+       "rat": [
+        249,
+        1000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D8",
+    "violations": [
+     "D8: part 0 missing",
+     "D8: parts 1, 2 and 3 must be all present or all absent"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-006",
+   "description": "Plan breaks D8-no-receipts",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 127,
+       "den": 500,
+       "rat": [
+        127,
+        500
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D8",
+    "violations": [
+     "D8: part 8 missing"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-007",
+   "description": "Plan breaks D8-partial-tier",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 127,
+       "den": 1000,
+       "rat": [
+        127,
+        1000
+       ]
+      },
+      "2": {
+       "num": 127,
+       "den": 1000,
+       "rat": [
+        127,
+        1000
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D8",
+    "violations": [
+     "D8: part 8 missing",
+     "D8: parts 1, 2 and 3 must be all present or all absent"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-008",
+   "description": "Plan breaks D8-sum-below-rho",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 127,
+       "den": 1000,
+       "rat": [
+        127,
+        1000
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D8",
+    "violations": [
+     "D8: part 8 missing",
+     "D8: parts do not sum to rho"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-009",
+   "description": "Plan breaks D8-zero-part",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 127,
+       "den": 500,
+       "rat": [
+        127,
+        500
+       ]
+      },
+      "4": {
+       "num": 0,
+       "den": 1,
+       "rat": [
+        0,
+        1
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D8",
+    "violations": [
+     "D8: part 8 missing",
+     "D8: every part rho must be positive"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-010",
+   "description": "Plan breaks D9-absorb-without-count",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 127,
+       "den": 500,
+       "rat": [
+        127,
+        500
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": true,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D9",
+    "violations": [
+     "D8: part 8 missing",
+     "D9: absorb needs part 4"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-011",
+   "description": "Plan breaks D9-movement-no-arguments",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 127,
+       "den": 1000,
+       "rat": [
+        127,
+        1000
+       ]
+      },
+      "5": {
+       "num": 127,
+       "den": 1000,
+       "rat": [
+        127,
+        1000
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536,
+     "capMovement": 10
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D9",
+    "violations": [
+     "D8: part 8 missing",
+     "D9: movement needs capMovement and an argument ref"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-012",
+   "description": "Plan breaks D10-rho-over-floor",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 3,
+      "den": 10,
+      "rat": [
+       3,
+       10
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 177,
+       "den": 4000,
+       "rat": [
+        177,
+        4000
+       ]
+      },
+      "1": {
+       "num": 413,
+       "den": 4000,
+       "rat": [
+        413,
+        4000
+       ]
+      },
+      "2": {
+       "num": 177,
+       "den": 4000,
+       "rat": [
+        177,
+        4000
+       ]
+      },
+      "3": {
+       "num": 413,
+       "den": 4000,
+       "rat": [
+        413,
+        4000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D10",
+    "violations": [
+     "D10: rho above the context floor"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-013",
+   "description": "Plan breaks D10-rho-over-context",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 1,
+      "den": 5,
+      "rat": [
+       1,
+       5
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 117,
+       "den": 4000,
+       "rat": [
+        117,
+        4000
+       ]
+      },
+      "1": {
+       "num": 273,
+       "den": 4000,
+       "rat": [
+        273,
+        4000
+       ]
+      },
+      "2": {
+       "num": 117,
+       "den": 4000,
+       "rat": [
+        117,
+        4000
+       ]
+      },
+      "3": {
+       "num": 273,
+       "den": 4000,
+       "rat": [
+        273,
+        4000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 300,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 1,
+      "den": 10,
+      "rat": [
+       1,
+       10
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 10000000,
+      "rat": [
+       1,
+       10000000
+      ]
+     },
+     "minVoters": 300,
+     "releasesPerDeck": 1,
+     "minWitnesses": 3,
+     "rhoYear": {
+      "num": 1,
+      "den": 2,
+      "rat": [
+       1,
+       2
+      ]
+     }
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D10",
+    "violations": [
+     "D10: rho above the context floor",
+     "D10: delta above the context floor",
+     "D11: minVoters above a gate"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-014",
+   "description": "Plan breaks D10-delta-over-floor",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 100000,
+      "rat": [
+       1,
+       100000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D10",
+    "violations": [
+     "D10: delta above the context floor"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-015",
+   "description": "Plan breaks D10-minvoters-below-floor",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 50,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D10",
+    "violations": [
+     "D10: minVoters below the context floor"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-016",
+   "description": "Plan breaks D10-count-over-rhomax",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 61,
+       "den": 250,
+       "rat": [
+        61,
+        250
+       ]
+      },
+      "4": {
+       "num": 1,
+       "den": 100,
+       "rat": [
+        1,
+        100
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D10",
+    "violations": [
+     "D8: part 8 missing",
+     "D10: count rho above count.rhoMax"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-017",
+   "description": "Plan breaks D11-gate-below-protocol",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536,
+     "gates": {
+      "0": 50
+     }
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D11",
+    "violations": [
+     "D11: gate for part 0 below the protocol gate",
+     "D11: minVoters above a gate"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-018",
+   "description": "Plan breaks D11-minvoters-above-gate",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 150,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D11",
+    "violations": [
+     "D11: minVoters above a gate"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-019",
+   "description": "Plan breaks D11-covstatements-over-cards",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536,
+     "covStatements": 19
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D11",
+    "violations": [
+     "D11: covStatements above the card count"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-020",
+   "description": "Plan breaks D11-grid-out-of-range",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 7,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D11",
+    "violations": [
+     "D11: grid out of range"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-021",
+   "description": "Plan breaks D11-covscale-not-power-of-two",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 1000
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D11",
+    "violations": [
+     "D11: covScale not a power of two in 2^8..2^24"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-022",
+   "description": "Plan breaks D11-roundwindow-too-short",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 600,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D11",
+    "violations": [
+     "D11: roundWindow out of range"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-023",
+   "description": "Plan breaks D14-cap-zero",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 0,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 0
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D14",
+    "violations": [
+     "D14: cap must be at least 1"
+    ]
+   }
+  },
+  {
+   "id": "release/plans/reject-024",
+   "description": "Plan breaks D14-capmovement-over-cards",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 127,
+       "den": 1000,
+       "rat": [
+        127,
+        1000
+       ]
+      },
+      "5": {
+       "num": 127,
+       "den": 1000,
+       "rat": [
+        127,
+        1000
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536,
+     "capMovement": 19
+    },
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "cards": 18,
+    "argument_refs": 4
+   },
+   "rejection": {
+    "step": 10,
+    "check": "deck-plan",
+    "reason": "D14",
+    "violations": [
+     "D8: part 8 missing",
+     "D14: capMovement above the card count"
+    ]
+   }
+  }
+ ]
+}

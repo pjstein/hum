@@ -1,0 +1,59 @@
+{
+ "spec": "context",
+ "file": "results-key",
+ "notes": "The results key: X25519 private scalar from HKDF(secret_k, info hum/results-key/1), clamped, and its public key; a version a member phone must refuse.",
+ "cases": [
+  {
+   "id": "context/results-key/context-results-key-zero-001",
+   "description": "Results key from secret 'zero'",
+   "section": "The results key",
+   "inputs": {
+    "secret_k": "00000000000000000000000000000000"
+   },
+   "expected": {
+    "private": "98f0f641c76572c754807976c29d5bdd7a2d37377ea735111afaa466c2558d4a",
+    "resultsKey": "3a22ed1498b09956cd159853c02e56efff45b15f56aebb6ca641064a7af8ff18"
+   }
+  },
+  {
+   "id": "context/results-key/context-results-key-epoch-3-002",
+   "description": "Results key from secret 'epoch-3'",
+   "section": "The results key",
+   "inputs": {
+    "secret_k": "efc9e5d1932f67265b4689ef018d23ad"
+   },
+   "expected": {
+    "private": "70cb31a891c9841a7bdfe1ed63cdb246b48925459f6cffbff9e9526cf99b9d7b",
+    "resultsKey": "28974c94796e392be412b54cc1c32dd0575182895a59e49364a3f8f6480fe238"
+   }
+  },
+  {
+   "id": "context/results-key/context-results-key-pattern-003",
+   "description": "Results key from secret 'pattern'",
+   "section": "The results key",
+   "inputs": {
+    "secret_k": "000102030405060708090a0b0c0d0e0f"
+   },
+   "expected": {
+    "private": "706fd6ca934e441095f6071a225671a20f87aa60da074e82a99a0534d68cfc72",
+    "resultsKey": "e8450c7ab49e16d04ece30a8904e99f657668f8c9c4f54b775d908aa7af27e48"
+   }
+  },
+  {
+   "id": "context/results-key/context-results-key-mismatch-004",
+   "description": "A context version whose resultsKey is not the key derived from epoch 3's secret; a member phone that holds the epoch recomputes it and refuses the version",
+   "section": "The results key",
+   "inputs": {
+    "secret_k": "efc9e5d1932f67265b4689ef018d23ad",
+    "resultsEpoch": 3,
+    "resultsKey": "a07b6d6435260624f826cb20d50ab71dde113c34945d5af6e83bd1b756a177a2",
+    "expected": "28974c94796e392be412b54cc1c32dd0575182895a59e49364a3f8f6480fe238"
+   },
+   "rejection": {
+    "step": null,
+    "check": "results-key",
+    "reason": "resultsKey does not match the keyring derivation"
+   }
+  }
+ ]
+}

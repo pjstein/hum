@@ -1,0 +1,287 @@
+{
+ "spec": "release",
+ "file": "gates",
+ "notes": "Size gates: which features a noised voter count unlocks.",
+ "cases": [
+  {
+   "id": "release/gates/unlock-001",
+   "description": "Features unlocked at 0 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 0,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [],
+    "publishable": false
+   }
+  },
+  {
+   "id": "release/gates/unlock-002",
+   "description": "Features unlocked at 99 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 99,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [],
+    "publishable": false
+   }
+  },
+  {
+   "id": "release/gates/unlock-003",
+   "description": "Features unlocked at 100 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 100,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [
+     "tallies"
+    ],
+    "publishable": true
+   }
+  },
+  {
+   "id": "release/gates/unlock-004",
+   "description": "Features unlocked at 101 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 101,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [
+     "tallies"
+    ],
+    "publishable": true
+   }
+  },
+  {
+   "id": "release/gates/unlock-005",
+   "description": "Features unlocked at 299 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 299,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [
+     "tallies"
+    ],
+    "publishable": true
+   }
+  },
+  {
+   "id": "release/gates/unlock-006",
+   "description": "Features unlocked at 300 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 300,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [
+     "tallies",
+     "common-ground",
+     "breakdown-cell"
+    ],
+    "publishable": true
+   }
+  },
+  {
+   "id": "release/gates/unlock-007",
+   "description": "Features unlocked at 799 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 799,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [
+     "tallies",
+     "common-ground",
+     "breakdown-cell"
+    ],
+    "publishable": true
+   }
+  },
+  {
+   "id": "release/gates/unlock-008",
+   "description": "Features unlocked at 800 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 800,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [
+     "tallies",
+     "common-ground",
+     "map",
+     "groups",
+     "breakdown-cell"
+    ],
+    "publishable": true
+   }
+  },
+  {
+   "id": "release/gates/unlock-009",
+   "description": "Features unlocked at 4999 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 4999,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [
+     "tallies",
+     "common-ground",
+     "map",
+     "groups",
+     "breakdown-cell"
+    ],
+    "publishable": true
+   }
+  },
+  {
+   "id": "release/gates/unlock-010",
+   "description": "Features unlocked at 5000 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 5000,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [
+     "tallies",
+     "common-ground",
+     "map",
+     "groups",
+     "breakdown-cell",
+     "real-data-checks"
+    ],
+    "publishable": true
+   }
+  },
+  {
+   "id": "release/gates/unlock-011",
+   "description": "Features unlocked at 100000 noised voters",
+   "section": "context.md Protocol constants",
+   "inputs": {
+    "noised_voters": 100000,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [
+     "tallies",
+     "common-ground",
+     "map",
+     "groups",
+     "breakdown-cell",
+     "real-data-checks"
+    ],
+    "publishable": true
+   }
+  },
+  {
+   "id": "release/gates/unlock-012",
+   "description": "A noised count of -3 (raw nHat may be negative) publishes nothing",
+   "section": "release.md Body fields",
+   "inputs": {
+    "noised_voters": -3,
+    "gates": {
+     "tallies": 100,
+     "common-ground": 300,
+     "map": 800,
+     "groups": 800,
+     "breakdown-cell": 300,
+     "real-data-checks": 5000
+    }
+   },
+   "expected": {
+    "unlocked": [],
+    "publishable": false
+   }
+  }
+ ]
+}

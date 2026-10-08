@@ -1,0 +1,986 @@
+{
+ "spec": "verifier",
+ "file": "summary",
+ "notes": "Disclosure summaries derived from each valid manifest alone.",
+ "cases": [
+  {
+   "id": "verifier/summary/verifier-summary-invite-link-001",
+   "description": "Disclosure summary of invite-link",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "01144d797f97ed051212eade2f4a9aa983bf7e93e30fafe7277df17916a197ce01",
+    "envelope": "a700010168766572696669657202582101bfbf05baac6bc1e3b44d319e00ea5098d3f11c1d4f67138be1b221310bca4f8c0401061a6ac4724008a364636f64655821015108c72f4d44e29651bce188ca24faec6503ce5d66f8db3b16679d74a3b22e28656275696c645821012d1bc6b22c93b1f4a6cbeef16a40d2d2ec40bc22ce95145ef411c786b611fe676770726f66696c655821015108c72f4d44e29651bce188ca24faec6503ce5d66f8db3b16679d74a3b22e2809ae0078184d696c6c62726f6f6b2074656e616e747320696e766974650178224d696c6c62726f6f6b2054656e616e747320556e696f6e206f7267616e697a6572730262656e0366696e766974650466706572736f6e0581a5004809eaadc711eb65af01736262732d626c7331323338312d73686132353602586036dce02dcda1b688b7c7227ee0bf1ec8e249813164362fcb30b6cc392108761766ebbeb59c4fb69109b91a60c8ed5bcbde9b2c7ba1770f1c23b77e667311e27276038c982ac80d5d1f9135f024216de98093c4a68eb6805c2de56e5fc7311b4b030004010781a30048d2207dce4886589f01782368706b652d7832353531392d7368613235362d6368616368613230706f6c7931333035025820efc0fae7acc505cc2a07f528cc3f3aa871f39fb396e028589b712b8a6959a1700881a60066696e766974650167496e76697465640264626f6f6c056467617465066661637469766507000981a700646c696e6b01646c696e6b02646e6f6e65037823546f20636865636b20796f75206f70656e65642074686520696e76697465206c696e6b040005646e6f6e6506f50b800ca10067726569737375650d1a0076a7000e000fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e310258209ba0f2f7930637f9b7c2fa8f769259030fffe804a3152da9b6c7ee023e4e7d25037822727573746320312e39392e302c20746172676574207761736d33322d776173697032"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Millbrook tenants invite",
+      "operator": "Millbrook Tenants Union organizers",
+      "lang": "en",
+      "assurance": 0,
+      "class": "person",
+      "authority": "cag736bn2vrv4dy5ujuyz4ahkkcmnh4i4dvhwoe4l4gzccmilzjhyy"
+     },
+     "proves": [
+      {
+       "name": "invite",
+       "label": "Invited",
+       "type": "bool",
+       "values": [],
+       "canBreakdown": false
+      }
+     ],
+     "asks": [
+      {
+       "name": "link",
+       "kind": "link",
+       "schema": "none",
+       "purpose": "To check you opened the invite link",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      }
+     ],
+     "links": [],
+     "expires": {
+      "validitySeconds": 7776000,
+      "epochPeriods": 3,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cafiqrrzpjvcoffsrxtqyrsre7lwgka6olvtprwz3cztz25fdwixcq",
+      "source": "9ba0f2f7930637f9b7c2fa8f769259030fffe804a3152da9b6c7ee023e4e7d25",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": "cafiqrrzpjvcoffsrxtqyrsre7lwgka6olvtprwz3cztz25fdwixcq"
+     },
+     "datasets": []
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-invite-codes-002",
+   "description": "Disclosure summary of invite-codes",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "01c5d6655bf0cd2e4b5763a3ab8708a9a0bf60bea602a79750be705c4f80d62d49",
+    "envelope": "a70001016876657269666965720258210132cd89254a7f4647f0c5e9529f50a9ec7ce41b8b6a95f502e711adc9eb7d4d2b0401061a6ac4724008a364636f64655821015108c72f4d44e29651bce188ca24faec6503ce5d66f8db3b16679d74a3b22e28656275696c645821012d1bc6b22c93b1f4a6cbeef16a40d2d2ec40bc22ce95145ef411c786b611fe676770726f66696c655821015108c72f4d44e29651bce188ca24faec6503ce5d66f8db3b16679d74a3b22e2809af0078184d696c6c62726f6f6b206f6e652d74696d6520636f6465730178224d696c6c62726f6f6b2054656e616e747320556e696f6e206f7267616e697a6572730262656e0366696e766974650466706572736f6e0581a5004809eaadc711eb65af01736262732d626c7331323338312d73686132353602586036dce02dcda1b688b7c7227ee0bf1ec8e249813164362fcb30b6cc392108761766ebbeb59c4fb69109b91a60c8ed5bcbde9b2c7ba1770f1c23b77e667311e27276038c982ac80d5d1f9135f024216de98093c4a68eb6805c2de56e5fc7311b4b030004010781a30048d2207dce4886589f01782368706b652d7832353531392d7368613235362d6368616368613230706f6c7931333035025820efc0fae7acc505cc2a07f528cc3f3aa871f39fb396e028589b712b8a6959a1700882a60066696e766974650167496e76697465640264626f6f6c05646761746506666163746976650700a70066636f686f72740166436f686f72740264656e756d0382a200010166537072696e67a20002016446616c6c0569627265616b646f776e066661637469766507000982a70064636f64650164636f646502647465787403782141206f6e652d74696d6520636f64652066726f6d20616e206f7267616e697a6572040005646e6f6e6506f5a7006664657669636501666465766963650266646576696365037826546f2073746f70206f6e652070686f6e652072656465656d696e67206d616e7920636f646573040005646e6f6e6506f40a81a50065636f646573016770726976617465025820c2e0cfe975abcb9586ec8c5cc64aac45f33c66e0ee64bcf7d9d432c77441f0770318fa04781f53616c74656420686173686573206f66206f6e652d74696d6520636f6465730b82a3006865766964656e63650164636f646502714f6e6520636172642070657220636f6465a30066646576696365016664657669636502734f6e65206361726420706572206465766963650ca10067726569737375650d1a0076a7000e000fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e310258209ba0f2f7930637f9b7c2fa8f769259030fffe804a3152da9b6c7ee023e4e7d25037822727573746320312e39392e302c20746172676574207761736d33322d776173697032"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Millbrook one-time codes",
+      "operator": "Millbrook Tenants Union organizers",
+      "lang": "en",
+      "assurance": 0,
+      "class": "person",
+      "authority": "caezm3cjfjj7umr7qyxuvfh2qvhwhzza3rnvjl5ic44i23splpvgsw"
+     },
+     "proves": [
+      {
+       "name": "invite",
+       "label": "Invited",
+       "type": "bool",
+       "values": [],
+       "canBreakdown": false
+      },
+      {
+       "name": "cohort",
+       "label": "Cohort",
+       "type": "enum",
+       "values": [
+        "Spring",
+        "Fall"
+       ],
+       "canBreakdown": true
+      }
+     ],
+     "asks": [
+      {
+       "name": "code",
+       "kind": "code",
+       "schema": "text",
+       "purpose": "A one-time code from an organizer",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      },
+      {
+       "name": "device",
+       "kind": "device",
+       "schema": "device",
+       "purpose": "To stop one phone redeeming many codes",
+       "required": false,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      }
+     ],
+     "links": [
+      {
+       "method": "evidence",
+       "scope": "One card per code"
+      },
+      {
+       "method": "device",
+       "scope": "One card per device"
+      }
+     ],
+     "expires": {
+      "validitySeconds": 7776000,
+      "epochPeriods": 3,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cafiqrrzpjvcoffsrxtqyrsre7lwgka6olvtprwz3cztz25fdwixcq",
+      "source": "9ba0f2f7930637f9b7c2fa8f769259030fffe804a3152da9b6c7ee023e4e7d25",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": "cafiqrrzpjvcoffsrxtqyrsre7lwgka6olvtprwz3cztz25fdwixcq"
+     },
+     "datasets": [
+      {
+       "name": "codes",
+       "kind": "private",
+       "records": 250,
+       "describe": "Salted hashes of one-time codes"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-approved-list-003",
+   "description": "Disclosure summary of approved-list",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "013de35bd43d9cbf38ad935decc77bf85790dfd0e37b0276feb0f23ba548a3e0ef",
+    "envelope": "a700010168766572696669657202582101ae7aedb3e1fd7d6b7ae3613ac196562d4eaefe6aa88b25ac89738b5a206bded30401061a6ac4724008a364636f646558210150c5f911f8ea45d45ab8f2014ece0e0527764c502ed71cef23142fbc84ae083c656275696c645821012af3dfe4ffb37c581d152fa120696e026e3d4937501c1e082bb48884cd628dbd6770726f66696c6558210150c5f911f8ea45d45ab8f2014ece0e0527764c502ed71cef23142fbc84ae083c09af00774d696c6c62726f6f6b20617070726f766564206c6973740178224d696c6c62726f6f6b2054656e616e747320556e696f6e206f7267616e697a6572730262656e036d617070726f7665642d6c6973740466706572736f6e0581a500485f54c88c849a975d01736262732d626c7331323338312d736861323536025860194227b6c566cecd04bb587c639029cb7ef569e931bfb1722cfd1fef41acda28953bc339ad1c28af608ae9f3a42e5fcc441868bb5841ce12827a9abf3122bf2b2579a3d3e2c2f5fd1f49c4acf3f0b3e267b4cdc353655808b12faaa40e8687e0030004010781a30048747199d94131d6bf01782368706b652d7832353531392d7368613235362d6368616368613230706f6c7931333035025820e98a00075e0be0cecb9b161465a688f70a9533d32a171359c3c9274a8674daed0882a60068617070726f7665640168417070726f7665640264626f6f6c05646761746506666163746976650700a70064726f6c650164526f6c650264656e756d0382a20001016654656e616e74a20002016753746577617264056467617465066661637469766507000982a70066726f737465720166726f737465720264746578740378294120726f7374657220656e74727920616e206f7267616e697a657220616464656420666f7220796f75040005646e6f6e6506f5a70065656d61696c0165656d61696c026474657874037820546f206d6174636820796f7520746f2074686520726f7374657220656e747279040005646e6f6e6506f50a81a50066726f73746572016770726976617465025820dfce60385b8e2f50a49c35a2b5e297c4563f2c191063eab7acca1f425c28246c0319019c047819417070726f7665642074656e616e74732c20323032362d30390b81a3006865766964656e63650166726f7374657202774f6e6520636172642070657220726f7374657220726f770ca10067726569737375650d1a00ed4e000e010fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e310258200b22182169d4c4bdbfcd32e4ad3f305146b31750c1354bba79f1184ebdb1e2d7037822727573746320312e39392e302c20746172676574207761736d33322d776173697032"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Millbrook approved list",
+      "operator": "Millbrook Tenants Union organizers",
+      "lang": "en",
+      "assurance": 1,
+      "class": "person",
+      "authority": "cagxhv3nt4h6x22324nqtvqmwkywu5lx6nkuiwjnmrfzywwranppng"
+     },
+     "proves": [
+      {
+       "name": "approved",
+       "label": "Approved",
+       "type": "bool",
+       "values": [],
+       "canBreakdown": false
+      },
+      {
+       "name": "role",
+       "label": "Role",
+       "type": "enum",
+       "values": [
+        "Tenant",
+        "Steward"
+       ],
+       "canBreakdown": false
+      }
+     ],
+     "asks": [
+      {
+       "name": "roster",
+       "kind": "roster",
+       "schema": "text",
+       "purpose": "A roster entry an organizer added for you",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      },
+      {
+       "name": "email",
+       "kind": "email",
+       "schema": "text",
+       "purpose": "To match you to the roster entry",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      }
+     ],
+     "links": [
+      {
+       "method": "evidence",
+       "scope": "One card per roster row"
+      }
+     ],
+     "expires": {
+      "validitySeconds": 15552000,
+      "epochPeriods": 6,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cafiml6ir7dvelvc2xdzactwobycso5smkaxnohhpemkc7peevyedy",
+      "source": "0b22182169d4c4bdbfcd32e4ad3f305146b31750c1354bba79f1184ebdb1e2d7",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": "cafiml6ir7dvelvc2xdzactwobycso5smkaxnohhpemkc7peevyedy"
+     },
+     "datasets": [
+      {
+       "name": "roster",
+       "kind": "private",
+       "records": 412,
+       "describe": "Approved tenants, 2026-09"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-age-band-004",
+   "description": "Disclosure summary of age-band",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "01cd18cbf606ed75f6475d30c10be9bddd0d7e76975e967f9dd70c5b4fb9dc8c92",
+    "envelope": "a70001016876657269666965720258210139a1cd3c10ffbe2c1807ca479e0dd94ef16ad0eacb0cac36ad271ecf88b21bd00401061a6ac4724008a364636f64655821014c5be64ebc8871184193cb098082849a26bfe6e36da1924774046df16ee8312e656275696c645821015188264653e56dff436a7aefaabcc220745f7ede1a8a5a6e2f3e886dec61e7c06770726f66696c655821014c5be64ebc8871184193cb098082849a26bfe6e36da1924774046df16ee8312e09ae00714167652062616e64207665726966696572017648756d207265666572656e6365206f70657261746f720262656e03686167652d62616e640466706572736f6e0581a50048c6dbaea04dc41a6a01736262732d626c7331323338312d736861323536025860ada07b31865719e9535d0a63cec7ad224095771eebca94025db49853ae90815c710df1c4890af59b840b3680dea3b931b45398409d580b1f7022c67e11ede944785e8e908d9684205f578091b9e98bb153fce4e204f02be0fc77f8eed0bbca5c030004010781a30048d9b7362ecfa1321f01782368706b652d7832353531392d7368613235362d6368616368613230706f6c7931333035025820bc797e85225e4bc2b7fa72750f1583f675cb7eb6b4bc36b3f327d29aa6ca62820881a700686167652d62616e6401684167652062616e64026462616e640385a30012011818026531382d3234a3001819011822026532352d3334a3001823011831026533352d3439a3001832011840026535302d3634a3001841011896026336352b0569627265616b646f776e066661637469766507000982a70063646f62016d646174652d6f662d626972746802646461746503781b546f20706c61636520796f7520696e20616e206167652062616e64040005646e6f6e6506f5a70063646f630168646f63756d656e740265696d61676503782d546f20636865636b207468652064617465206f6620626972746820616761696e7374206120646f63756d656e74040005646e6f6e6506f50b81a3006865766964656e63650163646f6302781c4f6e6520636172642070657220646f63756d656e74206e756d6265720ca10067726569737375650d1a01e133800e030fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e310258204921defae5927f16ce97ff8e7b270cb0c61a6749ba3e7d0b3b0a9669d4749270037822727573746320312e39392e302c20746172676574207761736d33322d776173697032"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Age band verifier",
+      "operator": "Hum reference operator",
+      "lang": "en",
+      "assurance": 3,
+      "class": "person",
+      "authority": "cae42dtj4cd734laya7fephqn3fhpc2wq5lfqzlbwvutr5t4iwin5a"
+     },
+     "proves": [
+      {
+       "name": "age-band",
+       "label": "Age band",
+       "type": "band",
+       "values": [
+        "18-24",
+        "25-34",
+        "35-49",
+        "50-64",
+        "65+"
+       ],
+       "canBreakdown": true
+      }
+     ],
+     "asks": [
+      {
+       "name": "dob",
+       "kind": "date-of-birth",
+       "schema": "date",
+       "purpose": "To place you in an age band",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      },
+      {
+       "name": "doc",
+       "kind": "document",
+       "schema": "image",
+       "purpose": "To check the date of birth against a document",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      }
+     ],
+     "links": [
+      {
+       "method": "evidence",
+       "scope": "One card per document number"
+      }
+     ],
+     "expires": {
+      "validitySeconds": 31536000,
+      "epochPeriods": 13,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cafgfxzsoxsehcgcbspfqtaecqsncnp7g4nw2deshoqcg34lo5ays4",
+      "source": "4921defae5927f16ce97ff8e7b270cb0c61a6749ba3e7d0b3b0a9669d4749270",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": "cafgfxzsoxsehcgcbspfqtaecqsncnp7g4nw2deshoqcg34lo5ays4"
+     },
+     "datasets": []
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-uniqueness-005",
+   "description": "Disclosure summary of uniqueness",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "01ffb396772b6cd8af83a03e7337be8e1f27de9a1c3b62c0d311ec9b8b66365ee8",
+    "envelope": "a700010168766572696669657202582101e60ad12d477c562ac801e0a9305eadea96bda33a2298c523779262826939f8170401061a6ac4724008a364636f6465582101bca9cf67b9b313cb2167058de39afbf71315c3017ed3c3aa2830af8cf1da2963656275696c64582101fe69a6dda0547eed3238486a9f75583fbad7bcd3773c84f02659b240fbfbdd276770726f66696c65582101bca9cf67b9b313cb2167058de39afbf71315c3017ed3c3aa2830af8cf1da296309ae0073556e697175656e657373207665726966696572017648756d207265666572656e6365206f70657261746f720262656e036a756e697175656e6573730466706572736f6e0581a5004868036a14535c2d7c01736262732d626c7331323338312d7368613235360258606c405a9788b0c12d93e8517e1f58cc5d429994765354cec6a46c197da6ae18d0303d326ca88770517c41939bc94a04641c8576b37cb6e6d399289d5cdb673b6dc10132273cc0802f353046c8c5202cce61ebee92a25ecb2b58a2bea8ea904960030004010781a300480067502b1d628b0301782368706b652d7832353531392d7368613235362d6368616368613230706f6c79313330350258203a2633c0df30370846ec18b930d193d83eebe971664006cb71415422208bf4320881a60066756e697175650166556e697175650264626f6f6c056467617465066661637469766507000983a700666465766963650166646576696365026664657669636503782641206f6e652d74696d65206174746573746174696f6e2066726f6d20746869732070686f6e65040005646e6f6e6506f5a70063646f630168646f63756d656e740265696d61676503781f412070686f746f206f6620616e206964656e7469747920646f63756d656e74040005646e6f6e6506f5a7006673656c666965016673656c6669650265696d61676503782e412070686f746f206f6620796f757220666163652c206d61746368656420746f20796f757220646f63756d656e74040005646e6f6e6506f50b82a3006865766964656e63650163646f6302754f6e6520636172642070657220646f63756d656e74a30066646576696365016664657669636502734f6e65206361726420706572206465766963650ca10067726569737375650d1a01e133800e030fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e31025820da38f05794bdef4a36c68a5b0ffa55826ac51d1102745c6ab8ba14b7351615d8037822727573746320312e39392e302c20746172676574207761736d33322d776173697032"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Uniqueness verifier",
+      "operator": "Hum reference operator",
+      "lang": "en",
+      "assurance": 3,
+      "class": "person",
+      "authority": "cahtavujni56fmkwiahqksmc6vxvjnpndhirjrrjdo6jgfatjhh4bo"
+     },
+     "proves": [
+      {
+       "name": "unique",
+       "label": "Unique",
+       "type": "bool",
+       "values": [],
+       "canBreakdown": false
+      }
+     ],
+     "asks": [
+      {
+       "name": "device",
+       "kind": "device",
+       "schema": "device",
+       "purpose": "A one-time attestation from this phone",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      },
+      {
+       "name": "doc",
+       "kind": "document",
+       "schema": "image",
+       "purpose": "A photo of an identity document",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      },
+      {
+       "name": "selfie",
+       "kind": "selfie",
+       "schema": "image",
+       "purpose": "A photo of your face, matched to your document",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      }
+     ],
+     "links": [
+      {
+       "method": "evidence",
+       "scope": "One card per document"
+      },
+      {
+       "method": "device",
+       "scope": "One card per device"
+      }
+     ],
+     "expires": {
+      "validitySeconds": 31536000,
+      "epochPeriods": 13,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cag6ktt3hxgzrhszbm4cy3y427p3rgfodaf7nhq5kfayk7dhr3iuwg",
+      "source": "da38f05794bdef4a36c68a5b0ffa55826ac51d1102745c6ab8ba14b7351615d8",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": "cag6ktt3hxgzrhszbm4cy3y427p3rgfodaf7nhq5kfayk7dhr3iuwg"
+     },
+     "datasets": []
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-custom-006",
+   "description": "Disclosure summary of custom",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "01d29e127035893158bac28142d61d8e176beb9f4c4a7ebe4898690a2dc38f7f1e",
+    "envelope": "a700010168766572696669657202582101ce14e669b1b18001a3a634bc0a5a8d50ba532b7d48dce00c7465db9ba08b0e080401061a6ac4724008a264636f64655821018938d2c9df913c6794dfd2857cd08789b1f33708e0aee4f0ecaf115b219c9665656275696c64582101efb2d0aed9dc3f8e7cf50e2e8d8100c8b90b1b9b0864bbd8280d555c4acb785309af007819556e696f6e206d656d62657273686970207665726966696572016a4c6f63616c20313233340262656e0366637573746f6d0466706572736f6e0581a500485e2ebfd3924391d101736262732d626c7331323338312d7368613235360258605299f74b612ef1dca3958690e2c6e7001300501d310b7ef41d5b49d10c44a21d2710dae5c415539dfe2c17ec63c6f9fb84e3efc5fb716a63527672009a4a64f0d7688a4d737459dfdcb2b18b25aa99febb3f271d33c41c0a58674b18ebd39881030004010781a30048702cc7bd476d7bf401782368706b652d7832353531392d7368613235362d6368616368613230706f6c7931333035025820d891da2314db6409b7e38dcb6e3a23d370f80b0832aa095d4a0484a3fb26b6dd0882a600666d656d62657201664d656d6265720264626f6f6c05646761746506666163746976650700a70064756e69740164556e6974026475696e7404191388056467617465066661637469766507000982a700646361726401656f74686572026474657874037826536f6d657468696e6720656c73653a20796f757220756e696f6e2063617264206e756d626572041a0001518005646861736806f5a80063726566016a63726564656e7469616c026a63726564656e7469616c03782a41207265736964656e7420636172642066726f6d20746865206469737472696374207665726966696572040005646e6f6e6506f50781a200582101521676b9d2d8b7e5cedd0ede88244f90f290d167e2bd249f1943f0e47c024632018164776172640b82a3006865766964656e636501646361726402774f6e6520636172642070657220756e696f6e2063617264a3006a63726564656e7469616c016372656602781a4f6e65206361726420706572207265736964656e7420636172640ca10067726569737375650d1a0083d6000e010fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e31025820a05e01c8638fb76d83fcf2b4af7468bd35a9a80fb968441b2322d1fa27e425e9037822727573746320312e39392e302c20746172676574207761736d33322d7761736970321003"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Union membership verifier",
+      "operator": "Local 1234",
+      "lang": "en",
+      "assurance": 1,
+      "class": "person",
+      "authority": "cahhbjztjwgyyaanduy2lycs2rviluuzlpvenzyamors5xg5armhaq"
+     },
+     "proves": [
+      {
+       "name": "member",
+       "label": "Member",
+       "type": "bool",
+       "values": [],
+       "canBreakdown": false
+      },
+      {
+       "name": "unit",
+       "label": "Unit",
+       "type": "uint",
+       "values": [],
+       "canBreakdown": false,
+       "max": 5000
+      }
+     ],
+     "asks": [
+      {
+       "name": "card",
+       "kind": "other",
+       "schema": "text",
+       "purpose": "Something else: your union card number",
+       "required": true,
+       "keptSeconds": 86400,
+       "storedAs": "hash"
+      },
+      {
+       "name": "ref",
+       "kind": "credential",
+       "schema": "credential",
+       "purpose": "A resident card from the district verifier",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none",
+       "accepts": [
+        {
+         "authority": "cafjbm5vz2lmlpzoo3uhn5cbej6ipfegrm7rl2je7dfb7bzd4ajdde",
+         "attributes": [
+          "ward"
+         ]
+        }
+       ]
+      }
+     ],
+     "links": [
+      {
+       "method": "evidence",
+       "scope": "One card per union card"
+      },
+      {
+       "method": "credential",
+       "scope": "One card per resident card"
+      }
+     ],
+     "expires": {
+      "validitySeconds": 8640000,
+      "epochPeriods": 3,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cagetruwj36ityz4u37jik7gqq6e3d4zxbdqk5zhq5sxrcwzbtslgk",
+      "source": "a05e01c8638fb76d83fcf2b4af7468bd35a9a80fb968441b2322d1fa27e425e9",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": null
+     },
+     "datasets": []
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-agent-007",
+   "description": "Disclosure summary of agent",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "0176d948932d0473234fa91ed9351bf66836061382c1e40c89d6775137e0f8c218",
+    "envelope": "a7000101687665726966696572025821019fc7b646aa106e3c07a8b78dc9c62e7a162da8546c8df02d6a1bd3d08aebae110401061a6ac4724008a264636f64655821018938d2c9df913c6794dfd2857cd08789b1f33708e0aee4f0ecaf115b219c9665656275696c64582101efb2d0aed9dc3f8e7cf50e2e8d8100c8b90b1b9b0864bbd8280d555c4acb785309ae00764167656e742073706f6e736f72207665726966696572017648756d207265666572656e6365206f70657261746f720262656e0366637573746f6d04656167656e740581a500481d08c98a1b65de5101736262732d626c7331323338312d736861323536025860f3244082259b989d3d5c17d9ea1f6c93e5307b93d76e3fce27f1aba43f6a901325bd5a039b3073b1d6142888245d6f4933cfd6e8cd3b1104ecf862f23640621fbdf54eede5a0cbafc49a9c77acd78bf7a5cd0f0d39334bb7d1a739ea6c7acb81030004010781a30048f8f57b68c5bcc00001782368706b652d7832353531392d7368613235362d6368616368613230706f6c793133303502582035d2fc04737df79e0ab18693a8e6adfd3aed97c773e89e2856dd59715c568a7d0881a6006d6167656e742d73706f6e736f72016f53706f6e736f726564206167656e740264626f6f6c056467617465066661637469766507000981a700636f726701656f7468657202647465787403783a536f6d657468696e6720656c73653a207468652073706f6e736f72696e67206f7267616e697a6174696f6e277320726567697374726174696f6e040005646e6f6e6506f50b800ca10067726569737375650d1a0076a7000e010fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e31025820a05e01c8638fb76d83fcf2b4af7468bd35a9a80fb968441b2322d1fa27e425e9037822727573746320312e39392e302c20746172676574207761736d33322d776173697032"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Agent sponsor verifier",
+      "operator": "Hum reference operator",
+      "lang": "en",
+      "assurance": 1,
+      "class": "agent",
+      "authority": "cagp4pnsgviig4pahvc3y3sogfz5bmlnikrwi34bnnin5huek5oxbc"
+     },
+     "proves": [
+      {
+       "name": "agent-sponsor",
+       "label": "Sponsored agent",
+       "type": "bool",
+       "values": [],
+       "canBreakdown": false
+      }
+     ],
+     "asks": [
+      {
+       "name": "org",
+       "kind": "other",
+       "schema": "text",
+       "purpose": "Something else: the sponsoring organization's registration",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      }
+     ],
+     "links": [],
+     "expires": {
+      "validitySeconds": 7776000,
+      "epochPeriods": 3,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cagetruwj36ityz4u37jik7gqq6e3d4zxbdqk5zhq5sxrcwzbtslgk",
+      "source": "a05e01c8638fb76d83fcf2b4af7468bd35a9a80fb968441b2322d1fa27e425e9",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": null
+     },
+     "datasets": []
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-district-v1-008",
+   "description": "Disclosure summary of district-v1",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "013edd0b24b277eea6ef1a2dfc4696f38ca0a2ef65cac7c2cda3f15f9f806d84d9",
+    "envelope": "a700010168766572696669657202582101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a8110401061a6ac4724008a464636f6465582101c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d29656275696c64582101b3ef176c6c5f8a13ceba9b02ac76666dd746b6178a2dee9aa634ff3d495cd1496770726f66696c65582101c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d296d646174617365742e7761726473582101b9d318071e998feafbefedee64803265acc661beb21856bbd9c1690f1fa36d9a09af00781b4d696c6c62726f6f6b206469737472696374207665726966696572017648756d207265666572656e6365206f70657261746f720262656e036864697374726963740466706572736f6e0581a500487ed98e04a3e3d7f601736262732d626c7331323338312d736861323536025860144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf030004010781a3004843de5f9cbce0bdee01782368706b652d7832353531392d7368613235362d6368616368613230706f6c79313330350258205212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a200882a70064776172640164576172640264656e756d0383a200010166576172642031a200020166576172642032a2000301665761726420330569627265616b646f776e06666163746976650700a70064617265610164417265610264656e756d0382a2000101694d696c6c62726f6f6ba2000201714f757473696465204d696c6c62726f6f6b0569627265616b646f776e066661637469766507000981a700656d61746368016a766f7465722d66696c6502647465787403782a546f2066696e6420796f7572207761726420696e2074686520636f756e747920766f7465722066696c65040005646e6f6e6506f50a82a50066766f74657273016770726976617465025820a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a160319bc52047822436f756e747920766f7465722066696c652c20323032362d30392065787472616374a50065776172647301667075626c6963025820a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c03030478235761726420626f756e6461726965732c20323032342072656469737472696374696e670b81a3006865766964656e636501656d6174636802781e4f6e6520636172642070657220766f7465722d66696c65207265636f72640ca10067726569737375650d1a00ed4e000e020fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e310258209ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6037822727573746320312e39392e302c20746172676574207761736d33322d776173697032"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Millbrook district verifier",
+      "operator": "Hum reference operator",
+      "lang": "en",
+      "assurance": 2,
+      "class": "person",
+      "authority": "cahgwqyeodwu2pfofyxkz6t7hmkqwlakqfx75aw7irvzeurhfqsubc"
+     },
+     "proves": [
+      {
+       "name": "ward",
+       "label": "Ward",
+       "type": "enum",
+       "values": [
+        "Ward 1",
+        "Ward 2",
+        "Ward 3"
+       ],
+       "canBreakdown": true
+      },
+      {
+       "name": "area",
+       "label": "Area",
+       "type": "enum",
+       "values": [
+        "Millbrook",
+        "Outside Millbrook"
+       ],
+       "canBreakdown": true
+      }
+     ],
+     "asks": [
+      {
+       "name": "match",
+       "kind": "voter-file",
+       "schema": "text",
+       "purpose": "To find your ward in the county voter file",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      }
+     ],
+     "links": [
+      {
+       "method": "evidence",
+       "scope": "One card per voter-file record"
+      }
+     ],
+     "expires": {
+      "validitySeconds": 15552000,
+      "epochPeriods": 6,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cahdvxuwcvfrkk3tcbl7pblawer5qgwygpgoykfvhpnl3nknsxross",
+      "source": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": "cahdvxuwcvfrkk3tcbl7pblawer5qgwygpgoykfvhpnl3nknsxross"
+     },
+     "datasets": [
+      {
+       "name": "voters",
+       "kind": "private",
+       "records": 48210,
+       "describe": "County voter file, 2026-09 extract"
+      },
+      {
+       "name": "wards",
+       "kind": "public",
+       "records": 3,
+       "describe": "Ward boundaries, 2024 redistricting"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-district-v2-009",
+   "description": "Disclosure summary of district-v2",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "01d534db6ae39013a4dab592687b09c5ab404fbac4b39e596ca118c4abbabbcd03",
+    "envelope": "a900010168766572696669657202582101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811035821013edd0b24b277eea6ef1a2dfc4696f38ca0a2ef65cac7c2cda3f15f9f806d84d90402055821013edd0b24b277eea6ef1a2dfc4696f38ca0a2ef65cac7c2cda3f15f9f806d84d9061a6ac4727c08a464636f6465582101c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d29656275696c64582101b3ef176c6c5f8a13ceba9b02ac76666dd746b6178a2dee9aa634ff3d495cd1496770726f66696c65582101c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d296d646174617365742e7761726473582101b9d318071e998feafbefedee64803265acc661beb21856bbd9c1690f1fa36d9a09af00781b4d696c6c62726f6f6b206469737472696374207665726966696572017648756d207265666572656e6365206f70657261746f720262656e036864697374726963740466706572736f6e0582a500487ed98e04a3e3d7f601736262732d626c7331323338312d736861323536025860144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf03000401a50048d46689265bca298b01736262732d626c7331323338312d736861323536025860d1cc3f1c09785b667b863247d9f4bd2f176a25dc81436e0a7fb1ba575c3cc0a7711796ac171eff00154c2432a9fe42c0a10c2adbd66deea33224be10ba20d3bff45ffb2c539af08b1a0313dfe67ac77864e087b017d48e10b7873d31718ca037030404020781a3004843de5f9cbce0bdee01782368706b652d7832353531392d7368613235362d6368616368613230706f6c79313330350258205212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a200882a70064776172640164576172640264656e756d0384a200010166576172642031a200020166576172642032a200030166576172642033a2000401665761726420340569627265616b646f776e06666163746976650700a70064617265610164417265610264656e756d0382a2000101694d696c6c62726f6f6ba2000201714f757473696465204d696c6c62726f6f6b0569627265616b646f776e066661637469766507000981a700656d61746368016a766f7465722d66696c6502647465787403782a546f2066696e6420796f7572207761726420696e2074686520636f756e747920766f7465722066696c65040005646e6f6e6506f50a82a50066766f74657273016770726976617465025820a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a160319bc52047822436f756e747920766f7465722066696c652c20323032362d30392065787472616374a50065776172647301667075626c6963025820a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c03030478235761726420626f756e6461726965732c20323032342072656469737472696374696e670b81a3006865766964656e636501656d6174636802781e4f6e6520636172642070657220766f7465722d66696c65207265636f72640ca10067726569737375650d1a00ed4e000e020fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e310258209ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6037822727573746320312e39392e302c20746172676574207761736d33322d776173697032"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Millbrook district verifier",
+      "operator": "Hum reference operator",
+      "lang": "en",
+      "assurance": 2,
+      "class": "person",
+      "authority": "cahgwqyeodwu2pfofyxkz6t7hmkqwlakqfx75aw7irvzeurhfqsubc"
+     },
+     "proves": [
+      {
+       "name": "ward",
+       "label": "Ward",
+       "type": "enum",
+       "values": [
+        "Ward 1",
+        "Ward 2",
+        "Ward 3",
+        "Ward 4"
+       ],
+       "canBreakdown": true
+      },
+      {
+       "name": "area",
+       "label": "Area",
+       "type": "enum",
+       "values": [
+        "Millbrook",
+        "Outside Millbrook"
+       ],
+       "canBreakdown": true
+      }
+     ],
+     "asks": [
+      {
+       "name": "match",
+       "kind": "voter-file",
+       "schema": "text",
+       "purpose": "To find your ward in the county voter file",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      }
+     ],
+     "links": [
+      {
+       "method": "evidence",
+       "scope": "One card per voter-file record"
+      }
+     ],
+     "expires": {
+      "validitySeconds": 15552000,
+      "epochPeriods": 6,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cahdvxuwcvfrkk3tcbl7pblawer5qgwygpgoykfvhpnl3nknsxross",
+      "source": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": "cahdvxuwcvfrkk3tcbl7pblawer5qgwygpgoykfvhpnl3nknsxross"
+     },
+     "datasets": [
+      {
+       "name": "voters",
+       "kind": "private",
+       "records": 48210,
+       "describe": "County voter file, 2026-09 extract"
+      },
+      {
+       "name": "wards",
+       "kind": "public",
+       "records": 3,
+       "describe": "Ward boundaries, 2024 redistricting"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-district-v3-010",
+   "description": "Disclosure summary of district-v3",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "0187ec09c92f5106efbd84e4c4ea44657ceb4d221a67fc48c0d42aaac01ee86524",
+    "envelope": "a900010168766572696669657202582101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811035821013edd0b24b277eea6ef1a2dfc4696f38ca0a2ef65cac7c2cda3f15f9f806d84d9040305582101d534db6ae39013a4dab592687b09c5ab404fbac4b39e596ca118c4abbabbcd03061a6ac472b808a464636f6465582101c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d29656275696c64582101b3ef176c6c5f8a13ceba9b02ac76666dd746b6178a2dee9aa634ff3d495cd1496770726f66696c65582101c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d296d646174617365742e7761726473582101b9d318071e998feafbefedee64803265acc661beb21856bbd9c1690f1fa36d9a09b000781b4d696c6c62726f6f6b206469737472696374207665726966696572017648756d207265666572656e6365206f70657261746f720262656e036864697374726963740466706572736f6e0581a50048d46689265bca298b01736262732d626c7331323338312d736861323536025860d1cc3f1c09785b667b863247d9f4bd2f176a25dc81436e0a7fb1ba575c3cc0a7711796ac171eff00154c2432a9fe42c0a10c2adbd66deea33224be10ba20d3bff45ffb2c539af08b1a0313dfe67ac77864e087b017d48e10b7873d31718ca037030404020681487ed98e04a3e3d7f60781a3004843de5f9cbce0bdee01782368706b652d7832353531392d7368613235362d6368616368613230706f6c79313330350258205212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a200882a70064776172640164576172640264656e756d0384a200010166576172642031a200020166576172642032a200030166576172642033a2000401665761726420340569627265616b646f776e06666163746976650700a70064617265610164417265610264656e756d0382a2000101694d696c6c62726f6f6ba2000201714f757473696465204d696c6c62726f6f6b0569627265616b646f776e066661637469766507000981a700656d61746368016a766f7465722d66696c6502647465787403782a546f2066696e6420796f7572207761726420696e2074686520636f756e747920766f7465722066696c65040005646e6f6e6506f50a82a50066766f74657273016770726976617465025820a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a160319bc52047822436f756e747920766f7465722066696c652c20323032362d30392065787472616374a50065776172647301667075626c6963025820a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c03030478235761726420626f756e6461726965732c20323032342072656469737472696374696e670b81a3006865766964656e636501656d6174636802781e4f6e6520636172642070657220766f7465722d66696c65207265636f72640ca10067726569737375650d1a00ed4e000e020fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e310258209ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6037822727573746320312e39392e302c20746172676574207761736d33322d776173697032"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Millbrook district verifier",
+      "operator": "Hum reference operator",
+      "lang": "en",
+      "assurance": 2,
+      "class": "person",
+      "authority": "cahgwqyeodwu2pfofyxkz6t7hmkqwlakqfx75aw7irvzeurhfqsubc"
+     },
+     "proves": [
+      {
+       "name": "ward",
+       "label": "Ward",
+       "type": "enum",
+       "values": [
+        "Ward 1",
+        "Ward 2",
+        "Ward 3",
+        "Ward 4"
+       ],
+       "canBreakdown": true
+      },
+      {
+       "name": "area",
+       "label": "Area",
+       "type": "enum",
+       "values": [
+        "Millbrook",
+        "Outside Millbrook"
+       ],
+       "canBreakdown": true
+      }
+     ],
+     "asks": [
+      {
+       "name": "match",
+       "kind": "voter-file",
+       "schema": "text",
+       "purpose": "To find your ward in the county voter file",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      }
+     ],
+     "links": [
+      {
+       "method": "evidence",
+       "scope": "One card per voter-file record"
+      }
+     ],
+     "expires": {
+      "validitySeconds": 15552000,
+      "epochPeriods": 6,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cahdvxuwcvfrkk3tcbl7pblawer5qgwygpgoykfvhpnl3nknsxross",
+      "source": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": "cahdvxuwcvfrkk3tcbl7pblawer5qgwygpgoykfvhpnl3nknsxross"
+     },
+     "datasets": [
+      {
+       "name": "voters",
+       "kind": "private",
+       "records": 48210,
+       "describe": "County voter file, 2026-09 extract"
+      },
+      {
+       "name": "wards",
+       "kind": "public",
+       "records": 3,
+       "describe": "Ward boundaries, 2024 redistricting"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-30-new-attr-next-epoch-011",
+   "description": "Disclosure summary of 30-new-attr-next-epoch",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "011480999a7bb007607c3aaeeb92912d62edbabbaa7adb27caa845f30fd1477d7c",
+    "envelope": "a9000101687665726966696572025821013b0ddc94ea62dca8bca11ce34144cc8f620037b1cd36e1bd702dc4e43c421376035821010bdf73e7e5e67d1fcd36cb39eba3dc5d8a8ef603a6bf7ca07d48b25e2a1ed4760402055821010bdf73e7e5e67d1fcd36cb39eba3dc5d8a8ef603a6bf7ca07d48b25e2a1ed476061a6ac4727c08a464636f6465582101c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d29656275696c64582101b3ef176c6c5f8a13ceba9b02ac76666dd746b6178a2dee9aa634ff3d495cd1496770726f66696c65582101c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d296d646174617365742e7761726473582101b9d318071e998feafbefedee64803265acc661beb21856bbd9c1690f1fa36d9a09af00782b4469737472696374206c696e6561676520666f722033302d6e65772d617474722d6e6578742d65706f6368017648756d207265666572656e6365206f70657261746f720262656e036864697374726963740466706572736f6e0581a500487ed98e04a3e3d7f601736262732d626c7331323338312d736861323536025860144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf030004010781a3004843de5f9cbce0bdee01782368706b652d7832353531392d7368613235362d6368616368613230706f6c79313330350258205212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a200883a70064776172640164576172640264656e756d0383a200010166576172642031a200020166576172642032a2000301665761726420330569627265616b646f776e06666163746976650700a70064617265610164417265610264656e756d0382a2000101694d696c6c62726f6f6ba2000201714f757473696465204d696c6c62726f6f6b0569627265616b646f776e06666163746976650700a70064746965720164546965720264656e756d0382a20001016141a20002016142056467617465066661637469766507187c0981a700656d61746368016a766f7465722d66696c6502647465787403782a546f2066696e6420796f7572207761726420696e2074686520636f756e747920766f7465722066696c65040005646e6f6e6506f50a82a50066766f74657273016770726976617465025820a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a160319bc52047822436f756e747920766f7465722066696c652c20323032362d30392065787472616374a50065776172647301667075626c6963025820a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c03030478235761726420626f756e6461726965732c20323032342072656469737472696374696e670b81a3006865766964656e636501656d6174636802781e4f6e6520636172642070657220766f7465722d66696c65207265636f72640ca10067726569737375650d1a00ed4e000e020fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e310258209ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6037822727573746320312e39392e302c20746172676574207761736d33322d776173697032"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "District lineage for 30-new-attr-next-epoch",
+      "operator": "Hum reference operator",
+      "lang": "en",
+      "assurance": 2,
+      "class": "person",
+      "authority": "cae5q3xeu5jrnzkf4ueoogqkezshweabxwhgtnyn5oaw4jzb4iijxm"
+     },
+     "proves": [
+      {
+       "name": "ward",
+       "label": "Ward",
+       "type": "enum",
+       "values": [
+        "Ward 1",
+        "Ward 2",
+        "Ward 3"
+       ],
+       "canBreakdown": true
+      },
+      {
+       "name": "area",
+       "label": "Area",
+       "type": "enum",
+       "values": [
+        "Millbrook",
+        "Outside Millbrook"
+       ],
+       "canBreakdown": true
+      },
+      {
+       "name": "tier",
+       "label": "Tier",
+       "type": "enum",
+       "values": [
+        "A",
+        "B"
+       ],
+       "canBreakdown": false
+      }
+     ],
+     "asks": [
+      {
+       "name": "match",
+       "kind": "voter-file",
+       "schema": "text",
+       "purpose": "To find your ward in the county voter file",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none"
+      }
+     ],
+     "links": [
+      {
+       "method": "evidence",
+       "scope": "One card per voter-file record"
+      }
+     ],
+     "expires": {
+      "validitySeconds": 15552000,
+      "epochPeriods": 6,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cahdvxuwcvfrkk3tcbl7pblawer5qgwygpgoykfvhpnl3nknsxross",
+      "source": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": "cahdvxuwcvfrkk3tcbl7pblawer5qgwygpgoykfvhpnl3nknsxross"
+     },
+     "datasets": [
+      {
+       "name": "voters",
+       "kind": "private",
+       "records": 48210,
+       "describe": "County voter file, 2026-09 extract"
+      },
+      {
+       "name": "wards",
+       "kind": "public",
+       "records": 3,
+       "describe": "Ward boundaries, 2024 redistricting"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "verifier/summary/verifier-summary-30-handover-e-now-plus-2-012",
+   "description": "Disclosure summary of 30-handover-e-now-plus-2",
+   "section": "Disclosure summary",
+   "inputs": {
+    "cid": "01da998548c60b62ace0aedd5efb43a4668eb376d0cb026c30be420e9f25a92527",
+    "envelope": "a900010168766572696669657202582101c9534bb54605e04bbd69d00825a01b77b75ec03f3a048cd803afa9f0336bd9e30358210100fb46569e9b46e152e0f43d79e25986fbc2e206cc9d00c57925cc7ff76eecdf04020558210100fb46569e9b46e152e0f43d79e25986fbc2e206cc9d00c57925cc7ff76eecdf061a6ac4727c08a264636f64655821018938d2c9df913c6794dfd2857cd08789b1f33708e0aee4f0ecaf115b219c9665656275696c64582101efb2d0aed9dc3f8e7cf50e2e8d8100c8b90b1b9b0864bbd8280d555c4acb785309af00782b437573746f6d206c696e6561676520666f722033302d68616e646f7665722d652d6e6f772d706c75732d32016a4c6f63616c20313233340262656e0366637573746f6d0466706572736f6e0581a500485e2ebfd3924391d101736262732d626c7331323338312d7368613235360258605299f74b612ef1dca3958690e2c6e7001300501d310b7ef41d5b49d10c44a21d2710dae5c415539dfe2c17ec63c6f9fb84e3efc5fb716a63527672009a4a64f0d7688a4d737459dfdcb2b18b25aa99febb3f271d33c41c0a58674b18ebd39881030004010781a30048702cc7bd476d7bf401782368706b652d7832353531392d7368613235362d6368616368613230706f6c7931333035025820d891da2314db6409b7e38dcb6e3a23d370f80b0832aa095d4a0484a3fb26b6dd0883a600666d656d62657201664d656d6265720264626f6f6c05646761746506666163746976650700a70064756e69740164556e6974026475696e740419138805646761746506666163746976650700a70064746965720164546965720264656e756d0382a20001016141a2000201614205646761746506666163746976650718f80982a700646361726401656f74686572026474657874037826536f6d657468696e6720656c73653a20796f757220756e696f6e2063617264206e756d626572041a0001518005646861736806f5a80063726566016a63726564656e7469616c026a63726564656e7469616c03782a41207265736964656e7420636172642066726f6d20746865206469737472696374207665726966696572040005646e6f6e6506f50781a200582101521676b9d2d8b7e5cedd0ede88244f90f290d167e2bd249f1943f0e47c024632018164776172640b82a3006865766964656e636501646361726402774f6e6520636172642070657220756e696f6e2063617264a3006a63726564656e7469616c016372656602781a4f6e65206361726420706572207265736964656e7420636172640ca10067726569737375650d1a0083d6000e010fa400707761736d2d636f6d706f6e656e742f31017768756d3a76657269666965722f6d6f64756c6540302e31025820a05e01c8638fb76d83fcf2b4af7468bd35a9a80fb968441b2322d1fa27e425e9037822727573746320312e39392e302c20746172676574207761736d33322d7761736970321003"
+   },
+   "expected": {
+    "summary": {
+     "who": {
+      "name": "Custom lineage for 30-handover-e-now-plus-2",
+      "operator": "Local 1234",
+      "lang": "en",
+      "assurance": 1,
+      "class": "person",
+      "authority": "cahevgs5viyc6as55nhiaqjnadn33oxwah45ajdgyaox2t4btnpm6g"
+     },
+     "proves": [
+      {
+       "name": "member",
+       "label": "Member",
+       "type": "bool",
+       "values": [],
+       "canBreakdown": false
+      },
+      {
+       "name": "unit",
+       "label": "Unit",
+       "type": "uint",
+       "values": [],
+       "canBreakdown": false,
+       "max": 5000
+      },
+      {
+       "name": "tier",
+       "label": "Tier",
+       "type": "enum",
+       "values": [
+        "A",
+        "B"
+       ],
+       "canBreakdown": false
+      }
+     ],
+     "asks": [
+      {
+       "name": "card",
+       "kind": "other",
+       "schema": "text",
+       "purpose": "Something else: your union card number",
+       "required": true,
+       "keptSeconds": 86400,
+       "storedAs": "hash"
+      },
+      {
+       "name": "ref",
+       "kind": "credential",
+       "schema": "credential",
+       "purpose": "A resident card from the district verifier",
+       "required": true,
+       "keptSeconds": 0,
+       "storedAs": "none",
+       "accepts": [
+        {
+         "authority": "cafjbm5vz2lmlpzoo3uhn5cbej6ipfegrm7rl2je7dfb7bzd4ajdde",
+         "attributes": [
+          "ward"
+         ]
+        }
+       ]
+      }
+     ],
+     "links": [
+      {
+       "method": "evidence",
+       "scope": "One card per union card"
+      },
+      {
+       "method": "credential",
+       "scope": "One card per resident card"
+      }
+     ],
+     "expires": {
+      "validitySeconds": 8640000,
+      "epochPeriods": 3,
+      "renewal": "reissue"
+     },
+     "code": {
+      "cid": "cagetruwj36ityz4u37jik7gqq6e3d4zxbdqk5zhq5sxrcwzbtslgk",
+      "source": "a05e01c8638fb76d83fcf2b4af7468bd35a9a80fb968441b2322d1fa27e425e9",
+      "toolchain": "rustc 1.99.0, target wasm32-wasip2",
+      "profile": null
+     },
+     "datasets": []
+    }
+   }
+  }
+ ]
+}

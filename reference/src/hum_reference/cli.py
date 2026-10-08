@@ -1,12 +1,13 @@
-"""The ``hum-vectors`` command. Regenerates ``vectors/`` from the reference.
-
-Until W0-08 lands, it only writes ``vectors/README.md``.
-"""
+"""The ``hum-vectors`` command. Regenerates ``vectors/`` from the reference."""
 
 from __future__ import annotations
 
 import argparse
+import shutil
+import tempfile
 from pathlib import Path
+
+from .vectors import write_all
 
 README = """\
 # vectors
@@ -17,14 +18,68 @@ Generated test vectors for every Hum spec, as JSON with hex-encoded bytes.
 runs the `hum-vectors` command from `reference/`. Never edit these files by
 hand: `just check` fails if the committed files differ from a fresh run.
 
-No vectors yet. W0-08 adds one directory per spec.
+One directory per spec area. Each file holds `cases`; a case has an `id`, a
+`description`, the spec `section` it tests, `inputs`, and either `expected`
+outputs or a `rejection` (`step` is normative, `reason` is advisory). How to
+run them and what counts as conformant is in `docs/specs/conformance.md`.
+
+| Directory | Spec | Files |
+| --- | --- | --- |
+{table}
 """
 
 
-def write_vectors(out: Path) -> None:
-    """Write the vector tree under ``out``. Deterministic: same inputs, same bytes."""
-    out.mkdir(parents=True, exist_ok=True)
-    (out / "README.md").write_text(README, encoding="utf-8")
+def write_vectors(out: Path) -> dict:
+    """Write the vector tree under ``out``. Deterministic: same inputs, same bytes.
+
+    Everything is generated into a fresh sibling directory first and swapped in only when
+    every generator succeeded, so a crash leaves ``out`` as it was.
+    """
+    out = out.resolve()
+    out.parent.mkdir(parents=True, exist_ok=True)
+    tmp = Path(tempfile.mkdtemp(prefix=f".{out.name}-new-", dir=out.parent))
+    try:
+        summary = write_all(tmp)
+        _write_readme(tmp, summary)
+    except BaseException:
+        shutil.rmtree(tmp, ignore_errors=True)
+        raise
+    old = out.parent / f".{out.name}-old-{tmp.name.rsplit('-', 1)[-1]}"
+    if out.exists():
+        out.rename(old)
+    tmp.rename(out)
+    if old.exists():
+        shutil.rmtree(old)
+    return summary
+
+
+def _write_readme(out: Path, summary: dict) -> None:
+    specs = {
+        "manifest": "`docs/specs/manifest.md`",
+        "log": "`docs/specs/manifest.md` (Transparency logs), `docs/specs/services.md` "
+        "(The bundle, Log and ledger, Witness)",
+        "storage": "`docs/specs/storage.md` §1–4, §8.1",
+        "release": "`docs/specs/deck.md` (release plan), `docs/specs/release.md` (noise, rounds), "
+        "`docs/specs/context.md` (constants, floors)",
+        "services": "`docs/specs/services.md`",
+        "chat": "`docs/specs/chat.md` (content types, framing, message ids)",
+        "issue-map": "`docs/specs/issue-map.md`",
+        "agent-sponsor": "`docs/specs/agent-sponsor.md`",
+        "verifier": "`docs/specs/verifier.md`",
+        "trust-list": "`docs/specs/trust-list.md`",
+        "verifier-runtime": "`docs/specs/verifier-runtime.md` (datasets, build recipes, masking)",
+        "context": "`docs/specs/context.md`",
+        "deck": "`docs/specs/deck.md`",
+        "take": "`docs/specs/take.md`",
+        "credentials": "`docs/specs/credentials.md` (structure, epochs, scopes; BBS pending)",
+        "ballot": "`docs/specs/ballot.md`",
+        "shield": "`docs/specs/shield.md`",
+    }
+    rows = []
+    for spec, files in summary.items():
+        names = ", ".join(f"`{n}.json` ({ok}+{bad})" for n, (ok, bad) in files.items())
+        rows.append(f"| `{spec}/` | {specs.get(spec, '')} | {names} |")
+    (out / "README.md").write_text(README.format(table="\n".join(rows)), encoding="utf-8")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -37,7 +92,10 @@ def main(argv: list[str] | None = None) -> int:
         help="directory to write into (default: ./vectors)",
     )
     args = parser.parse_args(argv)
-    write_vectors(args.out)
+    summary = write_vectors(args.out)
+    total_ok = sum(ok for files in summary.values() for ok, _ in files.values())
+    total_bad = sum(bad for files in summary.values() for _, bad in files.values())
+    print(f"wrote {args.out}: {total_ok} accepting and {total_bad} rejecting cases")
     return 0
 
 

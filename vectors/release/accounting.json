@@ -1,0 +1,412 @@
+{
+ "spec": "release",
+ "file": "accounting",
+ "notes": "\u03b5 \u2194 \u03c1 under zCDP with \u03b4 = 1e-6: \u03b5 = \u03c1 + 2\u221a(\u03c1 ln(1/\u03b4)); \u221a\u03c1 = \u221a(L + \u03b5) \u2212 \u221aL, L = ln(1/\u03b4). RHO_MAX is 127/500: \u03b5 4.00054 at \u03b4 1e-6 in binary64.",
+ "cases": [
+  {
+   "id": "release/accounting/eps-to-rho-001",
+   "description": "\u03c1 for \u03b5 0.5",
+   "section": "release.md Noise",
+   "inputs": {
+    "eps": 0.5,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 0.004443844159097092,
+    "eps_round_trip": 0.5000000000000017
+   }
+  },
+  {
+   "id": "release/accounting/eps-to-rho-002",
+   "description": "\u03c1 for \u03b5 1",
+   "section": "release.md Noise",
+   "inputs": {
+    "eps": 1,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 0.017468904769123432,
+    "eps_round_trip": 1.0000000000000016
+   }
+  },
+  {
+   "id": "release/accounting/eps-to-rho-003",
+   "description": "\u03c1 for \u03b5 2",
+   "section": "release.md Noise",
+   "inputs": {
+    "eps": 2,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 0.06757388167314415,
+    "eps_round_trip": 2.0000000000000018
+   }
+  },
+  {
+   "id": "release/accounting/eps-to-rho-004",
+   "description": "\u03c1 for \u03b5 4",
+   "section": "release.md Noise",
+   "inputs": {
+    "eps": 4,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 0.2539355782894971,
+    "eps_round_trip": 3.9999999999999996
+   }
+  },
+  {
+   "id": "release/accounting/eps-to-rho-005",
+   "description": "\u03c1 for \u03b5 8",
+   "section": "release.md Noise",
+   "inputs": {
+    "eps": 8,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 0.9097068296901019,
+    "eps_round_trip": 8.000000000000004
+   }
+  },
+  {
+   "id": "release/accounting/eps-to-rho-006",
+   "description": "\u03c1 for \u03b5 16",
+   "section": "release.md Noise",
+   "inputs": {
+    "eps": 16,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 3.0395687691769857,
+    "eps_round_trip": 15.999999999999998
+   }
+  },
+  {
+   "id": "release/accounting/eps-to-rho-007",
+   "description": "\u03c1 for \u03b5 20",
+   "section": "release.md Noise",
+   "inputs": {
+    "eps": 20,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 4.402394344470366,
+    "eps_round_trip": 20.000000000000007
+   }
+  },
+  {
+   "id": "release/accounting/rho-to-eps-008",
+   "description": "\u03b5 for \u03c1 127/500",
+   "section": "release.md Noise",
+   "inputs": {
+    "rho": {
+     "num": 127,
+     "den": 500,
+     "rat": [
+      127,
+      500
+     ]
+    },
+    "delta": 1e-06
+   },
+   "expected": {
+    "eps": 4.000539566972662
+   }
+  },
+  {
+   "id": "release/accounting/rho-to-eps-009",
+   "description": "\u03b5 for \u03c1 91/100",
+   "section": "release.md Noise",
+   "inputs": {
+    "rho": {
+     "num": 91,
+     "den": 100,
+     "rat": [
+      91,
+      100
+     ]
+    },
+    "delta": 1e-06
+   },
+   "expected": {
+    "eps": 8.00143556912068
+   }
+  },
+  {
+   "id": "release/accounting/rho-to-eps-010",
+   "description": "\u03b5 for \u03c1 1/100",
+   "section": "release.md Noise",
+   "inputs": {
+    "rho": {
+     "num": 1,
+     "den": 100,
+     "rat": [
+      1,
+      100
+     ]
+    },
+    "delta": 1e-06
+   },
+   "expected": {
+    "eps": 0.7533844377699678
+   }
+  },
+  {
+   "id": "release/accounting/rho-to-eps-011",
+   "description": "\u03b5 for \u03c1 1/10",
+   "section": "release.md Noise",
+   "inputs": {
+    "rho": {
+     "num": 1,
+     "den": 10,
+     "rat": [
+      1,
+      10
+     ]
+    },
+    "delta": 1e-06
+   },
+   "expected": {
+    "eps": 2.4507880004767997
+   }
+  },
+  {
+   "id": "release/accounting/rho-to-eps-012",
+   "description": "\u03b5 for \u03c1 1/1",
+   "section": "release.md Noise",
+   "inputs": {
+    "rho": {
+     "num": 1,
+     "den": 1,
+     "rat": [
+      1,
+      1
+     ]
+    },
+    "delta": 1e-06
+   },
+   "expected": {
+    "eps": 8.433844377699677
+   }
+  },
+  {
+   "id": "release/accounting/rho-to-eps-013",
+   "description": "\u03b5 for \u03c1 1/200",
+   "section": "release.md Noise",
+   "inputs": {
+    "rho": {
+     "num": 1,
+     "den": 200,
+     "rat": [
+      1,
+      200
+     ]
+    },
+    "delta": 1e-06
+   },
+   "expected": {
+    "eps": 0.5306521769756932
+   }
+  },
+  {
+   "id": "release/accounting/compose-014",
+   "description": "Four releases at RHO_MAX compose to \u03c1 1.016, about \u03b5 8.5, not 16",
+   "section": "release.md Noise",
+   "inputs": {
+    "rhos": [
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     }
+    ]
+   },
+   "expected": {
+    "rho_total": {
+     "num": 127,
+     "den": 125,
+     "rat": [
+      127,
+      125
+     ]
+    },
+    "eps_total": 8.509079133945324
+   }
+  },
+  {
+   "id": "release/accounting/sigma-015",
+   "description": "\u03c3 for \u0394\u00b2 = 1, \u03c1 = 1/200: exact \u03c3\u00b2, \u03c3_r = n/2\u00b2\u2070, the real value and the micro-unit integer round(\u03c3_r \u00d7 10\u2076) (ties to even)",
+   "section": "release.md Noise",
+   "inputs": {
+    "delta_squared": 1,
+    "rho": {
+     "num": 1,
+     "den": 200,
+     "rat": [
+      1,
+      200
+     ]
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 100,
+     "den": 1,
+     "rat": [
+      100,
+      1
+     ]
+    },
+    "n": 10485760,
+    "sigma_r": {
+     "num": 10,
+     "den": 1,
+     "rat": [
+      10,
+      1
+     ]
+    },
+    "sigma": 10.0,
+    "sigma_micro": 10000000
+   }
+  },
+  {
+   "id": "release/accounting/sigma-016",
+   "description": "\u03c3 for \u0394\u00b2 = 61, \u03c1 = 381/10000: exact \u03c3\u00b2, \u03c3_r = n/2\u00b2\u2070, the real value and the micro-unit integer round(\u03c3_r \u00d7 10\u2076) (ties to even)",
+   "section": "release.md Noise",
+   "inputs": {
+    "delta_squared": 61,
+    "rho": {
+     "num": 381,
+     "den": 10000,
+     "rat": [
+      381,
+      10000
+     ]
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 305000,
+     "den": 381,
+     "rat": [
+      305000,
+      381
+     ]
+    },
+    "n": 29667937,
+    "sigma_r": {
+     "num": 29667937,
+     "den": 1048576,
+     "rat": [
+      29667937,
+      1048576
+     ]
+    },
+    "sigma": 28.293549342265315,
+    "sigma_micro": 28293550
+   }
+  },
+  {
+   "id": "release/accounting/sigma-017",
+   "description": "\u03c3 for \u0394\u00b2 = 31, \u03c1 = 61/250: exact \u03c3\u00b2, \u03c3_r = n/2\u00b2\u2070, the real value and the micro-unit integer round(\u03c3_r \u00d7 10\u2076) (ties to even)",
+   "section": "release.md Noise",
+   "inputs": {
+    "delta_squared": 31,
+    "rho": {
+     "num": 61,
+     "den": 250,
+     "rat": [
+      61,
+      250
+     ]
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 3875,
+     "den": 61,
+     "rat": [
+      3875,
+      61
+     ]
+    },
+    "n": 8357394,
+    "sigma_r": {
+     "num": 4178697,
+     "den": 524288,
+     "rat": [
+      4178697,
+      524288
+     ]
+    },
+    "sigma": 7.970231500021465,
+    "sigma_micro": 7970232
+   }
+  },
+  {
+   "id": "release/accounting/sigma-018",
+   "description": "\u03c3 for \u0394\u00b2 = 4, \u03c1 = 1/200: exact \u03c3\u00b2, \u03c3_r = n/2\u00b2\u2070, the real value and the micro-unit integer round(\u03c3_r \u00d7 10\u2076) (ties to even)",
+   "section": "release.md Noise",
+   "inputs": {
+    "delta_squared": 4,
+    "rho": {
+     "num": 1,
+     "den": 200,
+     "rat": [
+      1,
+      200
+     ]
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 400,
+     "den": 1,
+     "rat": [
+      400,
+      1
+     ]
+    },
+    "n": 20971520,
+    "sigma_r": {
+     "num": 20,
+     "den": 1,
+     "rat": [
+      20,
+      1
+     ]
+    },
+    "sigma": 20.0,
+    "sigma_micro": 20000000
+   }
+  }
+ ]
+}

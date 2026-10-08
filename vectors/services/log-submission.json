@@ -1,0 +1,147 @@
+{
+ "spec": "services",
+ "file": "log-submission",
+ "notes": "The log of record's clock check on objects that carry a membership or sponsor proof: the disclosed epoch is current (first-hour grace) and issued is within 3,600 s of the log's clock T, bounds included. V = 3; B is an epoch boundary.",
+ "cases": [
+  {
+   "id": "services/log-submission/accept-current-epoch-001",
+   "description": "current epoch, issued = T",
+   "section": "Log and ledger",
+   "inputs": {
+    "card_epoch": 41,
+    "V": 3,
+    "log_clock_T": 297570600,
+    "issued": 297570600,
+    "B": 297561600
+   },
+   "expected": {
+    "append": true
+   }
+  },
+  {
+   "id": "services/log-submission/accept-old-epoch-T-plus-1800-002",
+   "description": "old epoch at T = B + 1800",
+   "section": "Log and ledger",
+   "inputs": {
+    "card_epoch": 40,
+    "V": 3,
+    "log_clock_T": 297563400,
+    "issued": 297563400,
+    "B": 297561600
+   },
+   "expected": {
+    "append": true
+   }
+  },
+  {
+   "id": "services/log-submission/reject-old-epoch-T-plus-3660-003",
+   "description": "old epoch at T = B + 3660",
+   "section": "Log and ledger",
+   "inputs": {
+    "card_epoch": 40,
+    "V": 3,
+    "log_clock_T": 297565260,
+    "issued": 297565260,
+    "B": 297561600
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-submission",
+    "rule": "P5",
+    "reason": "epoch_not_current",
+    "status": 422,
+    "body": "a3006872656a6563746564017165706f63685f6e6f745f63757272656e7403625035"
+   }
+  },
+  {
+   "id": "services/log-submission/reject-issued-T-plus-7200-004",
+   "description": "issued = T + 7200",
+   "section": "Log and ledger",
+   "inputs": {
+    "card_epoch": 41,
+    "V": 3,
+    "log_clock_T": 297570600,
+    "issued": 297577800,
+    "B": 297561600
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-submission",
+    "rule": "P5",
+    "reason": "issued_skew",
+    "status": 422,
+    "body": "a3006872656a6563746564016b6973737565645f736b657703625035"
+   }
+  },
+  {
+   "id": "services/log-submission/accept-issued-T-plus-3600-005",
+   "description": "issued = T + 3600 (bound included)",
+   "section": "Log and ledger",
+   "inputs": {
+    "card_epoch": 41,
+    "V": 3,
+    "log_clock_T": 297570600,
+    "issued": 297574200,
+    "B": 297561600
+   },
+   "expected": {
+    "append": true
+   }
+  },
+  {
+   "id": "services/log-submission/accept-issued-T-minus-3600-006",
+   "description": "issued = T - 3600 (bound included)",
+   "section": "Log and ledger",
+   "inputs": {
+    "card_epoch": 41,
+    "V": 3,
+    "log_clock_T": 297570600,
+    "issued": 297567000,
+    "B": 297561600
+   },
+   "expected": {
+    "append": true
+   }
+  },
+  {
+   "id": "services/log-submission/reject-issued-T-minus-3601-007",
+   "description": "issued = T - 3601",
+   "section": "Log and ledger",
+   "inputs": {
+    "card_epoch": 41,
+    "V": 3,
+    "log_clock_T": 297570600,
+    "issued": 297566999,
+    "B": 297561600
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-submission",
+    "rule": "P5",
+    "reason": "issued_skew",
+    "status": 422,
+    "body": "a3006872656a6563746564016b6973737565645f736b657703625035"
+   }
+  },
+  {
+   "id": "services/log-submission/reject-next-epoch-early-008",
+   "description": "a card of the next epoch before the boundary",
+   "section": "Log and ledger",
+   "inputs": {
+    "card_epoch": 41,
+    "V": 3,
+    "log_clock_T": 297561000,
+    "issued": 297561000,
+    "B": 297561600
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-submission",
+    "rule": "P5",
+    "reason": "epoch_not_current",
+    "status": 422,
+    "body": "a3006872656a6563746564017165706f63685f6e6f745f63757272656e7403625035"
+   }
+  }
+ ]
+}

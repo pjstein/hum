@@ -1,0 +1,93 @@
+{
+ "spec": "storage",
+ "file": "delete-order",
+ "notes": "\u00a78.2 delete orders signed by the context's 2-of-3 keyset (a1, a2, a3).",
+ "cases": [
+  {
+   "id": "storage/delete-order/delete-order-001",
+   "description": "Canonical order bytes, signed payload and a valid 2-of-3 signature set",
+   "section": "8.2",
+   "inputs": {
+    "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "cids": [
+     "01eb0b94088b2aa093baaf4c439d3c1684f13bca321bb77694f1ba64020881c2c7",
+     "01b9b3a769cea97e51493b4e72ee90ba48282936fadabbb8149bf8fa6d54b873c8"
+    ],
+    "issued": 1791259200,
+    "expires": 1791345600,
+    "signers": [
+     "a1",
+     "a2"
+    ]
+   },
+   "expected": {
+    "order": "a5000101582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30282582101b9b3a769cea97e51493b4e72ee90ba48282936fadabbb8149bf8fa6d54b873c8582101eb0b94088b2aa093baaf4c439d3c1684f13bca321bb77694f1ba64020881c2c7031a6ac47240041a6ac5c3c0",
+    "payload": "68756d2f626c6f622d64656c6574652f31241ec5d6059933578f4a13ea8fd0452bc00ee2b51c82b27513711970f390370c",
+    "body": "a200587ba5000101582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30282582101b9b3a769cea97e51493b4e72ee90ba48282936fadabbb8149bf8fa6d54b873c8582101eb0b94088b2aa093baaf4c439d3c1684f13bca321bb77694f1ba64020881c2c7031a6ac47240041a6ac5c3c00181589fd8628440a0f6828347a2012704426131a05840a919c02b250d5525f75e9199eed658e2881d9e1cc6d2d4f231dcebdde0b384417513a5b433cc66d51e8b02080ee4d1756800d9b93132ea36003be984909fc9038347a2012704426132a0584065a8f821e7cde191c99b0f4627a7d9a82c290933cb6e2985c10bb2b6d10572f15cbbdaefe8aacada4c8c94e683d77d5152ac429b13fc22a6a616129c274cf404",
+    "accept": true
+   }
+  },
+  {
+   "id": "storage/delete-order/delete-order-threshold-002",
+   "description": "One of three signatures",
+   "section": "8.2",
+   "inputs": {
+    "body": "a200587ba5000101582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30282582101b9b3a769cea97e51493b4e72ee90ba48282936fadabbb8149bf8fa6d54b873c8582101eb0b94088b2aa093baaf4c439d3c1684f13bca321bb77694f1ba64020881c2c7031a6ac47240041a6ac5c3c001815853d8628440a0f6818347a2012704426131a05840a919c02b250d5525f75e9199eed658e2881d9e1cc6d2d4f231dcebdde0b384417513a5b433cc66d51e8b02080ee4d1756800d9b93132ea36003be984909fc903"
+   },
+   "rejection": {
+    "step": null,
+    "check": "delete-order",
+    "status": 403,
+    "code": "forbidden",
+    "detail": "order"
+   }
+  },
+  {
+   "id": "storage/delete-order/delete-order-wrong-domain-003",
+   "description": "Signed as hum/manifest/1",
+   "section": "8.2",
+   "inputs": {
+    "body": "a200587ba5000101582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30282582101b9b3a769cea97e51493b4e72ee90ba48282936fadabbb8149bf8fa6d54b873c8582101eb0b94088b2aa093baaf4c439d3c1684f13bca321bb77694f1ba64020881c2c7031a6ac47240041a6ac5c3c00181589fd8628440a0f6828347a2012704426131a058402c393b03db89b571f91db7a4ce70cae28d67382bb494d29efea18bd22fe6d1d5515227b59627195ab468d23837ef9f0b4e5549bdd8e729b65bd714a47feb24058347a2012704426132a058400fabb826f0ed7a1e23494294f9ee2aef9118e53b80b87bedcd1078f921adfa40f53797b9eed6a30a724725535719ee9ba474049edfe34c4a6269c99ab5668507"
+   },
+   "rejection": {
+    "step": null,
+    "check": "delete-order",
+    "status": 403,
+    "code": "forbidden",
+    "detail": "order"
+   }
+  },
+  {
+   "id": "storage/delete-order/delete-order-expired-004",
+   "description": "Presented after expires",
+   "section": "8.2",
+   "inputs": {
+    "body": "a200587ba5000101582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30282582101b9b3a769cea97e51493b4e72ee90ba48282936fadabbb8149bf8fa6d54b873c8582101eb0b94088b2aa093baaf4c439d3c1684f13bca321bb77694f1ba64020881c2c7031a6ac47240041a6ac5c3c00181589fd8628440a0f6828347a2012704426131a05840a919c02b250d5525f75e9199eed658e2881d9e1cc6d2d4f231dcebdde0b384417513a5b433cc66d51e8b02080ee4d1756800d9b93132ea36003be984909fc9038347a2012704426132a0584065a8f821e7cde191c99b0f4627a7d9a82c290933cb6e2985c10bb2b6d10572f15cbbdaefe8aacada4c8c94e683d77d5152ac429b13fc22a6a616129c274cf404",
+    "now": 1791345601
+   },
+   "rejection": {
+    "step": null,
+    "check": "delete-order",
+    "status": 403,
+    "code": "forbidden",
+    "detail": "order"
+   }
+  },
+  {
+   "id": "storage/delete-order/delete-order-wrong-context-005",
+   "description": "Token's context authority differs from the order's",
+   "section": "8.2",
+   "inputs": {
+    "body": "a200587ba5000101582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30282582101b9b3a769cea97e51493b4e72ee90ba48282936fadabbb8149bf8fa6d54b873c8582101eb0b94088b2aa093baaf4c439d3c1684f13bca321bb77694f1ba64020881c2c7031a6ac47240041a6ac5c3c00181589fd8628440a0f6828347a2012704426131a05840a919c02b250d5525f75e9199eed658e2881d9e1cc6d2d4f231dcebdde0b384417513a5b433cc66d51e8b02080ee4d1756800d9b93132ea36003be984909fc9038347a2012704426132a0584065a8f821e7cde191c99b0f4627a7d9a82c290933cb6e2985c10bb2b6d10572f15cbbdaefe8aacada4c8c94e683d77d5152ac429b13fc22a6a616129c274cf404",
+    "token_context_authority": "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce"
+   },
+   "rejection": {
+    "step": null,
+    "check": "delete-order",
+    "status": 403,
+    "code": "forbidden",
+    "detail": "order"
+   }
+  }
+ ]
+}

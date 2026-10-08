@@ -1,0 +1,4776 @@
+{
+ "spec": "agent-sponsor",
+ "file": "manifests",
+ "notes": "Sponsor manifests under a 1-of-1 sponsor authority, verified with a fresh phone state (now = issued + 1 h, or the agent verifier's next epoch where `now` says so). sponsorProof is a credentials.md presentation of one possession leaf from the agent-class verifier, epoch only, verified as a logged presentation against the manifest's issued (ADR 0101); BBS proof bytes and pseudonyms are fixed (P4 pending, so as-bad-proof-scope has no vector). The log-submission cases are the log's clock check; the log of record of a sponsor manifest is the log whose proof its bundle carries (RS6).",
+ "cases": [
+  {
+   "id": "agent-sponsor/manifests/as-ok-shared-hardware-001",
+   "description": "as-ok-shared-hardware: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01dec8ebd3e4480c641c9441068bad0786e64bb179fcd109ec0a0d98211b3f82eb",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010002010582000306a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a0584096ef9d2d4fe8e7cce603eb4c6953aed49612bf1f26413808d095e1b6198b8f7b03da85b9ef551b0f83c4f6e5ed3311634ca38e8ef34f3e4f14598ff22b0e1b04",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 37,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "e559cb128c54ad39b078dbcc6bc3bd3db92f94b5f1f92b6c944c1b0ab0004a0c",
+       "3f2e76ec83d2e7fdd586dc1be380c349919d21ecd3c5c8063f58a091009488b6",
+       "8467bd887f37a0a5f9602deaf2f5ab5d95d1e01b678d2511104da06b258a565d",
+       "3d09033aaddab02bad97395b5a891d096328853f13a53b7836392e9ea239f91c",
+       "3cc80c21ab69a33e66bf57df7086b896d8d862c0b4040070b0300ffbfcbfa2f2",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "expected": {
+    "accept": true,
+    "version": 1
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-ok-shared-enclave-002",
+   "description": "as-ok-shared-enclave: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01e837c2c917b39a8513cba4ae826c72fe41da6713d4d876b37f78f95e7349a47c",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a1667265706f7274582101c0ad99ec6e91dbaab726684609b4c4a1c8c5e53c3d6efd946f306a53af32f10909aa005820fd4f993c08e4362143b60d08f9fb85bee5929947b56a64b8c626c39d222421530100020203a30000015830196b3e2b085676dcbd81463a51cd91b742ad82fd732d499ee1b9c58b29234e5f73146a939ac813f36311a5f765bdb5db021a6ac5c16804582039113df07267a239aa1016cbcd9fca31f54af2cb9b83396ce35d68065217b73c0582000306a4001a00015180010a02183203020773666163696c697461746f722d656e636c61766508784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a058408dda9d9ba57ab603ecc4fc4481f75e2ac81ececb5012588145610095d1f748a9f56d1d389beee1c13bdfc65ed515e4f48da889225646289cc23305fec1d04401",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 38,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "f136cc8ac5c2af5b1da49db9a3c6b92e621032e3190c204e52c31cad43b708af",
+       "cda2db244ca891106a484e3184b4efe01250c2a11b71337c6caa639623bcd0d2",
+       "8467bd887f37a0a5f9602deaf2f5ab5d95d1e01b678d2511104da06b258a565d",
+       "3d09033aaddab02bad97395b5a891d096328853f13a53b7836392e9ea239f91c",
+       "3cc80c21ab69a33e66bf57df7086b896d8d862c0b4040070b0300ffbfcbfa2f2",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "report",
+          {
+           "hex": "01c0ad99ec6e91dbaab726684609b4c4a1c8c5e53c3d6efd946f306a53af32f109"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "fd4f993c08e4362143b60d08f9fb85bee5929947b56a64b8c626c39d22242153"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          2
+         ],
+         [
+          3,
+          {
+           "map": [
+            [
+             0,
+             0
+            ],
+            [
+             1,
+             {
+              "hex": "196b3e2b085676dcbd81463a51cd91b742ad82fd732d499ee1b9c58b29234e5f73146a939ac813f36311a5f765bdb5db"
+             }
+            ],
+            [
+             2,
+             1791345000
+            ]
+           ]
+          }
+         ],
+         [
+          4,
+          {
+           "hex": "39113df07267a239aa1016cbcd9fca31f54af2cb9b83396ce35d68065217b73c"
+          }
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "facilitator-enclave"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "expected": {
+    "accept": true,
+    "version": 1
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-ok-public-003",
+   "description": "as-ok-public: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "019497317ec259efbec09d48561e47e109507a03f53722c8b74ba188a39ddea1a0",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a8005820153ee268d86f1428edc8a2d156d15abac4ccc482084b4d516c3594f4fb891c530101020305810406a4001a00015180010a0218320302076d73747564696f2d77726974657208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840f4dbd6c473f56d50af9c011bdb5f7b5ed994eaea4d3c077d5e7fb52347140319511f18b535f2275ef588d10be61859af86570d4d0f664597c69f60f2e3664d02",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 39,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "7efc0ba2badad622604cc1f897d7e48d1312c97286e2d000eb92e09248c3e7c7",
+       "cda2db244ca891106a484e3184b4efe01250c2a11b71337c6caa639623bcd0d2",
+       "8467bd887f37a0a5f9602deaf2f5ab5d95d1e01b678d2511104da06b258a565d",
+       "3d09033aaddab02bad97395b5a891d096328853f13a53b7836392e9ea239f91c",
+       "3cc80c21ab69a33e66bf57df7086b896d8d862c0b4040070b0300ffbfcbfa2f2",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "153ee268d86f1428edc8a2d156d15abac4ccc482084b4d516c3594f4fb891c53"
+          }
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          3
+         ],
+         [
+          5,
+          [
+           4
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "studio-writer"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "expected": {
+    "accept": true,
+    "version": 1
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-ok-empty-capabilities-004",
+   "description": "as-ok-empty-capabilities: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "018dd651ef77a6ccb706047c4e2ef610c21ba356ceba3a34f43b8a34aed444f4c2",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058205270c4878f9c20196bf9b8650abd9fa78340088e0c12c98de99949097751e3cb01000201058006a4001a00015180010a0218320302076672656164657208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840360e27aad3d0b648401c785b9ba886044c9662dba6604e1072888e08dab412791ef75050bf94e15c47776bf1f18b776b8cb67c09e847cd5c105f4c7dba02af03",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 40,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "a7a31e8b94ab28a43b08efb24f3062ad337988b8421e57973fc389700ef9c290",
+       "acad531f51a2e37e0d954db49030e550237bf4f59182a8b14029b0dcfc733b1c",
+       "922c35af25ccc5017acac1bf834f686e31435b640b5809da67ffee39748d07db",
+       "1311761a9dd5cdc1462f8a9d586c46f3ea83fbecb2c1e40dc3578d926cefb6ae",
+       "3cc80c21ab69a33e66bf57df7086b896d8d862c0b4040070b0300ffbfcbfa2f2",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "5270c4878f9c20196bf9b8650abd9fa78340088e0c12c98de99949097751e3cb"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          []
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "reader"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "expected": {
+    "accept": true,
+    "version": 1
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/renewable-v1-005",
+   "description": "renewable-v1: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0121f4a328a6d64ccba644184d8f4abe1784aa116cbee1828ddef9890deaefd614",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a8005820f6f2a984493a15f594d06f844e5fc158c16f6f2143ebdffae5f165b52e5354df010002010582000306a4001a00015180010a0218320302076972656e657761626c6508784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840b47b0c67a11ae86e730c5bcb071ab344d2008e56fd0bcf4b0dbea18254faa01921fafc0e261cfb555f5f2d8e24f5737d6f50882c23e60e732758db62600fb501",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 41,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "15d29fb959f117ee7666600bf40fb3937c8d8e818fbbfc95537e87dc69325011",
+       "acad531f51a2e37e0d954db49030e550237bf4f59182a8b14029b0dcfc733b1c",
+       "922c35af25ccc5017acac1bf834f686e31435b640b5809da67ffee39748d07db",
+       "1311761a9dd5cdc1462f8a9d586c46f3ea83fbecb2c1e40dc3578d926cefb6ae",
+       "3cc80c21ab69a33e66bf57df7086b896d8d862c0b4040070b0300ffbfcbfa2f2",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "f6f2a984493a15f594d06f844e5fc158c16f6f2143ebdffae5f165b52e5354df"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "renewable"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "expected": {
+    "accept": true,
+    "version": 1
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-ok-renew-006",
+   "description": "as-ok-renew: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0156120940b7a9342163d935bf88d6595f0bc37df7c8ddde53ab409c371abe4d81",
+     "envelope": "aa0001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30358210121f4a328a6d64ccba644184d8f4abe1784aa116cbee1828ddef9890deaefd61404020558210121f4a328a6d64ccba644184d8f4abe1784aa116cbee1828ddef9890deaefd614061a6ac5c3c1071a6b2f3bc008a009a8005820f6f2a984493a15f594d06f844e5fc158c16f6f2143ebdffae5f165b52e5354df010002010582000306a4001a00015180010a0218320302076972656e657761626c6508784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a0584016253dd1c6f54e94368b9b9032a6252000f41700bc49dd2bd766aeb83823b2a1e2998df2075354121fc9f325ff9c4c08af48cb7800de9be48030da39a8a94c06",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 42,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "a24ea7b99e6f7910c425a481f8fd545380cb01e3b64f39ac77dfe07d55213953",
+       "b021cc2d845c57e4117086a12910693c8307ceb2c5e3aee57fcd699b74fb4846",
+       "922c35af25ccc5017acac1bf834f686e31435b640b5809da67ffee39748d07db",
+       "1311761a9dd5cdc1462f8a9d586c46f3ea83fbecb2c1e40dc3578d926cefb6ae",
+       "3cc80c21ab69a33e66bf57df7086b896d8d862c0b4040070b0300ffbfcbfa2f2",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "0121f4a328a6d64ccba644184d8f4abe1784aa116cbee1828ddef9890deaefd614"
+       }
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       {
+        "hex": "0121f4a328a6d64ccba644184d8f4abe1784aa116cbee1828ddef9890deaefd614"
+       }
+      ],
+      [
+       6,
+       1791345601
+      ],
+      [
+       7,
+       1798257600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "f6f2a984493a15f594d06f844e5fc158c16f6f2143ebdffae5f165b52e5354df"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "renewable"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "expected": {
+    "accept": true,
+    "version": 2
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/retirable-v1-007",
+   "description": "retirable-v1: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "010c41585c80c30968e6eb193ce12f6418cae9463c4fc48f4f746b9dce060b663a",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058202f1194c5a000f12dca2053b47bc7c888ed9814bba1637c73f28ddee4be34b6c5010002010582000306a4001a00015180010a02183203020769726574697261626c6508784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a058408806c19854c22e46b7c84622d7331875086328f30078751a0a80028905f92e32fdd0b3df6ff875511079f153c4f8689dd3abbab8b0b1f861a744cdccd7dc4b0d",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 43,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "c461b0d6af705c7e37bd6dd9bca95267c680c904549c9aced82de815533d7f25",
+       "b021cc2d845c57e4117086a12910693c8307ceb2c5e3aee57fcd699b74fb4846",
+       "922c35af25ccc5017acac1bf834f686e31435b640b5809da67ffee39748d07db",
+       "1311761a9dd5cdc1462f8a9d586c46f3ea83fbecb2c1e40dc3578d926cefb6ae",
+       "3cc80c21ab69a33e66bf57df7086b896d8d862c0b4040070b0300ffbfcbfa2f2",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "2f1194c5a000f12dca2053b47bc7c888ed9814bba1637c73f28ddee4be34b6c5"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "retirable"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "expected": {
+    "accept": true,
+    "version": 1
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-ok-retire-008",
+   "description": "as-ok-retire: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0139eda6568c771cfe37c897257e0977026640b364d34f267cc467453b002ce75c",
+     "envelope": "aa0001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3035821010c41585c80c30968e6eb193ce12f6418cae9463c4fc48f4f746b9dce060b663a0402055821010c41585c80c30968e6eb193ce12f6418cae9463c4fc48f4f746b9dce060b663a061a6ac5c3c1071a6b14ddc008a009a90058202f1194c5a000f12dca2053b47bc7c888ed9814bba1637c73f28ddee4be34b6c5010002010582000306a4001a00015180010a02183203020769726574697261626c6508784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e09010bf5",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a0584087ba6dc0fd24a1456bfa83db1e83884dd86b4f57edabc220c74b65774a440493e1a31727bde67bd83f81e7df25d1795e63ce267f32268ef9bb9f5f28deaf8401",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 44,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "071f627d855e2d45b1652f4b7a0c71c84d7537620bb95d2cdeda8d7a7c10653f",
+       "0df8f89f6b5e740b4c07d0b6399a1fa24d5a029305370205a37f73e43b7a5da8",
+       "96d98dd79a21747e864d2428b2bff0e6ad21de0019c6ce7744aea079fd2e72ba",
+       "1311761a9dd5cdc1462f8a9d586c46f3ea83fbecb2c1e40dc3578d926cefb6ae",
+       "3cc80c21ab69a33e66bf57df7086b896d8d862c0b4040070b0300ffbfcbfa2f2",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "010c41585c80c30968e6eb193ce12f6418cae9463c4fc48f4f746b9dce060b663a"
+       }
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       {
+        "hex": "010c41585c80c30968e6eb193ce12f6418cae9463c4fc48f4f746b9dce060b663a"
+       }
+      ],
+      [
+       6,
+       1791345601
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "2f1194c5a000f12dca2053b47bc7c888ed9814bba1637c73f28ddee4be34b6c5"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "retirable"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ],
+         [
+          11,
+          true
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "expected": {
+    "accept": true,
+    "version": 2
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-ok-with-proof-009",
+   "description": "as-ok-with-proof: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "014777fbe5828f0eb29bfb4ab79bd7cf799ecb446d4283a1db64b2ba1e880a99e3",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a1687665726966696572582101ef9eea95e80a5d02feec8332390d3066598f618a73b5f929b5946101673a9ca809a9005820e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d010002010582000306a4001a00015180010a02183203020767766f756368656408784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e09010a58d4a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e40458606b838da3c1a4e70b81ae9ffcf0f1d7d786bd7623018bc5bd6bdf972b7825769d17008a34435cc1430cdcca500d77845406bd54ab6c72df7aa914d2bf460031b314bcd528f4e3580d38fc6b1c3b2b14e6142780c26dd5f1d9ae6cbec20bd71deb055830137dcbf454d984d0f33c39b34f079ed2d37233b324606dbe90247e3b523e57bc14d084dc474a185d9fb425fcc0ab4e1f0380",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a0584073d332169f0a4197a253ae2ea2b5ae052639463faca882efd559c29682552cf5e9b97abed29e293278f050c7c02a3e8842521347422c5556f9c0781ae7bf3308",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 49,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "ff3fb0e967caf01661ab2a76baada15afa57f8a46d5208629dc260080b55af19",
+       "3ab04d0d2de292903b78313152c94de0104d98498edc580038135049a2d90f17",
+       "a284e375d281b76bc5ffc6ed4aaa0ad799a2e3b967942801340ea74642c245f4",
+       "2757dbdf6594af3aa3647ebe808b60948830405c6eddbeaab07598842b3220a6",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "verifier",
+          {
+           "hex": "01ef9eea95e80a5d02feec8332390d3066598f618a73b5f929b5946101673a9ca8"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "vouched"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ],
+         [
+          10,
+          {
+           "hex": "a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e40458606b838da3c1a4e70b81ae9ffcf0f1d7d786bd7623018bc5bd6bdf972b7825769d17008a34435cc1430cdcca500d77845406bd54ab6c72df7aa914d2bf460031b314bcd528f4e3580d38fc6b1c3b2b14e6142780c26dd5f1d9ae6cbec20bd71deb055830137dcbf454d984d0f33c39b34f079ed2d37233b324606dbe90247e3b523e57bc14d084dc474a185d9fb425fcc0ab4e1f0380"
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "expected": {
+    "accept": true,
+    "version": 1
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-proof-no-verifier-010",
+   "description": "as-bad-proof-no-verifier: rejected by AS-8",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01b7cb225bb11689dfafd420fc5b75c3329e9b57243a53afc80f51acd4244bb561",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a9005820e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d010002010582000306a4001a00015180010a02183203020767766f756368656408784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e09010a58d4a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e40458606b838da3c1a4e70b81ae9ffcf0f1d7d786bd7623018bc5bd6bdf972b7825769d17008a34435cc1430cdcca500d77845406bd54ab6c72df7aa914d2bf460031b314bcd528f4e3580d38fc6b1c3b2b14e6142780c26dd5f1d9ae6cbec20bd71deb055830137dcbf454d984d0f33c39b34f079ed2d37233b324606dbe90247e3b523e57bc14d084dc474a185d9fb425fcc0ab4e1f0380",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840061807fb7745f97495e0c1d1c06b61caffaefbf141bda0de534f91c6a82d1c5218d294931c1155dabd54f9fa1cde7368c4a7da8e036aa66242c051be36647f0c",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 50,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "8fab78319cfeeeee64dcf11730f33830868da755560704ff4ea975c38c77efe6",
+       "590e93208dcba4ac8b50c450297b0b39535072b40aa277f120a6ec8131f550dd",
+       "a284e375d281b76bc5ffc6ed4aaa0ad799a2e3b967942801340ea74642c245f4",
+       "2757dbdf6594af3aa3647ebe808b60948830405c6eddbeaab07598842b3220a6",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "vouched"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ],
+         [
+          10,
+          {
+           "hex": "a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e40458606b838da3c1a4e70b81ae9ffcf0f1d7d786bd7623018bc5bd6bdf972b7825769d17008a34435cc1430cdcca500d77845406bd54ab6c72df7aa914d2bf460031b314bcd528f4e3580d38fc6b1c3b2b14e6142780c26dd5f1d9ae6cbec20bd71deb055830137dcbf454d984d0f33c39b34f079ed2d37233b324606dbe90247e3b523e57bc14d084dc474a185d9fb425fcc0ab4e1f0380"
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-8",
+    "reason": "AS-8: sponsorProof present iff refs.verifier present"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-proof-class-011",
+   "description": "as-bad-proof-class: rejected by AS-8",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0185e3e701e4fe7c1441e8110ee92cdcb79e50e1c3d2f7a7c0a33f89d0b53e818a",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a1687665726966696572582101e148089c09762f3f2a1456921beab77aca39852e46646071d9a7fb3ee682c28c09a9005820e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d010002010582000306a4001a00015180010a02183203020767766f756368656408784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e09010a58d4a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e40458606b838da3c1a4e70b81ae9ffcf0f1d7d786bd7623018bc5bd6bdf972b7825769d17008a34435cc1430cdcca500d77845406bd54ab6c72df7aa914d2bf460031b314bcd528f4e3580d38fc6b1c3b2b14e6142780c26dd5f1d9ae6cbec20bd71deb055830137dcbf454d984d0f33c39b34f079ed2d37233b324606dbe90247e3b523e57bc14d084dc474a185d9fb425fcc0ab4e1f0380",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a058404376cfd8553b0c15cbefa301b56141596048bf28e9ffb4f72ec7f20714ffc077f20982147f9b899c5c3ef370be5466fd568007d3dd9898b627678be46d50930e",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 51,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "9a7d9429e5e27c89588a56bfe339b6236801de4779ef84a35e41f60fa39dafef",
+       "590e93208dcba4ac8b50c450297b0b39535072b40aa277f120a6ec8131f550dd",
+       "a284e375d281b76bc5ffc6ed4aaa0ad799a2e3b967942801340ea74642c245f4",
+       "2757dbdf6594af3aa3647ebe808b60948830405c6eddbeaab07598842b3220a6",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "verifier",
+          {
+           "hex": "01e148089c09762f3f2a1456921beab77aca39852e46646071d9a7fb3ee682c28c"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "vouched"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ],
+         [
+          10,
+          {
+           "hex": "a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e40458606b838da3c1a4e70b81ae9ffcf0f1d7d786bd7623018bc5bd6bdf972b7825769d17008a34435cc1430cdcca500d77845406bd54ab6c72df7aa914d2bf460031b314bcd528f4e3580d38fc6b1c3b2b14e6142780c26dd5f1d9ae6cbec20bd71deb055830137dcbf454d984d0f33c39b34f079ed2d37233b324606dbe90247e3b523e57bc14d084dc474a185d9fb425fcc0ab4e1f0380"
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-8",
+    "reason": "AS-8: verifier class is not agent"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-proof-disclosed-012",
+   "description": "as-bad-proof-disclosed: rejected by AS-8",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01065b94feb8be750eb74dafa1b1e5cd60667f13e012428107001d7a4757af55f6",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a1687665726966696572582101ef9eea95e80a5d02feec8332390d3066598f618a73b5f929b5946101673a9ca809a9005820e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d010002010582000306a4001a00015180010a02183203020767766f756368656408784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e09010a58d6a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a2001902e401010458602fd155a79b92191c3990a61f79bbc93dae691904eae94909ce5aca078d39c761bc74d3afc5f14d2ce098d690b88170b0d378a273fb1633b15310f2cfbcdaad3b879a70087c31b8dd46dca0606972bbd23b003056f93b04d0dc8a87794b72034c05583061938833fdeaa06d300fbc24b6b70aa48dfcc936f1a6dbdc72625c3cfb55c631f30c3c45526f7625d6e690972a8b662b0380",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840148d33aa56e80418b698df0b52864b263a8adcc7563c15bdbba308ac62f91cfe9e5ac0fcc902780f694b78f94ce58533e0febca476a74ee1bb9596badd334f02",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 52,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "1d57a64f253b062d3202da7372b5fc33236ebc2e6b33f88e1726c218715ea2f9",
+       "140a357db3311f6db203db604128fea2eb5160390118eeaacc0c3b93d979f989",
+       "ccc6dff6ee3831d7e850952bec433bc81efab93552fffad2925b9b1fb7cfea2a",
+       "2757dbdf6594af3aa3647ebe808b60948830405c6eddbeaab07598842b3220a6",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "verifier",
+          {
+           "hex": "01ef9eea95e80a5d02feec8332390d3066598f618a73b5f929b5946101673a9ca8"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "vouched"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ],
+         [
+          10,
+          {
+           "hex": "a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a2001902e401010458602fd155a79b92191c3990a61f79bbc93dae691904eae94909ce5aca078d39c761bc74d3afc5f14d2ce098d690b88170b0d378a273fb1633b15310f2cfbcdaad3b879a70087c31b8dd46dca0606972bbd23b003056f93b04d0dc8a87794b72034c05583061938833fdeaa06d300fbc24b6b70aa48dfcc936f1a6dbdc72625c3cfb55c631f30c3c45526f7625d6e690972a8b662b0380"
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-8",
+    "reason": "AS-8: sponsorProof fails P7: message 1 disclosed without a leaf requiring it"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-proof-context-present-013",
+   "description": "as-bad-proof-context-present: rejected by AS-8",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0127b14814b4aed7990cf02c628a31e71ed4b146693644deeab4769aef73241773",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a1687665726966696572582101ef9eea95e80a5d02feec8332390d3066598f618a73b5f929b5946101673a9ca809a9005820e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d010002010582000306a4001a00015180010a02183203020767766f756368656408784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e09010a58f8a40001015821b94d9f30d7a8197bc420859c0fd3dc6560eec66b678c29a3fef605b9dc691399160281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e404586028a8a7f7b80c1a64de5cc52221d7bd0a67adf59b927fca1ef48d80c04620733a07f086cd8ca34b18ee7c56344893b076537ca06b46a80c0dd15a7f15df8c6ccef2a6346e8e7b9071bc6b6d4ec255c90aa8935ec1dd49cdf7226f1d888e761f0a055830ec2eed838d55dc0afb5e39dc3b47f69730084efb999b6692763124e11ff87d8214f1bb363cb89fdca5e8d45469c6fccf0380",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840ac2c1a7710af331a74d615edb1a0d16669c48a41e95949e5ba95c0a9f70c1e262566c8bc5c0506b6742e9d98180682faea8667bde79c50dc573b631782040005",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 53,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "675f630bd3bdd1ac46882aa672edae48dc44560b08d7acda69b878fd6187cd27",
+       "140a357db3311f6db203db604128fea2eb5160390118eeaacc0c3b93d979f989",
+       "ccc6dff6ee3831d7e850952bec433bc81efab93552fffad2925b9b1fb7cfea2a",
+       "2757dbdf6594af3aa3647ebe808b60948830405c6eddbeaab07598842b3220a6",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "verifier",
+          {
+           "hex": "01ef9eea95e80a5d02feec8332390d3066598f618a73b5f929b5946101673a9ca8"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "vouched"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ],
+         [
+          10,
+          {
+           "hex": "a40001015821b94d9f30d7a8197bc420859c0fd3dc6560eec66b678c29a3fef605b9dc691399160281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e404586028a8a7f7b80c1a64de5cc52221d7bd0a67adf59b927fca1ef48d80c04620733a07f086cd8ca34b18ee7c56344893b076537ca06b46a80c0dd15a7f15df8c6ccef2a6346e8e7b9071bc6b6d4ec255c90aa8935ec1dd49cdf7226f1d888e761f0a055830ec2eed838d55dc0afb5e39dc3b47f69730084efb999b6692763124e11ff87d8214f1bb363cb89fdca5e8d45469c6fccf0380"
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-8",
+    "reason": "AS-8: sponsorProof fails P2: context present when the use forbids it, or absent"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-proof-epoch-mismatch-014",
+   "description": "as-bad-proof-epoch-mismatch: rejected by AS-8",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "011842269cb353fccda7907ec80f512c34af2050ffd59c69fcd4118aba7150c8c1",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a1687665726966696572582101ef9eea95e80a5d02feec8332390d3066598f618a73b5f929b5946101673a9ca809a9005820e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d010002010582000306a4001a00015180010a02183203020767766f756368656408784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e09010a58d4a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e5045860fb4d8611f6b6123dda7205424300e1260ffffe378ec3195289e1e90c2c271e07847e1835dd6b307c7c8b538fb86265ab6e9c6b9f021470d7e5310756e15c33b0b1e3555c3094d65f1643a072caebd3f3f29a4776d207175cfdc5877f4d63eecc055830fed87d17ec54a1c785afa01d487a410c8a5c25f0fc52e7a1fd2041a6f098a355d9aaf61d690353a023c00df82af12f610380",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840a70a9eeee99e7bc66f6d0b4dec8d51c8c8418c0656c5bfd7eba2988d08c22e2e03df7ed0300f49c3c14bbb4a78eb7d49d66ff969368ead312af5acbe4c69f60c",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 54,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "06d7324bd0f03368763c8a13dad071a029e53b281b2928eea18dbac65d552d97",
+       "24f58c490231ddb5d9fee069a4402eb095ee495bafd75194333a8b3ae411a751",
+       "ccc6dff6ee3831d7e850952bec433bc81efab93552fffad2925b9b1fb7cfea2a",
+       "2757dbdf6594af3aa3647ebe808b60948830405c6eddbeaab07598842b3220a6",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "verifier",
+          {
+           "hex": "01ef9eea95e80a5d02feec8332390d3066598f618a73b5f929b5946101673a9ca8"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "vouched"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ],
+         [
+          10,
+          {
+           "hex": "a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e5045860fb4d8611f6b6123dda7205424300e1260ffffe378ec3195289e1e90c2c271e07847e1835dd6b307c7c8b538fb86265ab6e9c6b9f021470d7e5310756e15c33b0b1e3555c3094d65f1643a072caebd3f3f29a4776d207175cfdc5877f4d63eecc055830fed87d17ec54a1c785afa01d487a410c8a5c25f0fc52e7a1fd2041a6f098a355d9aaf61d690353a023c00df82af12f610380"
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-8",
+    "reason": "AS-8: sponsorProof fails P5: epoch outside the use's window"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-ok-proof-after-epoch-015",
+   "description": "as-ok-proof-after-epoch: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "013ff162d7fa36b21200633acdf4a73bb5c1894742f791c4e52cae7f2538b60a9f",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a1687665726966696572582101ef9eea95e80a5d02feec8332390d3066598f618a73b5f929b5946101673a9ca809a9005820e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d010002010582000306a4001a00015180010a0218320302076d766f75636865642d6c6174657208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e09010a58d4a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e404586010a431816e9a60d1d2fc6234126e3b534cae59b3377d2764b6d27c3b1bd671b935f85c6014c0f7171357110e07acfc7e2dea0af66b6d9823e3fb5293bb5f2d03af2e3906cf29d56277325d6d86313c4847d57a143174dd7ceee5073ef45effe8055830ad103692848fdee69d7e815e766565180751d1ff5bf4c5c3e9d96f76ba6e939b20b8f77076c3b71753ade6257d5b59100380",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840b756f380d28fe64409e682c44bf1a1057228e3d6eaab393108ae6f75f019ccc47c57cbc8410dbf33b91abac50c78e4b06b8a2c903dea507476322058d079c304",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 55,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "42bb512ad37bc94ad34f185d0237ad894cf94149942d34e9162dea12dc79f929",
+       "24f58c490231ddb5d9fee069a4402eb095ee495bafd75194333a8b3ae411a751",
+       "ccc6dff6ee3831d7e850952bec433bc81efab93552fffad2925b9b1fb7cfea2a",
+       "2757dbdf6594af3aa3647ebe808b60948830405c6eddbeaab07598842b3220a6",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "verifier",
+          {
+           "hex": "01ef9eea95e80a5d02feec8332390d3066598f618a73b5f929b5946101673a9ca8"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "e2784bc490031ed0aeb004c066b1ea9952eea19a4295f9a66bb11dff58e19a0d"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "vouched-later"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ],
+         [
+          10,
+          {
+           "hex": "a300010281a600582101b9b911056162e0bc4ce1cb0037aca00895ac9a4df6001e1ea93241150329a87101481d08c98a1b65de51020303a1001902e404586010a431816e9a60d1d2fc6234126e3b534cae59b3377d2764b6d27c3b1bd671b935f85c6014c0f7171357110e07acfc7e2dea0af66b6d9823e3fb5293bb5f2d03af2e3906cf29d56277325d6d86313c4847d57a143174dd7ceee5073ef45effe8055830ad103692848fdee69d7e815e766565180751d1ff5bf4c5c3e9d96f76ba6e939b20b8f77076c3b71753ade6257d5b59100380"
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1792634400
+   },
+   "expected": {
+    "accept": true,
+    "version": 1
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-tier-016",
+   "description": "as-bad-tier: rejected by AS-1",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01135c0b77dff22ef6e8a4adec22586ce2cbf7bc581b957fd0e4751fd75bb4dcf6",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010202010582000306a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840edf0230403d7c4c92d667d204096f6a12be81ad95dc5cd02932f4534199a7e1f7b85b9c910f53efe0ab7c2904210609bf95aea1198540486b32ba7da88c0ec08",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 56,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "cf4f166afea42f4ffb7aa64b3948e6814fa8cb102d234adfbfbc98461238712e",
+       "43867fbf49ce853d21f04f695bf63d091c0bcd7f993a4d0223029e9d452955ff",
+       "872523715baa6b889cb37f2b00006ffbd2e7dfaffed023b4ddb649d9a0b82f00",
+       "5fa29ef67cc2a1c87122dd1bf319c498d96b256c5795d7b0a9e2ccd50c94a519",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-1",
+    "reason": "AS-1: tier must be 0 or 1"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-public-enclave-017",
+   "description": "as-bad-public-enclave: rejected by AS-1",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "011f0bf7fef9adc1ca6ef99c51a535e7855bec55275f332a74d3f29f93a7e0e8fa",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a1667265706f7274582101c0ad99ec6e91dbaab726684609b4c4a1c8c5e53c3d6efd946f306a53af32f10909aa0058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e0101020203a30000015830196b3e2b085676dcbd81463a51cd91b742ad82fd732d499ee1b9c58b29234e5f73146a939ac813f36311a5f765bdb5db021a6ac5c16804582039113df07267a239aa1016cbcd9fca31f54af2cb9b83396ce35d68065217b73c05810406a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840f2a63e0f283a9468cb9db357a20cd129aa4e62220fc0e9b749399e241e3b6d10f7b2c474863b1f30535098e271b3c1db9a39aba4da307f005ec1a2d3d6b5db06",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 57,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "fc5ac9c9a47f9fe6824bba57a151b52b3e0f3fd95a81c774b56727196542d6ad",
+       "43867fbf49ce853d21f04f695bf63d091c0bcd7f993a4d0223029e9d452955ff",
+       "872523715baa6b889cb37f2b00006ffbd2e7dfaffed023b4ddb649d9a0b82f00",
+       "5fa29ef67cc2a1c87122dd1bf319c498d96b256c5795d7b0a9e2ccd50c94a519",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "report",
+          {
+           "hex": "01c0ad99ec6e91dbaab726684609b4c4a1c8c5e53c3d6efd946f306a53af32f109"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2
+         ],
+         [
+          3,
+          {
+           "map": [
+            [
+             0,
+             0
+            ],
+            [
+             1,
+             {
+              "hex": "196b3e2b085676dcbd81463a51cd91b742ad82fd732d499ee1b9c58b29234e5f73146a939ac813f36311a5f765bdb5db"
+             }
+            ],
+            [
+             2,
+             1791345000
+            ]
+           ]
+          }
+         ],
+         [
+          4,
+          {
+           "hex": "39113df07267a239aa1016cbcd9fca31f54af2cb9b83396ce35d68065217b73c"
+          }
+         ],
+         [
+          5,
+          [
+           4
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-1",
+    "reason": "AS-1: runtime 2 not allowed for tier 1"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-shared-anywhere-018",
+   "description": "as-bad-shared-anywhere: rejected by AS-1",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01cfdd9a3203408b069dbc74be46cf4a919638c6633fc6b245f4e92ca69b91843a",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010002030582000306a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a0584057dde4aa7a2818901f3c2f1ff485db30b9cd77d042981bb87be472001712ae9e5b2090d71ce005965361e41ee16e5e1892723fb7384e03f8f3d2001820e68c03",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 58,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "19f2c142dc910ffc3edb020d3f5da075d8a135c22a3ce5d6b1d1580b4b3b46c1",
+       "6815f260cf9873051eb5ab6f94dea787da85ac72267112abdba227790a30e67f",
+       "872523715baa6b889cb37f2b00006ffbd2e7dfaffed023b4ddb649d9a0b82f00",
+       "5fa29ef67cc2a1c87122dd1bf319c498d96b256c5795d7b0a9e2ccd50c94a519",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          3
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-1",
+    "reason": "AS-1: runtime 3 not allowed for tier 0"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-enclave-no-report-019",
+   "description": "as-bad-enclave-no-report: rejected by AS-2a",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "013f06a2edf9e7ecd04cbbc56d86f7c67dede7f4ce56fc5a635c475944f0821c20",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009aa0058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e0100020203a30000015830196b3e2b085676dcbd81463a51cd91b742ad82fd732d499ee1b9c58b29234e5f73146a939ac813f36311a5f765bdb5db021a6ac5c16804582039113df07267a239aa1016cbcd9fca31f54af2cb9b83396ce35d68065217b73c0582000306a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840eadfea61c2e6df650e89db22dee6866da4d7bded335658363a12139cfcb507bab570e312119b8a8b50b9c65b5143e98792d7cb1918ea7b9dbe7ba74e01adb200",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 59,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "43527ad6b69a3f98633dec5f93d9ce877e237a8db8cd4cdaa016ba8acbcf902e",
+       "6815f260cf9873051eb5ab6f94dea787da85ac72267112abdba227790a30e67f",
+       "872523715baa6b889cb37f2b00006ffbd2e7dfaffed023b4ddb649d9a0b82f00",
+       "5fa29ef67cc2a1c87122dd1bf319c498d96b256c5795d7b0a9e2ccd50c94a519",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          2
+         ],
+         [
+          3,
+          {
+           "map": [
+            [
+             0,
+             0
+            ],
+            [
+             1,
+             {
+              "hex": "196b3e2b085676dcbd81463a51cd91b742ad82fd732d499ee1b9c58b29234e5f73146a939ac813f36311a5f765bdb5db"
+             }
+            ],
+            [
+             2,
+             1791345000
+            ]
+           ]
+          }
+         ],
+         [
+          4,
+          {
+           "hex": "39113df07267a239aa1016cbcd9fca31f54af2cb9b83396ce35d68065217b73c"
+          }
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-2a",
+    "reason": "AS-2a: attestation, codeHash and report present iff runtime 2"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-codehash-020",
+   "description": "as-bad-codehash: rejected by AS-2a",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "014f432c816df3da0bf2b547c16c8f9c2fcbbeacd8e7d6c4853d796d07ea97a54e",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a1667265706f7274582101c0ad99ec6e91dbaab726684609b4c4a1c8c5e53c3d6efd946f306a53af32f10909aa005820fd4f993c08e4362143b60d08f9fb85bee5929947b56a64b8c626c39d222421530100020203a30000015830196b3e2b085676dcbd81463a51cd91b742ad82fd732d499ee1b9c58b29234e5f73146a939ac813f36311a5f765bdb5db021a6ac5c16804582000000000000000000000000000000000000000000000000000000000000000000582000306a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a0584052a2f9656e5b783765e35b2d2b7c591b7afcb4ae012ea51fcffc528784a938df530da2ca7e888833b4ab4d7a64ff1d045abfa77046b520ca56d01673f26cf801",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 60,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "1513594297b05ff767745d48dcc9671c274ac09ce332b4050bccfbf0a92b8090",
+       "d0bf472af45c4aebec2ba1e59f7f47be43081ef2b226c9ebf2132bbcb68c504c",
+       "83682aca6f0b3c8084157c1b73f664f1611e7405dccfb38a5eb49d5497b5d9ea",
+       "5fa29ef67cc2a1c87122dd1bf319c498d96b256c5795d7b0a9e2ccd50c94a519",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "report",
+          {
+           "hex": "01c0ad99ec6e91dbaab726684609b4c4a1c8c5e53c3d6efd946f306a53af32f109"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "fd4f993c08e4362143b60d08f9fb85bee5929947b56a64b8c626c39d22242153"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          2
+         ],
+         [
+          3,
+          {
+           "map": [
+            [
+             0,
+             0
+            ],
+            [
+             1,
+             {
+              "hex": "196b3e2b085676dcbd81463a51cd91b742ad82fd732d499ee1b9c58b29234e5f73146a939ac813f36311a5f765bdb5db"
+             }
+            ],
+            [
+             2,
+             1791345000
+            ]
+           ]
+          }
+         ],
+         [
+          4,
+          {
+           "hex": "0000000000000000000000000000000000000000000000000000000000000000"
+          }
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-2a",
+    "reason": "AS-2a: codeHash is not SHA-256(measurement)"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-platform-021",
+   "description": "as-bad-platform: rejected by AS-2a",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01f50d98c88156883ced4e1b7197eb27090f50e6cc4bed00ac81ed5c8a879ea3df",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a1667265706f7274582101c0ad99ec6e91dbaab726684609b4c4a1c8c5e53c3d6efd946f306a53af32f10909aa005820fd4f993c08e4362143b60d08f9fb85bee5929947b56a64b8c626c39d222421530100020203a30009015830196b3e2b085676dcbd81463a51cd91b742ad82fd732d499ee1b9c58b29234e5f73146a939ac813f36311a5f765bdb5db021a6ac5c16804582039113df07267a239aa1016cbcd9fca31f54af2cb9b83396ce35d68065217b73c0582000306a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a058400015f14570581482ff40eade309745230ee54ed2a38d5de690ffdd9101ed179210d4ac54694f249860eed097b3a5c834a05d5e39710d119807ce1ffab5256502",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 61,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "57928d5f54b6f10dd289d9bf0197fe350af6a1a6c56766813ad826434ca8bd5c",
+       "d0bf472af45c4aebec2ba1e59f7f47be43081ef2b226c9ebf2132bbcb68c504c",
+       "83682aca6f0b3c8084157c1b73f664f1611e7405dccfb38a5eb49d5497b5d9ea",
+       "5fa29ef67cc2a1c87122dd1bf319c498d96b256c5795d7b0a9e2ccd50c94a519",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "report",
+          {
+           "hex": "01c0ad99ec6e91dbaab726684609b4c4a1c8c5e53c3d6efd946f306a53af32f109"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "fd4f993c08e4362143b60d08f9fb85bee5929947b56a64b8c626c39d22242153"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          2
+         ],
+         [
+          3,
+          {
+           "map": [
+            [
+             0,
+             9
+            ],
+            [
+             1,
+             {
+              "hex": "196b3e2b085676dcbd81463a51cd91b742ad82fd732d499ee1b9c58b29234e5f73146a939ac813f36311a5f765bdb5db"
+             }
+            ],
+            [
+             2,
+             1791345000
+            ]
+           ]
+          }
+         ],
+         [
+          4,
+          {
+           "hex": "39113df07267a239aa1016cbcd9fca31f54af2cb9b83396ce35d68065217b73c"
+          }
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-2a",
+    "reason": "AS-2a: unknown attestation platform"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-public-post-022",
+   "description": "as-bad-public-post: rejected by AS-3",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01efaf40139b665aef721543db11b152daf98a7741ffbd7e630b253d7521da8251",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010102030582000406a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a058408a83cef8635e3c4922172c77b939aba310fb255c59224835664ee34da621b0c318416fb1a1a98c73ec3029b8c03be980d470e0d2cae8bb019a21b85701164e08",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 62,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "a60660f088b9b046719f8ae926487599c51f5cc2816bfb54a069e55de6e50cd1",
+       "d085728bb841de761d070e124274abccd0994b7c57d4cdb8003f12dcd0bd5e99",
+       "83682aca6f0b3c8084157c1b73f664f1611e7405dccfb38a5eb49d5497b5d9ea",
+       "5fa29ef67cc2a1c87122dd1bf319c498d96b256c5795d7b0a9e2ccd50c94a519",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          3
+         ],
+         [
+          5,
+          [
+           0,
+           4
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-3",
+    "reason": "AS-3: capabilities [0, 4] not allowed for tier 1"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-capability-unknown-023",
+   "description": "as-bad-capability-unknown: rejected by AS-3",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "015103f8891e8ae265706148a09cf80748ace563327d4424613f1a459ff240d03c",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010002010582000906a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840f2523f0a1f97c022484bb3746bcf29f8faeb4104c808a341ef39df3c3e0cecdfe072ea6e3e588d0a782f72c441724cee9c8683095d12c695132606c204d78f02",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 63,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "2e214cd1bfdeaddc33bbb9e6b4eddc29aa85b57a7207f0d245f76fa18bb5b4cb",
+       "d085728bb841de761d070e124274abccd0994b7c57d4cdb8003f12dcd0bd5e99",
+       "83682aca6f0b3c8084157c1b73f664f1611e7405dccfb38a5eb49d5497b5d9ea",
+       "5fa29ef67cc2a1c87122dd1bf319c498d96b256c5795d7b0a9e2ccd50c94a519",
+       "28cbdb54ce82f55d201acbd3c61777aa81ce542d4c73b0f7067d7d60a0282cea",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
+       "87a7a23eaca094cf491890ecf0a09467e5bd3a3ad512f150e5c95e5f4c70bdf9"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           9
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-3",
+    "reason": "AS-3: capabilities [0, 9] not allowed for tier 0"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-capability-dup-024",
+   "description": "as-bad-capability-dup: rejected by AS-3",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "012467c417b43e1f5ff392525f682855934cfe6362d76aba45a206e5512d59efd0",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010002010582000006a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840c17d9892d512fd29cb88152bb378032bacbd843ea866f07f78295e94737f69ad8f8e54177d80dc78093baf40d2ec264595d16d8bf9d468bf2523faacb7d9a308",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 64,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "2e8a69d71ec2dd4ad3b26eb113623df7bfe6e0b232de4603f87f2a3c56954bed",
+       "9704d9137107036d3447d020164a4d8c0bfe1062d15da90fc2764a8e85d4b2a3",
+       "d25bfb63abaf08178e13912fce7e2988ea36a759eef290473eba7e7fd3287da1",
+       "689f1103a98d929939bfc2a9c3be9cfd5f792bf9894862b0b71ddb6cd2d2f47d",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           0
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-3",
+    "reason": "AS-3: duplicate capability"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-window-025",
+   "description": "as-bad-window: rejected by AS-4",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01830512761287c48e005178eb77c92d3a65197eec113f49626677260affeb894c",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010002010582000306a40001010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840a94452c2f38992b6f2f5b577e83028ad58912bc899ed2a96974d36c3be5750f6e719b3388ad797aaeb7f5f69d8eed88ec477c434cc2052abe9c0c11db6a1eb03",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 65,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "427ca689cb7edef3aa77f9f16385ee94beeae68d158b1bb14daa1de87ac81b54",
+       "9704d9137107036d3447d020164a4d8c0bfe1062d15da90fc2764a8e85d4b2a3",
+       "d25bfb63abaf08178e13912fce7e2988ea36a759eef290473eba7e7fd3287da1",
+       "689f1103a98d929939bfc2a9c3be9cfd5f792bf9894862b0b71ddb6cd2d2f47d",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             1
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-4",
+    "reason": "AS-4: rateLimits.window out of range"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-rate-limits-missing-026",
+   "description": "as-bad-rate-limits-missing: rejected by AS-4",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01497cd7d9b59f9870994f9808e4e9529823f4518e355d1bd193601e704591fa27",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010002010582000306a2001a00015180010a07756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a0584013073d5fb3bfa2d3db1116aea5997047a5e06b36f832391c0c05bf29f5c6f442fdf11f18a27406e8487dd5749942426d207689cf6830f36b9077db091c565f09",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 66,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "0396abdb312db13f1eeb12853f4e89947a6ef8f9539c66acb3accb74e9196ff9",
+       "7ba79469dd471ce55de48329f51fba0924c9ac1fde375ef414b1b38845664733",
+       "d25bfb63abaf08178e13912fce7e2988ea36a759eef290473eba7e7fd3287da1",
+       "689f1103a98d929939bfc2a9c3be9cfd5f792bf9894862b0b71ddb6cd2d2f47d",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-4",
+    "reason": "AS-4: rateLimits needs all four fields"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-key-reuse-027",
+   "description": "as-bad-key-reuse: rejected by AS-5",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01ea0adf461fb1d10d3ae69a5d6e1ce64f4dd297038076d6784122feddedb40dd6",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058204b16d1ed7e38548114e551e4e32f744efe8de971719f0121f011f5f12a511e96010002010582000306a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840caf056f2e8dc6d9c383714c8b8be09b877679440e1a02a7da3f65aba48b422e05b65a788c1c09020129bc0aa06bbbe60f6901945d0bb60ee874408239edf8109",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 67,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "9c7d90e51c4c2920e5f3ceb682f8721b0460b7d30d958bd97787dba966f79126",
+       "7ba79469dd471ce55de48329f51fba0924c9ac1fde375ef414b1b38845664733",
+       "d25bfb63abaf08178e13912fce7e2988ea36a759eef290473eba7e7fd3287da1",
+       "689f1103a98d929939bfc2a9c3be9cfd5f792bf9894862b0b71ddb6cd2d2f47d",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "4b16d1ed7e38548114e551e4e32f744efe8de971719f0121f011f5f12a511e96"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-5",
+    "reason": "AS-5: agentKey is a key of the sponsor's keyset"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-no-expiry-028",
+   "description": "as-bad-no-expiry: rejected by AS-6",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01112f63cf27fcdcc842081df86b4309471b78c90f9751abe49d5c9af36d3cb201",
+     "envelope": "a70001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010002010582000306a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840b86bbbe220f9ea87c7207a5eb53bb14e6966e7f8846ea56f3dcb1cc013f48e1846efd206c04418e32949e02840c62597e2d047f4ef28d2cacc450d596f3fec05",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 68,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "f3e84ca123bd4553288fef6df1c418ccc6806f81f8b8a9a3e3e1e925f5295197",
+       "97f6655a4c890a4d201bbe5805f00edb15af5a7e4c667974440c2f903b2bb83c",
+       "3086d1da76a354654cb8dc4b138529d0bf8697e14e803eb1dc7982541a625a1e",
+       "689f1103a98d929939bfc2a9c3be9cfd5f792bf9894862b0b71ddb6cd2d2f47d",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-6",
+    "reason": "AS-6: expires is required"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-long-expiry-029",
+   "description": "as-bad-long-expiry: rejected by AS-6",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "017196bed4b80d71535df6e6f717453c51c853144f7118221f389c30744696578c",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6ca6f74008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010002010582000306a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f7208784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a058401eedeade4cfafe6376c9433ac6d966afd41a90838962877ba05fc2382d37a7402c49e9fb1e8e6087cf292010c8ff66234c197b352f397b5b4ef3e34d8ba65c03",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 69,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "0599959cb0533e6bc192ad94bb8b0992ccbaec2990081e1bfcfa3b1daf6f9af1",
+       "97f6655a4c890a4d201bbe5805f00edb15af5a7e4c667974440c2f903b2bb83c",
+       "3086d1da76a354654cb8dc4b138529d0bf8697e14e803eb1dc7982541a625a1e",
+       "689f1103a98d929939bfc2a9c3be9cfd5f792bf9894862b0b71ddb6cd2d2f47d",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1822881600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-6",
+    "reason": "AS-6: expires more than 90 days after issued"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-label-long-030",
+   "description": "as-bad-label-long: rejected by AS-7",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "016b1f3429c5e945428af4dbe2a0cf1e24aa806b89d0b33bd4e807588fd85896c1",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010002010582000306a4001a00015180010a0218320302077841787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787808784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a0584024f3ea4c4a747d7a424ecb068ebae08a27aef1959ce8f1b3a8af3e8ed7ec0dc97441be4786ff8d999f4ba8f8f0b3c7ea31f8aec2832bf98d1c8e1c4306274e02",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 70,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "3ddc6deb1f1cc170890a9befcb0bd29e660bdee6a9359f4aae514623e0104f54",
+       "7739baacf5dbfb50668188e37f43ef022defe75919e2f4d4ecc769cfba23424c",
+       "3086d1da76a354654cb8dc4b138529d0bf8697e14e803eb1dc7982541a625a1e",
+       "689f1103a98d929939bfc2a9c3be9cfd5f792bf9894862b0b71ddb6cd2d2f47d",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-7",
+    "reason": "AS-7: label must be 1..64 bytes, NFC, no controls"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-description-long-031",
+   "description": "as-bad-description-long: rejected by AS-7",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01763b28f374f9201a324c1a2ab613f1df532347e76f54ab7f056ce10d150faddc",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a80058209526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e010002010582000306a4001a00015180010a021832030207756d696c6c62726f6f6b2d666163696c697461746f72087902316464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464646464640901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a058400042d6f67ecf4840c329e1b739c34511c9e9df4cc0d1d60fe4b751da170c46c710cb24cbb26b1ede29d88dc4c467e75bb7ca5045215a0e9e20ca16281c30da09",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 71,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "844906cf5f406b9e911f080d5879355dc9620787a59939fe972bcef8abde2e54",
+       "7739baacf5dbfb50668188e37f43ef022defe75919e2f4d4ecc769cfba23424c",
+       "3086d1da76a354654cb8dc4b138529d0bf8697e14e803eb1dc7982541a625a1e",
+       "689f1103a98d929939bfc2a9c3be9cfd5f792bf9894862b0b71ddb6cd2d2f47d",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "9526cdfa951a4ffedff1bdac5cf79a38567d39f3767a7cbdb2959e8a8d405d9e"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "millbrook-facilitator"
+         ],
+         [
+          8,
+          "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-7",
+    "reason": "AS-7: description over 560 bytes or malformed"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/swappable-v1-032",
+   "description": "swappable-v1: verifies",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "013a82fc5ce20e4808b32d7012a9a1b86ca60c7ea31b55ca3a602ef74c91f518c3",
+     "envelope": "a80001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae30401061a6ac5c3c0071a6b14ddc008a009a8005820e23d992972e1746d7c221fbb347e11237381e063861cfb4a855198768806d611010002010582000306a4001a00015180010a02183203020769737761707061626c6508784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840cc7a5fb20bd3e7b2278ae54ed08ba49a17724c6b6e324d484096d6b7c8adaecb8ae3eb0082163fdfeb9f14a9044fc76b9456a193d0f43c1c70fda70bb52f8701",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 72,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "aa0e421f3f1a2bb61640d1591e47cc0d824fe738e15316611801cfa602be9735",
+       "cd63927ec92f29ddd1503a8dc95b821ddd4aace4d7da4174e40977944506b319",
+       "c663a9ccd37f3aa00d16d49a4a6dac5768e6c595212c27b09a5cc2444893b88f",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       6,
+       1791345600
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "e23d992972e1746d7c221fbb347e11237381e063861cfb4a855198768806d611"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "swappable"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "expected": {
+    "accept": true,
+    "version": 1
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-key-swap-033",
+   "description": "as-bad-key-swap: rejected by AS-9",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0109798d61750e59d8dca1a00427e1cd11353e16266320d10911994653a2120c84",
+     "envelope": "aa0001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3035821013a82fc5ce20e4808b32d7012a9a1b86ca60c7ea31b55ca3a602ef74c91f518c30402055821013a82fc5ce20e4808b32d7012a9a1b86ca60c7ea31b55ca3a602ef74c91f518c3061a6ac5c3c1071a6b14ddc008a009a8005820324b1c04f057b5b2712f9a514461df405dfda10e1f47d0689c8344d9df7ff3c0010002010582000306a4001a00015180010a02183203020769737761707061626c6508784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840ccd097cdb56a507780628f09f80db8d1499014629bb0b57d2999fffbb2218a2c71e371d670c5d02bcd034183a72dd68b06e6b7d7ef50e7265b4fb1479d077b04",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 73,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "4e5e17c6f378b88674535a04e799cc4cd8ec9fb1f254de2d0182fd4fc1afdd91",
+       "cd63927ec92f29ddd1503a8dc95b821ddd4aace4d7da4174e40977944506b319",
+       "c663a9ccd37f3aa00d16d49a4a6dac5768e6c595212c27b09a5cc2444893b88f",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "013a82fc5ce20e4808b32d7012a9a1b86ca60c7ea31b55ca3a602ef74c91f518c3"
+       }
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       {
+        "hex": "013a82fc5ce20e4808b32d7012a9a1b86ca60c7ea31b55ca3a602ef74c91f518c3"
+       }
+      ],
+      [
+       6,
+       1791345601
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "324b1c04f057b5b2712f9a514461df405dfda10e1f47d0689c8344d9df7ff3c0"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "swappable"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-9",
+    "reason": "AS-9: agentKey changed"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-after-retire-034",
+   "description": "as-bad-after-retire: rejected by AS-9",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01be71cb6f9a63ac62b886bc4c98a962038d080792a8bddf1502d3439b9e48fccb",
+     "envelope": "aa0001016d6167656e742d73706f6e736f7202582101495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3035821010c41585c80c30968e6eb193ce12f6418cae9463c4fc48f4f746b9dce060b663a04030558210139eda6568c771cfe37c897257e0977026640b364d34f267cc467453b002ce75c061a6ac5c3c2071a6b14ddc008a009a80058202f1194c5a000f12dca2053b47bc7c888ed9814bba1637c73f28ddee4be34b6c5010002010582000306a4001a00015180010a02183203020769726574697261626c6508784750726f706f736573206973737565732066726f6d206c6f6e67207468726561647320616e642064726166747320746865207374726f6e676573742070726f20616e6420636f6e2e0901",
+     "signatures": "d8628440a0f681834ca20127044773706f6e736f72a05840a7d51343cbc86e9452e7be7a370d92f62dc1a4a00c0f367d89edf1f94cfe384e1ba3f88e2071083d98cd1e517865842eaa2758ed46bc20987cb0f42b594ef70e",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 74,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n75\nZoOFC6Vye64LUgzV0UOkCSn5+mvdZDx/mu6vVBSMOfI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBhRKDhmg2VnuwKlDlL2rvrtMcr7h/2aNSSP5qGz/fuj+6lHywsiYcnvb5mLJH6tFzDO+7nQPS0aaRR6PtPNtVg4=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAkwW45db+J+0kSBS0f+5gjxqAzf/m2h/hIfJv+9MlvODeQ9YA7fvbpE8MuunjDT9WcxzuRT85NsXJtmLApVaQAQ==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAuD+2MS9D7ZanEBuFsyEwxO+zswPU2X96PcpKFtYTEKiEECmAV6+eELENP1ocLvxEDg3mh2vxCg6jfMy9y+pgBg==\n",
+      "path": [
+       "fcfd9941bd99b0b82a5cbf432e29716ec2b9f88e7bf720615a3d7f104ee8e27b",
+       "c663a9ccd37f3aa00d16d49a4a6dac5768e6c595212c27b09a5cc2444893b88f",
+       "a3b236f72b4f3f2291036eef73e7d62567cd556aa453f798fadb64ab0aea025c"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "agent-sponsor"
+      ],
+      [
+       2,
+       {
+        "hex": "01495930e2509cf82681d664e686918fcfbadbc25ac2c2000fb2208ac08d342ae3"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "010c41585c80c30968e6eb193ce12f6418cae9463c4fc48f4f746b9dce060b663a"
+       }
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       {
+        "hex": "0139eda6568c771cfe37c897257e0977026640b364d34f267cc467453b002ce75c"
+       }
+      ],
+      [
+       6,
+       1791345602
+      ],
+      [
+       7,
+       1796529600
+      ],
+      [
+       8,
+       {
+        "map": []
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "2f1194c5a000f12dca2053b47bc7c888ed9814bba1637c73f28ddee4be34b6c5"
+          }
+         ],
+         [
+          1,
+          0
+         ],
+         [
+          2,
+          1
+         ],
+         [
+          5,
+          [
+           0,
+           3
+          ]
+         ],
+         [
+          6,
+          {
+           "map": [
+            [
+             0,
+             86400
+            ],
+            [
+             1,
+             10
+            ],
+            [
+             2,
+             50
+            ],
+            [
+             3,
+             2
+            ]
+           ]
+          }
+         ],
+         [
+          7,
+          "retirable"
+         ],
+         [
+          8,
+          "Proposes issues from long threads and drafts the strongest pro and con."
+         ],
+         [
+          9,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "now": 1791349200
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "AS-9",
+    "reason": "AS-9: no version follows a retired one"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-ok-proof-at-log-035",
+   "description": "At the log: issued within an hour of T",
+   "section": "Validation rules",
+   "inputs": {
+    "manifest": "as-ok-with-proof",
+    "cid": "014777fbe5828f0eb29bfb4ab79bd7cf799ecb446d4283a1db64b2ba1e880a99e3",
+    "issued": 1791345600,
+    "log_clock_T": 1791347400,
+    "V": 1
+   },
+   "expected": {
+    "accept": true
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-proof-issued-skew-036",
+   "description": "At the log: issued two hours from T",
+   "section": "Validation rules",
+   "inputs": {
+    "manifest": "as-ok-with-proof",
+    "cid": "014777fbe5828f0eb29bfb4ab79bd7cf799ecb446d4283a1db64b2ba1e880a99e3",
+    "issued": 1791345600,
+    "log_clock_T": 1791352800,
+    "V": 1
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-submission",
+    "rule": "P5",
+    "reason": "issued is more than 3600 seconds from the log's clock"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-ok-log-of-record-listed-second-037",
+   "description": "The manifest's log of record (the log its proof names) is the context's second listed log: accepted; the verifier in force was read at the manifest's position in that log",
+   "section": "Validation rules",
+   "inputs": {
+    "manifest": "as-ok-with-proof",
+    "cid": "014777fbe5828f0eb29bfb4ab79bd7cf799ecb446d4283a1db64b2ba1e880a99e3",
+    "log_of_record": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+    "context_logs": [
+     "dcbf71187dcaa0d37986aa1b5b5487abeca24049780898ab085d7c1713ffec320d",
+     "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53"
+    ]
+   },
+   "expected": {
+    "accept": true,
+    "verifier_read_in": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53"
+   }
+  },
+  {
+   "id": "agent-sponsor/manifests/as-bad-log-of-record-not-listed-038",
+   "description": "The context lists no log holding the manifest: a phone in that context does not accept it",
+   "section": "Validation rules",
+   "inputs": {
+    "manifest": "as-ok-with-proof",
+    "cid": "014777fbe5828f0eb29bfb4ab79bd7cf799ecb446d4283a1db64b2ba1e880a99e3",
+    "log_of_record": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+    "context_logs": [
+     "dcbf71187dcaa0d37986aa1b5b5487abeca24049780898ab085d7c1713ffec320d"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "context-logs",
+    "rule": "AS-8",
+    "reason": "the manifest's log of record is not one of the context's logs"
+   }
+  }
+ ]
+}

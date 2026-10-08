@@ -1,0 +1,1187 @@
+{
+ "spec": "release",
+ "file": "sigmas",
+ "notes": "\u03c3 per part for the three valid plans (deck.md Vectors): \u0394\u00b2 per part from the Parts table, \u0394_cov = covScale + \u2308\u221a(M(M+1)/2) / 2\u2309 (release.md Round 1), \u03c3\u00b2 = \u0394\u00b2\u00b7den/(2\u00b7num) in lowest terms, \u03c3_r = n/2\u00b2\u2070 with n the least integer such that n\u00b2\u00b7q \u2265 p\u00b72\u2074\u2070 (the rational the sampler is called with), and `sigma` = round(\u03c3_r \u00d7 10\u2076) ties to even (covariance: round(\u03c3_r / covScale \u00d7 10\u2076)). A sampler called with \u03c3, or with a binary64 value, is non-conformant. The boundary cases show \u03c3\u00b2 a perfect square of a dyadic (n exactly at the bound), \u03c3\u00b2 one unit of 2\u207b\u2074\u2070 below that square (n rounds up to the same value), and \u03c3 within 2\u207b\u00b2\u2070 below an integer, where \u2308\u03c3_8\u2309 over \u03c3\u00b2 (release.md Receipts) and \u2308\u03c3_r\u2309 are both shown.",
+ "cases": [
+  {
+   "id": "release/sigmas/plan-001",
+   "description": "\u03c3 per part for plan full on an 18-card deck",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "1": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "2": {
+       "num": 747,
+       "den": 20000,
+       "rat": [
+        747,
+        20000
+       ]
+      },
+      "3": {
+       "num": 1743,
+       "den": 20000,
+       "rat": [
+        1743,
+        20000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "cards": 18
+   },
+   "expected": {
+    "0": {
+     "name": "tallies",
+     "delta_squared": 61,
+     "rho": {
+      "num": 747,
+      "den": 20000,
+      "rat": [
+       747,
+       20000
+      ]
+     },
+     "sigma_squared": {
+      "num": 610000,
+      "den": 747,
+      "rat": [
+       610000,
+       747
+      ]
+     },
+     "n": 3745541,
+     "sigma_r": {
+      "num": 3745541,
+      "den": 131072,
+      "rat": [
+       3745541,
+       131072
+      ]
+     },
+     "sigma": 28.57620920035376,
+     "sigma_micro": 28576210
+    },
+    "1": {
+     "name": "covariance",
+     "delta_squared": 4295884849,
+     "rho": {
+      "num": 1743,
+      "den": 20000,
+      "rat": [
+       1743,
+       20000
+      ]
+     },
+     "sigma_squared": {
+      "num": 42958848490000,
+      "den": 1743,
+      "rat": [
+       42958848490000,
+       1743
+      ]
+     },
+     "n": 164618081319,
+     "sigma_r": {
+      "num": 164618081319,
+      "den": 1048576,
+      "rat": [
+       164618081319,
+       1048576
+      ]
+     },
+     "sigma": 156992.03616916147,
+     "sigma_micro": 2395508,
+     "sigma_real_units": 2.3955083643976054
+    },
+    "2": {
+     "name": "map",
+     "delta_squared": 1,
+     "rho": {
+      "num": 747,
+      "den": 20000,
+      "rat": [
+       747,
+       20000
+      ]
+     },
+     "sigma_squared": {
+      "num": 10000,
+      "den": 747,
+      "rat": [
+       10000,
+       747
+      ]
+     },
+     "n": 3836539,
+     "sigma_r": {
+      "num": 3836539,
+      "den": 1048576,
+      "rat": [
+       3836539,
+       1048576
+      ]
+     },
+     "sigma": 3.658808666323012,
+     "sigma_micro": 3658809
+    },
+    "3": {
+     "name": "groups",
+     "delta_squared": 61,
+     "rho": {
+      "num": 1743,
+      "den": 20000,
+      "rat": [
+       1743,
+       20000
+      ]
+     },
+     "sigma_squared": {
+      "num": 610000,
+      "den": 1743,
+      "rat": [
+       610000,
+       1743
+      ]
+     },
+     "n": 19616257,
+     "sigma_r": {
+      "num": 19616257,
+      "den": 1048576,
+      "rat": [
+       19616257,
+       1048576
+      ]
+     },
+     "sigma": 18.707520247930656,
+     "sigma_micro": 18707520
+    },
+    "8": {
+     "name": "receipts",
+     "delta_squared": 4,
+     "rho": {
+      "num": 1,
+      "den": 200,
+      "rat": [
+       1,
+       200
+      ]
+     },
+     "sigma_squared": {
+      "num": 400,
+      "den": 1,
+      "rat": [
+       400,
+       1
+      ]
+     },
+     "n": 20,
+     "sigma_r": {
+      "num": 20,
+      "den": 1,
+      "rat": [
+       20,
+       1
+      ]
+     },
+     "sigma": 20.0,
+     "sigma_micro": 20000000
+    }
+   }
+  },
+  {
+   "id": "release/sigmas/plan-002",
+   "description": "\u03c3 per part for plan tallies-only on an 18-card deck",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 61,
+       "den": 250,
+       "rat": [
+        61,
+        250
+       ]
+      },
+      "4": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 30,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "cards": 18
+   },
+   "expected": {
+    "0": {
+     "name": "tallies",
+     "delta_squared": 31,
+     "rho": {
+      "num": 61,
+      "den": 250,
+      "rat": [
+       61,
+       250
+      ]
+     },
+     "sigma_squared": {
+      "num": 3875,
+      "den": 61,
+      "rat": [
+       3875,
+       61
+      ]
+     },
+     "n": 4178697,
+     "sigma_r": {
+      "num": 4178697,
+      "den": 524288,
+      "rat": [
+       4178697,
+       524288
+      ]
+     },
+     "sigma": 7.970231500021465,
+     "sigma_micro": 7970232
+    },
+    "4": {
+     "name": "count",
+     "delta_squared": 1,
+     "rho": {
+      "num": 1,
+      "den": 200,
+      "rat": [
+       1,
+       200
+      ]
+     },
+     "sigma_squared": {
+      "num": 100,
+      "den": 1,
+      "rat": [
+       100,
+       1
+      ]
+     },
+     "n": 10,
+     "sigma_r": {
+      "num": 10,
+      "den": 1,
+      "rat": [
+       10,
+       1
+      ]
+     },
+     "sigma": 10.0,
+     "sigma_micro": 10000000
+    },
+    "8": {
+     "name": "receipts",
+     "delta_squared": 1,
+     "rho": {
+      "num": 1,
+      "den": 200,
+      "rat": [
+       1,
+       200
+      ]
+     },
+     "sigma_squared": {
+      "num": 100,
+      "den": 1,
+      "rat": [
+       100,
+       1
+      ]
+     },
+     "n": 10,
+     "sigma_r": {
+      "num": 10,
+      "den": 1,
+      "rat": [
+       10,
+       1
+      ]
+     },
+     "sigma": 10.0,
+     "sigma_micro": 10000000
+    }
+   }
+  },
+  {
+   "id": "release/sigmas/plan-003",
+   "description": "\u03c3 per part for plan ibis on an 18-card deck",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 3237,
+       "den": 100000,
+       "rat": [
+        3237,
+        100000
+       ]
+      },
+      "1": {
+       "num": 747,
+       "den": 10000,
+       "rat": [
+        747,
+        10000
+       ]
+      },
+      "2": {
+       "num": 3237,
+       "den": 100000,
+       "rat": [
+        3237,
+        100000
+       ]
+      },
+      "3": {
+       "num": 747,
+       "den": 10000,
+       "rat": [
+        747,
+        10000
+       ]
+      },
+      "5": {
+       "num": 249,
+       "den": 12500,
+       "rat": [
+        249,
+        12500
+       ]
+      },
+      "6": {
+       "num": 747,
+       "den": 50000,
+       "rat": [
+        747,
+        50000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536,
+     "capMovement": 10,
+     "capRatings": 10
+    },
+    "cards": 18
+   },
+   "expected": {
+    "0": {
+     "name": "tallies",
+     "delta_squared": 61,
+     "rho": {
+      "num": 3237,
+      "den": 100000,
+      "rat": [
+       3237,
+       100000
+      ]
+     },
+     "sigma_squared": {
+      "num": 3050000,
+      "den": 3237,
+      "rat": [
+       3050000,
+       3237
+      ]
+     },
+     "n": 32186851,
+     "sigma_r": {
+      "num": 32186851,
+      "den": 1048576,
+      "rat": [
+       32186851,
+       1048576
+      ]
+     },
+     "sigma": 30.69577267805372,
+     "sigma_micro": 30695773
+    },
+    "1": {
+     "name": "covariance",
+     "delta_squared": 4295884849,
+     "rho": {
+      "num": 747,
+      "den": 10000,
+      "rat": [
+       747,
+       10000
+      ]
+     },
+     "sigma_squared": {
+      "num": 21479424245000,
+      "den": 747,
+      "rat": [
+       21479424245000,
+       747
+      ]
+     },
+     "n": 177807849883,
+     "sigma_r": {
+      "num": 177807849883,
+      "den": 1048576,
+      "rat": [
+       177807849883,
+       1048576
+      ]
+     },
+     "sigma": 169570.7796879006,
+     "sigma_micro": 2587445,
+     "sigma_real_units": 2.5874447584213347
+    },
+    "2": {
+     "name": "map",
+     "delta_squared": 1,
+     "rho": {
+      "num": 3237,
+      "den": 100000,
+      "rat": [
+       3237,
+       100000
+      ]
+     },
+     "sigma_squared": {
+      "num": 50000,
+      "den": 3237,
+      "rat": [
+       50000,
+       3237
+      ]
+     },
+     "n": 257569,
+     "sigma_r": {
+      "num": 257569,
+      "den": 65536,
+      "rat": [
+       257569,
+       65536
+      ]
+     },
+     "sigma": 3.9301909608274332,
+     "sigma_micro": 3930191
+    },
+    "3": {
+     "name": "groups",
+     "delta_squared": 71,
+     "rho": {
+      "num": 747,
+      "den": 10000,
+      "rat": [
+       747,
+       10000
+      ]
+     },
+     "sigma_squared": {
+      "num": 355000,
+      "den": 747,
+      "rat": [
+       355000,
+       747
+      ]
+     },
+     "n": 5714705,
+     "sigma_r": {
+      "num": 5714705,
+      "den": 262144,
+      "rat": [
+       5714705,
+       262144
+      ]
+     },
+     "sigma": 21.79986858710376,
+     "sigma_micro": 21799870
+    },
+    "5": {
+     "name": "movement",
+     "delta_squared": 20,
+     "rho": {
+      "num": 249,
+      "den": 12500,
+      "rat": [
+       249,
+       12500
+      ]
+     },
+     "sigma_squared": {
+      "num": 125000,
+      "den": 249,
+      "rat": [
+       125000,
+       249
+      ]
+     },
+     "n": 5873477,
+     "sigma_r": {
+      "num": 5873477,
+      "den": 262144,
+      "rat": [
+       5873477,
+       262144
+      ]
+     },
+     "sigma": 22.405535747411044,
+     "sigma_micro": 22405537
+    },
+    "6": {
+     "name": "ratings",
+     "delta_squared": 10,
+     "rho": {
+      "num": 747,
+      "den": 50000,
+      "rat": [
+       747,
+       50000
+      ]
+     },
+     "sigma_squared": {
+      "num": 250000,
+      "den": 747,
+      "rat": [
+       250000,
+       747
+      ]
+     },
+     "n": 19182695,
+     "sigma_r": {
+      "num": 19182695,
+      "den": 1048576,
+      "rat": [
+       19182695,
+       1048576
+      ]
+     },
+     "sigma": 18.29404333161506,
+     "sigma_micro": 18294044
+    },
+    "8": {
+     "name": "receipts",
+     "delta_squared": 4,
+     "rho": {
+      "num": 1,
+      "den": 200,
+      "rat": [
+       1,
+       200
+      ]
+     },
+     "sigma_squared": {
+      "num": 400,
+      "den": 1,
+      "rat": [
+       400,
+       1
+      ]
+     },
+     "n": 20,
+     "sigma_r": {
+      "num": 20,
+      "den": 1,
+      "rat": [
+       20,
+       1
+      ]
+     },
+     "sigma": 20.0,
+     "sigma_micro": 20000000
+    }
+   }
+  },
+  {
+   "id": "release/sigmas/absorbed-004",
+   "description": "Full plan with count and absorb whose tier stayed locked: tallies noised with \u03c1_tallies + \u03c1_cov + \u03c1_map + \u03c1_groups",
+   "section": "release.md Noise",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 183,
+       "den": 5000,
+       "rat": [
+        183,
+        5000
+       ]
+      },
+      "1": {
+       "num": 427,
+       "den": 5000,
+       "rat": [
+        427,
+        5000
+       ]
+      },
+      "2": {
+       "num": 183,
+       "den": 5000,
+       "rat": [
+        183,
+        5000
+       ]
+      },
+      "3": {
+       "num": 427,
+       "den": 5000,
+       "rat": [
+        427,
+        5000
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      },
+      "4": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 60,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": true,
+     "roundWindow": 259200,
+     "covScale": 65536
+    }
+   },
+   "expected": {
+    "tallies_rho": {
+     "num": 61,
+     "den": 250,
+     "rat": [
+      61,
+      250
+     ]
+    },
+    "sigma_squared": {
+     "num": 125,
+     "den": 1,
+     "rat": [
+      125,
+      1
+     ]
+    },
+    "n": 11723437,
+    "sigma_r": {
+     "num": 11723437,
+     "den": 1048576,
+     "rat": [
+      11723437,
+      1048576
+     ]
+    },
+    "sigma": 11.180339887498947,
+    "sigma_micro": 11180341
+   }
+  },
+  {
+   "id": "release/sigmas/example-005",
+   "description": "\u03c3_r and `sigma` per part for release.md's example plan (cap 18, 18 cards, covScale 2\u00b9\u2076, \u0394_cov 65543): tallies 18386906, covariance 2371813, map 3622619, groups 10337391, count 10000000 and receipts 20000000 (perfect squares)",
+   "section": "release.md Noise",
+   "inputs": {
+    "plan": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "parts": {
+      "0": {
+       "num": 281,
+       "den": 10000,
+       "rat": [
+        281,
+        10000
+       ]
+      },
+      "1": {
+       "num": 889,
+       "den": 10000,
+       "rat": [
+        889,
+        10000
+       ]
+      },
+      "2": {
+       "num": 381,
+       "den": 10000,
+       "rat": [
+        381,
+        10000
+       ]
+      },
+      "3": {
+       "num": 889,
+       "den": 10000,
+       "rat": [
+        889,
+        10000
+       ]
+      },
+      "4": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      },
+      "8": {
+       "num": 1,
+       "den": 200,
+       "rat": [
+        1,
+        200
+       ]
+      }
+     },
+     "cap": 18,
+     "minVoters": 100,
+     "grid": 24,
+     "absorb": false,
+     "roundWindow": 259200,
+     "covScale": 65536
+    },
+    "cards": 18
+   },
+   "expected": {
+    "0": {
+     "name": "tallies",
+     "sigma_squared": {
+      "num": 95000,
+      "den": 281,
+      "rat": [
+       95000,
+       281
+      ]
+     },
+     "n": 19280068,
+     "sigma_r": {
+      "num": 4820017,
+      "den": 262144,
+      "rat": [
+       4820017,
+       262144
+      ]
+     },
+     "sigma": 18.38690544422706,
+     "sigma_micro": 18386906
+    },
+    "1": {
+     "name": "covariance",
+     "sigma_squared": {
+      "num": 21479424245000,
+      "den": 889,
+      "rat": [
+       21479424245000,
+       889
+      ]
+     },
+     "n": 162989771448,
+     "sigma_r": {
+      "num": 20373721431,
+      "den": 131072,
+      "rat": [
+       20373721431,
+       131072
+      ]
+     },
+     "sigma": 155439.15886645604,
+     "sigma_micro": 2371813,
+     "cov_scale": 65536
+    },
+    "2": {
+     "name": "map",
+     "sigma_squared": {
+      "num": 5000,
+      "den": 381,
+      "rat": [
+       5000,
+       381
+      ]
+     },
+     "n": 3798591,
+     "sigma_r": {
+      "num": 3798591,
+      "den": 1048576,
+      "rat": [
+       3798591,
+       1048576
+      ]
+     },
+     "sigma": 3.622617780011092,
+     "sigma_micro": 3622619
+    },
+    "3": {
+     "name": "groups",
+     "sigma_squared": {
+      "num": 95000,
+      "den": 889,
+      "rat": [
+       95000,
+       889
+      ]
+     },
+     "n": 10839540,
+     "sigma_r": {
+      "num": 2709885,
+      "den": 262144,
+      "rat": [
+       2709885,
+       262144
+      ]
+     },
+     "sigma": 10.337390497350537,
+     "sigma_micro": 10337391
+    },
+    "4": {
+     "name": "count",
+     "sigma_squared": {
+      "num": 100,
+      "den": 1,
+      "rat": [
+       100,
+       1
+      ]
+     },
+     "n": 10485760,
+     "sigma_r": {
+      "num": 10,
+      "den": 1,
+      "rat": [
+       10,
+       1
+      ]
+     },
+     "sigma": 10.0,
+     "sigma_micro": 10000000
+    },
+    "8": {
+     "name": "receipts",
+     "sigma_squared": {
+      "num": 400,
+      "den": 1,
+      "rat": [
+       400,
+       1
+      ]
+     },
+     "n": 20971520,
+     "sigma_r": {
+      "num": 20,
+      "den": 1,
+      "rat": [
+       20,
+       1
+      ]
+     },
+     "sigma": 20.0,
+     "sigma_micro": 20000000
+    }
+   }
+  },
+  {
+   "id": "release/sigmas/boundary-square-006",
+   "description": "\u03c3\u00b2 = 100, a perfect square: n = 10\u00b72\u00b2\u2070 exactly at the bound, \u03c3_r = \u03c3 = 10",
+   "section": "release.md Noise, Receipts",
+   "inputs": {
+    "delta_squared": 1,
+    "rho": {
+     "num": 1,
+     "den": 200,
+     "rat": [
+      1,
+      200
+     ]
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 100,
+     "den": 1,
+     "rat": [
+      100,
+      1
+     ]
+    },
+    "n": 10485760,
+    "sigma_r": {
+     "num": 10,
+     "den": 1,
+     "rat": [
+      10,
+      1
+     ]
+    },
+    "sigma": 10.0,
+    "sigma_micro": 10000000,
+    "ceil_sigma_over_sigma_squared": 10,
+    "ceil_sigma_r": 10
+   }
+  },
+  {
+   "id": "release/sigmas/boundary-dyadic-square-007",
+   "description": "\u03c3\u00b2 = 25/16, the square of the dyadic 5/4: n exactly at the bound, \u03c3_r = \u03c3",
+   "section": "release.md Noise, Receipts",
+   "inputs": {
+    "delta_squared": 25,
+    "rho": {
+     "num": 8,
+     "den": 1,
+     "rat": [
+      8,
+      1
+     ]
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 25,
+     "den": 16,
+     "rat": [
+      25,
+      16
+     ]
+    },
+    "n": 1310720,
+    "sigma_r": {
+     "num": 5,
+     "den": 4,
+     "rat": [
+      5,
+      4
+     ]
+    },
+    "sigma": 1.25,
+    "sigma_micro": 1250000,
+    "ceil_sigma_over_sigma_squared": 2,
+    "ceil_sigma_r": 2
+   }
+  },
+  {
+   "id": "release/sigmas/boundary-one-below-square-008",
+   "description": "\u03c3\u00b2 = (10\u00b72\u00b2\u2070)\u00b2 \u2212 1 over 2\u2074\u2070, one unit below a dyadic square: n rounds up to 10\u00b72\u00b2\u2070 and \u03c3_r = 10 (the (n\u22121)\u00b2 test fails by one)",
+   "section": "release.md Noise, Receipts",
+   "inputs": {
+    "delta_squared": 109951162777599,
+    "rho": {
+     "num": 549755813888,
+     "den": 1,
+     "rat": [
+      549755813888,
+      1
+     ]
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 109951162777599,
+     "den": 1099511627776,
+     "rat": [
+      109951162777599,
+      1099511627776
+     ]
+    },
+    "n": 10485760,
+    "sigma_r": {
+     "num": 10,
+     "den": 1,
+     "rat": [
+      10,
+      1
+     ]
+    },
+    "sigma": 9.999999999999954,
+    "sigma_micro": 10000000,
+    "ceil_sigma_over_sigma_squared": 10,
+    "ceil_sigma_r": 10
+   }
+  },
+  {
+   "id": "release/sigmas/boundary-below-integer-009",
+   "description": "\u03c3 within 2\u207b\u00b2\u2070 below 20 (\u03c3\u00b2 = 400 \u2212 2\u207b\u00b3\u2070): \u03c3_r = 20; \u2308\u03c3_8\u2309 over \u03c3\u00b2 is 20 and \u2308\u03c3_r\u2309 is 20, the same",
+   "section": "release.md Noise, Receipts",
+   "inputs": {
+    "delta_squared": 1,
+    "rho": {
+     "num": 536870912,
+     "den": 429496729599,
+     "rat": [
+      536870912,
+      429496729599
+     ]
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 429496729599,
+     "den": 1073741824,
+     "rat": [
+      429496729599,
+      1073741824
+     ]
+    },
+    "n": 20971520,
+    "sigma_r": {
+     "num": 20,
+     "den": 1,
+     "rat": [
+      20,
+      1
+     ]
+    },
+    "sigma": 19.99999999997672,
+    "sigma_micro": 20000000,
+    "ceil_sigma_over_sigma_squared": 20,
+    "ceil_sigma_r": 20
+   }
+  }
+ ]
+}

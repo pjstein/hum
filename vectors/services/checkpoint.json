@@ -1,0 +1,102 @@
+{
+ "spec": "services",
+ "file": "checkpoint",
+ "notes": "Checkpoint acceptance as services.md lists it; the log key id derivation.",
+ "cases": [
+  {
+   "id": "services/checkpoint/checkpoint-valid-001",
+   "description": "Log signature and two cosignatures",
+   "section": "Log and ledger",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\netFTQ5DJIhRkjFvjdLAaYM2O+EWSu1AvnOsbT+cmjOg=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBlpsk9GrxNoP1xFLP5gNeu/xoCY7Hhfq6UbFm6FaqzrLq0RgXKHUU5DPrXXBq1QRctdxXVHEhCm32NJZ24RIKAM=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAOp44HbLc11SMyGw+KqOBwLuC1bB2JYkvoak8yF8cxlOzaZaJ0VK0VuUtudeKoyIhhZyLCR24KcziuJ6c03GdCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAVV7kkUDXfE6nlnGXXqxQHw8R7WTFS6zrruUjj8c64QLDKdsQ0J2wwShD9L+6GX4aUPWS+EYfISesXRkrOGPGCA==\n",
+    "witness_keys": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ]
+   },
+   "expected": {
+    "cosigners": 2,
+    "log_key_id": "5be17006"
+   }
+  },
+  {
+   "id": "services/checkpoint/checkpoint-reject-one-cosignature-002",
+   "description": "One cosignature (W-2)",
+   "section": "Log and ledger",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\netFTQ5DJIhRkjFvjdLAaYM2O+EWSu1AvnOsbT+cmjOg=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBlpsk9GrxNoP1xFLP5gNeu/xoCY7Hhfq6UbFm6FaqzrLq0RgXKHUU5DPrXXBq1QRctdxXVHEhCm32NJZ24RIKAM=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAOp44HbLc11SMyGw+KqOBwLuC1bB2JYkvoak8yF8cxlOzaZaJ0VK0VuUtudeKoyIhhZyLCR24KcziuJ6c03GdCA==\n",
+    "witness_keys": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "rule": "W-2"
+   }
+  },
+  {
+   "id": "services/checkpoint/checkpoint-reject-no-log-signature-003",
+   "description": "Missing the log's own signature",
+   "section": "Log and ledger",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\netFTQ5DJIhRkjFvjdLAaYM2O+EWSu1AvnOsbT+cmjOg=\n\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAOp44HbLc11SMyGw+KqOBwLuC1bB2JYkvoak8yF8cxlOzaZaJ0VK0VuUtudeKoyIhhZyLCR24KcziuJ6c03GdCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAVV7kkUDXfE6nlnGXXqxQHw8R7WTFS6zrruUjj8c64QLDKdsQ0J2wwShD9L+6GX4aUPWS+EYfISesXRkrOGPGCA==\n"
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "checkpoint is not signed by the log"
+   }
+  },
+  {
+   "id": "services/checkpoint/checkpoint-reject-unlisted-witness-004",
+   "description": "A cosignature from an unlisted witness does not count",
+   "section": "Log and ledger",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\netFTQ5DJIhRkjFvjdLAaYM2O+EWSu1AvnOsbT+cmjOg=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBlpsk9GrxNoP1xFLP5gNeu/xoCY7Hhfq6UbFm6FaqzrLq0RgXKHUU5DPrXXBq1QRctdxXVHEhCm32NJZ24RIKAM=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAOp44HbLc11SMyGw+KqOBwLuC1bB2JYkvoak8yF8cxlOzaZaJ0VK0VuUtudeKoyIhhZyLCR24KcziuJ6c03GdCA==\n\u2014 hum/witness/unlisted Ud8/LAAAAABqxHJA/BzV1dtr00bZ+Cd6cYsmFgLRK8zJQ0Vy2gTxKFnSx4HV71ZvCh70c3Pk9ST/MfBd1QKUtLfo0opYupcapx6wCQ==\n",
+    "witness_keys": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "rule": "W-2",
+    "cosigners": 1
+   }
+  },
+  {
+   "id": "services/checkpoint/checkpoint-reject-key-id-mismatch-005",
+   "description": "A cosignature whose name does not match its key id (recomputed from name and key)",
+   "section": "Log and ledger",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\netFTQ5DJIhRkjFvjdLAaYM2O+EWSu1AvnOsbT+cmjOg=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBlpsk9GrxNoP1xFLP5gNeu/xoCY7Hhfq6UbFm6FaqzrLq0RgXKHUU5DPrXXBq1QRctdxXVHEhCm32NJZ24RIKAM=\n\u2014 hum/witness/renamed RGX2LwAAAABqxHJAOp44HbLc11SMyGw+KqOBwLuC1bB2JYkvoak8yF8cxlOzaZaJ0VK0VuUtudeKoyIhhZyLCR24KcziuJ6c03GdCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAVV7kkUDXfE6nlnGXXqxQHw8R7WTFS6zrruUjj8c64QLDKdsQ0J2wwShD9L+6GX4aUPWS+EYfISesXRkrOGPGCA==\n",
+    "witness_keys": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "rule": "W-2",
+    "cosigners": 1
+   }
+  },
+  {
+   "id": "services/checkpoint/checkpoint-reject-tampered-timestamp-006",
+   "description": "A tampered cosignature timestamp",
+   "section": "Log and ledger",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\netFTQ5DJIhRkjFvjdLAaYM2O+EWSu1AvnOsbT+cmjOg=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBlpsk9GrxNoP1xFLP5gNeu/xoCY7Hhfq6UbFm6FaqzrLq0RgXKHUU5DPrXXBq1QRctdxXVHEhCm32NJZ24RIKAM=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJBOp44HbLc11SMyGw+KqOBwLuC1bB2JYkvoak8yF8cxlOzaZaJ0VK0VuUtudeKoyIhhZyLCR24KcziuJ6c03GdCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAVV7kkUDXfE6nlnGXXqxQHw8R7WTFS6zrruUjj8c64QLDKdsQ0J2wwShD9L+6GX4aUPWS+EYfISesXRkrOGPGCA==\n",
+    "witness_keys": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "rule": "W-2",
+    "cosigners": 1
+   }
+  }
+ ]
+}

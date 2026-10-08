@@ -4,7 +4,9 @@ version = "0.0.0"
 description = "Hum reference implementation: a small, readable Python port of every spec rule with bytes or numbers in it. Generates vectors/."
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+  "cryptography>=43",
+]
 
 [project.scripts]
 hum-vectors = "hum_reference.cli:main"
@@ -13,6 +15,7 @@ hum-vectors = "hum_reference.cli:main"
 dev = [
   "pytest>=8",
   "ruff>=0.6",
+  "numpy>=1.26",
 ]
 
 [build-system]
@@ -28,6 +31,10 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# Vector generators carry long human-readable case descriptions.
+"src/hum_reference/vectors/*" = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

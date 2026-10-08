@@ -1,0 +1,46 @@
+{
+ "spec": "storage",
+ "file": "delete",
+ "notes": "\u00a78.1. Delete secret to commitment; a wrong or reused secret does not match.",
+ "cases": [
+  {
+   "id": "storage/delete/delete-commitment-001",
+   "description": "commitment = SHA-256(\"hum/delete/1\" || secret)",
+   "section": "8.1",
+   "inputs": {
+    "delete_secret": "3a546c8404ede0c6723509e280ddb3525bb90fba026bfb6dc68cb6494f725305"
+   },
+   "expected": {
+    "commitment": "514e020243eb5a5fc966d900568468f6d0b4acaaff5bdddac3fa34d959b2e23e"
+   }
+  },
+  {
+   "id": "storage/delete/delete-wrong-secret-002",
+   "description": "A different secret against blob A's commitment",
+   "section": "8.1",
+   "inputs": {
+    "delete_secret": "0000000000000000000000000000000000000000000000000000000000000000",
+    "commitment": "514e020243eb5a5fc966d900568468f6d0b4acaaff5bdddac3fa34d959b2e23e"
+   },
+   "rejection": {
+    "step": null,
+    "check": "delete",
+    "reason": "bad-secret"
+   }
+  },
+  {
+   "id": "storage/delete/delete-reused-secret-003",
+   "description": "Blob A's secret against blob B's commitment",
+   "section": "8.1",
+   "inputs": {
+    "delete_secret": "3a546c8404ede0c6723509e280ddb3525bb90fba026bfb6dc68cb6494f725305",
+    "commitment": "83986b6c3086cb6a6aeeacaae853d17093df462b7cdeaee6fadacb99315d243e"
+   },
+   "rejection": {
+    "step": null,
+    "check": "delete",
+    "reason": "bad-secret"
+   }
+  }
+ ]
+}

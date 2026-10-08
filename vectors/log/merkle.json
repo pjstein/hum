@@ -1,0 +1,183 @@
+{
+ "spec": "log",
+ "file": "merkle",
+ "notes": "RFC 9162 section 2.1 hashing. Leaves are the Certificate Transparency test leaves; the size-8 root matches the known answer 5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328.",
+ "cases": [
+  {
+   "id": "log/merkle/root-001",
+   "description": "Root hash of the first 0 leaves",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaves": []
+   },
+   "expected": {
+    "root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  },
+  {
+   "id": "log/merkle/root-002",
+   "description": "Root hash of the first 1 leaves",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaves": [
+     ""
+    ]
+   },
+   "expected": {
+    "root": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+   }
+  },
+  {
+   "id": "log/merkle/root-003",
+   "description": "Root hash of the first 2 leaves",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaves": [
+     "",
+     "00"
+    ]
+   },
+   "expected": {
+    "root": "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125"
+   }
+  },
+  {
+   "id": "log/merkle/root-004",
+   "description": "Root hash of the first 3 leaves",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaves": [
+     "",
+     "00",
+     "10"
+    ]
+   },
+   "expected": {
+    "root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77"
+   }
+  },
+  {
+   "id": "log/merkle/root-005",
+   "description": "Root hash of the first 4 leaves",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaves": [
+     "",
+     "00",
+     "10",
+     "2021"
+    ]
+   },
+   "expected": {
+    "root": "d37ee418976dd95753c1c73862b9398fa2a2cf9b4ff0fdfe8b30cd95209614b7"
+   }
+  },
+  {
+   "id": "log/merkle/root-006",
+   "description": "Root hash of the first 5 leaves",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaves": [
+     "",
+     "00",
+     "10",
+     "2021",
+     "3031"
+    ]
+   },
+   "expected": {
+    "root": "4e3bbb1f7b478dcfe71fb631631519a3bca12c9aefca1612bfce4c13a86264d4"
+   }
+  },
+  {
+   "id": "log/merkle/root-007",
+   "description": "Root hash of the first 6 leaves",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaves": [
+     "",
+     "00",
+     "10",
+     "2021",
+     "3031",
+     "40414243"
+    ]
+   },
+   "expected": {
+    "root": "76e67dadbcdf1e10e1b74ddc608abd2f98dfb16fbce75277b5232a127f2087ef"
+   }
+  },
+  {
+   "id": "log/merkle/root-008",
+   "description": "Root hash of the first 7 leaves",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaves": [
+     "",
+     "00",
+     "10",
+     "2021",
+     "3031",
+     "40414243",
+     "5051525354555657"
+    ]
+   },
+   "expected": {
+    "root": "ddb89be403809e325750d3d263cd78929c2942b7942a34b77e122c9594a74c8c"
+   }
+  },
+  {
+   "id": "log/merkle/root-009",
+   "description": "Root hash of the first 8 leaves",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaves": [
+     "",
+     "00",
+     "10",
+     "2021",
+     "3031",
+     "40414243",
+     "5051525354555657",
+     "606162636465666768696a6b6c6d6e6f"
+    ]
+   },
+   "expected": {
+    "root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   }
+  },
+  {
+   "id": "log/merkle/leaf-hash-010",
+   "description": "Leaf hash of leaf 0",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaf": ""
+   },
+   "expected": {
+    "leaf_hash": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+   }
+  },
+  {
+   "id": "log/merkle/leaf-hash-011",
+   "description": "Leaf hash of leaf 1",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaf": "00"
+   },
+   "expected": {
+    "leaf_hash": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+   }
+  },
+  {
+   "id": "log/merkle/leaf-hash-012",
+   "description": "Leaf hash of leaf 2",
+   "section": "RFC 9162 2.1",
+   "inputs": {
+    "leaf": "10"
+   },
+   "expected": {
+    "leaf_hash": "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7"
+   }
+  }
+ ]
+}

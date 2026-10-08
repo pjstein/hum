@@ -1,0 +1,522 @@
+{
+ "spec": "ballot",
+ "file": "invalid",
+ "notes": "One failing case per rule sub-condition that needs no real presentation or DAP report. Pending: B2 (presentations), B3 agent-class/entry-not-vote with real cards, B9 gate disclosure, B11.",
+ "cases": [
+  {
+   "id": "ballot/invalid/ballot-invalid-B1-size-001",
+   "description": "48 KiB + 1",
+   "section": "Validation rules",
+   "inputs": {
+    "frame_length": 49153
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B1",
+    "error": "malformed",
+    "reason": "frame is 49153 bytes"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B1-nonzero-tail-002",
+   "description": "a non-zero byte after the ballot",
+   "section": "Validation rules",
+   "inputs": {
+    "frame_sha256": "2deeb272bf53fb52344fd7a868d82a888613f8acdb0811dd644084415f7f1731"
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B1",
+    "error": "malformed",
+    "reason": "non-zero byte after the ballot"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B1-length-prefix-003",
+   "description": "a length prefix larger than the frame",
+   "section": "Validation rules",
+   "inputs": {
+    "prefix": "0000c000"
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B1",
+    "error": "malformed",
+    "reason": "length prefix larger than the frame"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B1-presentation-9k-004",
+   "description": "a 9 KiB presentation",
+   "section": "Validation rules",
+   "inputs": {
+    "presentation_bytes": 9216
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B1",
+    "error": "malformed",
+    "reason": "presentation over 8 KiB or not bytes"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B1-round-4-005",
+   "description": "round 4",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B1",
+    "error": "malformed",
+    "reason": "round must be 0..3"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B1-nonce-31-006",
+   "description": "nonce of 31 bytes",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B1",
+    "error": "malformed",
+    "reason": "nonce must be 32 bytes"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B1-unknown-key-007",
+   "description": "unknown key 6 holding an agentKey signature",
+   "section": "Validation rules",
+   "inputs": {
+    "key": 6
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B1",
+    "error": "malformed",
+    "reason": "ballot must have exactly keys 0..5"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B1-other-deck-008",
+   "description": "a different deck",
+   "section": "Validation rules",
+   "inputs": {
+    "deck": "01cbef2cbfcdd6e3520175a6c4d489357e616d5bd791e0f28000380c7d40e91b48"
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B1",
+    "error": "malformed",
+    "reason": "deck is not a version this endpoint serves"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B3-no-card-009",
+   "description": "no card proof (agents never vote)",
+   "section": "Validation rules",
+   "inputs": {
+    "outcome": {
+     "nullifiers": [],
+     "primary": null,
+     "cards": []
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B3",
+    "error": "rejected",
+    "reason": "no card proof satisfies a leaf"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B3-agent-class-010",
+   "description": "an agent-class card",
+   "section": "Validation rules",
+   "inputs": {
+    "outcome": {
+     "nullifiers": [
+      "a2fc2e348f41db0b1532fab0bff20983aa8d9dec9f193d3922b6e079889f4f4e"
+     ],
+     "primary": "a2fc2e348f41db0b1532fab0bff20983aa8d9dec9f193d3922b6e079889f4f4e",
+     "cards": [
+      {
+       "class": "agent",
+       "issuer": "014c971e515d593af2260672d09529cf92a9a015ebbf9bcc41d9990a4292b91317",
+       "satisfies": true
+      }
+     ]
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B3",
+    "error": "rejected",
+    "reason": "a card is not from a person-class verifier"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B3-entry-not-vote-011",
+   "description": "a presentation satisfying entry but not vote (no card satisfies a vote leaf)",
+   "section": "Validation rules",
+   "inputs": {
+    "outcome": {
+     "nullifiers": [
+      "a98f67abb8890a8681d5f80b07e17445bd0c4dabd8f7ed8f37ce95996c6b4258"
+     ],
+     "primary": "a98f67abb8890a8681d5f80b07e17445bd0c4dabd8f7ed8f37ce95996c6b4258",
+     "cards": [
+      {
+       "class": "person",
+       "issuer": "014c971e515d593af2260672d09529cf92a9a015ebbf9bcc41d9990a4292b91317",
+       "satisfies": false
+      }
+     ]
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B3",
+    "error": "rejected",
+    "reason": "no card proof satisfies a leaf"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B3-pooled-012",
+   "description": "a pooled presentation whose second nullifier is already in the deck",
+   "section": "Validation rules",
+   "inputs": {
+    "outcome": {
+     "nullifiers": [
+      "2f1316f0cad6b5acd4da526a719cb61892629980f303050f81c80a4167f9c529",
+      "a131b7bbd4bb74e32d7e914fb30f49b15a4bc157c595f292742fff993fb5c40f"
+     ],
+     "primary": "2f1316f0cad6b5acd4da526a719cb61892629980f303050f81c80a4167f9c529",
+     "cards": [
+      {
+       "class": "person",
+       "issuer": "014c971e515d593af2260672d09529cf92a9a015ebbf9bcc41d9990a4292b91317",
+       "satisfies": true
+      },
+      {
+       "class": "person",
+       "issuer": "014c971e515d593af2260672d09529cf92a9a015ebbf9bcc41d9990a4292b91317",
+       "satisfies": true
+      }
+     ]
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B3",
+    "error": "conflict",
+    "reason": "nullifier already in the deck",
+    "detail": "nullifier"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B4-length-013",
+   "description": "votes of length C \u2212 1",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B4",
+    "error": "rejected",
+    "reason": "votes must be C bytes"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B4-byte-4-014",
+   "description": "a byte of 4",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B4",
+    "error": "rejected",
+    "reason": "vote byte outside 0..3"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B4-over-cap-015",
+   "description": "K + 1 non-zero bytes",
+   "section": "Validation rules",
+   "inputs": {
+    "cap": 17
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B4",
+    "error": "rejected",
+    "reason": "more than K counted votes"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B4-group-vote-deck-016",
+   "description": "group in a vote deck",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B4",
+    "error": "rejected",
+    "reason": "group in a vote deck"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B4-group-range-017",
+   "description": "group \u2265 groupsK",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B4",
+    "error": "rejected",
+    "reason": "group absent or not below groupsK"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B5-without-part-018",
+   "description": "movement without part 5",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B5",
+    "error": "rejected",
+    "reason": "movement present iff the plan has part 5"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B5-over-cap-019",
+   "description": "K_m + 1 entries",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B5",
+    "error": "rejected",
+    "reason": "more than K_m movement entries"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B5-moved-no-pro-020",
+   "description": "moved = 1 on a card with no pro",
+   "section": "Validation rules",
+   "inputs": {
+    "card": 12
+   },
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B5",
+    "error": "rejected",
+    "reason": "moved names an argument the card lacks"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B5-first-0-021",
+   "description": "first 0",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B5",
+    "error": "rejected",
+    "reason": "first/second outside 1..3"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B5-second-mismatch-022",
+   "description": "second \u2260 votes[i]",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B5",
+    "error": "rejected",
+    "reason": "second differs from the counted vote"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B6-over-cap-023",
+   "description": "K_r + 1 ratings",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B6",
+    "error": "rejected",
+    "reason": "more than K_r ratings"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B6-key-024",
+   "description": "key \u2265 A",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B6",
+    "error": "rejected",
+    "reason": "rating key not an argument"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B6-value-025",
+   "description": "value 3",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B6",
+    "error": "rejected",
+    "reason": "rating value outside 0..2"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B7-after-closes-026",
+   "description": "a different body after closes",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B7",
+    "error": "closed",
+    "reason": "different body at or after closes"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B7-nullifier-set-027",
+   "description": "a replacement with a different second nullifier",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B7",
+    "error": "conflict",
+    "reason": "different nullifier set",
+    "detail": "nullifiers"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B8-never-voted-028",
+   "description": "round 2 from a nullifier that never voted",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B8",
+    "error": "forbidden",
+    "reason": "primary nullifier never voted in round 0"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B8-twice-029",
+   "description": "round 1 sent twice with different cov",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B8",
+    "error": "conflict",
+    "reason": "different body under a known nullifier",
+    "detail": "duplicate"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B10-entry-030",
+   "description": "cov one entry over covScale",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B10",
+    "error": "rejected",
+    "reason": "cov entry outside [-covScale, covScale]"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B10-norm-031",
+   "description": "norm over \u0394_cov",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B10",
+    "error": "rejected",
+    "reason": "cov norm over delta_cov"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B10-length-032",
+   "description": "cov of the wrong length",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B10",
+    "error": "rejected",
+    "reason": "cov of the wrong length"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B10-cell-033",
+   "description": "cell = grid\u00b2",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B10",
+    "error": "rejected",
+    "reason": "cell not below grid\u00b2"
+   }
+  },
+  {
+   "id": "ballot/invalid/ballot-invalid-B10-round3-votes-034",
+   "description": "round 3 votes differing from round 0",
+   "section": "Validation rules",
+   "inputs": {},
+   "rejection": {
+    "step": null,
+    "check": "ballot-intake",
+    "rule": "B10",
+    "error": "rejected",
+    "reason": "votes differ from the accepted round-0 payload"
+   }
+  }
+ ]
+}

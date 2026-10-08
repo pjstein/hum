@@ -1,0 +1,114 @@
+{
+ "spec": "manifest",
+ "file": "signature",
+ "notes": "COSE_Sign with a detached payload (the CID) and external_aad 'hum/manifest/1' (ADR 0081-w0-08). Keys are Ed25519; seeds are given so signatures are reproducible.",
+ "cases": [
+  {
+   "id": "manifest/signature/sign-001",
+   "description": "Sign a CID with one key",
+   "section": "The envelope",
+   "inputs": {
+    "seed": "c3b08f0c09169421f61077334bd58611d68fae5750a498fbc59ac3aa4a68e99b",
+    "public": "0eaf82e1cf50ef8663f950f67c5cbe34cb8449fbefc6d3e9506ab239bafdadbd",
+    "kid": "6131",
+    "cid": "01e59625a822497c164d60705eb3fd6975c375ca213b8140137a826a77790986a9"
+   },
+   "expected": {
+    "protected": "a2012704426131",
+    "sig_structure": "85695369676e61747572654047a20127044261314e68756d2f6d616e69666573742f31582101e59625a822497c164d60705eb3fd6975c375ca213b8140137a826a77790986a9",
+    "signature": "d550bd50351f44cf1381390ee05fc321d1ab299e92db3d8e1f57120be49149b16ed9a95bc6ee1c5175c28ee18f3999334d08d180244ea8f5710c6c870f309501",
+    "cose_sign": "d8628440a0f6818347a2012704426131a05840d550bd50351f44cf1381390ee05fc321d1ab299e92db3d8e1f57120be49149b16ed9a95bc6ee1c5175c28ee18f3999334d08d180244ea8f5710c6c870f309501"
+   }
+  },
+  {
+   "id": "manifest/signature/sign-002",
+   "description": "Two signers on one CID; signatures are independent of each other",
+   "section": "The envelope",
+   "inputs": {
+    "signers": [
+     {
+      "seed": "c3b08f0c09169421f61077334bd58611d68fae5750a498fbc59ac3aa4a68e99b",
+      "kid": "6131"
+     },
+     {
+      "seed": "13391e1b40baed14e09e03f2c72d9818aa9b8e28523e9cfa673ee26366028267",
+      "kid": "6132"
+     }
+    ],
+    "cid": "01e59625a822497c164d60705eb3fd6975c375ca213b8140137a826a77790986a9"
+   },
+   "expected": {
+    "cose_sign": "d8628440a0f6828347a2012704426131a05840d550bd50351f44cf1381390ee05fc321d1ab299e92db3d8e1f57120be49149b16ed9a95bc6ee1c5175c28ee18f3999334d08d180244ea8f5710c6c870f3095018347a2012704426132a058409ec6f58944adff382d6647b7e85e0fffcd98cdd7eafe6ae4e404b59a6f896d3f39e58c66f616411f506b4db77fdd086c612e9f938dd0f4fc176dcb39caf9ba04"
+   }
+  },
+  {
+   "id": "manifest/signature/verify-003",
+   "description": "A valid signature verifies",
+   "section": "The envelope",
+   "inputs": {
+    "public": "0eaf82e1cf50ef8663f950f67c5cbe34cb8449fbefc6d3e9506ab239bafdadbd",
+    "cid": "01e59625a822497c164d60705eb3fd6975c375ca213b8140137a826a77790986a9",
+    "cose_sign": "d8628440a0f6818347a2012704426131a05840d550bd50351f44cf1381390ee05fc321d1ab299e92db3d8e1f57120be49149b16ed9a95bc6ee1c5175c28ee18f3999334d08d180244ea8f5710c6c870f309501"
+   },
+   "expected": {
+    "valid": true
+   }
+  },
+  {
+   "id": "manifest/signature/reject-004",
+   "description": "The same signature over another CID does not verify",
+   "section": "The envelope",
+   "inputs": {
+    "public": "0eaf82e1cf50ef8663f950f67c5cbe34cb8449fbefc6d3e9506ab239bafdadbd",
+    "cid": "01e7b0c7ca59efa17fc92e5aafb66a8109dd8bac6baf3db6e56c926dfa263ec1ea",
+    "cose_sign": "d8628440a0f6818347a2012704426131a05840d550bd50351f44cf1381390ee05fc321d1ab299e92db3d8e1f57120be49149b16ed9a95bc6ee1c5175c28ee18f3999334d08d180244ea8f5710c6c870f309501"
+   },
+   "rejection": {
+    "step": 6,
+    "reason": "wrong-cid"
+   }
+  },
+  {
+   "id": "manifest/signature/reject-005",
+   "description": "A signature made without the hum/manifest/1 domain string does not verify",
+   "section": "The envelope",
+   "inputs": {
+    "public": "0eaf82e1cf50ef8663f950f67c5cbe34cb8449fbefc6d3e9506ab239bafdadbd",
+    "cid": "01e59625a822497c164d60705eb3fd6975c375ca213b8140137a826a77790986a9",
+    "cose_sign": "d8628440a0f6818347a2012704426131a058402d9a478f2e9d56ecea9beadf4a63676b2be343488e979d1123c364c92b0d61085b253fd052991d61a99642d69da2ffa68e846bd345de0f58fbc05db15deedb06"
+   },
+   "rejection": {
+    "step": 6,
+    "reason": "no-domain-string"
+   }
+  },
+  {
+   "id": "manifest/signature/reject-006",
+   "description": "A signature under another domain (ballot/1) does not verify",
+   "section": "The envelope",
+   "inputs": {
+    "public": "0eaf82e1cf50ef8663f950f67c5cbe34cb8449fbefc6d3e9506ab239bafdadbd",
+    "cid": "01e59625a822497c164d60705eb3fd6975c375ca213b8140137a826a77790986a9",
+    "cose_sign": "d8628440a0f6818347a2012704426131a05840b4a0ab3af47694f8cdf40fab96f185ac818f97172d09b7389e04e7a42fd5715b220b895fa1bcf61a650ebb7d20ecf02d5a52acd8df396ca0851ec8e9fc8c590b"
+   },
+   "rejection": {
+    "step": 6,
+    "reason": "other-domain"
+   }
+  },
+  {
+   "id": "manifest/signature/reject-007",
+   "description": "An unknown algorithm (-7, ES256) in the protected header does not verify",
+   "section": "The envelope",
+   "inputs": {
+    "public": "0eaf82e1cf50ef8663f950f67c5cbe34cb8449fbefc6d3e9506ab239bafdadbd",
+    "cid": "01e59625a822497c164d60705eb3fd6975c375ca213b8140137a826a77790986a9",
+    "cose_sign": "d8628440a0f6818347a2012604426131a05840d550bd50351f44cf1381390ee05fc321d1ab299e92db3d8e1f57120be49149b16ed9a95bc6ee1c5175c28ee18f3999334d08d180244ea8f5710c6c870f309501"
+   },
+   "rejection": {
+    "step": 6,
+    "reason": "unknown-algorithm"
+   }
+  }
+ ]
+}

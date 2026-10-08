@@ -1,0 +1,296 @@
+{
+ "spec": "issue-map",
+ "file": "derived",
+ "notes": "Derived checks that are not manifests: edit-key derivation, release annotations, duplicate detection.",
+ "cases": [
+  {
+   "id": "issue-map/derived/im-edit-key-derive-001",
+   "description": "HKDF-SHA256(IKM = edit root, salt = hum/edit-key/1, info = SHA-256(v1 envelope without body key 2))",
+   "section": "Authority and authorship",
+   "inputs": {
+    "edit_root": "421e6b942a8c7fbb98126e5c9296bb259f4343c68fc5ee3cf87185b9665dfac5",
+    "v1_envelope": "a700010168706f736974696f6e02582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30401061a6ad1a14008a364746578745821019b6b10aaf70fd27b8675ec6fba7bac6d7abbe1d30a03e6c4d6c219d6b64059fa66706172656e74582101219abc35eb6a9a189bc59144868f6e89c52c52c223debe83acf1b472d0b3fd4167636f6e74657874582101ef0f753514636deeb4aa403611c00f07ce2b2d0db35da8aa30e73faa826c63ae09a50001010102582053ceb76be984e7ab58e76c92f3cfc112a7646992d41514d770c5cc2dfcd30a16030104f4"
+   },
+   "expected": {
+    "stripped_envelope": "a700010168706f736974696f6e02582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30401061a6ad1a14008a364746578745821019b6b10aaf70fd27b8675ec6fba7bac6d7abbe1d30a03e6c4d6c219d6b64059fa66706172656e74582101219abc35eb6a9a189bc59144868f6e89c52c52c223debe83acf1b472d0b3fd4167636f6e74657874582101ef0f753514636deeb4aa403611c00f07ce2b2d0db35da8aa30e73faa826c63ae09a400010101030104f4",
+    "info": "b5d787471043b7a46fe6ff37ca2e4a9b3ffd49314b680f51ddaba22d5fdcd2da",
+    "seed": "001504706eceb8d7990cf34faf4c86ef1a1d7edd52d344c981d5fe5dd8470790",
+    "public": "53ceb76be984e7ab58e76c92f3cfc112a7646992d41514d770c5cc2dfcd30a16",
+    "matches_body_editKey": true
+   }
+  },
+  {
+   "id": "issue-map/derived/im-annotate-common-ground-002",
+   "description": "Label for a position: common-ground",
+   "section": "After a release",
+   "inputs": {
+    "tallies": [
+     900.0,
+     80.0,
+     60.0
+    ],
+    "sigma_tallies": 18.3869,
+    "group_tallies": [
+     [
+      500.0,
+      40.0,
+      30.0
+     ],
+     [
+      400.0,
+      40.0,
+      30.0
+     ]
+    ],
+    "sigma_groups": 10.3376,
+    "z": 1.645
+   },
+   "expected": {
+    "share": 0.8653846153846154,
+    "sigma": 0.02176761213183468,
+    "label": "Common ground",
+    "groups": [
+     [
+      0.8771929824561403,
+      0.022608549372665505
+     ],
+     [
+      0.851063829787234,
+      0.026674658216387502
+     ]
+    ]
+   }
+  },
+  {
+   "id": "issue-map/derived/im-annotate-divides-003",
+   "description": "Label for a position: divides",
+   "section": "After a release",
+   "inputs": {
+    "tallies": [
+     520.0,
+     480.0,
+     40.0
+    ],
+    "sigma_tallies": 18.3869,
+    "group_tallies": [
+     [
+      480.0,
+      60.0,
+      20.0
+     ],
+     [
+      40.0,
+      420.0,
+      20.0
+     ]
+    ],
+    "sigma_groups": 10.3376,
+    "z": 1.645
+   },
+   "expected": {
+    "share": 0.5,
+    "sigma": 0.015311079323888553,
+    "label": "Divides",
+    "groups": [
+     [
+      0.8571428571428571,
+      0.022531758448365947
+     ],
+     [
+      0.08333333333333333,
+      0.01990443232441979
+     ]
+    ]
+   }
+  },
+  {
+   "id": "issue-map/derived/im-annotate-leans-yes-004",
+   "description": "Label for a position: leans-yes",
+   "section": "After a release",
+   "inputs": {
+    "tallies": [
+     560.0,
+     440.0,
+     40.0
+    ],
+    "sigma_tallies": 18.3869,
+    "group_tallies": [
+     [
+      300.0,
+      220.0,
+      20.0
+     ],
+     [
+      260.0,
+      220.0,
+      20.0
+     ]
+    ],
+    "sigma_groups": 10.3376,
+    "z": 1.645
+   },
+   "expected": {
+    "share": 0.5384615384615384,
+    "sigma": 0.015742881327508403,
+    "label": "Leans yes",
+    "groups": [
+     [
+      0.5555555555555556,
+      0.017280464899540063
+     ],
+     [
+      0.52,
+      0.018156545812870028
+     ]
+    ]
+   }
+  },
+  {
+   "id": "issue-map/derived/im-annotate-leans-no-005",
+   "description": "Label for a position: leans-no",
+   "section": "After a release",
+   "inputs": {
+    "tallies": [
+     420.0,
+     580.0,
+     40.0
+    ],
+    "sigma_tallies": 18.3869,
+    "group_tallies": null,
+    "sigma_groups": 10.3376,
+    "z": 1.645
+   },
+   "expected": {
+    "share": 0.40384615384615385,
+    "sigma": 0.014596021646727719,
+    "label": "Leans no"
+   }
+  },
+  {
+   "id": "issue-map/derived/im-annotate-no-label-006",
+   "description": "Label for a position: no-label",
+   "section": "After a release",
+   "inputs": {
+    "tallies": [
+     510.0,
+     500.0,
+     30.0
+    ],
+    "sigma_tallies": 18.3869,
+    "group_tallies": null,
+    "sigma_groups": 10.3376,
+    "z": 1.645
+   },
+   "expected": {
+    "share": 0.49038461538461536,
+    "sigma": 0.015215464018866188,
+    "label": null
+   }
+  },
+  {
+   "id": "issue-map/derived/im-annotate-too-few-007",
+   "description": "Label for a position: too-few",
+   "section": "After a release",
+   "inputs": {
+    "tallies": [
+     60.0,
+     50.0,
+     10.0
+    ],
+    "sigma_tallies": 18.3869,
+    "group_tallies": null,
+    "sigma_groups": 10.3376,
+    "z": 1.645
+   },
+   "expected": {
+    "share": null,
+    "sigma": null,
+    "label": null
+   }
+  },
+  {
+   "id": "issue-map/derived/im-annotate-group-too-few-008",
+   "description": "Label for a position: group-too-few",
+   "section": "After a release",
+   "inputs": {
+    "tallies": [
+     900.0,
+     80.0,
+     60.0
+    ],
+    "sigma_tallies": 18.3869,
+    "group_tallies": [
+     [
+      500.0,
+      40.0,
+      30.0
+     ],
+     [
+      30.0,
+      20.0,
+      10.0
+     ]
+    ],
+    "sigma_groups": 10.3376,
+    "z": 1.645
+   },
+   "expected": {
+    "share": 0.8653846153846154,
+    "sigma": 0.02176761213183468,
+    "label": null
+   }
+  },
+  {
+   "id": "issue-map/derived/im-dup-detect-0-009",
+   "description": "Informative: token-set (Jaccard) ratio after NFKC, case fold and punctuation strip; near match at 0.8",
+   "section": "Merging",
+   "inputs": {
+    "a": "File group complaints with code enforcement first.",
+    "b": "File group complaints with code enforcement first!"
+   },
+   "expected": {
+    "ratio": 1.0,
+    "near_match": true
+   }
+  },
+  {
+   "id": "issue-map/derived/im-dup-detect-1-010",
+   "description": "Informative: token-set (Jaccard) ratio after NFKC, case fold and punctuation strip; near match at 0.8",
+   "section": "Merging",
+   "inputs": {
+    "a": "Organize a rent strike after 60 days.",
+    "b": "After 60 days, organize a rent strike."
+   },
+   "expected": {
+    "ratio": 1.0,
+    "near_match": true
+   }
+  },
+  {
+   "id": "issue-map/derived/im-dup-detect-2-011",
+   "description": "Informative: token-set (Jaccard) ratio after NFKC, case fold and punctuation strip; near match at 0.8",
+   "section": "Merging",
+   "inputs": {
+    "a": "Organize a rent strike after 60 days.",
+    "b": "Escrow the rent with a lawyer."
+   },
+   "expected": {
+    "ratio": 0.18181818181818182,
+    "near_match": false
+   }
+  },
+  {
+   "id": "issue-map/derived/im-dup-detect-3-012",
+   "description": "Informative: token-set (Jaccard) ratio after NFKC, case fold and punctuation strip; near match at 0.8",
+   "section": "Merging",
+   "inputs": {
+    "a": "Fix the boiler",
+    "b": "Fix the boiler now"
+   },
+   "expected": {
+    "ratio": 0.75,
+    "near_match": false
+   }
+  }
+ ]
+}

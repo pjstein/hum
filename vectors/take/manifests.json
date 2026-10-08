@@ -1,0 +1,5179 @@
+{
+ "spec": "take",
+ "file": "manifests",
+ "notes": "Valid takes and one invalid take per rule sub-condition (take.md Vectors). Invalid takes other than the step-6 ones were appended by a misbehaving log. Bundles resolve against world.json here and the deck vectors' world.",
+ "cases": [
+  {
+   "id": "take/manifests/tk-ok-one-release-001",
+   "description": "one public release, two group series",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0173f206bd114e34907b0c3ed453ed79a9bd665bac5a65238ccbd604d2698b785d",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a264746578745821015cc70d2385d739a200188a3a0e88a6d3c885f7c8dc8e862578278431e70cd1566972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840489bd8c2bc3ce8d443aa6764e0c0457be44c084727849e1b88f0e11bd58bbcea6f34922d6b3d0a688492606b9d07ccb22ca8b54810c4137677b4287269828904",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 344,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "5fd36a2f3a2a1d34040a7c25d31ef1046ca9f1fecd6207500bae0d4d90c0668a",
+       "ccc404ab8ed9c2f2b90cd80e29c031ce6d95ef9361c09132f231c02b763d0b00",
+       "463f539b29e11d086e53617837a87e55144b2148af6d5129e36b54edf61fea8b",
+       "0e07cd5ab1efd3ad48baae249c7c49135e695a133f0cef5d087311517536057c",
+       "759576a6f6ea68f0980956ec4267e587c8b50adfe102a2816f99f387f267d1e3",
+       "9b9dc48f218334c31c9bb63a56bcca6878563fd2c06f9bb328d5bbf44b73726c",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "expected": {
+    "accept": true,
+    "type": "take",
+    "version": 1
+   }
+  },
+  {
+   "id": "take/manifests/tk-ok-two-contexts-002",
+   "description": "compare 2 over two public releases of two contexts",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "014b7a67865b60afd7ce33c3b2d8a36bc7e1f18df9cd5a1db41b1156d26bf99092",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a36474657874582101b045fc1b26540bde62a7c65cf59e1aec96c97dd356548a6b88e9ba3afaaed22f6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a6972656c656173652f3158210154e353872f096b4e3ca414d1ec60174f7299dc76b51d890760560e5c569c276209a4000001a20082a40000016774616c6c69657302800500a40001016774616c6c69657302800500010202a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840696533ad84f74befa523e9bb4f4043493e1245e408591d6c7281d4fd5dceb09ba28e6b4f845389e13337473c92fe5ab916d5940d84b8cf629c147c5cbebe760c",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 345,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "59f5fab68965941a6d9e05027e1928f05ed9e912a5160cf7a48164b6f6641ddf",
+       "ccc404ab8ed9c2f2b90cd80e29c031ce6d95ef9361c09132f231c02b763d0b00",
+       "463f539b29e11d086e53617837a87e55144b2148af6d5129e36b54edf61fea8b",
+       "0e07cd5ab1efd3ad48baae249c7c49135e695a133f0cef5d087311517536057c",
+       "759576a6f6ea68f0980956ec4267e587c8b50adfe102a2816f99f387f267d1e3",
+       "9b9dc48f218334c31c9bb63a56bcca6878563fd2c06f9bb328d5bbf44b73726c",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              1
+             ],
+             [
+              1,
+              "tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          2
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "291a97708b8a1fe450da3ff9b3818e2395348761a02e35b5db66ffc779b39951"
+   },
+   "expected": {
+    "accept": true,
+    "type": "take",
+    "version": 1
+   }
+  },
+  {
+   "id": "take/manifests/tk-ok-sealed-003",
+   "description": "sealed take over a sealed release: body carries no prose, blob is keyring form",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01433a5dde6b39d09907dcd2ffdab68f318a7dd64cdfb2a0da032eb760d2fc49b8",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a26474657874582101c1a9af5e336d3b5c20fc16dc2451f58b51bbcd4d1974c8ecd9d6e7099fbc33fe6972656c656173652f3058210192ca1573b543d9add74e54d331266bac75b81cbc906c2058dc0d3081d2f92ff809a5000001a20082a50000016d67726f75705f74616c6c696573028003000500a50000016d67726f75705f74616c6c696573028003010500010002a4000001185a02f5030003f50403",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840a67010c24976f7c86a10b34f07e38dfbd62f52093cc4fc46a096495ff4106fae022b9c7fe5ca0c853e8899f876314f1033c6b2ea8c6d343807ef14ebe5242b0f",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 346,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "24d9aca16a3681169b8713e02bb37419ccaf08688ab71f1c5e25d00660205021",
+       "4143166249ff09b70e8e21a79d611d864f1102da278ac18affe9054384d9ae5e",
+       "463f539b29e11d086e53617837a87e55144b2148af6d5129e36b54edf61fea8b",
+       "0e07cd5ab1efd3ad48baae249c7c49135e695a133f0cef5d087311517536057c",
+       "759576a6f6ea68f0980956ec4267e587c8b50adfe102a2816f99f387f267d1e3",
+       "9b9dc48f218334c31c9bb63a56bcca6878563fd2c06f9bb328d5bbf44b73726c",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       true
+      ],
+      [
+       4,
+       3
+      ]
+     ]
+    },
+    "query_hash": "0d4bf6c1abda7ce107dfd92c09aae2e6b8937036b1b4eb704ed94b0a2b35186b"
+   },
+   "expected": {
+    "accept": true,
+    "type": "take",
+    "version": 1
+   }
+  },
+  {
+   "id": "take/manifests/tk-ok-agent-004",
+   "description": "agent take under its sponsor's authority with an hum/author/1 signature",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01e240a80b4cdc7534068f44ac0b74e6d95e75bee219227f8933d0ab1717766fa9",
+     "envelope": "a70001016474616b6502582101830595ff8e2aeabedf9cfa097610b2b9196cbfe70312ff68613d8c3b232f92d00401061a6af92e4008a364746578745821012b4f65e8dca4d9ded5575c04a130451ec7eb91de102c1e14855eb94245d5aaaa6773706f6e736f72582101982fbf08d755efaa4a0bf53edca993ba4b4315a5c5768bbbca152535336f036b6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000301a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "authorship": "a20003025840409403db07d2d9c97a0499ba0d2d72c0dff28cd49f0431dcdf9049613b228a7d07f07d0e7b0ab92dcb6cf1ecbdf79656ac07021a613bdb59be3bc4fbfab43b0b",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 347,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "6f3bf5433d452705181ef930130f1fe91344ca2a3d12cdf6b38939e9588ad117",
+       "4143166249ff09b70e8e21a79d611d864f1102da278ac18affe9054384d9ae5e",
+       "463f539b29e11d086e53617837a87e55144b2148af6d5129e36b54edf61fea8b",
+       "0e07cd5ab1efd3ad48baae249c7c49135e695a133f0cef5d087311517536057c",
+       "759576a6f6ea68f0980956ec4267e587c8b50adfe102a2816f99f387f267d1e3",
+       "9b9dc48f218334c31c9bb63a56bcca6878563fd2c06f9bb328d5bbf44b73726c",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "expected": {
+    "accept": true,
+    "type": "take",
+    "version": 1
+   }
+  },
+  {
+   "id": "take/manifests/tk-ok-fork-005",
+   "description": "a fork under another authority with forkOf",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0160539bb12f5bc53876c58b3cb47443906ebd6d7bdebd166943229bec20421596",
+     "envelope": "a70001016474616b650258210145035c5ac328e143405e69f9bedb81ea543bb003c8548dfd93b0d53170ad421a0401061a6af92e4008a3647465787458210196135662286407a33bc4d8d7b8194ca5f0977af281a5aa3009ae1ae21380d2c166666f726b4f6658210173f206bd114e34907b0c3ed453ed79a9bd665bac5a65238ccbd604d2698b785d6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b66a058406b5f9ebcf789010762defda2b108a955de786dc6583d4a86d0514383f87adbaeecaa006f9ce92cff4e98478316d5430b3405818a31bc4d0c53a9ef7981780d00",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 348,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "14c5952eb7ef4851e94931dea01f7bd08f0582136f2c0052fb11479df84f9652",
+       "2222d79a7914e339e474fca0a00880874c918ea71b8f71593d4c23437cad5a5b",
+       "c92f7ecdbcf2d8f22b884d347109303ed094ced994c641b80dcee387b8777dae",
+       "0e07cd5ab1efd3ad48baae249c7c49135e695a133f0cef5d087311517536057c",
+       "759576a6f6ea68f0980956ec4267e587c8b50adfe102a2816f99f387f267d1e3",
+       "9b9dc48f218334c31c9bb63a56bcca6878563fd2c06f9bb328d5bbf44b73726c",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "expected": {
+    "accept": true,
+    "type": "take",
+    "version": 1
+   }
+  },
+  {
+   "id": "take/manifests/tk-ok-prose-edit-006",
+   "description": "version 2 with new prose and the same queryHash",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01e5ab302f219bac641bf678e284378f70fd28002dd9ed5007da7887bd4aba5610",
+     "envelope": "a90001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420358210173f206bd114e34907b0c3ed453ed79a9bd665bac5a65238ccbd604d2698b785d04020558210173f206bd114e34907b0c3ed453ed79a9bd665bac5a65238ccbd604d2698b785d061a6afa7fc008a26474657874582101291eda12ffa6c625741e831d7ddedebf3274510b27e77c75908a52c292b782d16972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840ea44612ae47a53d725fc93290d00811791b3baa2fa4e79814cf254e9532bf0f3708583e988ca47e86a7f60d1fcae2b8a3b97644095b4e22fa3bf9906c6b76405",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 349,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "130d64c673d6675bf3176731c622a67fd231d82633a0253042b3c59b71f0b8d2",
+       "2222d79a7914e339e474fca0a00880874c918ea71b8f71593d4c23437cad5a5b",
+       "c92f7ecdbcf2d8f22b884d347109303ed094ced994c641b80dcee387b8777dae",
+       "0e07cd5ab1efd3ad48baae249c7c49135e695a133f0cef5d087311517536057c",
+       "759576a6f6ea68f0980956ec4267e587c8b50adfe102a2816f99f387f267d1e3",
+       "9b9dc48f218334c31c9bb63a56bcca6878563fd2c06f9bb328d5bbf44b73726c",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "expected": {
+    "accept": true,
+    "type": "take",
+    "version": 2
+   }
+  },
+  {
+   "id": "take/manifests/tk-ok-retire-007",
+   "description": "version 2 retiring the lineage",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01975155f1c5bb1bafd753aa0e9db6048e5f0c8e55ac8b1b5a55f50bf2a8ce886f",
+     "envelope": "a90001016474616b65025821018155f0f33c2f320e56f18ad4b0858da05a9eedbc96e955a176c568d9ced98b0d0358210156090a9ac26b982550d9340efa148fb1a9c4d7bfc18a00fc78ded7a6e3ec1a4a04020558210156090a9ac26b982550d9340efa148fb1a9c4d7bfc18a00fc78ded7a6e3ec1a4a061a6afa7fc008a26474657874582101f597cafbc0ae4cb8f9fb663e3e82e8c186f95689d215e3ede049c22046e0ea366972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a5000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f407f5",
+     "signatures": "d8628440a0f6818348a201270443746b32a05840355bbafbd89991858983f22ca1823d72aa4511e7039385cb33b510c9d56f0b3bfab25e50c231dbd756f4e8bf8738c7143e548bd9e5ab1905923e5d79ad7f8706",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 351,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "12eb0e95ace4dbc4795a689c7a513cf2851dc8c3e76584be192a07b2e8425b40",
+       "e9ef8f637f6866df4f4917d19f78ddaed26b0405544dd4f2fc12cbf3a0861c54",
+       "c92f7ecdbcf2d8f22b884d347109303ed094ced994c641b80dcee387b8777dae",
+       "0e07cd5ab1efd3ad48baae249c7c49135e695a133f0cef5d087311517536057c",
+       "759576a6f6ea68f0980956ec4267e587c8b50adfe102a2816f99f387f267d1e3",
+       "9b9dc48f218334c31c9bb63a56bcca6878563fd2c06f9bb328d5bbf44b73726c",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ],
+      [
+       7,
+       true
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "expected": {
+    "accept": true,
+    "type": "take",
+    "version": 2
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-no-release-008",
+   "description": "no release ref",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0158d50115ef8111bcca7e0b6e2dead02be78194837652bb5f517e877be1194cc2",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a164746578745821016340334245c444ea6df143a0172ac6b195d3429f704a979c5503f9b27d75130009a4000001a20082a50000016d67726f75705f74616c6c696573028003000500a50000016d67726f75705f74616c6c696573028003010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840c9b1a545ac14f1e97b1f6bb390658ce61ab12b2896b80d3da561d4d26e6410b621295e80f64196cf0ae46b7f6c9757a0bee12b57b81cc9b767193aa08c27450f",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 352,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "87ecd669457b371bc8e9febc5b293ce27b3937af0223145b607d8469377b10c6",
+       "693c4c2136ea5cdd8fb195ea121495e99dd7a54e5b983009128cb686743bfb48",
+       "7b00bbb08cbb82beae878793e0601a212cf53ed7cc5d93543012976768f22025",
+       "418a739b58e5ee46fffdf929df63cca49d85cbeed47145be4cc48c73d0cdf8fc",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0d4bf6c1abda7ce107dfd92c09aae2e6b8937036b1b4eb704ed94b0a2b35186b"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-1",
+    "reason": "TK-1: 1 to 8 releases"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-release-gap-009",
+   "description": "release/0 and release/2 with no release/1",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "019ffa546c3f16af12478d859e495b287f9d2f1eac0732b6d6aa4ead3ca344dc1f",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a364746578745821019d699c40420cb8165805dd1abe82e0d0d39ab54c71247fff560a0350e1ad009c6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a6972656c656173652f3258210154e353872f096b4e3ca414d1ec60174f7299dc76b51d890760560e5c569c276209a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840b624d33a4b86ea1dcc5856fb783dac616e2db6dd3d1ccd6d84ea985e503beec12b2ea80b2eea7a4efa42577e00464c9e4b41d035e74017e6901b543ac67c2a08",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 353,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "5a903d43f3c124b9953552c26dc9b39a53ef597ad45f04b36444324699dc8ed5",
+       "693c4c2136ea5cdd8fb195ea121495e99dd7a54e5b983009128cb686743bfb48",
+       "7b00bbb08cbb82beae878793e0601a212cf53ed7cc5d93543012976768f22025",
+       "418a739b58e5ee46fffdf929df63cca49d85cbeed47145be4cc48c73d0cdf8fc",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-1",
+    "reason": "TK-1: release/<n> refs must be contiguous from 0"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-ref-not-release-010",
+   "description": "release/0 names a deck",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01940058a469187e156afa635378e506425b4dea5e698bb6ebd1262284a7690ca0",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a264746578745821014c429328a9833983543c9477270c8b788c943656631a1ed3ed0001116877ebe96972656c656173652f305821018986b4c12338fcc3a382d748f7c8e4b2fadfeb332770d156340005d26c833aa209a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a058406acee4d9690f2f1aacea092564503838ca02c03bcfb116fdedf14fa97b2e6621152c6dcaab7f9e9e73ca70748d51a99144ae3ecd2c20a3324837d04ec10dcb00",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 354,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "f6e4a41e5da8fcaeb8aa65aff1fc3d57e8b3e7e3656b3e76403edc53ebc55d09",
+       "a33f89858d81d4d6b150d6657d2877f1d713248ab3ba4f393854b9569b1db6bf",
+       "7b00bbb08cbb82beae878793e0601a212cf53ed7cc5d93543012976768f22025",
+       "418a739b58e5ee46fffdf929df63cca49d85cbeed47145be4cc48c73d0cdf8fc",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-1",
+    "reason": "TK-1: a release ref is not a release"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-text-long-011",
+   "description": "prose of 16,001 bytes",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01871617c9c44492a747c3ac3f27cdd3d9ca5912c8947b126c22bd7477c4189d91",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a264746578745821015161d1da2539f16f6132419fa558c742cc5ed47f1eca5037b943b869ada380386972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840dce7cfec57a85aaa2187bcbda1a8e5c20f776badb4842494ba1b524a8d3b5428ddaff2a141da0ac2eac3d035d3fe4508d8e166210a33fc7d496170572d921400",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 355,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "d09338d90edd6f49c102af28f5448de70bd4b13635b6957fee6352765a147c24",
+       "a33f89858d81d4d6b150d6657d2877f1d713248ab3ba4f393854b9569b1db6bf",
+       "7b00bbb08cbb82beae878793e0601a212cf53ed7cc5d93543012976768f22025",
+       "418a739b58e5ee46fffdf929df63cca49d85cbeed47145be4cc48c73d0cdf8fc",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-2",
+    "reason": "TK-2: prose over 16,000 bytes or malformed"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-labels-count-012",
+   "description": "one label for two series",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01daaa202cc872393c8964336b1010ac926bbc70e4ae5d7f835c9819eebda859ea",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a2647465787458210148310e4d659a63e2befa4fc0652575ba39c75af3b6bfe4ce7eef2c83fbd69d4e6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840b70bc47a6d32e2ba190ba868893596cc1084ff883c533f73158aa736673d4c67cc6088946e24122cd75cdf6a2db48d4466530e55eefceb5f1d5e787ebc409701",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 356,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "7749d6dd835280b9c3a940fc99ff712c5041e5ff63f31eb18de8a75055f19164",
+       "7d63a5b9fccab7c3e5e03df995998df4c587862b59ecf0c022ebd330c1250459",
+       "c6182aece8f20f187e86c292ade61e5411498cd3005c28873443637664e6adf4",
+       "418a739b58e5ee46fffdf929df63cca49d85cbeed47145be4cc48c73d0cdf8fc",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-2",
+    "reason": "TK-2: labels must have one entry per series"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-sealed-no-epoch-013",
+   "description": "sealed without epoch",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01d09c9cc15a0badfa07837a77648013e636c1e7e52ae6eeb670783438e33f143a",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a26474657874582101af45ba54f12ae14b663ab82bfb96bfc8cef4fde78f4dbd9f5073efb2f75c3f986972656c656173652f3058210192ca1573b543d9add74e54d331266bac75b81cbc906c2058dc0d3081d2f92ff809a4000001a20082a50000016d67726f75705f74616c6c696573028003000500a50000016d67726f75705f74616c6c696573028003010500010002a4000001185a02f5030003f5",
+     "signatures": "d8628440a0f6818348a201270443746b31a058409f15904032d328f31a8e12b0b9883a3f576731c5e1f2b237c58be65529033656e7ac299c895302d0f3a78d327b8add4babdb9b7baf62bbb889a537e7273a150d",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 357,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "e8d16941a38bdad4ac6db8751e072f268a6a6298f5b4eb75ac0186072133bab7",
+       "7d63a5b9fccab7c3e5e03df995998df4c587862b59ecf0c022ebd330c1250459",
+       "c6182aece8f20f187e86c292ade61e5411498cd3005c28873443637664e6adf4",
+       "418a739b58e5ee46fffdf929df63cca49d85cbeed47145be4cc48c73d0cdf8fc",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       true
+      ]
+     ]
+    },
+    "query_hash": "0d4bf6c1abda7ce107dfd92c09aae2e6b8937036b1b4eb704ed94b0a2b35186b"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-2",
+    "reason": "TK-2: sealed iff epoch present"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-sealed-title-in-body-014",
+   "description": "an unknown body key carrying text",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "014eb3acaf3e27394c030c1bbd0e65f2557732b398353f5640f64a9c4304b067f8",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a264746578745821010cc310f9f479efe374131163dd0c091339d10c1fdaabd6974432a02c8a5e3bc46972656c656173652f3058210192ca1573b543d9add74e54d331266bac75b81cbc906c2058dc0d3081d2f92ff809a6000001a20082a50000016d67726f75705f74616c6c696573028003000500a50000016d67726f75705f74616c6c696573028003010500010002a4000001185a02f5030003f50403086c54686520686561646c696e65",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840672979fbe226cd9ab608b0770c80e399d6678953a62c843662505c0fbe2bf28019d609250fa9338d46ae2b85fa604eeba3e830cc389569d88c9eb8a1fce3e10c",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 358,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "988508a85dfdcca60fb997dd5870b897a931f110419776a08aa61dc30a64e52d",
+       "da4091f01c3827d261e81c0c95e0a85ac0b53a471c4505b16b2826a9bbc4ddca",
+       "c6182aece8f20f187e86c292ade61e5411498cd3005c28873443637664e6adf4",
+       "418a739b58e5ee46fffdf929df63cca49d85cbeed47145be4cc48c73d0cdf8fc",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       true
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       8,
+       "The headline"
+      ]
+     ]
+    },
+    "query_hash": "0d4bf6c1abda7ce107dfd92c09aae2e6b8937036b1b4eb704ed94b0a2b35186b"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-2",
+    "reason": "TK-2: body has unknown keys [8]"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-public-over-sealed-015",
+   "description": "public take over sealed data",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01ad5ebe89fbe18f1a893bb443e1854450515f2db88fec0a0cbe9f90af5f77df6e",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a2647465787458210189d04a6014d8e1d1751ff8c2f50f62aafbce0837561e439fd604f76752232bca6972656c656173652f3058210192ca1573b543d9add74e54d331266bac75b81cbc906c2058dc0d3081d2f92ff809a4000001a20082a50000016d67726f75705f74616c6c696573028003000500a50000016d67726f75705f74616c6c696573028003010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840089e752c977b33e1566242c90acf021e370b6a10ed6239279e3c98e83768c2fe75eb0dd24fda59ac6877104605771f14540949377c53ae68969168973e5f8f05",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 359,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "d79007546b8e535d1db942cbf1f7616ac1413cdc621fdf79a50c1e5b2c46a5fe",
+       "da4091f01c3827d261e81c0c95e0a85ac0b53a471c4505b16b2826a9bbc4ddca",
+       "c6182aece8f20f187e86c292ade61e5411498cd3005c28873443637664e6adf4",
+       "418a739b58e5ee46fffdf929df63cca49d85cbeed47145be4cc48c73d0cdf8fc",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0d4bf6c1abda7ce107dfd92c09aae2e6b8937036b1b4eb704ed94b0a2b35186b"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-3",
+    "reason": "TK-3: sealed must follow the pinned releases' contexts"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-sealed-two-contexts-016",
+   "description": "sealed take pinning releases of two contexts",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0144b70b6a330dbbbecce75c7983f8a2879772fb492a3c18fbdf357c9481ce6d32",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a36474657874582101e2b7c961e3ccc88c03074a237c30a19b88821b99922e9dd1aff0060de5e78cac6972656c656173652f3058210192ca1573b543d9add74e54d331266bac75b81cbc906c2058dc0d3081d2f92ff86972656c656173652f3158210154e353872f096b4e3ca414d1ec60174f7299dc76b51d890760560e5c569c276209a5000001a20082a40000016774616c6c69657302800500a40001016774616c6c69657302800500010002a4000001185a02f5030003f50403",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840dbdc4a93b5479420071a81c83b61aa686bdeaf2ece9a908f86258b6971dbc5140f95b02f4e39012ff3cd269ea741aefb2f0ee31f4b00439e2816e37325122e01",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 360,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "b863ae3d322a3c246d15ddf841046d7a9432b1755ff1e02804aa4879d49ff619",
+       "f4c27799b877de30c1d73b0041f484a6786667327b5e78fb20d3f6fb32ded22c",
+       "aa2da8472b71a143b92ada26c61893434019c8938d2e255f16bb58e26a392eda",
+       "5742bbdc0a88975edf789c112c5e32edebf2a7d09b907846af20b09a4b1ca33e",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              1
+             ],
+             [
+              1,
+              "tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       true
+      ],
+      [
+       4,
+       3
+      ]
+     ]
+    },
+    "query_hash": "bf9b9df02526acd8a6f999b9fa3ca2a3f803d09eeaa4d54da8518c8cd29b9c77"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-3",
+    "reason": "TK-3: a sealed take pins releases of one context"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-table-unknown-017",
+   "description": "unknown table",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01e0258535c750eefba8260dfb6806e5ae9bc290a67cd082915ef33ec3c3344c73",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a2647465787458210185b8f9f19c9ee6f6a37d28825cc1a93431a4f707ca79d9169f162cfaf9d4765a6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20081a400000165766f74657302800500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840694d8c20dcbf4e1a1308098a5fb08b57f51664db51b32694199b569f7bf805106c15f0fb0adcff0e85ffb2eeeb5843bb0be609c16c46b43d51d767b26f50940b",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 361,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "2e414a19d6fdb24548b29b633c41eea259627de64a24590610e6585c9ccbdb72",
+       "f4c27799b877de30c1d73b0041f484a6786667327b5e78fb20d3f6fb32ded22c",
+       "aa2da8472b71a143b92ada26c61893434019c8938d2e255f16bb58e26a392eda",
+       "5742bbdc0a88975edf789c112c5e32edebf2a7d09b907846af20b09a4b1ca33e",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "votes"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "147903624f4425050750ec9f707f9baca7ea578c27c5a140d1c2ea971844a3c9"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-4",
+    "reason": "TK-4: series 0 unknown table 'votes'"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-release-index-018",
+   "description": "series release index 1 with one release",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01024dc632e3677e787d1668b800bf888d99f5222389a16b7ccbb290e572589906",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a26474657874582101003f1ad1d0fdbcb0f5fd7677bc70c2a32ec9298e2f5ff4b7e6212fcd85e998f46972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20081a40001016774616c6c69657302800500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840bc32017da3a02579c1469c84fef16370929d629867ffeaabf89617f33ff17bd8485806e0fe995a2eff42df2d665bd3740ca9a4a3dbfea5330f32ad795a6b3604",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 362,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "f86407a858c4a701036944beae23fa74af9742faeacd35a5762744f83631b598",
+       "c0d2d78167a270d6e594840571d6af6142f88060665c073a1dea89be2e7583bb",
+       "aa2da8472b71a143b92ada26c61893434019c8938d2e255f16bb58e26a392eda",
+       "5742bbdc0a88975edf789c112c5e32edebf2a7d09b907846af20b09a4b1ca33e",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              1
+             ],
+             [
+              1,
+              "tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "5fc01bf6da97092d7e72bb1cce089c1604bc5c48dda8ae7399b5ee06ccfe5075"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-4",
+    "reason": "TK-4: series 0 release index out of range"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-statement-foreign-019",
+   "description": "a statement the release's deck does not pin",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01cfd3444f4c98fc75093fea779b317efbc2ecbdd25e3adbcab3585d1881076124",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a26474657874582101f8640cdf61ac6b467bf1988d8a6f7c73ba1384e25bd5ee573ee1e6b350c0dcd26972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20081a40000016774616c6c6965730281582101f75a9021178f16a108f1e8608590425355f884ed2f992af58bff22f2b8e5783c0500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a0584014e3fa217bb2bd2a713a49de54b9e456e7d88b16545fa44a6e8c3edd79306ebe2a91d3c445c4419d4cf6caf675ea57821b216f114a66d8815e80b05918f7ae03",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 363,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "cbea7ce44b8e86a0f94427902f395bb7fb5c3a4e2092690bbba44921d4ee2e3c",
+       "c0d2d78167a270d6e594840571d6af6142f88060665c073a1dea89be2e7583bb",
+       "aa2da8472b71a143b92ada26c61893434019c8938d2e255f16bb58e26a392eda",
+       "5742bbdc0a88975edf789c112c5e32edebf2a7d09b907846af20b09a4b1ca33e",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01f75a9021178f16a108f1e8608590425355f884ed2f992af58bff22f2b8e5783c"
+               }
+              ]
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "2aca15744e62c2d0467d78096fb4c24369637239dbd3144de799e8f2002aaa46"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-4",
+    "reason": "TK-4: series 0 statement not pinned by the release's deck"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-statements-too-many-020",
+   "description": "257 statements",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01b4155b8b50a79bb47c5f0cce982a2f954347f115cb0126e5e2e4d47b0a5a0cab",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a2647465787458210153d7f09423b83db5e0d08e13ee05f2d15f8277629454af34e08669308c67e0866972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20081a40000016774616c6c6965730299010158210166eeeb85f1bdae0b9fd3dfe2d75d265b2a7d97246934c00e6805797a3a9eb2f55821014ec14d9b0e421c14ae73a06976e7abff8069a33cc5161e1b6d14ab7d1d75e0155821016cd937eb5d59088425ec659bf9bbc83e0604ae05be11f98df0b226acb534153f582101e1bb878d33f96265c47073e4ad2050613f514afbbae841a07419871004bdbd125821019a5d9242b402c20b4f3adb79905516b88fa3d0f1a56233cb2d4bd48f0909bed65821017af89b4513ff6d4b4e9f9355bbe029fdf23310de43bd287f808c7bcf7486ef00582101e84acca23cf449299c31141cde69ea53426605cf82381fb183e58d5c8359870e58210174bde4bd18372562d6b92b6598c92345c669a7b90153e62d46ce72b6b8f70591582101d08b038246729bda2a0a94655967b49ecfeaba988715e3cf688dd6caf255182558210103c0eea63d5181b2c1c442714158628bd586daa2eecd9e2358ec4ee8a98324cd5821017b4b2d3c7c131e3efd41d820d16d522b5a17e44463162513c6bfa5bebe32c0405821012b804781d128ce9947802c3bbba991c0bf4a9f250dd88e96de083d84ed04f47c582101626ea86e3ecf2d4db3db358873cbab6dab58aacfc23f2c78fc4f971183c188c0582101b4901e65f499167fb7c854ff09a74ded0f1d62e3ffc8f6bad239c56b2a2e497958210196c9fc0c4446953e91c831a0799920badbf420ff3cd5d18aecae9086db93078a582101365d323e3631bdf9e78befdbeb4f0ca690279e54e0b3f70eef60afc09efb65d7582101559d32de53b237c46dba2ca0cfab93f069e2e36c879afb97cd4aa1dcf8e0ffaa582101a27dfa5868779c9867f6fa609aa6c59f372001623809885c7eebe512ffee61a958210119c16c0dc375b05a39e201b00e3c63d14a79ccf0ddacc2b336b7dde93cdb464958210139561d875799410d521985acd9f68b7fb2bacfa7634f0083a0ac5827a53ce270582101491a6a2595cf9a79c3c858c6df71e8731e72d24d2c2cf596c9ff12abe29ee5ca5821014ae4e134d53e84c61f6e73ce931313269669f5a38585509af54dca63c4f6923c582101a95706eef9232000d5fe00bbdf4a69bd813337630e7ff1410970c3913d11262a58210110eb5c1eede963e3e28f4a9e7f10454bcb4b0fc69764c673121abfde74708a625821013df647e2b4cd30799905a281b0220bd775ca47b51a5d09b514418e9e81ebf6375821010e09b14615a6e2e5190bdd81e6757688424483e8c79eed5de221427d7ab1c9c85821019e7334b3b4281ed1d006def20a10ccbbf52f4cb32cc89cc9e1d33f0c07aa125958210104dc8c87dc119240a22273e2859e9ca3c1b553fee009efcfc9b81af97c5c836358210100781dbb50056f0a3bfc9a3a25ba9ce8999261419138805ad89bbe6eabba3b3f5821016bd7991ebae0acfd24066c92d1f733396d491e94098abbb870bbdb8d96636e6e582101aac08b86481361f63229089e3f6528a5e19edc644169377d8a756b04b702d9f85821014502758bb0af04ca7fe797a1f71af340c448bd21d5eabc802a5de7d8e57096f158210183fc901e6d1cc65b7ffe88eec09f223c3a378bfce874d64ef65c165700b19b4f582101ab82643fb82269b27b6450623b3b2dc6d24418fdd0baae44a01036b33c6d0af25821016fa4a6db3e476a1ec77a368c3010e7b05613b3df8bf77d1c0a6bae540448c0435821018676c84f24fee2477f915d9953983aa8b111d882d1dd17b28a7fe40765fdf9c3582101cc3649248f2e0fec41ee61b2d9ea2f7dcc4ad7576649b57862d2f633fd18c280582101c3f9b37ed584cc9dffd4522b2470e5d6fc2dbb59d0d35f88e858f408a6af5e7c58210160283bbd8e2c2260577d3358b3dac4e69caa53b5df6e0288e87842290fbd7305582101368faf6349f62409bc7759712b4ea388b9bf3a46a6ec83d556ef3f4640fc4dfa582101b67955550a38f70e002361dd6d1c77ee142d1322855db599c03505252e1ab53a58210121fb29db0aff6122bee9fd797aeb0550b8a33ebbf76b2065a3b2e64b955b8a245821013bff1165ba4ff46286a48a6a04ec64686f88b2bbad1e4baf1757cbd85d172393582101704c300e765a6f73bda0ccf2b5699c59d5a63e3482af40e9f07c7f18a5b4e2ee582101d4efbf4488bf1cd893f599fdba01ef02dfe3db1e32e6f26b6696ec45e82c1bb55821013bb79447920a319555dc6b4e60e16b9a326b76219580859ce1df9e6285d22c70582101ba1ef4637cbdecd2064a2c7bd63dd8d0eefae947e4f4bc282636bb177d4a2ee6582101f54eaf5a1f9a41bc5b6c80d7190cb71165df4e7b7aaea4138b088c6fc6b95f8c5821015fe602fa69b3be96cc5a0c8871a0768fe59b34680f8604291a2ef9e45904a5c0582101a4bfbb13575522807624f7f326643ac69a2d901928432f0b78885017917c498d582101b1c937935188024d7ba7b2c89c24597655e5c94fafc4de44c31cb8abbe47bcd05821014227160d95d1229b6e23474655a45a86fdf1a0e7c11cf3bfc13781f1ae86eb195821017de27c4c14426010a87f31f343823f9d4c7331ec2525a0b37871aa4b9711329b58210172885f1f5350b24901a4db520b25025e9271d61ed3d632433b7e2ee1efa55b1b58210142b78b3ce4fa492a3accf6d0f3ce09639630ab8dc4bf8db1ff7b1d26a2f0143c5821015b78e418566daaa0ec07c623d2c97257229e959a2b3ca3ca75c218357dd2a8f85821015cb4759d9ed5b7c2488c79fd95110093b44282f4b37e5a9dab41f6d9ad835044582101741b66cb4140fa5113d7c5e1978fac81b405c1d86ac75b22feb8ed981f3d3453582101ca90bd15c2f47c3faa5858072da8e202c3019857ef511736cf6b5bb8ff252d9c582101cb4bec1f8c5081143c1693d66032181574cef9a3314c7c8aa368ba5aa58ec7cb582101b6cc4bbe97bbdb2be0bad2c029bf9f18f150cf5ec1826c21fdf083302e18f7f6582101ada96a04673f6944d4cd72b5ec0e63b5904593a22ab764d24db621a4d90affa35821017b9c02c17445b4606b78d30602167aeec89039c650ea0a1c1d7cd27c8e2f87d1582101e428c1a0d4356c1cab762318bfae776532ed29f4f1b351928e1b1fa9ebee365058210185a6b8e6f35a3ee874d70e921e031b0d9fe855503442fe9b9b3652c1c6403d77582101891807f98fba135b92b0ffee8b4e43894fdd866b134de2c4fdb23c5997787811582101dc6e08cddeaf36fe5fe351f9adbe5568a2735b7d2eac2ce121777b33f7466c3458210149aa2212d3bce7fb06d9e9927a0648aaa234808f026a76ec326e6778102c5649582101a1d1c3b887a7705d19d9fb68f4328ba968a41aabf985cf6ff1709af17490a3b7582101d785bf558b67bcd1a0461d4c3a323fd4c2fa9a7a33a6970b19ad706ebbc29de0582101c9919c379105ee750c8c6442735fb6e97689e82c54954f765e2719e1cc6edcce582101319f28125fa75501011e32db1513bad4e5953a6c260a686af40878ff3fc6321a5821017f74d7c27926a2c215f3a73fd0d62c59a9db361ca69d624eef2b413156a2f95c58210179e35fcb72a66248d9d72fd47cca652f9c0bacd1fcb4f9a7decd0cc0c3a6c879582101db351fc8f46f75d51cc6c806e6010545f39eb6aeee0aadab5ecf1cc8a1103649582101346aa098fc6b17baba7e709192a7b52d8310ac381b7eb5be7cec97a8fca3db7558210144f0e8a2a4a661646371cb4dc4fbf78e6ddbfcc49672ab67cdae9bf7193f5503582101dce6a5f3f0487cce3f4fb997b1d6a9fe195a3800ddb77e62f19fb02e5edf43075821019ab5015e27f71d19dfdafc365ab9da32508cd1d1592ba280dc27515e025da0f85821010a40a281a53a3efba213d0c8a936c29c98cfe4fdffe4829c9969bee7f3ebe309582101317bae2c2dff8414f42658ecdbf4506c3800ab008022b6177a68b3f890cc369158210183f0cb5681850077b3ae2478a3105706ef5783f037e7f847882da7c7f856c1e75821017f1bec977995c3322b8b8ca26688ec7944f942487fd8012abac207694c36e26c582101a4eef31276ac9c0ff4438146d1d8168eaa0004823a259a9deefda1e0bd461706582101477d5a29055d52c90251b613184b341e269019ee71c989181eaecd6eeed66b925821016c1414734b1e40d7d05b327ad8fb535972b2cd014dedd4d784221ca5f01f17d15821012ed0857e06e315dc888ce0ab864a429171e69dda34d4f2c251600b9230ab01f1582101669a196d18725d5fdeae6f57be0539f7e977d081e6cd4aeccd411eea1a8b72e1582101b8489207f483ac2ebf8563f1e3989ccfddfc0f0fc7ea52cdb1dfb6bd5114f1b5582101959a82aaa261b942d2a0e79ed4b7e526aaa5b47720ce755d079bd0f1a805d96a582101fbc1a78e65f5c551586e5435ca2af74f6dd83caaf273ab8d99fbdbfbc6da1e6a5821015a3dd1ce282819c25a9afe0609c119740a2d56ddee1c24690922d4400a1fc03d582101d05ff3e46a70bd0f8351a8635e9c4372456ce94260b18de91c8fa463c65edf7f582101e1c097b7c42770ce2a0e43ea17024195360327025c5da7925a74bfab6b5ab4ef58210102b3c6b9e753292a943c74d28f7972bbe19842aeb6d2f897a5297a34b8c0a05b58210175c76cd36ae91e003299cd24152078acb9880a66f900ea26074345f724c717005821012eea73e3ef8fdea1b5613d3154f5d36fee16065a67c60de68f45faef99afe093582101872403d0073e8900eea270c152a15b890b73444e5865870768f5cdb4a302fcaa582101b6af68829b2506e8a347847870acd6f2263a901527dd756b5f1599af5d329e4b58210174ad63ed9a40a091c456d02a13fada7be8c1a6e403a4eaad166a55f4e8fa464f5821015f3741e99d2af3b1f3f162b4ab7cb1d88115167dddb55adbaad80c791a3846fa582101864c80559680c66af7351530c48c81c544fe3ac87e7b97cf14e71226810378495821018ea5aec05fc6be3b8adb6ee6608d55abfb613abb13d54a91ef66a1b8db05a36a582101112bf9442d60776def2d6fc585b71c95fabd9a6a9c28ee96480808fdb60a3ebd582101e3d7ae0c35feab1427abf5671d7729c283bc4b58ebf0d58dd471de83b0e2d325582101b77189fe68c9ea19199286d79d512f196db8651754d8e972669dfb5b49c50f9e5821017d5170501157f1a6fe70fc223de575c251776fe30c0b01a34447b1fdee7195a1582101b7f79ca51651dd143d0212f1113a4661fab7eea761d706ca4563194ca7290f9a582101576d6c5a34a8dc3c24cf33608466fe6d0c6c1cd694f8f39de1a898994a6d54eb582101d8f224c2c8ff1f4bfb949186f916903017dca8d8dcedf6f8e33b8d5135bcd52158210163d757d6d735c9c3d1f4c22501351c7263c73f4abe76d4710fc97186a85bd7eb582101d5cfbb8438bc8c40a55486758c43715498616bd208117f1bbab6b643e00798995821019d3edf7ace39e78e4ee6cc5721dbf35d301e12ce3ac700e687cfbaa6968f038158210183abc57c831b236a9c631bc38c61667ffc7cd80f10a819baacb6f8e470444208582101ee8fddffc903608c4973852ef4ba70320345ff6769e22b94137015d116e0f7c4582101da3069aaded4e94be953aee37466785fc1d8c0a951f90b63f66b2b0099ccef365821010eb8745a740da3d3e9a9515a7467371f855066591a2296a153be46d349c5215f582101125423323e6f5ef7d181f2b158a1ebbb35539dd6a97ebe743c67ec61f566808058210152e211c6ed349ddaba0e84be1b90f85ad6cae9820c8ba8dae499e243d7ca53da5821013873f2ab5412bf58262c43d8107f05c5e37c9d37542d55dcaf22deeb46123b3658210152346aaf6f1e992f0d1c0736a7cc933158b9da28a6ab7bc8dc150ffbeac74a0f5821018a81b5b35cb8df3d51a9c59deb9cf5612e363b8a0b2979c8c92577452a3374c65821015f0d257d2c9181526ee1d1c3b4ac22118230b9ca9a76df79e9d2edbe044bd67358210111cb1701095b5d06f2832b51face526cba7ea045e536cecfd521c82f3a91f29a5821013b54f734a20c54390a947c0b72a5949965d88f254dc0d0ef5738055286b534c45821013442b3c02c2dd65e83f2ba8070ffb2723a732bf3fa04561741534cf9face6be2582101c0ed0d74d3c747e1c46755f237cd258db99dd540f94013ba30a2f2c71eacebb85821017146bd5dfb03724edb6dbda99ec4a4d9d32531251e9cd82e69208a078f2cfc82582101a6cafc4e3dcb9f5d940c9caabc40e0f80e452cf515d70b299949ee12ffc7b9fa58210132c59472804b43642aa2a2d310b6cc54cad5b30bc4db05199dc37c25fcf22225582101d895f7ff952ee95c52be66e57dceffd18c412a37ee88067a5abc6362a3a9394958210100297dfb700086f3bb14b2daabd9914c48f40c8164e0e3cde316c333fab338c558210127db00a419c71b6bc0635c3e8655fba26cc0dee1e0d0d813303f0c96d96175555821010c307b223907c3b9d7d2e39466af2836521a91fefef89eb81f95fea2f3a98ad2582101aebc59553b79406e6a28beced059fb17300006db2e2abc09506eb69a1ba9f17558210136bb2dda8d01404e5085123b259604b4b9de6bed61dd9dbdbf6500098c84d3b35821014693d562f3ef060ace6687ced7fcb97013405cff2531870ba7a5cef28fcab1c15821016b25affca63d6080eb51c2111b6d90f2e2db3465404dc2ab2ed94a65b410d96058210146865178ded2b453c4ab73a69078a5f1be40b4ccc1d9accd4a2da3bb852498c758210178ae0ae4bf082677a94b7f6487d1ade32c8620b6ac84ac861ff1699b42521b8758210153fb34a57189d35e6e578767996d292b9af552ed69f8e7122196b8060e0a6206582101f286d46be960b82daea8db1a3f636f8cc226bd4278f27ccf5309e173e4d582295821015bca8796526bf8735512be22b1883e34e0550e883c8941b8477c730a1d1eda7b5821017709fc58db111cbf437f9e701a6e038361cb312b1d0f27beb0a351213d61e4cb582101a349ceb9491dba4aebe0583d74a2016d9f04d5cf1087307d2d0d25ff007ba313582101f40e730fc53e81e16f7e29c210667745d1152729a18063da766f4954dcc6220758210141dc7011074f1d25a618ef97f55a2dfe75a0a50845efd2f549522698b6406cbb5821019be89cf8a882202cf7f931f6759c17c4ed49739e64af255421cb6b6ce6603d05582101eb99b8ed930d4e0663dc99a74353106159991bda898e80299d6e6c37833e947058210107d42a7d27b863b77278dd3ba9b1ca4de3ee676700d4b98c7730892a412b7b49582101505dbc3079bf0f3207a78e5fd8218e9f356928addab5239a58140880d0426ac75821018e956702999f5a7252f049b826150315a9cfe7b01b3affdcf8afc2d1cca926f758210148b69511ad2044b1c61aba7801e2ff54d3e8f3ebc55c5c9fec4aa542f1b0abcb582101341cc1b37649b757f757d90303d8078608dff585a4345b209a750ed6dc461def5821012a9925a4448e473b103294478122917ca4876621c550ca1958ab10e533c3e985582101b7dd1a2a57e6282a727479052c41a65b7cb3a6c6b97974c18fbb2afe2aa7ee045821017b9cefb650695b3e5dfe9b7596685a31fe032f1734871d7e6c9f34bd0284899858210126fe0d20796d17f61b2e6dd927fd88cbf4a7c8bb3ddf0542b6b3b853760793cb5821012ceaa3141c71a536cb9e3dcc3e3968bac61e8b1b0b4d99711a86b0684ae81a65582101ed2377db674e792558ad39c84f9a047ad548113e6c2bfb14d4e50858ada5497b58210145e4a4f5f421e09b394c43aff3a48240b40c970d4dfef62ba194970d98e8abfd582101a9069a94b1b3941712f5f075cd636b43e4c2586e4c98fd18fc139373b5394096582101f31732162c34f40fbbb476cfe1c5670196d19a47d85be2c76aae9902fa63d464582101423c57c5415556b975a7a3b42ffbeeb309b0bb91e90e63bc33e0e8fa3ecbabbd5821018a54616d96e837cda3dfe00bee2a20b6ece4584276fbda25a927b25b57266d4b582101da41f93c743893026e0ff37ec9acd223e563ee6016ca18848f4518dd75aebe26582101a1b21abfb2b7a820a607bca0a3bc26b5631a7489d060c0e146502238dbf4a51e5821016fa8c2400ff1f07c5d805a7eb96f5fceb1f6bccc0bf56b6076822d702e2dc539582101020f48c5b7beaf5fde254db7e72efc872cf6e65df06a3e60b57e99ae216bc53c5821013c10351c5b35df62e8fb61575bd6f54349bad73bbcf65647ef172a4e5599af28582101ebc894e68bc20acf8f7377cae0cf5d41fa50ca3ccada8e415e7a156c42e7f8d85821017522fd960b1a76e09f21a1e24ad6c4c91d5d9391fd822c94d96b5c24c87854615821015ea87438d6517368425dbf1e2c200f73689952895a4f3f39688dd9c98c97db0a5821018732a4934752d4a3ca0a477e2c134d77aaffdf0b51445f903de01e313c3a0ea6582101a0dfb7d0849fb6c0c78a535798e705f88dfc0051aa2e496c5d6055f4f483e221582101ceae6fcdfc28ba8c02fb80622495d969a3dcb32a22ffbfc202be5c0f24aff3a15821010a7044661fd849241ea1d1da2104d1416df2090f8ef8fd6c539dafec7da7a3595821013cec64016997a47ea5fa022720388945565fb480c8d895685c1adeecc4953b8a5821014ab2b9f2fcba115d8fc0c6a55797bb7b7935d3926d752d6d06d6da24069a4aef5821016fbbf1681872a350e4cd7dc9f0785d3788aa89ecc1c6d5230db3dd23b83303885821016debb609148368582c31d1673b510a6239a7e728d2d9bf0a41c4ce82b00429be5821015f48fd9483f9fa5b0c8c9f7e2f1b2c48bf82444df835c23d6273ea10a090cb56582101e6f7a4d884f715d4d8067bba5d7a97c786ad43798ef36a1f1324f5bffb1bd5bc582101cf9cbaab6a335702aa927b023a8c7ef6d8a22e16bcde784055c946a88389889a58210199066263a54b4ecf5805b2295848c0121643cf63f2dcce36217e1131f6f85cfb582101336e71acbe9a5b36e9c8bd897777db850a167d3bb51818229f5a7fa85b04317e582101573d1043c6de380a40fd161be33971b3a5095f7d0bc9f0020fc5792f053da835582101bac743be54abdad76e0d6b808cc34d73b5c4e46f54a742e30835ec7dfe210603582101926e1264cd02c1412923693cf3c9b25e3e9f824eb069c78a915a1259c0c5417c582101abb5fc5766bf7acdb7da3136ad353db89ed08ccdcccc7c99cf431c4faff38b815821018d64be2f0987377656587678ed9c27234ad47fc2ba0d59159c469c9eac1bd4f05821017719e573693df1d7b328dd3b48398c37500732be74cfaae75b40d1e9c7cb7705582101990da2d7d493386f9b8041f02c13114d50f86b2234d8fb12ee465d538ca49b6c582101854e9101d8dc47c39c7b59e1bee58c1bf235d6554fa759b1d5a90ddb7500d6b55821017ab9875e9b20645643a22ccaf7fc15cc8c62d8d6acbd2663960275c94ea125b7582101be678896431ffa2435db83d97a53b8a8e89c359df31936fa1c83b9f9ac64e610582101924300a3706104f157217a6ef5097fd24432cde564b7509f0543f70f3dbff0d0582101c0d390a6461d333e67d088157a908ec6e51d60d6c6c343f1cc0cefb3751f178b582101c10b35a6959ed8054289f3947a5b53820abd1761b48eec4bbaed4f68605e5a2d582101be24316683f20318364a3106613be5b1e07b5980cd9d5f53613b4a917b228286582101abb3d10f26487930cd55e5f423554dcc6ada8cb46b9ad4f1677da88ea837530f582101a32fa8d1d333b245fc4de089d6781be586d5043c1e61f31c9198ed9cda8ddd1f582101f7e9355b36ef864550c9f8604117bb32fbf1c907a8bbc6e3ddf9a27334860f53582101592ed9757bd981becb0a2f71b83d494350f05d2ec3ac475cb1a63d477f11400c582101c808be7ce4d86b1f31cca9bd41bfdde2e471c044e3719564ecda5ce8ba2e01d5582101970b6990e5af9ea6e189ede74c13600a1f34101d7e3d20754e984979888521a7582101e6d5264b20f93f7d5eb5ae7baa3724dfb6b851be3cf259971898463a3a62a20d582101e6e138d4b847efd282b98d2851a7f34d30192bd5ed10354bb3b0b139652990bc58210115dd3b0caf70f7cde78dbdd7b600cfac01d6dedee0bb0d7436a998ff3c02a219582101bdb9c21567cc292dd239e3ec9310572f0c2459e2dfcdb70aa7f45a948981040b582101e9878d3d6f3c221fc8c5dbbb65e39c98e47f00226431f38826203d8a1cc2d3f8582101cc0bde98753e6158a68a58cab29c25fb0e428319d2dcfffac9f3df1849c2577c58210166442e6f59dcd680ed70b6a2833f3212a984c68e45d9ab6f12b51f325f4dada858210183b1a6a4b452519047b4d522995b997b1572eb155d5e9ba54df382ed2a8f3f345821016a2136804d375136bd416c95dc619ca2c31fbdbd2174ffebcfda7fba6312c7255821014507e2cbadb6d47414cf8020930fb25f91d5187972dc6f9d09be38aadc3abbb1582101f611560d558c6941895f6f4e0c0784d98f245d4b755f2682f4ca354fc422316d582101577e43b81cbc137eb3ab596cede94ec014c811a424e4239b3cfcef7bcee8f0fd5821011d23cd21ebde115aa76752048429ea5ff75e62c41c442d3ca1d72f23614118b25821015cf328e653f9fd29cd7e782ad45fa50043ab23dc359bde3f2de79552392700eb582101cbc8fe98287d8cbb247be0914611998f281e9aa3e98283761ae1853e7d26b5985821010c210f34e2ede5b4c55543ad74ee6330e7d20b7d6c32a63c493b0eca18d39cdd58210168594c23bc1b02ed894b38adc7268711d5ee18970eef0636f53514e363b5c30b582101e6b1dadc078900290336b8e9cd4c1a5237577ad4718fd940810a7e860745bc9258210145d10cae2d57ea2b4368d5e3ce60b6eb2dc226cb2f7e83ceff65f59f104b301e582101ce80c3b91572807a41aad39c93b3eea385ba552d135e52b6d870dcf805f063d15821014a1c54a07b8b69296066cd2b0419fa807bda1aa4240f354d8d8f9e81ed8c8a455821015d2547b0d9e9b7b471033d53e4ed4b2de656a3f9f2d8d9312e94d0a530afed76582101f5ecb1b85c7f51c01faca077390281fb7c897964c9ee8e56461c5294cb2f1f9e5821011aedb1eb3a60bbbd561a0d943162111f0abac7c1e18ccee182ec9fa710f3bcd8582101ad7395ff069e9c921b705ebe3550c7f5c27d24c0de1d2db9d4cf3731ce9a8982582101c7065a4a5d28db5cd7dc9e905d54baae680aa19b35e7129a62c3bb2f4926aaaa5821012f1424c2089122dd913dbd5be59eb0f5f23e4ff269a35f32257740d9f3b9783e582101d8b30cf88892e758360702a2a87fb03bc93eda0f8366a1c7133e1aace65223c158210108589fe4024a336edbc199cf8aa305e2f254d74d77b41870246d0ef447c97aa4582101c1425577ad3e62720abb9f1b32cbc41bf74407c364d6d9c0528d799cdbf2f3e8582101d7db9f3c441392cb454ea3a023b33f9159759253127471c5f2b462ddfba3bf2f58210185b6a54a969a47b4232f64eed14f98b56686f8765a9a7547e8f34e03c1d9ab36582101edeed9829b8163a4100c096c6c97cb9c25aafd07157a951c5fa444719131267558210127e919457d31d95df5d3acf36cb72adace176b68aa855650296f75ae743b2c22582101c9cfe56cbf656b3d86e5ef9ed1abe7c4a5398161bcdcec38136f36d3fd97f23d582101f62f15e1d182ba1572d42d571d8e48d340442858deba237322bba0ce00c357ae5821015c4fd57115f8025df8089c13e71b79ffb4ffdafc6ca5f8b8f6323727e7666c745821012aca457c8ebf13123df660cbde90bbd42a67d935ada7b187a7c80669a7dc7bd9582101821620e57a25e3c7ec41d8d955c2abc43b3fff065c7c485dfecc70020b3072c458210184a5608090260a3a4d18915ebe9e6adab8f9fc2a10f469e0ccbf924ff074cc83582101ff7ac4560a760e78a5c602512d31ee9218aee889690fb3e08e2c9b5fb7bb82a55821017fcd70ac05a276cc11f2691127f79acc48cf78d0e502145d1f90b95a81a811c758210142385114554141a0ce3bc6a2bbd5aba705ce1b0cdc2d09f3897d8d79272377055821017780b280d48e2d9657e901f1f340a535f63f996440e89817deaf0b0bb29c971658210146fa196aaf2fbcff68feb3903d88a164c695dd25731318b70f0848840a6d058c582101997d30d73e0c17312d0d9aeb26b1f708615832dfd5dc9ea68e9b3683790a4c3d582101877ea4ed45261bfce43ab450a915b052f3f922e09cd140c48ba497227bdc28cc582101f98f1859a359f78de54b14be5ebccd23f2f46881b66784bdbe37d8eaadbca19d582101cfc9f0c521e81fbe50e22bfcdc59331eca0fa16cb71f7ce5b6d18509b7b3a48358210109fedd41e795400f9157db576e39e0e34568bf15e7caf00c52b56f5e2dc23667582101af6414c3f905badf1bbbfb7b64fdb62800293de9d21b2566e5384dff88cef4e30500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a058404e4f524ca94ebc91dafee9a2ed0ae4ab5309dd63863c7e4c66462536767826c626c548d14b55faab94be8f813443202714ec154e8a0bd0563524d17fd225f10d",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 364,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "73c4387897ad89e67939f7e3596c9b9d94fc08a532a5cd23b6675ba334eeb310",
+       "1b1bdc18157cb63143c895b4072cd94bfeeb47f0340358ddd0c5dd25257d0c3e",
+       "ed46879ba35d6418d5b2a225ebca2c7a330a1145d87333cd77158d7a8f62a6a6",
+       "5742bbdc0a88975edf789c112c5e32edebf2a7d09b907846af20b09a4b1ca33e",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "0166eeeb85f1bdae0b9fd3dfe2d75d265b2a7d97246934c00e6805797a3a9eb2f5"
+               },
+               {
+                "hex": "014ec14d9b0e421c14ae73a06976e7abff8069a33cc5161e1b6d14ab7d1d75e015"
+               },
+               {
+                "hex": "016cd937eb5d59088425ec659bf9bbc83e0604ae05be11f98df0b226acb534153f"
+               },
+               {
+                "hex": "01e1bb878d33f96265c47073e4ad2050613f514afbbae841a07419871004bdbd12"
+               },
+               {
+                "hex": "019a5d9242b402c20b4f3adb79905516b88fa3d0f1a56233cb2d4bd48f0909bed6"
+               },
+               {
+                "hex": "017af89b4513ff6d4b4e9f9355bbe029fdf23310de43bd287f808c7bcf7486ef00"
+               },
+               {
+                "hex": "01e84acca23cf449299c31141cde69ea53426605cf82381fb183e58d5c8359870e"
+               },
+               {
+                "hex": "0174bde4bd18372562d6b92b6598c92345c669a7b90153e62d46ce72b6b8f70591"
+               },
+               {
+                "hex": "01d08b038246729bda2a0a94655967b49ecfeaba988715e3cf688dd6caf2551825"
+               },
+               {
+                "hex": "0103c0eea63d5181b2c1c442714158628bd586daa2eecd9e2358ec4ee8a98324cd"
+               },
+               {
+                "hex": "017b4b2d3c7c131e3efd41d820d16d522b5a17e44463162513c6bfa5bebe32c040"
+               },
+               {
+                "hex": "012b804781d128ce9947802c3bbba991c0bf4a9f250dd88e96de083d84ed04f47c"
+               },
+               {
+                "hex": "01626ea86e3ecf2d4db3db358873cbab6dab58aacfc23f2c78fc4f971183c188c0"
+               },
+               {
+                "hex": "01b4901e65f499167fb7c854ff09a74ded0f1d62e3ffc8f6bad239c56b2a2e4979"
+               },
+               {
+                "hex": "0196c9fc0c4446953e91c831a0799920badbf420ff3cd5d18aecae9086db93078a"
+               },
+               {
+                "hex": "01365d323e3631bdf9e78befdbeb4f0ca690279e54e0b3f70eef60afc09efb65d7"
+               },
+               {
+                "hex": "01559d32de53b237c46dba2ca0cfab93f069e2e36c879afb97cd4aa1dcf8e0ffaa"
+               },
+               {
+                "hex": "01a27dfa5868779c9867f6fa609aa6c59f372001623809885c7eebe512ffee61a9"
+               },
+               {
+                "hex": "0119c16c0dc375b05a39e201b00e3c63d14a79ccf0ddacc2b336b7dde93cdb4649"
+               },
+               {
+                "hex": "0139561d875799410d521985acd9f68b7fb2bacfa7634f0083a0ac5827a53ce270"
+               },
+               {
+                "hex": "01491a6a2595cf9a79c3c858c6df71e8731e72d24d2c2cf596c9ff12abe29ee5ca"
+               },
+               {
+                "hex": "014ae4e134d53e84c61f6e73ce931313269669f5a38585509af54dca63c4f6923c"
+               },
+               {
+                "hex": "01a95706eef9232000d5fe00bbdf4a69bd813337630e7ff1410970c3913d11262a"
+               },
+               {
+                "hex": "0110eb5c1eede963e3e28f4a9e7f10454bcb4b0fc69764c673121abfde74708a62"
+               },
+               {
+                "hex": "013df647e2b4cd30799905a281b0220bd775ca47b51a5d09b514418e9e81ebf637"
+               },
+               {
+                "hex": "010e09b14615a6e2e5190bdd81e6757688424483e8c79eed5de221427d7ab1c9c8"
+               },
+               {
+                "hex": "019e7334b3b4281ed1d006def20a10ccbbf52f4cb32cc89cc9e1d33f0c07aa1259"
+               },
+               {
+                "hex": "0104dc8c87dc119240a22273e2859e9ca3c1b553fee009efcfc9b81af97c5c8363"
+               },
+               {
+                "hex": "0100781dbb50056f0a3bfc9a3a25ba9ce8999261419138805ad89bbe6eabba3b3f"
+               },
+               {
+                "hex": "016bd7991ebae0acfd24066c92d1f733396d491e94098abbb870bbdb8d96636e6e"
+               },
+               {
+                "hex": "01aac08b86481361f63229089e3f6528a5e19edc644169377d8a756b04b702d9f8"
+               },
+               {
+                "hex": "014502758bb0af04ca7fe797a1f71af340c448bd21d5eabc802a5de7d8e57096f1"
+               },
+               {
+                "hex": "0183fc901e6d1cc65b7ffe88eec09f223c3a378bfce874d64ef65c165700b19b4f"
+               },
+               {
+                "hex": "01ab82643fb82269b27b6450623b3b2dc6d24418fdd0baae44a01036b33c6d0af2"
+               },
+               {
+                "hex": "016fa4a6db3e476a1ec77a368c3010e7b05613b3df8bf77d1c0a6bae540448c043"
+               },
+               {
+                "hex": "018676c84f24fee2477f915d9953983aa8b111d882d1dd17b28a7fe40765fdf9c3"
+               },
+               {
+                "hex": "01cc3649248f2e0fec41ee61b2d9ea2f7dcc4ad7576649b57862d2f633fd18c280"
+               },
+               {
+                "hex": "01c3f9b37ed584cc9dffd4522b2470e5d6fc2dbb59d0d35f88e858f408a6af5e7c"
+               },
+               {
+                "hex": "0160283bbd8e2c2260577d3358b3dac4e69caa53b5df6e0288e87842290fbd7305"
+               },
+               {
+                "hex": "01368faf6349f62409bc7759712b4ea388b9bf3a46a6ec83d556ef3f4640fc4dfa"
+               },
+               {
+                "hex": "01b67955550a38f70e002361dd6d1c77ee142d1322855db599c03505252e1ab53a"
+               },
+               {
+                "hex": "0121fb29db0aff6122bee9fd797aeb0550b8a33ebbf76b2065a3b2e64b955b8a24"
+               },
+               {
+                "hex": "013bff1165ba4ff46286a48a6a04ec64686f88b2bbad1e4baf1757cbd85d172393"
+               },
+               {
+                "hex": "01704c300e765a6f73bda0ccf2b5699c59d5a63e3482af40e9f07c7f18a5b4e2ee"
+               },
+               {
+                "hex": "01d4efbf4488bf1cd893f599fdba01ef02dfe3db1e32e6f26b6696ec45e82c1bb5"
+               },
+               {
+                "hex": "013bb79447920a319555dc6b4e60e16b9a326b76219580859ce1df9e6285d22c70"
+               },
+               {
+                "hex": "01ba1ef4637cbdecd2064a2c7bd63dd8d0eefae947e4f4bc282636bb177d4a2ee6"
+               },
+               {
+                "hex": "01f54eaf5a1f9a41bc5b6c80d7190cb71165df4e7b7aaea4138b088c6fc6b95f8c"
+               },
+               {
+                "hex": "015fe602fa69b3be96cc5a0c8871a0768fe59b34680f8604291a2ef9e45904a5c0"
+               },
+               {
+                "hex": "01a4bfbb13575522807624f7f326643ac69a2d901928432f0b78885017917c498d"
+               },
+               {
+                "hex": "01b1c937935188024d7ba7b2c89c24597655e5c94fafc4de44c31cb8abbe47bcd0"
+               },
+               {
+                "hex": "014227160d95d1229b6e23474655a45a86fdf1a0e7c11cf3bfc13781f1ae86eb19"
+               },
+               {
+                "hex": "017de27c4c14426010a87f31f343823f9d4c7331ec2525a0b37871aa4b9711329b"
+               },
+               {
+                "hex": "0172885f1f5350b24901a4db520b25025e9271d61ed3d632433b7e2ee1efa55b1b"
+               },
+               {
+                "hex": "0142b78b3ce4fa492a3accf6d0f3ce09639630ab8dc4bf8db1ff7b1d26a2f0143c"
+               },
+               {
+                "hex": "015b78e418566daaa0ec07c623d2c97257229e959a2b3ca3ca75c218357dd2a8f8"
+               },
+               {
+                "hex": "015cb4759d9ed5b7c2488c79fd95110093b44282f4b37e5a9dab41f6d9ad835044"
+               },
+               {
+                "hex": "01741b66cb4140fa5113d7c5e1978fac81b405c1d86ac75b22feb8ed981f3d3453"
+               },
+               {
+                "hex": "01ca90bd15c2f47c3faa5858072da8e202c3019857ef511736cf6b5bb8ff252d9c"
+               },
+               {
+                "hex": "01cb4bec1f8c5081143c1693d66032181574cef9a3314c7c8aa368ba5aa58ec7cb"
+               },
+               {
+                "hex": "01b6cc4bbe97bbdb2be0bad2c029bf9f18f150cf5ec1826c21fdf083302e18f7f6"
+               },
+               {
+                "hex": "01ada96a04673f6944d4cd72b5ec0e63b5904593a22ab764d24db621a4d90affa3"
+               },
+               {
+                "hex": "017b9c02c17445b4606b78d30602167aeec89039c650ea0a1c1d7cd27c8e2f87d1"
+               },
+               {
+                "hex": "01e428c1a0d4356c1cab762318bfae776532ed29f4f1b351928e1b1fa9ebee3650"
+               },
+               {
+                "hex": "0185a6b8e6f35a3ee874d70e921e031b0d9fe855503442fe9b9b3652c1c6403d77"
+               },
+               {
+                "hex": "01891807f98fba135b92b0ffee8b4e43894fdd866b134de2c4fdb23c5997787811"
+               },
+               {
+                "hex": "01dc6e08cddeaf36fe5fe351f9adbe5568a2735b7d2eac2ce121777b33f7466c34"
+               },
+               {
+                "hex": "0149aa2212d3bce7fb06d9e9927a0648aaa234808f026a76ec326e6778102c5649"
+               },
+               {
+                "hex": "01a1d1c3b887a7705d19d9fb68f4328ba968a41aabf985cf6ff1709af17490a3b7"
+               },
+               {
+                "hex": "01d785bf558b67bcd1a0461d4c3a323fd4c2fa9a7a33a6970b19ad706ebbc29de0"
+               },
+               {
+                "hex": "01c9919c379105ee750c8c6442735fb6e97689e82c54954f765e2719e1cc6edcce"
+               },
+               {
+                "hex": "01319f28125fa75501011e32db1513bad4e5953a6c260a686af40878ff3fc6321a"
+               },
+               {
+                "hex": "017f74d7c27926a2c215f3a73fd0d62c59a9db361ca69d624eef2b413156a2f95c"
+               },
+               {
+                "hex": "0179e35fcb72a66248d9d72fd47cca652f9c0bacd1fcb4f9a7decd0cc0c3a6c879"
+               },
+               {
+                "hex": "01db351fc8f46f75d51cc6c806e6010545f39eb6aeee0aadab5ecf1cc8a1103649"
+               },
+               {
+                "hex": "01346aa098fc6b17baba7e709192a7b52d8310ac381b7eb5be7cec97a8fca3db75"
+               },
+               {
+                "hex": "0144f0e8a2a4a661646371cb4dc4fbf78e6ddbfcc49672ab67cdae9bf7193f5503"
+               },
+               {
+                "hex": "01dce6a5f3f0487cce3f4fb997b1d6a9fe195a3800ddb77e62f19fb02e5edf4307"
+               },
+               {
+                "hex": "019ab5015e27f71d19dfdafc365ab9da32508cd1d1592ba280dc27515e025da0f8"
+               },
+               {
+                "hex": "010a40a281a53a3efba213d0c8a936c29c98cfe4fdffe4829c9969bee7f3ebe309"
+               },
+               {
+                "hex": "01317bae2c2dff8414f42658ecdbf4506c3800ab008022b6177a68b3f890cc3691"
+               },
+               {
+                "hex": "0183f0cb5681850077b3ae2478a3105706ef5783f037e7f847882da7c7f856c1e7"
+               },
+               {
+                "hex": "017f1bec977995c3322b8b8ca26688ec7944f942487fd8012abac207694c36e26c"
+               },
+               {
+                "hex": "01a4eef31276ac9c0ff4438146d1d8168eaa0004823a259a9deefda1e0bd461706"
+               },
+               {
+                "hex": "01477d5a29055d52c90251b613184b341e269019ee71c989181eaecd6eeed66b92"
+               },
+               {
+                "hex": "016c1414734b1e40d7d05b327ad8fb535972b2cd014dedd4d784221ca5f01f17d1"
+               },
+               {
+                "hex": "012ed0857e06e315dc888ce0ab864a429171e69dda34d4f2c251600b9230ab01f1"
+               },
+               {
+                "hex": "01669a196d18725d5fdeae6f57be0539f7e977d081e6cd4aeccd411eea1a8b72e1"
+               },
+               {
+                "hex": "01b8489207f483ac2ebf8563f1e3989ccfddfc0f0fc7ea52cdb1dfb6bd5114f1b5"
+               },
+               {
+                "hex": "01959a82aaa261b942d2a0e79ed4b7e526aaa5b47720ce755d079bd0f1a805d96a"
+               },
+               {
+                "hex": "01fbc1a78e65f5c551586e5435ca2af74f6dd83caaf273ab8d99fbdbfbc6da1e6a"
+               },
+               {
+                "hex": "015a3dd1ce282819c25a9afe0609c119740a2d56ddee1c24690922d4400a1fc03d"
+               },
+               {
+                "hex": "01d05ff3e46a70bd0f8351a8635e9c4372456ce94260b18de91c8fa463c65edf7f"
+               },
+               {
+                "hex": "01e1c097b7c42770ce2a0e43ea17024195360327025c5da7925a74bfab6b5ab4ef"
+               },
+               {
+                "hex": "0102b3c6b9e753292a943c74d28f7972bbe19842aeb6d2f897a5297a34b8c0a05b"
+               },
+               {
+                "hex": "0175c76cd36ae91e003299cd24152078acb9880a66f900ea26074345f724c71700"
+               },
+               {
+                "hex": "012eea73e3ef8fdea1b5613d3154f5d36fee16065a67c60de68f45faef99afe093"
+               },
+               {
+                "hex": "01872403d0073e8900eea270c152a15b890b73444e5865870768f5cdb4a302fcaa"
+               },
+               {
+                "hex": "01b6af68829b2506e8a347847870acd6f2263a901527dd756b5f1599af5d329e4b"
+               },
+               {
+                "hex": "0174ad63ed9a40a091c456d02a13fada7be8c1a6e403a4eaad166a55f4e8fa464f"
+               },
+               {
+                "hex": "015f3741e99d2af3b1f3f162b4ab7cb1d88115167dddb55adbaad80c791a3846fa"
+               },
+               {
+                "hex": "01864c80559680c66af7351530c48c81c544fe3ac87e7b97cf14e7122681037849"
+               },
+               {
+                "hex": "018ea5aec05fc6be3b8adb6ee6608d55abfb613abb13d54a91ef66a1b8db05a36a"
+               },
+               {
+                "hex": "01112bf9442d60776def2d6fc585b71c95fabd9a6a9c28ee96480808fdb60a3ebd"
+               },
+               {
+                "hex": "01e3d7ae0c35feab1427abf5671d7729c283bc4b58ebf0d58dd471de83b0e2d325"
+               },
+               {
+                "hex": "01b77189fe68c9ea19199286d79d512f196db8651754d8e972669dfb5b49c50f9e"
+               },
+               {
+                "hex": "017d5170501157f1a6fe70fc223de575c251776fe30c0b01a34447b1fdee7195a1"
+               },
+               {
+                "hex": "01b7f79ca51651dd143d0212f1113a4661fab7eea761d706ca4563194ca7290f9a"
+               },
+               {
+                "hex": "01576d6c5a34a8dc3c24cf33608466fe6d0c6c1cd694f8f39de1a898994a6d54eb"
+               },
+               {
+                "hex": "01d8f224c2c8ff1f4bfb949186f916903017dca8d8dcedf6f8e33b8d5135bcd521"
+               },
+               {
+                "hex": "0163d757d6d735c9c3d1f4c22501351c7263c73f4abe76d4710fc97186a85bd7eb"
+               },
+               {
+                "hex": "01d5cfbb8438bc8c40a55486758c43715498616bd208117f1bbab6b643e0079899"
+               },
+               {
+                "hex": "019d3edf7ace39e78e4ee6cc5721dbf35d301e12ce3ac700e687cfbaa6968f0381"
+               },
+               {
+                "hex": "0183abc57c831b236a9c631bc38c61667ffc7cd80f10a819baacb6f8e470444208"
+               },
+               {
+                "hex": "01ee8fddffc903608c4973852ef4ba70320345ff6769e22b94137015d116e0f7c4"
+               },
+               {
+                "hex": "01da3069aaded4e94be953aee37466785fc1d8c0a951f90b63f66b2b0099ccef36"
+               },
+               {
+                "hex": "010eb8745a740da3d3e9a9515a7467371f855066591a2296a153be46d349c5215f"
+               },
+               {
+                "hex": "01125423323e6f5ef7d181f2b158a1ebbb35539dd6a97ebe743c67ec61f5668080"
+               },
+               {
+                "hex": "0152e211c6ed349ddaba0e84be1b90f85ad6cae9820c8ba8dae499e243d7ca53da"
+               },
+               {
+                "hex": "013873f2ab5412bf58262c43d8107f05c5e37c9d37542d55dcaf22deeb46123b36"
+               },
+               {
+                "hex": "0152346aaf6f1e992f0d1c0736a7cc933158b9da28a6ab7bc8dc150ffbeac74a0f"
+               },
+               {
+                "hex": "018a81b5b35cb8df3d51a9c59deb9cf5612e363b8a0b2979c8c92577452a3374c6"
+               },
+               {
+                "hex": "015f0d257d2c9181526ee1d1c3b4ac22118230b9ca9a76df79e9d2edbe044bd673"
+               },
+               {
+                "hex": "0111cb1701095b5d06f2832b51face526cba7ea045e536cecfd521c82f3a91f29a"
+               },
+               {
+                "hex": "013b54f734a20c54390a947c0b72a5949965d88f254dc0d0ef5738055286b534c4"
+               },
+               {
+                "hex": "013442b3c02c2dd65e83f2ba8070ffb2723a732bf3fa04561741534cf9face6be2"
+               },
+               {
+                "hex": "01c0ed0d74d3c747e1c46755f237cd258db99dd540f94013ba30a2f2c71eacebb8"
+               },
+               {
+                "hex": "017146bd5dfb03724edb6dbda99ec4a4d9d32531251e9cd82e69208a078f2cfc82"
+               },
+               {
+                "hex": "01a6cafc4e3dcb9f5d940c9caabc40e0f80e452cf515d70b299949ee12ffc7b9fa"
+               },
+               {
+                "hex": "0132c59472804b43642aa2a2d310b6cc54cad5b30bc4db05199dc37c25fcf22225"
+               },
+               {
+                "hex": "01d895f7ff952ee95c52be66e57dceffd18c412a37ee88067a5abc6362a3a93949"
+               },
+               {
+                "hex": "0100297dfb700086f3bb14b2daabd9914c48f40c8164e0e3cde316c333fab338c5"
+               },
+               {
+                "hex": "0127db00a419c71b6bc0635c3e8655fba26cc0dee1e0d0d813303f0c96d9617555"
+               },
+               {
+                "hex": "010c307b223907c3b9d7d2e39466af2836521a91fefef89eb81f95fea2f3a98ad2"
+               },
+               {
+                "hex": "01aebc59553b79406e6a28beced059fb17300006db2e2abc09506eb69a1ba9f175"
+               },
+               {
+                "hex": "0136bb2dda8d01404e5085123b259604b4b9de6bed61dd9dbdbf6500098c84d3b3"
+               },
+               {
+                "hex": "014693d562f3ef060ace6687ced7fcb97013405cff2531870ba7a5cef28fcab1c1"
+               },
+               {
+                "hex": "016b25affca63d6080eb51c2111b6d90f2e2db3465404dc2ab2ed94a65b410d960"
+               },
+               {
+                "hex": "0146865178ded2b453c4ab73a69078a5f1be40b4ccc1d9accd4a2da3bb852498c7"
+               },
+               {
+                "hex": "0178ae0ae4bf082677a94b7f6487d1ade32c8620b6ac84ac861ff1699b42521b87"
+               },
+               {
+                "hex": "0153fb34a57189d35e6e578767996d292b9af552ed69f8e7122196b8060e0a6206"
+               },
+               {
+                "hex": "01f286d46be960b82daea8db1a3f636f8cc226bd4278f27ccf5309e173e4d58229"
+               },
+               {
+                "hex": "015bca8796526bf8735512be22b1883e34e0550e883c8941b8477c730a1d1eda7b"
+               },
+               {
+                "hex": "017709fc58db111cbf437f9e701a6e038361cb312b1d0f27beb0a351213d61e4cb"
+               },
+               {
+                "hex": "01a349ceb9491dba4aebe0583d74a2016d9f04d5cf1087307d2d0d25ff007ba313"
+               },
+               {
+                "hex": "01f40e730fc53e81e16f7e29c210667745d1152729a18063da766f4954dcc62207"
+               },
+               {
+                "hex": "0141dc7011074f1d25a618ef97f55a2dfe75a0a50845efd2f549522698b6406cbb"
+               },
+               {
+                "hex": "019be89cf8a882202cf7f931f6759c17c4ed49739e64af255421cb6b6ce6603d05"
+               },
+               {
+                "hex": "01eb99b8ed930d4e0663dc99a74353106159991bda898e80299d6e6c37833e9470"
+               },
+               {
+                "hex": "0107d42a7d27b863b77278dd3ba9b1ca4de3ee676700d4b98c7730892a412b7b49"
+               },
+               {
+                "hex": "01505dbc3079bf0f3207a78e5fd8218e9f356928addab5239a58140880d0426ac7"
+               },
+               {
+                "hex": "018e956702999f5a7252f049b826150315a9cfe7b01b3affdcf8afc2d1cca926f7"
+               },
+               {
+                "hex": "0148b69511ad2044b1c61aba7801e2ff54d3e8f3ebc55c5c9fec4aa542f1b0abcb"
+               },
+               {
+                "hex": "01341cc1b37649b757f757d90303d8078608dff585a4345b209a750ed6dc461def"
+               },
+               {
+                "hex": "012a9925a4448e473b103294478122917ca4876621c550ca1958ab10e533c3e985"
+               },
+               {
+                "hex": "01b7dd1a2a57e6282a727479052c41a65b7cb3a6c6b97974c18fbb2afe2aa7ee04"
+               },
+               {
+                "hex": "017b9cefb650695b3e5dfe9b7596685a31fe032f1734871d7e6c9f34bd02848998"
+               },
+               {
+                "hex": "0126fe0d20796d17f61b2e6dd927fd88cbf4a7c8bb3ddf0542b6b3b853760793cb"
+               },
+               {
+                "hex": "012ceaa3141c71a536cb9e3dcc3e3968bac61e8b1b0b4d99711a86b0684ae81a65"
+               },
+               {
+                "hex": "01ed2377db674e792558ad39c84f9a047ad548113e6c2bfb14d4e50858ada5497b"
+               },
+               {
+                "hex": "0145e4a4f5f421e09b394c43aff3a48240b40c970d4dfef62ba194970d98e8abfd"
+               },
+               {
+                "hex": "01a9069a94b1b3941712f5f075cd636b43e4c2586e4c98fd18fc139373b5394096"
+               },
+               {
+                "hex": "01f31732162c34f40fbbb476cfe1c5670196d19a47d85be2c76aae9902fa63d464"
+               },
+               {
+                "hex": "01423c57c5415556b975a7a3b42ffbeeb309b0bb91e90e63bc33e0e8fa3ecbabbd"
+               },
+               {
+                "hex": "018a54616d96e837cda3dfe00bee2a20b6ece4584276fbda25a927b25b57266d4b"
+               },
+               {
+                "hex": "01da41f93c743893026e0ff37ec9acd223e563ee6016ca18848f4518dd75aebe26"
+               },
+               {
+                "hex": "01a1b21abfb2b7a820a607bca0a3bc26b5631a7489d060c0e146502238dbf4a51e"
+               },
+               {
+                "hex": "016fa8c2400ff1f07c5d805a7eb96f5fceb1f6bccc0bf56b6076822d702e2dc539"
+               },
+               {
+                "hex": "01020f48c5b7beaf5fde254db7e72efc872cf6e65df06a3e60b57e99ae216bc53c"
+               },
+               {
+                "hex": "013c10351c5b35df62e8fb61575bd6f54349bad73bbcf65647ef172a4e5599af28"
+               },
+               {
+                "hex": "01ebc894e68bc20acf8f7377cae0cf5d41fa50ca3ccada8e415e7a156c42e7f8d8"
+               },
+               {
+                "hex": "017522fd960b1a76e09f21a1e24ad6c4c91d5d9391fd822c94d96b5c24c8785461"
+               },
+               {
+                "hex": "015ea87438d6517368425dbf1e2c200f73689952895a4f3f39688dd9c98c97db0a"
+               },
+               {
+                "hex": "018732a4934752d4a3ca0a477e2c134d77aaffdf0b51445f903de01e313c3a0ea6"
+               },
+               {
+                "hex": "01a0dfb7d0849fb6c0c78a535798e705f88dfc0051aa2e496c5d6055f4f483e221"
+               },
+               {
+                "hex": "01ceae6fcdfc28ba8c02fb80622495d969a3dcb32a22ffbfc202be5c0f24aff3a1"
+               },
+               {
+                "hex": "010a7044661fd849241ea1d1da2104d1416df2090f8ef8fd6c539dafec7da7a359"
+               },
+               {
+                "hex": "013cec64016997a47ea5fa022720388945565fb480c8d895685c1adeecc4953b8a"
+               },
+               {
+                "hex": "014ab2b9f2fcba115d8fc0c6a55797bb7b7935d3926d752d6d06d6da24069a4aef"
+               },
+               {
+                "hex": "016fbbf1681872a350e4cd7dc9f0785d3788aa89ecc1c6d5230db3dd23b8330388"
+               },
+               {
+                "hex": "016debb609148368582c31d1673b510a6239a7e728d2d9bf0a41c4ce82b00429be"
+               },
+               {
+                "hex": "015f48fd9483f9fa5b0c8c9f7e2f1b2c48bf82444df835c23d6273ea10a090cb56"
+               },
+               {
+                "hex": "01e6f7a4d884f715d4d8067bba5d7a97c786ad43798ef36a1f1324f5bffb1bd5bc"
+               },
+               {
+                "hex": "01cf9cbaab6a335702aa927b023a8c7ef6d8a22e16bcde784055c946a88389889a"
+               },
+               {
+                "hex": "0199066263a54b4ecf5805b2295848c0121643cf63f2dcce36217e1131f6f85cfb"
+               },
+               {
+                "hex": "01336e71acbe9a5b36e9c8bd897777db850a167d3bb51818229f5a7fa85b04317e"
+               },
+               {
+                "hex": "01573d1043c6de380a40fd161be33971b3a5095f7d0bc9f0020fc5792f053da835"
+               },
+               {
+                "hex": "01bac743be54abdad76e0d6b808cc34d73b5c4e46f54a742e30835ec7dfe210603"
+               },
+               {
+                "hex": "01926e1264cd02c1412923693cf3c9b25e3e9f824eb069c78a915a1259c0c5417c"
+               },
+               {
+                "hex": "01abb5fc5766bf7acdb7da3136ad353db89ed08ccdcccc7c99cf431c4faff38b81"
+               },
+               {
+                "hex": "018d64be2f0987377656587678ed9c27234ad47fc2ba0d59159c469c9eac1bd4f0"
+               },
+               {
+                "hex": "017719e573693df1d7b328dd3b48398c37500732be74cfaae75b40d1e9c7cb7705"
+               },
+               {
+                "hex": "01990da2d7d493386f9b8041f02c13114d50f86b2234d8fb12ee465d538ca49b6c"
+               },
+               {
+                "hex": "01854e9101d8dc47c39c7b59e1bee58c1bf235d6554fa759b1d5a90ddb7500d6b5"
+               },
+               {
+                "hex": "017ab9875e9b20645643a22ccaf7fc15cc8c62d8d6acbd2663960275c94ea125b7"
+               },
+               {
+                "hex": "01be678896431ffa2435db83d97a53b8a8e89c359df31936fa1c83b9f9ac64e610"
+               },
+               {
+                "hex": "01924300a3706104f157217a6ef5097fd24432cde564b7509f0543f70f3dbff0d0"
+               },
+               {
+                "hex": "01c0d390a6461d333e67d088157a908ec6e51d60d6c6c343f1cc0cefb3751f178b"
+               },
+               {
+                "hex": "01c10b35a6959ed8054289f3947a5b53820abd1761b48eec4bbaed4f68605e5a2d"
+               },
+               {
+                "hex": "01be24316683f20318364a3106613be5b1e07b5980cd9d5f53613b4a917b228286"
+               },
+               {
+                "hex": "01abb3d10f26487930cd55e5f423554dcc6ada8cb46b9ad4f1677da88ea837530f"
+               },
+               {
+                "hex": "01a32fa8d1d333b245fc4de089d6781be586d5043c1e61f31c9198ed9cda8ddd1f"
+               },
+               {
+                "hex": "01f7e9355b36ef864550c9f8604117bb32fbf1c907a8bbc6e3ddf9a27334860f53"
+               },
+               {
+                "hex": "01592ed9757bd981becb0a2f71b83d494350f05d2ec3ac475cb1a63d477f11400c"
+               },
+               {
+                "hex": "01c808be7ce4d86b1f31cca9bd41bfdde2e471c044e3719564ecda5ce8ba2e01d5"
+               },
+               {
+                "hex": "01970b6990e5af9ea6e189ede74c13600a1f34101d7e3d20754e984979888521a7"
+               },
+               {
+                "hex": "01e6d5264b20f93f7d5eb5ae7baa3724dfb6b851be3cf259971898463a3a62a20d"
+               },
+               {
+                "hex": "01e6e138d4b847efd282b98d2851a7f34d30192bd5ed10354bb3b0b139652990bc"
+               },
+               {
+                "hex": "0115dd3b0caf70f7cde78dbdd7b600cfac01d6dedee0bb0d7436a998ff3c02a219"
+               },
+               {
+                "hex": "01bdb9c21567cc292dd239e3ec9310572f0c2459e2dfcdb70aa7f45a948981040b"
+               },
+               {
+                "hex": "01e9878d3d6f3c221fc8c5dbbb65e39c98e47f00226431f38826203d8a1cc2d3f8"
+               },
+               {
+                "hex": "01cc0bde98753e6158a68a58cab29c25fb0e428319d2dcfffac9f3df1849c2577c"
+               },
+               {
+                "hex": "0166442e6f59dcd680ed70b6a2833f3212a984c68e45d9ab6f12b51f325f4dada8"
+               },
+               {
+                "hex": "0183b1a6a4b452519047b4d522995b997b1572eb155d5e9ba54df382ed2a8f3f34"
+               },
+               {
+                "hex": "016a2136804d375136bd416c95dc619ca2c31fbdbd2174ffebcfda7fba6312c725"
+               },
+               {
+                "hex": "014507e2cbadb6d47414cf8020930fb25f91d5187972dc6f9d09be38aadc3abbb1"
+               },
+               {
+                "hex": "01f611560d558c6941895f6f4e0c0784d98f245d4b755f2682f4ca354fc422316d"
+               },
+               {
+                "hex": "01577e43b81cbc137eb3ab596cede94ec014c811a424e4239b3cfcef7bcee8f0fd"
+               },
+               {
+                "hex": "011d23cd21ebde115aa76752048429ea5ff75e62c41c442d3ca1d72f23614118b2"
+               },
+               {
+                "hex": "015cf328e653f9fd29cd7e782ad45fa50043ab23dc359bde3f2de79552392700eb"
+               },
+               {
+                "hex": "01cbc8fe98287d8cbb247be0914611998f281e9aa3e98283761ae1853e7d26b598"
+               },
+               {
+                "hex": "010c210f34e2ede5b4c55543ad74ee6330e7d20b7d6c32a63c493b0eca18d39cdd"
+               },
+               {
+                "hex": "0168594c23bc1b02ed894b38adc7268711d5ee18970eef0636f53514e363b5c30b"
+               },
+               {
+                "hex": "01e6b1dadc078900290336b8e9cd4c1a5237577ad4718fd940810a7e860745bc92"
+               },
+               {
+                "hex": "0145d10cae2d57ea2b4368d5e3ce60b6eb2dc226cb2f7e83ceff65f59f104b301e"
+               },
+               {
+                "hex": "01ce80c3b91572807a41aad39c93b3eea385ba552d135e52b6d870dcf805f063d1"
+               },
+               {
+                "hex": "014a1c54a07b8b69296066cd2b0419fa807bda1aa4240f354d8d8f9e81ed8c8a45"
+               },
+               {
+                "hex": "015d2547b0d9e9b7b471033d53e4ed4b2de656a3f9f2d8d9312e94d0a530afed76"
+               },
+               {
+                "hex": "01f5ecb1b85c7f51c01faca077390281fb7c897964c9ee8e56461c5294cb2f1f9e"
+               },
+               {
+                "hex": "011aedb1eb3a60bbbd561a0d943162111f0abac7c1e18ccee182ec9fa710f3bcd8"
+               },
+               {
+                "hex": "01ad7395ff069e9c921b705ebe3550c7f5c27d24c0de1d2db9d4cf3731ce9a8982"
+               },
+               {
+                "hex": "01c7065a4a5d28db5cd7dc9e905d54baae680aa19b35e7129a62c3bb2f4926aaaa"
+               },
+               {
+                "hex": "012f1424c2089122dd913dbd5be59eb0f5f23e4ff269a35f32257740d9f3b9783e"
+               },
+               {
+                "hex": "01d8b30cf88892e758360702a2a87fb03bc93eda0f8366a1c7133e1aace65223c1"
+               },
+               {
+                "hex": "0108589fe4024a336edbc199cf8aa305e2f254d74d77b41870246d0ef447c97aa4"
+               },
+               {
+                "hex": "01c1425577ad3e62720abb9f1b32cbc41bf74407c364d6d9c0528d799cdbf2f3e8"
+               },
+               {
+                "hex": "01d7db9f3c441392cb454ea3a023b33f9159759253127471c5f2b462ddfba3bf2f"
+               },
+               {
+                "hex": "0185b6a54a969a47b4232f64eed14f98b56686f8765a9a7547e8f34e03c1d9ab36"
+               },
+               {
+                "hex": "01edeed9829b8163a4100c096c6c97cb9c25aafd07157a951c5fa4447191312675"
+               },
+               {
+                "hex": "0127e919457d31d95df5d3acf36cb72adace176b68aa855650296f75ae743b2c22"
+               },
+               {
+                "hex": "01c9cfe56cbf656b3d86e5ef9ed1abe7c4a5398161bcdcec38136f36d3fd97f23d"
+               },
+               {
+                "hex": "01f62f15e1d182ba1572d42d571d8e48d340442858deba237322bba0ce00c357ae"
+               },
+               {
+                "hex": "015c4fd57115f8025df8089c13e71b79ffb4ffdafc6ca5f8b8f6323727e7666c74"
+               },
+               {
+                "hex": "012aca457c8ebf13123df660cbde90bbd42a67d935ada7b187a7c80669a7dc7bd9"
+               },
+               {
+                "hex": "01821620e57a25e3c7ec41d8d955c2abc43b3fff065c7c485dfecc70020b3072c4"
+               },
+               {
+                "hex": "0184a5608090260a3a4d18915ebe9e6adab8f9fc2a10f469e0ccbf924ff074cc83"
+               },
+               {
+                "hex": "01ff7ac4560a760e78a5c602512d31ee9218aee889690fb3e08e2c9b5fb7bb82a5"
+               },
+               {
+                "hex": "017fcd70ac05a276cc11f2691127f79acc48cf78d0e502145d1f90b95a81a811c7"
+               },
+               {
+                "hex": "0142385114554141a0ce3bc6a2bbd5aba705ce1b0cdc2d09f3897d8d7927237705"
+               },
+               {
+                "hex": "017780b280d48e2d9657e901f1f340a535f63f996440e89817deaf0b0bb29c9716"
+               },
+               {
+                "hex": "0146fa196aaf2fbcff68feb3903d88a164c695dd25731318b70f0848840a6d058c"
+               },
+               {
+                "hex": "01997d30d73e0c17312d0d9aeb26b1f708615832dfd5dc9ea68e9b3683790a4c3d"
+               },
+               {
+                "hex": "01877ea4ed45261bfce43ab450a915b052f3f922e09cd140c48ba497227bdc28cc"
+               },
+               {
+                "hex": "01f98f1859a359f78de54b14be5ebccd23f2f46881b66784bdbe37d8eaadbca19d"
+               },
+               {
+                "hex": "01cfc9f0c521e81fbe50e22bfcdc59331eca0fa16cb71f7ce5b6d18509b7b3a483"
+               },
+               {
+                "hex": "0109fedd41e795400f9157db576e39e0e34568bf15e7caf00c52b56f5e2dc23667"
+               },
+               {
+                "hex": "01af6414c3f905badf1bbbfb7b64fdb62800293de9d21b2566e5384dff88cef4e3"
+               }
+              ]
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "e13a594e1fe61505e32877e5c72b2a12fcb9c641f5ec7ca70d6820ef2eb8eb6a"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-4",
+    "reason": "TK-4: series 0 over 256 statements"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-group-on-tallies-021",
+   "description": "group on the tallies table",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01e5144ae695d6e443f29fb7710868c19d0c5a1aeaf08be011623796d7c2e6cd09",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a264746578745821012ff812b12081ca2f0fae1c35386777912fdd3834a82701b60e5758559b2523ab6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20081a50000016774616c6c696573028003000500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840ffd2895768e1f1a6242944c28d8430f3fde4b96685c21c13c173613c2cb04b47b509781457743c633897ac5c103fb5fdbb3122c21413ff043477a8fe83427b09",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 365,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "815ee21c5482d9f617f8097616aca6f488eabe769dc95304ff282329f73de865",
+       "1b1bdc18157cb63143c895b4072cd94bfeeb47f0340358ddd0c5dd25257d0c3e",
+       "ed46879ba35d6418d5b2a225ebca2c7a330a1145d87333cd77158d7a8f62a6a6",
+       "5742bbdc0a88975edf789c112c5e32edebf2a7d09b907846af20b09a4b1ca33e",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "tallies"
+             ],
+             [
+              2,
+              []
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "49d90f32317f57f1fa3384b35d0ad3e64d909edd547469ae96da4e8a73e2ef8e"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-4",
+    "reason": "TK-4: series 0 group on a table without groups"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-sig-022",
+   "description": "signed by another authority's key",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01bbd1ca97a23b10ecf603f53f3b361643e23309f98d8d10636ac910e094341083",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a264746578745821014ec5c7a637380205946cfddb84c4600a3712e2281bfeebc9080f9787fc26f42f6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b32a0584071a48da8f10914a8e9f1dfcacd52666dbc73f48783639f383bf95f1b6e84a6a17e8816b0d6ebfef920c66fdfe55cfff81b3ab2502ac50fe540216f864ef38701",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 344,
+      "checkpoint": "",
+      "path": []
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 6,
+    "rule": "TK-5",
+    "reason": "TK-5: 0 valid sign signatures, threshold 1"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-agent-authority-mismatch-023",
+   "description": "agent take under an authority that is not the sponsor's",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "013e465967397aa3ff8d58d7185f77456c6f028d73c7fdf461e5634a2f98098cf5",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a36474657874582101a4bab94b4ec3e3628730bd0db986b182d8c285281204498351c9f847447e69df6773706f6e736f72582101982fbf08d755efaa4a0bf53edca993ba4b4315a5c5768bbbca152535336f036b6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000301a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "authorship": "a2000302584009734b2e5c2f7116947c5953a8ae9a1d849daf3d2dcd70e02772d65847c9767fa111ec1e82d5bf5bc36563182a9d3d531e6342f8ab47d75ec3c555c38cf69101",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 366,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "3528cee51eb87db7c55c1bb29ab1212a111f055b65708ab4394099d4bdd55e4e",
+       "dfe6139598c41d4e9e076dbd4042c4fcf19ef399220ba9ee8a1dc8babcea32a8",
+       "ed46879ba35d6418d5b2a225ebca2c7a330a1145d87333cd77158d7a8f62a6a6",
+       "5742bbdc0a88975edf789c112c5e32edebf2a7d09b907846af20b09a4b1ca33e",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 6,
+    "rule": "TK-5",
+    "reason": "TK-5: sponsor authority differs"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-agent-capability-024",
+   "description": "sponsor without the take capability",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01cb73355148776dddca69d68cc7f5302ac1320ffb5d84ccd9152153ef3e1debe6",
+     "envelope": "a70001016474616b650258210135ffef85fb66ce4a4595d93b0646d94ae4d31257bf5db84afeee5ca8ca4460610401061a6af92e4008a364746578745821011473b280420be88094fa67cde96400d973a551c9b76a7d7764690307957dc1af6773706f6e736f725821019bfb94688fff77c551c5bfad6569a8631107546444c1467ad71f4d16e6adc3a36972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000301a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "authorship": "a200030258401d75fc523fd72ee8cd1b92eaefc333281b45c966399dffc9ecc1e37a2af30d71383acdaea531d1d7d1792f4c888d07b0eb393fc2d5e7352003359bf4f2b05801",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 367,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "55957819aada1594bb46490715d4cfd9fb3a8d8b475c05e5f2fb82cd075c3ca9",
+       "dfe6139598c41d4e9e076dbd4042c4fcf19ef399220ba9ee8a1dc8babcea32a8",
+       "ed46879ba35d6418d5b2a225ebca2c7a330a1145d87333cd77158d7a8f62a6a6",
+       "5742bbdc0a88975edf789c112c5e32edebf2a7d09b907846af20b09a4b1ca33e",
+       "793a0e4031e396e16e94efd78b32f98d838db7c4a0d1794a2dd50a16bc2c80ca",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 6,
+    "rule": "TK-5",
+    "reason": "TK-5: sponsor lacks take"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-sponsor-missing-025",
+   "description": "agent take without a sponsor ref",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01dc78b3cd4961fe4d48df0e13716a066bb0924bd354a4893dbf7dc0ea5a6848ef",
+     "envelope": "a70001016474616b6502582101830595ff8e2aeabedf9cfa097610b2b9196cbfe70312ff68613d8c3b232f92d00401061a6af92e4008a2647465787458210143f0e04fdbc4871fa4d6efd9ab83363d13269c79c941d655504531d6b61cb99b6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000301a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "authorship": "a200030258407584ddb3b55c4ac866d6988ecb5bd1745545623eadd62048b6110251cf68150475984516303bea950983cb4313ac28624188cabe4558d898df4cd4ee92ae750e",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 368,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "7c31e3b2b33bc7fbec389b883ef37e889ce9c47065ef65a1acda8aef93fe5001",
+       "d1722adbbc7cd2b68900690beb0b09a1fd18dd7bdad45e0921a6bd3f137d240b",
+       "454c2315b2e87bb65c9ec659c3093e6be68ff3b0a97582cffe91393e47a6ee86",
+       "f82927b80793792153f07b9eb3de71e0e2ec049b883c16c0b2c8d744ae3f1ac5",
+       "9a30ed025d82732dcf62379f1d4b3351f8e23f656eb4e4a1f0738a2050714cd7",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 6,
+    "rule": "TK-6",
+    "reason": "TK-6: agent take without a sponsor ref"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-sponsor-on-person-026",
+   "description": "sponsor ref on an authority-authored take",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "010e4fac90e37a2fa590dfacb2d617a1445c173e599750352b021d9e2f9d14f50d",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a364746578745821015dfe0642b326438986f1f994e8550ef2ef353ef206ae873d7726d916797c0c4d6773706f6e736f72582101982fbf08d755efaa4a0bf53edca993ba4b4315a5c5768bbbca152535336f036b6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840e34758a1471e99db20babc1009350cb66b95d5e9d78dd91a4d4cc9ef978adcf71a19f765addc259948eeca9c444d3cdb72ba39def5cc9d5470096bb4810b040c",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 369,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "15391e3ee3e97bae4f1811aaf5bc0cf8d3e0b141214d3e60141d2560d39109f5",
+       "d1722adbbc7cd2b68900690beb0b09a1fd18dd7bdad45e0921a6bd3f137d240b",
+       "454c2315b2e87bb65c9ec659c3093e6be68ff3b0a97582cffe91393e47a6ee86",
+       "f82927b80793792153f07b9eb3de71e0e2ec049b883c16c0b2c8d744ae3f1ac5",
+       "9a30ed025d82732dcf62379f1d4b3351f8e23f656eb4e4a1f0738a2050714cd7",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-6",
+    "reason": "TK-6: sponsor present iff author is 3"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-interval-027",
+   "description": "interval 50",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "0116ac5b0132d1091f01b955247c889aa2d7aec40b355a616fa31b17ef5068d2ac",
+     "envelope": "a70001016474616b6502582101a851d3a9e54f397a9665bbfcf64187107bc9062fc44eff21b1515a27bea11a420401061a6af92e4008a26474657874582101bb82bddce4550dc165bcbbca00c0fd8d434519423df4bdc08e7a094c1b4263dc6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001183202f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b31a05840ec75bfe407d20efe04e30c5a2ae84b504113ebbe92322b9e7fd1712e3a20225eafc776016fc51ffc5531a9d17de2530811a4e074246b57b8ede77ece2ef5aa07",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 370,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "31f39fa74cd0b488a6d93171a7a98cbc87f0d013edc7c0b981f64145d680f6e2",
+       "6132db627b2b2d7a7c83e4360136beddd0e5f94ee77a0cae656ffe462174aa0d",
+       "454c2315b2e87bb65c9ec659c3093e6be68ff3b0a97582cffe91393e47a6ee86",
+       "f82927b80793792153f07b9eb3de71e0e2ec049b883c16c0b2c8d744ae3f1ac5",
+       "9a30ed025d82732dcf62379f1d4b3351f8e23f656eb4e4a1f0738a2050714cd7",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          50
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "776b5f3cf51505ac217d8c7064c4d16cd664b0ba9e1d2a92d86225d4a1c04913"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-7",
+    "reason": "TK-7: interval must be 80, 90 or 95"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-author-swap-028",
+   "description": "version 2 swaps author 3 for 0 (signed by the sponsor authority's keyset)",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01a527c6a50798f1a5f4a1466be476e23d396c6a29fa380647a20c66e6d4ea8050",
+     "envelope": "a90001016474616b6502582101830595ff8e2aeabedf9cfa097610b2b9196cbfe70312ff68613d8c3b232f92d003582101e240a80b4cdc7534068f44ac0b74e6d95e75bee219227f8933d0ab1717766fa9040205582101e240a80b4cdc7534068f44ac0b74e6d95e75bee219227f8933d0ab1717766fa9061a6afa7fc008a264746578745821012b4f65e8dca4d9ded5575c04a130451ec7eb91de102c1e14855eb94245d5aaaa6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443737031a05840f57c3ed0162408b1cc7c95964197b747da412c395bbab4d026b26a9e792221fe8d8486bbaedda51f9a9e71965500a5e98e4c3ff77c639064c5cbbd88d35f2407",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 371,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "ae3894d4cbb71f06613f49311a41b49985b68d9e723d65669893e16284306cd3",
+       "6132db627b2b2d7a7c83e4360136beddd0e5f94ee77a0cae656ffe462174aa0d",
+       "454c2315b2e87bb65c9ec659c3093e6be68ff3b0a97582cffe91393e47a6ee86",
+       "f82927b80793792153f07b9eb3de71e0e2ec049b883c16c0b2c8d744ae3f1ac5",
+       "9a30ed025d82732dcf62379f1d4b3351f8e23f656eb4e4a1f0738a2050714cd7",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-8",
+    "reason": "TK-8: author changed"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-after-retire-029",
+   "description": "version 3 after a retired version 2",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01900bd649d471f3569bfea85983e938d511942ff22eb01c5ea4f3b8395d7cf3fb",
+     "envelope": "a90001016474616b65025821018155f0f33c2f320e56f18ad4b0858da05a9eedbc96e955a176c568d9ced98b0d0358210156090a9ac26b982550d9340efa148fb1a9c4d7bfc18a00fc78ded7a6e3ec1a4a040305582101975155f1c5bb1bafd753aa0e9db6048e5f0c8e55ac8b1b5a55f50bf2a8ce886f061a6afbd14008a26474657874582101f597cafbc0ae4cb8f9fb663e3e82e8c186f95689d215e3ede049c22046e0ea366972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a5000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f407f5",
+     "signatures": "d8628440a0f6818348a201270443746b32a05840b901701c3a5b4ad7783d3805beb41b41be2a33060a39babd8943d7b59122e5e21968ee604ea403291186d48ace73fb2e26a1ad50e7cc39b638b489b36e123005",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 372,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "a0cb0357d7201c1e5f2d726309f479254832952d96bea93ab9138e07a702b86e",
+       "1f8afbae1fa63f447f16a5b801213bc5be379bd3baa6e06c4b6b3d78b7bd35c8",
+       "0b51362877dc2072ae29d6e8be94be07d034326fd4f85180f93606b9153e47fa",
+       "f82927b80793792153f07b9eb3de71e0e2ec049b883c16c0b2c8d744ae3f1ac5",
+       "9a30ed025d82732dcf62379f1d4b3351f8e23f656eb4e4a1f0738a2050714cd7",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ],
+      [
+       7,
+       true
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-8",
+    "reason": "TK-8: a version follows a retired one"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-self-fork-030",
+   "description": "version 2 forking its own version 1",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "016c4439158f09e5a2cb07ce6e646a9de23239e0ba0a9fb028d10c64867193e25b",
+     "envelope": "a90001016474616b65025821018155f0f33c2f320e56f18ad4b0858da05a9eedbc96e955a176c568d9ced98b0d035821017dd6d9178f2d478622cf503576e910924768d795681441333ed68e944a13476c0402055821017dd6d9178f2d478622cf503576e910924768d795681441333ed68e944a13476c061a6afa7fc008a36474657874582101d7b44121b3cf82ed01d903135ea84971e43bdfb74131586e528da61d54b343f066666f726b4f665821017dd6d9178f2d478622cf503576e910924768d795681441333ed68e944a13476c6972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b32a058402f3f74006d7d7477ab16fa10619d28952b6584d7d0f7aecff282be011d6dc8f79ae9e711aec193930662970e9f35322c08f4f28b5525ad19e69ff4a6da822105",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 374,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "a74eb8ab5970fe3262e3091200f2e51d16476aa1ed673fe0bdc27e36424fa37f",
+       "c79dcae2d6c6584f1ccc5b15957a9e23a06e25d5cf02dfafdf1cbd5889070050",
+       "0b51362877dc2072ae29d6e8be94be07d034326fd4f85180f93606b9153e47fa",
+       "f82927b80793792153f07b9eb3de71e0e2ec049b883c16c0b2c8d744ae3f1ac5",
+       "9a30ed025d82732dcf62379f1d4b3351f8e23f656eb4e4a1f0738a2050714cd7",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-9",
+    "reason": "TK-9: a take cannot fork itself"
+   }
+  },
+  {
+   "id": "take/manifests/tk-bad-fork-unsealed-031",
+   "description": "public fork of a sealed take",
+   "section": "Validation rules",
+   "inputs": {
+    "bundle": {
+     "cid": "01dbfbb49a0c8a8a9ae401675a08fd0cdfcf27b179aa9a86a18d81621f1409864a",
+     "envelope": "a70001016474616b650258210145035c5ac328e143405e69f9bedb81ea543bb003c8548dfd93b0d53170ad421a0401061a6af92e4008a36474657874582101d9f6cadc7ecf57849f7c42e00f0dda3b15ad4f551bd03b60154845e86f902be966666f726b4f66582101433a5dde6b39d09907dcd2ffdab68f318a7dd64cdfb2a0da032eb760d2fc49b86972656c656173652f30582101d9bf675e5d07107c874ef962347137f20c5e0dbcbd6d35f00c798e211d4c462a09a4000001a20082a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303000500a50000016d67726f75705f74616c6c6965730283582101e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f582101fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b5821013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e303010500010002a4000001185a02f5030003f4",
+     "signatures": "d8628440a0f6818348a201270443746b66a0584066eee61a799fd20a293cd7cd85dab6852f7a4834f4fc0875318742cc9864114e2d4b75d4a34a8ab950208bb0be7bfed747b4e152f17fcd2f12226d8b0ecac40c",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 375,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "path": [
+       "21315a4e3ec80e20aa72c515d84ea3466c4e2458e3ba94f8a95cdd4aa34f2511",
+       "c79dcae2d6c6584f1ccc5b15957a9e23a06e25d5cf02dfafdf1cbd5889070050",
+       "0b51362877dc2072ae29d6e8be94be07d034326fd4f85180f93606b9153e47fa",
+       "f82927b80793792153f07b9eb3de71e0e2ec049b883c16c0b2c8d744ae3f1ac5",
+       "9a30ed025d82732dcf62379f1d4b3351f8e23f656eb4e4a1f0738a2050714cd7",
+       "d78b285cc5c1387eebc75319c346bcb6a2390f0e20cc4dadeb1d6cc98187b463",
+       "893c5743ccd79ed6cf5a63ff0db646736f7eecdc2639a7a8c5885c62dab9ae84",
+       "657e9632abc8abce2bcb2bb0cb4d40b3c36762328e148a5f1c5cad448d3c01cc",
+       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          [
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              0
+             ],
+             [
+              1,
+              "group_tallies"
+             ],
+             [
+              2,
+              [
+               {
+                "hex": "01e348fcc493f6547dcba42819ae4a21272d494d36ddccd2cb00b26dcfe6fecd2f"
+               },
+               {
+                "hex": "01fabd7e57e48edece65c1b40afac3ab719020a1a3b7eb95390416ffc821ba4a2b"
+               },
+               {
+                "hex": "013837978e316f0bd26071ce7aad65268b493d42c16204e1752b9a8b1df655d0e3"
+               }
+              ]
+             ],
+             [
+              3,
+              1
+             ],
+             [
+              5,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          1,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          90
+         ],
+         [
+          2,
+          true
+         ],
+         [
+          3,
+          0
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       false
+      ]
+     ]
+    },
+    "query_hash": "0736f15bf7c8fb3e0922ac919aa1d7c9253284fe32f0b97090503ac38ba1a6f4"
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "TK-9",
+    "reason": "TK-9: a fork of a sealed take must be sealed"
+   }
+  }
+ ]
+}

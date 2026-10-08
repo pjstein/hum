@@ -1,0 +1,300 @@
+{
+ "spec": "log",
+ "file": "consistency",
+ "notes": "Consistency proofs (RFC 9162 section 2.1.4) over the CT test leaves.",
+ "cases": [
+  {
+   "id": "log/consistency/prove-001",
+   "description": "Tree of size 1 extended to size 2",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 1,
+    "new_size": 2,
+    "old_root": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "new_root": "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125"
+   },
+   "expected": {
+    "proof": [
+     "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/consistency/prove-002",
+   "description": "Tree of size 1 extended to size 8",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 1,
+    "new_size": 8,
+    "old_root": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "new_root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+     "5f083f0a1a33ca076a95279832580db3e0ef4584bdff1f54c8a360f50de3031e",
+     "6b47aaf29ee3c2af9af889bc1fb9254dabd31177f16232dd6aab035ca39bf6e4"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/consistency/prove-003",
+   "description": "Tree of size 2 extended to size 3",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 2,
+    "new_size": 3,
+    "old_root": "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+    "new_root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77"
+   },
+   "expected": {
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/consistency/prove-004",
+   "description": "Tree of size 2 extended to size 5",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 2,
+    "new_size": 5,
+    "old_root": "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+    "new_root": "4e3bbb1f7b478dcfe71fb631631519a3bca12c9aefca1612bfce4c13a86264d4"
+   },
+   "expected": {
+    "proof": [
+     "5f083f0a1a33ca076a95279832580db3e0ef4584bdff1f54c8a360f50de3031e",
+     "bc1a0643b12e4d2d7c77918f44e0f4f79a838b6cf9ec5b5c283e1f4d88599e6b"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/consistency/prove-005",
+   "description": "Tree of size 3 extended to size 7",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 3,
+    "new_size": 7,
+    "old_root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77",
+    "new_root": "ddb89be403809e325750d3d263cd78929c2942b7942a34b77e122c9594a74c8c"
+   },
+   "expected": {
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "837dbb152e9b079010717e84e865da4ebc0fa198a806d59d31bf15accef22d0e"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/consistency/prove-006",
+   "description": "Tree of size 4 extended to size 7",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 4,
+    "new_size": 7,
+    "old_root": "d37ee418976dd95753c1c73862b9398fa2a2cf9b4ff0fdfe8b30cd95209614b7",
+    "new_root": "ddb89be403809e325750d3d263cd78929c2942b7942a34b77e122c9594a74c8c"
+   },
+   "expected": {
+    "proof": [
+     "837dbb152e9b079010717e84e865da4ebc0fa198a806d59d31bf15accef22d0e"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/consistency/prove-007",
+   "description": "Tree of size 6 extended to size 8",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 6,
+    "new_size": 8,
+    "old_root": "76e67dadbcdf1e10e1b74ddc608abd2f98dfb16fbce75277b5232a127f2087ef",
+    "new_root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "0ebc5d3437fbe2db158b9f126a1d118e308181031d0a949f8dededebc558ef6a",
+     "ca854ea128ed050b41b35ffc1b87b8eb2bde461e9e3b5596ece6b9d5975a0ae0",
+     "d37ee418976dd95753c1c73862b9398fa2a2cf9b4ff0fdfe8b30cd95209614b7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/consistency/prove-008",
+   "description": "Tree of size 7 extended to size 8",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 7,
+    "new_size": 8,
+    "old_root": "ddb89be403809e325750d3d263cd78929c2942b7942a34b77e122c9594a74c8c",
+    "new_root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [
+     "b08693ec2e721597130641e8211e7eedccb4c26413963eee6c1e2ed16ffb1a5f",
+     "46f6ffadd3d06a09ff3c5860d2755c8b9819db7df44251788c7d8e3180de8eb1",
+     "0ebc5d3437fbe2db158b9f126a1d118e308181031d0a949f8dededebc558ef6a",
+     "d37ee418976dd95753c1c73862b9398fa2a2cf9b4ff0fdfe8b30cd95209614b7"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/consistency/prove-009",
+   "description": "Tree of size 8 extended to size 8",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 8,
+    "new_size": 8,
+    "old_root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328",
+    "new_root": "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"
+   },
+   "expected": {
+    "proof": [],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/consistency/prove-010",
+   "description": "Tree of size 3 extended to size 3",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 3,
+    "new_size": 3,
+    "old_root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77",
+    "new_root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77"
+   },
+   "expected": {
+    "proof": [],
+    "valid": true
+   }
+  },
+  {
+   "id": "log/consistency/reject-011",
+   "description": "Consistency does not verify: wrong-old-root",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 3,
+    "new_size": 7,
+    "old_root": "0000000000000000000000000000000000000000000000000000000000000000",
+    "new_root": "ddb89be403809e325750d3d263cd78929c2942b7942a34b77e122c9594a74c8c",
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "837dbb152e9b079010717e84e865da4ebc0fa198a806d59d31bf15accef22d0e"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "wrong-old-root"
+   }
+  },
+  {
+   "id": "log/consistency/reject-012",
+   "description": "Consistency does not verify: wrong-new-root",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 3,
+    "new_size": 7,
+    "old_root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77",
+    "new_root": "0000000000000000000000000000000000000000000000000000000000000000",
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "837dbb152e9b079010717e84e865da4ebc0fa198a806d59d31bf15accef22d0e"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "wrong-new-root"
+   }
+  },
+  {
+   "id": "log/consistency/reject-013",
+   "description": "Consistency does not verify: old-larger-than-new",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 7,
+    "new_size": 3,
+    "old_root": "ddb89be403809e325750d3d263cd78929c2942b7942a34b77e122c9594a74c8c",
+    "new_root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77",
+    "proof": [
+     "0298d122906dcfc10892cb53a73992fc5b9f493ea4c9badb27b791b4127a7fe7",
+     "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "837dbb152e9b079010717e84e865da4ebc0fa198a806d59d31bf15accef22d0e"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "old-larger-than-new"
+   }
+  },
+  {
+   "id": "log/consistency/reject-014",
+   "description": "Consistency does not verify: empty-proof",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 3,
+    "new_size": 7,
+    "old_root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77",
+    "new_root": "ddb89be403809e325750d3d263cd78929c2942b7942a34b77e122c9594a74c8c",
+    "proof": []
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "empty-proof"
+   }
+  },
+  {
+   "id": "log/consistency/reject-015",
+   "description": "Consistency does not verify: history-rewritten",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 3,
+    "new_size": 7,
+    "old_root": "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77",
+    "new_root": "f2b2907c478d199b1e837980f28266879905e10abf7282320abee458da6c7f9e",
+    "proof": [
+     "6d81c11dec0565db1d9a6d4dc4033a70b10f2f93a73ca1b7beb9a81f96963508",
+     "07506a85fd9dd2f120eb694f86011e5bb4662e5c415a62917033d4a9624487e7",
+     "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+     "837dbb152e9b079010717e84e865da4ebc0fa198a806d59d31bf15accef22d0e"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "history-rewritten"
+   }
+  },
+  {
+   "id": "log/consistency/reject-016",
+   "description": "Consistency does not verify: equal-sizes-different-roots",
+   "section": "RFC 9162 2.1.4",
+   "inputs": {
+    "old_size": 7,
+    "new_size": 7,
+    "old_root": "ddb89be403809e325750d3d263cd78929c2942b7942a34b77e122c9594a74c8c",
+    "new_root": "0000000000000000000000000000000000000000000000000000000000000000",
+    "proof": []
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "equal-sizes-different-roots"
+   }
+  }
+ ]
+}

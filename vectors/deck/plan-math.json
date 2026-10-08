@@ -1,0 +1,779 @@
+{
+ "spec": "deck",
+ "file": "plan-math",
+ "notes": "\u03c3 per part for the valid plans (micro-units from the exact rational \u03c3\u00b2, ADR 0010) and \u0394_cov for (M, covScale) pairs (release.md Round 1).",
+ "cases": [
+  {
+   "id": "deck/plan-math/sigma-001",
+   "description": "\u03c3 per part for valid-full",
+   "section": "The release plan",
+   "inputs": {
+    "plan": {
+     "map": [
+      [
+       0,
+       [
+        127,
+        500
+       ]
+      ],
+      [
+       1,
+       [
+        1,
+        1000000
+       ]
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          [
+           183,
+           5000
+          ]
+         ],
+         [
+          1,
+          [
+           427,
+           5000
+          ]
+         ],
+         [
+          2,
+          [
+           183,
+           5000
+          ]
+         ],
+         [
+          3,
+          [
+           427,
+           5000
+          ]
+         ],
+         [
+          4,
+          [
+           1,
+           200
+          ]
+         ],
+         [
+          8,
+          [
+           1,
+           200
+          ]
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       18
+      ],
+      [
+       4,
+       18
+      ],
+      [
+       7,
+       100
+      ],
+      [
+       9,
+       true
+      ]
+     ]
+    },
+    "cards": 18
+   },
+   "expected": {
+    "0": {
+     "delta_squared": 19,
+     "rho": {
+      "num": 183,
+      "den": 5000
+     },
+     "sigma_r": {
+      "num": 2111695,
+      "den": 131072
+     },
+     "sigma_micro": 16110954
+    },
+    "1": {
+     "delta_squared": 4295884849,
+     "rho": {
+      "num": 427,
+      "den": 5000
+     },
+     "sigma_r": {
+      "num": 83148094361,
+      "den": 524288
+     },
+     "sigma_micro": 2419928
+    },
+    "2": {
+     "delta_squared": 1,
+     "rho": {
+      "num": 183,
+      "den": 5000
+     },
+     "sigma_r": {
+      "num": 3875649,
+      "den": 1048576
+     },
+     "sigma_micro": 3696107
+    },
+    "3": {
+     "delta_squared": 19,
+     "rho": {
+      "num": 427,
+      "den": 5000
+     },
+     "sigma_r": {
+      "num": 11059431,
+      "den": 1048576
+     },
+     "sigma_micro": 10547095
+    },
+    "4": {
+     "delta_squared": 1,
+     "rho": {
+      "num": 1,
+      "den": 200
+     },
+     "sigma_r": {
+      "num": 10,
+      "den": 1
+     },
+     "sigma_micro": 10000000
+    },
+    "8": {
+     "delta_squared": 4,
+     "rho": {
+      "num": 1,
+      "den": 200
+     },
+     "sigma_r": {
+      "num": 20,
+      "den": 1
+     },
+     "sigma_micro": 20000000
+    }
+   }
+  },
+  {
+   "id": "deck/plan-math/sigma-002",
+   "description": "\u03c3 per part for valid-tallies-only",
+   "section": "The release plan",
+   "inputs": {
+    "plan": {
+     "map": [
+      [
+       0,
+       [
+        127,
+        500
+       ]
+      ],
+      [
+       1,
+       [
+        1,
+        1000000
+       ]
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          [
+           61,
+           250
+          ]
+         ],
+         [
+          4,
+          [
+           1,
+           200
+          ]
+         ],
+         [
+          8,
+          [
+           1,
+           200
+          ]
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       18
+      ],
+      [
+       7,
+       100
+      ]
+     ]
+    },
+    "cards": 18
+   },
+   "expected": {
+    "0": {
+     "delta_squared": 19,
+     "rho": {
+      "num": 61,
+      "den": 250
+     },
+     "sigma_r": {
+      "num": 12779,
+      "den": 2048
+     },
+     "sigma_micro": 6239746
+    },
+    "4": {
+     "delta_squared": 1,
+     "rho": {
+      "num": 1,
+      "den": 200
+     },
+     "sigma_r": {
+      "num": 10,
+      "den": 1
+     },
+     "sigma_micro": 10000000
+    },
+    "8": {
+     "delta_squared": 1,
+     "rho": {
+      "num": 1,
+      "den": 200
+     },
+     "sigma_r": {
+      "num": 10,
+      "den": 1
+     },
+     "sigma_micro": 10000000
+    }
+   }
+  },
+  {
+   "id": "deck/plan-math/sigma-003",
+   "description": "\u03c3 per part for valid-ibis",
+   "section": "The release plan",
+   "inputs": {
+    "plan": {
+     "map": [
+      [
+       0,
+       [
+        127,
+        500
+       ]
+      ],
+      [
+       1,
+       [
+        1,
+        1000000
+       ]
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          [
+           3237,
+           100000
+          ]
+         ],
+         [
+          1,
+          [
+           747,
+           10000
+          ]
+         ],
+         [
+          2,
+          [
+           3237,
+           100000
+          ]
+         ],
+         [
+          3,
+          [
+           747,
+           10000
+          ]
+         ],
+         [
+          5,
+          [
+           249,
+           12500
+          ]
+         ],
+         [
+          6,
+          [
+           747,
+           50000
+          ]
+         ],
+         [
+          8,
+          [
+           1,
+           200
+          ]
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       18
+      ],
+      [
+       7,
+       100
+      ],
+      [
+       11,
+       10
+      ],
+      [
+       12,
+       10
+      ]
+     ]
+    },
+    "cards": 18
+   },
+   "expected": {
+    "0": {
+     "delta_squared": 19,
+     "rho": {
+      "num": 3237,
+      "den": 100000
+     },
+     "sigma_r": {
+      "num": 4490869,
+      "den": 262144
+     },
+     "sigma_micro": 17131306
+    },
+    "1": {
+     "delta_squared": 4295884849,
+     "rho": {
+      "num": 747,
+      "den": 10000
+     },
+     "sigma_r": {
+      "num": 177807849883,
+      "den": 1048576
+     },
+     "sigma_micro": 2587445
+    },
+    "2": {
+     "delta_squared": 1,
+     "rho": {
+      "num": 3237,
+      "den": 100000
+     },
+     "sigma_r": {
+      "num": 257569,
+      "den": 65536
+     },
+     "sigma_micro": 3930191
+    },
+    "3": {
+     "delta_squared": 29,
+     "rho": {
+      "num": 747,
+      "den": 10000
+     },
+     "sigma_r": {
+      "num": 7304553,
+      "den": 524288
+     },
+     "sigma_micro": 13932329
+    },
+    "5": {
+     "delta_squared": 20,
+     "rho": {
+      "num": 249,
+      "den": 12500
+     },
+     "sigma_r": {
+      "num": 5873477,
+      "den": 262144
+     },
+     "sigma_micro": 22405537
+    },
+    "6": {
+     "delta_squared": 10,
+     "rho": {
+      "num": 747,
+      "den": 50000
+     },
+     "sigma_r": {
+      "num": 19182695,
+      "den": 1048576
+     },
+     "sigma_micro": 18294044
+    },
+    "8": {
+     "delta_squared": 4,
+     "rho": {
+      "num": 1,
+      "den": 200
+     },
+     "sigma_r": {
+      "num": 20,
+      "den": 1
+     },
+     "sigma_micro": 20000000
+    }
+   }
+  },
+  {
+   "id": "deck/plan-math/sigma-004",
+   "description": "\u03c3 per part for valid-breakdown",
+   "section": "The release plan",
+   "inputs": {
+    "plan": {
+     "map": [
+      [
+       0,
+       [
+        127,
+        500
+       ]
+      ],
+      [
+       1,
+       [
+        1,
+        1000000
+       ]
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          [
+           6723,
+           200000
+          ]
+         ],
+         [
+          1,
+          [
+           15687,
+           200000
+          ]
+         ],
+         [
+          2,
+          [
+           6723,
+           200000
+          ]
+         ],
+         [
+          3,
+          [
+           15687,
+           200000
+          ]
+         ],
+         [
+          7,
+          [
+           249,
+           10000
+          ]
+         ],
+         [
+          8,
+          [
+           1,
+           200
+          ]
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       18
+      ],
+      [
+       7,
+       100
+      ],
+      [
+       13,
+       {
+        "map": [
+         [
+          0,
+          [
+           0,
+           0
+          ]
+         ],
+         [
+          1,
+          "ward"
+         ],
+         [
+          2,
+          [
+           1,
+           2,
+           3
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "cards": 18
+   },
+   "expected": {
+    "0": {
+     "delta_squared": 19,
+     "rho": {
+      "num": 6723,
+      "den": 200000
+     },
+     "sigma_r": {
+      "num": 17627681,
+      "den": 1048576
+     },
+     "sigma_micro": 16811067
+    },
+    "1": {
+     "delta_squared": 4295884849,
+     "rho": {
+      "num": 15687,
+      "den": 200000
+     },
+     "sigma_r": {
+      "num": 173522693671,
+      "den": 1048576
+     },
+     "sigma_micro": 2525088
+    },
+    "2": {
+     "delta_squared": 1,
+     "rho": {
+      "num": 6723,
+      "den": 200000
+     },
+     "sigma_r": {
+      "num": 1011017,
+      "den": 262144
+     },
+     "sigma_micro": 3856724
+    },
+    "3": {
+     "delta_squared": 19,
+     "rho": {
+      "num": 15687,
+      "den": 200000
+     },
+     "sigma_r": {
+      "num": 5770013,
+      "den": 524288
+     },
+     "sigma_micro": 11005426
+    },
+    "7": {
+     "delta_squared": 19,
+     "rho": {
+      "num": 249,
+      "den": 10000
+     },
+     "sigma_r": {
+      "num": 10240757,
+      "den": 524288
+     },
+     "sigma_micro": 19532694
+    },
+    "8": {
+     "delta_squared": 4,
+     "rho": {
+      "num": 1,
+      "den": 200
+     },
+     "sigma_r": {
+      "num": 20,
+      "den": 1
+     },
+     "sigma_micro": 20000000
+    }
+   }
+  },
+  {
+   "id": "deck/plan-math/sigma-005",
+   "description": "\u03c3 per part for the rating plan (parts 0, 3, 8; cap 20; 12 cards)",
+   "section": "Rating decks",
+   "inputs": {
+    "plan": {
+     "map": [
+      [
+       0,
+       [
+        1,
+        20
+       ]
+      ],
+      [
+       1,
+       [
+        1,
+        1000000
+       ]
+      ],
+      [
+       2,
+       {
+        "map": [
+         [
+          0,
+          [
+           19,
+           1000
+          ]
+         ],
+         [
+          3,
+          [
+           57,
+           2000
+          ]
+         ],
+         [
+          8,
+          [
+           1,
+           400
+          ]
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       20
+      ],
+      [
+       7,
+       100
+      ]
+     ]
+    },
+    "cards": 12
+   },
+   "expected": {
+    "0": {
+     "delta_squared": 21,
+     "sigma_r": {
+      "num": 385157,
+      "den": 16384
+     },
+     "sigma_micro": 23508118
+    },
+    "3": {
+     "delta_squared": 21,
+     "sigma_r": {
+      "num": 2515835,
+      "den": 131072
+     },
+     "sigma_micro": 19194298
+    },
+    "8": {
+     "delta_squared": 1,
+     "sigma_r": {
+      "num": 14829105,
+      "den": 1048576
+     },
+     "sigma_micro": 14142137
+    }
+   }
+  },
+  {
+   "id": "deck/plan-math/delta-cov-006",
+   "description": "\u0394_cov for M 18, covScale 65536",
+   "section": "release.md Round 1",
+   "inputs": {
+    "M": 18,
+    "covScale": 65536
+   },
+   "expected": {
+    "delta_cov": 65543,
+    "delta_cov_squared": 4295884849
+   }
+  },
+  {
+   "id": "deck/plan-math/delta-cov-007",
+   "description": "\u0394_cov for M 60, covScale 65536",
+   "section": "release.md Round 1",
+   "inputs": {
+    "M": 60,
+    "covScale": 65536
+   },
+   "expected": {
+    "delta_cov": 65558,
+    "delta_cov_squared": 4297851364
+   }
+  },
+  {
+   "id": "deck/plan-math/delta-cov-008",
+   "description": "\u0394_cov for M 60, covScale 256",
+   "section": "release.md Round 1",
+   "inputs": {
+    "M": 60,
+    "covScale": 256
+   },
+   "expected": {
+    "delta_cov": 278,
+    "delta_cov_squared": 77284
+   }
+  },
+  {
+   "id": "deck/plan-math/delta-cov-009",
+   "description": "\u0394_cov for M 256, covScale 16777216",
+   "section": "release.md Round 1",
+   "inputs": {
+    "M": 256,
+    "covScale": 16777216
+   },
+   "expected": {
+    "delta_cov": 16777307,
+    "delta_cov_squared": 281478030172249
+   }
+  }
+ ]
+}

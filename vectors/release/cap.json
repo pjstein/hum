@@ -1,0 +1,420 @@
+{
+ "spec": "release",
+ "file": "cap",
+ "notes": "Contribution capping on the phone: a later vote replaces an earlier one on the same card, then at most K votes are kept (this reference keeps the first K in cast order; ballot.md says a uniformly random K). The tallies contribution has squared L2 norm at most K + 1.",
+ "cases": [
+  {
+   "id": "release/cap/contribution-001",
+   "description": "Contribution for under-cap",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "votes": [
+     {
+      "card": 0,
+      "vote": 1
+     },
+     {
+      "card": 1,
+      "vote": -1
+     },
+     {
+      "card": 2,
+      "vote": 0
+     }
+    ],
+    "cap": 5,
+    "cards": 6
+   },
+   "expected": {
+    "kept": [
+     {
+      "card": 0,
+      "vote": 1
+     },
+     {
+      "card": 1,
+      "vote": -1
+     },
+     {
+      "card": 2,
+      "vote": 0
+     }
+    ],
+    "agree": [
+     1,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "disagree": [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    "unsure": [
+     0,
+     0,
+     1,
+     0,
+     0,
+     0
+    ],
+    "participant": 1,
+    "norm_squared": 4,
+    "max_norm_squared": 6
+   }
+  },
+  {
+   "id": "release/cap/contribution-002",
+   "description": "Contribution for at-cap",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "votes": [
+     {
+      "card": 0,
+      "vote": 1
+     },
+     {
+      "card": 1,
+      "vote": -1
+     },
+     {
+      "card": 2,
+      "vote": 0
+     },
+     {
+      "card": 3,
+      "vote": 1
+     },
+     {
+      "card": 4,
+      "vote": 1
+     }
+    ],
+    "cap": 5,
+    "cards": 6
+   },
+   "expected": {
+    "kept": [
+     {
+      "card": 0,
+      "vote": 1
+     },
+     {
+      "card": 1,
+      "vote": -1
+     },
+     {
+      "card": 2,
+      "vote": 0
+     },
+     {
+      "card": 3,
+      "vote": 1
+     },
+     {
+      "card": 4,
+      "vote": 1
+     }
+    ],
+    "agree": [
+     1,
+     0,
+     0,
+     1,
+     1,
+     0
+    ],
+    "disagree": [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    "unsure": [
+     0,
+     0,
+     1,
+     0,
+     0,
+     0
+    ],
+    "participant": 1,
+    "norm_squared": 6,
+    "max_norm_squared": 6
+   }
+  },
+  {
+   "id": "release/cap/contribution-003",
+   "description": "Contribution for over-cap",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "votes": [
+     {
+      "card": 0,
+      "vote": 1
+     },
+     {
+      "card": 1,
+      "vote": -1
+     },
+     {
+      "card": 2,
+      "vote": 1
+     },
+     {
+      "card": 3,
+      "vote": -1
+     },
+     {
+      "card": 4,
+      "vote": 1
+     },
+     {
+      "card": 5,
+      "vote": -1
+     },
+     {
+      "card": 6,
+      "vote": 1
+     },
+     {
+      "card": 7,
+      "vote": -1
+     }
+    ],
+    "cap": 5,
+    "cards": 10
+   },
+   "expected": {
+    "kept": [
+     {
+      "card": 0,
+      "vote": 1
+     },
+     {
+      "card": 1,
+      "vote": -1
+     },
+     {
+      "card": 2,
+      "vote": 1
+     },
+     {
+      "card": 3,
+      "vote": -1
+     },
+     {
+      "card": 4,
+      "vote": 1
+     }
+    ],
+    "agree": [
+     1,
+     0,
+     1,
+     0,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "disagree": [
+     0,
+     1,
+     0,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "unsure": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "participant": 1,
+    "norm_squared": 6,
+    "max_norm_squared": 6
+   }
+  },
+  {
+   "id": "release/cap/contribution-004",
+   "description": "Contribution for revote-replaces",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "votes": [
+     {
+      "card": 0,
+      "vote": 1
+     },
+     {
+      "card": 1,
+      "vote": -1
+     },
+     {
+      "card": 0,
+      "vote": -1
+     },
+     {
+      "card": 2,
+      "vote": 0
+     }
+    ],
+    "cap": 2,
+    "cards": 4
+   },
+   "expected": {
+    "kept": [
+     {
+      "card": 1,
+      "vote": -1
+     },
+     {
+      "card": 0,
+      "vote": -1
+     }
+    ],
+    "agree": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "disagree": [
+     1,
+     1,
+     0,
+     0
+    ],
+    "unsure": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "participant": 1,
+    "norm_squared": 3,
+    "max_norm_squared": 3
+   }
+  },
+  {
+   "id": "release/cap/contribution-005",
+   "description": "Contribution for cap-1",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "votes": [
+     {
+      "card": 3,
+      "vote": 0
+     },
+     {
+      "card": 1,
+      "vote": 1
+     }
+    ],
+    "cap": 1,
+    "cards": 4
+   },
+   "expected": {
+    "kept": [
+     {
+      "card": 3,
+      "vote": 0
+     }
+    ],
+    "agree": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "disagree": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "unsure": [
+     0,
+     0,
+     0,
+     1
+    ],
+    "participant": 1,
+    "norm_squared": 2,
+    "max_norm_squared": 2
+   }
+  },
+  {
+   "id": "release/cap/contribution-006",
+   "description": "Contribution for empty",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "votes": [],
+    "cap": 60,
+    "cards": 3
+   },
+   "expected": {
+    "kept": [],
+    "agree": [
+     0,
+     0,
+     0
+    ],
+    "disagree": [
+     0,
+     0,
+     0
+    ],
+    "unsure": [
+     0,
+     0,
+     0
+    ],
+    "participant": 1,
+    "norm_squared": 1,
+    "max_norm_squared": 61
+   }
+  },
+  {
+   "id": "release/cap/reject-007",
+   "description": "A vote outside {1, -1, 0} is invalid",
+   "section": "deck.md The release plan",
+   "inputs": {
+    "votes": [
+     {
+      "card": 0,
+      "vote": 2
+     }
+    ],
+    "cap": 5,
+    "cards": 1
+   },
+   "rejection": {
+    "step": null,
+    "check": "contribution",
+    "reason": "invalid-vote"
+   }
+  }
+ ]
+}

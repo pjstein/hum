@@ -1,0 +1,1002 @@
+{
+ "spec": "take",
+ "file": "numeric",
+ "notes": "Noise math, measures, queryHash and gallery ranking (take.md). Floats are binary64 printed with Python's shortest repr; compare to six decimals.",
+ "cases": [
+  {
+   "id": "take/numeric/take-noise-share-001",
+   "description": "agree share with m = 3 at \u03c3 18.3869",
+   "section": "Noise math",
+   "inputs": {
+    "counts": [
+     412.0,
+     240.0,
+     61.0
+    ],
+    "sigma": 18.3869,
+    "m": 3
+   },
+   "expected": {
+    "too_few": false,
+    "N": 713.0,
+    "p": 0.5778401122019635,
+    "sigma_p": 0.023719668872402108,
+    "display": 0.5778401122019635,
+    "interval_90": [
+     0.538821256906862,
+     0.616858967497065
+    ],
+    "interval_80": [
+     0.547431496707544,
+     0.608248727696383
+    ],
+    "interval_95": [
+     0.5313495612120553,
+     0.6243306631918717
+    ]
+   }
+  },
+  {
+   "id": "take/numeric/take-noise-ratio-002",
+   "description": "fair share with m = 2 (a take's fairness)",
+   "section": "Noise math",
+   "inputs": {
+    "counts": [
+     300.0,
+     190.0
+    ],
+    "sigma": 19.0,
+    "m": 2
+   },
+   "expected": {
+    "too_few": false,
+    "N": 490.0,
+    "p": 0.6122448979591837,
+    "sigma_p": 0.028100819424134057,
+    "display": 0.6122448979591837,
+    "f_low_90": 0.5660190500064831
+   }
+  },
+  {
+   "id": "take/numeric/take-noise-diff-003",
+   "description": "two shares within the noise and one beyond it, at each z",
+   "section": "Noise math",
+   "inputs": {
+    "a": [
+     412.0,
+     240.0,
+     61.0
+    ],
+    "b": [
+     380.0,
+     260.0,
+     70.0
+    ],
+    "c": [
+     200.0,
+     400.0,
+     100.0
+    ],
+    "sigma": 18.3869
+   },
+   "expected": {
+    "p": [
+     0.5778401122019635,
+     0.5352112676056338,
+     0.2857142857142857
+    ],
+    "sigma_p": [
+     0.023719668872402108,
+     0.023002212547989207,
+     0.02155606100523063
+    ],
+    "ab_within": {
+     "80": false,
+     "90": true,
+     "95": true
+    },
+    "ac_within": {
+     "80": false,
+     "90": false,
+     "95": false
+    }
+   }
+  },
+  {
+   "id": "take/numeric/take-noise-too-few-004",
+   "description": "N below 10\u03c3 renders as too few votes",
+   "section": "Noise math",
+   "inputs": {
+    "counts": [
+     90.0,
+     60.0,
+     20.0
+    ],
+    "sigma": 18.3869
+   },
+   "expected": {
+    "too_few": true,
+    "N": 170.0
+   }
+  },
+  {
+   "id": "take/numeric/take-noise-negative-n-005",
+   "description": "a negative N fails the gap test",
+   "section": "Noise math",
+   "inputs": {
+    "counts": [
+     -20.0,
+     5.0,
+     3.0
+    ],
+    "sigma": 18.3869
+   },
+   "expected": {
+    "too_few": true,
+    "N": -12.0
+   }
+  },
+  {
+   "id": "take/numeric/take-noise-agree-minus-disagree-006",
+   "description": "agreeMinusDisagree with \u03c3_d",
+   "section": "Noise math",
+   "inputs": {
+    "agree": 412.0,
+    "disagree": 240.0,
+    "unsure": 61.0,
+    "sigma": 18.3869
+   },
+   "expected": {
+    "too_few": false,
+    "N": 713.0,
+    "d": 0.24123422159887797,
+    "sigma_d": 0.03802829581972971,
+    "display": 0.24123422159887797
+   }
+  },
+  {
+   "id": "take/numeric/take-noise-pooled-007",
+   "description": "pooled \u03c3 over three releases",
+   "section": "Noise math",
+   "inputs": {
+    "sigmas": [
+     18.3869,
+     19.0,
+     10.3376
+    ]
+   },
+   "expected": {
+    "pooled_sigma": 28.389154009410003
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-moved-008",
+   "description": "movedToward over a fixed movement table (toward)",
+   "section": "Query spec",
+   "inputs": {
+    "movement_rows": [
+     {
+      "first": 0,
+      "second": 0,
+      "n": 120.0
+     },
+     {
+      "first": 0,
+      "second": 1,
+      "n": 30.0
+     },
+     {
+      "first": 0,
+      "second": 2,
+      "n": 25.0
+     },
+     {
+      "first": 1,
+      "second": 0,
+      "n": 40.0
+     },
+     {
+      "first": 1,
+      "second": 1,
+      "n": 90.0
+     },
+     {
+      "first": 1,
+      "second": 2,
+      "n": 15.0
+     },
+     {
+      "first": 2,
+      "second": 0,
+      "n": 22.0
+     },
+     {
+      "first": 2,
+      "second": 1,
+      "n": 18.0
+     },
+     {
+      "first": 2,
+      "second": 2,
+      "n": 60.0
+     }
+    ],
+    "sigma": 7.5,
+    "measure": 6
+   },
+   "expected": {
+    "too_few": false,
+    "N": 420.0,
+    "p": 0.18333333333333332,
+    "sigma_p": 0.02650146799938541,
+    "display": 0.18333333333333332
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-moved-009",
+   "description": "movedAway over a fixed movement table (away)",
+   "section": "Query spec",
+   "inputs": {
+    "movement_rows": [
+     {
+      "first": 0,
+      "second": 0,
+      "n": 120.0
+     },
+     {
+      "first": 0,
+      "second": 1,
+      "n": 30.0
+     },
+     {
+      "first": 0,
+      "second": 2,
+      "n": 25.0
+     },
+     {
+      "first": 1,
+      "second": 0,
+      "n": 40.0
+     },
+     {
+      "first": 1,
+      "second": 1,
+      "n": 90.0
+     },
+     {
+      "first": 1,
+      "second": 2,
+      "n": 15.0
+     },
+     {
+      "first": 2,
+      "second": 0,
+      "n": 22.0
+     },
+     {
+      "first": 2,
+      "second": 1,
+      "n": 18.0
+     },
+     {
+      "first": 2,
+      "second": 2,
+      "n": 60.0
+     }
+    ],
+    "sigma": 7.5,
+    "measure": 7
+   },
+   "expected": {
+    "too_few": false,
+    "N": 420.0,
+    "p": 0.1738095238095238,
+    "sigma_p": 0.026660604321398527,
+    "display": 0.1738095238095238
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-moved-010",
+   "description": "moved over a fixed movement table (unchanged)",
+   "section": "Query spec",
+   "inputs": {
+    "movement_rows": [
+     {
+      "first": 0,
+      "second": 0,
+      "n": 120.0
+     },
+     {
+      "first": 0,
+      "second": 1,
+      "n": 30.0
+     },
+     {
+      "first": 0,
+      "second": 2,
+      "n": 25.0
+     },
+     {
+      "first": 1,
+      "second": 0,
+      "n": 40.0
+     },
+     {
+      "first": 1,
+      "second": 1,
+      "n": 90.0
+     },
+     {
+      "first": 1,
+      "second": 2,
+      "n": 15.0
+     },
+     {
+      "first": 2,
+      "second": 0,
+      "n": 22.0
+     },
+     {
+      "first": 2,
+      "second": 1,
+      "n": 18.0
+     },
+     {
+      "first": 2,
+      "second": 2,
+      "n": 60.0
+     }
+    ],
+    "sigma": 7.5,
+    "measure": 8
+   },
+   "expected": {
+    "too_few": false,
+    "N": 420.0,
+    "p": 0.6428571428571429,
+    "sigma_p": 0.030211018577364822,
+    "display": 0.6428571428571429
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-mapcell-011",
+   "description": "mapCell at [2, 3]",
+   "section": "Query spec",
+   "inputs": {
+    "map_rows": [
+     {
+      "x": 0,
+      "y": 0,
+      "n": 0.0
+     },
+     {
+      "x": 0,
+      "y": 1,
+      "n": 3.0
+     },
+     {
+      "x": 0,
+      "y": 2,
+      "n": 6.0
+     },
+     {
+      "x": 0,
+      "y": 3,
+      "n": 9.0
+     },
+     {
+      "x": 1,
+      "y": 0,
+      "n": 7.0
+     },
+     {
+      "x": 1,
+      "y": 1,
+      "n": 10.0
+     },
+     {
+      "x": 1,
+      "y": 2,
+      "n": 2.0
+     },
+     {
+      "x": 1,
+      "y": 3,
+      "n": 5.0
+     },
+     {
+      "x": 2,
+      "y": 0,
+      "n": 3.0
+     },
+     {
+      "x": 2,
+      "y": 1,
+      "n": 6.0
+     },
+     {
+      "x": 2,
+      "y": 2,
+      "n": 9.0
+     },
+     {
+      "x": 2,
+      "y": 3,
+      "n": 1.0
+     },
+     {
+      "x": 3,
+      "y": 0,
+      "n": 10.0
+     },
+     {
+      "x": 3,
+      "y": 1,
+      "n": 2.0
+     },
+     {
+      "x": 3,
+      "y": 2,
+      "n": 5.0
+     },
+     {
+      "x": 3,
+      "y": 3,
+      "n": 8.0
+     }
+    ],
+    "sigma": 3.6227,
+    "cell": [
+     2,
+     3
+    ]
+   },
+   "expected": {
+    "value": 1.0,
+    "sigma": 3.6227
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-012",
+   "description": "measure 0 on a tallies row",
+   "section": "Query spec",
+   "inputs": {
+    "row": {
+     "agree": 412.0,
+     "disagree": 240.0,
+     "unsure": 61.0
+    },
+    "sigma": 18.3869,
+    "measure": 0
+   },
+   "expected": {
+    "too_few": false,
+    "N": 713.0,
+    "p": 0.5778401122019635,
+    "sigma_p": 0.023719668872402108,
+    "display": 0.5778401122019635
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-013",
+   "description": "measure 1 on a tallies row",
+   "section": "Query spec",
+   "inputs": {
+    "row": {
+     "agree": 412.0,
+     "disagree": 240.0,
+     "unsure": 61.0
+    },
+    "sigma": 18.3869,
+    "measure": 1
+   },
+   "expected": {
+    "too_few": false,
+    "N": 713.0,
+    "p": 0.33660589060308554,
+    "sigma_p": 0.02105638532815644,
+    "display": 0.33660589060308554
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-014",
+   "description": "measure 2 on a tallies row",
+   "section": "Query spec",
+   "inputs": {
+    "row": {
+     "agree": 412.0,
+     "disagree": 240.0,
+     "unsure": 61.0
+    },
+    "sigma": 18.3869,
+    "measure": 2
+   },
+   "expected": {
+    "too_few": false,
+    "N": 713.0,
+    "p": 0.08555399719495091,
+    "sigma_p": 0.02378732490330795,
+    "display": 0.08555399719495091
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-015",
+   "description": "measure 3 on a tallies row",
+   "section": "Query spec",
+   "inputs": {
+    "row": {
+     "agree": 412.0,
+     "disagree": 240.0,
+     "unsure": 61.0
+    },
+    "sigma": 18.3869,
+    "measure": 3
+   },
+   "expected": {
+    "too_few": false,
+    "N": 713.0,
+    "d": 0.24123422159887797,
+    "sigma_d": 0.03802829581972971,
+    "display": 0.24123422159887797
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-016",
+   "description": "measure 4 (count) of column disagree",
+   "section": "Query spec",
+   "inputs": {
+    "row": {
+     "agree": 412.0,
+     "disagree": 240.0,
+     "unsure": 61.0
+    },
+    "sigma": 18.3869,
+    "measure": 4,
+    "column": "disagree"
+   },
+   "expected": {
+    "value": 240.0,
+    "sigma": 18.3869
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-017",
+   "description": "measure 5 (participants) from nHat",
+   "section": "Query spec",
+   "inputs": {
+    "n_hat": 1243,
+    "sigma": 18.3869,
+    "measure": 5
+   },
+   "expected": {
+    "value": 1243,
+    "sigma": 18.3869
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-018",
+   "description": "measure 5 (participants) from a group_sizes row",
+   "section": "Query spec",
+   "inputs": {
+    "row": {
+     "group": 1,
+     "n": 601
+    },
+    "sigma": 10.3376,
+    "measure": 5
+   },
+   "expected": {
+    "value": 601,
+    "sigma": 10.3376
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-019",
+   "description": "measure 9 on a ratings row",
+   "section": "Query spec",
+   "inputs": {
+    "row": {
+     "moves": 210.0,
+     "neutral": 90.0,
+     "against": 50.0
+    },
+    "sigma": 9.1,
+    "measure": 9
+   },
+   "expected": {
+    "too_few": false,
+    "N": 350.0,
+    "p": 0.6,
+    "sigma_p": 0.024390161951081832,
+    "display": 0.6
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-020",
+   "description": "measure 10 on a ratings row",
+   "section": "Query spec",
+   "inputs": {
+    "row": {
+     "moves": 210.0,
+     "neutral": 90.0,
+     "against": 50.0
+    },
+    "sigma": 9.1,
+    "measure": 10
+   },
+   "expected": {
+    "too_few": false,
+    "N": 350.0,
+    "p": 0.14285714285714285,
+    "sigma_p": 0.022896394868170484,
+    "display": 0.14285714285714285
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-021",
+   "description": "measure 11 (consensusScore)",
+   "section": "Query spec",
+   "inputs": {
+    "row": {
+     "score": 0.4231
+    },
+    "measure": 11
+   },
+   "expected": {
+    "value": 0.4231
+   }
+  },
+  {
+   "id": "take/numeric/take-measure-022",
+   "description": "measure 12 (repnessScore), not significant",
+   "section": "Query spec",
+   "inputs": {
+    "row": {
+     "metric": 1.73,
+     "significant": false
+    },
+    "measure": 12
+   },
+   "expected": {
+    "value": 1.73,
+    "significant": false
+   }
+  },
+  {
+   "id": "take/numeric/take-queryhash-023",
+   "description": "queryHash is over [query, chart]; a prose edit keeps it, a chart edit changes it",
+   "section": "Ratings and versions",
+   "inputs": {
+    "query": {
+     "map": [
+      [
+       0,
+       [
+        {
+         "map": [
+          [
+           0,
+           0
+          ],
+          [
+           1,
+           "group_tallies"
+          ],
+          [
+           2,
+           [
+            {
+             "hex": "01e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc"
+            }
+           ]
+          ],
+          [
+           5,
+           0
+          ],
+          [
+           3,
+           0
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       1,
+       0
+      ]
+     ]
+    },
+    "chart": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       90
+      ],
+      [
+       2,
+       true
+      ],
+      [
+       3,
+       0
+      ]
+     ]
+    },
+    "chart_edited": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       90
+      ],
+      [
+       2,
+       true
+      ],
+      [
+       3,
+       0
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "query_hash": "942b6d3ba9555766deda93eefa1d585b42336384876f5491a99efcc952c854ea",
+    "query_hash_after_prose_edit": "942b6d3ba9555766deda93eefa1d585b42336384876f5491a99efcc952c854ea",
+    "query_hash_after_chart_edit": "3cc0c947642fa078e9af742bd2b81da71ad3157998e2d27591fd854db4d422d3",
+    "hashed_bytes": "68756d2f74616b652d71756572792f3182a20081a50000016d67726f75705f74616c6c6965730281582101e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc030005000100a4000001185a02f50300"
+   }
+  },
+  {
+   "id": "take/numeric/take-rank-min-group-024",
+   "description": "score is the lowest f_low over groups at or above GATE_CELL (the third group is below the gate)",
+   "section": "Gallery ranking",
+   "inputs": {
+    "group_cells": [
+     [
+      300.0,
+      190.0,
+      19.0,
+      650.0
+     ],
+     [
+      240.0,
+      260.0,
+      19.0,
+      480.0
+     ],
+     [
+      120.0,
+      40.0,
+      19.0,
+      200.0
+     ]
+    ],
+    "overall": [
+     660.0,
+     490.0,
+     19.0
+    ]
+   },
+   "expected": {
+    "rated": true,
+    "hasGroupScore": true,
+    "score": 0.4357634082452095
+   }
+  },
+  {
+   "id": "take/numeric/take-rank-overall-only-025",
+   "description": "no group past GATE_CELL: score from the overall row, hasGroupScore false",
+   "section": "Gallery ranking",
+   "inputs": {
+    "group_cells": [
+     [
+      120.0,
+      40.0,
+      19.0,
+      200.0
+     ]
+    ],
+    "overall": [
+     660.0,
+     490.0,
+     19.0
+    ]
+   },
+   "expected": {
+    "rated": true,
+    "hasGroupScore": false,
+    "score": 0.5544862652679666
+   }
+  },
+  {
+   "id": "take/numeric/take-rank-pooled-026",
+   "description": "two rating releases pooled: counts summed, \u03c3 combined",
+   "section": "Gallery ranking",
+   "inputs": {
+    "release_a": [
+     [
+      300.0,
+      190.0,
+      19.0,
+      650.0
+     ]
+    ],
+    "release_b": [
+     [
+      280.0,
+      200.0,
+      19.0,
+      610.0
+     ]
+    ]
+   },
+   "expected": {
+    "pooled_sigma": 26.870057685088806,
+    "rated": true,
+    "hasGroupScore": true,
+    "score": 0.5651041804140757
+   }
+  },
+  {
+   "id": "take/numeric/take-rank-unrated-last-027",
+   "description": "sort key (rated, hasGroupScore, score to 6 decimals, forkCount, -logIndex) descending; unrated last, newest first",
+   "section": "Gallery ranking",
+   "inputs": {
+    "takes": [
+     {
+      "name": "A",
+      "rated": true,
+      "hasGroupScore": true,
+      "score": 0.5712,
+      "forkCount": 2,
+      "logIndex": 10
+     },
+     {
+      "name": "B",
+      "rated": true,
+      "hasGroupScore": true,
+      "score": 0.5712,
+      "forkCount": 7,
+      "logIndex": 12
+     },
+     {
+      "name": "C",
+      "rated": true,
+      "hasGroupScore": false,
+      "score": 0.9,
+      "forkCount": 0,
+      "logIndex": 3
+     },
+     {
+      "name": "D",
+      "rated": false,
+      "hasGroupScore": false,
+      "score": null,
+      "forkCount": 0,
+      "logIndex": 20
+     },
+     {
+      "name": "E",
+      "rated": false,
+      "hasGroupScore": false,
+      "score": null,
+      "forkCount": 5,
+      "logIndex": 25
+     },
+     {
+      "name": "F",
+      "rated": true,
+      "hasGroupScore": true,
+      "score": 0.5712004,
+      "forkCount": 0,
+      "logIndex": 30
+     }
+    ]
+   },
+   "expected": {
+    "order": [
+     "B",
+     "A",
+     "F",
+     "C",
+     "E",
+     "D"
+    ],
+    "keys": {
+     "A": [
+      1,
+      1,
+      0.5712,
+      2,
+      10
+     ],
+     "B": [
+      1,
+      1,
+      0.5712,
+      7,
+      12
+     ],
+     "C": [
+      1,
+      0,
+      0.9,
+      0,
+      3
+     ],
+     "D": [
+      0,
+      0,
+      -Infinity,
+      0,
+      20
+     ],
+     "E": [
+      0,
+      0,
+      -Infinity,
+      5,
+      25
+     ],
+     "F": [
+      1,
+      1,
+      0.5712,
+      0,
+      30
+     ]
+    }
+   }
+  },
+  {
+   "id": "take/numeric/take-render-gap-028",
+   "description": "a series over an unreleased tier is valid and renders as a gap (no numbers)",
+   "section": "Query spec",
+   "inputs": {
+    "series": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       "group_tallies"
+      ],
+      [
+       2,
+       []
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       3,
+       0
+      ]
+     ]
+    },
+    "unlocked": [
+     0,
+     4,
+     8
+    ]
+   },
+   "expected": {
+    "renders": "not released at this size",
+    "valid": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,329 @@
+{
+ "spec": "manifest",
+ "file": "keyset",
+ "notes": "Keyset bodies and the pre-rotation commitment (provisional body layout, ADR 0081-w0-08).",
+ "cases": [
+  {
+   "id": "manifest/keyset/commitment-001",
+   "description": "Next-keyset commitment: SHA-256 of CBOR [[kid, public]...] sorted by kid",
+   "section": "Authorities and keys",
+   "inputs": {
+    "keys": [
+     {
+      "kid": "6231",
+      "public": "083ffb0ea6a663a335011a27e1cf068b6e940a7e552a4d6b6428add96831184f"
+     },
+     {
+      "kid": "6232",
+      "public": "7702d11debff9536da6f65ac7582a8646a301c899a9fe7ccd052511033037005"
+     },
+     {
+      "kid": "6233",
+      "public": "cdeae3af649435045bd0907f551489f7df87a795c80190a1e9547c988975ca7d"
+     }
+    ]
+   },
+   "expected": {
+    "commitment": "3aa3e2a94b0f31db45c6a9d07cada9216009bccdf206ccc9fe6f2c48102f99b2"
+   }
+  },
+  {
+   "id": "manifest/keyset/body-002",
+   "description": "Keyset A version 1 as built in the test world (no authority field: it is its own)",
+   "section": "Authorities and keys",
+   "inputs": {
+    "keys": [
+     {
+      "kid": "6131",
+      "public": "0eaf82e1cf50ef8663f950f67c5cbe34cb8449fbefc6d3e9506ab239bafdadbd",
+      "roles": [
+       "sign",
+       "rotate"
+      ]
+     },
+     {
+      "kid": "6132",
+      "public": "6140f7f9d9f0f2e2769687d310d0459b26e170939923fcfadfd6629f2a413d20",
+      "roles": [
+       "sign",
+       "rotate"
+      ]
+     },
+     {
+      "kid": "6133",
+      "public": "f3be71279c0976d8e3314fd254b995e9343b885ab9d18c554da854d5ab260364",
+      "roles": [
+       "sign",
+       "rotate"
+      ]
+     }
+    ],
+    "sign_threshold": 2,
+    "rotate_threshold": 2,
+    "next": [
+     {
+      "kid": "6231",
+      "public": "083ffb0ea6a663a335011a27e1cf068b6e940a7e552a4d6b6428add96831184f"
+     },
+     {
+      "kid": "6232",
+      "public": "7702d11debff9536da6f65ac7582a8646a301c899a9fe7ccd052511033037005"
+     },
+     {
+      "kid": "6233",
+      "public": "cdeae3af649435045bd0907f551489f7df87a795c80190a1e9547c988975ca7d"
+     }
+    ]
+   },
+   "expected": {
+    "body": {
+     "map": [
+      [
+       0,
+       [
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "6131"
+           }
+          ],
+          [
+           1,
+           -8
+          ],
+          [
+           2,
+           {
+            "hex": "0eaf82e1cf50ef8663f950f67c5cbe34cb8449fbefc6d3e9506ab239bafdadbd"
+           }
+          ],
+          [
+           3,
+           [
+            "sign",
+            "rotate"
+           ]
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "6132"
+           }
+          ],
+          [
+           1,
+           -8
+          ],
+          [
+           2,
+           {
+            "hex": "6140f7f9d9f0f2e2769687d310d0459b26e170939923fcfadfd6629f2a413d20"
+           }
+          ],
+          [
+           3,
+           [
+            "sign",
+            "rotate"
+           ]
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "6133"
+           }
+          ],
+          [
+           1,
+           -8
+          ],
+          [
+           2,
+           {
+            "hex": "f3be71279c0976d8e3314fd254b995e9343b885ab9d18c554da854d5ab260364"
+           }
+          ],
+          [
+           3,
+           [
+            "sign",
+            "rotate"
+           ]
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          "sign",
+          2
+         ],
+         [
+          "rotate",
+          2
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "3aa3e2a94b0f31db45c6a9d07cada9216009bccdf206ccc9fe6f2c48102f99b2"
+       }
+      ]
+     ]
+    },
+    "envelope": "a6000101666b65797365740401061a6ac4724008a009a30083a40042613101270258200eaf82e1cf50ef8663f950f67c5cbe34cb8449fbefc6d3e9506ab239bafdadbd0382647369676e66726f74617465a40042613201270258206140f7f9d9f0f2e2769687d310d0459b26e170939923fcfadfd6629f2a413d200382647369676e66726f74617465a4004261330127025820f3be71279c0976d8e3314fd254b995e9343b885ab9d18c554da854d5ab2603640382647369676e66726f7461746501a2647369676e0266726f74617465020258203aa3e2a94b0f31db45c6a9d07cada9216009bccdf206ccc9fe6f2c48102f99b2",
+    "cid": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+   }
+  },
+  {
+   "id": "manifest/keyset/body-003",
+   "description": "Keyset A version 2: rotation with a revocation of a3 from log position 5",
+   "section": "Authorities and keys",
+   "inputs": {
+    "prev": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "revocations": [
+     {
+      "kid": "6133",
+      "from_position": 5
+     }
+    ]
+   },
+   "expected": {
+    "body": {
+     "map": [
+      [
+       0,
+       [
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "6231"
+           }
+          ],
+          [
+           1,
+           -8
+          ],
+          [
+           2,
+           {
+            "hex": "083ffb0ea6a663a335011a27e1cf068b6e940a7e552a4d6b6428add96831184f"
+           }
+          ],
+          [
+           3,
+           [
+            "sign",
+            "rotate"
+           ]
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "6232"
+           }
+          ],
+          [
+           1,
+           -8
+          ],
+          [
+           2,
+           {
+            "hex": "7702d11debff9536da6f65ac7582a8646a301c899a9fe7ccd052511033037005"
+           }
+          ],
+          [
+           3,
+           [
+            "sign",
+            "rotate"
+           ]
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "6233"
+           }
+          ],
+          [
+           1,
+           -8
+          ],
+          [
+           2,
+           {
+            "hex": "cdeae3af649435045bd0907f551489f7df87a795c80190a1e9547c988975ca7d"
+           }
+          ],
+          [
+           3,
+           [
+            "sign",
+            "rotate"
+           ]
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          "sign",
+          2
+         ],
+         [
+          "rotate",
+          2
+         ]
+        ]
+       }
+      ],
+      [
+       3,
+       [
+        [
+         {
+          "hex": "6133"
+         },
+         5
+        ]
+       ]
+      ]
+     ]
+    },
+    "envelope": "a9000101666b657973657402582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a303582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3040205582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3061a6ac472b808a009a30083a4004262310127025820083ffb0ea6a663a335011a27e1cf068b6e940a7e552a4d6b6428add96831184f0382647369676e66726f74617465a40042623201270258207702d11debff9536da6f65ac7582a8646a301c899a9fe7ccd0525110330370050382647369676e66726f74617465a4004262330127025820cdeae3af649435045bd0907f551489f7df87a795c80190a1e9547c988975ca7d0382647369676e66726f7461746501a2647369676e0266726f746174650203818242613305",
+    "cid": "011d96d053da1c8a60d94a695e3f5255d3d90b9c3e4f1400489dc466cc4a2b7d63"
+   }
+  }
+ ]
+}

@@ -1,0 +1,294 @@
+{
+ "spec": "ballot",
+ "file": "client",
+ "notes": "Client-side selections: the counted hand that only grows, undo before casting, the movement selection, the ratings selection from a seed (reference expansion), the send schedule, and a re-voted card outside the counted hand.",
+ "cases": [
+  {
+   "id": "ballot/client/ballot-client-counted-hand-001",
+   "description": "A hand growing from 10 to K + 5 cast cards across three sends: no card ever leaves",
+   "section": "The counted hand",
+   "inputs": {
+    "cap": 18,
+    "cast_order": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22
+    ]
+   },
+   "expected": {
+    "sends": [
+     {
+      "cast": 10,
+      "counted": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8,
+       9
+      ]
+     },
+     {
+      "cast": 18,
+      "counted": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8,
+       9,
+       10,
+       11,
+       12,
+       13,
+       14,
+       15,
+       16,
+       17
+      ]
+     },
+     {
+      "cast": 23,
+      "counted": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8,
+       9,
+       10,
+       11,
+       12,
+       13,
+       14,
+       15,
+       16,
+       17
+      ]
+     }
+    ],
+    "never_shrinks": true
+   }
+  },
+  {
+   "id": "ballot/client/ballot-client-undo-002",
+   "description": "An undone swipe is not cast: the hand excludes it",
+   "section": "Casting and the hand",
+   "inputs": {
+    "swipes": [
+     {
+      "card": 0,
+      "vote": 1,
+      "undone": false
+     },
+     {
+      "card": 1,
+      "vote": 2,
+      "undone": true
+     },
+     {
+      "card": 2,
+      "vote": 3,
+      "undone": false
+     }
+    ]
+   },
+   "expected": {
+    "cast_order": [
+     0,
+     2
+    ],
+    "counted": {
+     "0": 1,
+     "2": 3
+    }
+   }
+  },
+  {
+   "id": "ballot/client/ballot-client-movement-selection-003",
+   "description": "The first K_m re-voted cards in re-vote order",
+   "section": "The movement selection",
+   "inputs": {
+    "revote_order": [
+     5,
+     3,
+     9,
+     1,
+     0,
+     7,
+     2,
+     8,
+     4,
+     6,
+     11,
+     10
+    ],
+    "cap_movement": 10
+   },
+   "expected": {
+    "selection": [
+     5,
+     3,
+     9,
+     1,
+     0,
+     7,
+     2,
+     8,
+     4,
+     6
+    ]
+   }
+  },
+  {
+   "id": "ballot/client/ballot-client-ratings-selection-004",
+   "description": "A uniform K_r of A arguments from a fixed seed (reference expansion: SHA-256 stream, rejection sampling)",
+   "section": "The ratings selection",
+   "inputs": {
+    "seed": "a9dd9d48133e2d072b7b0a6c9c862465208eaac8b19545f16f3712ccd9b9307d",
+    "arguments": 25,
+    "cap_ratings": 10
+   },
+   "expected": {
+    "selection": [
+     1,
+     2,
+     4,
+     11,
+     15,
+     16,
+     18,
+     19,
+     21,
+     24
+    ],
+    "all_when_small": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ]
+   }
+  },
+  {
+   "id": "ballot/client/ballot-client-send-schedule-005",
+   "description": "Sends from a sequence of hand edits with timestamps and a fixed random stream",
+   "section": "Replacement in round 0",
+   "inputs": {
+    "first_leave": 1793332800,
+    "edits": [
+     1793361600,
+     1793365200,
+     1793397600,
+     1793476800,
+     1793480400
+    ],
+    "closes": 1793505600,
+    "seed": "8fdde95e545c13c9d0ef271458d094e4d4876120f7d14522c8e974b24bfd681d"
+   },
+   "expected": {
+    "sends": [
+     {
+      "at": 1793332800,
+      "kind": "first"
+     },
+     {
+      "at": 1793361600,
+      "kind": "replacement"
+     },
+     {
+      "at": 1793397600,
+      "kind": "replacement"
+     },
+     {
+      "at": 1793476800,
+      "kind": "replacement"
+     },
+     {
+      "at": 1793492248,
+      "kind": "final"
+     }
+    ]
+   }
+  },
+  {
+   "id": "ballot/client/ballot-movement-uncounted-006",
+   "description": "A re-voted card outside the counted hand still appears in movement",
+   "section": "The movement selection",
+   "inputs": {
+    "cap": 5,
+    "cast_order": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17
+    ],
+    "revoted_card": 9
+   },
+   "expected": {
+    "payload": {
+     "0": "010101010100000000000000000000000000",
+     "1": {
+      "9": [
+       1,
+       2,
+       0
+      ]
+     }
+    },
+    "card_counted": false,
+    "in_movement": true
+   }
+  }
+ ]
+}

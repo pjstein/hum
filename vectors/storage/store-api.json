@@ -1,0 +1,433 @@
+{
+ "spec": "storage",
+ "file": "store-api",
+ "notes": "\u00a76 decisions: visibility table, put mismatch with exact error bytes, re-put, tombstone in another context, promotion.",
+ "cases": [
+  {
+   "id": "storage/store-api/store-visibility-001",
+   "description": "token none, blob public",
+   "section": "6.4",
+   "inputs": {
+    "token": "none",
+    "blob": "public"
+   },
+   "expected": {
+    "status": 200
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-002",
+   "description": "token none, blob sealed-own",
+   "section": "6.4",
+   "inputs": {
+    "token": "none",
+    "blob": "sealed-own"
+   },
+   "expected": {
+    "status": 401,
+    "code": "unauthorized",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-003",
+   "description": "token none, blob sealed-other",
+   "section": "6.4",
+   "inputs": {
+    "token": "none",
+    "blob": "sealed-other"
+   },
+   "expected": {
+    "status": 401,
+    "code": "unauthorized",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-004",
+   "description": "token none, blob absent",
+   "section": "6.4",
+   "inputs": {
+    "token": "none",
+    "blob": "absent"
+   },
+   "expected": {
+    "status": 401,
+    "code": "unauthorized",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-005",
+   "description": "token none, blob tombstoned",
+   "section": "6.4",
+   "inputs": {
+    "token": "none",
+    "blob": "tombstoned"
+   },
+   "expected": {
+    "status": 401,
+    "code": "unauthorized",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-006",
+   "description": "token valid, blob public",
+   "section": "6.4",
+   "inputs": {
+    "token": "valid",
+    "blob": "public"
+   },
+   "expected": {
+    "status": 200
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-007",
+   "description": "token valid, blob sealed-own",
+   "section": "6.4",
+   "inputs": {
+    "token": "valid",
+    "blob": "sealed-own"
+   },
+   "expected": {
+    "status": 200
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-008",
+   "description": "token valid, blob sealed-other",
+   "section": "6.4",
+   "inputs": {
+    "token": "valid",
+    "blob": "sealed-other"
+   },
+   "expected": {
+    "status": 404,
+    "code": "not_found",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-009",
+   "description": "token valid, blob absent",
+   "section": "6.4",
+   "inputs": {
+    "token": "valid",
+    "blob": "absent"
+   },
+   "expected": {
+    "status": 404,
+    "code": "not_found",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-010",
+   "description": "token valid, blob tombstoned",
+   "section": "6.4",
+   "inputs": {
+    "token": "valid",
+    "blob": "tombstoned"
+   },
+   "expected": {
+    "status": 410,
+    "code": "closed",
+    "detail": "tombstoned"
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-011",
+   "description": "token invalid, blob public",
+   "section": "6.4",
+   "inputs": {
+    "token": "invalid",
+    "blob": "public"
+   },
+   "expected": {
+    "status": 401,
+    "code": "unauthorized",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-012",
+   "description": "token invalid, blob sealed-own",
+   "section": "6.4",
+   "inputs": {
+    "token": "invalid",
+    "blob": "sealed-own"
+   },
+   "expected": {
+    "status": 401,
+    "code": "unauthorized",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-013",
+   "description": "token invalid, blob sealed-other",
+   "section": "6.4",
+   "inputs": {
+    "token": "invalid",
+    "blob": "sealed-other"
+   },
+   "expected": {
+    "status": 401,
+    "code": "unauthorized",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-014",
+   "description": "token invalid, blob absent",
+   "section": "6.4",
+   "inputs": {
+    "token": "invalid",
+    "blob": "absent"
+   },
+   "expected": {
+    "status": 401,
+    "code": "unauthorized",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-015",
+   "description": "token invalid, blob tombstoned",
+   "section": "6.4",
+   "inputs": {
+    "token": "invalid",
+    "blob": "tombstoned"
+   },
+   "expected": {
+    "status": 401,
+    "code": "unauthorized",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-016",
+   "description": "token spent, blob public",
+   "section": "6.4",
+   "inputs": {
+    "token": "spent",
+    "blob": "public"
+   },
+   "expected": {
+    "status": 401,
+    "code": "token_spent",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-017",
+   "description": "token spent, blob sealed-own",
+   "section": "6.4",
+   "inputs": {
+    "token": "spent",
+    "blob": "sealed-own"
+   },
+   "expected": {
+    "status": 401,
+    "code": "token_spent",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-018",
+   "description": "token spent, blob sealed-other",
+   "section": "6.4",
+   "inputs": {
+    "token": "spent",
+    "blob": "sealed-other"
+   },
+   "expected": {
+    "status": 401,
+    "code": "token_spent",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-019",
+   "description": "token spent, blob absent",
+   "section": "6.4",
+   "inputs": {
+    "token": "spent",
+    "blob": "absent"
+   },
+   "expected": {
+    "status": 401,
+    "code": "token_spent",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-visibility-020",
+   "description": "token spent, blob tombstoned",
+   "section": "6.4",
+   "inputs": {
+    "token": "spent",
+    "blob": "tombstoned"
+   },
+   "expected": {
+    "status": 401,
+    "code": "token_spent",
+    "bare": true
+   }
+  },
+  {
+   "id": "storage/store-api/store-put-mismatch-021",
+   "description": "Body does not hash to the path CID",
+   "section": "6.3",
+   "inputs": {
+    "path_cid": "018810ad581e59f2bc3928b261707a71308f7e139eb04820366dc4d5c18d980225",
+    "body": "030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca3aab1b8"
+   },
+   "rejection": {
+    "step": null,
+    "check": "put",
+    "status": 409,
+    "code": "conflict",
+    "detail": "cid_mismatch",
+    "body": "a20068636f6e666c696374016c6369645f6d69736d61746368"
+   }
+  },
+  {
+   "id": "storage/store-api/store-reput-no-new-commitment-022",
+   "description": "Re-put with a new commitment answers 200 and changes nothing; deleting with the new secret fails",
+   "section": "6.3",
+   "inputs": {
+    "first_commitment": "942881ed92753a239f8bd21e90f3b52c88c2da86d6a172eafab0d0a5fe969419",
+    "second_commitment": "6d9497945393fe7a8cd886e4698857e5cb9f80ec65d2ab2e5419255cec5dea2f"
+   },
+   "expected": {
+    "reput": {
+     "status": 200,
+     "code": null,
+     "note": "no new commitment, retention unchanged"
+    },
+    "delete_with_second_secret": {
+     "status": 403,
+     "code": "forbidden",
+     "detail": "secret"
+    }
+   }
+  },
+  {
+   "id": "storage/store-api/store-put-tombstone-other-context-023",
+   "description": "A CID tombstoned in context B is accepted from context A",
+   "section": "6.3",
+   "inputs": {
+    "tombstoned_in": "0144683ec104d99e598bcb59717e54e0373091825e2520b08dd78ed54792b927e4",
+    "put_from": "0116964e5816d1fcf514de32d8f87ded50a9e43747214153a563ebab156f5cb06e"
+   },
+   "expected": {
+    "status": 201,
+    "code": null
+   }
+  },
+  {
+   "id": "storage/store-api/store-put-tombstoned-024",
+   "description": "The same CID put again from the context that deleted it",
+   "section": "6.3",
+   "inputs": {
+    "tombstoned_in": "0116964e5816d1fcf514de32d8f87ded50a9e43747214153a563ebab156f5cb06e",
+    "put_from": "0116964e5816d1fcf514de32d8f87ded50a9e43747214153a563ebab156f5cb06e"
+   },
+   "rejection": {
+    "step": null,
+    "check": "put",
+    "status": 410,
+    "code": "closed",
+    "detail": "tombstoned"
+   }
+  },
+  {
+   "id": "storage/store-api/store-put-no-credential-025",
+   "description": "Put check order: no-credential",
+   "section": "6.3",
+   "inputs": {
+    "credential_ok": false
+   },
+   "rejection": {
+    "step": null,
+    "check": "put",
+    "status": 401,
+    "code": "unauthorized"
+   }
+  },
+  {
+   "id": "storage/store-api/store-put-too-large-026",
+   "description": "Put check order: too-large",
+   "section": "6.3",
+   "inputs": {
+    "content_length": 1099511627776
+   },
+   "rejection": {
+    "step": null,
+    "check": "put",
+    "status": 413,
+    "code": "too_large"
+   }
+  },
+  {
+   "id": "storage/store-api/store-put-bad-commitment-027",
+   "description": "Put check order: bad-commitment",
+   "section": "6.3",
+   "inputs": {
+    "delete_header": "zz"
+   },
+   "rejection": {
+    "step": null,
+    "check": "put",
+    "status": 422,
+    "code": "rejected",
+    "detail": "commitment"
+   }
+  },
+  {
+   "id": "storage/store-api/store-put-format-028",
+   "description": "Put check order: format",
+   "section": "6.3",
+   "inputs": {
+    "content_type": "application/x-unknown"
+   },
+   "rejection": {
+    "step": null,
+    "check": "put",
+    "status": 415,
+    "code": "malformed",
+    "detail": "format"
+   }
+  },
+  {
+   "id": "storage/store-api/promote-digest-ok-029",
+   "description": "A public copy whose CID equals the reference's digest",
+   "section": "9",
+   "inputs": {
+    "reference": "a600582101277a6612e1fd3c0cfe5286c6ef1d1104add6300cd76926f41b002ec5abf74ab101010250000102030405060708090a0b0c0d0e0f031864047819746578742f706c61696e3b20636861727365743d7574662d38065821015a2cda2351d1cdd9dd7957e57c0b3c8522451f25b6494569b7e94388c46f0980",
+    "public_bytes": "030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca3aab1b8"
+   },
+   "expected": {
+    "upload": true,
+    "public_cid": "015a2cda2351d1cdd9dd7957e57c0b3c8522451f25b6494569b7e94388c46f0980"
+   }
+  },
+  {
+   "id": "storage/store-api/promote-digest-mismatch-030",
+   "description": "A client refuses a public copy whose CID differs from the digest",
+   "section": "9",
+   "inputs": {
+    "reference": "a600582101277a6612e1fd3c0cfe5286c6ef1d1104add6300cd76926f41b002ec5abf74ab101010250000102030405060708090a0b0c0d0e0f031864047819746578742f706c61696e3b20636861727365743d7574662d38065821015a2cda2351d1cdd9dd7957e57c0b3c8522451f25b6494569b7e94388c46f0980",
+    "public_bytes": "030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca3aab1b878"
+   },
+   "rejection": {
+    "step": null,
+    "check": "promotion",
+    "reason": "digest-mismatch"
+   }
+  }
+ ]
+}

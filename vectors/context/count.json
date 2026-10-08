@@ -1,0 +1,207 @@
+{
+ "spec": "context",
+ "file": "count",
+ "notes": "Daily-count buckets: bucket d = floor((t - opens) / 86400); the bucket holding closes is the last; noise is an input, one integer draw per bucket.",
+ "cases": [
+  {
+   "id": "context/count/context-count-three-days-001",
+   "description": "three full days",
+   "section": "The noised daily count",
+   "inputs": {
+    "opens": 1791259200,
+    "closes": 1791518399,
+    "receipt_times": [
+     1791259210,
+     1791262800,
+     1791345605,
+     1791432100,
+     1791432200,
+     1791518399
+    ],
+    "noise": [
+     1,
+     -2,
+     0
+    ]
+   },
+   "expected": {
+    "buckets": [
+     0,
+     1,
+     2
+    ],
+    "counts": [
+     2,
+     1,
+     3
+    ],
+    "noised": [
+     3,
+     -1,
+     3
+    ],
+    "running": [
+     3,
+     2,
+     5
+    ]
+   }
+  },
+  {
+   "id": "context/count/context-count-closes-mid-bucket-002",
+   "description": "closes mid-way through day 3; the bucket holding closes is noised at closes",
+   "section": "The noised daily count",
+   "inputs": {
+    "opens": 1791259200,
+    "closes": 1791520200,
+    "receipt_times": [
+     1791259210,
+     1791262800,
+     1791345605,
+     1791432100,
+     1791432200,
+     1791518399,
+     1791519000
+    ],
+    "noise": [
+     0,
+     1,
+     0,
+     -1
+    ]
+   },
+   "expected": {
+    "buckets": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "counts": [
+     2,
+     1,
+     3,
+     1
+    ],
+    "noised": [
+     2,
+     2,
+     3,
+     0
+    ],
+    "running": [
+     2,
+     4,
+     7,
+     7
+    ]
+   }
+  },
+  {
+   "id": "context/count/context-count-extension-003",
+   "description": "closes extended by two days: the series continues with new buckets",
+   "section": "The noised daily count",
+   "inputs": {
+    "opens": 1791259200,
+    "closes": 1791691200,
+    "receipt_times": [
+     1791259210,
+     1791262800,
+     1791345605,
+     1791432100,
+     1791432200,
+     1791518399,
+     1791519000,
+     1791604850
+    ],
+    "noise": [
+     0,
+     1,
+     0,
+     -1,
+     2,
+     0
+    ]
+   },
+   "expected": {
+    "buckets": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "counts": [
+     2,
+     1,
+     3,
+     1,
+     1,
+     0
+    ],
+    "noised": [
+     2,
+     2,
+     3,
+     0,
+     3,
+     0
+    ],
+    "running": [
+     2,
+     4,
+     7,
+     7,
+     10,
+     10
+    ]
+   }
+  },
+  {
+   "id": "context/count/context-count-late-ballot-ignored-004",
+   "description": "a receipt after closes is outside every bucket",
+   "section": "The noised daily count",
+   "inputs": {
+    "opens": 1791259200,
+    "closes": 1791518399,
+    "receipt_times": [
+     1791259210,
+     1791262800,
+     1791345605,
+     1791432100,
+     1791432200,
+     1791518399,
+     1792123200
+    ],
+    "noise": [
+     0,
+     0,
+     0
+    ]
+   },
+   "expected": {
+    "buckets": [
+     0,
+     1,
+     2
+    ],
+    "counts": [
+     2,
+     1,
+     3
+    ],
+    "noised": [
+     2,
+     1,
+     3
+    ],
+    "running": [
+     2,
+     3,
+     6
+    ]
+   }
+  }
+ ]
+}

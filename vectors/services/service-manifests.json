@@ -1,0 +1,3430 @@
+{
+ "spec": "services",
+ "file": "service-manifests",
+ "notes": "One valid service manifest per kind, one failing per rule S-1..S-8 and BS-1..BS-6. Each service is its own 1-of-1 authority (keyset logged in world.json).",
+ "cases": [
+  {
+   "id": "services/service-manifests/service-valid-log-001",
+   "description": "Valid log manifest",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "013c6078d9d2bf93731d955960945c5bd8b66f37dfaba09635bdf121ea598a4f5a",
+     "envelope": "a70001016773657276696365025821013b9650b6c9456dc728b926f8b21239320cbbbcff577eb026cc64418c66638a090401061a6ac4724008a009a700636c6f6701817468747470733a2f2f6c6f672e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca3080252610004000100010682a200784268756d2f7769746e6573732f63616675686d796d6462616d6d73736b77657461713262797174636a3668647174797072793579777274673769677a78756534646c34015820e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5cea200784268756d2f7769746e6573732f6361686a7872753333636133666e7a683473663236373532746c3567716f786b77736e6b7a7568346e666772787a357966706d69377501582037bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d07783e68756d2f6c6f672f63616633746834716d716e6c33656936693273616d6969706e367376696a6e6a71767a696135663768726a6a626e356b33766268766709a16872657175657374731a00278d00",
+     "signatures": "d8628440a0f681834ca2012704477376632d6c6f67a058406edd3dc9e16b7afd7c4cfcbc87978a009389e4933e18ef9a012e1f5738b33632e29ab76942624c73846c2588e9cc604833039bafecb6ab403227d4d1797a0607",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 45,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "7f8094e8134c92d5c1b03a08070e7bbcd22cfefd692795f0a3ecdcd572d1c3f1",
+       "9020ebcbf47ef131bf290a4b6a6a80a1339efee2fcb490aa97a04b717f7ab2ff",
+       "7df3624cd4fe60e0c19ad993d29f36cdc1f6956daa6d6cb6be2da776887aec90",
+       "072a1fb5b2cea72fff5612272ce2437f71022cf0c891a722dd2027d3e2720381",
+       "18ea9a356ab2320d8d3b1942cf52ce87f22471d3ccc75728ce5e3c870bf0fcf1",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "log"
+      ],
+      [
+       1,
+       [
+        "https://log.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       6,
+       [
+        {
+         "map": [
+          [
+           0,
+           "hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4"
+          ],
+          [
+           1,
+           {
+            "hex": "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce"
+           }
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           "hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u"
+          ],
+          [
+           1,
+           {
+            "hex": "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+           }
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       7,
+       "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg"
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "requests",
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "log"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-valid-witness-002",
+   "description": "Valid witness manifest",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01447093a49404b6752aac1d8674a4d039df301d59727bc7fe8dc526754aa1fa30",
+     "envelope": "a700010167736572766963650258210102ad52ccea6b46e6ef2f25551ab2003fcf9945593c87688e161102c61ae3f32c0401061a6ac4724008a009a400677769746e6573730181781868747470733a2f2f7769746e6573732e6578616d706c652f020108624348",
+     "signatures": "d8628440a0f6818350a20127044b7376632d7769746e657373a05840cfb55e4b7122e31f80fc9c99b1eee4c450178c5ec22ccb29e730230c412cf5d3bd207972fb3c698680ac28f9034d61b64db23447231ab528705145c2037a5d0f",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 46,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "affa436e5c63d32f0b799ff1d94435419df344c17091a36eb1856778a57fb918",
+       "014d5c33f197f5b8a4cde2bd8021c4c800346493e969e01a4eb990a71f30b036",
+       "7df3624cd4fe60e0c19ad993d29f36cdc1f6956daa6d6cb6be2da776887aec90",
+       "072a1fb5b2cea72fff5612272ce2437f71022cf0c891a722dd2027d3e2720381",
+       "18ea9a356ab2320d8d3b1942cf52ce87f22471d3ccc75728ce5e3c870bf0fcf1",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "witness"
+      ],
+      [
+       1,
+       [
+        "https://witness.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       8,
+       "CH"
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "witness"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-valid-aggregator-003",
+   "description": "Valid aggregator manifest",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "018ca67fb1ea8d726aff28992515b75fc55a42d4d7004bd3e0ff7f33e787203cf7",
+     "envelope": "a7000101677365727669636502582101e25e1ff3a65839b13cc3625aab6663790df87130be318f0595de29d0a372955a0401061a6ac4724008a009a5006a61676772656761746f7201817468747470733a2f2f6167672e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca3080252610004000100010b01",
+     "signatures": "d8628440a0f6818353a20127044e7376632d61676772656761746f72a05840cb5a3227906b697c2741be3edb6cc94b1a5769cf244b880cef8b11d88e058ce8724cc99d075ae57ddaecb00bd19d6b3c4ec916082cf764a4889e72b19ee12c0d",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 47,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "98a85ef5daef80e25e7a747a3e5207c074e4239b589a7bb6b0dcfda615939a44",
+       "014d5c33f197f5b8a4cde2bd8021c4c800346493e969e01a4eb990a71f30b036",
+       "7df3624cd4fe60e0c19ad993d29f36cdc1f6956daa6d6cb6be2da776887aec90",
+       "072a1fb5b2cea72fff5612272ce2437f71022cf0c891a722dd2027d3e2720381",
+       "18ea9a356ab2320d8d3b1942cf52ce87f22471d3ccc75728ce5e3c870bf0fcf1",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "aggregator"
+      ],
+      [
+       1,
+       [
+        "https://agg.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       11,
+       1
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "aggregator"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-valid-issuer-004",
+   "description": "Valid issuer manifest",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "011db36957e11a2664d7040e558bfc4aa7a2b3c0167d2ddcd2c65243bb035a32ac",
+     "envelope": "a70001016773657276696365025821017b3209b0aa3e84ae8848f8e64c0e3382d3e051e0aaf236cf38f600df0fe7e1b50401061a6ac4724008a009a4006669737375657201817768747470733a2f2f6973737565722e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001",
+     "signatures": "d8628440a0f681834fa20127044a7376632d697373756572a05840cef5d48a8c66285c653eb73549a79786f199f892a3674c952fa730cf9a9ee60f6c8826f4042e36e3ef578592eb4d4fc7b9c68d0e12583ee385e8e2413a537101",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 48,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "7d9f3e48c2eb4b41bad703d0453b9f21eb6a44b4d826068090ad0cde2cab08b6",
+       "bc40a7b2d7705978593189032a5ff1e047ee9ad12a8fd70fac0c415d15097e89",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "issuer"
+      ],
+      [
+       1,
+       [
+        "https://issuer.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "issuer"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-valid-delivery-005",
+   "description": "Valid delivery manifest",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01b475ec3c671672a15000c487634d96f93ae225d7bbb3f21324b6151ed9e70f34",
+     "envelope": "a70001016773657276696365025821010a95ae9eb13605a8f0cebd1c36e5e21328806295e9b9f49d0e24debd28fea5ad0401061a6ac4724008a009a6006864656c697665727901817368747470733a2f2f64732e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e10a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f6818351a20127044c7376632d64656c6976657279a05840e70a04e518bbab903ccbab0372d10ebcc229a3827b7c55c8f32c0d7cf825f76a26ff3d4b6f39fa3a7ae2754a7387f222fd5603390a5c42858361921b9a7a2606",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 49,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "bad5d7672a7a0375bd139afc2f848e4bf5bfa9260991376e6535688e921c9dde",
+       "bc40a7b2d7705978593189032a5ff1e047ee9ad12a8fd70fac0c415d15097e89",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "delivery"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-valid-blob-store-006",
+   "description": "Valid blob-store manifest",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01881565128c3a1a2050545631d30b67efcb31f239ee33ae7aa34cd7f8fd6341c7",
+     "envelope": "a7000101677365727669636502582101747b165934fbb2b30d1592a3adb32879e5ae9815bb49d943e8b0711e88b7944a0401061a6ac4724008a009a9006a626c6f622d73746f726501817668747470733a2f2f73746f72652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a99609610a3006968756d2d73746f72650102021a00278d0011a5001a80000000011b0000000c80000000021b0000000280000000031b00000019000000000419138812a20000011a00278d0013a2008201020188781e6170706c69636174696f6e2f766e642e6170616368652e706172717565747819746578742f706c61696e3b20636861727365743d7574662d38706170706c69636174696f6e2f63626f72706170706c69636174696f6e2f6a736f6e781f6170706c69636174696f6e2f766e642e68756d2e6b6579626f782b68706b6569696d6167652f706e676a696d6167652f6a7065676a696d6167652f77656270",
+     "signatures": "d8628440a0f6818353a20127044e7376632d626c6f622d73746f7265a058409a89f51dc31733895c02f74e3b7a1a340cdbd91f8dcb337d8ac2acec162ddecdc7f3951ba731cb6f81546e3d8d59574ceef90ea5923799e4c558d95aceac5009",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 50,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "8485168b56a8cb256478aab37b4d64f1710394700bae3b269e96f17200b7d4ce",
+       "e6cc35a41fe2808ebe171caa855bb9a1a804866f51791ac06fddafb343b1fdff",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "blob-store"
+      ],
+      [
+       1,
+       [
+        "https://store.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a996096"
+        }
+       ]
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-store"
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          2147483648
+         ],
+         [
+          1,
+          53687091200
+         ],
+         [
+          2,
+          10737418240
+         ],
+         [
+          3,
+          107374182400
+         ],
+         [
+          4,
+          5000
+         ]
+        ]
+       }
+      ],
+      [
+       18,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       19,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           2
+          ]
+         ],
+         [
+          1,
+          [
+           "application/vnd.apache.parquet",
+           "text/plain; charset=utf-8",
+           "application/cbor",
+           "application/json",
+           "application/vnd.hum.keybox+hpke",
+           "image/png",
+           "image/jpeg",
+           "image/webp"
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "blob-store"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-valid-resolver-007",
+   "description": "Valid resolver manifest",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01bdf8015547f524aa3dfc7fe845cf136e75ce5ed80364e99e6178b836850f258c",
+     "envelope": "a70001016773657276696365025821013bca9bc1cf7289aef80aaf78d07239a1934c7d787c86a406bc569754584d61f70401061a6ac4724008a009a400687265736f6c7665720181781868747470733a2f2f7265736f6c76652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001",
+     "signatures": "d8628440a0f6818351a20127044c7376632d7265736f6c766572a058404ce4f26a43c4b12b767b2e23c46322a901485b0e5eef6aa9d7fdb0b1e0a46775252209e2980fa8b4f030df0f06032d7b542b6ba2144d6a64ca41979f9f738c00",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 51,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2ade8581ac978a01da31774b70c71a9cedb0b1b2227aac60abba06d85759b6c0",
+       "e6cc35a41fe2808ebe171caa855bb9a1a804866f51791ac06fddafb343b1fdff",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "resolver"
+      ],
+      [
+       1,
+       [
+        "https://resolve.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "resolver"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-valid-relay-008",
+   "description": "Valid relay manifest",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "0121ee7131219b324612c8214c848339d2916e1a73abe3ee3cea63beddce80ddc5",
+     "envelope": "a70001016773657276696365025821014a94adda0f42f7339e114a6ea02dbbc135925a3a8df867e8d27da47b879409930401061a6ac4724008a009a4006572656c617901817668747470733a2f2f72656c61792e6578616d706c652f020108624953",
+     "signatures": "d8628440a0f681834ea2012704497376632d72656c6179a058407b58777e09e3203826add1b885733b505251ce24bef058741da7a333f7bc4034b6991cbea143801271d8a59d97a2f175ab01ddf52804f56785c450f12a0a020d",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 52,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2d9cbe2f8c5c1569ec2c6f2e15f495fd06348677c4d2cc63c7a4395c34061b9d",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "relay"
+      ],
+      [
+       1,
+       [
+        "https://relay.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       8,
+       "IS"
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "relay"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-valid-gallery-009",
+   "description": "Valid gallery manifest",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01db59e8b654425d06e0d4ba9ccb2ea738e564ecb32912c3162cfbde5372c215d9",
+     "envelope": "a70001016773657276696365025821019a9bc88c4d50f6da7a3967933e52aec018d12bd84a53061dcef072eef6b107ac0401061a6ac4724008a009a5006767616c6c6572790181781868747470733a2f2f67616c6c6572792e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000109a2666572726f72731a000151806872657175657374731a00278d00",
+     "signatures": "d8628440a0f6818350a20127044b7376632d67616c6c657279a05840b2090ebea6a8e711f86553b723c96fba21279b1443893c4759add71b0e2cbcc167c3dbad64142b0602cccf22ab9849e0bfd979a8bf66ffc67a87dc2979d21102",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 53,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "cdd8fc3bf2e2f6c4317292327d0aed3c62029b7d0f56c4ac743b65c310e75fc1",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "gallery"
+      ],
+      [
+       1,
+       [
+        "https://gallery.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "requests",
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "gallery"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-blob-store-valid-v2-010",
+   "description": "Store version 2 adds a sealed format (BS-5 allows growth)",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "0188a2799c3466ff90718780129015432fa4a88243252473f60a7bf3a28c7cd3ec",
+     "envelope": "a9000101677365727669636502582101747b165934fbb2b30d1592a3adb32879e5ae9815bb49d943e8b0711e88b7944a03582101881565128c3a1a2050545631d30b67efcb31f239ee33ae7aa34cd7f8fd6341c7040205582101881565128c3a1a2050545631d30b67efcb31f239ee33ae7aa34cd7f8fd6341c7061a6ac4724a08a009a9006a626c6f622d73746f726501817668747470733a2f2f73746f72652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a99609610a3006968756d2d73746f72650102021a00278d0011a5001a80000000011b0000000c80000000021b0000000280000000031b00000019000000000419138812a20000011a00278d0013a200830102030188781e6170706c69636174696f6e2f766e642e6170616368652e706172717565747819746578742f706c61696e3b20636861727365743d7574662d38706170706c69636174696f6e2f63626f72706170706c69636174696f6e2f6a736f6e781f6170706c69636174696f6e2f766e642e68756d2e6b6579626f782b68706b6569696d6167652f706e676a696d6167652f6a7065676a696d6167652f77656270",
+     "signatures": "d8628440a0f6818353a20127044e7376632d626c6f622d73746f7265a058406b17933997dd4a73530e815436cb3d265ca5ae986068bcb380ca3f85ed588a1e1e5edfe0ad3dca50e082410caaa5144c85d2cda8f4f74312e69ae9be8c699708",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 54,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "25a5c8b7bd98920a786ee4b2b692e63454dd74358cc816de2c6fd5c4a49bfd0a",
+       "bb9e1fd5643722254b8e14a3fda7ca1d5d12e15af6edeef8cf6b3a74adaf3314",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "blob-store"
+      ],
+      [
+       1,
+       [
+        "https://store.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a996096"
+        }
+       ]
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-store"
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          2147483648
+         ],
+         [
+          1,
+          53687091200
+         ],
+         [
+          2,
+          10737418240
+         ],
+         [
+          3,
+          107374182400
+         ],
+         [
+          4,
+          5000
+         ]
+        ]
+       }
+      ],
+      [
+       18,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       19,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           2,
+           3
+          ]
+         ],
+         [
+          1,
+          [
+           "application/vnd.apache.parquet",
+           "text/plain; charset=utf-8",
+           "application/cbor",
+           "application/json",
+           "application/vnd.hum.keybox+hpke",
+           "image/png",
+           "image/jpeg",
+           "image/webp"
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "blob-store"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-1-kind-011",
+   "description": "Unknown kind gateway",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01caeecd1a6cb282908142af5a0aac7c24e12d1f09f99f3c89ed45c584b7dffb08",
+     "envelope": "a70001016773657276696365025821014a94adda0f42f7339e114a6ea02dbbc135925a3a8df867e8d27da47b879409930401061a6ac4724508a009a400676761746577617901817668747470733a2f2f72656c61792e6578616d706c652f020108624953",
+     "signatures": "d8628440a0f681834ea2012704497376632d72656c6179a05840db571a1e74faaaf771b0b72b405b5fbdd1d0f8820f5099a70d2ee8ebce02f5cbe0104cd1d0932dced54c35eadd3e9a74e6afd928ff06b6b5da0053c197419006",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 52,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2d9cbe2f8c5c1569ec2c6f2e15f495fd06348677c4d2cc63c7a4395c34061b9d",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "gateway"
+      ],
+      [
+       1,
+       [
+        "https://relay.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       8,
+       "IS"
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-1",
+    "reason": "S-1: unknown kind 'gateway'"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-1-reserved-012",
+   "description": "Reserved key 12 present",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01c449d7cfc5ffebf806c1233f00ba330924cb2011a3f5a74064653d4c797dddaa",
+     "envelope": "a70001016773657276696365025821014a94adda0f42f7339e114a6ea02dbbc135925a3a8df867e8d27da47b879409930401061a6ac4724508a009a5006572656c617901817668747470733a2f2f72656c61792e6578616d706c652f0201086249530c01",
+     "signatures": "d8628440a0f681834ea2012704497376632d72656c6179a05840989037a005bdd3e40a0426e0a335b80333efaf07c5d4038c15a34031b4dfb84998792736a3c0e80d974acfd28f10177514feb02be4d0333b1cd50200bebbb80f",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 52,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2d9cbe2f8c5c1569ec2c6f2e15f495fd06348677c4d2cc63c7a4395c34061b9d",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "relay"
+      ],
+      [
+       1,
+       [
+        "https://relay.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       8,
+       "IS"
+      ],
+      [
+       12,
+       1
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-1",
+    "reason": "S-1: keys 12 to 15 are reserved"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-2-empty-013",
+   "description": "No endpoints",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01b16a65701e2a27f56e26d31a375a21a6b6a28966fcea03c12215e3c83d397dfe",
+     "envelope": "a70001016773657276696365025821014a94adda0f42f7339e114a6ea02dbbc135925a3a8df867e8d27da47b879409930401061a6ac4724508a009a4006572656c61790180020108624953",
+     "signatures": "d8628440a0f681834ea2012704497376632d72656c6179a05840184ec51b68c4d48c08ac6acfc2fbdad371998b93c1f5a8d3892c2bb60a4ec9184e0dd7c6d2bed595b2ab9ca0c97de7b724b2a5d26b4a26c03060166351fd7b02",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 52,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2d9cbe2f8c5c1569ec2c6f2e15f495fd06348677c4d2cc63c7a4395c34061b9d",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "relay"
+      ],
+      [
+       1,
+       []
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       8,
+       "IS"
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-2",
+    "reason": "S-2: endpoints must have at least one entry"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-2-http-014",
+   "description": "An http endpoint",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01574c368f0713898822d6b9f9a98012081e67d4fd2290b679db0cf32ddf3efeba",
+     "envelope": "a70001016773657276696365025821014a94adda0f42f7339e114a6ea02dbbc135925a3a8df867e8d27da47b879409930401061a6ac4724508a009a4006572656c6179018175687474703a2f2f72656c61792e6578616d706c652f020108624953",
+     "signatures": "d8628440a0f681834ea2012704497376632d72656c6179a0584064ae1efc3a95331ebe7f6b879dcf3ef3bad80aebbf0f6b18b59eca27d946eccbe0eb984fb618ce2dad758d109d9d7715a8320365e70264d4220b64d56245650d",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 52,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2d9cbe2f8c5c1569ec2c6f2e15f495fd06348677c4d2cc63c7a4395c34061b9d",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "relay"
+      ],
+      [
+       1,
+       [
+        "http://relay.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       8,
+       "IS"
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-2",
+    "reason": "S-2: every endpoint is an absolute https URL without query or fragment"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-2-query-015",
+   "description": "An endpoint with a query",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01faba3e121d962f97f2418b89f40977adecbe520a809906d41caa483018b4a56c",
+     "envelope": "a70001016773657276696365025821014a94adda0f42f7339e114a6ea02dbbc135925a3a8df867e8d27da47b879409930401061a6ac4724508a009a4006572656c61790181781a68747470733a2f2f72656c61792e6578616d706c652f3f783d31020108624953",
+     "signatures": "d8628440a0f681834ea2012704497376632d72656c6179a05840f014ccd8d0c048c8bb69a4a7c2d15093dae216cba8a5b7d1d40f8c5a6478875ae740d57479e826223ceb79439af573d655e95da1428c034f9041036f2fd69e0b",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 52,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2d9cbe2f8c5c1569ec2c6f2e15f495fd06348677c4d2cc63c7a4395c34061b9d",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "relay"
+      ],
+      [
+       1,
+       [
+        "https://relay.example/?x=1"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       8,
+       "IS"
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-2",
+    "reason": "S-2: every endpoint is an absolute https URL without query or fragment"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-3-one-witness-016",
+   "description": "Log with one witness",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01c4039e86f62c45eddf51298f0f606ca40389ef071f8f87333bef365c0c992fb1",
+     "envelope": "a70001016773657276696365025821013b9650b6c9456dc728b926f8b21239320cbbbcff577eb026cc64418c66638a090401061a6ac4724508a009a700636c6f6701817468747470733a2f2f6c6f672e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca3080252610004000100010681a200784268756d2f7769746e6573732f63616675686d796d6462616d6d73736b77657461713262797174636a3668647174797072793579777274673769677a78756534646c34015820e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce07783e68756d2f6c6f672f63616633746834716d716e6c33656936693273616d6969706e367376696a6e6a71767a696135663768726a6a626e356b33766268766709a16872657175657374731a00278d00",
+     "signatures": "d8628440a0f681834ca2012704477376632d6c6f67a05840a3935bd242dec7ea307ac1472032f9ff245f85596f7155a21792c8ff714f085e12eb5d002d96b7b1143a86ee053abb47017d6d21beba37c476a533dbbc78e80a",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 55,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "a2147764bf5c5ddc693b7bc5bb43990578609cbfcd38737ba4d60cac277ae1d0",
+       "bb9e1fd5643722254b8e14a3fda7ca1d5d12e15af6edeef8cf6b3a74adaf3314",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "log"
+      ],
+      [
+       1,
+       [
+        "https://log.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       6,
+       [
+        {
+         "map": [
+          [
+           0,
+           "hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4"
+          ],
+          [
+           1,
+           {
+            "hex": "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce"
+           }
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       7,
+       "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg"
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "requests",
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "S-3",
+    "reason": "S-3: log needs at least 2 witnesses"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-3-duplicate-key-017",
+   "description": "Log with two witnesses sharing a key",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "0182538cd0351b716abad2557e26154cf7f46228565ad493bfbca01c1e2386cac5",
+     "envelope": "a70001016773657276696365025821013b9650b6c9456dc728b926f8b21239320cbbbcff577eb026cc64418c66638a090401061a6ac4724508a009a700636c6f6701817468747470733a2f2f6c6f672e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca3080252610004000100010682a200784268756d2f7769746e6573732f63616675686d796d6462616d6d73736b77657461713262797174636a3668647174797072793579777274673769677a78756534646c34015820e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5cea200656f74686572015820e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce07783e68756d2f6c6f672f63616633746834716d716e6c33656936693273616d6969706e367376696a6e6a71767a696135663768726a6a626e356b33766268766709a16872657175657374731a00278d00",
+     "signatures": "d8628440a0f681834ca2012704477376632d6c6f67a058404829ae4a97d1e65bd272d4df10bd9f9ac90cb84e9a38e9b235c2658630497765440c72cd8c2f04ce0ae66b0d709c7dfe7de49b4cfc0532a448b20ec06eee4805",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 56,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "9c6d4c39e3d7690d0682c4e0d9331d9ce75570ba43940e2c381ef653db535c78",
+       "e81022b5ca12aefe9e29f80e95202fb82b96b30552d92d7ebf0b971177604bf3",
+       "df6c66833edda7d562e7bb8df8ef851428c8e82e95a826de529a1ad34eb43459",
+       "2a63cc8c4879c14d87b02d9858c9310d01c933558be402291a269aed5303742d",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "log"
+      ],
+      [
+       1,
+       [
+        "https://log.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       6,
+       [
+        {
+         "map": [
+          [
+           0,
+           "hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4"
+          ],
+          [
+           1,
+           {
+            "hex": "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce"
+           }
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           "other"
+          ],
+          [
+           1,
+           {
+            "hex": "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce"
+           }
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       7,
+       "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg"
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "requests",
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "S-3",
+    "reason": "S-3: witness keys must be distinct"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-3-no-origin-018",
+   "description": "Log without origin",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "0172664ad6d94d8409cb2fde103714460240a98dc0d6e214d602d8edbdc924cde1",
+     "envelope": "a70001016773657276696365025821013b9650b6c9456dc728b926f8b21239320cbbbcff577eb026cc64418c66638a090401061a6ac4724508a009a600636c6f6701817468747470733a2f2f6c6f672e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca3080252610004000100010682a200784268756d2f7769746e6573732f63616675686d796d6462616d6d73736b77657461713262797174636a3668647174797072793579777274673769677a78756534646c34015820e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5cea200784268756d2f7769746e6573732f6361686a7872753333636133666e7a683473663236373532746c3567716f786b77736e6b7a7568346e666772787a357966706d69377501582037bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d09a16872657175657374731a00278d00",
+     "signatures": "d8628440a0f681834ca2012704477376632d6c6f67a0584006cedb7ac5009f232ae529aba6249eb9b71f628c199325f5777e010e189767966db229a32dbc79f3edd47d771f5c3fcd621c4a211d8020f3dba2ce3d6160ba0b",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 45,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "7f8094e8134c92d5c1b03a08070e7bbcd22cfefd692795f0a3ecdcd572d1c3f1",
+       "9020ebcbf47ef131bf290a4b6a6a80a1339efee2fcb490aa97a04b717f7ab2ff",
+       "7df3624cd4fe60e0c19ad993d29f36cdc1f6956daa6d6cb6be2da776887aec90",
+       "072a1fb5b2cea72fff5612272ce2437f71022cf0c891a722dd2027d3e2720381",
+       "18ea9a356ab2320d8d3b1942cf52ce87f22471d3ccc75728ce5e3c870bf0fcf1",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "log"
+      ],
+      [
+       1,
+       [
+        "https://log.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       6,
+       [
+        {
+         "map": [
+          [
+           0,
+           "hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4"
+          ],
+          [
+           1,
+           {
+            "hex": "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce"
+           }
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           "hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u"
+          ],
+          [
+           1,
+           {
+            "hex": "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+           }
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "requests",
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-3",
+    "reason": "S-3: log needs origin and witnesses"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-3-witnesses-on-relay-019",
+   "description": "witnesses on a non-log",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01d82fda0c2b6027f436e3eb7838ef4d3512e4daf713f3b813e92c8bc112da099f",
+     "envelope": "a70001016773657276696365025821014a94adda0f42f7339e114a6ea02dbbc135925a3a8df867e8d27da47b879409930401061a6ac4724508a009a5006572656c617901817668747470733a2f2f72656c61792e6578616d706c652f0201068008624953",
+     "signatures": "d8628440a0f681834ea2012704497376632d72656c6179a05840d89803d297331f34b63371f5ff3f9f67acc6f864700ac5b8813fea0b8685929969ae32666e49446ccf46a60956215b8ba11fcf1ff6fe3bbe58858d3c2dc52506",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 52,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2d9cbe2f8c5c1569ec2c6f2e15f495fd06348677c4d2cc63c7a4395c34061b9d",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "relay"
+      ],
+      [
+       1,
+       [
+        "https://relay.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       6,
+       []
+      ],
+      [
+       8,
+       "IS"
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-3",
+    "reason": "S-3: origin and witnesses are log-only"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-4-origin-020",
+   "description": "Version 2 changes the origin",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01e9cf88379ecb2975e17e95d161396f492f588a99e5ec3bf944ee8400ee1ebb11",
+     "envelope": "a90001016773657276696365025821013b9650b6c9456dc728b926f8b21239320cbbbcff577eb026cc64418c66638a09035821013c6078d9d2bf93731d955960945c5bd8b66f37dfaba09635bdf121ea598a4f5a0402055821013c6078d9d2bf93731d955960945c5bd8b66f37dfaba09635bdf121ea598a4f5a061a6ac4724508a009a700636c6f6701817468747470733a2f2f6c6f672e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca3080252610004000100010682a200784268756d2f7769746e6573732f63616675686d796d6462616d6d73736b77657461713262797174636a3668647174797072793579777274673769677a78756534646c34015820e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5cea200784268756d2f7769746e6573732f6361686a7872753333636133666e7a683473663236373532746c3567716f786b77736e6b7a7568346e666772787a357966706d69377501582037bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d076d68756d2f6c6f672f6f7468657209a16872657175657374731a00278d00",
+     "signatures": "d8628440a0f681834ca2012704477376632d6c6f67a058407bb33b58783fa1f028966a4613425655928a79c4829b2fc32d8400f7185f65738a005b23d091b11818c5188669b5cd1deb567d30c627b943a5156fd162ac460a",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 57,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "314f376aa290da8624a10e523e42dca46196458c992b92d389224826e9fa836a",
+       "e81022b5ca12aefe9e29f80e95202fb82b96b30552d92d7ebf0b971177604bf3",
+       "df6c66833edda7d562e7bb8df8ef851428c8e82e95a826de529a1ad34eb43459",
+       "2a63cc8c4879c14d87b02d9858c9310d01c933558be402291a269aed5303742d",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "log"
+      ],
+      [
+       1,
+       [
+        "https://log.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       6,
+       [
+        {
+         "map": [
+          [
+           0,
+           "hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4"
+          ],
+          [
+           1,
+           {
+            "hex": "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce"
+           }
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           "hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u"
+          ],
+          [
+           1,
+           {
+            "hex": "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+           }
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       7,
+       "hum/log/other"
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "requests",
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "S-4",
+    "reason": "S-4: origin changed between versions"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-4-kind-021",
+   "description": "Version 2 changes the kind",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01be0502f64ec28627bedd902c30b4c88b3b9da55171a4003a67a26e9b1768e14c",
+     "envelope": "a90001016773657276696365025821019a9bc88c4d50f6da7a3967933e52aec018d12bd84a53061dcef072eef6b107ac03582101db59e8b654425d06e0d4ba9ccb2ea738e564ecb32912c3162cfbde5372c215d9040205582101db59e8b654425d06e0d4ba9ccb2ea738e564ecb32912c3162cfbde5372c215d9061a6ac4724508a009a500687265736f6c7665720181781868747470733a2f2f67616c6c6572792e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000109a2666572726f72731a000151806872657175657374731a00278d00",
+     "signatures": "d8628440a0f6818350a20127044b7376632d67616c6c657279a05840d1cfacb375015017a63611a1d078d7a8bf10558312fa6e36b19517299b32e4f5febdc09dd528dcc24676482e2ab7dd073648b9958e303fc916a0358c9e95c402",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 58,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "61569d16bf3db9fd75b266e134106b140198ed8b54e2287e627a2498d19fc2b3",
+       "5c76264cedbb119f11e107d5a0be1c3bcdca4693ee3b1dd32826949e343fa34e",
+       "df6c66833edda7d562e7bb8df8ef851428c8e82e95a826de529a1ad34eb43459",
+       "2a63cc8c4879c14d87b02d9858c9310d01c933558be402291a269aed5303742d",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "resolver"
+      ],
+      [
+       1,
+       [
+        "https://gallery.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "requests",
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "S-4",
+    "reason": "S-4: kind changed between versions"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-5-missing-022",
+   "description": "Resolver without ohttp",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "016ae09dd40d010d9a17b82a636ba44caa3ec71ef856f387124bfaa01ba9b49714",
+     "envelope": "a70001016773657276696365025821013bca9bc1cf7289aef80aaf78d07239a1934c7d787c86a406bc569754584d61f70401061a6ac4724508a009a300687265736f6c7665720181781868747470733a2f2f7265736f6c76652e6578616d706c652f0201",
+     "signatures": "d8628440a0f6818351a20127044c7376632d7265736f6c766572a058406715c82d55d170914eef5c604f0cbeecf71216acb3c2811f7ab791adb4506e2195d984f6d283011221ebb0855cf9ee77efaf073728800aced7f63611f2adc706",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 51,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2ade8581ac978a01da31774b70c71a9cedb0b1b2227aac60abba06d85759b6c0",
+       "e6cc35a41fe2808ebe171caa855bb9a1a804866f51791ac06fddafb343b1fdff",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "resolver"
+      ],
+      [
+       1,
+       [
+        "https://resolve.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-5",
+    "reason": "S-5: ohttp required for kinds reached through the relay"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-5-malformed-023",
+   "description": "Truncated KeyConfig",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "010eb7dd43ffe8d275b74fe67e314dce8e19914e5fe9cfcadd165394585075ad1e",
+     "envelope": "a70001016773657276696365025821013bca9bc1cf7289aef80aaf78d07239a1934c7d787c86a406bc569754584d61f70401061a6ac4724508a009a400687265736f6c7665720181781868747470733a2f2f7265736f6c76652e6578616d706c652f02010358270100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001",
+     "signatures": "d8628440a0f6818351a20127044c7376632d7265736f6c766572a058408a1b03c129efd47bf3c7ca5ae99e8109fabed410af7a38153087712d5d349795494b03d3915751147f3906d14bf29ba39a1450000a315fde34984dfb96cdb80a",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 51,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2ade8581ac978a01da31774b70c71a9cedb0b1b2227aac60abba06d85759b6c0",
+       "e6cc35a41fe2808ebe171caa855bb9a1a804866f51791ac06fddafb343b1fdff",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "resolver"
+      ],
+      [
+       1,
+       [
+        "https://resolve.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001"
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-5",
+    "reason": "S-5: ohttp is not a well-formed KeyConfig: cipher suites malformed"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-5-relay-024",
+   "description": "Relay with ohttp",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01222d5e1922c1239ace556c61baedb9a099bafbe025180da8d76e30b784943788",
+     "envelope": "a70001016773657276696365025821014a94adda0f42f7339e114a6ea02dbbc135925a3a8df867e8d27da47b879409930401061a6ac4724508a009a5006572656c617901817668747470733a2f2f72656c61792e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000108624953",
+     "signatures": "d8628440a0f681834ea2012704497376632d72656c6179a05840069e6faa8677320f37a32218d31050ef6539be66b18446b8064f89a769cd08b1b4990db769972d18d58e26419faa469052253f08d2e03951ab2c59aa171e6b07",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 52,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "2d9cbe2f8c5c1569ec2c6f2e15f495fd06348677c4d2cc63c7a4395c34061b9d",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "relay"
+      ],
+      [
+       1,
+       [
+        "https://relay.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       8,
+       "IS"
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-5",
+    "reason": "S-5: ohttp must be absent for witness and relay"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-6-no-token-issuers-025",
+   "description": "Delivery without tokenIssuers",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01d9458abca0e0bbd9120685dee5019f5e44c10b09589a0cf47b7db831706a7ec9",
+     "envelope": "a70001016773657276696365025821010a95ae9eb13605a8f0cebd1c36e5e21328806295e9b9f49d0e24debd28fea5ad0401061a6ac4724508a009a5006864656c697665727901817368747470733a2f2f64732e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000110a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f6818351a20127044c7376632d64656c6976657279a058408c37d093c877051fd058d8ad8592ac69f2083427c968379f824520cc61fe04940860dc7c92aef9130678d36c6fea31c50ba5b504b22f96017e736d544a45d406",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 49,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "bad5d7672a7a0375bd139afc2f848e4bf5bfa9260991376e6535688e921c9dde",
+       "bc40a7b2d7705978593189032a5ff1e047ee9ad12a8fd70fac0c415d15097e89",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-6",
+    "reason": "S-6: tokenIssuers required and non-empty"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-6-no-issuer-map-026",
+   "description": "Delivery without the issuer map",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "012d3e1237dd60f119255dfa809ce938eb61d56f128584c884e539a3cdcb489f37",
+     "envelope": "a70001016773657276696365025821010a95ae9eb13605a8f0cebd1c36e5e21328806295e9b9f49d0e24debd28fea5ad0401061a6ac4724508a009a5006864656c697665727901817368747470733a2f2f64732e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e",
+     "signatures": "d8628440a0f6818351a20127044c7376632d64656c6976657279a0584065df7d3864933e8f4eaf382dc61f0445e91fe62a25a2b479ec242b9d2783c4e16c82bbe5cf64fac4bf35bfe02a9d79c66d21695f0f71e1e7d505a962be2b2a09",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 49,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "bad5d7672a7a0375bd139afc2f848e4bf5bfa9260991376e6535688e921c9dde",
+       "bc40a7b2d7705978593189032a5ff1e047ee9ad12a8fd70fac0c415d15097e89",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-6",
+    "reason": "S-6: issuer map (key 16) required"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-7-phase-027",
+   "description": "Aggregator phase 3",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01a345915d14b84012cd874edb55f0dbda9e3ef675e163f28502360a45a26c10dd",
+     "envelope": "a7000101677365727669636502582101e25e1ff3a65839b13cc3625aab6663790df87130be318f0595de29d0a372955a0401061a6ac4724508a009a5006a61676772656761746f7201817468747470733a2f2f6167672e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca3080252610004000100010b03",
+     "signatures": "d8628440a0f6818353a20127044e7376632d61676772656761746f72a058406d9a4fe359a87fa5c7bfd789528a9a1986b6c2f0db9eb469464b85d8343f2c91298e70508b42b933d90a51bee2a3b3d82eadef458718e1adc4a63ad783bb8702",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 47,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "98a85ef5daef80e25e7a747a3e5207c074e4239b589a7bb6b0dcfda615939a44",
+       "014d5c33f197f5b8a4cde2bd8021c4c800346493e969e01a4eb990a71f30b036",
+       "7df3624cd4fe60e0c19ad993d29f36cdc1f6956daa6d6cb6be2da776887aec90",
+       "072a1fb5b2cea72fff5612272ce2437f71022cf0c891a722dd2027d3e2720381",
+       "18ea9a356ab2320d8d3b1942cf52ce87f22471d3ccc75728ce5e3c870bf0fcf1",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "aggregator"
+      ],
+      [
+       1,
+       [
+        "https://agg.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       11,
+       3
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-7",
+    "reason": "S-7: aggregator phase must be 1 or 2"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-7-hpke-phase1-028",
+   "description": "hpke with phase 1",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01cb72fb4817d6108defd8469ff52c9c8edb229a4c2bea7a9e51ec325da8f7d1b5",
+     "envelope": "a7000101677365727669636502582101e25e1ff3a65839b13cc3625aab6663790df87130be318f0595de29d0a372955a0401061a6ac4724508a009a6006a61676772656761746f7201817468747470733a2f2f6167672e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca3080252610004000100010a4201020b01",
+     "signatures": "d8628440a0f6818353a20127044e7376632d61676772656761746f72a0584078fae9411a478e488967d54de1baf2b37205ba2a39a4063703e7af1df75cca694251a9d4712646f134d7ab58c56f2fa173bdda055086147a08d9572a39b02b0c",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 47,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "98a85ef5daef80e25e7a747a3e5207c074e4239b589a7bb6b0dcfda615939a44",
+       "014d5c33f197f5b8a4cde2bd8021c4c800346493e969e01a4eb990a71f30b036",
+       "7df3624cd4fe60e0c19ad993d29f36cdc1f6956daa6d6cb6be2da776887aec90",
+       "072a1fb5b2cea72fff5612272ce2437f71022cf0c891a722dd2027d3e2720381",
+       "18ea9a356ab2320d8d3b1942cf52ce87f22471d3ccc75728ce5e3c870bf0fcf1",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "aggregator"
+      ],
+      [
+       1,
+       [
+        "https://agg.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       10,
+       {
+        "hex": "0102"
+       }
+      ],
+      [
+       11,
+       1
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-7",
+    "reason": "S-7: hpke present iff phase 2"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-7-no-hpke-029",
+   "description": "Phase 2 without hpke",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "014eb58f684085331591d87dd542aa8c37580bee98f9a0d66ae0f96b390fadb62a",
+     "envelope": "a7000101677365727669636502582101e25e1ff3a65839b13cc3625aab6663790df87130be318f0595de29d0a372955a0401061a6ac4724508a009a5006a61676772656761746f7201817468747470733a2f2f6167672e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca3080252610004000100010b02",
+     "signatures": "d8628440a0f6818353a20127044e7376632d61676772656761746f72a05840d5589b6d0ecdd7afca41ddaf2b2e2fe3a1ba327291f1bdd3c54e7175ed44acb22552c300901caf01717f3bdbf042a52407825f45ad9959b79e2471347b552e0a",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 47,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "98a85ef5daef80e25e7a747a3e5207c074e4239b589a7bb6b0dcfda615939a44",
+       "014d5c33f197f5b8a4cde2bd8021c4c800346493e969e01a4eb990a71f30b036",
+       "7df3624cd4fe60e0c19ad993d29f36cdc1f6956daa6d6cb6be2da776887aec90",
+       "072a1fb5b2cea72fff5612272ce2437f71022cf0c891a722dd2027d3e2720381",
+       "18ea9a356ab2320d8d3b1942cf52ce87f22471d3ccc75728ce5e3c870bf0fcf1",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "aggregator"
+      ],
+      [
+       1,
+       [
+        "https://agg.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       11,
+       2
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-7",
+    "reason": "S-7: hpke present iff phase 2"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-8-class-030",
+   "description": "Unknown retention class",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "017b807fe8df958e692dcf3f185b7cfb756410fdfa79c55bedbcf44fb7d078c4e5",
+     "envelope": "a70001016773657276696365025821019a9bc88c4d50f6da7a3967933e52aec018d12bd84a53061dcef072eef6b107ac0401061a6ac4724508a009a5006767616c6c6572790181781868747470733a2f2f67616c6c6572792e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000109a16674726163657301",
+     "signatures": "d8628440a0f6818350a20127044b7376632d67616c6c657279a05840c40b6237626c2dbd1a2c8252ccefb0c995db8513ec85abd7aab2e5bc5cfae6f2a113389362e2e1058428281b0037c1090a23038ea60d2458d2f712d2fc7ae104",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 53,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "cdd8fc3bf2e2f6c4317292327d0aed3c62029b7d0f56c4ac743b65c310e75fc1",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "gallery"
+      ],
+      [
+       1,
+       [
+        "https://gallery.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "traces",
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-8",
+    "reason": "S-8: retention keys must be the four classes"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-invalid-S-8-ceiling-031",
+   "description": "Gallery retention above 30 days",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01dd904489f07fc25e65142427266ae6cbb5953884de3ff5fb758af27ed022c5ea",
+     "envelope": "a70001016773657276696365025821019a9bc88c4d50f6da7a3967933e52aec018d12bd84a53061dcef072eef6b107ac0401061a6ac4724508a009a5006767616c6c6572790181781868747470733a2f2f67616c6c6572792e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000109a16872657175657374731a0028de80",
+     "signatures": "d8628440a0f6818350a20127044b7376632d67616c6c657279a05840fb6f2ddd46ab52689acda9cf09b258d08309bcecaceea1580de7ad5baec7e43505b3b389b07fdaf6f8e7cdf815057d621b5de1e3f93d108de22f859e3d4f210c",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 53,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "cdd8fc3bf2e2f6c4317292327d0aed3c62029b7d0f56c4ac743b65c310e75fc1",
+       "b62c077253b525abcdf82f604509cdd34fbd49786eb149fa5f7c8275ecbec320",
+       "2e93adfd72249a159cdb378a82bea5649b22042d2dfa1f924a6ee670c62f9698",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "gallery"
+      ],
+      [
+       1,
+       [
+        "https://gallery.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "requests",
+          2678400
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-8",
+    "reason": "S-8: retention.requests above the ceiling for gallery"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-blob-store-bad-token-type-032",
+   "description": "issuer.type 1",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "012d032a3915900b22655f329acaac2a6082cdd80fe53c9a44e32a1d5dab99fcc5",
+     "envelope": "a7000101677365727669636502582101747b165934fbb2b30d1592a3adb32879e5ae9815bb49d943e8b0711e88b7944a0401061a6ac4724508a009a9006a626c6f622d73746f726501817668747470733a2f2f73746f72652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a99609610a3006968756d2d73746f72650101021a00278d0011a5001a80000000011b0000000c80000000021b0000000280000000031b00000019000000000419138812a20000011a00278d0013a2008201020188781e6170706c69636174696f6e2f766e642e6170616368652e706172717565747819746578742f706c61696e3b20636861727365743d7574662d38706170706c69636174696f6e2f63626f72706170706c69636174696f6e2f6a736f6e781f6170706c69636174696f6e2f766e642e68756d2e6b6579626f782b68706b6569696d6167652f706e676a696d6167652f6a7065676a696d6167652f77656270",
+     "signatures": "d8628440a0f6818353a20127044e7376632d626c6f622d73746f7265a058400becbc74e6ff7ac4fa6c65a0c3a748749ea32826ed11c6da8da6dac121d13f40c863b6d6106feff2668474e43ef335870707d3279af9edb18d353d3a59b0be0f",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 50,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "8485168b56a8cb256478aab37b4d64f1710394700bae3b269e96f17200b7d4ce",
+       "e6cc35a41fe2808ebe171caa855bb9a1a804866f51791ac06fddafb343b1fdff",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "blob-store"
+      ],
+      [
+       1,
+       [
+        "https://store.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a996096"
+        }
+       ]
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-store"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          2147483648
+         ],
+         [
+          1,
+          53687091200
+         ],
+         [
+          2,
+          10737418240
+         ],
+         [
+          3,
+          107374182400
+         ],
+         [
+          4,
+          5000
+         ]
+        ]
+       }
+      ],
+      [
+       18,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       19,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           2
+          ]
+         ],
+         [
+          1,
+          [
+           "application/vnd.apache.parquet",
+           "text/plain; charset=utf-8",
+           "application/cbor",
+           "application/json",
+           "application/vnd.hum.keybox+hpke",
+           "image/png",
+           "image/jpeg",
+           "image/webp"
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "BS-1",
+    "reason": "BS-1: issuer.type must be 2"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-blob-store-small-maxblob-033",
+   "description": "maxBlob 1000",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01bc4dbfb17b27a35241b7ab4c5f9b34759f646f9e5faf542916ca1ee3bb54ad7c",
+     "envelope": "a7000101677365727669636502582101747b165934fbb2b30d1592a3adb32879e5ae9815bb49d943e8b0711e88b7944a0401061a6ac4724508a009a9006a626c6f622d73746f726501817668747470733a2f2f73746f72652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a99609610a3006968756d2d73746f72650102021a00278d0011a5001903e8011b0000000c80000000021b0000000280000000031b00000019000000000419138812a20000011a00278d0013a2008201020188781e6170706c69636174696f6e2f766e642e6170616368652e706172717565747819746578742f706c61696e3b20636861727365743d7574662d38706170706c69636174696f6e2f63626f72706170706c69636174696f6e2f6a736f6e781f6170706c69636174696f6e2f766e642e68756d2e6b6579626f782b68706b6569696d6167652f706e676a696d6167652f6a7065676a696d6167652f77656270",
+     "signatures": "d8628440a0f6818353a20127044e7376632d626c6f622d73746f7265a0584036f463683e2ef56b3f19e8b69010952ba002337ef0ceff6186352536d4c2afcd9e4a69b63e85e444784570c5932277ad171540463c5f908388a5c589aebc3b0b",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 50,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "8485168b56a8cb256478aab37b4d64f1710394700bae3b269e96f17200b7d4ce",
+       "e6cc35a41fe2808ebe171caa855bb9a1a804866f51791ac06fddafb343b1fdff",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "blob-store"
+      ],
+      [
+       1,
+       [
+        "https://store.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a996096"
+        }
+       ]
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-store"
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          1000
+         ],
+         [
+          1,
+          53687091200
+         ],
+         [
+          2,
+          10737418240
+         ],
+         [
+          3,
+          107374182400
+         ],
+         [
+          4,
+          5000
+         ]
+        ]
+       }
+      ],
+      [
+       18,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       19,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           2
+          ]
+         ],
+         [
+          1,
+          [
+           "application/vnd.apache.parquet",
+           "text/plain; charset=utf-8",
+           "application/cbor",
+           "application/json",
+           "application/vnd.hum.keybox+hpke",
+           "image/png",
+           "image/jpeg",
+           "image/webp"
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "BS-2",
+    "reason": "BS-2: blobLimits.maxBlob below 65536"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-blob-store-missing-limit-034",
+   "description": "blobLimits missing tokensPerMemberDay",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01c52108cdbcced5613c55b7c7125be542c7d0f119ef2b2221e2b1a848a3c30622",
+     "envelope": "a7000101677365727669636502582101747b165934fbb2b30d1592a3adb32879e5ae9815bb49d943e8b0711e88b7944a0401061a6ac4724508a009a9006a626c6f622d73746f726501817668747470733a2f2f73746f72652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a99609610a3006968756d2d73746f72650102021a00278d0011a4001a80000000011b0000000c80000000021b0000000280000000031b000000190000000012a20000011a00278d0013a2008201020188781e6170706c69636174696f6e2f766e642e6170616368652e706172717565747819746578742f706c61696e3b20636861727365743d7574662d38706170706c69636174696f6e2f63626f72706170706c69636174696f6e2f6a736f6e781f6170706c69636174696f6e2f766e642e68756d2e6b6579626f782b68706b6569696d6167652f706e676a696d6167652f6a7065676a696d6167652f77656270",
+     "signatures": "d8628440a0f6818353a20127044e7376632d626c6f622d73746f7265a058409aa0c1a62404c07d0bb4d0b112ccd87efa10c2941e9b129fede1be9e3aee97fd634c9bca49692083530af0aad5c0c8e223c92337c89a88ee7e40f2fa58f0170b",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 50,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "8485168b56a8cb256478aab37b4d64f1710394700bae3b269e96f17200b7d4ce",
+       "e6cc35a41fe2808ebe171caa855bb9a1a804866f51791ac06fddafb343b1fdff",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "blob-store"
+      ],
+      [
+       1,
+       [
+        "https://store.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a996096"
+        }
+       ]
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-store"
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          2147483648
+         ],
+         [
+          1,
+          53687091200
+         ],
+         [
+          2,
+          10737418240
+         ],
+         [
+          3,
+          107374182400
+         ]
+        ]
+       }
+      ],
+      [
+       18,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       19,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           2
+          ]
+         ],
+         [
+          1,
+          [
+           "application/vnd.apache.parquet",
+           "text/plain; charset=utf-8",
+           "application/cbor",
+           "application/json",
+           "application/vnd.hum.keybox+hpke",
+           "image/png",
+           "image/jpeg",
+           "image/webp"
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "BS-2",
+    "reason": "BS-2: blobLimits missing keys [4]"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-blob-store-formats-035",
+   "description": "formats.sealed without 2",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01b5f4a13c659da572c73d2f3e4afc27a5ab93a6461cc3ec62dafbe594dd33a133",
+     "envelope": "a7000101677365727669636502582101747b165934fbb2b30d1592a3adb32879e5ae9815bb49d943e8b0711e88b7944a0401061a6ac4724508a009a9006a626c6f622d73746f726501817668747470733a2f2f73746f72652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a99609610a3006968756d2d73746f72650102021a00278d0011a5001a80000000011b0000000c80000000021b0000000280000000031b00000019000000000419138812a20000011a00278d0013a20081010188781e6170706c69636174696f6e2f766e642e6170616368652e706172717565747819746578742f706c61696e3b20636861727365743d7574662d38706170706c69636174696f6e2f63626f72706170706c69636174696f6e2f6a736f6e781f6170706c69636174696f6e2f766e642e68756d2e6b6579626f782b68706b6569696d6167652f706e676a696d6167652f6a7065676a696d6167652f77656270",
+     "signatures": "d8628440a0f6818353a20127044e7376632d626c6f622d73746f7265a05840ce76dee03eb4c9ec192875cf419f1d39e22efda55243769b9b6e78c1299c7d8f8ead5cfa87d2367ccdfdd3077cd24f045cf378495e72119679670c6dc73e0102",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 50,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "8485168b56a8cb256478aab37b4d64f1710394700bae3b269e96f17200b7d4ce",
+       "e6cc35a41fe2808ebe171caa855bb9a1a804866f51791ac06fddafb343b1fdff",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "blob-store"
+      ],
+      [
+       1,
+       [
+        "https://store.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a996096"
+        }
+       ]
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-store"
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          2147483648
+         ],
+         [
+          1,
+          53687091200
+         ],
+         [
+          2,
+          10737418240
+         ],
+         [
+          3,
+          107374182400
+         ],
+         [
+          4,
+          5000
+         ]
+        ]
+       }
+      ],
+      [
+       18,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       19,
+       {
+        "map": [
+         [
+          0,
+          [
+           1
+          ]
+         ],
+         [
+          1,
+          [
+           "application/vnd.apache.parquet",
+           "text/plain; charset=utf-8",
+           "application/cbor",
+           "application/json",
+           "application/vnd.hum.keybox+hpke",
+           "image/png",
+           "image/jpeg",
+           "image/webp"
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "BS-3",
+    "reason": "BS-3: formats must list sealed 1 and 2 and a public type"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-blob-store-short-tombstone-036",
+   "description": "tombstone one hour",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "018da8c7eb64393bff02124ae7dae47525c90008fef7e0b0ade20722c00813b0d2",
+     "envelope": "a7000101677365727669636502582101747b165934fbb2b30d1592a3adb32879e5ae9815bb49d943e8b0711e88b7944a0401061a6ac4724508a009a9006a626c6f622d73746f726501817668747470733a2f2f73746f72652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a99609610a3006968756d2d73746f72650102021a00278d0011a5001a80000000011b0000000c80000000021b0000000280000000031b00000019000000000419138812a2000001190e1013a2008201020188781e6170706c69636174696f6e2f766e642e6170616368652e706172717565747819746578742f706c61696e3b20636861727365743d7574662d38706170706c69636174696f6e2f63626f72706170706c69636174696f6e2f6a736f6e781f6170706c69636174696f6e2f766e642e68756d2e6b6579626f782b68706b6569696d6167652f706e676a696d6167652f6a7065676a696d6167652f77656270",
+     "signatures": "d8628440a0f6818353a20127044e7376632d626c6f622d73746f7265a05840f991bf39a1b2b4f6d5fa8d2cb1cc4d3eeeb9330106671c7c3f264ebb5d3ae7a0126d6ad5c497c4e4266e98e31041c4c7f6bf5d7a723d3fe6f4f5b3fa10673903",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 50,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "8485168b56a8cb256478aab37b4d64f1710394700bae3b269e96f17200b7d4ce",
+       "e6cc35a41fe2808ebe171caa855bb9a1a804866f51791ac06fddafb343b1fdff",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "blob-store"
+      ],
+      [
+       1,
+       [
+        "https://store.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a996096"
+        }
+       ]
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-store"
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          2147483648
+         ],
+         [
+          1,
+          53687091200
+         ],
+         [
+          2,
+          10737418240
+         ],
+         [
+          3,
+          107374182400
+         ],
+         [
+          4,
+          5000
+         ]
+        ]
+       }
+      ],
+      [
+       18,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          3600
+         ]
+        ]
+       }
+      ],
+      [
+       19,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           2
+          ]
+         ],
+         [
+          1,
+          [
+           "application/vnd.apache.parquet",
+           "text/plain; charset=utf-8",
+           "application/cbor",
+           "application/json",
+           "application/vnd.hum.keybox+hpke",
+           "image/png",
+           "image/jpeg",
+           "image/webp"
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "BS-4",
+    "reason": "BS-4: blobRetention.tombstone below 86400"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-blob-store-name-changed-037",
+   "description": "Version 3 renames the issuer",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "010d58ef4b15cdca08f403ab212c0395fa83495cc2834154bb0e587dcb4e5ed922",
+     "envelope": "a9000101677365727669636502582101747b165934fbb2b30d1592a3adb32879e5ae9815bb49d943e8b0711e88b7944a03582101881565128c3a1a2050545631d30b67efcb31f239ee33ae7aa34cd7f8fd6341c704030558210188a2799c3466ff90718780129015432fa4a88243252473f60a7bf3a28c7cd3ec061a6ac4724508a009a9006a626c6f622d73746f726501817668747470733a2f2f73746f72652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a99609610a3006772656e616d65640102021a00278d0011a5001a80000000011b0000000c80000000021b0000000280000000031b00000019000000000419138812a20000011a00278d0013a200830102030188781e6170706c69636174696f6e2f766e642e6170616368652e706172717565747819746578742f706c61696e3b20636861727365743d7574662d38706170706c69636174696f6e2f63626f72706170706c69636174696f6e2f6a736f6e781f6170706c69636174696f6e2f766e642e68756d2e6b6579626f782b68706b6569696d6167652f706e676a696d6167652f6a7065676a696d6167652f77656270",
+     "signatures": "d8628440a0f6818353a20127044e7376632d626c6f622d73746f7265a05840cbd8d34bb75b14f42b101c0dfc54784909dcdb20cad3e0cdee706c182da92022f4cb003fad5be10092dda159ddc5c969bfde4714a34b589693631c0740506601",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 59,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "643ddb65de2790b878c204133dcc2ebb4bb153831a1dbb63fdbd66e1cafcc975",
+       "5c76264cedbb119f11e107d5a0be1c3bcdca4693ee3b1dd32826949e343fa34e",
+       "df6c66833edda7d562e7bb8df8ef851428c8e82e95a826de529a1ad34eb43459",
+       "2a63cc8c4879c14d87b02d9858c9310d01c933558be402291a269aed5303742d",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "blob-store"
+      ],
+      [
+       1,
+       [
+        "https://store.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a996096"
+        }
+       ]
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "renamed"
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          2147483648
+         ],
+         [
+          1,
+          53687091200
+         ],
+         [
+          2,
+          10737418240
+         ],
+         [
+          3,
+          107374182400
+         ],
+         [
+          4,
+          5000
+         ]
+        ]
+       }
+      ],
+      [
+       18,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       19,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           2,
+           3
+          ]
+         ],
+         [
+          1,
+          [
+           "application/vnd.apache.parquet",
+           "text/plain; charset=utf-8",
+           "application/cbor",
+           "application/json",
+           "application/vnd.hum.keybox+hpke",
+           "image/png",
+           "image/jpeg",
+           "image/webp"
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "BS-5",
+    "reason": "BS-5: issuer.name changed"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-blob-store-format-dropped-038",
+   "description": "Version 2 of store B drops sealed format 3",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01c5e556c8ad5f39414e965717412a307adc559a144fc9340ab4b377583efddc94",
+     "envelope": "a9000101677365727669636502582101611900937a513ce1fdf6b7382763a553e1ccdb584e7bbb80d3778a627b5f261f03582101161ed9d894618244baaf65ad40ceeb884c4a6f13a17a404f4ff484188b177027040205582101161ed9d894618244baaf65ad40ceeb884c4a6f13a17a404f4ff484188b177027061a6ac4724508a009a9006a626c6f622d73746f726501817668747470733a2f2f73746f72652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a99609610a3006968756d2d73746f72650102021a00278d0011a5001a80000000011b0000000c80000000021b0000000280000000031b00000019000000000419138812a20000011a00278d0013a2008201020188781e6170706c69636174696f6e2f766e642e6170616368652e706172717565747819746578742f706c61696e3b20636861727365743d7574662d38706170706c69636174696f6e2f63626f72706170706c69636174696f6e2f6a736f6e781f6170706c69636174696f6e2f766e642e68756d2e6b6579626f782b68706b6569696d6167652f706e676a696d6167652f6a7065676a696d6167652f77656270",
+     "signatures": "d8628440a0f6818350a20127044b7376632d73746f72652d62a05840c9d701ffa62314d59441716dafa39b4cdd7920d914340768140fb0ef16cc676ab95c5dc8296c1188d098d0d26e357d91a8ce4d3c43f93b26c2418a190782a306",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 62,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "b1bb61eaebf907e73cce17ad9ad02c2accd8816ce3878252a352762d8e46d7b6",
+       "36162dbca216b508b07a81b122970c90465455e706b29c12255fe48c5e5f1a2c",
+       "2a63cc8c4879c14d87b02d9858c9310d01c933558be402291a269aed5303742d",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "blob-store"
+      ],
+      [
+       1,
+       [
+        "https://store.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a996096"
+        }
+       ]
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-store"
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          2147483648
+         ],
+         [
+          1,
+          53687091200
+         ],
+         [
+          2,
+          10737418240
+         ],
+         [
+          3,
+          107374182400
+         ],
+         [
+          4,
+          5000
+         ]
+        ]
+       }
+      ],
+      [
+       18,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       19,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           2
+          ]
+         ],
+         [
+          1,
+          [
+           "application/vnd.apache.parquet",
+           "text/plain; charset=utf-8",
+           "application/cbor",
+           "application/json",
+           "application/vnd.hum.keybox+hpke",
+           "image/png",
+           "image/jpeg",
+           "image/webp"
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "BS-5",
+    "reason": "BS-5: formats.sealed lost a value"
+   }
+  },
+  {
+   "id": "services/service-manifests/service-blob-store-foreign-key-039",
+   "description": "Store with key 11 (phase)",
+   "section": "Services are named by key",
+   "inputs": {
+    "bundle": {
+     "cid": "01b6ffe9e8821569d86d6a48c8f24271c88c816918c4465f867f76a6f284825ad5",
+     "envelope": "a7000101677365727669636502582101747b165934fbb2b30d1592a3adb32879e5ae9815bb49d943e8b0711e88b7944a0401061a6ac4724508a009aa006a626c6f622d73746f726501817668747470733a2f2f73746f72652e6578616d706c652f02010358290100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca30802526100040001000104815821012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a9960960b0110a3006968756d2d73746f72650102021a00278d0011a5001a80000000011b0000000c80000000021b0000000280000000031b00000019000000000419138812a20000011a00278d0013a2008201020188781e6170706c69636174696f6e2f766e642e6170616368652e706172717565747819746578742f706c61696e3b20636861727365743d7574662d38706170706c69636174696f6e2f63626f72706170706c69636174696f6e2f6a736f6e781f6170706c69636174696f6e2f766e642e68756d2e6b6579626f782b68706b6569696d6167652f706e676a696d6167652f6a7065676a696d6167652f77656270",
+     "signatures": "d8628440a0f6818353a20127044e7376632d626c6f622d73746f7265a05840fca1187d267883d908fed676c1e679bc52a63d72ce0504b5fa00fd019bfbb11bfc843bb343f5616f1e17fd0387d7ef95283aef11b28a9095cbe2f468abf97409",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 50,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n63\n9I2s5J4nenRpnekSIuOpIV8ZU5Oe85x+d7cLJOcGcWQ=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBjkHpoKoU17SFpFeKUJztr+SRxPBerKQ5dORYSWPh4JSou0k8FrNjxsIMTH46UY5lJ9yhJmE0U1rK1iXEz5IJgw=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJARFZG4eSSDCaEW+KmT+wLNX6pg4CzPVePP3cAWtgWay6oRgPqgnJZH3QWm9uGhGJ5JSKatxL/V1iKZhf05UFbAw==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAnq5NW+xExneetmTodPRXNxc6ES9le4wbA1r6I/FlSimN28Q5y4EV5ZT+JSLtLOr4GbCRdpSfK06JW6ANAOw7AA==\n",
+      "path": [
+       "8485168b56a8cb256478aab37b4d64f1710394700bae3b269e96f17200b7d4ce",
+       "e6cc35a41fe2808ebe171caa855bb9a1a804866f51791ac06fddafb343b1fdff",
+       "c6a3773454ebb5bd8b2afe4701c8cecb98b4861c5eb54427d01ccc7692b2c5d8",
+       "2ac8182fb53e20562879f2a563e337328b443cde2d388331e2ad186ea69ce947",
+       "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "blob-store"
+      ],
+      [
+       1,
+       [
+        "https://store.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "012bf1c84bb26c1c12d0626b25a9e5c27d3bef99e91ad26c49d84d512d9a996096"
+        }
+       ]
+      ],
+      [
+       11,
+       1
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-store"
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          2147483648
+         ],
+         [
+          1,
+          53687091200
+         ],
+         [
+          2,
+          10737418240
+         ],
+         [
+          3,
+          107374182400
+         ],
+         [
+          4,
+          5000
+         ]
+        ]
+       }
+      ],
+      [
+       18,
+       {
+        "map": [
+         [
+          0,
+          0
+         ],
+         [
+          1,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       19,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           2
+          ]
+         ],
+         [
+          1,
+          [
+           "application/vnd.apache.parquet",
+           "text/plain; charset=utf-8",
+           "application/cbor",
+           "application/json",
+           "application/vnd.hum.keybox+hpke",
+           "image/png",
+           "image/jpeg",
+           "image/webp"
+          ]
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "BS-6",
+    "reason": "BS-6: keys 6, 7, 10, 11 are foreign to a store"
+   }
+  },
+  {
+   "id": "services/service-manifests/key-config-040",
+   "description": "A well-formed RFC 9458 KeyConfig (X25519, one suite)",
+   "section": "Services are named by key",
+   "inputs": {
+    "key_id": 1,
+    "kem": 32,
+    "public": "0d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261",
+    "suites": [
+     [
+      1,
+      1
+     ]
+    ]
+   },
+   "expected": {
+    "key_config": "0100200d3dcbf62c3d9225df76538c870e4c15873a861ec4ad3789984a5ca308025261000400010001",
+    "parsed": {
+     "key_id": 1,
+     "kem": 32,
+     "suites": [
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  }
+ ]
+}

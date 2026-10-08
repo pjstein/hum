@@ -1,0 +1,101 @@
+{
+ "spec": "verifier-runtime",
+ "file": "masking",
+ "notes": "Rule 12: the phone-visible code for a duplicate is 0 unless every required evidence item binds the submitter (document, selfie, credential, device). The logged code is always the true one. Also the reserved code table.",
+ "cases": [
+  {
+   "id": "verifier-runtime/masking/rejection-codes-001",
+   "description": "Reserved rejection codes 0-5",
+   "section": "Exports",
+   "inputs": {},
+   "expected": {
+    "codes": {
+     "0": "no match",
+     "1": "duplicate",
+     "2": "missing evidence",
+     "3": "malformed evidence",
+     "4": "dataset proof failed",
+     "5": "outside scope"
+    }
+   }
+  },
+  {
+   "id": "verifier-runtime/masking/mask-002",
+   "description": "Masking: district-duplicate",
+   "section": "What the host does with a decision",
+   "inputs": {
+    "true_code": 1,
+    "required_evidence_kinds": [
+     "voter-file"
+    ]
+   },
+   "expected": {
+    "phone_code": 0,
+    "logged_code": 1
+   }
+  },
+  {
+   "id": "verifier-runtime/masking/mask-003",
+   "description": "Masking: uniqueness-document-selfie-device",
+   "section": "What the host does with a decision",
+   "inputs": {
+    "true_code": 1,
+    "required_evidence_kinds": [
+     "device",
+     "document",
+     "selfie"
+    ]
+   },
+   "expected": {
+    "phone_code": 1,
+    "logged_code": 1
+   }
+  },
+  {
+   "id": "verifier-runtime/masking/mask-004",
+   "description": "Masking: uniqueness-device-phone",
+   "section": "What the host does with a decision",
+   "inputs": {
+    "true_code": 1,
+    "required_evidence_kinds": [
+     "device",
+     "phone"
+    ]
+   },
+   "expected": {
+    "phone_code": 0,
+    "logged_code": 1
+   }
+  },
+  {
+   "id": "verifier-runtime/masking/mask-005",
+   "description": "Masking: no-match-unmasked",
+   "section": "What the host does with a decision",
+   "inputs": {
+    "true_code": 0,
+    "required_evidence_kinds": [
+     "voter-file"
+    ]
+   },
+   "expected": {
+    "phone_code": 0,
+    "logged_code": 0
+   }
+  },
+  {
+   "id": "verifier-runtime/masking/mask-006",
+   "description": "Masking: missing-evidence-unmasked",
+   "section": "What the host does with a decision",
+   "inputs": {
+    "true_code": 2,
+    "required_evidence_kinds": [
+     "voter-file"
+    ]
+   },
+   "expected": {
+    "phone_code": 2,
+    "logged_code": 2
+   }
+  }
+ ]
+}

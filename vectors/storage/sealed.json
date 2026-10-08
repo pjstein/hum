@@ -1,0 +1,385 @@
+{
+ "spec": "storage",
+ "file": "sealed",
+ "notes": "\u00a71.3 to \u00a71.5. Format 1 (direct key) and format 2 (keyring, salted); AAD hum/sealed/1 || header. Each case gives every chunk's nonce, AAD and tag; small blobs give the full ciphertext and large ones its SHA-256.",
+ "cases": [
+  {
+   "id": "storage/sealed/seal-empty-001",
+   "description": "Format 1, 0-byte plaintext",
+   "section": "1.3",
+   "inputs": {
+    "format": 1,
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "plaintext": ""
+   },
+   "expected": {
+    "padded_length": 1,
+    "ciphertext_length": 18,
+    "cid": "013f2e4d6a8e9aaa40d4927e9c47976afc7d27b6876eae7069ad238441e90fdcdb",
+    "chunks": [
+     {
+      "index": 0,
+      "last": true,
+      "nonce": "000000010000000000000000",
+      "aad": "68756d2f7365616c65642f3101",
+      "plaintext_bytes": 1,
+      "tag": "f3c823fafce74f4866110d1b524fc079"
+     }
+    ],
+    "ciphertext": "01e3f3c823fafce74f4866110d1b524fc079",
+    "plaintext_digest": "01e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-small-002",
+   "description": "Format 1, 100-byte plaintext",
+   "section": "1.3",
+   "inputs": {
+    "format": 1,
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "plaintext": "030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca3aab1b8"
+   },
+   "expected": {
+    "padded_length": 104,
+    "ciphertext_length": 121,
+    "cid": "01277a6612e1fd3c0cfe5286c6ef1d1104add6300cd76926f41b002ec5abf74ab1",
+    "chunks": [
+     {
+      "index": 0,
+      "last": true,
+      "nonce": "000000010000000000000000",
+      "aad": "68756d2f7365616c65642f3101",
+      "plaintext_bytes": 104,
+      "tag": "17b852dda2464320854ce33b1fee0f63"
+     }
+    ],
+    "ciphertext": "01608bece485c982de01bd158880f58ae0fbebb5d2a393f756854469c19efbfd4982d0ebc94c62c998b87fc9c93ed31d0bf3df806e64b6bd9af4adc7f6d6b93e1c5645ecf1c96f3c0f124bac6dfdf675eda617fc25cf5a29e907bfbbf513ce22b85052554a9ceb1b5817b852dda2464320854ce33b1fee0f63",
+    "plaintext_digest": "015a2cda2351d1cdd9dd7957e57c0b3c8522451f25b6494569b7e94388c46f0980"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-one-chunk-exact-003",
+   "description": "Format 1, 65535-byte plaintext",
+   "section": "1.3",
+   "inputs": {
+    "format": 1,
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "plaintext_rule": "byte i = (i * 7 + 3) mod 256",
+    "plaintext_length": 65535,
+    "plaintext_sha256": "feaacf5dfeada48ff99357abd0998dd8b350c8b0603a81f573cf3ea577885f99"
+   },
+   "expected": {
+    "padded_length": 65536,
+    "ciphertext_length": 65553,
+    "cid": "01ad00664c723f53ebf6d93545c15e12322ef089e42f05bfb1fe81717740e5c8ed",
+    "chunks": [
+     {
+      "index": 0,
+      "last": true,
+      "nonce": "000000010000000000000000",
+      "aad": "68756d2f7365616c65642f3101",
+      "plaintext_bytes": 65536,
+      "tag": "c7a7eea690460d6bf09253e3cfd3289f"
+     }
+    ],
+    "ciphertext_sha256": "ad00664c723f53ebf6d93545c15e12322ef089e42f05bfb1fe81717740e5c8ed",
+    "plaintext_digest": "01feaacf5dfeada48ff99357abd0998dd8b350c8b0603a81f573cf3ea577885f99"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-two-chunks-004",
+   "description": "Format 1, 65536-byte plaintext",
+   "section": "1.3",
+   "inputs": {
+    "format": 1,
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "plaintext_rule": "byte i = (i * 7 + 3) mod 256",
+    "plaintext_length": 65536,
+    "plaintext_sha256": "510b126e1d4ced49107fe4ab03ee54cb1c8e4caf6064e1dd29c48d4a3e74c38b"
+   },
+   "expected": {
+    "padded_length": 67584,
+    "ciphertext_length": 67617,
+    "cid": "015b4589dfc55d1a2a031ea28110b795c597a8903961af945ba9b19c40f75113de",
+    "chunks": [
+     {
+      "index": 0,
+      "last": false,
+      "nonce": "000000000000000000000000",
+      "aad": "68756d2f7365616c65642f3101",
+      "plaintext_bytes": 65536,
+      "tag": "73345d8f3cdfbaab9b9203f5bec748f5"
+     },
+     {
+      "index": 1,
+      "last": true,
+      "nonce": "000000010000000000000001",
+      "aad": "68756d2f7365616c65642f3101",
+      "plaintext_bytes": 2048,
+      "tag": "8e6a3671118e09ed09a6ea61dacbd450"
+     }
+    ],
+    "ciphertext_sha256": "5b4589dfc55d1a2a031ea28110b795c597a8903961af945ba9b19c40f75113de",
+    "plaintext_digest": "01510b126e1d4ced49107fe4ab03ee54cb1c8e4caf6064e1dd29c48d4a3e74c38b"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-three-chunks-005",
+   "description": "Format 1, 150000-byte plaintext",
+   "section": "1.3",
+   "inputs": {
+    "format": 1,
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "plaintext_rule": "byte i = (i * 7 + 3) mod 256",
+    "plaintext_length": 150000,
+    "plaintext_sha256": "1a30606485db064b096234e62251582c1df2a03388118482cfc7334d4f61efb2"
+   },
+   "expected": {
+    "padded_length": 151552,
+    "ciphertext_length": 151601,
+    "cid": "01efe2a737877c019c7d91e59ec84491b31e01835eaee891ef0bb41a4f0fbed3ac",
+    "chunks": [
+     {
+      "index": 0,
+      "last": false,
+      "nonce": "000000000000000000000000",
+      "aad": "68756d2f7365616c65642f3101",
+      "plaintext_bytes": 65536,
+      "tag": "73345d8f3cdfbaab9b9203f5bec748f5"
+     },
+     {
+      "index": 1,
+      "last": false,
+      "nonce": "000000000000000000000001",
+      "aad": "68756d2f7365616c65642f3101",
+      "plaintext_bytes": 65536,
+      "tag": "d66946faa66f3a5e66fe213c1fedde41"
+     },
+     {
+      "index": 2,
+      "last": true,
+      "nonce": "000000010000000000000002",
+      "aad": "68756d2f7365616c65642f3101",
+      "plaintext_bytes": 20480,
+      "tag": "4b0325461cbbb5eb9e55ca831ebc7885"
+     }
+    ],
+    "ciphertext_sha256": "efe2a737877c019c7d91e59ec84491b31e01835eaee891ef0bb41a4f0fbed3ac",
+    "plaintext_digest": "011a30606485db064b096234e62251582c1df2a03388118482cfc7334d4f61efb2"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-keyring-006",
+   "description": "Format 2, 100-byte plaintext under a keyring epoch secret and salt",
+   "section": "4.3",
+   "inputs": {
+    "format": 2,
+    "epoch_secret": "d118dc3507a2c2f9eee7253df63fc292",
+    "salt": "a1a2a3a4a5a6a7a8a9aaabacadaeafb0",
+    "plaintext": "030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca3aab1b8"
+   },
+   "expected": {
+    "header": "02a1a2a3a4a5a6a7a8a9aaabacadaeafb0",
+    "key": "abad87c77b628eb545157304f0e1a2db",
+    "padded_length": 104,
+    "ciphertext_length": 137,
+    "cid": "019c32450d690373db7a6223618505ba5cd3a5e2c5d1d40a9aee099db49d885035",
+    "chunks": [
+     {
+      "index": 0,
+      "last": true,
+      "nonce": "000000010000000000000000",
+      "aad": "68756d2f7365616c65642f3102a1a2a3a4a5a6a7a8a9aaabacadaeafb0",
+      "plaintext_bytes": 104,
+      "tag": "b03390bef313cf01f87f9e8d948621ce"
+     }
+    ],
+    "ciphertext": "02a1a2a3a4a5a6a7a8a9aaabacadaeafb07d6ea85cb53b05781031278595768bfdbe49bd7c9a059392cf95f37f6fee786fca0d75a792ca3e05ed64462878f3dbb0a318c5900fc52b8b19b63c63f2d8f0529f1dd12683983ef947485253e994ec8af6ab0fc0867446f7151ecb4b5128ed3b6351107cb3fdffdab03390bef313cf01f87f9e8d948621ce"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-bad-format-007",
+   "description": "Open fails with bad-format: first byte 0x03",
+   "section": "1.5",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "ciphertext": "03608bece485c982de01bd158880f58ae0fbebb5d2a393f756854469c19efbfd4982d0ebc94c62c998b87fc9c93ed31d0bf3df806e64b6bd9af4adc7f6d6b93e1c5645ecf1c96f3c0f124bac6dfdf675eda617fc25cf5a29e907bfbbf513ce22b85052554a9ceb1b5817b852dda2464320854ce33b1fee0f63"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "bad-format"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-format-mismatch-008",
+   "description": "Open fails with bad-format: a format 1 blob under a reference that says format 2",
+   "section": "1.5",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "reference_format": 2,
+    "ciphertext": "01608bece485c982de01bd158880f58ae0fbebb5d2a393f756854469c19efbfd4982d0ebc94c62c998b87fc9c93ed31d0bf3df806e64b6bd9af4adc7f6d6b93e1c5645ecf1c96f3c0f124bac6dfdf675eda617fc25cf5a29e907bfbbf513ce22b85052554a9ceb1b5817b852dda2464320854ce33b1fee0f63"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "bad-format"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-swapped-salt-009",
+   "description": "Open fails with bad-tag: format 2 header salt replaced",
+   "section": "1.5",
+   "inputs": {
+    "epoch_secret": "d118dc3507a2c2f9eee7253df63fc292",
+    "ciphertext": "02b1b2b3b4b5b6b7b8b9babbbcbdbebfc07d6ea85cb53b05781031278595768bfdbe49bd7c9a059392cf95f37f6fee786fca0d75a792ca3e05ed64462878f3dbb0a318c5900fc52b8b19b63c63f2d8f0529f1dd12683983ef947485253e994ec8af6ab0fc0867446f7151ecb4b5128ed3b6351107cb3fdffdab03390bef313cf01f87f9e8d948621ce"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "bad-tag"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-truncated-chunk-010",
+   "description": "Open fails with bad-tag: seal-two-chunks with its last chunk missing",
+   "section": "1.5",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "ciphertext_sha256": "f4bbdeb6ae780b699c94aaa3468e2e862625837a26fb428e1bfedca608b66f35",
+    "ciphertext_length": 65553,
+    "ciphertext_rule": "seal-two-chunks with its last chunk missing"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "bad-tag"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-truncated-bytes-011",
+   "description": "Open fails with bad-tag: seal-two-chunks cut five bytes before its end",
+   "section": "1.5",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "ciphertext_sha256": "bc6128cc29b8ae067aa3a94ee846df6384a4bdd8674b8ca896b8ff8f5e23bd6e",
+    "ciphertext_length": 67612,
+    "ciphertext_rule": "seal-two-chunks cut five bytes before its end"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "bad-tag"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-swapped-chunks-012",
+   "description": "Open fails with bad-tag: seal-two-chunks with chunks 0 and 1 exchanged",
+   "section": "1.5",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "ciphertext_sha256": "750ebfe50cb88c9f386f3c94a084d18fa92268071ff79536a20cc03409bacace",
+    "ciphertext_length": 67617,
+    "ciphertext_rule": "seal-two-chunks with chunks 0 and 1 exchanged"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "bad-tag"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-foreign-chunk-013",
+   "description": "Open fails with bad-tag: seal-two-chunks with chunk 1 taken from the same plaintext sealed under key f0e1d2c3b4a5968778695a4b3c2d1e0f",
+   "section": "1.5",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "ciphertext_sha256": "54b6f59b8c78e74af11c916a1475e76565b2bb187f7994ae58f8ba074bdb5bd8",
+    "ciphertext_length": 67617,
+    "ciphertext_rule": "seal-two-chunks with chunk 1 taken from the same plaintext sealed under key f0e1d2c3b4a5968778695a4b3c2d1e0f"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "bad-tag"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-trailing-data-014",
+   "description": "Open fails with trailing-data: 16 zero bytes after the last chunk; the reference's size fixes the expected length",
+   "section": "1.5",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "reference_size": 100,
+    "ciphertext": "01608bece485c982de01bd158880f58ae0fbebb5d2a393f756854469c19efbfd4982d0ebc94c62c998b87fc9c93ed31d0bf3df806e64b6bd9af4adc7f6d6b93e1c5645ecf1c96f3c0f124bac6dfdf675eda617fc25cf5a29e907bfbbf513ce22b85052554a9ceb1b5817b852dda2464320854ce33b1fee0f6300000000000000000000000000000000"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "trailing-data"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-trailing-data-unknown-size-015",
+   "description": "Open fails with bad-tag: the same bytes with no size known: the extra bytes become part of the last chunk",
+   "section": "1.5",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "ciphertext": "01608bece485c982de01bd158880f58ae0fbebb5d2a393f756854469c19efbfd4982d0ebc94c62c998b87fc9c93ed31d0bf3df806e64b6bd9af4adc7f6d6b93e1c5645ecf1c96f3c0f124bac6dfdf675eda617fc25cf5a29e907bfbbf513ce22b85052554a9ceb1b5817b852dda2464320854ce33b1fee0f6300000000000000000000000000000000"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "bad-tag"
+   }
+  },
+  {
+   "id": "storage/sealed/seal-wrong-key-016",
+   "description": "Open fails with bad-tag: a different key",
+   "section": "1.5",
+   "inputs": {
+    "key": "f0e1d2c3b4a5968778695a4b3c2d1e0f",
+    "ciphertext": "01608bece485c982de01bd158880f58ae0fbebb5d2a393f756854469c19efbfd4982d0ebc94c62c998b87fc9c93ed31d0bf3df806e64b6bd9af4adc7f6d6b93e1c5645ecf1c96f3c0f124bac6dfdf675eda617fc25cf5a29e907bfbbf513ce22b85052554a9ceb1b5817b852dda2464320854ce33b1fee0f63"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-sealed",
+    "reason": "bad-tag"
+   }
+  },
+  {
+   "id": "storage/sealed/range-middle-chunk-017",
+   "description": "Chunk 1 of seal-three-chunks decrypts alone with nonce(1, false)",
+   "section": "1.4",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "header": "01",
+    "chunk_index": 1,
+    "last": false,
+    "byte_offset": 65553,
+    "chunk_sha256": "13b5a6aa79e99eaae74a51ac60015ed69c0113cd22b71ae2e69deb19c1f3dc9b"
+   },
+   "expected": {
+    "plaintext_sha256": "510b126e1d4ced49107fe4ab03ee54cb1c8e4caf6064e1dd29c48d4a3e74c38b",
+    "plaintext_equals": "bytes 65536..131072 of the padded plaintext"
+   }
+  },
+  {
+   "id": "storage/sealed/range-wrong-index-018",
+   "description": "The same bytes decrypted as chunk 0 fail",
+   "section": "1.4",
+   "inputs": {
+    "key": "000102030405060708090a0b0c0d0e0f",
+    "header": "01",
+    "chunk_index": 0,
+    "last": false,
+    "chunk_sha256": "13b5a6aa79e99eaae74a51ac60015ed69c0113cd22b71ae2e69deb19c1f3dc9b"
+   },
+   "rejection": {
+    "step": null,
+    "check": "open-chunk",
+    "reason": "bad-tag"
+   }
+  }
+ ]
+}

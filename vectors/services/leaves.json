@@ -1,0 +1,100 @@
+{
+ "spec": "services",
+ "file": "leaves",
+ "notes": "Leaf bytes and hashes per manifest type present in the world, an entry bundle, and a leaf hashed without the 0x00 prefix (reject).",
+ "cases": [
+  {
+   "id": "services/leaves/leaf-keyset-001",
+   "description": "Leaf for the first keyset in the world",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+    "type": "keyset",
+    "authority": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+    "lineage": null,
+    "version": 1
+   },
+   "expected": {
+    "leaf": "855821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53666b65797365745821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53f601",
+    "leaf_hash": "69db9be1e603b2236cb13abf6937555cdc94218382ace6bcc610cc4d25610492"
+   }
+  },
+  {
+   "id": "services/leaves/leaf-context-002",
+   "description": "Leaf for the first context in the world",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda69",
+    "type": "context",
+    "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "lineage": null,
+    "version": 1
+   },
+   "expected": {
+    "leaf": "855821013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda6967636f6e74657874582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601",
+    "leaf_hash": "9fd8d50174d6e5f3be7995d83255635469dd62e8b22fd073b9b6a4fa7bf34ddc"
+   }
+  },
+  {
+   "id": "services/leaves/leaf-deck-003",
+   "description": "Leaf for the first deck in the world",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "type": "deck",
+    "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "lineage": null,
+    "version": 1
+   },
+   "expected": {
+    "leaf": "85582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875646465636b582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601",
+    "leaf_hash": "c44209bacdd30de7a05a0401f42c1568abd4119cfc23af66c06ad379e9fc44c2"
+   }
+  },
+  {
+   "id": "services/leaves/leaf-service-004",
+   "description": "Leaf for the first service in the world",
+   "section": "Log and ledger",
+   "inputs": {
+    "cid": "013c6078d9d2bf93731d955960945c5bd8b66f37dfaba09635bdf121ea598a4f5a",
+    "type": "service",
+    "authority": "013b9650b6c9456dc728b926f8b21239320cbbbcff577eb026cc64418c66638a09",
+    "lineage": null,
+    "version": 1
+   },
+   "expected": {
+    "leaf": "855821013c6078d9d2bf93731d955960945c5bd8b66f37dfaba09635bdf121ea598a4f5a67736572766963655821013b9650b6c9456dc728b926f8b21239320cbbbcff577eb026cc64418c66638a09f601",
+    "leaf_hash": "a6e300f8dd4d1a5d66b06f90ddbf39eef46f1f5e79686a9fea4df6d5c1a151a7"
+   }
+  },
+  {
+   "id": "services/leaves/entry-bundle-005",
+   "description": "Entry bundle of leaves 0..2 (uint16 BE length prefixes)",
+   "section": "Log and ledger",
+   "inputs": {
+    "leaves": [
+     "855821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53666b65797365745821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53f601",
+     "85582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3666b6579736574582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601",
+     "855821013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda6967636f6e74657874582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601"
+    ]
+   },
+   "expected": {
+    "entry_bundle": "0050855821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53666b65797365745821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53f601005085582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3666b6579736574582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f6010051855821013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda6967636f6e74657874582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3f601"
+   }
+  },
+  {
+   "id": "services/leaves/leaf-reject-no-prefix-006",
+   "description": "SHA-256(leaf) without the 0x00 prefix is not the leaf hash (LG-6)",
+   "section": "Log and ledger",
+   "inputs": {
+    "leaf": "855821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53666b65797365745821017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53f601",
+    "claimed_hash": "c993745574e1edc699db44da4e6a6eb3e25128a4ca4a2576f99d8dc3a33d5817"
+   },
+   "rejection": {
+    "step": 7,
+    "rule": "LG-6",
+    "reason": "leaf hash must prefix 0x00"
+   }
+  }
+ ]
+}

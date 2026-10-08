@@ -1,0 +1,407 @@
+{
+ "spec": "verifier-runtime",
+ "file": "datasets",
+ "notes": "Dataset records, the salted RFC 9162 tree, inclusion proofs valid and tampered, and a public dataset blob whose recomputed root must equal the manifest's commitment (rule 15). Records are synthetic.",
+ "cases": [
+  {
+   "id": "verifier-runtime/datasets/dataset-tree-001",
+   "description": "Six synthetic voter records: record bytes, salted leaf hashes, root",
+   "section": "Datasets",
+   "inputs": {
+    "salt": "0a17ef00b732350d659489dd05058d7d17f07c4d61a339b9cc63ff952c86af47",
+    "records": [
+     {
+      "key": "7265632d30303031",
+      "fields": [
+       [
+        "name",
+        "Ada Lane"
+       ],
+       [
+        "street",
+        "12 Mill St"
+       ],
+       [
+        "ward",
+        "1"
+       ]
+      ]
+     },
+     {
+      "key": "7265632d30303032",
+      "fields": [
+       [
+        "name",
+        "Ben Orchard"
+       ],
+       [
+        "street",
+        "40 River Rd"
+       ],
+       [
+        "ward",
+        "2"
+       ]
+      ]
+     },
+     {
+      "key": "7265632d30303033",
+      "fields": [
+       [
+        "name",
+        "Cleo Marsh"
+       ],
+       [
+        "street",
+        "7 Hill Ave"
+       ],
+       [
+        "ward",
+        "3"
+       ]
+      ]
+     },
+     {
+      "key": "7265632d30303034",
+      "fields": [
+       [
+        "name",
+        "Dev Field"
+       ],
+       [
+        "street",
+        "88 Mill St"
+       ],
+       [
+        "ward",
+        "1"
+       ]
+      ]
+     },
+     {
+      "key": "7265632d30303035",
+      "fields": [
+       [
+        "name",
+        "Eli Grove"
+       ],
+       [
+        "street",
+        "3 Pond Way"
+       ],
+       [
+        "ward",
+        "2"
+       ]
+      ]
+     },
+     {
+      "key": "7265632d30303036",
+      "fields": [
+       [
+        "name",
+        "Fay Brook"
+       ],
+       [
+        "street",
+        "19 Hill Ave"
+       ],
+       [
+        "ward",
+        "3"
+       ]
+      ]
+     }
+    ]
+   },
+   "expected": {
+    "record_bytes": [
+     "82487265632d303030318382646e616d6568416461204c616e6582667374726565746a3132204d696c6c2053748264776172646131",
+     "82487265632d303030328382646e616d656b42656e204f72636861726482667374726565746b34302052697665722052648264776172646132",
+     "82487265632d303030338382646e616d656a436c656f204d6172736882667374726565746a372048696c6c204176658264776172646133",
+     "82487265632d303030348382646e616d6569446576204669656c6482667374726565746a3838204d696c6c2053748264776172646131",
+     "82487265632d303030358382646e616d6569456c692047726f766582667374726565746a3320506f6e64205761798264776172646132",
+     "82487265632d303030368382646e616d65694661792042726f6f6b82667374726565746b31392048696c6c204176658264776172646133"
+    ],
+    "root": "929c26d309da56e3d1cf11ee003ad5b5e151df941ba060a674fe1b5f5d80e913",
+    "empty_root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  },
+  {
+   "id": "verifier-runtime/datasets/dataset-proof-002",
+   "description": "Inclusion proof for record 0",
+   "section": "Datasets",
+   "inputs": {
+    "salt": "0a17ef00b732350d659489dd05058d7d17f07c4d61a339b9cc63ff952c86af47",
+    "key": "7265632d30303031",
+    "fields": [
+     [
+      "name",
+      "Ada Lane"
+     ],
+     [
+      "street",
+      "12 Mill St"
+     ],
+     [
+      "ward",
+      "1"
+     ]
+    ],
+    "index": 0,
+    "size": 6,
+    "root": "929c26d309da56e3d1cf11ee003ad5b5e151df941ba060a674fe1b5f5d80e913"
+   },
+   "expected": {
+    "proof": [
+     "2cad24e02b7bf14b5ee4073d04071df5aa758ad316f8c6d3388f13d61fee045c",
+     "22879753bbddcc3dc896c99da7cdcb9fb51e883592ef92ae6778e65a8424c4e3",
+     "bb6cd0ae9dde25877568716418b53d10e19a50de1e9df4f25bdec49e52b12247"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "verifier-runtime/datasets/dataset-proof-003",
+   "description": "Inclusion proof for record 3",
+   "section": "Datasets",
+   "inputs": {
+    "salt": "0a17ef00b732350d659489dd05058d7d17f07c4d61a339b9cc63ff952c86af47",
+    "key": "7265632d30303034",
+    "fields": [
+     [
+      "name",
+      "Dev Field"
+     ],
+     [
+      "street",
+      "88 Mill St"
+     ],
+     [
+      "ward",
+      "1"
+     ]
+    ],
+    "index": 3,
+    "size": 6,
+    "root": "929c26d309da56e3d1cf11ee003ad5b5e151df941ba060a674fe1b5f5d80e913"
+   },
+   "expected": {
+    "proof": [
+     "4eccb09674d5ae46d1393c00f8ee875bc3ac3cd88ff94b81c86243bddcd3777e",
+     "4629f31ed2bd424379a84e7299fe4cd90775cea6a7272c8cc70d34565311fd50",
+     "bb6cd0ae9dde25877568716418b53d10e19a50de1e9df4f25bdec49e52b12247"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "verifier-runtime/datasets/dataset-proof-004",
+   "description": "Inclusion proof for record 5",
+   "section": "Datasets",
+   "inputs": {
+    "salt": "0a17ef00b732350d659489dd05058d7d17f07c4d61a339b9cc63ff952c86af47",
+    "key": "7265632d30303036",
+    "fields": [
+     [
+      "name",
+      "Fay Brook"
+     ],
+     [
+      "street",
+      "19 Hill Ave"
+     ],
+     [
+      "ward",
+      "3"
+     ]
+    ],
+    "index": 5,
+    "size": 6,
+    "root": "929c26d309da56e3d1cf11ee003ad5b5e151df941ba060a674fe1b5f5d80e913"
+   },
+   "expected": {
+    "proof": [
+     "6bee688756d6cd61d700457dcc7a73acf6382bd00992043f01b20f291b9b5673",
+     "906681bd513aceed77fdb2b9de84ab02067261682f3bbccc88ee5733f470c0c0"
+    ],
+    "valid": true
+   }
+  },
+  {
+   "id": "verifier-runtime/datasets/dataset-proof-bad-005",
+   "description": "Dataset proof fails (rejection code 4): tampered-field",
+   "section": "Datasets",
+   "inputs": {
+    "salt": "0a17ef00b732350d659489dd05058d7d17f07c4d61a339b9cc63ff952c86af47",
+    "key": "7265632d30303033",
+    "fields": [
+     [
+      "name",
+      "Cleo Marsh"
+     ],
+     [
+      "street",
+      "7 Hill Ave"
+     ],
+     [
+      "ward",
+      "1"
+     ]
+    ],
+    "index": 2,
+    "size": 6,
+    "proof": [
+     "7ec8fcda5f476ff5902d5b19381acb88f366ca8cc6b8a609298a4924810c90e9",
+     "4629f31ed2bd424379a84e7299fe4cd90775cea6a7272c8cc70d34565311fd50",
+     "bb6cd0ae9dde25877568716418b53d10e19a50de1e9df4f25bdec49e52b12247"
+    ],
+    "root": "929c26d309da56e3d1cf11ee003ad5b5e151df941ba060a674fe1b5f5d80e913"
+   },
+   "rejection": {
+    "step": null,
+    "check": "dataset-lookup",
+    "rule": "code-4",
+    "reason": "tampered-field"
+   }
+  },
+  {
+   "id": "verifier-runtime/datasets/dataset-proof-bad-006",
+   "description": "Dataset proof fails (rejection code 4): substituted-record",
+   "section": "Datasets",
+   "inputs": {
+    "salt": "0a17ef00b732350d659489dd05058d7d17f07c4d61a339b9cc63ff952c86af47",
+    "key": "7265632d30303032",
+    "fields": [
+     [
+      "name",
+      "Ben Orchard"
+     ],
+     [
+      "street",
+      "40 River Rd"
+     ],
+     [
+      "ward",
+      "2"
+     ]
+    ],
+    "index": 2,
+    "size": 6,
+    "proof": [
+     "7ec8fcda5f476ff5902d5b19381acb88f366ca8cc6b8a609298a4924810c90e9",
+     "4629f31ed2bd424379a84e7299fe4cd90775cea6a7272c8cc70d34565311fd50",
+     "bb6cd0ae9dde25877568716418b53d10e19a50de1e9df4f25bdec49e52b12247"
+    ],
+    "root": "929c26d309da56e3d1cf11ee003ad5b5e151df941ba060a674fe1b5f5d80e913"
+   },
+   "rejection": {
+    "step": null,
+    "check": "dataset-lookup",
+    "rule": "code-4",
+    "reason": "substituted-record"
+   }
+  },
+  {
+   "id": "verifier-runtime/datasets/dataset-proof-bad-007",
+   "description": "Dataset proof fails (rejection code 4): wrong-index",
+   "section": "Datasets",
+   "inputs": {
+    "salt": "0a17ef00b732350d659489dd05058d7d17f07c4d61a339b9cc63ff952c86af47",
+    "key": "7265632d30303033",
+    "fields": [
+     [
+      "name",
+      "Cleo Marsh"
+     ],
+     [
+      "street",
+      "7 Hill Ave"
+     ],
+     [
+      "ward",
+      "3"
+     ]
+    ],
+    "index": 3,
+    "size": 6,
+    "proof": [
+     "7ec8fcda5f476ff5902d5b19381acb88f366ca8cc6b8a609298a4924810c90e9",
+     "4629f31ed2bd424379a84e7299fe4cd90775cea6a7272c8cc70d34565311fd50",
+     "bb6cd0ae9dde25877568716418b53d10e19a50de1e9df4f25bdec49e52b12247"
+    ],
+    "root": "929c26d309da56e3d1cf11ee003ad5b5e151df941ba060a674fe1b5f5d80e913"
+   },
+   "rejection": {
+    "step": null,
+    "check": "dataset-lookup",
+    "rule": "code-4",
+    "reason": "wrong-index"
+   }
+  },
+  {
+   "id": "verifier-runtime/datasets/dataset-proof-bad-008",
+   "description": "Dataset proof fails (rejection code 4): wrong-salt-length-proof",
+   "section": "Datasets",
+   "inputs": {
+    "salt": "0a17ef00b732350d659489dd05058d7d17f07c4d61a339b9cc63ff952c86af47",
+    "key": "7265632d30303033",
+    "fields": [
+     [
+      "name",
+      "Cleo Marsh"
+     ],
+     [
+      "street",
+      "7 Hill Ave"
+     ],
+     [
+      "ward",
+      "3"
+     ]
+    ],
+    "index": 2,
+    "size": 6,
+    "proof": [
+     "7ec8fcda5f476ff5902d5b19381acb88f366ca8cc6b8a609298a4924810c90e9",
+     "4629f31ed2bd424379a84e7299fe4cd90775cea6a7272c8cc70d34565311fd50"
+    ],
+    "root": "929c26d309da56e3d1cf11ee003ad5b5e151df941ba060a674fe1b5f5d80e913"
+   },
+   "rejection": {
+    "step": null,
+    "check": "dataset-lookup",
+    "rule": "code-4",
+    "reason": "wrong-salt-length-proof"
+   }
+  },
+  {
+   "id": "verifier-runtime/datasets/dataset-public-blob-009",
+   "description": "Public dataset blob [salt, record...] and its recomputed root (rule 15)",
+   "section": "Datasets",
+   "inputs": {
+    "blob": "8758200a17ef00b732350d659489dd05058d7d17f07c4d61a339b9cc63ff952c86af4782487265632d303030318382646e616d6568416461204c616e6582667374726565746a3132204d696c6c205374826477617264613182487265632d303030328382646e616d656b42656e204f72636861726482667374726565746b3430205269766572205264826477617264613282487265632d303030338382646e616d656a436c656f204d6172736882667374726565746a372048696c6c20417665826477617264613382487265632d303030348382646e616d6569446576204669656c6482667374726565746a3838204d696c6c205374826477617264613182487265632d303030358382646e616d6569456c692047726f766582667374726565746a3320506f6e6420576179826477617264613282487265632d303030368382646e616d65694661792042726f6f6b82667374726565746b31392048696c6c204176658264776172646133",
+    "cid": "01d7bc554207f37890f9699bf372e87daddbe1f28f903be83a9e20c8742920fccb"
+   },
+   "expected": {
+    "root": "929c26d309da56e3d1cf11ee003ad5b5e151df941ba060a674fe1b5f5d80e913",
+    "equals_commitment": true
+   }
+  },
+  {
+   "id": "verifier-runtime/datasets/dataset-public-blob-mismatch-010",
+   "description": "A blob under another salt does not reproduce the commitment",
+   "section": "Datasets",
+   "inputs": {
+    "blob": "8758206c83c657b04e7035aaf1e41c4404fd1152cbf6ed7265fff774dc5bb54961f93e82487265632d303030318382646e616d6568416461204c616e6582667374726565746a3132204d696c6c205374826477617264613182487265632d303030328382646e616d656b42656e204f72636861726482667374726565746b3430205269766572205264826477617264613282487265632d303030338382646e616d656a436c656f204d6172736882667374726565746a372048696c6c20417665826477617264613382487265632d303030348382646e616d6569446576204669656c6482667374726565746a3838204d696c6c205374826477617264613182487265632d303030358382646e616d6569456c692047726f766582667374726565746a3320506f6e6420576179826477617264613282487265632d303030368382646e616d65694661792042726f6f6b82667374726565746b31392048696c6c204176658264776172646133",
+    "commitment": "929c26d309da56e3d1cf11ee003ad5b5e151df941ba060a674fe1b5f5d80e913"
+   },
+   "rejection": {
+    "step": null,
+    "check": "dataset-blob",
+    "rule": "15",
+    "reason": "root differs from commitment"
+   }
+  }
+ ]
+}

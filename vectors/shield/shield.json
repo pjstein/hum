@@ -1,0 +1,2965 @@
+{
+ "spec": "shield",
+ "file": "shield",
+ "notes": "Shield arithmetic: exact rationals until display; display is binary64 rho_to_eps rounded half to even to one decimal. The window is anchored per ADR 0102: an entry counts while now < anchor + 365 days, anchor = max(chargedAt, settledAt, or expires while unsettled); settledAt = max(phone clock, final version's issued) capped at expires. An unsettled entry leaves the window only after a successful lookup of the deck lineage's latest version (inputs.lookup: the expires it returned, or 'failed'). Rejecting cases are the ledger's refusals (check shield-fit or shield-ledger, rule S4..S9). The behavioral halves of S3 to S7 and S10 to S12 are simulator scenarios (sim-shield-*).",
+ "cases": [
+  {
+   "id": "shield/shield/shield-eps-rho-001",
+   "description": "eps_to_rho and rho_to_eps at \u03b5 1",
+   "section": "The budget",
+   "inputs": {
+    "eps": 1,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 0.017468904769123432,
+    "eps_back": 1.0000000000000016
+   }
+  },
+  {
+   "id": "shield/shield/shield-eps-rho-002",
+   "description": "eps_to_rho and rho_to_eps at \u03b5 2",
+   "section": "The budget",
+   "inputs": {
+    "eps": 2,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 0.06757388167314415,
+    "eps_back": 2.0000000000000018
+   }
+  },
+  {
+   "id": "shield/shield/shield-eps-rho-003",
+   "description": "eps_to_rho and rho_to_eps at \u03b5 4",
+   "section": "The budget",
+   "inputs": {
+    "eps": 4,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 0.2539355782894971,
+    "eps_back": 3.9999999999999996
+   }
+  },
+  {
+   "id": "shield/shield/shield-eps-rho-004",
+   "description": "eps_to_rho and rho_to_eps at \u03b5 8",
+   "section": "The budget",
+   "inputs": {
+    "eps": 8,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 0.9097068296901019,
+    "eps_back": 8.000000000000004
+   }
+  },
+  {
+   "id": "shield/shield/shield-eps-rho-005",
+   "description": "eps_to_rho and rho_to_eps at \u03b5 16",
+   "section": "The budget",
+   "inputs": {
+    "eps": 16,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 3.0395687691769857,
+    "eps_back": 15.999999999999998
+   }
+  },
+  {
+   "id": "shield/shield/shield-eps-rho-006",
+   "description": "eps_to_rho and rho_to_eps at \u03b5 20",
+   "section": "The budget",
+   "inputs": {
+    "eps": 20,
+    "delta": 1e-06
+   },
+   "expected": {
+    "rho": 4.402394344470366,
+    "eps_back": 20.000000000000007
+   }
+  },
+  {
+   "id": "shield/shield/shield-eps-rho-007",
+   "description": "S1: rho_to_eps(2201/500) \u2264 20 < rho_to_eps(4403/1000)",
+   "section": "Conformance",
+   "inputs": {
+    "shield_rho": [
+     2201,
+     500
+    ],
+    "above": [
+     4403,
+     1000
+    ]
+   },
+   "expected": {
+    "eps_at_shield_rho": 19.998907062127252,
+    "eps_above": 20.00167853207017,
+    "holds": true
+   }
+  },
+  {
+   "id": "shield/shield/shield-eps-rho-008",
+   "description": "S1 fails for a shield of 4403/1000: its \u03b5 is above 20",
+   "section": "Conformance",
+   "inputs": {
+    "shield_rho": [
+     4403,
+     1000
+    ],
+    "eps": 20.00167853207017
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-s1",
+    "rule": "S1",
+    "reason": "eps above 20"
+   }
+  },
+  {
+   "id": "shield/shield/shield-compose-board-009",
+   "description": "The P-Budget ledger: three settled entries and one pending",
+   "section": "The budget",
+   "inputs": {
+    "entries": [
+     {
+      "deck": "01d3c6f0ac796194b288f917ef868db962274238f9b4339d43a11ae2d86265d2da",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1788667200,
+      "settledAt": null,
+      "expires": null,
+      "anchor": 1788667200,
+      "state": "charged",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01a18fc3b69c9e73ced27bc530c6c1d4de27a92880e092ff4b9d4eb93b8197114c",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       169,
+       2500
+      ],
+      "chargedAt": 1789531200,
+      "settledAt": null,
+      "expires": null,
+      "anchor": 1789531200,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01977faaacb273c3689abab269832bfb2751dba48bc7488326f5382f269504ce19",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": null,
+      "anchor": 1790395200,
+      "state": "charged",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "018ec2540d75073569e6a46578a2e0d6dbbe3577b16d27b255e7b86f720598eb35",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1791172800,
+      "settledAt": null,
+      "expires": null,
+      "anchor": 1791172800,
+      "state": "pending",
+      "cards": [],
+      "receipts": 0
+     }
+    ],
+    "now": 1791259200
+   },
+   "expected": {
+    "spent_rho": [
+     1037,
+     1250
+    ],
+    "settled_rho": [
+     1439,
+     2500
+    ],
+    "remaining_rho": [
+     8931,
+     2500
+    ],
+    "over_budget": false,
+    "displayed_eps": 7.6,
+    "settled_eps": 6.2,
+    "pending_eps": 1.4,
+    "headline_settled": 0.6892234064538326,
+    "headline_including_pending": 0.6199738796723974,
+    "expected_display": {
+     "eps": 6.2,
+     "pending": 1.4,
+     "headline_settled_pct": 69,
+     "headline_pending_pct": 62
+    }
+   }
+  },
+  {
+   "id": "shield/shield/shield-compose-four-at-four-010",
+   "description": "Four entries at 127/500 display as \u03b5 8.5",
+   "section": "Composition",
+   "inputs": {
+    "entries": [
+     {
+      "deck": "018f74b20a769ad21c382cc9ec822d7f84e0412b62e30db4b5835470dd89a75278",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1791259200,
+      "settledAt": null,
+      "expires": null,
+      "anchor": 1791259200,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "019810fd02fcaeed17efa2788cb78c1e744102950793196cd56f8d0ab75d4ce87b",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1791172800,
+      "settledAt": null,
+      "expires": null,
+      "anchor": 1791172800,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01a5f5c54d95001bff623afbb8e31ba09cc3df980a33cce0cd92af567a2ce35c01",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1791086400,
+      "settledAt": null,
+      "expires": null,
+      "anchor": 1791086400,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0177b5363dbf68a85607b69e2146d7eb65a32b36112ac766271fc5d52645030220",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1791000000,
+      "settledAt": null,
+      "expires": null,
+      "anchor": 1791000000,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     }
+    ],
+    "now": 1791259200
+   },
+   "expected": {
+    "spent_rho": [
+     127,
+     125
+    ],
+    "settled_rho": [
+     127,
+     125
+    ],
+    "remaining_rho": [
+     1693,
+     500
+    ],
+    "over_budget": false,
+    "displayed_eps": 8.5,
+    "settled_eps": 8.5,
+    "pending_eps": 0.0,
+    "headline_settled": 0.5745460433027338,
+    "headline_including_pending": 0.5745460433027338
+   }
+  },
+  {
+   "id": "shield/shield/shield-fit-011",
+   "description": "Plan 127/500 against remaining 1/4 does not fit: the deck is sat out",
+   "section": "Reserving and charging",
+   "inputs": {
+    "remaining": [
+     1,
+     4
+    ],
+    "plan_rho": [
+     127,
+     500
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-fit",
+    "rule": "S4",
+    "reason": "plan.rho > remaining"
+   }
+  },
+  {
+   "id": "shield/shield/shield-fit-012",
+   "description": "Plan 1/4 against remaining 1/4 fits",
+   "section": "Reserving and charging",
+   "inputs": {
+    "remaining": [
+     1,
+     4
+    ],
+    "plan_rho": [
+     1,
+     4
+    ]
+   },
+   "expected": {
+    "fits": true
+   }
+  },
+  {
+   "id": "shield/shield/shield-fit-013",
+   "description": "Plan 1/20 against remaining 1/4 fits",
+   "section": "Reserving and charging",
+   "inputs": {
+    "remaining": [
+     1,
+     4
+    ],
+    "plan_rho": [
+     1,
+     20
+    ]
+   },
+   "expected": {
+    "fits": true
+   }
+  },
+  {
+   "id": "shield/shield/shield-fit-014",
+   "description": "Two plans of 1/5 against remaining 1/4: the first fits and is reserved",
+   "section": "Reserving and charging",
+   "inputs": {
+    "remaining_before": [
+     1,
+     4
+    ],
+    "plan_rho": [
+     1,
+     5
+    ]
+   },
+   "expected": {
+    "reserved": true,
+    "remaining_after": [
+     1,
+     20
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-fit-015",
+   "description": "Two plans of 1/5 against remaining 1/4: the second does not fit after the reservation",
+   "section": "Reserving and charging",
+   "inputs": {
+    "remaining_before": [
+     1,
+     20
+    ],
+    "plan_rho": [
+     1,
+     5
+    ],
+    "ledger": [
+     {
+      "deck": "013faa8ceaf9effd0e0b467e82a38cd10252a94736742e7eb1070324ca16e93d91",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       519,
+       125
+      ],
+      "chargedAt": 1791172800,
+      "settledAt": null,
+      "expires": null,
+      "anchor": 1791172800,
+      "state": "charged",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0190fdde25d2704f063e934cd8c613eafc54a3269b71dc557d1d2fac72026c29ef",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       1,
+       5
+      ],
+      "chargedAt": 1791259200,
+      "settledAt": null,
+      "expires": null,
+      "anchor": 1791259200,
+      "state": "reserved",
+      "cards": [],
+      "receipts": 0
+     }
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-fit",
+    "rule": "S4",
+    "reason": "second deck does not fit after the first reservation"
+   }
+  },
+  {
+   "id": "shield/shield/shield-fit-016",
+   "description": "A restored ledger whose estimated entries exceed SHIELD_RHO: remaining is zero and no plan fits",
+   "section": "Restore",
+   "inputs": {
+    "ledger": [
+     {
+      "deck": "018e3f5e93e2fbd574a7ce1a7cf7a6ae7d9750b04c995f202c80cc299c847e99c4",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01778cbfb414cfd16cec59c77976c04030005adcdc0c114fcb52d200c1533f7005",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01c57a8c46c71d2cf69b8da654e3db5a28b060db14fc09bad81742b101cd6c6c84",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0198ced516979c77a827e6ded7808008037d3b7207bdb12568e266251dae649f8e",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01dad95a49e427660448c7b36f15980a6dbb928daa20854daf4350856229886bb7",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "016ccdd131e0b635c7220ec7ddc9c879287a8b385d35082e1aad8f74fc07e995f8",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "019584dedd70d1e3513872d5020b710ed8b91d1690fbddcf57f1279b4ff2ef9663",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0183d7bb908a66dac269fa9952fb91ed291815de34d9de84f1d9d48b19b344d9e5",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0111545c9c66366c6190e1cb34ec8c0aaacea92401f8b6dfb82a3d7742e0a7c519",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "014c6d4456cca2859670c45092c051580c2d1e858bd69c77e724d07f8a4fc4b75e",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0105f065498b21ed4a3cef4a4322f72f967001ad8a612903ac07a10c300e221921",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0174e7066056b5eeb1b84da4d77732c2281711b71cffeee10692fcec9420c74495",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "015d201311b34183d9608598cfc7fb696ab0e49604d53cef3dcd3294cb918b5f38",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01b8b5a68545c8921d1fbd8d662ba1488e48edd42aa5b7486877f338d15e7e12fa",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01d4ad0bc523bcdbbe2929e9a4ec81795dc218dcb6be10630fc89437f14ade8835",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0146cae32119fba5525834b35d3ffd59054529d3b2681e05691f0d50d29c059c81",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01179361af30cb08bbb12d09f1e56a0196ca653d2f80f52e9e1625902634e14b4e",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01d42f1db26e1ea88932b0fddc3260b48a1773569282a3b8d61d387aa6f9f7c7f5",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1792987200,
+      "anchor": 1792987200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     }
+    ],
+    "now": 1791259200,
+    "plan_rho": [
+     1,
+     400
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-fit",
+    "rule": "S4",
+    "reason": "spent above SHIELD_RHO; remaining clamped at zero",
+    "board": {
+     "spent_rho": [
+      1143,
+      250
+     ],
+     "settled_rho": [
+      1143,
+      250
+     ],
+     "remaining_rho": [
+      0,
+      1
+     ],
+     "over_budget": true,
+     "displayed_eps": 20.5,
+     "settled_eps": 20.5,
+     "pending_eps": 0.0,
+     "headline_settled": -0.023361060137024214,
+     "headline_including_pending": -0.023361060137024214
+    }
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-017",
+   "description": "Entries whose anchors are at days 0, 100, 364, 365, 366 before now and 3 days ahead",
+   "section": "The budget",
+   "inputs": {
+    "anchor_offset_days": [
+     0,
+     100,
+     364,
+     365,
+     366,
+     -3
+    ],
+    "now": 1791259200,
+    "entries": [
+     {
+      "deck": "016729d1a6dddce1185b5a583996406593965defe9ae0e5dfe7b501e6f13afc312",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1791259200,
+      "settledAt": 1791259200,
+      "expires": null,
+      "anchor": 1791259200,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0168865f8723be9305f139a34418dc8f0e89162247fea46432790e01621dcabf29",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1782619200,
+      "settledAt": 1782619200,
+      "expires": null,
+      "anchor": 1782619200,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0182ca18bc18bd88c717dee71bbd1673e980cc9f989b178b3069615fce36d5d1c0",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1759809600,
+      "settledAt": 1759809600,
+      "expires": null,
+      "anchor": 1759809600,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01b7516e655b0bcabe60660e5e07c3114a6a1ec8280e389b0744f6850503eb0536",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1759723200,
+      "settledAt": 1759723200,
+      "expires": null,
+      "anchor": 1759723200,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "0180b9e4c316def105dbf81b6ddfed3d5970824a57bfce2af07234bcaea8677d01",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1759636800,
+      "settledAt": 1759636800,
+      "expires": null,
+      "anchor": 1759636800,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01f9cf2842392fc4d69f8b4a2cba49bb75e3469430d8fa3730afe15362500796d6",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1791518400,
+      "settledAt": 1791518400,
+      "expires": null,
+      "anchor": 1791518400,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     }
+    ]
+   },
+   "expected": {
+    "in_window": [
+     true,
+     true,
+     true,
+     false,
+     false,
+     true
+    ],
+    "spent": [
+     127,
+     125
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-018",
+   "description": "reserved 400 days ago, deck still open (expires 10 days ahead): in",
+   "section": "The budget",
+   "inputs": {
+    "entry": {
+     "deck": "015a2f2f58e5c3241552c6153b69d562a2cf0c234e28bd771fc3de208050871b86",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1756699200,
+     "settledAt": null,
+     "expires": 1792123200,
+     "anchor": 1792123200,
+     "state": "charged",
+     "cards": [],
+     "receipts": 0
+    },
+    "now": 1791259200
+   },
+   "expected": {
+    "anchor": 1792123200,
+    "in_window": true
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-019",
+   "description": "reserved 400 days ago, final version seen 30 days ago: in",
+   "section": "The budget",
+   "inputs": {
+    "entry": {
+     "deck": "01b0635d43a7c9e5269bf3c88a8afa5a644e4c226289c2cba33b6fb8bdecb63670",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1756699200,
+     "settledAt": 1788667200,
+     "expires": 1789531200,
+     "anchor": 1788667200,
+     "state": "released",
+     "cards": [],
+     "receipts": 0
+    },
+    "now": 1791259200
+   },
+   "expected": {
+    "anchor": 1788667200,
+    "in_window": true
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-020",
+   "description": "final version seen 366 days ago: out",
+   "section": "The budget",
+   "inputs": {
+    "entry": {
+     "deck": "01fce0bc9c52abbde811a3f7e8d32caaa122f5b1e2ef392f5ada774abcb7ca9a56",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1748059200,
+     "settledAt": 1759636800,
+     "expires": 1760155200,
+     "anchor": 1759636800,
+     "state": "released",
+     "cards": [],
+     "receipts": 0
+    },
+    "now": 1791259200
+   },
+   "expected": {
+    "anchor": 1759636800,
+    "in_window": false
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-021",
+   "description": "no final version, expires 366 days ago: out",
+   "section": "The budget",
+   "inputs": {
+    "entry": {
+     "deck": "01e7eab008e2c49510b07000299afff0fba22ca7bb2f0b7c520242714e3b0f3761",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1748059200,
+     "settledAt": null,
+     "expires": 1759636800,
+     "anchor": 1759636800,
+     "state": "charged",
+     "cards": [],
+     "receipts": 0
+    },
+    "now": 1791259200
+   },
+   "expected": {
+    "anchor": 1759636800,
+    "in_window": false
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-022",
+   "description": "no final version, expires extended to 10 days ago by a later deck version: in",
+   "section": "The budget",
+   "inputs": {
+    "entry": {
+     "deck": "0159426ef3be4224217268e2edaa90be664c48473dd541b21298435e869941d8ae",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1748059200,
+     "settledAt": null,
+     "expires": 1790395200,
+     "anchor": 1790395200,
+     "state": "charged",
+     "cards": [],
+     "receipts": 0
+    },
+    "now": 1791259200
+   },
+   "expected": {
+    "anchor": 1790395200,
+    "in_window": true
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-023",
+   "description": "final version first seen after expires: the anchor is expires (settledAt capped)",
+   "section": "The budget",
+   "inputs": {
+    "entry": {
+     "deck": "019cc901f4ce9549d85e5318c16058419562168a4f79a11daa860965093fd2eefc",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1748059200,
+     "settledAt": 1759809600,
+     "expires": 1759809600,
+     "anchor": 1759809600,
+     "state": "released",
+     "cards": [],
+     "receipts": 0
+    },
+    "now": 1791259200
+   },
+   "expected": {
+    "anchor": 1759809600,
+    "in_window": true
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-024",
+   "description": "estimated entry anchored at expires 365 days ago: out",
+   "section": "The budget",
+   "inputs": {
+    "entry": {
+     "deck": "017483294c05519c80788e5f23e569ace0f62d969eb4c191b105029f274dc1e0f3",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1758427200,
+     "settledAt": null,
+     "expires": 1759723200,
+     "anchor": 1759723200,
+     "state": "estimated",
+     "cards": [],
+     "receipts": 0
+    },
+    "now": 1791259200
+   },
+   "expected": {
+    "anchor": 1759723200,
+    "in_window": false
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-025",
+   "description": "unsettled entry voted under deck version 1, 365 days past version 1's expires; the log holds a version 2 whose expires is 100 days ago: kept, expires updated",
+   "section": "The budget",
+   "inputs": {
+    "entry": {
+     "deck": "015f17bb5fe27be501b8c8a70e7759af2d9092ed2be275e3641a048669d3e033b6",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1757563200,
+     "settledAt": null,
+     "expires": 1759723200,
+     "anchor": 1759723200,
+     "state": "charged",
+     "cards": [],
+     "receipts": 0
+    },
+    "now": 1791259200,
+    "lookup": 1782619200
+   },
+   "expected": {
+    "in_window_before_lookup": false,
+    "counts": true,
+    "expires_after": 1782619200,
+    "anchor_after": 1782619200,
+    "spent": [
+     127,
+     500
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-026",
+   "description": "the same entry with the log unreachable: kept, tried again later",
+   "section": "The budget",
+   "inputs": {
+    "entry": {
+     "deck": "015f17bb5fe27be501b8c8a70e7759af2d9092ed2be275e3641a048669d3e033b6",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1757563200,
+     "settledAt": null,
+     "expires": 1759723200,
+     "anchor": 1759723200,
+     "state": "charged",
+     "cards": [],
+     "receipts": 0
+    },
+    "now": 1791259200,
+    "lookup": "failed"
+   },
+   "expected": {
+    "in_window_before_lookup": false,
+    "counts": true,
+    "expires_after": 1759723200,
+    "anchor_after": 1759723200,
+    "spent": [
+     127,
+     500
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-027",
+   "description": "the same entry when the lookup confirms version 1 is the latest: out",
+   "section": "The budget",
+   "inputs": {
+    "entry": {
+     "deck": "015f17bb5fe27be501b8c8a70e7759af2d9092ed2be275e3641a048669d3e033b6",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1757563200,
+     "settledAt": null,
+     "expires": 1759723200,
+     "anchor": 1759723200,
+     "state": "charged",
+     "cards": [],
+     "receipts": 0
+    },
+    "now": 1791259200,
+    "lookup": 1759723200
+   },
+   "expected": {
+    "in_window_before_lookup": false,
+    "counts": false,
+    "expires_after": 1759723200,
+    "anchor_after": 1759723200,
+    "spent": [
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-028",
+   "description": "final version verified while the phone's clock reads 200 days before that version's issued: settledAt is issued",
+   "section": "The budget",
+   "inputs": {
+    "chargedAt": 1786075200,
+    "expires": 1789531200,
+    "issued": 1788667200,
+    "clock_at_verification": 1771387200
+   },
+   "expected": {
+    "settledAt": 1788667200,
+    "anchor": 1788667200,
+    "state": "released"
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-029",
+   "description": "a clock set back 400 days: the settled and the unsettled entry both still count",
+   "section": "The budget",
+   "inputs": {
+    "entries": [
+     {
+      "deck": "01f5b53c275d3376f6025e895267c97901ecf98107d17a87cb931e8f1a3dc4a9b9",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1788667200,
+      "settledAt": 1791172800,
+      "expires": null,
+      "anchor": 1791172800,
+      "state": "released",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "017a4d5c9ab05039e74ff3bc2c36ea282ecc10bfda547a6bbec23eb960f7c4a037",
+      "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1788667200,
+      "settledAt": null,
+      "expires": 1792123200,
+      "anchor": 1792123200,
+      "state": "charged",
+      "cards": [],
+      "receipts": 0
+     }
+    ],
+    "now": 1756699200
+   },
+   "expected": {
+    "in_window": [
+     true,
+     true
+    ],
+    "spent": [
+     127,
+     250
+    ],
+    "spent_at_now": [
+     127,
+     250
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-window-030",
+   "description": "An extension of closes moves an unsettled entry's anchor; a final version seen after expires settles at expires",
+   "section": "The budget",
+   "inputs": {
+    "chargedAt": 1748059200,
+    "expires_first": 1759291200,
+    "expires_extended": 1790395200,
+    "final_seen_at": 1791259200
+   },
+   "expected": {
+    "anchor_before": 1759291200,
+    "anchor_after_extension": 1790395200,
+    "settledAt": 1790395200,
+    "anchor_final": 1790395200,
+    "in_window": true
+   }
+  },
+  {
+   "id": "shield/shield/shield-long-decks-031",
+   "description": "Seventeen year-long decks reserved on day 0, closed day 360, released day 366: remaining on day 365",
+   "section": "Conformance",
+   "inputs": {
+    "entries": 17,
+    "rho_each": [
+     127,
+     500
+    ],
+    "closes_day": 360,
+    "released_day": 366,
+    "expires_day": 372,
+    "now_day": 365
+   },
+   "expected": {
+    "remaining": [
+     21,
+     250
+    ],
+    "fits_eighteenth": false
+   }
+  },
+  {
+   "id": "shield/shield/shield-long-decks-032",
+   "description": "On day 365 an eighteenth deck at 127/500 does not fit",
+   "section": "Conformance",
+   "inputs": {
+    "remaining": [
+     21,
+     250
+    ],
+    "plan_rho": [
+     127,
+     500
+    ],
+    "now_day": 365
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-fit",
+    "rule": "S8",
+    "reason": "the seventeen entries are anchored at their releases, not their reservations"
+   }
+  },
+  {
+   "id": "shield/shield/shield-long-decks-033",
+   "description": "Seventeen year-long decks reserved on day 0, closed day 360, released day 366: remaining on day 400",
+   "section": "Conformance",
+   "inputs": {
+    "entries": 17,
+    "rho_each": [
+     127,
+     500
+    ],
+    "closes_day": 360,
+    "released_day": 366,
+    "expires_day": 372,
+    "now_day": 400
+   },
+   "expected": {
+    "remaining": [
+     21,
+     250
+    ],
+    "fits_eighteenth": false
+   }
+  },
+  {
+   "id": "shield/shield/shield-long-decks-034",
+   "description": "On day 400 an eighteenth deck at 127/500 does not fit",
+   "section": "Conformance",
+   "inputs": {
+    "remaining": [
+     21,
+     250
+    ],
+    "plan_rho": [
+     127,
+     500
+    ],
+    "now_day": 400
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-fit",
+    "rule": "S8",
+    "reason": "the seventeen entries are anchored at their releases, not their reservations"
+   }
+  },
+  {
+   "id": "shield/shield/shield-long-decks-035",
+   "description": "A late Leader issues a final version on day 373, after expires on day 372: the phone refuses it, the entry stays unsettled with its anchor at expires and counts on day 400",
+   "section": "Conformance",
+   "inputs": {
+    "chargedAt_day": 0,
+    "expires_day": 372,
+    "final_issued_day": 373,
+    "now_day": 400
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-ledger",
+    "rule": "S8",
+    "reason": "final version issued after the deck's expires; refused",
+    "entry": {
+     "deck": "01e25dd8cc1320e0d157efa14ea4bee8d6f7cdabadc3be47595af1c917357e4242",
+     "context": "01878f7e6c90bb3b56103cfb5a42f2a8247d87a910c13d674f0800d4dc2b62f752",
+     "rho": [
+      127,
+      500
+     ],
+     "chargedAt": 1756699200,
+     "settledAt": null,
+     "expires": 1788840000,
+     "anchor": 1788840000,
+     "state": "charged",
+     "cards": [],
+     "receipts": 1
+    },
+    "in_window_day_400": true,
+    "in_window_day_738": false
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-036",
+   "description": "Event sequence leave-without-casting",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open"
+     },
+     {
+      "event": "leave",
+      "cast": false
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "leave",
+      "outcome": {
+       "dropped": true,
+       "state": "dropped"
+      },
+      "refused": null,
+      "state": "dropped",
+      "counts": false,
+      "spent": [
+       0,
+       1
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-037",
+   "description": "Event sequence lost-response-then-retry",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open"
+     },
+     {
+      "event": "cast"
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "lost"
+     },
+     {
+      "event": "receipt",
+      "receipt": {
+       "round": 0,
+       "retry": true
+      }
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "cast",
+      "outcome": {
+       "cast": true,
+       "state": "reserved"
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "lost",
+      "outcome": {
+       "state": "pending",
+       "refund": false
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "receipt",
+      "outcome": {
+       "state": "charged"
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-038",
+   "description": "Event sequence rejected",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open"
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "rejected"
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "rejected",
+      "outcome": {
+       "state": "pending",
+       "refund": false
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-039",
+   "description": "Event sequence released",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open",
+      "expires": 1793851200
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "receipt"
+     },
+     {
+      "event": "final",
+      "seenAt": 1792123200,
+      "issued": 1792036800
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "receipt",
+      "outcome": {
+       "state": "charged"
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "final",
+      "outcome": {
+       "state": "released",
+       "settledAt": 1792123200,
+       "anchor": 1792123200
+      },
+      "refused": null,
+      "state": "released",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-040",
+   "description": "Event sequence released-clock-behind-issued",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open",
+      "expires": 1793851200
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "receipt"
+     },
+     {
+      "event": "final",
+      "seenAt": 1791691200,
+      "issued": 1792036800
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "receipt",
+      "outcome": {
+       "state": "charged"
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "final",
+      "outcome": {
+       "state": "released",
+       "settledAt": 1792036800,
+       "anchor": 1792036800
+      },
+      "refused": null,
+      "state": "released",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-041",
+   "description": "Event sequence abandoned",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open"
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "receipt"
+     },
+     {
+      "event": "abandoned"
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "receipt",
+      "outcome": {
+       "state": "charged"
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "abandoned",
+      "outcome": {
+       "state": "charged",
+       "refund": false
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-042",
+   "description": "Event sequence restore-then-vote",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "estimate",
+      "chargedAt": 1790827200,
+      "expires": 1791691200
+     },
+     {
+      "event": "open"
+     },
+     {
+      "event": "send"
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "after_each": [
+     {
+      "event": "estimate",
+      "outcome": {
+       "state": "estimated"
+      },
+      "refused": null,
+      "state": "estimated",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "estimated",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-043",
+   "description": "Event sequence extend-then-final-after-expires",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open",
+      "expires": 1792123200
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "receipt"
+     },
+     {
+      "event": "extend",
+      "expires": 1792987200
+     },
+     {
+      "event": "final",
+      "seenAt": 1793419200
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "receipt",
+      "outcome": {
+       "state": "charged"
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "extend",
+      "outcome": {
+       "expires": 1792987200,
+       "anchor": 1792987200
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "final",
+      "outcome": {
+       "state": "released",
+       "settledAt": 1792987200,
+       "anchor": 1792987200
+      },
+      "refused": null,
+      "state": "released",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-044",
+   "description": "Event sequence later-rounds-add-nothing",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open"
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "receipt"
+     },
+     {
+      "event": "replace"
+     },
+     {
+      "event": "round"
+     },
+     {
+      "event": "round"
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "receipt",
+      "outcome": {
+       "state": "charged"
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "replace",
+      "outcome": {
+       "state": "charged",
+       "entries": 1,
+       "added": false
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "round",
+      "outcome": {
+       "state": "charged",
+       "entries": 1,
+       "added": false
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "round",
+      "outcome": {
+       "state": "charged",
+       "entries": 1,
+       "added": false
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-045",
+   "description": "Refused event sequence drop-after-send",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open"
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "drop"
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-ledger",
+    "rule": "S7",
+    "reason": "bytes were handed to the network; never dropped",
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "drop",
+      "outcome": null,
+      "refused": {
+       "rule": "S7",
+       "reason": "bytes were handed to the network; never dropped"
+      },
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-046",
+   "description": "Refused event sequence refund-after-rejected",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open"
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "rejected"
+     },
+     {
+      "event": "refund"
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-ledger",
+    "rule": "S6",
+    "reason": "an entry whose bytes were sent is never removed or reduced",
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "rejected",
+      "outcome": {
+       "state": "pending",
+       "refund": false
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "refund",
+      "outcome": null,
+      "refused": {
+       "rule": "S6",
+       "reason": "an entry whose bytes were sent is never removed or reduced"
+      },
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-047",
+   "description": "Refused event sequence remove-estimated",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "estimate",
+      "chargedAt": 1791172800
+     },
+     {
+      "event": "remove"
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-ledger",
+    "rule": "S9",
+    "reason": "an estimated entry cannot be removed in draft 0.1",
+    "after_each": [
+     {
+      "event": "estimate",
+      "outcome": {
+       "state": "estimated"
+      },
+      "refused": null,
+      "state": "estimated",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "remove",
+      "outcome": null,
+      "refused": {
+       "rule": "S9",
+       "reason": "an estimated entry cannot be removed in draft 0.1"
+      },
+      "state": "estimated",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-048",
+   "description": "Refused event sequence second-entry-on-replacement",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open"
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "estimate",
+      "chargedAt": 1791259200
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-ledger",
+    "rule": "S5",
+    "reason": "a second entry for one deck",
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "estimate",
+      "outcome": null,
+      "refused": {
+       "rule": "S5",
+       "reason": "a second entry for one deck"
+      },
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-049",
+   "description": "Refused event sequence round-without-round0",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open"
+     },
+     {
+      "event": "round"
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-ledger",
+    "rule": "S5",
+    "reason": "round for a deck without a sent round-0 ballot",
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "round",
+      "outcome": null,
+      "refused": {
+       "rule": "S5",
+       "reason": "round for a deck without a sent round-0 ballot"
+      },
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-050",
+   "description": "Refused event sequence drop-charged",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open"
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "receipt"
+     },
+     {
+      "event": "drop"
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-ledger",
+    "rule": "S7",
+    "reason": "bytes were handed to the network; never dropped",
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "receipt",
+      "outcome": {
+       "state": "charged"
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "drop",
+      "outcome": null,
+      "refused": {
+       "rule": "S7",
+       "reason": "bytes were handed to the network; never dropped"
+      },
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-states-051",
+   "description": "Refused event sequence final-issued-after-expires",
+   "section": "Reserving and charging",
+   "inputs": {
+    "events": [
+     {
+      "event": "open",
+      "expires": 1792123200
+     },
+     {
+      "event": "send"
+     },
+     {
+      "event": "receipt"
+     },
+     {
+      "event": "final",
+      "seenAt": 1792296000,
+      "issued": 1792209600
+     }
+    ],
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "shield-ledger",
+    "rule": "S8",
+    "reason": "final version issued after the deck's expires; refused",
+    "after_each": [
+     {
+      "event": "open",
+      "outcome": {
+       "reserved": true
+      },
+      "refused": null,
+      "state": "reserved",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "send",
+      "outcome": {
+       "state": "pending"
+      },
+      "refused": null,
+      "state": "pending",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "receipt",
+      "outcome": {
+       "state": "charged"
+      },
+      "refused": null,
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     },
+     {
+      "event": "final",
+      "outcome": null,
+      "refused": {
+       "rule": "S8",
+       "reason": "final version issued after the deck's expires; refused"
+      },
+      "state": "charged",
+      "counts": true,
+      "spent": [
+       127,
+       500
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-restore-052",
+   "description": "Estimated entries after a restore: every deck of every backed-up context whose latest expires is within the window; chargedAt = closes, anchor = expires, no settledAt",
+   "section": "Restore",
+   "inputs": {
+    "contexts": [
+     {
+      "lineage": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "left": null
+     },
+     {
+      "lineage": "011f350aee1b798dd92daa3f8c27a114f833fe92f7a65ed7c463e390e33b8d630e",
+      "left": 1782619200
+     }
+    ],
+    "decks": [
+     {
+      "name": "released",
+      "closes": 1773979200,
+      "expires": 1774843200,
+      "deck": "01e1abf2cf0b1c21ba4594d8f3a67e7586c4f7d9d3501e993ca928757e201439fc",
+      "context": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "rho": [
+       127,
+       500
+      ]
+     },
+     {
+      "name": "in-rounds",
+      "closes": 1791086400,
+      "expires": 1792123200,
+      "deck": "01da448daa3d4c2ef8c4a5756e8fd6b83a7bde5e927e34831795bc53ae656dae76",
+      "context": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "rho": [
+       127,
+       500
+      ]
+     },
+     {
+      "name": "closed-unreleased",
+      "closes": 1790395200,
+      "expires": 1790654400,
+      "deck": "013b32b0f7d0246527b9d53433c7fd8da0c25638e590baf8f5d27435240012892f",
+      "context": "011f350aee1b798dd92daa3f8c27a114f833fe92f7a65ed7c463e390e33b8d630e",
+      "rho": [
+       1,
+       20
+      ]
+     },
+     {
+      "name": "abandoned",
+      "closes": 1765339200,
+      "expires": 1766376000,
+      "deck": "012aefe50f1ae48fea995fceb2608f81e7c23edabb61e0255585f6164df213baa5",
+      "context": "011f350aee1b798dd92daa3f8c27a114f833fe92f7a65ed7c463e390e33b8d630e",
+      "rho": [
+       127,
+       500
+      ]
+     },
+     {
+      "name": "open",
+      "closes": 1791691200,
+      "expires": 1792728000,
+      "deck": "013acfb4ab03db8222c0263d5ca5592ed403fdd856558ee3328bb7cf8951531148",
+      "context": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "rho": [
+       127,
+       500
+      ]
+     },
+     {
+      "name": "extended",
+      "closes": 1759809600,
+      "expires": 1761019200,
+      "deck": "01dfc94475515c64a2140878f8d30a3879d82170ae912cbab2ed969a0a07122191",
+      "context": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "rho": [
+       127,
+       500
+      ]
+     },
+     {
+      "name": "too-old",
+      "closes": 1758427200,
+      "expires": 1759636800,
+      "deck": "018e061537fd99f36e8e5060fa5bed04d0399a403c946b63ef49aec85dc9448ae9",
+      "context": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "rho": [
+       127,
+       500
+      ]
+     },
+     {
+      "name": "exactly-365",
+      "closes": 1759291200,
+      "expires": 1759723200,
+      "deck": "013cb1356ec5e88cd0d50e332bc4426a361e1e1a51c87da34550508f84627b53c6",
+      "context": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "rho": [
+       127,
+       500
+      ]
+     }
+    ],
+    "now": 1791259200
+   },
+   "expected": {
+    "estimated": [
+     {
+      "deck": "01e1abf2cf0b1c21ba4594d8f3a67e7586c4f7d9d3501e993ca928757e201439fc",
+      "context": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1773979200,
+      "settledAt": null,
+      "expires": 1774843200,
+      "anchor": 1774843200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01da448daa3d4c2ef8c4a5756e8fd6b83a7bde5e927e34831795bc53ae656dae76",
+      "context": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1791086400,
+      "settledAt": null,
+      "expires": 1792123200,
+      "anchor": 1792123200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "013b32b0f7d0246527b9d53433c7fd8da0c25638e590baf8f5d27435240012892f",
+      "context": "011f350aee1b798dd92daa3f8c27a114f833fe92f7a65ed7c463e390e33b8d630e",
+      "rho": [
+       1,
+       20
+      ],
+      "chargedAt": 1790395200,
+      "settledAt": null,
+      "expires": 1790654400,
+      "anchor": 1790654400,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "012aefe50f1ae48fea995fceb2608f81e7c23edabb61e0255585f6164df213baa5",
+      "context": "011f350aee1b798dd92daa3f8c27a114f833fe92f7a65ed7c463e390e33b8d630e",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1765339200,
+      "settledAt": null,
+      "expires": 1766376000,
+      "anchor": 1766376000,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "013acfb4ab03db8222c0263d5ca5592ed403fdd856558ee3328bb7cf8951531148",
+      "context": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1791691200,
+      "settledAt": null,
+      "expires": 1792728000,
+      "anchor": 1792728000,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     },
+     {
+      "deck": "01dfc94475515c64a2140878f8d30a3879d82170ae912cbab2ed969a0a07122191",
+      "context": "0187c5939a0b6cd3f56f5d99988af77e0b487ddc8f9feca5eeff67c0f1a401a4c5",
+      "rho": [
+       127,
+       500
+      ],
+      "chargedAt": 1759809600,
+      "settledAt": null,
+      "expires": 1761019200,
+      "anchor": 1761019200,
+      "state": "estimated",
+      "cards": [],
+      "receipts": 0
+     }
+    ],
+    "spent": [
+     33,
+     25
+    ]
+   }
+  },
+  {
+   "id": "shield/shield/shield-display-053",
+   "description": "Display of \u03c1 127/500",
+   "section": "The budget",
+   "inputs": {
+    "rho": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "eps_binary64": 4.000539566972662,
+    "displayed": 4.0
+   }
+  },
+  {
+   "id": "shield/shield/shield-display-054",
+   "description": "Display of \u03c1 72/125",
+   "section": "The budget",
+   "inputs": {
+    "rho": [
+     72,
+     125
+    ]
+   },
+   "expected": {
+    "eps_binary64": 6.217891201144318,
+    "displayed": 6.2
+   }
+  },
+  {
+   "id": "shield/shield/shield-display-055",
+   "description": "Display of \u03c1 127/125",
+   "section": "The budget",
+   "inputs": {
+    "rho": [
+     127,
+     125
+    ]
+   },
+   "expected": {
+    "eps_binary64": 8.509079133945324,
+    "displayed": 8.5
+   }
+  },
+  {
+   "id": "shield/shield/shield-display-056",
+   "description": "Display of \u03c1 0",
+   "section": "The budget",
+   "inputs": {
+    "rho": [
+     0,
+     1
+    ]
+   },
+   "expected": {
+    "eps_binary64": 0.0,
+    "displayed": 0.0
+   }
+  },
+  {
+   "id": "shield/shield/shield-display-057",
+   "description": "Display of \u03c1 2201/500",
+   "section": "The budget",
+   "inputs": {
+    "rho": [
+     2201,
+     500
+    ]
+   },
+   "expected": {
+    "eps_binary64": 19.998907062127252,
+    "displayed": 20.0
+   }
+  },
+  {
+   "id": "shield/shield/shield-display-058",
+   "description": "round half to even at 6.25",
+   "section": "The budget",
+   "inputs": {
+    "eps": 6.25
+   },
+   "expected": {
+    "displayed": 6.2
+   }
+  },
+  {
+   "id": "shield/shield/shield-display-059",
+   "description": "round half to even at 6.35",
+   "section": "The budget",
+   "inputs": {
+    "eps": 6.35
+   },
+   "expected": {
+    "displayed": 6.3
+   }
+  },
+  {
+   "id": "shield/shield/shield-display-060",
+   "description": "round half to even at 8.45",
+   "section": "The budget",
+   "inputs": {
+    "eps": 8.45
+   },
+   "expected": {
+    "displayed": 8.4
+   }
+  }
+ ]
+}

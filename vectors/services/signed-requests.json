@@ -1,0 +1,123 @@
+{
+ "spec": "services",
+ "file": "signed-requests",
+ "notes": "A-1 payload bytes, A-2 COSE_Sign under hum/service-request/1, A-3 freshness.",
+ "cases": [
+  {
+   "id": "services/signed-requests/service-request-payload-001",
+   "description": "The exact A-1 layout",
+   "section": "Signed requests",
+   "inputs": {
+    "method": "POST",
+    "target": "/v1/log/add?x=1",
+    "body": "7b7d",
+    "nonce": "aff5d424c12ac738e637f0a9dd8bc7fb",
+    "issued": 1791259200
+   },
+   "expected": {
+    "preimage": "68756d2f736572766963652d726571756573742f3100504f5354202f76312f6c6f672f6164643f783d310044136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8aaff5d424c12ac738e637f0a9dd8bc7fb000000006ac47240",
+    "payload": "cc2358ac4a8934a3c12d7fb2f123f984b3bebe3b8e69510527fb5784e9373ef4"
+   }
+  },
+  {
+   "id": "services/signed-requests/request-valid-002",
+   "description": "authority request signed a1+a2 (threshold 2)",
+   "section": "Signed requests",
+   "inputs": {
+    "method": "POST",
+    "target": "/v1/log/add?x=1",
+    "body": "7b7d",
+    "nonce": "aff5d424c12ac738e637f0a9dd8bc7fb",
+    "issued": 1791259200,
+    "keyset_sign_threshold": 2
+   },
+   "expected": {
+    "cose_sign": "d8628440a0f6828347a2012704426131a0584066724f5f35f6480cbde2baaa463797e91871a0eb7f86a44283a0b4dba3a5a65c46cb4f4b079253ddb538b644b751b9262d2af95a750b6312a42278e0ea1a280a8347a2012704426132a05840ba055f753a7ff1318cd3e35abe77f1ae252e3106dd1f322fd11b0ff228f3e7e848d91dfdd5c538736865b13f3c499bee5a84b6095cecdb5c2e1c1a9a7b245f07",
+    "hum_authority_header": "2GKEQKD2goNHogEnBEJhMaBYQGZyT1819kgMveK6qkY3l-kYcaDrf4akQoOgtNujpaZcRstPSweSU921OLZEt1G5Ji0q-Vp1C2MSpCJ44OoaKAqDR6IBJwRCYTKgWEC6BV91On_xMYzT41q-d_GuJS4xBt0fMi_RGw_yKPPn6EjZHf3VxThzaGWxPzxJm-5ahLYJXOzbXC4cGpp7JF8H",
+    "valid_signatures": 2
+   }
+  },
+  {
+   "id": "services/signed-requests/request-reject-A-1-target-003",
+   "description": "The same signature over a different target",
+   "section": "Signed requests",
+   "inputs": {
+    "cose_sign": "d8628440a0f6828347a2012704426131a0584066724f5f35f6480cbde2baaa463797e91871a0eb7f86a44283a0b4dba3a5a65c46cb4f4b079253ddb538b644b751b9262d2af95a750b6312a42278e0ea1a280a8347a2012704426132a05840ba055f753a7ff1318cd3e35abe77f1ae252e3106dd1f322fd11b0ff228f3e7e848d91dfdd5c538736865b13f3c499bee5a84b6095cecdb5c2e1c1a9a7b245f07",
+    "method": "POST",
+    "target": "/v1/log/add",
+    "body": "7b7d",
+    "nonce": "aff5d424c12ac738e637f0a9dd8bc7fb",
+    "issued": 1791259200
+   },
+   "rejection": {
+    "step": null,
+    "check": "verify-request",
+    "rule": "A-1",
+    "valid_signatures": 0
+   }
+  },
+  {
+   "id": "services/signed-requests/request-reject-A-2-threshold-004",
+   "description": "One signature below a threshold of 2",
+   "section": "Signed requests",
+   "inputs": {
+    "cose_sign": "d8628440a0f6818347a2012704426131a0584066724f5f35f6480cbde2baaa463797e91871a0eb7f86a44283a0b4dba3a5a65c46cb4f4b079253ddb538b644b751b9262d2af95a750b6312a42278e0ea1a280a",
+    "keyset_sign_threshold": 2
+   },
+   "rejection": {
+    "step": null,
+    "check": "verify-request",
+    "rule": "A-2",
+    "valid_signatures": 1
+   }
+  },
+  {
+   "id": "services/signed-requests/request-reject-A-3-stale-005",
+   "description": "Issued 301 seconds ago",
+   "section": "Signed requests",
+   "inputs": {
+    "issued": 1791259200,
+    "now": 1791259501,
+    "nonce": "aff5d424c12ac738e637f0a9dd8bc7fb"
+   },
+   "rejection": {
+    "step": null,
+    "check": "freshness",
+    "rule": "A-3",
+    "code": "replay"
+   }
+  },
+  {
+   "id": "services/signed-requests/request-reject-A-3-replay-006",
+   "description": "A nonce seen in the window",
+   "section": "Signed requests",
+   "inputs": {
+    "issued": 1791259200,
+    "now": 1791259210,
+    "nonce": "aff5d424c12ac738e637f0a9dd8bc7fb",
+    "seen": [
+     "aff5d424c12ac738e637f0a9dd8bc7fb"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "freshness",
+    "rule": "A-3",
+    "code": "replay"
+   }
+  },
+  {
+   "id": "services/signed-requests/tokens-007",
+   "description": "Privacy Pass tokens use the RFC 9578 test vectors for types 0x0001 and 0x0002 unchanged (T-1 replay: a second redemption answers 401 token_spent)",
+   "section": "Signed requests",
+   "inputs": {
+    "reference": "RFC 9578 appendix test vectors"
+   },
+   "expected": {
+    "replay_status": 401,
+    "replay_code": "token_spent",
+    "body": "a1006b746f6b656e5f7370656e74"
+   }
+  }
+ ]
+}

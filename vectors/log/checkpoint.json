@@ -1,0 +1,179 @@
+{
+ "spec": "log",
+ "file": "checkpoint",
+ "notes": "Signed checkpoints (C2SP tlog-checkpoint note) and witness cosignatures (cosignature/v1) for the test world. Names come from authority CIDs; a phone matches cosignatures by recomputing the key id from the line's name and each listed key.",
+ "cases": [
+  {
+   "id": "log/checkpoint/origin-001",
+   "description": "Origin line hum/log/<log authority CID text>",
+   "section": "Log and ledger",
+   "inputs": {
+    "log_authority": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53"
+   },
+   "expected": {
+    "origin": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg"
+   }
+  },
+  {
+   "id": "log/checkpoint/witness-name-002",
+   "description": "Witness name hum/witness/<witness authority CID text>",
+   "section": "Witness",
+   "inputs": {
+    "witness_authority": "01687661830818c9495624c10d07109893e38e13c3e38ee2d199be8366f42706be"
+   },
+   "expected": {
+    "name": "hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4"
+   }
+  },
+  {
+   "id": "log/checkpoint/key-id-003",
+   "description": "Note key id (0x01) for the log key and cosignature key id (0x04) for witness 1",
+   "section": "Witness",
+   "inputs": {
+    "log": {
+     "name": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg",
+     "public": "9cfd8ac3d8b50af6eb0b4f991a3e7549c70f249e94df53c3a89b1046166666ff"
+    },
+    "witness": {
+     "name": "hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4",
+     "public": "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce"
+    }
+   },
+   "expected": {
+    "log_key_id": "5be17006",
+    "witness_key_id": "4465f62f"
+   }
+  },
+  {
+   "id": "log/checkpoint/sign-004",
+   "description": "The log signs its checkpoint; the key name equals the origin line",
+   "section": "Log and ledger",
+   "inputs": {
+    "origin": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg",
+    "size": 36,
+    "root": "149072689166ee7c902296a304cf2a4c7ecec34b4dbbbb2c438cefdba6024be8",
+    "seed": "ef842030f22bc2abf9312d36048a74c92e4b6ef603bc0818f56293040eb7d62f"
+   },
+   "expected": {
+    "text": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n36\nFJByaJFm7nyQIpajBM8qTH7Ow0tNu7ssQ4zv26YCS+g=\n",
+    "signature_line": "\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBmfJJCkZ6CEmV5BAPwT5mkOgx1+EA8ev4gQI0RGW9GtR4ejiHXATn2sDtbNJ2FsH8tJM3l+5htJotDkv9LRQ5QQ=\n",
+    "payload": "5be1700667c9242919e821265790403f04f99a43a0c75f8403c7afe20408d11196f46b51e1e8e21d70139f6b03b5b349d85b07f2d24cde5fb986d268b4392ff4b450e504"
+   }
+  },
+  {
+   "id": "log/checkpoint/cosign-005",
+   "description": "Witness 1 cosigns the checkpoint at a fixed time",
+   "section": "Witness",
+   "inputs": {
+    "text": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n36\nFJByaJFm7nyQIpajBM8qTH7Ow0tNu7ssQ4zv26YCS+g=\n",
+    "name": "hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4",
+    "seed": "ab3538ab9256fd15d27d5254652cde993e29cd39d30c3fc1a4cf0f6527196d34",
+    "timestamp": 1791259200
+   },
+   "expected": {
+    "signed_message": "636f7369676e61747572652f76310a74696d6520313739313235393230300a68756d2f6c6f672f63616633746834716d716e6c33656936693273616d6969706e367376696a6e6a71767a696135663768726a6a626e356b3376626876670a33360a464a4279614a466d376e79514970616a424d38715448374f7730744e7537737351347a7632365943532b673d0a",
+    "signature_line": "\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAIxfQ0qH3d+M7ExTzAqwiDFT7BpDWW7rBigeO8CONegemXd1FvkWmoAbEPFBvaYF6bFK+bShmqlIkwX/R6SMiDA==\n",
+    "payload": "4465f62f000000006ac472402317d0d2a1f777e33b1314f302ac220c54fb0690d65bbac18a078ef0238d7a07a65ddd45be45a6a006c43c506f69817a6c52be6d2866aa5224c17fd1e923220c"
+   }
+  },
+  {
+   "id": "log/checkpoint/note-006",
+   "description": "The full signed note: log signature plus two witness cosignatures",
+   "section": "Log and ledger",
+   "inputs": {
+    "text": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n36\nFJByaJFm7nyQIpajBM8qTH7Ow0tNu7ssQ4zv26YCS+g=\n"
+   },
+   "expected": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n36\nFJByaJFm7nyQIpajBM8qTH7Ow0tNu7ssQ4zv26YCS+g=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBmfJJCkZ6CEmV5BAPwT5mkOgx1+EA8ev4gQI0RGW9GtR4ejiHXATn2sDtbNJ2FsH8tJM3l+5htJotDkv9LRQ5QQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAIxfQ0qH3d+M7ExTzAqwiDFT7BpDWW7rBigeO8CONegemXd1FvkWmoAbEPFBvaYF6bFK+bShmqlIkwX/R6SMiDA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJApTfwIuE7cf5oRWBcEAMzLQf3/dVuDroxfr/pa/DUM2fkHJPOKQKsQlf+O1dkXaJ+VSnceOu875dUjsCjGyEDCA==\n",
+    "cosignatures": 2
+   }
+  },
+  {
+   "id": "log/checkpoint/verify-007",
+   "description": "Both listed witness keys cosigned (W-1)",
+   "section": "Witness",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n36\nFJByaJFm7nyQIpajBM8qTH7Ow0tNu7ssQ4zv26YCS+g=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBmfJJCkZ6CEmV5BAPwT5mkOgx1+EA8ev4gQI0RGW9GtR4ejiHXATn2sDtbNJ2FsH8tJM3l+5htJotDkv9LRQ5QQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAIxfQ0qH3d+M7ExTzAqwiDFT7BpDWW7rBigeO8CONegemXd1FvkWmoAbEPFBvaYF6bFK+bShmqlIkwX/R6SMiDA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJApTfwIuE7cf5oRWBcEAMzLQf3/dVuDroxfr/pa/DUM2fkHJPOKQKsQlf+O1dkXaJ+VSnceOu875dUjsCjGyEDCA==\n",
+    "log_public": "9cfd8ac3d8b50af6eb0b4f991a3e7549c70f249e94df53c3a89b1046166666ff",
+    "witness_keys": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ]
+   },
+   "expected": {
+    "log_signature_valid": true,
+    "cosigners": 2,
+    "timestamps": [
+     1791259200,
+     1791259200
+    ]
+   }
+  },
+  {
+   "id": "log/checkpoint/reject-008",
+   "description": "Only one listed witness key: fewer than MIN_WITNESSES (W-2)",
+   "section": "Witness",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n36\nFJByaJFm7nyQIpajBM8qTH7Ow0tNu7ssQ4zv26YCS+g=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBmfJJCkZ6CEmV5BAPwT5mkOgx1+EA8ev4gQI0RGW9GtR4ejiHXATn2sDtbNJ2FsH8tJM3l+5htJotDkv9LRQ5QQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAIxfQ0qH3d+M7ExTzAqwiDFT7BpDWW7rBigeO8CONegemXd1FvkWmoAbEPFBvaYF6bFK+bShmqlIkwX/R6SMiDA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJApTfwIuE7cf5oRWBcEAMzLQf3/dVuDroxfr/pa/DUM2fkHJPOKQKsQlf+O1dkXaJ+VSnceOu875dUjsCjGyEDCA==\n",
+    "log_public": "9cfd8ac3d8b50af6eb0b4f991a3e7549c70f249e94df53c3a89b1046166666ff",
+    "witness_keys": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "W-2",
+    "cosigners": 1
+   }
+  },
+  {
+   "id": "log/checkpoint/reject-009",
+   "description": "A cosignature from an unlisted witness does not count",
+   "section": "Witness",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n36\nFJByaJFm7nyQIpajBM8qTH7Ow0tNu7ssQ4zv26YCS+g=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBmfJJCkZ6CEmV5BAPwT5mkOgx1+EA8ev4gQI0RGW9GtR4ejiHXATn2sDtbNJ2FsH8tJM3l+5htJotDkv9LRQ5QQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAIxfQ0qH3d+M7ExTzAqwiDFT7BpDWW7rBigeO8CONegemXd1FvkWmoAbEPFBvaYF6bFK+bShmqlIkwX/R6SMiDA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJApTfwIuE7cf5oRWBcEAMzLQf3/dVuDroxfr/pa/DUM2fkHJPOKQKsQlf+O1dkXaJ+VSnceOu875dUjsCjGyEDCA==\n",
+    "log_public": "9cfd8ac3d8b50af6eb0b4f991a3e7549c70f249e94df53c3a89b1046166666ff",
+    "witness_keys": [
+     "8176a8471301ac94369479e37e9ec422f03382758792b6383d2d3a3178d47197",
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "W-2",
+    "cosigners": 1
+   }
+  },
+  {
+   "id": "log/checkpoint/reject-010",
+   "description": "A cosignature whose timestamp was changed after signing does not verify",
+   "section": "Witness",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n36\nFJByaJFm7nyQIpajBM8qTH7Ow0tNu7ssQ4zv26YCS+g=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBmfJJCkZ6CEmV5BAPwT5mkOgx1+EA8ev4gQI0RGW9GtR4ejiHXATn2sDtbNJ2FsH8tJM3l+5htJotDkv9LRQ5QQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJBIxfQ0qH3d+M7ExTzAqwiDFT7BpDWW7rBigeO8CONegemXd1FvkWmoAbEPFBvaYF6bFK+bShmqlIkwX/R6SMiDA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJApTfwIuE7cf5oRWBcEAMzLQf3/dVuDroxfr/pa/DUM2fkHJPOKQKsQlf+O1dkXaJ+VSnceOu875dUjsCjGyEDCA==\n",
+    "log_public": "9cfd8ac3d8b50af6eb0b4f991a3e7549c70f249e94df53c3a89b1046166666ff",
+    "witness_keys": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "W-2",
+    "cosigners": 1
+   }
+  },
+  {
+   "id": "log/checkpoint/reject-011",
+   "description": "The log signature over a different tree size does not verify",
+   "section": "Log and ledger",
+   "inputs": {
+    "note": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n37\nFJByaJFm7nyQIpajBM8qTH7Ow0tNu7ssQ4zv26YCS+g=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBmfJJCkZ6CEmV5BAPwT5mkOgx1+EA8ev4gQI0RGW9GtR4ejiHXATn2sDtbNJ2FsH8tJM3l+5htJotDkv9LRQ5QQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAIxfQ0qH3d+M7ExTzAqwiDFT7BpDWW7rBigeO8CONegemXd1FvkWmoAbEPFBvaYF6bFK+bShmqlIkwX/R6SMiDA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJApTfwIuE7cf5oRWBcEAMzLQf3/dVuDroxfr/pa/DUM2fkHJPOKQKsQlf+O1dkXaJ+VSnceOu875dUjsCjGyEDCA==\n",
+    "log_public": "9cfd8ac3d8b50af6eb0b4f991a3e7549c70f249e94df53c3a89b1046166666ff"
+   },
+   "rejection": {
+    "step": 7,
+    "reason": "log-signature-invalid"
+   }
+  }
+ ]
+}

@@ -1,0 +1,647 @@
+{
+ "spec": "manifest",
+ "file": "cbor",
+ "notes": "Deterministic CBOR, RFC 8949 section 4.2.1. Inputs use the JSON form from conformance.md. Reject cases give bytes an implementation must refuse at verification step 2.",
+ "cases": [
+  {
+   "id": "manifest/cbor/encode-001",
+   "description": "Encode uint-0",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": 0
+   },
+   "expected": {
+    "cbor": "00"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-002",
+   "description": "Encode uint-23",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": 23
+   },
+   "expected": {
+    "cbor": "17"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-003",
+   "description": "Encode uint-24",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": 24
+   },
+   "expected": {
+    "cbor": "1818"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-004",
+   "description": "Encode uint-255",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": 255
+   },
+   "expected": {
+    "cbor": "18ff"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-005",
+   "description": "Encode uint-256",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": 256
+   },
+   "expected": {
+    "cbor": "190100"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-006",
+   "description": "Encode uint-65535",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": 65535
+   },
+   "expected": {
+    "cbor": "19ffff"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-007",
+   "description": "Encode uint-65536",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": 65536
+   },
+   "expected": {
+    "cbor": "1a00010000"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-008",
+   "description": "Encode uint-2^32",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": 4294967296
+   },
+   "expected": {
+    "cbor": "1b0000000100000000"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-009",
+   "description": "Encode uint-max",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": 18446744073709551615
+   },
+   "expected": {
+    "cbor": "1bffffffffffffffff"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-010",
+   "description": "Encode negative-1",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": -1
+   },
+   "expected": {
+    "cbor": "20"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-011",
+   "description": "Encode negative-24",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": -24
+   },
+   "expected": {
+    "cbor": "37"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-012",
+   "description": "Encode negative-25",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": -25
+   },
+   "expected": {
+    "cbor": "3818"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-013",
+   "description": "Encode negative-256",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": -256
+   },
+   "expected": {
+    "cbor": "38ff"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-014",
+   "description": "Encode negative-min",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": -18446744073709551616
+   },
+   "expected": {
+    "cbor": "3bffffffffffffffff"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-015",
+   "description": "Encode bytes-empty",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": {
+     "hex": ""
+    }
+   },
+   "expected": {
+    "cbor": "40"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-016",
+   "description": "Encode bytes-33",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": {
+     "hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"
+    }
+   },
+   "expected": {
+    "cbor": "5821000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-017",
+   "description": "Encode text-ascii",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": "deck"
+   },
+   "expected": {
+    "cbor": "646465636b"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-018",
+   "description": "Encode text-utf8",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": "\u03c1 \u2264 0.254"
+   },
+   "expected": {
+    "cbor": "6ccf8120e289a420302e323534"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-019",
+   "description": "Encode false",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": false
+   },
+   "expected": {
+    "cbor": "f4"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-020",
+   "description": "Encode true",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": true
+   },
+   "expected": {
+    "cbor": "f5"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-021",
+   "description": "Encode null",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": null
+   },
+   "expected": {
+    "cbor": "f6"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-022",
+   "description": "Encode array-empty",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": []
+   },
+   "expected": {
+    "cbor": "80"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-023",
+   "description": "Encode array-mixed",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": [
+     1,
+     "a",
+     {
+      "hex": "00"
+     },
+     [
+      null
+     ]
+    ]
+   },
+   "expected": {
+    "cbor": "84016161410081f6"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-024",
+   "description": "Encode rat",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": [
+     127,
+     500
+    ]
+   },
+   "expected": {
+    "cbor": "82187f1901f4"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-025",
+   "description": "Encode map-int-keys-sorted",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": {
+     "map": [
+      [
+       10,
+       0
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       256,
+       0
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "cbor": "a301000a0019010000"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-026",
+   "description": "Encode map-text-keys-bytewise",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": {
+     "map": [
+      [
+       "b",
+       0
+      ],
+      [
+       "aa",
+       0
+      ],
+      [
+       "a",
+       0
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "cbor": "a361610061620062616100"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-027",
+   "description": "Encode map-mixed-key-types",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": {
+     "map": [
+      [
+       -1,
+       0
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       "a",
+       0
+      ],
+      [
+       {
+        "hex": "00"
+       },
+       0
+      ],
+      [
+       0,
+       0
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "cbor": "a5000001002000410000616100"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-028",
+   "description": "Encode map-nested",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": {
+     "map": [
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "x"
+         ],
+         [
+          1,
+          [
+           1,
+           2
+          ]
+         ]
+        ]
+       }
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "context",
+          {
+           "hex": "010000000000000000000000000000000000000000000000000000000000000000"
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "cbor": "a208a167636f6e74657874582101000000000000000000000000000000000000000000000000000000000000000009a200617801820102"
+   }
+  },
+  {
+   "id": "manifest/cbor/encode-029",
+   "description": "Encode tag-98",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "value": {
+     "tag": 98,
+     "value": [
+      {
+       "hex": ""
+      },
+      {
+       "map": []
+      },
+      null,
+      []
+     ]
+    }
+   },
+   "expected": {
+    "cbor": "d8628440a0f680"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-030",
+   "description": "Reject uint 0 encoded with a one-byte argument",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "1800"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "int-not-shortest-1"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-031",
+   "description": "Reject uint 24 encoded with a two-byte argument",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "190018"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "int-not-shortest-2"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-032",
+   "description": "Reject uint 65535 encoded with a four-byte argument",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "1a0000ffff"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "int-not-shortest-4"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-033",
+   "description": "Reject uint 2^32-1 encoded with eight bytes",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "1b00000000ffffffff"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "int-not-shortest-8"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-034",
+   "description": "Reject map keys 1 then 0",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "a201000000"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "map-keys-unsorted"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-035",
+   "description": "Reject RFC 7049 length-first order (\"b\" before \"aa\") is not bytewise order",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "a262616100616200"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "map-keys-length-first"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-036",
+   "description": "Reject map with key 1 twice",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "a201000100"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "map-duplicate-key"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-037",
+   "description": "Reject indefinite-length array",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "9f0102ff"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "indefinite-array"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-038",
+   "description": "Reject indefinite-length byte string",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "5f4101ff"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "indefinite-bytes"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-039",
+   "description": "Reject indefinite-length map",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "bf0100ff"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "indefinite-map"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-040",
+   "description": "Reject half-precision float 1.0",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "f93c00"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "float16"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-041",
+   "description": "Reject double 1.0",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "fb3ff0000000000000"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "float64"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-042",
+   "description": "Reject two items where one is expected",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "0100"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "trailing-bytes"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-043",
+   "description": "Reject map that ends before its second value",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "a2010002"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "truncated"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-044",
+   "description": "Reject text string that is not UTF-8",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "61ff"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "invalid-utf8"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-045",
+   "description": "Reject simple value undefined (23)",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "f7"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "undefined-simple"
+   }
+  },
+  {
+   "id": "manifest/cbor/reject-046",
+   "description": "Reject an array used as a map key",
+   "section": "Encoding and content addressing",
+   "inputs": {
+    "cbor": "a1800100"
+   },
+   "rejection": {
+    "step": 2,
+    "reason": "map-key-array"
+   }
+  }
+ ]
+}

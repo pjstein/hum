@@ -1,0 +1,122 @@
+{
+ "spec": "storage",
+ "file": "keyring",
+ "notes": "\u00a74. Blob keys from an epoch secret and a salt, two blobs under one epoch, the keyring-share payload, and the exporter arithmetic for the epoch secret.",
+ "cases": [
+  {
+   "id": "storage/keyring/keyring-derive-001",
+   "description": "Blob key for secret 'zero' and salt a1a2\u2026",
+   "section": "4.3",
+   "inputs": {
+    "epoch_secret": "00000000000000000000000000000000",
+    "salt": "a1a2a3a4a5a6a7a8a9aaabacadaeafb0"
+   },
+   "expected": {
+    "prk": "2e62ee04bb44d987f3169544c94c4af6b5b99c93f060e49a62d3bc3eaa2056ef",
+    "key": "7e0828b26fad32e878bc4268578426da"
+   }
+  },
+  {
+   "id": "storage/keyring/keyring-derive-002",
+   "description": "Blob key for secret 'zero' and salt b1b2\u2026",
+   "section": "4.3",
+   "inputs": {
+    "epoch_secret": "00000000000000000000000000000000",
+    "salt": "b1b2b3b4b5b6b7b8b9babbbcbdbebfc0"
+   },
+   "expected": {
+    "prk": "2153d46759a49b728b7152755748543314784c7192248f45b05159685ba7f539",
+    "key": "2856ce3fb33f6c632c2bc41851f7ea93"
+   }
+  },
+  {
+   "id": "storage/keyring/keyring-derive-003",
+   "description": "Blob key for secret 'test' and salt a1a2\u2026",
+   "section": "4.3",
+   "inputs": {
+    "epoch_secret": "d118dc3507a2c2f9eee7253df63fc292",
+    "salt": "a1a2a3a4a5a6a7a8a9aaabacadaeafb0"
+   },
+   "expected": {
+    "prk": "5dde2ac29fcc5b3b737973e26a58a85e5f1a86ebe72ae7623aaaf61fb0acafc9",
+    "key": "abad87c77b628eb545157304f0e1a2db"
+   }
+  },
+  {
+   "id": "storage/keyring/keyring-derive-004",
+   "description": "Blob key for secret 'test' and salt b1b2\u2026",
+   "section": "4.3",
+   "inputs": {
+    "epoch_secret": "d118dc3507a2c2f9eee7253df63fc292",
+    "salt": "b1b2b3b4b5b6b7b8b9babbbcbdbebfc0"
+   },
+   "expected": {
+    "prk": "efbfe41a3ab1919a9f04e8d58cbb7b1e6c0d721a10b9a52d95f1f69ab815154e",
+    "key": "f60b39bc148231da8c2c567970f254cf"
+   }
+  },
+  {
+   "id": "storage/keyring/keyring-two-blobs-005",
+   "description": "Two format 2 blobs of one plaintext under one epoch differ in key and ciphertext",
+   "section": "4.3",
+   "inputs": {
+    "epoch_secret": "d118dc3507a2c2f9eee7253df63fc292",
+    "salts": [
+     "a1a2a3a4a5a6a7a8a9aaabacadaeafb0",
+     "b1b2b3b4b5b6b7b8b9babbbcbdbebfc0"
+    ],
+    "plaintext": "030a11181f262d343b424950575e656c737a81888f969da4abb2b9c0c7ced5dce3eaf1f8ff060d141b222930373e454c535a61686f767d848b9299a0a7aeb5bcc3cad1d8dfe6edf4fb020910171e252c333a41484f565d646b727980878e959ca3aab1b8"
+   },
+   "expected": {
+    "keys": [
+     "abad87c77b628eb545157304f0e1a2db",
+     "f60b39bc148231da8c2c567970f254cf"
+    ],
+    "first_chunk_ciphertext": [
+     "7d6ea85cb53b05781031278595768bfd",
+     "4755578cd404bf95b0effff046e18df1"
+    ],
+    "cids": [
+     "019c32450d690373db7a6223618505ba5cd3a5e2c5d1d40a9aee099db49d885035",
+     "01ac91240d7825fec9fb6d6364335a820a63caf1ae287bc7fa7704ef98da59693f"
+    ],
+    "keys_differ": true,
+    "ciphertexts_differ": true
+   }
+  },
+  {
+   "id": "storage/keyring/keyring-share-006",
+   "description": "keyring-share payload {0: [[k, mls_epoch, secret]...]} sorted by k",
+   "section": "4.2",
+   "inputs": {
+    "entries": [
+     {
+      "k": 2,
+      "mls_epoch": 9,
+      "secret": "101112131415161718191a1b1c1d1e1f"
+     },
+     {
+      "k": 1,
+      "mls_epoch": 4,
+      "secret": "000102030405060708090a0b0c0d0e0f"
+     }
+    ]
+   },
+   "expected": {
+    "payload": "a1008283010450000102030405060708090a0b0c0d0e0f83020950101112131415161718191a1b1c1d1e1f"
+   }
+  },
+  {
+   "id": "storage/keyring/exporter-007",
+   "description": "Epoch secret = MLS-Exporter(\"hum/keyring/1\", \"\", 16) with HKDF-SHA256 (RFC 9420 section 8.5); chat.md's vectors are the normative check against an MLS stack",
+   "section": "4.1",
+   "inputs": {
+    "exporter_secret": "e34c0203774eb26ce87c3d883768292b32f337d4e2dd2d5605b1e0cf09439642"
+   },
+   "expected": {
+    "derived_secret": "59230469b729f7b44c5161005a2beb525095e9e5d1ad7ad0ca347267cfcbe47a",
+    "epoch_secret": "1518b9963873aef450b2a467fbe29a0d"
+   }
+  }
+ ]
+}

@@ -1,0 +1,504 @@
+{
+ "spec": "release",
+ "file": "shield",
+ "notes": "A phone charges its yearly shield (\u03b5 20 \u2192 \u03c1) with each plan's full \u03c1 before voting, and sits a deck out when the total would exceed it.",
+ "cases": [
+  {
+   "id": "release/shield/charge-001",
+   "description": "Shield check: first-deck",
+   "section": "context.md Floors",
+   "inputs": {
+    "spent_rho": [],
+    "planned_rho": {
+     "num": 127,
+     "den": 500,
+     "rat": [
+      127,
+      500
+     ]
+    },
+    "shield_eps_year": {
+     "num": 20,
+     "den": 1,
+     "rat": [
+      20,
+      1
+     ]
+    }
+   },
+   "expected": {
+    "budget_rho": 4.402394344470366,
+    "total_rho_after": 0.254,
+    "eps_after": 4.000539566972662,
+    "allowed": true
+   }
+  },
+  {
+   "id": "release/shield/charge-002",
+   "description": "Shield check: fourth-deck",
+   "section": "context.md Floors",
+   "inputs": {
+    "spent_rho": [
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     }
+    ],
+    "planned_rho": {
+     "num": 127,
+     "den": 500,
+     "rat": [
+      127,
+      500
+     ]
+    },
+    "shield_eps_year": {
+     "num": 20,
+     "den": 1,
+     "rat": [
+      20,
+      1
+     ]
+    }
+   },
+   "expected": {
+    "budget_rho": 4.402394344470366,
+    "total_rho_after": 1.016,
+    "eps_after": 8.509079133945324,
+    "allowed": true
+   }
+  },
+  {
+   "id": "release/shield/charge-003",
+   "description": "Shield check: seventeenth-deck",
+   "section": "context.md Floors",
+   "inputs": {
+    "spent_rho": [
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     }
+    ],
+    "planned_rho": {
+     "num": 127,
+     "den": 500,
+     "rat": [
+      127,
+      500
+     ]
+    },
+    "shield_eps_year": {
+     "num": 20,
+     "den": 1,
+     "rat": [
+      20,
+      1
+     ]
+    }
+   },
+   "expected": {
+    "budget_rho": 4.402394344470366,
+    "total_rho_after": 4.318,
+    "eps_after": 19.765378365184134,
+    "allowed": true
+   }
+  },
+  {
+   "id": "release/shield/charge-004",
+   "description": "Shield check: eighteenth-deck",
+   "section": "context.md Floors",
+   "inputs": {
+    "spent_rho": [
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     }
+    ],
+    "planned_rho": {
+     "num": 127,
+     "den": 500,
+     "rat": [
+      127,
+      500
+     ]
+    },
+    "shield_eps_year": {
+     "num": 20,
+     "den": 1,
+     "rat": [
+      20,
+      1
+     ]
+    }
+   },
+   "expected": {
+    "budget_rho": 4.402394344470366,
+    "total_rho_after": 4.572,
+    "eps_after": 20.467221202740486,
+    "allowed": false
+   }
+  },
+  {
+   "id": "release/shield/charge-005",
+   "description": "Shield check: stricter-personal-shield",
+   "section": "context.md Floors",
+   "inputs": {
+    "spent_rho": [
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     }
+    ],
+    "planned_rho": {
+     "num": 127,
+     "den": 500,
+     "rat": [
+      127,
+      500
+     ]
+    },
+    "shield_eps_year": {
+     "num": 8,
+     "den": 1,
+     "rat": [
+      8,
+      1
+     ]
+    }
+   },
+   "expected": {
+    "budget_rho": 0.9097068296901019,
+    "total_rho_after": 0.762,
+    "eps_after": 7.251196882563752,
+    "allowed": true
+   }
+  },
+  {
+   "id": "release/shield/charge-006",
+   "description": "Shield check: stricter-personal-shield-fits",
+   "section": "context.md Floors",
+   "inputs": {
+    "spent_rho": [
+     {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     }
+    ],
+    "planned_rho": {
+     "num": 127,
+     "den": 500,
+     "rat": [
+      127,
+      500
+     ]
+    },
+    "shield_eps_year": {
+     "num": 8,
+     "den": 1,
+     "rat": [
+      8,
+      1
+     ]
+    }
+   },
+   "expected": {
+    "budget_rho": 0.9097068296901019,
+    "total_rho_after": 0.508,
+    "eps_after": 5.806407067580161,
+    "allowed": true
+   }
+  }
+ ]
+}

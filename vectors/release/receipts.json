@@ -1,0 +1,198 @@
+{
+ "spec": "release",
+ "file": "receipts",
+ "notes": "Receipt padding (release.md Receipts): integer \u2308\u03c3_8\u2309 from the exact rational \u03c3\u00b2, Y_r = 6\u00b7\u2308\u03c3_8\u2309 + Z_r clamped at 0 with Z_r an input, and a padded tree with its pages. Dummy leaves here are fixed bytes; a real aggregator draws them. The keybox seal is pending an HPKE library; only its info and aad bytes are given.",
+ "cases": [
+  {
+   "id": "release/receipts/ceil-sigma-001",
+   "description": "\u2308\u03c3_8\u2309 for \u0394\u00b2 4, \u03c1 1/200",
+   "section": "Receipts",
+   "inputs": {
+    "delta_squared": 4,
+    "rho": {
+     "num": 1,
+     "den": 200
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 400,
+     "den": 1
+    },
+    "ceil_sigma": 20
+   }
+  },
+  {
+   "id": "release/receipts/ceil-sigma-002",
+   "description": "\u2308\u03c3_8\u2309 for \u0394\u00b2 1, \u03c1 1/200",
+   "section": "Receipts",
+   "inputs": {
+    "delta_squared": 1,
+    "rho": {
+     "num": 1,
+     "den": 200
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 100,
+     "den": 1
+    },
+    "ceil_sigma": 10
+   }
+  },
+  {
+   "id": "release/receipts/ceil-sigma-003",
+   "description": "\u2308\u03c3_8\u2309 for \u0394\u00b2 4, \u03c1 1/400",
+   "section": "Receipts",
+   "inputs": {
+    "delta_squared": 4,
+    "rho": {
+     "num": 1,
+     "den": 400
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 800,
+     "den": 1
+    },
+    "ceil_sigma": 29
+   }
+  },
+  {
+   "id": "release/receipts/ceil-sigma-004",
+   "description": "\u2308\u03c3_8\u2309 for \u0394\u00b2 2, \u03c1 3/1000",
+   "section": "Receipts",
+   "inputs": {
+    "delta_squared": 2,
+    "rho": {
+     "num": 3,
+     "den": 1000
+    }
+   },
+   "expected": {
+    "sigma_squared": {
+     "num": 1000,
+     "den": 3
+    },
+    "ceil_sigma": 19
+   }
+  },
+  {
+   "id": "release/receipts/padding-005",
+   "description": "Y_r for Z_r 0 at \u03c3_8\u00b2 400",
+   "section": "Receipts",
+   "inputs": {
+    "sigma_squared": {
+     "num": 400,
+     "den": 1
+    },
+    "z_r": 0
+   },
+   "expected": {
+    "y_r": 120
+   }
+  },
+  {
+   "id": "release/receipts/padding-006",
+   "description": "Y_r for Z_r 17 at \u03c3_8\u00b2 400",
+   "section": "Receipts",
+   "inputs": {
+    "sigma_squared": {
+     "num": 400,
+     "den": 1
+    },
+    "z_r": 17
+   },
+   "expected": {
+    "y_r": 137
+   }
+  },
+  {
+   "id": "release/receipts/padding-007",
+   "description": "Y_r for Z_r -40 at \u03c3_8\u00b2 400",
+   "section": "Receipts",
+   "inputs": {
+    "sigma_squared": {
+     "num": 400,
+     "den": 1
+    },
+    "z_r": -40
+   },
+   "expected": {
+    "y_r": 80
+   }
+  },
+  {
+   "id": "release/receipts/padding-008",
+   "description": "Y_r for Z_r -1000 at \u03c3_8\u00b2 400",
+   "section": "Receipts",
+   "inputs": {
+    "sigma_squared": {
+     "num": 400,
+     "den": 1
+    },
+    "z_r": -1000
+   },
+   "expected": {
+    "y_r": 0
+   }
+  },
+  {
+   "id": "release/receipts/padded-tree-009",
+   "description": "Seven real leaves padded with Y_r = 3 dummies, sorted bytewise, one page",
+   "section": "Receipts",
+   "inputs": {
+    "real_leaves": [
+     "ba86ded629635fabb1a96f542c0fe6073d33a7ff1f1fdd16e456b49909762f89",
+     "32f22b2934fba4f564390ef5cb30a4835a4f1156514254ae419880eb870849bb",
+     "41729241c9ea309e594d87e3261c1ff874c431d9703e467e1d2f0d3655076bd7",
+     "ce22d3b55008e48b377907e0fb0572966ae8ba19e849d4dd5de52a226b8889a0",
+     "9c8717d202b3b94a05c734c340879b5cd8147a9f3000c61bdf5ba7b099f6f6e0",
+     "73aefd87564fbe9d8c334b52aea46a303edbc641931015bf0e034ac65cde559b",
+     "7310d45c1b2a6a48df92eeb056bf1aef0fb06beace61b87c906aebb572303207"
+    ],
+    "dummy_leaves": [
+     "3871cb4c3ef29ff0f6f348c0345ff66eab9ad0e44fad0eb41e1d816acd1ab9b2",
+     "1e295801c48256d7e9e7dfa02a0b43840e4923ce1f26e0422c43600aae76a2cf",
+     "36079d8443e769724e61ae617a6b098f347213cc713d2b94227655c2b16c96d6"
+    ],
+    "y_r": 3
+   },
+   "expected": {
+    "sorted_leaves": [
+     "1e295801c48256d7e9e7dfa02a0b43840e4923ce1f26e0422c43600aae76a2cf",
+     "32f22b2934fba4f564390ef5cb30a4835a4f1156514254ae419880eb870849bb",
+     "36079d8443e769724e61ae617a6b098f347213cc713d2b94227655c2b16c96d6",
+     "3871cb4c3ef29ff0f6f348c0345ff66eab9ad0e44fad0eb41e1d816acd1ab9b2",
+     "41729241c9ea309e594d87e3261c1ff874c431d9703e467e1d2f0d3655076bd7",
+     "7310d45c1b2a6a48df92eeb056bf1aef0fb06beace61b87c906aebb572303207",
+     "73aefd87564fbe9d8c334b52aea46a303edbc641931015bf0e034ac65cde559b",
+     "9c8717d202b3b94a05c734c340879b5cd8147a9f3000c61bdf5ba7b099f6f6e0",
+     "ba86ded629635fabb1a96f542c0fe6073d33a7ff1f1fdd16e456b49909762f89",
+     "ce22d3b55008e48b377907e0fb0572966ae8ba19e849d4dd5de52a226b8889a0"
+    ],
+    "k": 0,
+    "root": "68ca6ae3c50976f2c002862d7a5f1ef5277348765e09e04322cdfd4b4194077c",
+    "page_cids": [
+     "018ef8ad8638fd3860fe61f3da3a837094438a9100861ffdba55a3071b4daefe9e"
+    ],
+    "root_blob": "a2000001815821018ef8ad8638fd3860fe61f3da3a837094438a9100861ffdba55a3071b4daefe9e"
+   }
+  },
+  {
+   "id": "release/receipts/keybox-layout-010",
+   "description": "HPKE info and aad for the keybox (the seal itself is pending)",
+   "section": "Members-only results",
+   "inputs": {
+    "deck_cid": "0181bb07ef759f1f09f3d1d2e78d0cd00b7f680d0b1c07566322260a2d15dd11e7"
+   },
+   "expected": {
+    "info": "68756d2f726573756c74732d6b6579626f782f310181bb07ef759f1f09f3d1d2e78d0cd00b7f680d0b1c07566322260a2d15dd11e7",
+    "aad": "0181bb07ef759f1f09f3d1d2e78d0cd00b7f680d0b1c07566322260a2d15dd11e7",
+    "pending": "HPKE seal needs a library"
+   }
+  }
+ ]
+}

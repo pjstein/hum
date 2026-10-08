@@ -1,0 +1,175 @@
+{
+ "spec": "chat",
+ "file": "derivations",
+ "notes": "Message ids (5.1), padding buckets (4.3), authenticated data (4.2), safety code (2.2). Message-id lengths are big-endian uint16 (draft-ietf-mimi-content-09 message IDs, chat.md 5.1); the salt is in the input twice, once inside the serialized MimiContent and once appended.",
+ "cases": [
+  {
+   "id": "chat/derivations/message-id-001",
+   "description": "Message id for a text message",
+   "section": "5.1",
+   "inputs": {
+    "identity_key": "3241a8783642f0f639e60f1208f6fc672f041ede7cb20dc0f34624d966939fa0",
+    "group_id": "cb9ff9cdeb0abebd232fdcd5d77b7066f0d0bf033cec4534e3926536a56e7b6f",
+    "message": "875037c19b77b8fe03e6d6c89bb608a48c6bf640f6f6a08601600000781e746578742f6d61726b646f776e3b76617269616e743d47464d2d4d494d494568656c6c6f",
+    "salt": "37c19b77b8fe03e6d6c89bb608a48c6b",
+    "sender_uri": "hum:member:gja2q6bwilypmopgb4jar5x4m4xqihw6psza3qhtiysnszutt6qa",
+    "room_uri": "hum:channel:zop7ttplbk7l2izp3tk5o63qm3ynbpydhtweknhdsjstnjlopnxq",
+    "length_encoding": "big-endian uint16"
+   },
+   "expected": {
+    "message_id": "01e5ea92e64178c073a79d2009fc083c34c698188c6d01f823ed700506c62e71"
+   }
+  },
+  {
+   "id": "chat/derivations/padding-002",
+   "description": "Bucket for 100 bytes (application)",
+   "section": "4.3",
+   "inputs": {
+    "size": 100,
+    "commit": false
+   },
+   "expected": {
+    "bucket": 512
+   }
+  },
+  {
+   "id": "chat/derivations/padding-003",
+   "description": "Bucket for 512 bytes (application)",
+   "section": "4.3",
+   "inputs": {
+    "size": 512,
+    "commit": false
+   },
+   "expected": {
+    "bucket": 512
+   }
+  },
+  {
+   "id": "chat/derivations/padding-004",
+   "description": "Bucket for 513 bytes (application)",
+   "section": "4.3",
+   "inputs": {
+    "size": 513,
+    "commit": false
+   },
+   "expected": {
+    "bucket": 1024
+   }
+  },
+  {
+   "id": "chat/derivations/padding-005",
+   "description": "Bucket for 65536 bytes (application)",
+   "section": "4.3",
+   "inputs": {
+    "size": 65536,
+    "commit": false
+   },
+   "expected": {
+    "bucket": 65536
+   }
+  },
+  {
+   "id": "chat/derivations/padding-reject-006",
+   "description": "65537 bytes exceeds every application bucket",
+   "section": "4.3",
+   "inputs": {
+    "size": 65537,
+    "commit": false
+   },
+   "rejection": {
+    "step": null,
+    "check": "mls-bucket",
+    "reason": "not_padded"
+   }
+  },
+  {
+   "id": "chat/derivations/padding-007",
+   "description": "Bucket for 65537 bytes (commit)",
+   "section": "4.3",
+   "inputs": {
+    "size": 65537,
+    "commit": true
+   },
+   "expected": {
+    "bucket": 131072
+   }
+  },
+  {
+   "id": "chat/derivations/padding-008",
+   "description": "Bucket for 1048576 bytes (commit)",
+   "section": "4.3",
+   "inputs": {
+    "size": 1048576,
+    "commit": true
+   },
+   "expected": {
+    "bucket": 1048576
+   }
+  },
+  {
+   "id": "chat/derivations/padding-reject-009",
+   "description": "1048577 bytes exceeds every commit bucket",
+   "section": "4.3",
+   "inputs": {
+    "size": 1048577,
+    "commit": true
+   },
+   "rejection": {
+    "step": null,
+    "check": "mls-bucket",
+    "reason": "not_padded"
+   }
+  },
+  {
+   "id": "chat/derivations/padding-reject-not-bucket-010",
+   "description": "The DS rejects a 700-byte application message (not a bucket size)",
+   "section": "4.3",
+   "inputs": {
+    "size": 700,
+    "commit": false
+   },
+   "rejection": {
+    "step": null,
+    "check": "ds-bucket",
+    "reason": "not_padded"
+   }
+  },
+  {
+   "id": "chat/derivations/authenticated-data-011",
+   "description": "authenticated_data for an application message and for a commit",
+   "section": "4.2",
+   "inputs": {
+    "franking_tag": "7f56863b4dfa5e8b00677cbd201ffbcfca4cc7450a23383cf50c2700f926c9e7"
+   },
+   "expected": {
+    "application": "017f56863b4dfa5e8b00677cbd201ffbcfca4cc7450a23383cf50c2700f926c9e7",
+    "commit": "00"
+   }
+  },
+  {
+   "id": "chat/derivations/authenticated-data-reject-length-012",
+   "description": "A 32-byte authenticated_data on an application message is dropped",
+   "section": "4.2",
+   "inputs": {
+    "authenticated_data": "7f56863b4dfa5e8b00677cbd201ffbcfca4cc7450a23383cf50c2700f926c9e7"
+   },
+   "rejection": {
+    "step": null,
+    "check": "authenticated-data",
+    "reason": "wrong length"
+   }
+  },
+  {
+   "id": "chat/derivations/safety-code-013",
+   "description": "Safety code: SHA-512(hum/safety/1 || identity key), 12 groups of 5 digits",
+   "section": "2.2",
+   "inputs": {
+    "identity_key": "3241a8783642f0f639e60f1208f6fc672f041ede7cb20dc0f34624d966939fa0"
+   },
+   "expected": {
+    "code": "21d5b1697d81380a79fc37c835e81014c2e09f088b9c4ec0ef68d1b7cdcbda8ded90547e83d1f1761b72c3ae17f04df46bb889d822e7e3124a3773c606ed9776",
+    "groups": "94653 91868 77296 46600 61039 82699 26964 53430 43703 15032 85795 59430"
+   }
+  }
+ ]
+}

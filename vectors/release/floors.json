@@ -1,0 +1,633 @@
+{
+ "spec": "release",
+ "file": "floors",
+ "notes": "context.md: protocol constants, rules C3 and C4 on a context's floors, and C10 on tightening between versions.",
+ "cases": [
+  {
+   "id": "release/floors/protocol-001",
+   "description": "Draft 0.1 protocol constants",
+   "section": "context.md Protocol constants",
+   "inputs": {},
+   "expected": {
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    },
+    "shieldYearEps": {
+     "num": 20,
+     "den": 1,
+     "rat": [
+      20,
+      1
+     ]
+    },
+    "gates": {
+     "tallies": 100,
+     "common": 300,
+     "map": 800,
+     "cell": 300,
+     "checks": 5000
+    },
+    "maxCards": 256,
+    "countRhoMaxDefault": {
+     "num": 1,
+     "den": 200,
+     "rat": [
+      1,
+      200
+     ]
+    }
+   }
+  },
+  {
+   "id": "release/floors/context-002",
+   "description": "Context floors equal-to-protocol are accepted",
+   "section": "context.md Floors",
+   "inputs": {
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    }
+   },
+   "expected": {
+    "violations": []
+   }
+  },
+  {
+   "id": "release/floors/context-003",
+   "description": "Context floors stricter are accepted",
+   "section": "context.md Floors",
+   "inputs": {
+    "floors": {
+     "rho": {
+      "num": 1,
+      "den": 10,
+      "rat": [
+       1,
+       10
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 10000000,
+      "rat": [
+       1,
+       10000000
+      ]
+     },
+     "minVoters": 300,
+     "releasesPerDeck": 1,
+     "minWitnesses": 3,
+     "rhoYear": {
+      "num": 1,
+      "den": 2,
+      "rat": [
+       1,
+       2
+      ]
+     }
+    }
+   },
+   "expected": {
+    "violations": []
+   }
+  },
+  {
+   "id": "release/floors/reject-004",
+   "description": "Context floors break C3-rho",
+   "section": "context.md Floors",
+   "inputs": {
+    "floors": {
+     "rho": {
+      "num": 3,
+      "den": 10,
+      "rat": [
+       3,
+       10
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "check": "context-floors",
+    "reason": "C3",
+    "violations": [
+     "C3: floors.rho above RHO_MAX"
+    ]
+   }
+  },
+  {
+   "id": "release/floors/reject-005",
+   "description": "Context floors break C3-delta",
+   "section": "context.md Floors",
+   "inputs": {
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 100000,
+      "rat": [
+       1,
+       100000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "check": "context-floors",
+    "reason": "C3",
+    "violations": [
+     "C3: floors.delta above DELTA_MAX"
+    ]
+   }
+  },
+  {
+   "id": "release/floors/reject-006",
+   "description": "Context floors break C3-minvoters",
+   "section": "context.md Floors",
+   "inputs": {
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 50,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "check": "context-floors",
+    "reason": "C3",
+    "violations": [
+     "C3: floors.minVoters below MIN_VOTERS"
+    ]
+   }
+  },
+  {
+   "id": "release/floors/reject-007",
+   "description": "Context floors break C3-releases",
+   "section": "context.md Floors",
+   "inputs": {
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 2,
+     "minWitnesses": 2
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "check": "context-floors",
+    "reason": "C3",
+    "violations": [
+     "C3: floors.releasesPerDeck must be 1"
+    ]
+   }
+  },
+  {
+   "id": "release/floors/reject-008",
+   "description": "Context floors break C3-minwitnesses",
+   "section": "context.md Floors",
+   "inputs": {
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 1
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "check": "context-floors",
+    "reason": "C3",
+    "violations": [
+     "C3: floors.minWitnesses below MIN_WITNESSES"
+    ]
+   }
+  },
+  {
+   "id": "release/floors/reject-009",
+   "description": "Context floors break C4-rhoyear",
+   "section": "context.md Floors",
+   "inputs": {
+    "floors": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2,
+     "rhoYear": {
+      "num": 1,
+      "den": 10,
+      "rat": [
+       1,
+       10
+      ]
+     }
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "check": "context-floors",
+    "reason": "C4",
+    "violations": [
+     "C4: rhoYear below rho"
+    ]
+   }
+  },
+  {
+   "id": "release/floors/tighten-010",
+   "description": "Version 2 lowers rho to 1/5, raises minVoters to 300 and lowers rhoYear (C10)",
+   "section": "context.md Floors",
+   "inputs": {
+    "prev": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2,
+     "rhoYear": {
+      "num": 2,
+      "den": 1,
+      "rat": [
+       2,
+       1
+      ]
+     }
+    },
+    "new": {
+     "rho": {
+      "num": 1,
+      "den": 5,
+      "rat": [
+       1,
+       5
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 300,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2,
+     "rhoYear": {
+      "num": 1,
+      "den": 1,
+      "rat": [
+       1,
+       1
+      ]
+     }
+    }
+   },
+   "expected": {
+    "violations": []
+   }
+  },
+  {
+   "id": "release/floors/reject-011",
+   "description": "Version 2 breaks C10-rho-raised",
+   "section": "context.md Floors",
+   "inputs": {
+    "prev": {
+     "rho": {
+      "num": 1,
+      "den": 5,
+      "rat": [
+       1,
+       5
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2,
+     "rhoYear": {
+      "num": 2,
+      "den": 1,
+      "rat": [
+       2,
+       1
+      ]
+     }
+    },
+    "new": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2,
+     "rhoYear": {
+      "num": 2,
+      "den": 1,
+      "rat": [
+       2,
+       1
+      ]
+     }
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "check": "context-tightening",
+    "reason": "C10",
+    "violations": [
+     "C10: rho raised"
+    ]
+   }
+  },
+  {
+   "id": "release/floors/reject-012",
+   "description": "Version 2 breaks C10-minvoters-lowered",
+   "section": "context.md Floors",
+   "inputs": {
+    "prev": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2,
+     "rhoYear": {
+      "num": 2,
+      "den": 1,
+      "rat": [
+       2,
+       1
+      ]
+     }
+    },
+    "new": {
+     "rho": {
+      "num": 1,
+      "den": 5,
+      "rat": [
+       1,
+       5
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 50,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2,
+     "rhoYear": {
+      "num": 2,
+      "den": 1,
+      "rat": [
+       2,
+       1
+      ]
+     }
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "check": "context-tightening",
+    "reason": "C10",
+    "violations": [
+     "C10: minVoters lowered"
+    ]
+   }
+  },
+  {
+   "id": "release/floors/reject-013",
+   "description": "Version 2 breaks C10-rhoyear-dropped",
+   "section": "context.md Floors",
+   "inputs": {
+    "prev": {
+     "rho": {
+      "num": 127,
+      "den": 500,
+      "rat": [
+       127,
+       500
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 100,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2,
+     "rhoYear": {
+      "num": 2,
+      "den": 1,
+      "rat": [
+       2,
+       1
+      ]
+     }
+    },
+    "new": {
+     "rho": {
+      "num": 1,
+      "den": 5,
+      "rat": [
+       1,
+       5
+      ]
+     },
+     "delta": {
+      "num": 1,
+      "den": 1000000,
+      "rat": [
+       1,
+       1000000
+      ]
+     },
+     "minVoters": 300,
+     "releasesPerDeck": 1,
+     "minWitnesses": 2
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "check": "context-tightening",
+    "reason": "C10",
+    "violations": [
+     "C10: rhoYear raised or dropped"
+    ]
+   }
+  }
+ ]
+}

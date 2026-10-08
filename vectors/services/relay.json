@@ -1,0 +1,207 @@
+{
+ "spec": "services",
+ "file": "relay",
+ "notes": "O-3 padding buckets, O-5 relay authority, bootstrap witnesses.",
+ "cases": [
+  {
+   "id": "services/relay/padding-001",
+   "description": "Bucket for a 0-byte request",
+   "section": "OHTTP relay",
+   "inputs": {
+    "size": 0
+   },
+   "expected": {
+    "bucket": 1024
+   }
+  },
+  {
+   "id": "services/relay/padding-002",
+   "description": "Bucket for a 1-byte request",
+   "section": "OHTTP relay",
+   "inputs": {
+    "size": 1
+   },
+   "expected": {
+    "bucket": 1024
+   }
+  },
+  {
+   "id": "services/relay/padding-003",
+   "description": "Bucket for a 1024-byte request",
+   "section": "OHTTP relay",
+   "inputs": {
+    "size": 1024
+   },
+   "expected": {
+    "bucket": 1024
+   }
+  },
+  {
+   "id": "services/relay/padding-004",
+   "description": "Bucket for a 1025-byte request",
+   "section": "OHTTP relay",
+   "inputs": {
+    "size": 1025
+   },
+   "expected": {
+    "bucket": 4096
+   }
+  },
+  {
+   "id": "services/relay/padding-005",
+   "description": "Bucket for a 4096-byte request",
+   "section": "OHTTP relay",
+   "inputs": {
+    "size": 4096
+   },
+   "expected": {
+    "bucket": 4096
+   }
+  },
+  {
+   "id": "services/relay/padding-006",
+   "description": "Bucket for a 5000-byte request",
+   "section": "OHTTP relay",
+   "inputs": {
+    "size": 5000
+   },
+   "expected": {
+    "bucket": 16384
+   }
+  },
+  {
+   "id": "services/relay/padding-007",
+   "description": "Bucket for a 70000-byte request",
+   "section": "OHTTP relay",
+   "inputs": {
+    "size": 70000
+   },
+   "expected": {
+    "bucket": 262144
+   }
+  },
+  {
+   "id": "services/relay/padding-008",
+   "description": "Bucket for a 262144-byte request",
+   "section": "OHTTP relay",
+   "inputs": {
+    "size": 262144
+   },
+   "expected": {
+    "bucket": 262144
+   }
+  },
+  {
+   "id": "services/relay/padding-009",
+   "description": "Bucket for a 262145-byte request",
+   "section": "OHTTP relay",
+   "inputs": {
+    "size": 262145
+   },
+   "expected": {
+    "bucket": 524288
+   }
+  },
+  {
+   "id": "services/relay/padding-010",
+   "description": "Bucket for a 600000-byte request",
+   "section": "OHTTP relay",
+   "inputs": {
+    "size": 600000
+   },
+   "expected": {
+    "bucket": 786432
+   }
+  },
+  {
+   "id": "services/relay/o5-accept-011",
+   "description": "A relay under its own authority",
+   "section": "OHTTP relay",
+   "inputs": {
+    "relay_authority": "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+    "service_authorities": [
+     "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce"
+    ]
+   },
+   "expected": {
+    "accept": true
+   }
+  },
+  {
+   "id": "services/relay/o5-reject-012",
+   "description": "A relay signed by the authority of a service the phone reaches through it",
+   "section": "OHTTP relay",
+   "inputs": {
+    "relay_authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "service_authorities": [
+     "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "relay-authority",
+    "rule": "O-5"
+   }
+  },
+  {
+   "id": "services/relay/bootstrap-accept-013",
+   "description": "First checkpoint cosigned by both shipped constant keys",
+   "section": "Log and ledger",
+   "inputs": {
+    "constants": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ],
+    "cosigners": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ]
+   },
+   "expected": {
+    "accept": true
+   }
+  },
+  {
+   "id": "services/relay/bootstrap-reject-outside-constants-014",
+   "description": "Cosigned by two keys outside the constants",
+   "section": "Log and ledger",
+   "inputs": {
+    "constants": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ],
+    "cosigners": [
+     "48552c08d98a08b9023e99df675ff0060db6451bb4ef2cfcea1baa87c8e9b7e3",
+     "f5d3e646fccb2b936d0109aa19b3dbcd44444d23b195ca34fa850f67353683c3"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "rule": "MIN_WITNESSES",
+    "reason": "no constant key cosigned"
+   }
+  },
+  {
+   "id": "services/relay/bootstrap-reject-one-constant-015",
+   "description": "Cosigned by one constant key only",
+   "section": "Log and ledger",
+   "inputs": {
+    "constants": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "37bf0f572290a6b854a6da65fde375a70f1755329e5b9250594232c4b1556a3d"
+    ],
+    "cosigners": [
+     "e23b84b007435106a77d0584351f762fd7b25e642a4307c902ecd4782832f5ce",
+     "48552c08d98a08b9023e99df675ff0060db6451bb4ef2cfcea1baa87c8e9b7e3"
+    ]
+   },
+   "rejection": {
+    "step": 7,
+    "rule": "MIN_WITNESSES",
+    "reason": "one constant cosigner"
+   }
+  }
+ ]
+}

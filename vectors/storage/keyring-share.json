@@ -1,0 +1,39 @@
+{
+ "spec": "storage",
+ "file": "keyring-share",
+ "notes": "\u00a74.2 keyring-share rejections.",
+ "cases": [
+  {
+   "id": "storage/keyring-share/keyring-share-unauthorized-sender-001",
+   "description": "A keyring-share from a member that did not commit the Add is ignored",
+   "section": "4.2",
+   "inputs": {
+    "payload": "a1008183010450d118dc3507a2c2f9eee7253df63fc292",
+    "sender_committed_add": false
+   },
+   "rejection": {
+    "step": null,
+    "check": "keyring-share",
+    "reason": "unauthorized-sender"
+   }
+  },
+  {
+   "id": "storage/keyring-share/keyring-share-conflicting-secret-002",
+   "description": "An entry for epoch 1 with a different secret than the one held: ignored and the sender flagged",
+   "section": "4.2",
+   "inputs": {
+    "held": {
+     "k": 1,
+     "secret": "d118dc3507a2c2f9eee7253df63fc292"
+    },
+    "payload": "a1008183010450bd4106123e659e259c401119d0c7ef0a"
+   },
+   "rejection": {
+    "step": null,
+    "check": "keyring-share",
+    "reason": "conflicting-secret",
+    "flag_sender": true
+   }
+  }
+ ]
+}
