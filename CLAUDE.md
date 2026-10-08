@@ -50,7 +50,7 @@ Code in these areas needs the owner's explicit review before merging. Mark the P
 - log proof verification and witness checks
 - anything that decides what leaves the phone
 
-Never hand-roll cryptography or noise sampling. Use the libraries recorded in `docs/DECISIONS.md`; adding a dependency in a seam needs approval. Floating-point noise sampling is a known attack surface: use a vetted discrete or exact sampler.
+Never hand-roll primitives or noise sampling: curves, pairings, hashes, AEADs, KDFs and samplers always come from a vetted library recorded in `docs/DECISIONS.md`. A protocol-level construction may be implemented in-house only from a published draft or RFC, with the owner's approval recorded in `docs/decisions/`; it must pass that document's test vectors and be in scope of the outside cryptography review before real users. Adding a dependency in a seam needs approval. Floating-point noise sampling is a known attack surface: use a vetted discrete or exact sampler.
 
 ## Repo layout (created by the bootstrap prompt)
 
