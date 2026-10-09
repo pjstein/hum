@@ -1,7 +1,7 @@
 {
  "spec": "services",
  "file": "relay",
- "notes": "O-3 padding buckets, O-5 relay authority, O-6 relay selection, bootstrap gateway configurations and witnesses. O-6 picks come from a fixed stream, SHA-256(hum/relay-pick/1 \u2016 seed \u2016 uint32be(counter)) read as 32-bit draws with rejection sampling over the set in the order given (shipped relays, then the context's): a reference device so the vectors are deterministic, not a protocol rule; a phone uses its CSPRNG and only the set membership and the re-pick rule are normative.",
+ "notes": "O-3 padding buckets, O-5 relay authority, O-6 relay selection, bootstrap gateway configurations and witnesses. O-6 picks come from a fixed stream, SHA-256(hum/relay-pick/1 \u2016 seed \u2016 uint32be(counter)) read as 32-bit draws with rejection sampling over the set in the order given (shipped relays, then the context's): a reference device so the vectors are deterministic, not a protocol rule; a phone uses its CSPRNG. relay_set and rest are compared as sets; draws, chosen, first_chosen, stream fields and request-kind vocabulary are advisory harness devices. Uniform selection, eligible membership, re-picking and never-direct behavior are normative.",
  "cases": [
   {
    "id": "services/relay/padding-001",

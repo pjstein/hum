@@ -1546,7 +1546,6 @@ def evidence_file(w: World, built: dict[str, Any]) -> File:
                 "reason": reason,
                 "status": err.status,
                 "code": err.code,
-                "body": hexify(services.encode_error(err)),
             },
         )
     return f

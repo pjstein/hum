@@ -438,6 +438,34 @@ def build_rating_releases(wd, valid_deck: m.Bundle, decks: dict[str, m.Bundle]):
         )
     )
     b = wd.append(
+        "release-invalid-R1-rating-part3-missing-n",
+        rating_release_env(wd, valid_deck, groups_n=None),
+        signers,
+    )
+    cases.append(
+        (
+            "invalid-R1-rating-part3-missing-n",
+            "rating part 3 retains its noised n even though n does not gate its unlock",
+            "R1",
+            10,
+            b,
+        )
+    )
+    b = wd.append(
+        "release-invalid-R1-rating-part3-boolean-n",
+        rating_release_env(wd, valid_deck, groups_n=True),
+        signers,
+    )
+    cases.append(
+        (
+            "invalid-R1-rating-part3-boolean-n",
+            "a boolean is not an integer noised participant total",
+            "R1",
+            10,
+            b,
+        )
+    )
+    b = wd.append(
         "release-invalid-R5-rating-not-final",
         rating_release_env(wd, decks["R5-not-final"], final=False),
         signers,

@@ -824,7 +824,70 @@
    }
   },
   {
-   "id": "chat/join-records/join-precommit-live-stop-018",
+   "id": "chat/join-records/join-own-record-age-3599-018",
+   "description": "An own record is usable strictly before JOIN_PENDING; at the boundary send fresh",
+   "section": "2.5 step 4",
+   "inputs": {
+    "record": {
+     "nullifiers": [
+      "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+     ],
+     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+     "day": 20711,
+     "seq": 70,
+     "received": 1801000000
+    },
+    "retry_at": 1801003599
+   },
+   "expected": {
+    "existing_record_usable": true,
+    "action": "commit"
+   }
+  },
+  {
+   "id": "chat/join-records/join-own-record-age-3600-019",
+   "description": "An own record is usable strictly before JOIN_PENDING; at the boundary send fresh",
+   "section": "2.5 step 4",
+   "inputs": {
+    "record": {
+     "nullifiers": [
+      "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+     ],
+     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+     "day": 20711,
+     "seq": 70,
+     "received": 1801000000
+    },
+    "retry_at": 1801003600
+   },
+   "expected": {
+    "existing_record_usable": false,
+    "action": "send-fresh-record"
+   }
+  },
+  {
+   "id": "chat/join-records/join-own-record-age-3601-020",
+   "description": "An own record is usable strictly before JOIN_PENDING; at the boundary send fresh",
+   "section": "2.5 step 4",
+   "inputs": {
+    "record": {
+     "nullifiers": [
+      "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+     ],
+     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+     "day": 20711,
+     "seq": 70,
+     "received": 1801000000
+    },
+    "retry_at": 1801003601
+   },
+   "expected": {
+    "existing_record_usable": false,
+    "action": "send-fresh-record"
+   }
+  },
+  {
+   "id": "chat/join-records/join-precommit-live-stop-021",
    "description": "Pre-commit check against an earlier record for a different identity: the earlier record's identity is a live member: stop",
    "section": "2.5 step 4",
    "inputs": {
@@ -867,7 +930,7 @@
    }
   },
   {
-   "id": "chat/join-records/join-precommit-pending-stop-019",
+   "id": "chat/join-records/join-precommit-pending-stop-022",
    "description": "Pre-commit check against an earlier record for a different identity: the earlier record is 30 minutes old and its identity is not a member: pending, stop",
    "section": "2.5 step 4",
    "inputs": {
@@ -908,7 +971,89 @@
    }
   },
   {
-   "id": "chat/join-records/join-precommit-inert-commit-020",
+   "id": "chat/join-records/join-precommit-boundary-commit-023",
+   "description": "Pre-commit check against an earlier record for a different identity: the earlier record is exactly 3600 seconds old: no longer pending",
+   "section": "2.5 step 4",
+   "inputs": {
+    "own_record": {
+     "nullifiers": [
+      "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+     ],
+     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+     "day": 20711,
+     "seq": 90,
+     "received": 1801007200
+    },
+    "records": [
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d",
+      "day": 20711,
+      "seq": 80,
+      "received": 1801003600
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20711,
+      "seq": 90,
+      "received": 1801007200
+     }
+    ],
+    "live_identities": []
+   },
+   "expected": {
+    "decision": "commit",
+    "reason": "no earlier record is live or pending"
+   }
+  },
+  {
+   "id": "chat/join-records/join-precommit-boundary-stop-024",
+   "description": "Pre-commit check against an earlier record for a different identity: the earlier record is 3599 seconds old: still pending",
+   "section": "2.5 step 4",
+   "inputs": {
+    "own_record": {
+     "nullifiers": [
+      "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+     ],
+     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+     "day": 20711,
+     "seq": 90,
+     "received": 1801007200
+    },
+    "records": [
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d",
+      "day": 20711,
+      "seq": 80,
+      "received": 1801003601
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20711,
+      "seq": 90,
+      "received": 1801007200
+     }
+    ],
+    "live_identities": []
+   },
+   "expected": {
+    "decision": "stop",
+    "reason": "earlier record seq 80 is pending (3599 s < JOIN_PENDING)"
+   }
+  },
+  {
+   "id": "chat/join-records/join-precommit-inert-commit-025",
    "description": "Pre-commit check against an earlier record for a different identity: the earlier record is two hours old and its identity is not a member: inert, commit",
    "section": "2.5 step 4",
    "inputs": {
@@ -949,7 +1094,7 @@
    }
   },
   {
-   "id": "chat/join-records/join-no-record-removed-after-grace-021",
+   "id": "chat/join-records/join-no-record-removed-after-grace-026",
    "description": "No-record backstop: an Add of a new human identity with no join-record, with the organizers group fetched 600 s past the Add: the leaf is removed",
    "section": "2.5 step 4",
    "inputs": {
@@ -959,6 +1104,8 @@
     "add_received": 1801100000,
     "organizers_fetched_to": 1801100600,
     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "snapshots_ready_before_add": true,
+    "record_observed_for_add": false,
     "records": [
      {
       "nullifiers": [
@@ -987,7 +1134,7 @@
    }
   },
   {
-   "id": "chat/join-records/join-no-record-kept-before-grace-022",
+   "id": "chat/join-records/join-no-record-kept-before-grace-027",
    "description": "No-record backstop: the same Add seen with the organizers group fetched only 599 s past it: kept",
    "section": "2.5 step 4",
    "inputs": {
@@ -997,6 +1144,8 @@
     "add_received": 1801100000,
     "organizers_fetched_to": 1801100599,
     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "snapshots_ready_before_add": true,
+    "record_observed_for_add": false,
     "records": [
      {
       "nullifiers": [
@@ -1025,7 +1174,7 @@
    }
   },
   {
-   "id": "chat/join-records/join-no-record-kept-unfetched-023",
+   "id": "chat/join-records/join-no-record-kept-unfetched-028",
    "description": "No-record backstop: the same Add when the organizers group cannot be fetched: the greeter does nothing",
    "section": "2.5 step 4",
    "inputs": {
@@ -1035,6 +1184,8 @@
     "add_received": 1801100000,
     "organizers_fetched_to": null,
     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "snapshots_ready_before_add": true,
+    "record_observed_for_add": false,
     "records": [
      {
       "nullifiers": [
@@ -1063,7 +1214,117 @@
    }
   },
   {
-   "id": "chat/join-records/join-no-record-kept-open-entry-024",
+   "id": "chat/join-records/join-no-record-kept-historical-add-029",
+   "description": "No-record backstop: a newly initialized greeter sees existing members but no historical record in its snapshot: kept",
+   "section": "2.5 step 4",
+   "inputs": {
+    "leaf_kind": 1,
+    "was_member": false,
+    "entry_yields_nullifier": true,
+    "add_received": 1801100000,
+    "organizers_fetched_to": 1801100600,
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "snapshots_ready_before_add": false,
+    "record_observed_for_add": false,
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ]
+   },
+   "expected": {
+    "action": "keep",
+    "reason": "Add predates acquisition of current membership and organizers snapshots"
+   }
+  },
+  {
+   "id": "chat/join-records/join-no-record-kept-retained-expired-record-030",
+   "description": "No-record backstop: a retained record 397 days old names this identity: it is enough for the identity-only no-record check",
+   "section": "2.5 step 4",
+   "inputs": {
+    "leaf_kind": 1,
+    "was_member": false,
+    "entry_yields_nullifier": true,
+    "add_received": 1801100000,
+    "organizers_fetched_to": 1801100600,
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "snapshots_ready_before_add": true,
+    "record_observed_for_add": false,
+    "records": [
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20315,
+      "seq": 95,
+      "received": 1766799200
+     }
+    ]
+   },
+   "expected": {
+    "action": "keep",
+    "reason": "a join-record names this identity"
+   }
+  },
+  {
+   "id": "chat/join-records/join-no-record-kept-pruned-observed-record-031",
+   "description": "No-record backstop: this Add already had an observed record, later expired and pruned: omission cannot revoke admission",
+   "section": "2.5 step 4",
+   "inputs": {
+    "leaf_kind": 1,
+    "was_member": false,
+    "entry_yields_nullifier": true,
+    "add_received": 1801100000,
+    "organizers_fetched_to": 1801100600,
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "snapshots_ready_before_add": true,
+    "record_observed_for_add": true,
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ]
+   },
+   "expected": {
+    "action": "keep",
+    "reason": "a join-record was already observed for this Add"
+   }
+  },
+  {
+   "id": "chat/join-records/join-no-record-kept-open-entry-032",
    "description": "No-record backstop: the same in a context with entry = [0]: kept, no record exists there",
    "section": "2.5 step 4",
    "inputs": {
@@ -1073,6 +1334,8 @@
     "add_received": 1801100000,
     "organizers_fetched_to": 1801100600,
     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "snapshots_ready_before_add": true,
+    "record_observed_for_add": false,
     "records": [
      {
       "nullifiers": [
@@ -1101,7 +1364,7 @@
    }
   },
   {
-   "id": "chat/join-records/join-no-record-kept-agent-leaf-025",
+   "id": "chat/join-records/join-no-record-kept-agent-leaf-033",
    "description": "No-record backstop: an agent (kind 2) leaf with no record: kept",
    "section": "2.5 step 4",
    "inputs": {
@@ -1111,6 +1374,8 @@
     "add_received": 1801100000,
     "organizers_fetched_to": 1801100600,
     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "snapshots_ready_before_add": true,
+    "record_observed_for_add": false,
     "records": [
      {
       "nullifiers": [
@@ -1139,7 +1404,7 @@
    }
   },
   {
-   "id": "chat/join-records/join-no-record-kept-second-device-026",
+   "id": "chat/join-records/join-no-record-kept-second-device-034",
    "description": "No-record backstop: a second device of an identity that is already a member, with no record: kept",
    "section": "2.5 step 4",
    "inputs": {
@@ -1149,6 +1414,8 @@
     "add_received": 1801100000,
     "organizers_fetched_to": 1801100600,
     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "snapshots_ready_before_add": true,
+    "record_observed_for_add": false,
     "records": [
      {
       "nullifiers": [
@@ -1177,7 +1444,7 @@
    }
   },
   {
-   "id": "chat/join-records/join-no-record-kept-record-arrived-027",
+   "id": "chat/join-records/join-no-record-kept-record-arrived-035",
    "description": "No-record backstop: a record naming the identity is found by the time of the fetch: kept",
    "section": "2.5 step 4",
    "inputs": {
@@ -1187,6 +1454,8 @@
     "add_received": 1801100000,
     "organizers_fetched_to": 1801100600,
     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "snapshots_ready_before_add": true,
+    "record_observed_for_add": false,
     "records": [
      {
       "nullifiers": [
@@ -1224,7 +1493,7 @@
    }
   },
   {
-   "id": "chat/join-records/join-record-expired-inert-028",
+   "id": "chat/join-records/join-record-expired-inert-036",
    "description": "A record 397 days old for a live identity is present and undeleted: a ticket sharing its nullifier is admitted, a greeter's own record after it commits, and the duplicate backstop removes nothing; a record exactly 396 days old still blocks",
    "section": "5.17",
    "inputs": {
@@ -1297,7 +1566,7 @@
    }
   },
   {
-   "id": "chat/join-records/join-record-expired-snapshot-omits-029",
+   "id": "chat/join-records/join-record-expired-snapshot-omits-037",
    "description": "The snapshot sent to a newcomer omits the 397-day-old record and keeps the 396-day-old one",
    "section": "5.17",
    "inputs": {
@@ -1378,7 +1647,7 @@
    }
   },
   {
-   "id": "chat/join-records/join-records-prune-030",
+   "id": "chat/join-records/join-records-prune-038",
    "description": "Deletion (advisory, MAY): the reference deletes a record whose identity left and a record more than 396 days old; an implementation that keeps the old record also conforms, since it is inert either way",
    "section": "5.17",
    "inputs": {

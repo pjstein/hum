@@ -265,8 +265,14 @@ def _r1(env: dict[int, Any]) -> None:
         no_unknown_keys(rec, {PR_RHO, PR_SIGMA, PR_N}, "R1", f"part {p}")
         require(is_rat(rec[PR_RHO]), "R1", f"part {p} rho")
         require(is_uint(rec[PR_SIGMA]), "R1", f"part {p} sigma must be a uint")
+        if N_HAT in b and p in PARTS_WITH_N:
+            require(PR_N in rec, "R1", f"part {p} requires n when nHat is present")
         if PR_N in rec:
-            require(isinstance(rec[PR_N], int), "R1", f"part {p} n must be an int")
+            require(
+                isinstance(rec[PR_N], int) and not isinstance(rec[PR_N], bool),
+                "R1",
+                f"part {p} n must be an int",
+            )
             require(p in PARTS_WITH_N, "R1", f"part {p} carries no n")
     if N_HAT in b:
         require(isinstance(b[N_HAT], int) and not isinstance(b[N_HAT], bool), "R1", "nHat")

@@ -30,6 +30,7 @@ import base64
 import hashlib
 import re
 from dataclasses import dataclass
+from datetime import date
 from typing import Any
 
 from . import cbor, cose, log, merkle
@@ -734,7 +735,7 @@ _COUNT_WORDS = ("accepted", "ballot", "received", "voter", "200", "intake")
 def _is_cid(v: Any) -> bool:
     if isinstance(v, bytes):
         return len(v) == 33 and v[0] == 1
-    return isinstance(v, str) and len(v) == 66 and v.startswith("01")
+    return isinstance(v, str) and re.fullmatch(r"01[0-9a-f]{64}", v) is not None
 
 
 def _uint(v: Any) -> bool:
@@ -746,7 +747,15 @@ def _int(v: Any) -> bool:
 
 
 def _day(v: Any) -> bool:
-    return _uint(v) or (isinstance(v, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", v) is not None)
+    if _uint(v):
+        return True
+    if not isinstance(v, str) or re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", v) is None:
+        return False
+    try:
+        date.fromisoformat(v)
+    except ValueError:
+        return False
+    return True
 
 
 def _minute(v: Any) -> bool:
@@ -767,7 +776,9 @@ def _service_name(name: str):
 
 def _bytes_n(n: int):
     return lambda v: (
-        isinstance(v, bytes) and len(v) == n or (isinstance(v, str) and len(v) == 2 * n)
+        isinstance(v, bytes)
+        and len(v) == n
+        or (isinstance(v, str) and re.fullmatch(rf"[0-9a-f]{{{2 * n}}}", v) is not None)
     )
 
 
@@ -788,7 +799,8 @@ LOG_SCHEMA: dict[str, dict[str, Any]] = {
     },
     "aggregator": {
         "service": _service_name("aggregator"), "day": _day, "deck": _is_cid,
-        "round": lambda v: _uint(v) and v <= 3, "state": lambda v: v in AGG_STATES,
+        "round": lambda v: _uint(v) and v <= 3,
+        "state": lambda v: isinstance(v, str) and v in AGG_STATES,
         "code": lambda v: isinstance(v, str) and v in CODES, "rejected_count": _uint,
         "n_hat": _uint, "part": lambda v: _uint(v) and v <= 8, "part_n": _uint,
         "padded_leaves": _uint, "k": lambda v: _uint(v) and v <= 32, "daily_bucket": _uint,
@@ -796,13 +808,12 @@ LOG_SCHEMA: dict[str, dict[str, Any]] = {
     },
     "host": {
         "session_id": _bytes_n(SESSION_ID_LEN), "authority": _is_cid,
-        "version": lambda v: _uint(v) and v >= 1, "day": _day,
-        "outcome": lambda v: v == "issued" or v == "module-limit" or (_uint(v) and v <= 255),
+        "version": lambda v: _uint(v) and v >= 1, "day": _uint,
+        "outcome": lambda v: v == "issued" or v == "module-limit" or (_uint(v) and v <= 999),
         "memory_bucket": _uint, "fuel_bucket": _uint,
     },
     "delivery": {
-        # chat.md §12.9 "Error logs": no request bodies, no client addresses, timestamps rounded
-        # to the minute. The names are the reference's; chat.md gives none.
+        # L-6 fixes these field names; chat.md §12.9 limits retention and content.
         "service": _service_name("delivery"), "day": _day, "code": _code, "minute": _minute,
         "context": _is_cid,
     },
@@ -839,6 +850,8 @@ def check_log_line(service: str, line: dict[str, Any]) -> str | None:
         raise ValueError(f"unknown service {service!r}")
     schema = LOG_SCHEMA[service]
     for key, value in line.items():
+        if not isinstance(key, str):
+            return "L-6"
         if key not in schema:
             lowered = key.lower()
             if service == "aggregator" and (
@@ -867,7 +880,9 @@ def check_log_line(service: str, line: dict[str, Any]) -> str | None:
         path = line.get("path", "")
         if isinstance(path, str) and BALLOT_PATH_MARK in path:
             return "L-5"
-    if service == "resolver" and "count" in line and set(line) - {"cid", "count"}:
+    if service == "host" and set(line) != set(schema):
+        return "L-6"
+    if service == "resolver" and "count" in line and set(line) != {"cid", "count"}:
         return "L-6"
     return None
 

@@ -539,6 +539,7 @@ def build_releases(wd) -> Builder:
         n_hat=90,
         mutate=lambda e: (
             body(e).__setitem__(rb.N_HAT, 90),
+            body(e)[rb.PARTS][0].__setitem__(rb.PR_N, 90),
             body(e).__setitem__(rb.UNLOCKED, [0, 4, 8]),
         ),
     )

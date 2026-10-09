@@ -550,6 +550,18 @@ def join_records_file() -> File:
         {"records": [_rec_json(failed)], "retry_at": t1 + 7_200},
         {"existing_record_usable": chat.join_record_usable(failed, t1 + 7_200), "action": "send-fresh-record"},
     )  # fmt: skip
+    for age in (3_599, 3_600, 3_601):
+        usable = chat.join_record_usable(failed, failed.received + age)
+        f.add(
+            f"join-own-record-age-{age}",
+            "An own record is usable strictly before JOIN_PENDING; at the boundary send fresh",
+            "2.5 step 4",
+            {"record": _rec_json(failed), "retry_at": failed.received + age},
+            {
+                "existing_record_usable": usable,
+                "action": "commit" if usable else "send-fresh-record",
+            },
+        )
     # ---- the pre-commit check against an earlier record for a different identity (RU2)
     own = chat.JoinRecord((n4,), idd, 20711, 90, t1 + 7_200)
     for suffix, desc, earlier, live_set in (
@@ -557,6 +569,10 @@ def join_records_file() -> File:
          chat.JoinRecord((n4,), idc, 20711, 80, t1), {idc}),
         ("join-precommit-pending-stop", "the earlier record is 30 minutes old and its identity is not a member: pending, stop",
          chat.JoinRecord((n4,), idc, 20711, 80, t1 + 7_200 - 1_800), set()),
+        ("join-precommit-boundary-commit", "the earlier record is exactly 3600 seconds old: no longer pending",
+         chat.JoinRecord((n4,), idc, 20711, 80, own.received - 3_600), set()),
+        ("join-precommit-boundary-stop", "the earlier record is 3599 seconds old: still pending",
+         chat.JoinRecord((n4,), idc, 20711, 80, own.received - 3_599), set()),
         ("join-precommit-inert-commit", "the earlier record is two hours old and its identity is not a member: inert, commit",
          chat.JoinRecord((n4,), idc, 20711, 80, t1), set()),
     ):  # fmt: skip
@@ -572,7 +588,8 @@ def join_records_file() -> File:
     # ---- the no-record backstop (RU1)
     add_t = t1 + 100_000
     base = dict(leaf_kind=1, was_member=False, entry_yields_nullifier=True, add_received=add_t,
-                fetched_to=add_t + 600, identity=idd, records=records)  # fmt: skip
+                fetched_to=add_t + 600, identity=idd, records=records,
+                snapshots_ready_before_add=True, record_observed_for_add=False)  # fmt: skip
     for suffix, desc, over in (
         ("join-no-record-removed-after-grace",
          "an Add of a new human identity with no join-record, with the organizers group fetched "
@@ -583,6 +600,15 @@ def join_records_file() -> File:
         ("join-no-record-kept-unfetched",
          "the same Add when the organizers group cannot be fetched: the greeter does nothing",
          {"fetched_to": None}),
+        ("join-no-record-kept-historical-add",
+         "a newly initialized greeter sees existing members but no historical record in its snapshot: kept",
+         {"snapshots_ready_before_add": False}),
+        ("join-no-record-kept-retained-expired-record",
+         "a retained record 397 days old names this identity: it is enough for the identity-only no-record check",
+         {"records": [chat.JoinRecord((n4,), idd, 20712 - 397, 95, add_t - 397 * 86_400)]}),
+        ("join-no-record-kept-pruned-observed-record",
+         "this Add already had an observed record, later expired and pruned: omission cannot revoke admission",
+         {"record_observed_for_add": True}),
         ("join-no-record-kept-open-entry",
          "the same in a context with entry = [0]: kept, no record exists there",
          {"entry_yields_nullifier": False}),
@@ -604,6 +630,8 @@ def join_records_file() -> File:
             {"leaf_kind": args["leaf_kind"], "was_member": args["was_member"],
              "entry_yields_nullifier": args["entry_yields_nullifier"], "add_received": args["add_received"],
              "organizers_fetched_to": args["fetched_to"], "identity": hexify(idd),
+             "snapshots_ready_before_add": args["snapshots_ready_before_add"],
+             "record_observed_for_add": args["record_observed_for_add"],
              "records": [_rec_json(r) for r in args["records"]]},
             {"action": action, "reason": reason},
         )  # fmt: skip

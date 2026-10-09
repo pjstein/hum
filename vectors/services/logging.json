@@ -1,7 +1,7 @@
 {
  "spec": "services",
  "file": "logging",
- "notes": "L-6 and L-5 (RT2, RU3): a log line is a map of named fields; L-6's table is the complete set of field names each service may write, with domains, and a line with any other field or a value outside its domain is forbidden. One allowed and one forbidden line per service row, plus the aggregator and gateway cases of L-5: never a count of accepted ballots for a deck or a round, exact or bucketed, before or after the final version; for ballot intake no line per request, no per-request minute and no count per deck, round or path; rejections counted by code per deck only for malformed, too_large, rejected and forbidden; closed and conflict counted at no grain, appearing only in the service's daily total (rejected_count with no deck and no code). The gateway logs a path and result code with no connection identifier, or counts per path, nothing for a ballot-intake path and no intake counter at any grain: ballot requests appear only inside its daily total of all requests (count with no path). `rule` is L-5 where that rule names the failure (every L-5 failure is also an L-6 failure) and L-6 otherwise. Readings the spec leaves open: the delivery row defers to chat.md \u00a712.9's error-log row, which names no fields (the reference uses service, day, code, minute, context); `day` is a day number or YYYY-MM-DD; `code` is an error code string or an HTTP status; `minute` is a Unix time that is a multiple of 60; the resolver's after-24-hours shape is exactly {cid, count}.",
+ "notes": "L-6 and L-5 (RT2, RU3): a log line is a map of named fields; L-6's table is the complete set of field names each service may write, with domains, and a line with any other field or a value outside its domain is forbidden. One allowed and one forbidden line per service row, plus the aggregator and gateway cases of L-5: never a count of accepted ballots for a deck or a round, exact or bucketed, before or after the final version; for ballot intake no line per request, no per-request minute and no count per deck, round or path; rejections counted by code per deck only for malformed, too_large, rejected and forbidden; closed and conflict counted at no grain, appearing only in the service's daily total (rejected_count with no deck and no code). The gateway logs a path and result code with no connection identifier, or counts per path, nothing for a ballot-intake path and no intake counter at any grain: ballot requests appear only inside its daily total of all requests (count with no path). `rule` is L-5 where that rule names the failure (every L-5 failure is also an L-6 failure) and L-6 otherwise. L-6 defines the delivery fields, valid calendar dates, named codes or HTTP statuses, minute-aligned Unix timestamps, exact host session fields and outcome codes 0..999, and exactly {cid, count} for resolver aggregates. CID and byte strings use valid lowercase hexadecimal when represented as text.",
  "cases": [
   {
    "id": "services/logging/log-line-accepted-noised-before-final-001",
@@ -765,6 +765,261 @@
      "window": 20740,
      "request_count": 1,
      "path": "/v1/log/add"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-host-outcome-999-041",
+   "description": "the largest runtime rejection code is 999",
+   "section": "What services log",
+   "inputs": {
+    "service": "host",
+    "line": {
+     "session_id": "00000000000000000000000000000000",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "version": 1,
+     "day": 20740,
+     "outcome": 999,
+     "memory_bucket": 0,
+     "fuel_bucket": 0
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-log-leap-day-042",
+   "description": "a valid leap-day calendar date",
+   "section": "What services log",
+   "inputs": {
+    "service": "log",
+    "line": {
+     "day": "2024-02-29"
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-cid-nonhex-043",
+   "description": "a CID of the right length containing nonhex characters",
+   "section": "What services log",
+   "inputs": {
+    "service": "log",
+    "line": {
+     "cid": "01gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-cid-uppercase-044",
+   "description": "text CIDs require lowercase hexadecimal",
+   "section": "What services log",
+   "inputs": {
+    "service": "log",
+    "line": {
+     "cid": "01ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-session-nonhex-045",
+   "description": "a session ID of the right length containing nonhex characters",
+   "section": "What services log",
+   "inputs": {
+    "service": "host",
+    "line": {
+     "session_id": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "version": 1,
+     "day": 20740,
+     "outcome": 999,
+     "memory_bucket": 0,
+     "fuel_bucket": 0
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-session-uppercase-046",
+   "description": "text session IDs require lowercase hexadecimal",
+   "section": "What services log",
+   "inputs": {
+    "service": "host",
+    "line": {
+     "session_id": "ABABABABABABABABABABABABABABABAB",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "version": 1,
+     "day": 20740,
+     "outcome": 999,
+     "memory_bucket": 0,
+     "fuel_bucket": 0
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-host-day-text-047",
+   "description": "host opening day is runtime time.day, an unsigned integer",
+   "section": "What services log",
+   "inputs": {
+    "service": "host",
+    "line": {
+     "session_id": "00000000000000000000000000000000",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "version": 1,
+     "day": "2026-10-09",
+     "outcome": 999,
+     "memory_bucket": 0,
+     "fuel_bucket": 0
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-host-outcome-1000-048",
+   "description": "runtime rejection codes end at 999",
+   "section": "What services log",
+   "inputs": {
+    "service": "host",
+    "line": {
+     "session_id": "00000000000000000000000000000000",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "version": 1,
+     "day": 20740,
+     "outcome": 1000,
+     "memory_bucket": 0,
+     "fuel_bucket": 0
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-host-missing-field-049",
+   "description": "every host session field is required",
+   "section": "What services log",
+   "inputs": {
+    "service": "host",
+    "line": {
+     "session_id": "00000000000000000000000000000000",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "version": 1,
+     "day": 20740,
+     "outcome": 999,
+     "memory_bucket": 0
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-invalid-calendar-date-050",
+   "description": "a syntactic date that does not exist",
+   "section": "What services log",
+   "inputs": {
+    "service": "log",
+    "line": {
+     "day": "2025-02-29"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-boolean-day-051",
+   "description": "a boolean is not an unsigned day number",
+   "section": "What services log",
+   "inputs": {
+    "service": "log",
+    "line": {
+     "day": true
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-state-not-text-052",
+   "description": "a state must be a named string, never an array",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "state": []
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-type-not-text-053",
+   "description": "a manifest type must be a registered name",
+   "section": "What services log",
+   "inputs": {
+    "service": "log",
+    "line": {
+     "type": []
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-resolver-count-without-cid-054",
+   "description": "the aggregate shape requires cid as well as count",
+   "section": "What services log",
+   "inputs": {
+    "service": "resolver",
+    "line": {
+     "count": 17
     }
    },
    "rejection": {

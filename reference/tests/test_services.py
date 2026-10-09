@@ -394,7 +394,27 @@ def test_aggregator_log_line_l5_and_gateway_config():
     assert services.check_gateway_log_line({"client_ip": "x"}) == "L-6"
     assert services.check_log_line("resolver", {"cid": cid, "count": 2}) is None
     assert services.check_log_line("resolver", {"cid": cid, "count": 2, "size": 1}) == "L-6"
-    assert services.check_log_line("host", {"session_id": "00" * 16, "outcome": "issued"}) is None
+    host = {
+        "session_id": "00" * 16,
+        "authority": cid,
+        "version": 1,
+        "day": 1,
+        "outcome": "issued",
+        "memory_bucket": 0,
+        "fuel_bucket": 0,
+    }
+    assert services.check_log_line("host", host) is None
+    assert services.check_log_line("host", {**host, "outcome": 999}) is None
+    for line in (
+        {**host, "outcome": 1000},
+        {**host, "session_id": "z" * 32},
+        {"session_id": "00" * 16},
+    ):
+        assert services.check_log_line("host", line) == "L-6"
+    for line in ({"cid": "01" + "g" * 64}, {"day": "2025-02-29"}, {"type": []}):
+        assert services.check_log_line("log", line) == "L-6"
+    assert services.check_log_line("aggregator", {"state": []}) == "L-6"
+    assert services.check_log_line("resolver", {"count": 2}) == "L-6"
     assert services.check_log_line("host", {"session_id": "00" * 15, "outcome": "issued"}) == "L-6"
     with pytest.raises(ValueError):
         services.check_log_line("nobody", {})

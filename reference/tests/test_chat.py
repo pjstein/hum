@@ -121,7 +121,8 @@ def test_join_precommit_and_backstop_rules():
     assert chat.join_precommit_decision(own, [earlier, own], set())[0] == "commit"
     same = chat.JoinRecord((n,), b, 20700, 10, own.received - 1)
     assert chat.join_precommit_decision(own, [same, own], set())[0] == "commit"
-    assert chat.join_record_usable(earlier, earlier.received + chat.JOIN_PENDING)
+    assert chat.join_record_usable(earlier, earlier.received + chat.JOIN_PENDING - 1)
+    assert not chat.join_record_usable(earlier, earlier.received + chat.JOIN_PENDING)
     assert not chat.join_record_usable(earlier, earlier.received + chat.JOIN_PENDING + 1)
     base = dict(
         leaf_kind=1,
@@ -131,11 +132,15 @@ def test_join_precommit_and_backstop_rules():
         fetched_to=5_000 + chat.JOIN_GRACE,
         identity=b,
         records=[],
+        snapshots_ready_before_add=True,
+        record_observed_for_add=False,
     )
     assert chat.join_backstop_decision(**base)[0] == "remove"
     for over in (
         {"fetched_to": 5_000 + chat.JOIN_GRACE - 1},
         {"fetched_to": None},
+        {"snapshots_ready_before_add": False},
+        {"record_observed_for_add": True},
         {"entry_yields_nullifier": False},
         {"leaf_kind": 2},
         {"was_member": True},

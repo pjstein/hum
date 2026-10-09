@@ -361,7 +361,7 @@ def join_precommit_decision(
 def join_record_usable(record: JoinRecord, now: int) -> bool:
     """A greeter commits within ``JOIN_PENDING`` of its record or sends a fresh one first; a
     retried ticket may commit under an existing record for the same identity on the same terms."""
-    return now - record.received <= JOIN_PENDING
+    return 0 <= now - record.received < JOIN_PENDING
 
 
 def join_backstop_decision(
@@ -373,12 +373,21 @@ def join_backstop_decision(
     fetched_to: int | None,
     identity: bytes,
     records: list[JoinRecord],
+    snapshots_ready_before_add: bool,
+    record_observed_for_add: bool,
 ) -> tuple[str, str]:
     """Section 2.5 step 4 (RU1): a greeter removes a leaf that was added with no join-record only
     when every condition holds: a kind 1 (human) leaf; its identity was not in the all-members
     group before the Add; the context's ``entry`` yields a nullifier; the organizers group has
     been fetched to a receive time at least ``JOIN_GRACE`` past the Add commit; and no record
-    names the identity. Returns ("remove" | "keep", reason)."""
+    names the identity. Only Adds observed after current all-members and organizers snapshots
+    were acquired are in scope. ``record_observed_for_add`` remembers a matching record for
+    this Add/admission, not forever for the identity; pruning cannot undo that observation.
+    Returns ("remove" | "keep", reason)."""
+    if not snapshots_ready_before_add:
+        return "keep", "Add predates acquisition of current membership and organizers snapshots"
+    if record_observed_for_add:
+        return "keep", "a join-record was already observed for this Add"
     if not entry_yields_nullifier:
         return "keep", "entry is [0]: no record exists in this context"
     if leaf_kind != 1:

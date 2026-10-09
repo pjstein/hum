@@ -63,6 +63,8 @@ Answered by the owner directly. The seam diffs still get the owner's read before
 
 ## Adopted in the docs
 
+- **Wave 0 closeout clarifications (ADR 0111).** Rating part-3 counts and unlocks, greeter record timing and snapshot-aware admission checks, logging domains, and the normative boundaries of evidence/relay vectors. Independently reviewed; owner seam review remains required. No open owner decision is accepted by this entry. See `docs/decisions/0111-w0-11-closeout-clarifications.md`.
+
 - Manifest envelope: deterministic CBOR, CIDs (0x01 + SHA-256), detached COSE_Sign with Ed25519 under the `hum/manifest/1` domain string, keyset lineages with pre-rotation, pinning by CID, transparency logs with witness cosignatures. See `docs/specs/manifest.md`.
 - Differential privacy: user-level ρ-zCDP Gaussian mechanism, δ = 10⁻⁶; one release per deck; every release is a sum, so central DP ships first and two-server aggregation (DAP, Prio3) replaces it later without changing the math.
 - Size gates: tallies 100 voters, common ground 300, map and groups 800, breakdown cells 300, real-data checks 5,000.

@@ -1190,7 +1190,9 @@ def relay_file(fx: fixtures.Fixture) -> File:
         "SHA-256(hum/relay-pick/1 ‖ seed ‖ uint32be(counter)) read as 32-bit draws with "
         "rejection sampling over the set in the order given (shipped relays, then the "
         "context's): a reference device so the vectors are deterministic, not a protocol rule; "
-        "a phone uses its CSPRNG and only the set membership and the re-pick rule are normative.",
+        "a phone uses its CSPRNG. relay_set and rest are compared as sets; draws, chosen, "
+        "first_chosen, stream fields and request-kind vocabulary are advisory harness devices. "
+        "Uniform selection, eligible membership, re-picking and never-direct behavior are normative.",
     )
     for size in (0, 1, 1024, 1025, 4096, 5000, 70_000, 262_144, 262_145, 600_000):
         f.add(
@@ -1656,12 +1658,24 @@ def host_file(fx: fixtures.Fixture) -> File:
             f.add(f"host-v2-{name}", desc, "Issuer and verifier host", inputs, expected)
         else:
             rule = "V-4" if out.rule == "V-4" else "V-2"
+            rejection = {
+                "step": None,
+                "check": "host-issue",
+                "rule": rule,
+                "status": status,
+                "code": out.code,
+                "error_rule": out.rule,
+            }
+            if rule == "V-4":
+                rejection["reason"] = out.detail  # diagnostic text is advisory
+            else:
+                rejection["body"] = hexify(services.encode_error(out))
             f.add(
                 f"host-v4-{name}" if rule == "V-4" else f"host-v2-{name}",
                 desc,
                 "Issuer and verifier host",
                 inputs,
-                rejection={"step": None, "check": "host-issue", "rule": rule, "status": status, "code": out.code, "error_rule": out.rule, "body": hexify(services.encode_error(out))},
+                rejection=rejection,
             )  # fmt: skip
     return f
 
@@ -1683,11 +1697,10 @@ def logging_file(fx: fixtures.Fixture) -> File:
         "ballot-intake path and no intake counter at any grain: ballot requests appear only "
         "inside its daily total of all requests (count with no path). `rule` is L-5 where that "
         "rule names the failure (every L-5 failure is also an L-6 failure) and L-6 otherwise. "
-        "Readings the spec leaves open: the delivery row defers to chat.md §12.9's error-log "
-        "row, which names no fields (the reference uses service, day, code, minute, context); "
-        "`day` is a day number or YYYY-MM-DD; `code` is an error code string or an HTTP status; "
-        "`minute` is a Unix time that is a multiple of 60; the resolver's after-24-hours shape "
-        "is exactly {cid, count}.",
+        "L-6 defines the delivery fields, valid calendar dates, named codes or HTTP statuses, "
+        "minute-aligned Unix timestamps, exact host session fields and outcome codes 0..999, "
+        "and exactly {cid, count} for resolver aggregates. CID and byte strings use valid "
+        "lowercase hexadecimal when represented as text.",
     )
     deck = hexify(fx.deck_v1.cid)
     ctx = hexify(fx.context_v1.cid)
@@ -1750,6 +1763,82 @@ def logging_file(fx: fixtures.Fixture) -> File:
     bad("gallery", "gallery-viewer", {"service": "gallery", "day": 20740, "query_shape": "takes", "viewer": "v-19"}, "a per-viewer identifier", "L-6")  # fmt: skip
     ok("relay", "relay-ok", {"day": 20740, "client_ip": "203.0.113.9", "window": 20740, "request_count": 240, "gateway": auth, "code": 200}, "client IP and request count per window, gateway, result code")  # fmt: skip
     bad("relay", "relay-path", {"day": 20740, "client_ip": "203.0.113.9", "window": 20740, "request_count": 1, "path": "/v1/log/add"}, "a client paired with a request's content", "L-6")  # fmt: skip
+    host = {
+        "session_id": "00" * 16,
+        "authority": auth,
+        "version": 1,
+        "day": 20740,
+        "outcome": 999,
+        "memory_bucket": 0,
+        "fuel_bucket": 0,
+    }
+    ok("host", "host-outcome-999", host, "the largest runtime rejection code is 999")
+    ok("log", "log-leap-day", {"day": "2024-02-29"}, "a valid leap-day calendar date")
+    for service, suffix, line, desc in (
+        (
+            "log",
+            "cid-nonhex",
+            {"cid": "01" + "g" * 64},
+            "a CID of the right length containing nonhex characters",
+        ),
+        (
+            "log",
+            "cid-uppercase",
+            {"cid": "01" + "AB" * 32},
+            "text CIDs require lowercase hexadecimal",
+        ),
+        (
+            "host",
+            "session-nonhex",
+            {**host, "session_id": "z" * 32},
+            "a session ID of the right length containing nonhex characters",
+        ),
+        (
+            "host",
+            "session-uppercase",
+            {**host, "session_id": "AB" * 16},
+            "text session IDs require lowercase hexadecimal",
+        ),
+        (
+            "host",
+            "host-day-text",
+            {**host, "day": "2026-10-09"},
+            "host opening day is runtime time.day, an unsigned integer",
+        ),
+        (
+            "host",
+            "host-outcome-1000",
+            {**host, "outcome": 1000},
+            "runtime rejection codes end at 999",
+        ),
+        (
+            "host",
+            "host-missing-field",
+            {k: v for k, v in host.items() if k != "fuel_bucket"},
+            "every host session field is required",
+        ),
+        (
+            "log",
+            "invalid-calendar-date",
+            {"day": "2025-02-29"},
+            "a syntactic date that does not exist",
+        ),
+        ("log", "boolean-day", {"day": True}, "a boolean is not an unsigned day number"),
+        (
+            "aggregator",
+            "state-not-text",
+            {"state": []},
+            "a state must be a named string, never an array",
+        ),
+        ("log", "type-not-text", {"type": []}, "a manifest type must be a registered name"),
+        (
+            "resolver",
+            "resolver-count-without-cid",
+            {"count": 17},
+            "the aggregate shape requires cid as well as count",
+        ),
+    ):
+        bad(service, suffix, line, desc, "L-6")
     return f
 
 

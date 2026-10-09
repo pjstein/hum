@@ -94,8 +94,7 @@
     "rule": "V-4",
     "reason": "other_request",
     "status": 422,
-    "code": "rejected",
-    "body": "a3006872656a6563746564017165766964656e63655f6d69736d617463680363562d34"
+    "code": "rejected"
    }
   },
   {
@@ -120,8 +119,7 @@
     "rule": "V-4",
     "reason": "other_session",
     "status": 422,
-    "code": "rejected",
-    "body": "a3006872656a6563746564017165766964656e63655f6d69736d617463680363562d34"
+    "code": "rejected"
    }
   },
   {
@@ -146,8 +144,7 @@
     "rule": "V-4",
     "reason": "other_item_name",
     "status": 422,
-    "code": "rejected",
-    "body": "a3006872656a6563746564017165766964656e63655f6d69736d617463680363562d34"
+    "code": "rejected"
    }
   },
   {
@@ -172,8 +169,7 @@
     "rule": "V-4",
     "reason": "other_verifier",
     "status": 422,
-    "code": "rejected",
-    "body": "a3006872656a6563746564017165766964656e63655f6d69736d617463680363562d34"
+    "code": "rejected"
    }
   }
  ]
