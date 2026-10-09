@@ -25,14 +25,14 @@ Applied on 2026-10-08 on the owner's answer "apply all recommended". The record 
 - The two-phone shield risk recorded as accepted for draft 0.1 (record 0023).
 - The independent check for the in-house BBS crate recorded as a second implementation in the Python reference (record 0110).
 - `docs/DECISIONS.md` gained "Accepted by the owner on 2026-10-08".
-- `sim/`: a change to the leak checker was in progress when the session ended. It may be half done.
+- `sim/`: the leak checker change for record 0107. Verified with the Rust gates and `just sim-fast`; not committed.
 
 ## What was running when the session ended
 
 These agents do not survive the session. Check for their output files before redoing the work.
 
 1. **Review of the 0103, 0104, 0107 edits.** If it finished, `docs/specs/reviews/applied-decisions.md` has a section titled "ADRs 0103, 0104, 0107". If that section is missing, run the review again.
-2. **Simulator change.** `docs/specs/simulator.md` has a new allow table. `sim/src/leak.rs` must follow it: delivery may not see device keys; four new registry kinds; a check that two phones of one context register the same public card fields. Run the Rust gates to see whether it landed.
+2. **Simulator change.** Done and verified at the end of the session, uncommitted: `sim/src/leak.rs` and `sim/src/world.rs` follow the new allow table. The format check and clippy were clean, `cargo test --workspace --locked` passed 47 tests, and `just sim-fast` passed 5 scenarios. One stale line remains in `docs/specs/simulator.md`: the W1-05 plug-in row still says chat registers "device keys as MLS leaves", which the new table forbids at the delivery service. Fix that row.
 3. **BLS12-381 library research.** If it finished, `docs/research/bls12-381-libraries.md` exists.
 
 ## Remaining steps to close wave 0
