@@ -103,3 +103,16 @@ def test_receipt_leaf_task_and_selection_determinism():
     assert sched[0] == {"at": 50_000, "kind": "first"} and sched == bl.send_schedule(
         [100_000, 200_000], 50_000, 300_000, h("x")
     )
+
+
+def test_b1_presentation_over_8k_is_too_large():
+    from hum_reference import ballot as bl
+    from hum_reference import cbor
+
+    deck = b"\x01" + bytes(32)
+    big = bl.ballot_map(deck, 0, bytes(32), bl.round0_payload(bytes([1] * 18)), bytes(8193))
+    with pytest.raises(bl.BallotError) as e:
+        bl.unframe(bl.frame(cbor.encode(big)))
+    assert (e.value.rule, e.value.error) == ("B1", "too_large")
+    ok = bl.ballot_map(deck, 0, bytes(32), bl.round0_payload(bytes([1] * 18)), bytes(8192))
+    assert bl.unframe(bl.frame(cbor.encode(ok)))[bl.PRESENTATION] == bytes(8192)

@@ -1,0 +1,539 @@
+{
+ "spec": "verifier",
+ "file": "keys",
+ "notes": "Issuer key retirement timing (KEY_TAIL = 44,928,000 seconds, 520 days after the key's last epoch ends; ADR 0104). KEY_TAIL is not a validation rule: a key removed earlier is the emergency path, with the cost verifier.md's Lifetime section states, so both cases here are accepted and the earliest ordinary retirement time is the value under test.",
+ "cases": [
+  {
+   "id": "verifier/keys/verifier-key-tail-ordinary-001",
+   "description": "The district lineage's version 3 retires the version-1 key: its last epoch is the one before the version-2 key's fromEpoch, and version 3 is logged after KEY_TAIL past that epoch's end (ordinary retirement)",
+   "section": "Issuer key",
+   "inputs": {
+    "kid": "7ed98e04a3e3d7f6",
+    "version_2_view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       "verifier"
+      ],
+      [
+       2,
+       {
+        "hex": "01cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "013edd0b24b277eea6ef1a2dfc4696f38ca0a2ef65cac7c2cda3f15f9f806d84d9"
+       }
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       {
+        "hex": "013edd0b24b277eea6ef1a2dfc4696f38ca0a2ef65cac7c2cda3f15f9f806d84d9"
+       }
+      ],
+      [
+       6,
+       1791259260
+      ],
+      [
+       8,
+       {
+        "map": [
+         [
+          "code",
+          {
+           "hex": "01c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d29"
+          }
+         ],
+         [
+          "build",
+          {
+           "hex": "01b3ef176c6c5f8a13ceba9b02ac76666dd746b6178a2dee9aa634ff3d495cd149"
+          }
+         ],
+         [
+          "profile",
+          {
+           "hex": "01c75bd2c2a962a56e620afef0ac16247b035b06799d8516a77b57b6a9b2bc5d29"
+          }
+         ],
+         [
+          "dataset.wards",
+          {
+           "hex": "01b9d318071e998feafbefedee64803265acc661beb21856bbd9c1690f1fa36d9a"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          "Millbrook district verifier"
+         ],
+         [
+          1,
+          "Hum reference operator"
+         ],
+         [
+          2,
+          "en"
+         ],
+         [
+          3,
+          "district"
+         ],
+         [
+          4,
+          "person"
+         ],
+         [
+          5,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "7ed98e04a3e3d7f6"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "144175e02e8794e6373a271a0c59998b653e3917a9c0430de0ef2e08e7e30e64265a885604c5569042ebdbef7049842d43db48c70924ea0e31812fc3fc26a5ea68617c0ef735ea59396d0de4138b88b15880053657afaabfe13d1a8998d60acf"
+              }
+             ],
+             [
+              3,
+              0
+             ],
+             [
+              4,
+              1
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "d46689265bca298b"
+              }
+             ],
+             [
+              1,
+              "bbs-bls12381-sha256"
+             ],
+             [
+              2,
+              {
+               "hex": "d1cc3f1c09785b667b863247d9f4bd2f176a25dc81436e0a7fb1ba575c3cc0a7711796ac171eff00154c2432a9fe42c0a10c2adbd66deea33224be10ba20d3bff45ffb2c539af08b1a0313dfe67ac77864e087b017d48e10b7873d31718ca037"
+              }
+             ],
+             [
+              3,
+              4
+             ],
+             [
+              4,
+              2
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          7,
+          [
+           {
+            "map": [
+             [
+              0,
+              {
+               "hex": "43de5f9cbce0bdee"
+              }
+             ],
+             [
+              1,
+              "hpke-x25519-sha256-chacha20poly1305"
+             ],
+             [
+              2,
+              {
+               "hex": "5212b18209fbdd995c8a073fc8dd15346cafffbf110094bcba3d900f68ec8a20"
+              }
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          8,
+          [
+           {
+            "map": [
+             [
+              0,
+              "ward"
+             ],
+             [
+              1,
+              "Ward"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Ward 1"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Ward 2"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  3
+                 ],
+                 [
+                  1,
+                  "Ward 3"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  4
+                 ],
+                 [
+                  1,
+                  "Ward 4"
+                 ]
+                ]
+               }
+              ]
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "area"
+             ],
+             [
+              1,
+              "Area"
+             ],
+             [
+              2,
+              "enum"
+             ],
+             [
+              3,
+              [
+               {
+                "map": [
+                 [
+                  0,
+                  1
+                 ],
+                 [
+                  1,
+                  "Millbrook"
+                 ]
+                ]
+               },
+               {
+                "map": [
+                 [
+                  0,
+                  2
+                 ],
+                 [
+                  1,
+                  "Outside Millbrook"
+                 ]
+                ]
+               }
+              ]
+             ],
+             [
+              5,
+              "breakdown"
+             ],
+             [
+              6,
+              "active"
+             ],
+             [
+              7,
+              0
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          9,
+          [
+           {
+            "map": [
+             [
+              0,
+              "match"
+             ],
+             [
+              1,
+              "voter-file"
+             ],
+             [
+              2,
+              "text"
+             ],
+             [
+              3,
+              "To find your ward in the county voter file"
+             ],
+             [
+              4,
+              0
+             ],
+             [
+              5,
+              "none"
+             ],
+             [
+              6,
+              true
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          10,
+          [
+           {
+            "map": [
+             [
+              0,
+              "voters"
+             ],
+             [
+              1,
+              "private"
+             ],
+             [
+              2,
+              {
+               "hex": "a25d8d2ef3eee3406da12e47eb50003429242bb597d7621b098d443f96a74a16"
+              }
+             ],
+             [
+              3,
+              48210
+             ],
+             [
+              4,
+              "County voter file, 2026-09 extract"
+             ]
+            ]
+           },
+           {
+            "map": [
+             [
+              0,
+              "wards"
+             ],
+             [
+              1,
+              "public"
+             ],
+             [
+              2,
+              {
+               "hex": "a49170e35a94a2cac95c6c1dda889ee5233fc93b33a1e3da010c0a351b09b61c"
+              }
+             ],
+             [
+              3,
+              3
+             ],
+             [
+              4,
+              "Ward boundaries, 2024 redistricting"
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          11,
+          [
+           {
+            "map": [
+             [
+              0,
+              "evidence"
+             ],
+             [
+              1,
+              "match"
+             ],
+             [
+              2,
+              "One card per voter-file record"
+             ]
+            ]
+           }
+          ]
+         ],
+         [
+          12,
+          {
+           "map": [
+            [
+             0,
+             "reissue"
+            ]
+           ]
+          }
+         ],
+         [
+          13,
+          15552000
+         ],
+         [
+          14,
+          2
+         ],
+         [
+          15,
+          {
+           "map": [
+            [
+             0,
+             "wasm-component/1"
+            ],
+            [
+             1,
+             "hum:verifier/module@0.1"
+            ],
+            [
+             2,
+             {
+              "hex": "9ff41e7ca1b8ccb70d2043639d2b7d02e05db85be1a475c470ad7820fd68cda6"
+             }
+            ],
+            [
+             3,
+             "rustc 1.99.0, target wasm32-wasip2"
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ]
+     ]
+    },
+    "version_3_issued": 1791259320,
+    "validity": 15552000,
+    "KEY_TAIL": 44928000
+   },
+   "expected": {
+    "last_epoch": 3,
+    "epoch_seconds": 14515200,
+    "earliest_ordinary_retirement": 102988800,
+    "ordinary": true,
+    "retired_kids": [
+     "7ed98e04a3e3d7f6"
+    ]
+   }
+  },
+  {
+   "id": "verifier/keys/verifier-key-tail-emergency-002",
+   "description": "A key whose last epoch ended one epoch ago, removed now: before KEY_TAIL, so this is an emergency removal, not ordinary retirement; valid under rules 24 to 28, with the effect on open decks the Lifetime section states",
+   "section": "Issuer key",
+   "inputs": {
+    "last_epoch": 122,
+    "removed_at": 1791259320,
+    "validity": 15552000,
+    "KEY_TAIL": 44928000
+   },
+   "expected": {
+    "earliest_ordinary_retirement": 1830297600,
+    "ordinary": false,
+    "emergency": true
+   }
+  },
+  {
+   "id": "verifier/keys/verifier-key-tail-capacity-003",
+   "description": "issuerKeys holds at most 8 keys and a replaced key stays listed for KEY_TAIL, so about seven key changes fit in 520 days; an eighth forces an early removal",
+   "section": "Issuer key",
+   "inputs": {
+    "max_issuer_keys": 8,
+    "KEY_TAIL": 44928000
+   },
+   "expected": {
+    "changes_without_early_removal": 7
+   }
+  }
+ ]
+}

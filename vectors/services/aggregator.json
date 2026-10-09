@@ -117,8 +117,55 @@
    }
   },
   {
-   "id": "services/aggregator/receipt-pages-100-009",
-   "description": "Pages for 100 padded leaves (leaf i = SHA-256('leaf' + decimal i))",
+   "id": "services/aggregator/receipt-body-009",
+   "description": "The receipt body {0: leaf, 1: signature, 2: kid}, kid naming the sign key that signed",
+   "section": "Aggregator",
+   "inputs": {
+    "leaf": "b52a8566aaece89ae7529b217613820e9ead266fcf368cfbf5359bf07286a0c0",
+    "signature": "fb68626ed8be4242db1873f00d558c82e96c3107cd53b2a277852cba42bfed34ee53916d540db910ef11fa255489dbe5615e28d4619ea6e708c4594470c0cc07",
+    "kid": "331e8bbd33acbadc"
+   },
+   "expected": {
+    "body": "a3005820b52a8566aaece89ae7529b217613820e9ead266fcf368cfbf5359bf07286a0c0015840fb68626ed8be4242db1873f00d558c82e96c3107cd53b2a277852cba42bfed34ee53916d540db910ef11fa255489dbe5615e28d4619ea6e708c4594470c0cc070248331e8bbd33acbadc",
+    "view": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "b52a8566aaece89ae7529b217613820e9ead266fcf368cfbf5359bf07286a0c0"
+       }
+      ],
+      [
+       1,
+       {
+        "hex": "fb68626ed8be4242db1873f00d558c82e96c3107cd53b2a277852cba42bfed34ee53916d540db910ef11fa255489dbe5615e28d4619ea6e708c4594470c0cc07"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "331e8bbd33acbadc"
+       }
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/aggregator/receipts-below-minimum-010",
+   "description": "GET .../rounds/{n}/receipts for a release below the minimum: 404, bare not_found (AG-4; release.md R13: no receipt tree)",
+   "section": "Aggregator",
+   "inputs": {
+    "below_minimum": true
+   },
+   "expected": {
+    "status": 404,
+    "body": "a100696e6f745f666f756e64"
+   }
+  },
+  {
+   "id": "services/aggregator/receipt-pages-100-011",
+   "description": "Pages for 100 padded leaves (leaf i = SHA-256('leaf' + decimal i)); the GET response {0: root, 1: k, 2: pages} and the root blob {0: k, 1: pages}",
    "section": "Aggregator",
    "inputs": {
     "leaf_rule": "SHA-256(b'leaf' + str(i))",
@@ -137,12 +184,13 @@
     "root": "a301ea70ae90880e6c3f2308fe9457f2afab140587239d4f8ecb46779a3fb16d",
     "root_blob": "a200000181582101c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2",
     "root_blob_cid": "0178849855ad71856ced38165afb17264b4fdf20b68fe265eb6ef4e477b4099e32",
-    "first_sorted_leaf": "0145d8f9599c301448dcdf7aca8ca040b1cced631ea2cf4f66e9a9d1e60dd155"
+    "first_sorted_leaf": "0145d8f9599c301448dcdf7aca8ca040b1cced631ea2cf4f66e9a9d1e60dd155",
+    "response_body": "a3005820a301ea70ae90880e6c3f2308fe9457f2afab140587239d4f8ecb46779a3fb16d01000281582101c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2"
    }
   },
   {
-   "id": "services/aggregator/receipt-pages-4096-010",
-   "description": "Pages for 4096 padded leaves (leaf i = SHA-256('leaf' + decimal i))",
+   "id": "services/aggregator/receipt-pages-4096-012",
+   "description": "Pages for 4096 padded leaves (leaf i = SHA-256('leaf' + decimal i)); the GET response {0: root, 1: k, 2: pages} and the root blob {0: k, 1: pages}",
    "section": "Aggregator",
    "inputs": {
     "leaf_rule": "SHA-256(b'leaf' + str(i))",
@@ -161,12 +209,13 @@
     "root": "cc430ed98553b331c6c028887fa72a8d66953ace736543c10985dcd1c667207f",
     "root_blob": "a200000181582101c131c3cb3f2e461fb7026a42f7cb16762c6d9576effd8d37e0209bcc23af8617",
     "root_blob_cid": "01a023a679e2a17c9f388314e8fdb99437cc17b4f100ebc969e725c1c4dc0c9935",
-    "first_sorted_leaf": "0010c5c382811b228eb9d70038b451995b105cfc2a951226aa586cb9a48fde4d"
+    "first_sorted_leaf": "0010c5c382811b228eb9d70038b451995b105cfc2a951226aa586cb9a48fde4d",
+    "response_body": "a3005820cc430ed98553b331c6c028887fa72a8d66953ace736543c10985dcd1c667207f01000281582101c131c3cb3f2e461fb7026a42f7cb16762c6d9576effd8d37e0209bcc23af8617"
    }
   },
   {
-   "id": "services/aggregator/receipt-pages-4097-011",
-   "description": "Pages for 4097 padded leaves (leaf i = SHA-256('leaf' + decimal i))",
+   "id": "services/aggregator/receipt-pages-4097-013",
+   "description": "Pages for 4097 padded leaves (leaf i = SHA-256('leaf' + decimal i)); the GET response {0: root, 1: k, 2: pages} and the root blob {0: k, 1: pages}",
    "section": "Aggregator",
    "inputs": {
     "leaf_rule": "SHA-256(b'leaf' + str(i))",
@@ -187,11 +236,70 @@
     "root": "1f8b99e2d3051c6ededdf372d4c50f16d56bc14410ce5762527b9b52b4b4eb9f",
     "root_blob": "a2000101825821016dcfd04766ef46e384df246a61f05093a69fb12962e7fb2cc481d92c33bb7e84582101a854e19ee559dffcfb4696742b4c7f15f5bc31a4f4c324b70cc689a7d22a627c",
     "root_blob_cid": "01fc3a4c94359b214d2ac133db7398fcbe8cfe295bc24fe1dde29d6f84775babb4",
-    "first_sorted_leaf": "0010c5c382811b228eb9d70038b451995b105cfc2a951226aa586cb9a48fde4d"
+    "first_sorted_leaf": "0010c5c382811b228eb9d70038b451995b105cfc2a951226aa586cb9a48fde4d",
+    "response_body": "a30058201f8b99e2d3051c6ededdf372d4c50f16d56bc14410ce5762527b9b52b4b4eb9f010102825821016dcfd04766ef46e384df246a61f05093a69fb12962e7fb2cc481d92c33bb7e84582101a854e19ee559dffcfb4696742b4c7f15f5bc31a4f4c324b70cc689a7d22a627c"
    }
   },
   {
-   "id": "services/aggregator/receipt-pages-1000000-012",
+   "id": "services/aggregator/receipts-response-matches-blob-014",
+   "description": "A phone checks the GET .../receipts response {0: root, 1: k, 2: pages} against the logged release's root and the pinned root blob {0: k, 1: pages} before fetching a page: all three match",
+   "section": "Aggregator",
+   "inputs": {
+    "response": "a3005820a301ea70ae90880e6c3f2308fe9457f2afab140587239d4f8ecb46779a3fb16d01000281582101c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2",
+    "release_root": "a301ea70ae90880e6c3f2308fe9457f2afab140587239d4f8ecb46779a3fb16d",
+    "pinned_root_blob": "a200000181582101c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2"
+   },
+   "expected": {
+    "accepted": true
+   }
+  },
+  {
+   "id": "services/aggregator/receipts-response-k-mismatch-015",
+   "description": "The GET .../receipts response's k differs from the pinned blob's: the phone rejects it (services.md Receipts; the response and the pinned blob are two distinct bodies by design)",
+   "section": "Aggregator",
+   "inputs": {
+    "response": "a3005820a301ea70ae90880e6c3f2308fe9457f2afab140587239d4f8ecb46779a3fb16d01010281582101c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2",
+    "release_root": "a301ea70ae90880e6c3f2308fe9457f2afab140587239d4f8ecb46779a3fb16d",
+    "pinned_root_blob": "a200000181582101c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2"
+   },
+   "rejection": {
+    "step": null,
+    "check": "receipts-response",
+    "reason": "k_mismatch"
+   }
+  },
+  {
+   "id": "services/aggregator/receipts-response-pages-mismatch-016",
+   "description": "The GET .../receipts response's a page CID differs from the pinned blob's: the phone rejects it (services.md Receipts; the response and the pinned blob are two distinct bodies by design)",
+   "section": "Aggregator",
+   "inputs": {
+    "response": "a3005820a301ea70ae90880e6c3f2308fe9457f2afab140587239d4f8ecb46779a3fb16d01000281582101bd2211b19c8b177d825791c6a54856eb6e5ceb966eda135e0866bcf4738ef119",
+    "release_root": "a301ea70ae90880e6c3f2308fe9457f2afab140587239d4f8ecb46779a3fb16d",
+    "pinned_root_blob": "a200000181582101c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2"
+   },
+   "rejection": {
+    "step": null,
+    "check": "receipts-response",
+    "reason": "pages_mismatch"
+   }
+  },
+  {
+   "id": "services/aggregator/receipts-response-root-mismatch-017",
+   "description": "The GET .../receipts response's root differs from the logged release's receipts[n]: the phone rejects it (services.md Receipts; the response and the pinned blob are two distinct bodies by design)",
+   "section": "Aggregator",
+   "inputs": {
+    "response": "a3005820d4ba24b3e6e5a4e273c3c284a3d4180a1ae1ac48e0482c953c7a271fa35dd20a01000281582101c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2",
+    "release_root": "a301ea70ae90880e6c3f2308fe9457f2afab140587239d4f8ecb46779a3fb16d",
+    "pinned_root_blob": "a200000181582101c35828135d78ca29f79636434ae11f930152dc0bd7ad6b34f641ba434e6806b2"
+   },
+   "rejection": {
+    "step": null,
+    "check": "receipts-response",
+    "reason": "root_mismatch"
+   }
+  },
+  {
+   "id": "services/aggregator/receipt-pages-1000000-018",
    "description": "Pages for 1,000,000 leaves: k = 8, 256 pages",
    "section": "Aggregator",
    "inputs": {

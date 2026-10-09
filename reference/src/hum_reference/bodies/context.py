@@ -84,7 +84,8 @@ CONSTANTS = {
 (
     NAME, SEALED, ENTRY, VOTE, ISSUERS, PERMS, FLOORS, LOGS, AGGREGATORS, STORES, STORAGE, CHAT,
     MIX_GLOBAL, RESULTS_KEY, RESULTS_EPOCH, COUNT, MAP, AGENTS, ABOUT_EPOCH, NULLIFIER,
-) = range(20)  # fmt: skip
+    RESOLVERS, RELAYS,
+) = range(22)  # fmt: skip
 REQUIRED = {
     NAME,
     SEALED,
@@ -99,7 +100,7 @@ REQUIRED = {
     MIX_GLOBAL,
     NULLIFIER,
 }
-ALL_KEYS = set(range(20))
+ALL_KEYS = set(range(22))
 
 P_CARDS, P_RESULTS, P_MEMBER_LIST = 0, 1, 2
 F_RHO, F_DELTA, F_MIN_VOTERS, F_RELEASES, F_RHO_YEAR, F_MIN_WITNESSES = range(6)
@@ -202,6 +203,8 @@ def body(
     map_limits: dict[int, Any] | None = None,
     agents: dict[int, Any] | None = None,
     about_epoch: int | None = None,
+    resolvers: list[bytes] | None = None,
+    relays: list[bytes] | None = None,
 ) -> dict[int, Any]:
     out: dict[int, Any] = {
         NAME: name,
@@ -226,6 +229,8 @@ def body(
         (MAP, map_limits),
         (AGENTS, agents),
         (ABOUT_EPOCH, about_epoch),
+        (RESOLVERS, resolvers),
+        (RELAYS, relays),
     ):
         if value is not None:
             out[key] = value
@@ -473,6 +478,13 @@ def schema(env: dict[int, Any]) -> None:
             "C1",
             "issuers",
         )
+    for key, name_ in ((RESOLVERS, "resolvers"), (RELAYS, "relays")):
+        if key in b:
+            require(
+                isinstance(b[key], list) and all(is_cid(a) for a in b[key]),
+                "C1",
+                f"{name_} must be an array of auth",
+            )
     if RESULTS_KEY in b:
         require(is_bytes(b[RESULTS_KEY], 32), "C1", "resultsKey must be 32 bytes")
     if RESULTS_EPOCH in b:
@@ -603,6 +615,22 @@ def rules(view: m.Resolved) -> None:
     log_ids = [e[L_LOG] for e in b[LOGS]]
     require(len(set(log_ids)) == len(log_ids), "C7", "duplicate log")
     require(len(set(issuers)) == len(issuers), "C7", "duplicate issuer")
+    resolvers = b.get(RESOLVERS, [])
+    relays = b.get(RELAYS, [])
+    if RESOLVERS in b:
+        require(1 <= len(resolvers) <= 8, "C7", "resolvers has 1..8 entries when present")
+        require(len(set(resolvers)) == len(resolvers), "C7", "duplicate resolver")
+    if RELAYS in b:
+        require(1 <= len(relays) <= 4, "C7", "relays has 1..4 entries when present")
+        require(len(set(relays)) == len(relays), "C7", "duplicate relay")
+        named = set(log_ids) | set(aggs) | set(b[STORES]) | set(resolvers) | set(issuers)
+        named.add(b[CHAT][CH_DELIVERY])
+        for relay in relays:
+            require(
+                relay not in named,
+                "C7",
+                "a relay equals an authority this context names (services.md O-5, lookup-free)",
+            )
     # C8
     for entry_ in b[LOGS]:
         w = entry_[L_WITNESSES]
@@ -633,6 +661,11 @@ def rules(view: m.Resolved) -> None:
         pb = prev[m.BODY]
         require(b[SEALED] == pb[SEALED], "C11", "sealed changed")
         require(b[CHAT][CH_ALL] == pb[CHAT][CH_ALL], "C11", "chat.allMembers changed")
+        require(
+            b[LOGS][0][L_LOG] == pb[LOGS][0][L_LOG],
+            "C11",
+            "logs[0].log changed (the ledger of record is frozen from version 1)",
+        )
     # C12
     results = b[PERMS][P_RESULTS]
     require(results in (0, 1), "C12", "perms.results must be 0 or 1")

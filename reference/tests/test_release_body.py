@@ -99,3 +99,30 @@ def test_four_stage_release_body(wd):
     assert set(body[rb.RECEIPTS]) == {0, 1, 2, 3}
     assert "keybox" in env[m.REFS] and "t/repness" in env[m.REFS]
     assert body[rb.PARTS][4][rb.PR_SIGMA] == 10_000_000  # σ = 1/√(2·1/200) = 10
+
+
+def test_below_minimum_shape_follows_adr_0103(wd):
+    """Below the minimum: parts 0 and 4 only, no part 8, empty receipts, no receipts/0 ref."""
+    for name in ("release-valid-below-minimum", "release-valid-below-minimum-ibis"):
+        env = cbor.decode(wd.named[name].envelope)
+        body = env[m.BODY]
+        assert body[rb.UNLOCKED] == [] and body[rb.FINAL] is True and rb.N_HAT not in body
+        assert set(body[rb.PARTS]) == {0, 4} and body[rb.RECEIPTS] == {}
+        assert not any(k.startswith("receipts/") or k.startswith("t/") for k in env[m.REFS])
+    names = {n: r for n, _d, r, _b in wd.releases.cases}
+    assert names["invalid-R13-below-minimum-receipt-root"] == "R13"
+
+
+def test_release_only_in_second_log_fails_step7(wd):
+    b = wd.named["release-step7-not-in-ledger-of-record"]
+    assert b.proof.log == wd.w2.log_authority and b.cid not in wd.w.bundles
+    # the second log mirrors the ledger of record at index + 1
+    some = next(iter(wd.w.bundles.values()))
+    assert wd.w2.bundles[some.cid].proof.position == some.proof.position + 1
+    with pytest.raises(m.Rejection) as e:
+        m.verify_bundle(wd.w2.context(now=fixtures.NOW), b)
+    assert (e.value.step, e.value.rule) == (7, None)
+    # a phone following the ledger of record fails step 7 as well (proof from another log)
+    with pytest.raises(m.Rejection) as e2:
+        m.verify_bundle(wd.w.context(now=fixtures.NOW), b)
+    assert e2.value.step == 7

@@ -25,6 +25,9 @@ from . import (
 
 __all__ = [
     "KINDS",
+    "DL_LIMIT_NAMES",
+    "delivery_defaults",
+    "delivery_rules",
     "LOG_CEILINGS",
     "RETENTION_CLASSES",
     "body",
@@ -62,6 +65,25 @@ TOKEN_KINDS = {"delivery", "blob-store"}
 RETENTION_CLASSES = {"requests", "errors", "counters", "content"}
 MIN_WITNESSES = 2
 DAY = 86_400
+# chat.md section 12.1: the delivery service's manifest (kind ``delivery``), DL-1 to DL-5
+DL_LIMIT_NAMES = (
+    "channelsPerContext",
+    "bytesPerChannel",
+    "commitsPerHour",
+    "sendsPerMinute",
+    "tokensPerIssuance",
+    "ticketsPerContextDay",
+)
+DL_LIMIT_DEFAULTS = dict(
+    zip(DL_LIMIT_NAMES, (1_000, 256 * 1024 * 1024, 600, 600, 64, 10_000), strict=True)
+)
+DL_ROTATION_MAX = 2_592_000
+DL_CONTENT_MAX = 2_592_000
+DL_ERRORS_MAX = DAY
+DL_FOREIGN_KEYS = {WITNESSES, ORIGIN, HPKE, PHASE}
+"""Keys a delivery manifest never carries; services.md S-1, S-3 and S-7 refuse them at step 4."""
+DL_TOKENS_PER_ISSUANCE_MAX = 64
+DL_COMMITS_PER_HOUR_MAX = 3_600
 # Ceilings from the "What services log" table; None means the sibling spec sets them.
 LOG_CEILINGS: dict[str, int | None] = {
     "log": 90 * DAY,
@@ -161,6 +183,59 @@ def body(
     if witnesses is not None:
         out[WITNESSES] = [{W_NAME: n, W_KEY: k} for n, k in witnesses]
     return out
+
+
+def delivery_defaults() -> dict[str, Any]:
+    """chat.md section 12.1 defaults for the reference delivery service (DL-1 to DL-3)."""
+    return {
+        "issuer": {ISS_NAME: "hum-ds", ISS_TYPE: 1, ISS_ROTATION: 30 * DAY},
+        "limits": dict(DL_LIMIT_DEFAULTS),
+        "retention": {"content": DL_CONTENT_MAX, "errors": DL_ERRORS_MAX},
+    }
+
+
+def delivery_rules(b: dict[int, Any], prev_body: dict[int, Any] | None) -> None:
+    """chat.md section 12.1 DL-1 to DL-5 for a ``service`` manifest of kind ``delivery``, run at
+    step 10 after S-1 to S-8. Keys that do not belong to a delivery manifest (``origin``,
+    ``witnesses``, ``phase``, ``hpke``, 17 and above) are refused at step 4 by services.md
+    S-1, S-3 and S-7 before any DL rule runs."""
+    iss = b.get(ISSUER)
+    require(isinstance(iss, dict), "DL-1", "issuer map (key 16) required")
+    require(iss.get(ISS_TYPE) == 1, "DL-1", "issuer.type must be 1 (VOPRF)")
+    require(is_text(iss.get(ISS_NAME), 255, min_bytes=1), "DL-1", "issuer.name must be non-empty")
+    require(
+        is_uint(iss.get(ISS_ROTATION)) and iss[ISS_ROTATION] <= DL_ROTATION_MAX,
+        "DL-1",
+        "issuer.rotation above 2,592,000 seconds",
+    )
+    limits = b.get(LIMITS)
+    require(isinstance(limits, dict), "DL-2", "limits required")
+    require(set(limits) == set(DL_LIMIT_NAMES), "DL-2", "limits must hold exactly the six names")
+    require(all(is_uint(v, 1) for v in limits.values()), "DL-2", "every limit is a uint >= 1")
+    ret = b.get(RETENTION)
+    require(isinstance(ret, dict), "DL-3", "retention required")
+    require(
+        is_uint(ret.get("content")) and ret["content"] <= DL_CONTENT_MAX,
+        "DL-3",
+        "retention.content must be declared and at most 2,592,000 seconds",
+    )
+    require(
+        is_uint(ret.get("errors")) and ret["errors"] <= DL_ERRORS_MAX,
+        "DL-3",
+        "retention.errors must be declared and at most 86,400 seconds",
+    )
+    require(
+        limits["tokensPerIssuance"] <= DL_TOKENS_PER_ISSUANCE_MAX,
+        "DL-4",
+        "limits.tokensPerIssuance above 64 (12.3 caps an issuance request there)",
+    )
+    require(
+        limits["commitsPerHour"] <= DL_COMMITS_PER_HOUR_MAX,
+        "DL-4",
+        "limits.commitsPerHour above 3,600 (one commit a second)",
+    )
+    if prev_body is not None:
+        require(prev_body[ISSUER][ISS_NAME] == iss[ISS_NAME], "DL-5", "issuer.name changed")
 
 
 def blob_store_defaults() -> dict[str, Any]:
@@ -373,6 +448,8 @@ def rules(view: m.Resolved) -> None:
                 "BS-5",
                 "formats.sealed lost a value",
             )
+    if kind == "delivery":
+        delivery_rules(b, prev[m.BODY] if prev is not None else None)
 
 
 m.register("service", schema=schema, rules=rules)

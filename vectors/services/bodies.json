@@ -1,0 +1,1976 @@
+{
+ "spec": "services",
+ "file": "bodies",
+ "notes": "services.md \"Body keys\": one service-body-* case per row, each with a JSON view by field name and the deterministic CBOR bytes with integer keys in field order. Six rows are provisional (cross-spec.md 12.10): the two log proof responses and the four gallery responses had no earlier definition; their keys and shapes may change.",
+ "cases": [
+  {
+   "id": "services/bodies/service-body-log-add-response-001",
+   "description": "body keys for log-add-response",
+   "section": "Body keys",
+   "inputs": {
+    "body": "log-add-response",
+    "fields": [
+     "index",
+     "checkpoint",
+     "path"
+    ],
+    "view": {
+     "map": [
+      [
+       "index",
+       41
+      ],
+      [
+       "checkpoint",
+       "hum/log/c...\n42\n..."
+      ],
+      [
+       "path",
+       [
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a3001829017368756d2f6c6f672f632e2e2e0a34320a2e2e2e0282582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d",
+    "item": {
+     "map": [
+      [
+       0,
+       41
+      ],
+      [
+       1,
+       "hum/log/c...\n42\n..."
+      ],
+      [
+       2,
+       [
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-log-entry-002",
+   "description": "body keys for log-entry",
+   "section": "Body keys",
+   "inputs": {
+    "body": "log-entry",
+    "fields": [
+     "index",
+     "type",
+     "authority"
+    ],
+    "view": {
+     "map": [
+      [
+       "index",
+       41
+      ],
+      [
+       "type",
+       "deck"
+      ],
+      [
+       "authority",
+       {
+        "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+       }
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a300182901646465636b02582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "item": {
+     "map": [
+      [
+       0,
+       41
+      ],
+      [
+       1,
+       "deck"
+      ],
+      [
+       2,
+       {
+        "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+       }
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-log-lineage-element-003",
+   "description": "body keys for log-lineage-element",
+   "section": "Body keys",
+   "inputs": {
+    "body": "log-lineage-element",
+    "fields": [
+     "index",
+     "cid",
+     "version",
+     "authority"
+    ],
+    "view": {
+     "map": [
+      [
+       "index",
+       41
+      ],
+      [
+       "cid",
+       {
+        "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+       }
+      ],
+      [
+       "version",
+       1
+      ],
+      [
+       "authority",
+       {
+        "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+       }
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a400182901582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875020103582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "item": {
+     "map": [
+      [
+       0,
+       41
+      ],
+      [
+       1,
+       {
+        "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+       }
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+       }
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-agg-deck-open-004",
+   "description": "body keys for agg-deck-open",
+   "section": "Body keys",
+   "inputs": {
+    "body": "agg-deck-open",
+    "fields": [
+     "taskIds",
+     "round0",
+     "cap",
+     "phase",
+     "leader",
+     "helper"
+    ],
+    "view": {
+     "map": [
+      [
+       "taskIds",
+       [
+        [
+         {
+          "hex": "cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b8"
+         },
+         {
+          "hex": "c5b07aa23d078812a38ed3fe61b593270f130f9602599924eb53c8ba7ed37a72"
+         },
+         {
+          "hex": "1b5d65f4061eeded8a3e823d279072675aa255f1ea4c09457de858fa67e687f3"
+         }
+        ]
+       ]
+      ],
+      [
+       "round0",
+       {
+        "map": [
+         [
+          "opens",
+          1791259200
+         ],
+         [
+          "closes",
+          1792987200
+         ]
+        ]
+       }
+      ],
+      [
+       "cap",
+       18
+      ],
+      [
+       "phase",
+       1
+      ],
+      [
+       "leader",
+       {
+        "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+       }
+      ],
+      [
+       "helper",
+       {
+        "hex": "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce"
+       }
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a60081835820cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b85820c5b07aa23d078812a38ed3fe61b593270f130f9602599924eb53c8ba7ed37a7258201b5d65f4061eeded8a3e823d279072675aa255f1ea4c09457de858fa67e687f301a2001a6ac47240011a6aded0400212030104582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3055821011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce",
+    "item": {
+     "map": [
+      [
+       0,
+       [
+        [
+         {
+          "hex": "cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b8"
+         },
+         {
+          "hex": "c5b07aa23d078812a38ed3fe61b593270f130f9602599924eb53c8ba7ed37a72"
+         },
+         {
+          "hex": "1b5d65f4061eeded8a3e823d279072675aa255f1ea4c09457de858fa67e687f3"
+         }
+        ]
+       ]
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          1791259200
+         ],
+         [
+          1,
+          1792987200
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       18
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       {
+        "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+       }
+      ],
+      [
+       5,
+       {
+        "hex": "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce"
+       }
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-agg-deck-state-005",
+   "description": "body keys for agg-deck-state",
+   "section": "Body keys",
+   "inputs": {
+    "body": "agg-deck-state",
+    "fields": [
+     "taskIds",
+     "round0",
+     "cap",
+     "phase",
+     "leader",
+     "helper",
+     "state",
+     "rounds",
+     "versions"
+    ],
+    "view": {
+     "map": [
+      [
+       "taskIds",
+       [
+        [
+         {
+          "hex": "cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b8"
+         },
+         {
+          "hex": "c5b07aa23d078812a38ed3fe61b593270f130f9602599924eb53c8ba7ed37a72"
+         },
+         {
+          "hex": "1b5d65f4061eeded8a3e823d279072675aa255f1ea4c09457de858fa67e687f3"
+         }
+        ]
+       ]
+      ],
+      [
+       "round0",
+       {
+        "map": [
+         [
+          "opens",
+          1791259200
+         ],
+         [
+          "closes",
+          1792987200
+         ]
+        ]
+       }
+      ],
+      [
+       "cap",
+       18
+      ],
+      [
+       "phase",
+       1
+      ],
+      [
+       "leader",
+       {
+        "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+       }
+      ],
+      [
+       "helper",
+       {
+        "hex": "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce"
+       }
+      ],
+      [
+       "state",
+       "round 1"
+      ],
+      [
+       "rounds",
+       [
+        {
+         "map": [
+          [
+           "n",
+           0
+          ],
+          [
+           "opens",
+           1791259200
+          ],
+          [
+           "closes",
+           1792987200
+          ],
+          [
+           "version",
+           null
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           "n",
+           1
+          ],
+          [
+           "opens",
+           1793073600
+          ],
+          [
+           "closes",
+           1793332800
+          ],
+          [
+           "version",
+           {
+            "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+           }
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       "versions",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a90081835820cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b85820c5b07aa23d078812a38ed3fe61b593270f130f9602599924eb53c8ba7ed37a7258201b5d65f4061eeded8a3e823d279072675aa255f1ea4c09457de858fa67e687f301a2001a6ac47240011a6aded0400212030104582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3055821011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce0667726f756e6420310782a40000011a6ac47240021a6aded04003f6a40001011a6ae021c0021a6ae4164003582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750881582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "item": {
+     "map": [
+      [
+       0,
+       [
+        [
+         {
+          "hex": "cb89a1001769e84e579165d7f788fae31526faf5a2fcc273593c87e895fb70b8"
+         },
+         {
+          "hex": "c5b07aa23d078812a38ed3fe61b593270f130f9602599924eb53c8ba7ed37a72"
+         },
+         {
+          "hex": "1b5d65f4061eeded8a3e823d279072675aa255f1ea4c09457de858fa67e687f3"
+         }
+        ]
+       ]
+      ],
+      [
+       1,
+       {
+        "map": [
+         [
+          0,
+          1791259200
+         ],
+         [
+          1,
+          1792987200
+         ]
+        ]
+       }
+      ],
+      [
+       2,
+       18
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       {
+        "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+       }
+      ],
+      [
+       5,
+       {
+        "hex": "011df4daecce23ab3cfdb7fd4fca759f05440eb37e90c645b6ad15871efce9dfce"
+       }
+      ],
+      [
+       6,
+       "round 1"
+      ],
+      [
+       7,
+       [
+        {
+         "map": [
+          [
+           0,
+           0
+          ],
+          [
+           1,
+           1791259200
+          ],
+          [
+           2,
+           1792987200
+          ],
+          [
+           3,
+           null
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           1793073600
+          ],
+          [
+           2,
+           1793332800
+          ],
+          [
+           3,
+           {
+            "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+           }
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       8,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-ballot-receipt-006",
+   "description": "body keys for ballot-receipt",
+   "section": "Body keys",
+   "inputs": {
+    "body": "ballot-receipt",
+    "fields": [
+     "leaf",
+     "signature",
+     "kid"
+    ],
+    "view": {
+     "map": [
+      [
+       "leaf",
+       {
+        "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+       }
+      ],
+      [
+       "signature",
+       {
+        "hex": "885c8fa188ba75e15846a6bef07295620d008ae8624d608eac7b6c7260ad32da90f61e9cc3225e3a18e6418328bb3630da8b659065b4aba18d8fe76a2d021ce1"
+       }
+      ],
+      [
+       "kid",
+       {
+        "hex": "828beab3b1d447fe"
+       }
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a300582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d015840885c8fa188ba75e15846a6bef07295620d008ae8624d608eac7b6c7260ad32da90f61e9cc3225e3a18e6418328bb3630da8b659065b4aba18d8fe76a2d021ce10248828beab3b1d447fe",
+    "item": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+       }
+      ],
+      [
+       1,
+       {
+        "hex": "885c8fa188ba75e15846a6bef07295620d008ae8624d608eac7b6c7260ad32da90f61e9cc3225e3a18e6418328bb3630da8b659065b4aba18d8fe76a2d021ce1"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "828beab3b1d447fe"
+       }
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-agg-receipts-007",
+   "description": "body keys for agg-receipts",
+   "section": "Body keys",
+   "inputs": {
+    "body": "agg-receipts",
+    "fields": [
+     "root",
+     "k",
+     "pages"
+    ],
+    "view": {
+     "map": [
+      [
+       "root",
+       {
+        "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+       }
+      ],
+      [
+       "k",
+       1
+      ],
+      [
+       "pages",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        },
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a300582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d01010282582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "item": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+       }
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        },
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-receipt-root-blob-008",
+   "description": "body keys for receipt-root-blob",
+   "section": "Body keys",
+   "inputs": {
+    "body": "receipt-root-blob",
+    "fields": [
+     "k",
+     "pages"
+    ],
+    "view": {
+     "map": [
+      [
+       "k",
+       1
+      ],
+      [
+       "pages",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        },
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a200010182582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "item": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        },
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-agg-daily-009",
+   "description": "body keys for agg-daily",
+   "section": "Body keys",
+   "inputs": {
+    "body": "agg-daily",
+    "fields": [
+     "sigma",
+     "buckets",
+     "total"
+    ],
+    "view": {
+     "map": [
+      [
+       "sigma",
+       [
+        10,
+        1
+       ]
+      ],
+      [
+       "buckets",
+       [
+        {
+         "map": [
+          [
+           "bucket",
+           0
+          ],
+          [
+           "increment",
+           12
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           "bucket",
+           1
+          ],
+          [
+           "increment",
+           -3
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       "total",
+       9
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a300820a010182a20000010ca2000101220209",
+    "item": {
+     "map": [
+      [
+       0,
+       [
+        10,
+        1
+       ]
+      ],
+      [
+       1,
+       [
+        {
+         "map": [
+          [
+           0,
+           0
+          ],
+          [
+           1,
+           12
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           -3
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       2,
+       9
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-agg-propose-request-010",
+   "description": "body keys for agg-propose-request",
+   "section": "Body keys",
+   "inputs": {
+    "body": "agg-propose-request",
+    "fields": [
+     "bundle",
+     "tables",
+     "pages"
+    ],
+    "view": {
+     "map": [
+      [
+       "bundle",
+       {
+        "hex": "8c3c3fd13aef7e985b8c6624e4d319dbc33132e89cbc904f847c518c0bd40b5efc2c1ee6b4231fe6"
+       }
+      ],
+      [
+       "tables",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ],
+      [
+       "pages",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a30058288c3c3fd13aef7e985b8c6624e4d319dbc33132e89cbc904f847c518c0bd40b5efc2c1ee6b4231fe60181582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750281582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "item": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "8c3c3fd13aef7e985b8c6624e4d319dbc33132e89cbc904f847c518c0bd40b5efc2c1ee6b4231fe6"
+       }
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ],
+      [
+       2,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-agg-propose-response-011",
+   "description": "body keys for agg-propose-response",
+   "section": "Body keys",
+   "inputs": {
+    "body": "agg-propose-response",
+    "fields": [
+     "signature"
+    ],
+    "view": {
+     "map": [
+      [
+       "signature",
+       {
+        "hex": "885c8fa188ba75e15846a6bef07295620d008ae8624d608eac7b6c7260ad32da90f61e9cc3225e3a18e6418328bb3630da8b659065b4aba18d8fe76a2d021ce1"
+       }
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a1005840885c8fa188ba75e15846a6bef07295620d008ae8624d608eac7b6c7260ad32da90f61e9cc3225e3a18e6418328bb3630da8b659065b4aba18d8fe76a2d021ce1",
+    "item": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "885c8fa188ba75e15846a6bef07295620d008ae8624d608eac7b6c7260ad32da90f61e9cc3225e3a18e6418328bb3630da8b659065b4aba18d8fe76a2d021ce1"
+       }
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-verifier-session-request-012",
+   "description": "body keys for verifier-session-request",
+   "section": "Body keys",
+   "inputs": {
+    "body": "verifier-session-request",
+    "fields": [
+     "manifest"
+    ],
+    "view": {
+     "map": [
+      [
+       "manifest",
+       {
+        "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+       }
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a100582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "item": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+       }
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-verifier-session-response-013",
+   "description": "body keys for verifier-session-response",
+   "section": "Body keys",
+   "inputs": {
+    "body": "verifier-session-response",
+    "fields": [
+     "id",
+     "expires"
+    ],
+    "view": {
+     "map": [
+      [
+       "id",
+       {
+        "hex": "b789f1ce638ee7582d5b04ba8c2b0c7a"
+       }
+      ],
+      [
+       "expires",
+       1791262800
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a20050b789f1ce638ee7582d5b04ba8c2b0c7a011a6ac48050",
+    "item": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "b789f1ce638ee7582d5b04ba8c2b0c7a"
+       }
+      ],
+      [
+       1,
+       1791262800
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-verifier-evidence-014",
+   "description": "body keys for verifier-evidence",
+   "section": "Body keys",
+   "inputs": {
+    "body": "verifier-evidence",
+    "fields": [
+     "name",
+     "kid",
+     "ciphertext"
+    ],
+    "view": {
+     "map": [
+      [
+       "name",
+       "match"
+      ],
+      [
+       "kid",
+       {
+        "hex": "2dcb5bd67d02c813"
+       }
+      ],
+      [
+       "ciphertext",
+       {
+        "hex": "241c7d5b77aac283a5f398189373d1d43bdf9e2c669a9b69d29d29aa22663424f5c1fa6fa756b37e17b5e9d34eec29c2"
+       }
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a300656d6174636801482dcb5bd67d02c813025830241c7d5b77aac283a5f398189373d1d43bdf9e2c669a9b69d29d29aa22663424f5c1fa6fa756b37e17b5e9d34eec29c2",
+    "item": {
+     "map": [
+      [
+       0,
+       "match"
+      ],
+      [
+       1,
+       {
+        "hex": "2dcb5bd67d02c813"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "241c7d5b77aac283a5f398189373d1d43bdf9e2c669a9b69d29d29aa22663424f5c1fa6fa756b37e17b5e9d34eec29c2"
+       }
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-verifier-issue-015",
+   "description": "body keys for verifier-issue",
+   "section": "Body keys",
+   "inputs": {
+    "body": "verifier-issue",
+    "fields": [
+     "kid",
+     "ciphertext"
+    ],
+    "view": {
+     "map": [
+      [
+       "kid",
+       {
+        "hex": "2dcb5bd67d02c813"
+       }
+      ],
+      [
+       "ciphertext",
+       {
+        "hex": "241c7d5b77aac283a5f398189373d1d43bdf9e2c669a9b69d29d29aa22663424f5c1fa6fa756b37e17b5e9d34eec29c2"
+       }
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a200482dcb5bd67d02c813015830241c7d5b77aac283a5f398189373d1d43bdf9e2c669a9b69d29d29aa22663424f5c1fa6fa756b37e17b5e9d34eec29c2",
+    "item": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "2dcb5bd67d02c813"
+       }
+      ],
+      [
+       1,
+       {
+        "hex": "241c7d5b77aac283a5f398189373d1d43bdf9e2c669a9b69d29d29aa22663424f5c1fa6fa756b37e17b5e9d34eec29c2"
+       }
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-verifier-revocation-016",
+   "description": "body keys for verifier-revocation",
+   "section": "Body keys",
+   "inputs": {
+    "body": "verifier-revocation",
+    "fields": [
+     "method",
+     "accumulator"
+    ],
+    "view": {
+     "map": [
+      [
+       "method",
+       "reissue"
+      ],
+      [
+       "accumulator",
+       null
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a200677265697373756501f6",
+    "item": {
+     "map": [
+      [
+       0,
+       "reissue"
+      ],
+      [
+       1,
+       null
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-releases-element-017",
+   "description": "body keys for releases-element",
+   "section": "Body keys",
+   "inputs": {
+    "body": "releases-element",
+    "fields": [
+     "cid",
+     "index",
+     "deck",
+     "context",
+     "issued",
+     "parts"
+    ],
+    "view": {
+     "map": [
+      [
+       "cid",
+       {
+        "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+       }
+      ],
+      [
+       "index",
+       70
+      ],
+      [
+       "deck",
+       {
+        "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+       }
+      ],
+      [
+       "context",
+       {
+        "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+       }
+      ],
+      [
+       "issued",
+       1791259200
+      ],
+      [
+       "parts",
+       [
+        "tallies",
+        "count",
+        "receipts"
+       ]
+      ]
+     ]
+    },
+    "provisional": false
+   },
+   "expected": {
+    "bytes": "a600582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a487501184602582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a487503582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3041a6ac4724005836774616c6c69657365636f756e74687265636569707473",
+    "item": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+       }
+      ],
+      [
+       1,
+       70
+      ],
+      [
+       2,
+       {
+        "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3"
+       }
+      ],
+      [
+       4,
+       1791259200
+      ],
+      [
+       5,
+       [
+        "tallies",
+        "count",
+        "receipts"
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-log-proof-inclusion-018",
+   "description": "PROVISIONAL (cross-spec.md 12.10): body keys for log-proof-inclusion",
+   "section": "Body keys",
+   "inputs": {
+    "body": "log-proof-inclusion",
+    "fields": [
+     "index",
+     "size",
+     "path"
+    ],
+    "view": {
+     "map": [
+      [
+       "index",
+       41
+      ],
+      [
+       "size",
+       64
+      ],
+      [
+       "path",
+       [
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": true
+   },
+   "expected": {
+    "bytes": "a30018290118400286582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d",
+    "item": {
+     "map": [
+      [
+       0,
+       41
+      ],
+      [
+       1,
+       64
+      ],
+      [
+       2,
+       [
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-log-proof-consistency-019",
+   "description": "PROVISIONAL (cross-spec.md 12.10): body keys for log-proof-consistency",
+   "section": "Body keys",
+   "inputs": {
+    "body": "log-proof-consistency",
+    "fields": [
+     "from",
+     "to",
+     "path"
+    ],
+    "view": {
+     "map": [
+      [
+       "from",
+       32
+      ],
+      [
+       "to",
+       64
+      ],
+      [
+       "path",
+       [
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": true
+   },
+   "expected": {
+    "bytes": "a30018200118400282582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d582082d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d",
+    "item": {
+     "map": [
+      [
+       0,
+       32
+      ],
+      [
+       1,
+       64
+      ],
+      [
+       2,
+       [
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        },
+        {
+         "hex": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-gallery-takes-020",
+   "description": "PROVISIONAL (cross-spec.md 12.10): body keys for gallery-takes",
+   "section": "Body keys",
+   "inputs": {
+    "body": "gallery-takes",
+    "fields": [
+     "takes",
+     "ratings",
+     "next"
+    ],
+    "view": {
+     "map": [
+      [
+       "takes",
+       [
+        {
+         "map": [
+          [
+           "cid",
+           {
+            "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+           }
+          ],
+          [
+           "logIndex",
+           90
+          ],
+          [
+           "rated",
+           true
+          ],
+          [
+           "hasGroupScore",
+           true
+          ],
+          [
+           "score",
+           412345
+          ],
+          [
+           "forkCount",
+           2
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       "ratings",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ],
+      [
+       "next",
+       "c3VwZXJjdXJzb3I"
+      ]
+     ]
+    },
+    "provisional": true
+   },
+   "expected": {
+    "bytes": "a30081a600582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a487501185a02f503f5041a00064ab905020181582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875026f633356775a584a6a64584a7a623349",
+    "item": {
+     "map": [
+      [
+       0,
+       [
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+           }
+          ],
+          [
+           1,
+           90
+          ],
+          [
+           2,
+           true
+          ],
+          [
+           3,
+           true
+          ],
+          [
+           4,
+           412345
+          ],
+          [
+           5,
+           2
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ],
+      [
+       2,
+       "c3VwZXJjdXJzb3I"
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-gallery-take-021",
+   "description": "PROVISIONAL (cross-spec.md 12.10): body keys for gallery-take",
+   "section": "Body keys",
+   "inputs": {
+    "body": "gallery-take",
+    "fields": [
+     "bundle",
+     "ratings",
+     "versions",
+     "releases"
+    ],
+    "view": {
+     "map": [
+      [
+       "bundle",
+       {
+        "hex": "8c3c3fd13aef7e985b8c6624e4d319dbc33132e89cbc904f847c518c0bd40b5efc2c1ee6b4231fe6"
+       }
+      ],
+      [
+       "ratings",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ],
+      [
+       "versions",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ],
+      [
+       "releases",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": true
+   },
+   "expected": {
+    "bytes": "a40058288c3c3fd13aef7e985b8c6624e4d319dbc33132e89cbc904f847c518c0bd40b5efc2c1ee6b4231fe60181582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750281582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750381582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "item": {
+     "map": [
+      [
+       0,
+       {
+        "hex": "8c3c3fd13aef7e985b8c6624e4d319dbc33132e89cbc904f847c518c0bd40b5efc2c1ee6b4231fe6"
+       }
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ],
+      [
+       2,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ],
+      [
+       3,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-gallery-take-forks-022",
+   "description": "PROVISIONAL (cross-spec.md 12.10): body keys for gallery-take-forks",
+   "section": "Body keys",
+   "inputs": {
+    "body": "gallery-take-forks",
+    "fields": [
+     "takes",
+     "next"
+    ],
+    "view": {
+     "map": [
+      [
+       "takes",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": true
+   },
+   "expected": {
+    "bytes": "a10081582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "item": {
+     "map": [
+      [
+       0,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-gallery-ratings-023",
+   "description": "PROVISIONAL (cross-spec.md 12.10): body keys for gallery-ratings",
+   "section": "Body keys",
+   "inputs": {
+    "body": "gallery-ratings",
+    "fields": [
+     "releases"
+    ],
+    "view": {
+     "map": [
+      [
+       "releases",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        },
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": true
+   },
+   "expected": {
+    "bytes": "a10082582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "item": {
+     "map": [
+      [
+       0,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        },
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-gallery-takes-unrated-and-tie-024",
+   "description": "PROVISIONAL (cross-spec.md 12.10, fields renamed in 12.12): a listing with a rated take (score 0.4123454 \u2192 412345), a take whose score 1/128 = 0.0078125 sits exactly on a six-decimal rounding tie (half to even in binary64 \u2192 0.007812 \u2192 7812, hasGroupScore false: scored from the overall row), and an unrated take with rated false and no score key; forkCount and logIndex are take.md's sort-key names; next absent",
+   "section": "Body keys",
+   "inputs": {
+    "body": "gallery-takes",
+    "fields": [
+     "takes",
+     "ratings",
+     "next"
+    ],
+    "element_fields": [
+     "cid",
+     "logIndex",
+     "rated",
+     "hasGroupScore",
+     "score",
+     "forkCount"
+    ],
+    "scores": [
+     0.4123454,
+     0.0078125,
+     null
+    ],
+    "view": {
+     "map": [
+      [
+       "takes",
+       [
+        {
+         "map": [
+          [
+           "cid",
+           {
+            "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+           }
+          ],
+          [
+           "logIndex",
+           90
+          ],
+          [
+           "rated",
+           true
+          ],
+          [
+           "hasGroupScore",
+           true
+          ],
+          [
+           "score",
+           412345
+          ],
+          [
+           "forkCount",
+           2
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           "cid",
+           {
+            "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+           }
+          ],
+          [
+           "logIndex",
+           91
+          ],
+          [
+           "rated",
+           true
+          ],
+          [
+           "hasGroupScore",
+           false
+          ],
+          [
+           "score",
+           7812
+          ],
+          [
+           "forkCount",
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           "cid",
+           {
+            "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+           }
+          ],
+          [
+           "logIndex",
+           95
+          ],
+          [
+           "rated",
+           false
+          ],
+          [
+           "hasGroupScore",
+           false
+          ],
+          [
+           "forkCount",
+           1
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       "ratings",
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    },
+    "provisional": true
+   },
+   "expected": {
+    "bytes": "a20083a600582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a487501185a02f503f5041a00064ab90502a600582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a487501185b02f503f404191e840500a500582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a487501185f02f403f405010181582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+    "item": {
+     "map": [
+      [
+       0,
+       [
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+           }
+          ],
+          [
+           1,
+           90
+          ],
+          [
+           2,
+           true
+          ],
+          [
+           3,
+           true
+          ],
+          [
+           4,
+           412345
+          ],
+          [
+           5,
+           2
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+           }
+          ],
+          [
+           1,
+           91
+          ],
+          [
+           2,
+           true
+          ],
+          [
+           3,
+           false
+          ],
+          [
+           4,
+           7812
+          ],
+          [
+           5,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+           }
+          ],
+          [
+           1,
+           95
+          ],
+          [
+           2,
+           false
+          ],
+          [
+           3,
+           false
+          ],
+          [
+           5,
+           1
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+        }
+       ]
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "services/bodies/service-body-reject-unknown-field-025",
+   "description": "A body with a field the row does not list is refused by the encoder",
+   "section": "Body keys",
+   "inputs": {
+    "body": "agg-receipts",
+    "view": {
+     "root": "82d007f5e668f0d3925ff642d23a99d5e47b7d629591378c532665c5df52a49d",
+     "k": 0,
+     "pages": [],
+     "count": 812
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "encode-body",
+    "reason": "unknown field: no exact count in the receipts response"
+   }
+  }
+ ]
+}

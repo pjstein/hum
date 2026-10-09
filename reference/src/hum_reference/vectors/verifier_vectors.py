@@ -1339,6 +1339,219 @@ def world_file(w: World) -> File:
     return f
 
 
+def keys_file(w: World, built: dict[str, Any]) -> File:
+    f = File(
+        SPEC,
+        "keys",
+        "Issuer key retirement timing (KEY_TAIL = 44,928,000 seconds, 520 days after the key's "
+        "last epoch ends; ADR 0104). KEY_TAIL is not a validation rule: a key removed earlier is "
+        "the emergency path, with the cost verifier.md's Lifetime section states, so both cases "
+        "here are accepted and the earliest ordinary retirement time is the value under test.",
+    )
+    d2 = cbor.decode(built["valid"]["district-v2"].envelope)
+    d3 = cbor.decode(built["valid"]["district-v3"].envelope)
+    body2, body3 = d2[m.BODY], d3[m.BODY]
+    old_kid = fixtures.fixed_bytes("kid-district-1", 8)
+    last = vf.last_epoch_of_key(body2, old_kid)
+    earliest = vf.earliest_retirement(last, body2[vf.VALIDITY])
+    f.add(
+        "verifier-key-tail-ordinary",
+        "The district lineage's version 3 retires the version-1 key: its last epoch is the one "
+        "before the version-2 key's fromEpoch, and version 3 is logged after KEY_TAIL past that "
+        "epoch's end (ordinary retirement)",
+        "Issuer key",
+        {
+            "kid": hexify(old_kid),
+            "version_2_view": jsonable(d2),
+            "version_3_issued": d3[m.ISSUED],
+            "validity": body2[vf.VALIDITY],
+            "KEY_TAIL": vf.KEY_TAIL,
+        },
+        {
+            "last_epoch": last,
+            "epoch_seconds": vf.epoch_seconds(body2[vf.VALIDITY]),
+            "earliest_ordinary_retirement": earliest,
+            "ordinary": d3[m.ISSUED] >= earliest,
+            "retired_kids": [hexify(k) for k in body3[vf.RETIRED_KIDS]],
+        },
+    )
+    recent_last = vf.epoch_now(d3[m.ISSUED], body2[vf.VALIDITY])[0] - 1
+    early = vf.earliest_retirement(recent_last, body2[vf.VALIDITY])
+    f.add(
+        "verifier-key-tail-emergency",
+        "A key whose last epoch ended one epoch ago, removed now: before KEY_TAIL, so this is an "
+        "emergency removal, not ordinary retirement; valid under rules 24 to 28, with the effect "
+        "on open decks the Lifetime section states",
+        "Issuer key",
+        {
+            "last_epoch": recent_last,
+            "removed_at": d3[m.ISSUED],
+            "validity": body2[vf.VALIDITY],
+            "KEY_TAIL": vf.KEY_TAIL,
+        },
+        {
+            "earliest_ordinary_retirement": early,
+            "ordinary": d3[m.ISSUED] >= early,
+            "emergency": True,
+        },
+    )
+    f.add(
+        "verifier-key-tail-capacity",
+        "issuerKeys holds at most 8 keys and a replaced key stays listed for KEY_TAIL, so about "
+        "seven key changes fit in 520 days; an eighth forces an early removal",
+        "Issuer key",
+        {"max_issuer_keys": 8, "KEY_TAIL": vf.KEY_TAIL},
+        {"changes_without_early_removal": 7},
+    )
+    return f
+
+
+def evidence_file(w: World, built: dict[str, Any]) -> File:
+    from .. import services
+
+    f = File(
+        SPEC,
+        "evidence",
+        "Evidence sealing strings (Host key, RT1): HPKE base mode to the host key, info = "
+        "hum/evidence/1 ‖ verifier authority CID (33) ‖ item name, aad = the 16-byte session "
+        "ID ‖ SHA-256(issuance request plaintext, canonical CBOR), 48 bytes. The phone builds "
+        "the request before sealing; the host holds items sealed until the issue call, "
+        "recomputes the hash from the request it receives and opens each item under it; any "
+        "item that does not open ends the session with rejected, rule V-4. HPKE itself is "
+        "pending a library (the Python `cryptography` HPKE has no aad argument): each case "
+        "gives the exact info and aad bytes an implementation must seal and open under, and "
+        "the rejections name which of the two would make the AEAD fail. Ciphertexts are "
+        "placeholders.",
+    )
+    d1 = cbor.decode(built["valid"]["district-v1"].envelope)
+    authority = d1[m.AUTHORITY]
+    host_kid = d1[m.BODY][vf.HOST_KEYS][0][vf.HK_KID]
+    session = fixtures.fixed_bytes("session-id", 16)
+    other_session = fixtures.fixed_bytes("session-id-other", 16)
+    kid = fixtures.fixed_bytes("issuer-kid", 8)
+    manifest_cid = built["valid"]["district-v1"].cid
+
+    def request(commits: list[bytes]) -> bytes:
+        return cbor.encode({0: 1, 1: manifest_cid, 2: kid, 3: commits, 4: [1]})
+
+    req = request([fixtures.fixed_bytes("commit-a", 200)])
+    req_other = request([fixtures.fixed_bytes("commit-b", 200)])
+    req_handover = request(
+        [fixtures.fixed_bytes("commit-a", 200), fixtures.fixed_bytes("commit-a2", 200)]
+    )
+    info = services.evidence_info(authority, "match")
+    aad = services.evidence_aad(session, req)
+    sealed = {"info": info, "aad": aad, "ciphertext": fixtures.fixed_bytes("evidence-ct", 48)}
+
+    def body(item):
+        return hexify(
+            services.encode_body(
+                "verifier-evidence",
+                {"name": "match", "kid": host_kid, "ciphertext": item["ciphertext"]},
+            )
+        )
+
+    def inputs(sess, rq, item):
+        return {
+            "verifier_authority": hexify(authority),
+            "host_kid": hexify(host_kid),
+            "session_id": hexify(sess),
+            "item_name": "match",
+            "issuance_request_plaintext": hexify(rq),
+            "request_hash": hexify(services.request_hash(rq)),
+            "suite": "hpke-x25519-sha256-chacha20poly1305, base mode",
+            "sealed_info": hexify(item["info"]),
+            "sealed_aad": hexify(item["aad"]),
+            "request_body": body(item),
+        }
+
+    f.add(
+        "verifier-evidence-sealed",
+        "An evidence item sealed for this verifier, this item name, this session and the "
+        "issuance request the phone then submits: opens",
+        "Host key",
+        inputs(session, req, sealed),
+        {"info": hexify(info), "aad": hexify(aad), "aad_length": len(aad), "opens": True},
+    )
+    aad_h = services.evidence_aad(session, req_handover)
+    sealed_h = {**sealed, "aad": aad_h}
+    assert (
+        services.open_evidence_structural(sealed_h, authority, "match", session, req_handover)
+        is None
+    )
+    f.add(
+        "verifier-evidence-handover-two-commitments",
+        "A first session during handover: one request with two commitments, one hash, every "
+        "item sealed under it (valid)",
+        "Host key",
+        inputs(session, req_handover, sealed_h),
+        {"info": hexify(info), "aad": hexify(aad_h), "opens": True, "commitments": 2},
+    )
+    aad_retry = services.evidence_aad(other_session, req)
+    sealed_retry = {**sealed, "aad": aad_retry}
+    assert (
+        services.open_evidence_structural(sealed_retry, authority, "match", other_session, req)
+        is None
+    )
+    f.add(
+        "verifier-evidence-lost-response-retry",
+        "A lost-response retry in a new session: the evidence is re-sealed under the new "
+        "session ID and the same request hash; the identical request gets the identical "
+        "response (services/host host-v2-identical-retry-new-session)",
+        "Host key",
+        inputs(other_session, req, sealed_retry),
+        {"info": hexify(info), "aad": hexify(aad_retry), "opens": True,
+         "same_request_hash_as_first_session": True},
+    )  # fmt: skip
+    for suffix, desc, sess, rq, sealed_bad, reason in (
+        (
+            "verifier-evidence-other-request",
+            "The issuance request submitted in the session differs from the one the evidence "
+            "was sealed for: the aad's hash half differs, the AEAD fails, the session ends with "
+            "rejected, rule V-4",
+            session, req_other, sealed, "other_request",
+        ),
+        (
+            "verifier-evidence-session-id-replaced",
+            "The session ID was replaced in transit (an edge handed the phone another "
+            "session's ID): the aad's first 16 bytes differ, the AEAD fails (V-4)",
+            other_session, req, sealed, "other_session",
+        ),
+        (
+            "verifier-evidence-other-item",
+            "Sealed under another item's name: the info differs, the AEAD fails (V-4)",
+            session, req, {**sealed, "info": services.evidence_info(authority, "address")},
+            "other_item_name",
+        ),
+        (
+            "verifier-evidence-other-verifier",
+            "Sealed for another verifier's authority: the info differs, the AEAD fails (V-4)",
+            session, req,
+            {**sealed, "info": services.evidence_info(w.new_authority("evidence-other"), "match")},
+            "other_verifier",
+        ),
+    ):  # fmt: skip
+        got = services.open_evidence_structural(sealed_bad, authority, "match", sess, rq)
+        assert got == reason, (suffix, got)
+        err = services.evidence_rejection()
+        f.add(
+            suffix,
+            desc,
+            "Host key",
+            inputs(sess, rq, sealed_bad),
+            rejection={
+                "step": None,
+                "check": "evidence-open",
+                "rule": "V-4",
+                "reason": reason,
+                "status": err.status,
+                "code": err.code,
+                "body": hexify(services.encode_error(err)),
+            },
+        )
+    return f
+
+
 def generate() -> list[File]:
     w, built = build()
     return [
@@ -1347,4 +1560,6 @@ def generate() -> list[File]:
         log_file(w, built),
         layout_file(w),
         summary_file(w, built),
+        keys_file(w, built),
+        evidence_file(w, built),
     ]

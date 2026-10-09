@@ -215,7 +215,48 @@
    }
   },
   {
-   "id": "ballot/receipts/ballot-receipt-check-002",
+   "id": "ballot/receipts/ballot-receipt-kid-002",
+   "description": "A receipt {0: leaf, 1: signature, 2: kid}, verified under the Leader keyset's sign key that kid names",
+   "section": "Receipts",
+   "inputs": {
+    "leader_sign_keys": {
+     "5b5c9b177e91266b": "1ff866f46cc0bfd0b7b7e0486913a20a61cff62edf6e6300938452bf92fe16ec",
+     "1e8a37cbd44ddacf": "b79c00f50efe6291f2d7b80812ea86b84aa34406d63bfb3c63de6c53212bbffe"
+    },
+    "task_id": "e69a57d5bd3a1a97ec15dc1cf80bc9847bb9109e1ef7b949cb6fa2c9d0922663",
+    "leaf": "6c8f325be509b1d850b6aaae5a4a2384d8268d91d01cd2b89f3bb58fd2b5ad55",
+    "receipt": "a30058206c8f325be509b1d850b6aaae5a4a2384d8268d91d01cd2b89f3bb58fd2b5ad55015840c3ea09387f564bf76f38b5c8a5c10d189e047b830664fc6efe82b34044be6da89e17d333741e4cd34fe8dc0c68c29f48b892c6e2bb355f59ad97d49af1b2b40c02481e8a37cbd44ddacf"
+   },
+   "expected": {
+    "view": {
+     "leaf": "6c8f325be509b1d850b6aaae5a4a2384d8268d91d01cd2b89f3bb58fd2b5ad55",
+     "signature": "c3ea09387f564bf76f38b5c8a5c10d189e047b830664fc6efe82b34044be6da89e17d333741e4cd34fe8dc0c68c29f48b892c6e2bb355f59ad97d49af1b2b40c",
+     "kid": "1e8a37cbd44ddacf"
+    },
+    "verifies": true
+   }
+  },
+  {
+   "id": "ballot/receipts/ballot-receipt-kid-003",
+   "description": "The same signature with another listed kid: verified under that key, it fails",
+   "section": "Receipts",
+   "inputs": {
+    "leader_sign_keys": {
+     "5b5c9b177e91266b": "1ff866f46cc0bfd0b7b7e0486913a20a61cff62edf6e6300938452bf92fe16ec",
+     "1e8a37cbd44ddacf": "b79c00f50efe6291f2d7b80812ea86b84aa34406d63bfb3c63de6c53212bbffe"
+    },
+    "task_id": "e69a57d5bd3a1a97ec15dc1cf80bc9847bb9109e1ef7b949cb6fa2c9d0922663",
+    "leaf": "6c8f325be509b1d850b6aaae5a4a2384d8268d91d01cd2b89f3bb58fd2b5ad55",
+    "receipt": "a30058206c8f325be509b1d850b6aaae5a4a2384d8268d91d01cd2b89f3bb58fd2b5ad55015840c3ea09387f564bf76f38b5c8a5c10d189e047b830664fc6efe82b34044be6da89e17d333741e4cd34fe8dc0c68c29f48b892c6e2bb355f59ad97d49af1b2b40c02485b5c9b177e91266b"
+   },
+   "rejection": {
+    "step": null,
+    "check": "receipt-verify",
+    "reason": "kid names a key that did not sign"
+   }
+  },
+  {
+   "id": "ballot/receipts/ballot-receipt-check-004",
    "description": "A dispute over the first ballot's missing leaf is rebutted by the later valid ballot",
    "section": "Receipts",
    "inputs": {

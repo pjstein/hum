@@ -241,3 +241,31 @@ def test_generators_are_deterministic_and_well_formed():
             doc = json.loads(data)
             for case in doc["cases"]:
                 assert ("expected" in case) != ("rejection" in case)
+
+
+def test_key_tail_retirement_timing():
+    from hum_reference.bodies import verifier as vf
+
+    assert vf.KEY_TAIL == 44_928_000
+    validity = 15_552_000  # 180 days: V = 6, one epoch = 14,515,200 s
+    assert vf.epoch_seconds(validity) == 6 * vf.PERIOD
+    assert vf.earliest_retirement(3, validity) == 4 * 6 * vf.PERIOD + vf.KEY_TAIL
+    body = vf.body(
+        name="t",
+        operator="o",
+        profile="district",
+        issuer_keys=[
+            vf.issuer_key(b"kid-0001", bytes(96), 0, 1),
+            vf.issuer_key(b"kid-0002", bytes(96), 4, 2),
+        ],
+        host_keys=[vf.host_key(b"hkid-001", bytes(32))],
+        attributes=[],
+        evidence_=[],
+        dedup_=[],
+        code_=vf.code(bytes(32), vf.TOOLCHAIN),
+        assurance=2,
+        validity=validity,
+        datasets=[],
+    )
+    assert vf.last_epoch_of_key(body, b"kid-0001") == 3
+    assert vf.last_epoch_of_key(body, b"kid-0002") is None

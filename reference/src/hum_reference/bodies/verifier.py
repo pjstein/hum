@@ -101,6 +101,7 @@ DAY = 86_400
 MAX_VALIDITY = 31_622_400
 TOOLCHAIN = "rustc 1.99.0, target wasm32-wasip2"  # verifier.md "Code"; no cargo-component
 KEPT_GRACE = 2_592_000
+KEY_TAIL = 44_928_000  # 520 days: the earliest ordinary retirement after a key's last epoch
 AGE_BANDS = ((18, 24), (25, 34), (35, 49), (50, 64), (65, 150))
 
 # profile table: required attributes (name -> (type, exposure)), optional attributes,
@@ -832,3 +833,25 @@ def disclosure_summary(env: dict[int, Any]) -> dict[str, Any]:
 
 
 m.register("verifier", schema=schema, rules=rules)
+
+
+def epoch_seconds(validity: int) -> int:
+    """One epoch of this verifier in seconds: ``V`` periods of 28 days."""
+    return max(1, validity // PERIOD) * PERIOD
+
+
+def earliest_retirement(last_epoch: int, validity: int) -> int:
+    """The earliest time a key whose last epoch is ``last_epoch`` may move to ``retiredKids``
+    by ordinary retirement: ``KEY_TAIL`` after that epoch ends. Not a validation rule: an
+    earlier removal is the emergency path, with the cost "Lifetime" states."""
+    return (last_epoch + 1) * epoch_seconds(validity) + KEY_TAIL
+
+
+def last_epoch_of_key(body: dict[int, Any], kid: bytes) -> int | None:
+    """The last epoch ``kid`` signs: one below the next listed key's ``fromEpoch``, or None
+    when it is the newest key."""
+    keys = sorted(body[ISSUER_KEYS], key=lambda k: k[IK_FROM_EPOCH])
+    for i, k in enumerate(keys):
+        if k[IK_KID] == kid:
+            return keys[i + 1][IK_FROM_EPOCH] - 1 if i + 1 < len(keys) else None
+    return None

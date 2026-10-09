@@ -1,0 +1,209 @@
+{
+ "spec": "services",
+ "file": "host",
+ "notes": "V-2 at the verifier host: one issuance request per session; an identical retry gets the identical response in the session or in a later session mapping to the same dedup row; a different request in the session is conflict; a different request in a later session against a spent row gets the masked code vr-0, never conflict (TS8). V-4 (RT1): the host holds every evidence item sealed until the issue call, then opens each under aad = session ID \u2016 SHA-256(request plaintext); an item sealed for another request or another session ID ends the session with rejected, rule V-4, and nothing is issued. The response bytes are a placeholder derived from the host secret and the request hash; the real response is pending BBS and HPKE. Each case is one step of one sequence against one host, in order.",
+ "cases": [
+  {
+   "id": "services/host/host-v2-issued-001",
+   "description": "Evidence sealed for session 1 and request A; request A: opens, issued",
+   "section": "Issuer and verifier host",
+   "inputs": {
+    "host_secret": "8fd8f159749db92d350002a3d5639922403ed221eea64b1ded8df60581c06dad",
+    "verifier_authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "session_id": "203e28d22f4b72bc70863349c50a3ba1",
+    "request": "a5000101582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750248828beab3b1d447fe038158c8e0c16f900d85b95272a58d5efc8aa124cfdffcbdb27e3339033625b4b2775a26ac83dfaf8faf2c660283ff84f95c85d18cafa82bd1405c3a416083f49c2b2727634e96b76c4ffd76df38bd782ea9c0cc8dfab02bcd13c81d7ba7ef22b0a68272ae8c6dd3bf8edc1169f996b290e55073d70dd1598fdbe8ef0f4a2ee482a048726b632f8fc8cd12b3351481c40d2756af86fd20469df06514647074a342b33891aa6ca61b3df17d52929455bac80ab933073d482e0b30066536163e09e3e9e33ac383364449888f4d048101",
+    "request_hash": "8f2b88d27701999a035a0bce2bf983e86666844e0668c0ceae8a5a69a8483cc2",
+    "dedup_key": "8bd9350dde3fc49577ce6d9fe93691fb7138799f02c568a75cd367fd09f3292b",
+    "sequence_position": 0,
+    "evidence_sealed_aad": "203e28d22f4b72bc70863349c50a3ba18f2b88d27701999a035a0bce2bf983e86666844e0668c0ceae8a5a69a8483cc2",
+    "evidence_sealed_info": "68756d2f65766964656e63652f3101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a36d61746368"
+   },
+   "expected": {
+    "status": 200,
+    "response": "da19159542d40fcb107a78f719d51100fb2768ed8fdad46d3fcdd298ee32b291",
+    "same_as_first": true
+   }
+  },
+  {
+   "id": "services/host/host-v2-identical-retry-002",
+   "description": "The identical request again in session 1: the identical response",
+   "section": "Issuer and verifier host",
+   "inputs": {
+    "host_secret": "8fd8f159749db92d350002a3d5639922403ed221eea64b1ded8df60581c06dad",
+    "verifier_authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "session_id": "203e28d22f4b72bc70863349c50a3ba1",
+    "request": "a5000101582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750248828beab3b1d447fe038158c8e0c16f900d85b95272a58d5efc8aa124cfdffcbdb27e3339033625b4b2775a26ac83dfaf8faf2c660283ff84f95c85d18cafa82bd1405c3a416083f49c2b2727634e96b76c4ffd76df38bd782ea9c0cc8dfab02bcd13c81d7ba7ef22b0a68272ae8c6dd3bf8edc1169f996b290e55073d70dd1598fdbe8ef0f4a2ee482a048726b632f8fc8cd12b3351481c40d2756af86fd20469df06514647074a342b33891aa6ca61b3df17d52929455bac80ab933073d482e0b30066536163e09e3e9e33ac383364449888f4d048101",
+    "request_hash": "8f2b88d27701999a035a0bce2bf983e86666844e0668c0ceae8a5a69a8483cc2",
+    "dedup_key": "8bd9350dde3fc49577ce6d9fe93691fb7138799f02c568a75cd367fd09f3292b",
+    "sequence_position": 1
+   },
+   "expected": {
+    "status": 200,
+    "response": "da19159542d40fcb107a78f719d51100fb2768ed8fdad46d3fcdd298ee32b291",
+    "same_as_first": true
+   }
+  },
+  {
+   "id": "services/host/host-v2-conflict-in-session-003",
+   "description": "A different request in session 1 after one was answered: conflict",
+   "section": "Issuer and verifier host",
+   "inputs": {
+    "host_secret": "8fd8f159749db92d350002a3d5639922403ed221eea64b1ded8df60581c06dad",
+    "verifier_authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "session_id": "203e28d22f4b72bc70863349c50a3ba1",
+    "request": "a5000101582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750248828beab3b1d447fe038158c8186420b3ef3f3b5931e84f544bb02d50aa1e95b709d5333a357d40aae0ddd9e6ff6dee50e724dd9f781b76d5ab3d7fa3bc0f56d2687a08fecf79b29eb7135d314a34835e193425fce2e3d58577b142e63410295072e2607dd15003f316b735eebb81a798c846e58b4edc8d9219efd6d0c6b2a441c45798df6818bfcbccc36b3b82f0b29ed77bfc8b3ed255beb69b29b186d986d2c1ce6d9eee7be036ce7981b7f2392a1f01bb2d44854321267cf8de170b15be6b8184465f13c421f4e8a9f0a355aab5cb093ec1b7048101",
+    "request_hash": "cc39e8ef45fbc9ad999f42d39900790c1f4ee37554dd1be499a1fd1f81d0b491",
+    "dedup_key": "8bd9350dde3fc49577ce6d9fe93691fb7138799f02c568a75cd367fd09f3292b",
+    "sequence_position": 2
+   },
+   "rejection": {
+    "step": null,
+    "check": "host-issue",
+    "rule": "V-2",
+    "status": 409,
+    "code": "conflict",
+    "error_rule": null,
+    "body": "a10068636f6e666c696374"
+   }
+  },
+  {
+   "id": "services/host/host-v2-identical-retry-new-session-004",
+   "description": "Lost response: the identical request in a later session, evidence re-sealed under the new session ID and the same request hash, mapping to the same dedup row: opens, the identical response",
+   "section": "Issuer and verifier host",
+   "inputs": {
+    "host_secret": "8fd8f159749db92d350002a3d5639922403ed221eea64b1ded8df60581c06dad",
+    "verifier_authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "session_id": "e6deaf4bf2b5c4e363c0211a32681b3e",
+    "request": "a5000101582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750248828beab3b1d447fe038158c8e0c16f900d85b95272a58d5efc8aa124cfdffcbdb27e3339033625b4b2775a26ac83dfaf8faf2c660283ff84f95c85d18cafa82bd1405c3a416083f49c2b2727634e96b76c4ffd76df38bd782ea9c0cc8dfab02bcd13c81d7ba7ef22b0a68272ae8c6dd3bf8edc1169f996b290e55073d70dd1598fdbe8ef0f4a2ee482a048726b632f8fc8cd12b3351481c40d2756af86fd20469df06514647074a342b33891aa6ca61b3df17d52929455bac80ab933073d482e0b30066536163e09e3e9e33ac383364449888f4d048101",
+    "request_hash": "8f2b88d27701999a035a0bce2bf983e86666844e0668c0ceae8a5a69a8483cc2",
+    "dedup_key": "8bd9350dde3fc49577ce6d9fe93691fb7138799f02c568a75cd367fd09f3292b",
+    "sequence_position": 3,
+    "evidence_sealed_aad": "e6deaf4bf2b5c4e363c0211a32681b3e8f2b88d27701999a035a0bce2bf983e86666844e0668c0ceae8a5a69a8483cc2",
+    "evidence_sealed_info": "68756d2f65766964656e63652f3101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a36d61746368"
+   },
+   "expected": {
+    "status": 200,
+    "response": "da19159542d40fcb107a78f719d51100fb2768ed8fdad46d3fcdd298ee32b291",
+    "same_as_first": true
+   }
+  },
+  {
+   "id": "services/host/host-v2-duplicate-masked-005",
+   "description": "A different request in a later session against the spent row: rejected, rule vr-0 (masked), never conflict",
+   "section": "Issuer and verifier host",
+   "inputs": {
+    "host_secret": "8fd8f159749db92d350002a3d5639922403ed221eea64b1ded8df60581c06dad",
+    "verifier_authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "session_id": "39bff519d6d2861813f88d74196087d7",
+    "request": "a5000101582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750248828beab3b1d447fe038158c8186420b3ef3f3b5931e84f544bb02d50aa1e95b709d5333a357d40aae0ddd9e6ff6dee50e724dd9f781b76d5ab3d7fa3bc0f56d2687a08fecf79b29eb7135d314a34835e193425fce2e3d58577b142e63410295072e2607dd15003f316b735eebb81a798c846e58b4edc8d9219efd6d0c6b2a441c45798df6818bfcbccc36b3b82f0b29ed77bfc8b3ed255beb69b29b186d986d2c1ce6d9eee7be036ce7981b7f2392a1f01bb2d44854321267cf8de170b15be6b8184465f13c421f4e8a9f0a355aab5cb093ec1b7048101",
+    "request_hash": "cc39e8ef45fbc9ad999f42d39900790c1f4ee37554dd1be499a1fd1f81d0b491",
+    "dedup_key": "8bd9350dde3fc49577ce6d9fe93691fb7138799f02c568a75cd367fd09f3292b",
+    "sequence_position": 4,
+    "evidence_sealed_aad": "39bff519d6d2861813f88d74196087d7cc39e8ef45fbc9ad999f42d39900790c1f4ee37554dd1be499a1fd1f81d0b491",
+    "evidence_sealed_info": "68756d2f65766964656e63652f3101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a36d61746368"
+   },
+   "rejection": {
+    "step": null,
+    "check": "host-issue",
+    "rule": "V-2",
+    "status": 422,
+    "code": "rejected",
+    "error_rule": "vr-0",
+    "body": "a2006872656a6563746564036476722d30"
+   }
+  },
+  {
+   "id": "services/host/host-v4-evidence-other-request-006",
+   "description": "Evidence sealed for request B, request C submitted in the same session: the aad's hash differs, rejected, rule V-4, nothing issued",
+   "section": "Issuer and verifier host",
+   "inputs": {
+    "host_secret": "8fd8f159749db92d350002a3d5639922403ed221eea64b1ded8df60581c06dad",
+    "verifier_authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "session_id": "c825aa81be17e97884c6fc3d8f378c45",
+    "request": "a5000101582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750248828beab3b1d447fe038158c8bd9abdd6c050af76534c6d1a123f4340115b9364ec9fae263c024e31c086d98f1acc1fb24205c7179241857353619716c9244f374284d225a81fdb490f0bc6396345b144c4d0940a7d01b198649b4ec237c5a40e9c4073f25dfcf359dc0ad6e12de07d134993a5c2250a0cc93b4b64c44688fdfe61d98191fbc9f0bbc5c3edf5a03bda38ee9fd7d5fb598ff0243bf154ea48bb81ce80445ee1e45879217ad6d9ff7a0d4f2c828d4e3336d6f96f914dfcdd2a7b2b778e1ab9a48a6b223c67d2cc75442e2d6e3215c0048101",
+    "request_hash": "844dbe13e19fe0989dd4754e8336059c08cf091d70e936a8da54b0c0d3c43ae0",
+    "dedup_key": "0ff306fae931452e90649b1c9211dcd2d0064ac90984f0c7aff01a676081395a",
+    "sequence_position": 5,
+    "evidence_sealed_aad": "c825aa81be17e97884c6fc3d8f378c45cc39e8ef45fbc9ad999f42d39900790c1f4ee37554dd1be499a1fd1f81d0b491",
+    "evidence_sealed_info": "68756d2f65766964656e63652f3101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a36d61746368"
+   },
+   "rejection": {
+    "step": null,
+    "check": "host-issue",
+    "rule": "V-4",
+    "status": 422,
+    "code": "rejected",
+    "error_rule": "V-4",
+    "body": "a3006872656a6563746564017165766964656e63655f6d69736d617463680363562d34"
+   }
+  },
+  {
+   "id": "services/host/host-v4-session-ended-007",
+   "description": "The same session after a V-4 failure answers nothing more",
+   "section": "Issuer and verifier host",
+   "inputs": {
+    "host_secret": "8fd8f159749db92d350002a3d5639922403ed221eea64b1ded8df60581c06dad",
+    "verifier_authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "session_id": "c825aa81be17e97884c6fc3d8f378c45",
+    "request": "a5000101582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750248828beab3b1d447fe038158c8186420b3ef3f3b5931e84f544bb02d50aa1e95b709d5333a357d40aae0ddd9e6ff6dee50e724dd9f781b76d5ab3d7fa3bc0f56d2687a08fecf79b29eb7135d314a34835e193425fce2e3d58577b142e63410295072e2607dd15003f316b735eebb81a798c846e58b4edc8d9219efd6d0c6b2a441c45798df6818bfcbccc36b3b82f0b29ed77bfc8b3ed255beb69b29b186d986d2c1ce6d9eee7be036ce7981b7f2392a1f01bb2d44854321267cf8de170b15be6b8184465f13c421f4e8a9f0a355aab5cb093ec1b7048101",
+    "request_hash": "cc39e8ef45fbc9ad999f42d39900790c1f4ee37554dd1be499a1fd1f81d0b491",
+    "dedup_key": "0ff306fae931452e90649b1c9211dcd2d0064ac90984f0c7aff01a676081395a",
+    "sequence_position": 6
+   },
+   "rejection": {
+    "step": null,
+    "check": "host-issue",
+    "rule": "V-4",
+    "status": 422,
+    "code": "rejected",
+    "error_rule": "V-4",
+    "body": "a3006872656a6563746564017165766964656e63655f6d69736d617463680363562d34"
+   }
+  },
+  {
+   "id": "services/host/host-v4-evidence-other-session-008",
+   "description": "Session ID replaced in transit: the phone sealed under session 1's ID, the request arrives in session 5: rejected, rule V-4",
+   "section": "Issuer and verifier host",
+   "inputs": {
+    "host_secret": "8fd8f159749db92d350002a3d5639922403ed221eea64b1ded8df60581c06dad",
+    "verifier_authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "session_id": "8d9ed69720d6530e6ca28a28488d4ba9",
+    "request": "a5000101582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750248828beab3b1d447fe038158c8bd9abdd6c050af76534c6d1a123f4340115b9364ec9fae263c024e31c086d98f1acc1fb24205c7179241857353619716c9244f374284d225a81fdb490f0bc6396345b144c4d0940a7d01b198649b4ec237c5a40e9c4073f25dfcf359dc0ad6e12de07d134993a5c2250a0cc93b4b64c44688fdfe61d98191fbc9f0bbc5c3edf5a03bda38ee9fd7d5fb598ff0243bf154ea48bb81ce80445ee1e45879217ad6d9ff7a0d4f2c828d4e3336d6f96f914dfcdd2a7b2b778e1ab9a48a6b223c67d2cc75442e2d6e3215c0048101",
+    "request_hash": "844dbe13e19fe0989dd4754e8336059c08cf091d70e936a8da54b0c0d3c43ae0",
+    "dedup_key": "0ff306fae931452e90649b1c9211dcd2d0064ac90984f0c7aff01a676081395a",
+    "sequence_position": 7,
+    "evidence_sealed_aad": "203e28d22f4b72bc70863349c50a3ba1844dbe13e19fe0989dd4754e8336059c08cf091d70e936a8da54b0c0d3c43ae0",
+    "evidence_sealed_info": "68756d2f65766964656e63652f3101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a36d61746368"
+   },
+   "rejection": {
+    "step": null,
+    "check": "host-issue",
+    "rule": "V-4",
+    "status": 422,
+    "code": "rejected",
+    "error_rule": "V-4",
+    "body": "a3006872656a6563746564017165766964656e63655f6d69736d617463680363562d34"
+   }
+  },
+  {
+   "id": "services/host/host-v2-handover-two-commitments-009",
+   "description": "Handover first session: one request with two commitments, evidence sealed under its one hash: opens, issued",
+   "section": "Issuer and verifier host",
+   "inputs": {
+    "host_secret": "8fd8f159749db92d350002a3d5639922403ed221eea64b1ded8df60581c06dad",
+    "verifier_authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+    "session_id": "3ca2790bc465f4aeea94cd42fd5b7afa",
+    "request": "a5000101582101ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a48750248828beab3b1d447fe038258c848fa1170f12abc53bc5a88fc070f91d84b569cd81710963876dcc33f72bf1a8c55d15f8d5f8dae71db965c8bd3599336d0f07d0997b22bc575e4a296bd64ae4846f08449e063efcdafead2826e180ac56c20aa787d53db9123b5b02d341de0cf183838c6bb8ca96252f38723f930bbf4b608afd2aea08215304c910f012793a94cbee014b7ebbf3b0b1c0bb799ee7f6f6c9305799b2b7703884624e498b3a1c09eb9ebd9f04a928a64116ea00004fa75f634953045a3120b7d3bb3519653d8d830257e55b9bf454d58c88618487bc6046b7580333755cfda090c8f42a9d2a5f3e11fafb1df28f88fc37b607606a802a86e00911a877d5a664bfc2ce249860c41a26ae55177b0e2fc9d3306369e37e4f31f6f80ce44516c68ae54336b37161d47f4ae18ae0c0e0ac5bdc0a853e6d127ce6c2e7068b784d9aef35ea9d63c7269519588ba38a6efef42886c009d3c3222834908154a86d345d6e2f8ffeee59646701657c66fdf1a0ae690155b1d93fa0153744e6ad4ab316e4e7a83211f462c5af964f1d6116947cffc360a5586ec5c54b318ba048101",
+    "request_hash": "75cb8323150b772d38a066884d9204d9ab1b120b6068be10d3054412be684c4d",
+    "dedup_key": "ce01ff8077d3e6fee46173a99983e145464ec2d4b4c2f6415a8b959e22b7e3a9",
+    "sequence_position": 8,
+    "evidence_sealed_aad": "3ca2790bc465f4aeea94cd42fd5b7afa75cb8323150b772d38a066884d9204d9ab1b120b6068be10d3054412be684c4d",
+    "evidence_sealed_info": "68756d2f65766964656e63652f3101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a36d61746368"
+   },
+   "expected": {
+    "status": 200,
+    "response": "e1cbbac0c219cbbe063ea740a53149e23f414a2c64846efb0c68ad683da81983"
+   }
+  }
+ ]
+}

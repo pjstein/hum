@@ -13,6 +13,7 @@ from fractions import Fraction
 from .. import cbor, fixtures
 from .. import manifest as m
 from .. import release as rmath
+from ..bodies import context as c
 from ..bodies import deck as dk
 from ..bodies import release as rb
 from ..bodies import take as tk
@@ -75,7 +76,7 @@ def build_ratings(wd: tv.TakeWorld) -> None:
     )
 
     def rating_env(cards_takes, *, source=None, plan_=None, title="Fair readings?", topics=("Fairness",),
-                   kind=dk.KIND_RATING, extra_refs=None, issued=None, minv=None):  # fmt: skip
+                   kind=dk.KIND_RATING, extra_refs=None, issued=None, minv=None, ctx=None):  # fmt: skip
         plan_ = plan_ or dk.plan_rating()
         if minv is not None:
             plan_ = dict(plan_)
@@ -86,7 +87,7 @@ def build_ratings(wd: tv.TakeWorld) -> None:
         if extra_refs:
             refs.update(extra_refs)
         env = wd.deck_env(
-            wd.ctx, plan_, cards, refs, title=title, topics=list(topics), opens=tv.RATING_OPENS,
+            ctx or wd.ctx, plan_, cards, refs, title=title, topics=list(topics), opens=tv.RATING_OPENS,
             closes=tv.RATING_CLOSES, kind=kind, issued=issued or tv.T_TAKE + DAY,
         )  # fmt: skip
         return env
@@ -200,11 +201,103 @@ def build_ratings(wd: tv.TakeWorld) -> None:
         )
         for i in range(3)
     ]
+    # a third source for the part-3-unlocked-with-part-0 release (R6, RT3): its own source, so
+    # R10's two-per-source-per-year count never sees it beside the valid and below-minimum cases
+    dsrc3 = wd.deck(
+        "rating-source-3",
+        wd.deck_env(
+            wd.ctx,
+            dk.plan_full(dv.CARDS, cov_statements=dv.CARDS),
+            copy.deepcopy(wd.cards),
+            dict(wd.refs),
+            title="Rating source 3",
+        ),
+    )
+    v = bld.version("rating-source-3-v1", dsrc3, n_hat=1243, record=False)
+    v = bld.version("rating-source-3-v2", dsrc3, stage=2, prev=v, part_n={1: 1198}, record=False)
+    v = bld.version("rating-source-3-v3", dsrc3, stage=3, prev=v, part_n={2: 1171}, record=False)
+    src3 = bld.version("rating-source-3-v4", dsrc3, stage=4, prev=v, part_n={3: 1150}, record=False)
+    takes3 = [
+        wd.take(
+            f"rating3-{i}",
+            wd.take_env(f"rating3-{i}", [src3], series=series_, issued=tv.T_TAKE + 40 + i),
+        )
+        for i in range(3)
+    ]
+    extra_decks["nhat-400"] = wd.deck(
+        "rating-for-nhat-400-source-3",
+        rating_env(
+            takes3, source=src3, title="Fair readings? (source 3)", issued=tv.T_TAKE + 9 * DAY + 1
+        ),
+    )
     extra_decks["R5-groupsk"] = wd.deck(
         "rating-for-R5-groupsk-source-2",
         rating_env(
             takes2, source=src2, title="Fair readings? (source 2)", issued=tv.T_TAKE + 9 * DAY
         ),
+    )
+
+    # ---- a context that raised its voter minimum (ADR 0103 item 3, TS6): versions 2 and 3 of
+    # the main context with floors.minVoters 300 and 500; the source release stays in the
+    # lineage, so D15's "this deck's context lineage" holds
+    def ctx_version(prev: m.Bundle, version: int, min_voters: int, issued: int) -> m.Bundle:
+        env = copy.deepcopy(cbor.decode(prev.envelope))
+        env[m.VERSION] = version
+        env[m.LINEAGE] = env.get(m.LINEAGE, prev.cid)
+        env[m.PREV] = prev.cid
+        env[m.ISSUED] = issued
+        env[m.BODY][c.FLOORS] = c.floors(min_voters=min_voters)
+        return wd.append(f"context-main-v{version}-min-{min_voters}", env, wd.organizers())
+
+    ctx300 = ctx_version(wd.ctx, 2, 300, tv.T_TAKE + 2 * DAY + 1)
+    ctx500 = ctx_version(ctx300, 3, 500, tv.T_TAKE + 2 * DAY + 2)
+    wd.ctx_min_300, wd.ctx_min_500 = ctx300, ctx500
+    bad(
+        "minvoters-under-floor",
+        rating_env(wd.rating_takes, ctx=ctx300, issued=tv.T_TAKE + 3 * DAY),
+        "a rating deck with minVoters 100 in a context whose floor is 300 (D10 fires before D15: "
+        "minVoters below the context floor)",
+        rule="D10",
+    )
+    b = wd.deck(
+        "rating-valid-min-300",
+        rating_env(wd.rating_takes, ctx=ctx300, plan_=dk.plan_rating(min_voters=300),
+                   issued=tv.T_TAKE + 3 * DAY + 1),
+    )  # fmt: skip
+    wd.rating_deck_cases.append((
+        "valid-rating-min-300",
+        "a rating deck in a context whose floor is 300, with minVoters 300 and gates[0] 300",
+        None,
+        b,
+    ))  # fmt: skip
+    b = wd.deck(
+        "rating-valid-min-500",
+        rating_env(wd.rating_takes, ctx=ctx500, plan_=dk.plan_rating(min_voters=500),
+                   issued=tv.T_TAKE + 3 * DAY + 2),
+    )  # fmt: skip
+    wd.rating_deck_cases.append((
+        "valid-rating-min-500",
+        "a rating deck under a context minimum of 500, with minVoters 500 and gates[0] 500: "
+        "D11 does not test part 3 (gated per group cell)",
+        None,
+        b,
+    ))  # fmt: skip
+    bad(
+        "gates0-not-raised",
+        rating_env(
+            wd.rating_takes,
+            ctx=ctx300,
+            plan_=dk.plan_rating(min_voters=300, gates={}),
+            issued=tv.T_TAKE + 3 * DAY + 3,
+        ),
+        "minVoters 300 under a floor of 300 without gates[0] raised: D11 (minVoters above the "
+        "tallies gate) fires before D15",
+        rule="D11",
+    )
+    # a deck for the below-minimum rating release (its own lineage, so R10 cannot fire)
+    extra_decks["below-minimum"] = wd.deck(
+        "rating-for-below-minimum",
+        cbor.decode(valid.envelope) | {m.ISSUED: tv.T_TAKE + 10 * DAY},
     )
     # 61 eligible takes: append 61 more takes, then a 61-card deck
     more = [
@@ -220,56 +313,74 @@ def build_ratings(wd: tv.TakeWorld) -> None:
         rating_env(all_takes, issued=tv.T_TAKE + 2 * DAY),
         "61 cards where the first 60 eligible takes are the limit",
     )
+
     # ---- rating releases
     wd.rating_release_cases = build_rating_releases(wd, valid, extra_decks)
 
 
 def rating_release_env(
-    wd, deck: m.Bundle, *, n_hat=250, groups_n=900, groups_k=2, final=True, issued=None, mutate=None
+    wd,
+    deck: m.Bundle,
+    *,
+    n_hat=250,
+    groups_n=900,
+    groups_k=2,
+    final=True,
+    issued=None,
+    mutate=None,
+    keep_groups_k=False,
 ):
     deck_env = cbor.decode(deck.envelope)
     plan = deck_env[m.BODY][dk.PLAN]
     cards = len(deck_env[m.BODY][dk.CARDS])
     plan_parts = {p: Fraction(r[0], r[1]) for p, r in plan[dk.P_PARTS].items()}
+    below = n_hat < plan[dk.P_MIN_VOTERS]  # ADR 0103: only part 0 is noised below the minimum
     parts = {
         dk.TALLIES: rb.part_record(
-            plan_parts[0], rb.sigma_of_part(plan, cards, 0, plan_parts[0]), n_hat
+            plan_parts[0], rb.sigma_of_part(plan, cards, 0, plan_parts[0]), None if below else n_hat
         ),
-        dk.GROUPS: rb.part_record(
-            plan_parts[3], rb.sigma_of_part(plan, cards, 3, plan_parts[3]), groups_n
-        ),
-        dk.RECEIPTS: rb.part_record(plan_parts[8], rb.sigma_of_part(plan, cards, 8, plan_parts[8])),
     }
-    unlocked = rb.canonical_unlocked(plan, parts, n_hat, 1)
+    if not below:
+        parts[dk.GROUPS] = rb.part_record(
+            plan_parts[3], rb.sigma_of_part(plan, cards, 3, plan_parts[3]), groups_n
+        )
+        parts[dk.RECEIPTS] = rb.part_record(
+            plan_parts[8], rb.sigma_of_part(plan, cards, 8, plan_parts[8])
+        )
+    unlocked = rb.canonical_unlocked(plan, parts, n_hat, 1, rating=True)
     refs = {"deck": deck.cid}
     label = f"rating-release-{hexify(deck.cid)[:8]}"
-    for t in ("tallies", "group_tallies", "group_sizes"):
-        refs[f"t/{t}"] = wd.w.put_blob(cbor.encode({"hum-vector-table": f"{label}-{t}"}))
-    # take.md: a rating release publishes tallies, group_tallies and group_sizes only (no repness
-    # at stage 1; release.md R7 asks for repness at stage 4).
-    from .. import services
+    receipts = {}
+    if not below:
+        for t in ("tallies", "group_tallies", "group_sizes"):
+            refs[f"t/{t}"] = wd.w.put_blob(cbor.encode({"hum-vector-table": f"{label}-{t}"}))
+        # take.md: a rating release publishes tallies, group_tallies and group_sizes only (no
+        # repness at stage 1; release.md R7 asks for repness at stage 4).
+        from .. import services
 
-    leaves = [fixtures.fixed_bytes(f"{label}-receipt-{i}") for i in range(5)]
-    pages = services.receipt_pages(leaves)
-    for page in pages["pages"]:
-        wd.w.put_blob(page)
-    refs["receipts/0"] = wd.w.put_blob(pages["root_blob"])
+        leaves = [fixtures.fixed_bytes(f"{label}-receipt-{i}") for i in range(5)]
+        pages = services.receipt_pages(leaves)
+        for page in pages["pages"]:
+            wd.w.put_blob(page)
+        refs["receipts/0"] = wd.w.put_blob(pages["root_blob"])
+        receipts = {0: pages["root"]}
     ctx_env = cbor.decode(wd.w.bundles[deck_env[m.REFS]["context"]].envelope)
     issued = issued or deck_env[m.BODY][dk.CLOSES] + 3600
     body = rb.body(
         helper=ctx_env[m.BODY][8][1],
         stage=1,
         final=final,
-        rho=sum(plan_parts.values(), Fraction(0)),
+        rho=sum((plan_parts[p] for p in parts), Fraction(0)),
         delta=Fraction(plan[dk.P_DELTA][0], plan[dk.P_DELTA][1]),
         parts=parts,
         unlocked=unlocked,
-        receipts={0: pages["root"]},
+        receipts=receipts,
         assurance=wd.assurance,
         sealed=False,
-        n_hat=n_hat,
+        n_hat=None if below else n_hat,
         round_deadline=None if final else issued + WINDOW,
-        groups_k=groups_k,
+        # R7: no groupsK below the minimum (no group table); keep_groups_k builds the R7 case
+        groups_k=None if (below and not keep_groups_k) else groups_k,
     )
     env = m.envelope("release", body, authority=ctx_env[m.BODY][8][0], issued=issued, refs=refs)
     if mutate:
@@ -285,7 +396,42 @@ def build_rating_releases(wd, valid_deck: m.Bundle, decks: dict[str, m.Bundle]):
         (
             "valid-rating",
             "one-version rating release: parts 0, 3, 8; tallies, group_tallies, group_sizes; "
-            "groupsK from the source; nHat 250 (below GATE_COMMON, so no consensus table)",
+            "groupsK from the source; nHat 250 (below GATE_COMMON, so no consensus table); "
+            "part 3 unlocked with part 0 (R6, its n 900 plays no part in the unlock)",
+            None,
+            None,
+            b,
+        )
+    )
+    b = wd.append(
+        "release-valid-rating-nhat-400",
+        rating_release_env(wd, decks["nhat-400"], n_hat=400, groups_n=400),
+        signers,
+    )
+    cases.append(
+        (
+            "valid-rating-nhat-400",
+            "a rating release with nHat 400 and the groups part's n 400, below gate(1) 800: "
+            "part 3 is unlocked with part 0 (R6, RT3) and unlocked is [0, 3, 8]. Its group "
+            "cells are filtered at GATE_CELL 300 in post-processing, which the tables (opaque "
+            "placeholder blobs here) would show; the manifest-level rule is what this case "
+            "checks",
+            None,
+            None,
+            b,
+        )
+    )
+    b = wd.append(
+        "release-valid-below-minimum-rating",
+        rating_release_env(wd, decks["below-minimum"], n_hat=80),
+        signers,
+    )
+    cases.append(
+        (
+            "valid-below-minimum-rating",
+            "a rating deck below its minimum (nHat 80 under 100): version 1 final, unlocked "
+            "empty, parts holding part 0 only (no part 3, no part 8), no tables, no receipts, "
+            "no groupsK in the body (R7)",
             None,
             None,
             b,
@@ -304,6 +450,20 @@ def build_rating_releases(wd, valid_deck: m.Bundle, decks: dict[str, m.Bundle]):
     )
     cases.append(
         ("invalid-R5-rating-groupsk", "rating groupsK 3 where the source has 2", "R5", 10, b)
+    )
+    b = wd.append(
+        "release-invalid-R7-groupsk-below-minimum",
+        rating_release_env(wd, decks["below-minimum"], n_hat=80, keep_groups_k=True),
+        signers,
+    )
+    cases.append(
+        (
+            "invalid-R7-groupsk-below-minimum",
+            "groupsK on a below-minimum rating release (R7: groupsK iff part 0 is unlocked)",
+            "R7",
+            10,
+            b,
+        )
     )
     b = wd.append(
         "release-invalid-R7-rating-consensus",

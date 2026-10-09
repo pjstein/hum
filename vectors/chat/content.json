@@ -633,7 +633,55 @@
    }
   },
   {
-   "id": "chat/content/content-reject-version-017",
+   "id": "chat/content/content-join-record-017",
+   "description": "Valid join-record",
+   "section": "5.2",
+   "inputs": {
+    "type": "join-record",
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "76cd65c0220bd7b19aaeb16ac6c57d70afe7efdba4f82d6155e5cd18f00f74d4"
+        },
+        {
+         "hex": "f0c576c6c7c5ceb8d4be7329b2c82a5f48028d982ba1b62a5a5f357fa93ad8a9"
+        }
+       ]
+      ],
+      [
+       2,
+       {
+        "hex": "3241a8783642f0f639e60f1208f6fc672f041ede7cb20dc0f34624d966939fa0"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ],
+      [
+       5,
+       20733
+      ]
+     ]
+    },
+    "external_parts": 0
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.join-record+cbor",
+    "bytes": "a500010182582076cd65c0220bd7b19aaeb16ac6c57d70afe7efdba4f82d6155e5cd18f00f74d45820f0c576c6c7c5ceb8d4be7329b2c82a5f48028d982ba1b62a5a5f357fa93ad8a90258203241a8783642f0f639e60f1208f6fc672f041ede7cb20dc0f34624d966939fa003582101ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4051950fd"
+   }
+  },
+  {
+   "id": "chat/content/content-reject-version-018",
    "description": "Reject: unknown version",
    "section": "5.2",
    "inputs": {
@@ -648,7 +696,7 @@
    }
   },
   {
-   "id": "chat/content/content-reject-missing-key-018",
+   "id": "chat/content/content-reject-missing-key-019",
    "description": "Reject: missing required key",
    "section": "5.2",
    "inputs": {
@@ -663,7 +711,7 @@
    }
   },
   {
-   "id": "chat/content/content-reject-array-max-019",
+   "id": "chat/content/content-reject-array-max-020",
    "description": "Reject: array over maximum",
    "section": "5.2",
    "inputs": {
@@ -678,7 +726,7 @@
    }
   },
   {
-   "id": "chat/content/content-reject-unknown-key-020",
+   "id": "chat/content/content-reject-unknown-key-021",
    "description": "Reject: unknown key",
    "section": "5.2",
    "inputs": {
@@ -693,7 +741,7 @@
    }
   },
   {
-   "id": "chat/content/content-reject-file-op-no-part-021",
+   "id": "chat/content/content-reject-file-op-no-part-022",
    "description": "Reject: add without an ExternalPart",
    "section": "5.2",
    "inputs": {
@@ -708,7 +756,7 @@
    }
   },
   {
-   "id": "chat/content/content-reject-file-op-extra-part-022",
+   "id": "chat/content/content-reject-file-op-extra-part-023",
    "description": "Reject: rename with an ExternalPart",
    "section": "5.2",
    "inputs": {
@@ -723,7 +771,7 @@
    }
   },
   {
-   "id": "chat/content/content-reject-folder-index-no-part-023",
+   "id": "chat/content/content-reject-folder-index-no-part-024",
    "description": "Reject: folder-index without its ExternalPart",
    "section": "5.2",
    "inputs": {
@@ -738,7 +786,7 @@
    }
   },
   {
-   "id": "chat/content/content-reject-non-canonical-024",
+   "id": "chat/content/content-reject-non-canonical-025",
    "description": "Reject: bytes that do not re-encode to themselves",
    "section": "5.2",
    "inputs": {
@@ -752,7 +800,7 @@
    }
   },
   {
-   "id": "chat/content/content-reject-deck-dealt-foreign-context-025",
+   "id": "chat/content/content-reject-deck-dealt-foreign-context-026",
    "description": "deck-dealt whose context is a version of another lineage than the group's",
    "section": "5.6",
    "inputs": {
@@ -806,7 +854,7 @@
    }
   },
   {
-   "id": "chat/content/content-reject-release-digest-deck-mismatch-026",
+   "id": "chat/content/content-reject-release-digest-deck-mismatch-027",
    "description": "release-digest whose deck is not the release's refs['deck']",
    "section": "5.6",
    "inputs": {
@@ -844,7 +892,7 @@
    }
   },
   {
-   "id": "chat/content/content-roles-signed-027",
+   "id": "chat/content/content-roles-signed-028",
    "description": "A roles message signed by the context's a1+a2 under hum/chat-roles/1",
    "section": "5.8",
    "inputs": {
@@ -910,7 +958,7 @@
    }
   },
   {
-   "id": "chat/content/content-roles-reject-bad-signature-028",
+   "id": "chat/content/content-roles-reject-bad-signature-029",
    "description": "The same signature over serial 2",
    "section": "5.8",
    "inputs": {
@@ -923,7 +971,7 @@
    }
   },
   {
-   "id": "chat/content/external-part-029",
+   "id": "chat/content/external-part-030",
    "description": "A direct reference as a draft-ietf-mimi-content-09 ExternalPart: one flat fifteen-element nestedPart array, disposition render (1), cardinality external (2)",
    "section": "5.1",
    "inputs": {

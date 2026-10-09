@@ -1,0 +1,1447 @@
+{
+ "spec": "chat",
+ "file": "join-records",
+ "notes": "The greeter's join-record state machine (2.5 step 4, 5.17, ADR 0104, TS9, RT4, RU1, RU2): record and snapshot bodies, the ticket decision against the live records, the record-before-commit sequence with its pre-commit check (JOIN_PENDING = 3,600 s), the two-greeter race, the no-record backstop (JOIN_GRACE = 600 s) and pruning. Times are delivery-service receive times in seconds; `seq` is the delivery-service sequence number. The ticket's HPKE sealing and its membership proof stay in the pending chat/join set; here the nullifiers a proof yields are inputs.",
+ "cases": [
+  {
+   "id": "chat/join-records/join-record-valid-001",
+   "description": "A record: two nullifiers sorted bytewise (a two-card entry policy), identity, context, day",
+   "section": "5.17",
+   "inputs": {
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d"
+        },
+        {
+         "hex": "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+        }
+       ]
+      ],
+      [
+       2,
+       {
+        "hex": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ],
+      [
+       5,
+       20700
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.join-record+cbor",
+    "bytes": "a500010182582021b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d582040d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd102582072fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a03582101ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4051950dc"
+   }
+  },
+  {
+   "id": "chat/join-records/join-record-snapshot-valid-002",
+   "description": "The snapshot a newcomer to the organizers group receives: rows [nullifiers, identity, day]",
+   "section": "5.17",
+   "inputs": {
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       4,
+       [
+        [
+         [
+          {
+           "hex": "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d"
+          },
+          {
+           "hex": "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+          }
+         ],
+         {
+          "hex": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+         },
+         20700
+        ],
+        [
+         [
+          {
+           "hex": "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+          }
+         ],
+         {
+          "hex": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367"
+         },
+         20710
+        ]
+       ]
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.join-record+cbor",
+    "bytes": "a2000104828382582021b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d582040d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1582072fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a1950dc838158204d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8582032bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac2013671950e6"
+   }
+  },
+  {
+   "id": "chat/join-records/join-record-reject-unsorted-003",
+   "description": "Reject: nullifiers not sorted bytewise",
+   "section": "5.17",
+   "inputs": {
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+        },
+        {
+         "hex": "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d"
+        }
+       ]
+      ],
+      [
+       2,
+       {
+        "hex": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ],
+      [
+       5,
+       20700
+      ]
+     ]
+    },
+    "bytes": "a500010182582040d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1582021b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d02582072fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a03582101ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4051950dc"
+   },
+   "rejection": {
+    "step": null,
+    "check": "content",
+    "reason": "field 1 invalid"
+   }
+  },
+  {
+   "id": "chat/join-records/join-record-reject-duplicate-004",
+   "description": "Reject: a nullifier listed twice",
+   "section": "5.17",
+   "inputs": {
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d"
+        },
+        {
+         "hex": "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d"
+        }
+       ]
+      ],
+      [
+       2,
+       {
+        "hex": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ],
+      [
+       5,
+       20700
+      ]
+     ]
+    },
+    "bytes": "a500010182582021b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d582021b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d02582072fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a03582101ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4051950dc"
+   },
+   "rejection": {
+    "step": null,
+    "check": "content",
+    "reason": "field 1 invalid"
+   }
+  },
+  {
+   "id": "chat/join-records/join-record-reject-nine-005",
+   "description": "Reject: nine nullifiers",
+   "section": "5.17",
+   "inputs": {
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d"
+        },
+        {
+         "hex": "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+        },
+        {
+         "hex": "4ccdfea93c1e32e62072747fe8e50cc2d8bc290b48d005b1537b9c99aeeb064f"
+        },
+        {
+         "hex": "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+        },
+        {
+         "hex": "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+        },
+        {
+         "hex": "acd57d903ce1c3aacdcd38a7c7a600b00b4f55331f14380d17381e1a65b61eac"
+        },
+        {
+         "hex": "b107cf618dab1f0bcd4b8600575305be45cf4f12361ad5916d40753be45870ea"
+        },
+        {
+         "hex": "d6d0d7595aa11bc9db51164fee27b057bf9062488fff9f78fdf092c4b8b40067"
+        },
+        {
+         "hex": "f68c441b417e16a8bb10522f9d295ec071f7024419d924971d31251a92a9f03c"
+        }
+       ]
+      ],
+      [
+       2,
+       {
+        "hex": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ],
+      [
+       5,
+       20700
+      ]
+     ]
+    },
+    "bytes": "a500010189582021b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d582040d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd158204ccdfea93c1e32e62072747fe8e50cc2d8bc290b48d005b1537b9c99aeeb064f58204d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f858209593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb5820acd57d903ce1c3aacdcd38a7c7a600b00b4f55331f14380d17381e1a65b61eac5820b107cf618dab1f0bcd4b8600575305be45cf4f12361ad5916d40753be45870ea5820d6d0d7595aa11bc9db51164fee27b057bf9062488fff9f78fdf092c4b8b400675820f68c441b417e16a8bb10522f9d295ec071f7024419d924971d31251a92a9f03c02582072fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a03582101ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4051950dc"
+   },
+   "rejection": {
+    "step": null,
+    "check": "content",
+    "reason": "array at key 1 over maximum 8"
+   }
+  },
+  {
+   "id": "chat/join-records/join-record-reject-mixed-006",
+   "description": "Reject: a record carrying the snapshot key 4",
+   "section": "5.17",
+   "inputs": {
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d"
+        },
+        {
+         "hex": "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+        }
+       ]
+      ],
+      [
+       2,
+       {
+        "hex": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ],
+      [
+       5,
+       20700
+      ],
+      [
+       4,
+       []
+      ]
+     ]
+    },
+    "bytes": "a600010182582021b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d582040d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd102582072fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a03582101ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e40480051950dc"
+   },
+   "rejection": {
+    "step": null,
+    "check": "content",
+    "reason": "join-record is a record (keys 1, 2, 3, 5) or a snapshot (key 4)"
+   }
+  },
+  {
+   "id": "chat/join-records/join-record-reject-no-day-007",
+   "description": "Reject: day missing",
+   "section": "5.17",
+   "inputs": {
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       [
+        {
+         "hex": "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d"
+        },
+        {
+         "hex": "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+        }
+       ]
+      ],
+      [
+       2,
+       {
+        "hex": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ]
+     ]
+    },
+    "bytes": "a400010182582021b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d582040d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd102582072fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a03582101ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+   },
+   "rejection": {
+    "step": null,
+    "check": "content",
+    "reason": "join-record is a record (keys 1, 2, 3, 5) or a snapshot (key 4)"
+   }
+  },
+  {
+   "id": "chat/join-records/join-record-reject-old-shape-008",
+   "description": "Reject: key 1 as one bstr (the pre-ADR-0104 shape)",
+   "section": "5.17",
+   "inputs": {
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       2,
+       {
+        "hex": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+       }
+      ],
+      [
+       3,
+       {
+        "hex": "01ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4"
+       }
+      ],
+      [
+       5,
+       20700
+      ],
+      [
+       1,
+       {
+        "hex": "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d"
+       }
+      ]
+     ]
+    },
+    "bytes": "a5000101582021b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d02582072fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a03582101ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4051950dc"
+   },
+   "rejection": {
+    "step": null,
+    "check": "content",
+    "reason": "field 1 invalid"
+   }
+  },
+  {
+   "id": "chat/join-records/join-ticket-admit-new-009",
+   "description": "A ticket whose nullifiers are all new",
+   "section": "2.5 step 4",
+   "inputs": {
+    "ticket_nullifiers": [
+     "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+    ],
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ],
+    "live_identities": [
+     "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+     "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+    ]
+   },
+   "expected": {
+    "decision": "admit",
+    "reason": "no nullifier recorded for a live identity"
+   }
+  },
+  {
+   "id": "chat/join-records/join-ticket-discard-second-nullifier-recorded-010",
+   "description": "A two-card ticket whose first nullifier is new and whose second is recorded for a live identity: discarded (any of the proof's nullifiers)",
+   "section": "2.5 step 4",
+   "inputs": {
+    "ticket_nullifiers": [
+     "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb",
+     "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+    ],
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ],
+    "live_identities": [
+     "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+     "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+    ]
+   },
+   "expected": {
+    "decision": "discard",
+    "reason": "nullifier 40d55b1105636a94\u2026 recorded for a live identity"
+   }
+  },
+  {
+   "id": "chat/join-records/join-ticket-admit-removed-identity-011",
+   "description": "The same nullifier recorded only for an identity that has left the all-members group: admitted",
+   "section": "2.5 step 4",
+   "inputs": {
+    "ticket_nullifiers": [
+     "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb",
+     "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+    ],
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ],
+    "live_identities": [
+     "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367"
+    ]
+   },
+   "expected": {
+    "decision": "admit",
+    "reason": "no nullifier recorded for a live identity"
+   }
+  },
+  {
+   "id": "chat/join-records/join-greeter-sequence-012",
+   "description": "The greeter's order (RT4): send the join-record, wait until the delivery service has sequenced it, re-check the records, then fetch KeyPackages and commit the Add. Here no earlier record shares a nullifier, so the greeter commits",
+   "section": "2.5 step 4",
+   "inputs": {
+    "own_record": {
+     "nullifiers": [
+      "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+     ],
+     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+     "day": 20711,
+     "seq": 70,
+     "received": 1801000000
+    },
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20711,
+      "seq": 70,
+      "received": 1801000000
+     }
+    ],
+    "live_identities": [
+     "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+     "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+    ]
+   },
+   "expected": {
+    "sequence": [
+     "join-record",
+     "wait-for-sequencing",
+     "pre-commit-check",
+     "add-commit"
+    ],
+    "decision": "commit",
+    "reason": "no earlier record is live or pending"
+   }
+  },
+  {
+   "id": "chat/join-records/join-two-greeters-later-record-stops-013",
+   "description": "Two tickets from one card (identity a has left, so its record is inert) opened by two greeters at once: both send records before committing; the greeter whose record has the lower sequence number commits, the one with the later record finds a pending earlier record for a different identity and stops (RT4; was a post-commit removal under TS9)",
+   "section": "2.5 step 4",
+   "inputs": {
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     },
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d",
+      "day": 20711,
+      "seq": 58,
+      "received": 1800864120
+     },
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20711,
+      "seq": 59,
+      "received": 1800864125
+     }
+    ],
+    "live_identities": [
+     "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367"
+    ]
+   },
+   "expected": {
+    "greeters": [
+     {
+      "own_record_seq": 58,
+      "decision": "commit",
+      "reason": "no earlier record is live or pending"
+     },
+     {
+      "own_record_seq": 59,
+      "decision": "stop",
+      "reason": "earlier record seq 58 is pending (5 s < JOIN_PENDING)"
+     }
+    ]
+   }
+  },
+  {
+   "id": "chat/join-records/join-two-live-identities-backstop-014",
+   "description": "Backstop: two live identities whose records share nullifiers (a greeter committed against the rule); every greeter removes the identity whose join-record has the higher delivery-service sequence number",
+   "section": "2.5 step 4",
+   "inputs": {
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     },
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d",
+      "day": 20711,
+      "seq": 58,
+      "received": 1800864120
+     }
+    ],
+    "live_identities": [
+     "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d",
+     "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+     "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+    ]
+   },
+   "expected": {
+    "remove": [
+     "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d"
+    ],
+    "keep": [
+     "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+     "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+    ]
+   }
+  },
+  {
+   "id": "chat/join-records/join-rebase-recheck-drops-add-015",
+   "description": "A greeter whose Add is rebased onto a new epoch re-checks the records: the other greeter's record for the same card is now live, so it drops its Add",
+   "section": "2.5 step 4",
+   "inputs": {
+    "ticket_nullifiers": [
+     "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+     "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+    ],
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     },
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d",
+      "day": 20711,
+      "seq": 58,
+      "received": 1800864120
+     }
+    ]
+   },
+   "expected": {
+    "decision": "discard",
+    "reason": "nullifier 21b6c8aa84801488\u2026 recorded for a live identity"
+   }
+  },
+  {
+   "id": "chat/join-records/join-greeter-fails-before-commit-016",
+   "description": "A greeter sends its record and fails before the commit: the record names an identity that is not a member, so it is inert. Another greeter opening the same ticket within JOIN_PENDING admits the same identity under the existing record (a retried ticket matches its own record): the ticket decision ignores records of non-members and the pre-commit check ignores a record naming the same identity",
+   "section": "2.5 step 4",
+   "inputs": {
+    "ticket_nullifiers": [
+     "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+    ],
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20711,
+      "seq": 70,
+      "received": 1801000000
+     }
+    ],
+    "live_identities": [
+     "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+     "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+    ],
+    "retry_at": 1801000600
+   },
+   "expected": {
+    "ticket": {
+     "decision": "admit",
+     "reason": "no nullifier recorded for a live identity"
+    },
+    "existing_record_usable": true,
+    "pre_commit": {
+     "decision": "commit",
+     "reason": "no earlier record is live or pending"
+    }
+   }
+  },
+  {
+   "id": "chat/join-records/join-greeter-record-expired-resend-017",
+   "description": "The same retry two hours later: the existing record is older than JOIN_PENDING, so the greeter sends a fresh record before committing",
+   "section": "2.5 step 4",
+   "inputs": {
+    "records": [
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20711,
+      "seq": 70,
+      "received": 1801000000
+     }
+    ],
+    "retry_at": 1801007200
+   },
+   "expected": {
+    "existing_record_usable": false,
+    "action": "send-fresh-record"
+   }
+  },
+  {
+   "id": "chat/join-records/join-precommit-live-stop-018",
+   "description": "Pre-commit check against an earlier record for a different identity: the earlier record's identity is a live member: stop",
+   "section": "2.5 step 4",
+   "inputs": {
+    "own_record": {
+     "nullifiers": [
+      "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+     ],
+     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+     "day": 20711,
+     "seq": 90,
+     "received": 1801007200
+    },
+    "records": [
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d",
+      "day": 20711,
+      "seq": 80,
+      "received": 1801000000
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20711,
+      "seq": 90,
+      "received": 1801007200
+     }
+    ],
+    "live_identities": [
+     "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d"
+    ]
+   },
+   "expected": {
+    "decision": "stop",
+    "reason": "earlier record seq 80 names a live identity"
+   }
+  },
+  {
+   "id": "chat/join-records/join-precommit-pending-stop-019",
+   "description": "Pre-commit check against an earlier record for a different identity: the earlier record is 30 minutes old and its identity is not a member: pending, stop",
+   "section": "2.5 step 4",
+   "inputs": {
+    "own_record": {
+     "nullifiers": [
+      "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+     ],
+     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+     "day": 20711,
+     "seq": 90,
+     "received": 1801007200
+    },
+    "records": [
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d",
+      "day": 20711,
+      "seq": 80,
+      "received": 1801005400
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20711,
+      "seq": 90,
+      "received": 1801007200
+     }
+    ],
+    "live_identities": []
+   },
+   "expected": {
+    "decision": "stop",
+    "reason": "earlier record seq 80 is pending (1800 s < JOIN_PENDING)"
+   }
+  },
+  {
+   "id": "chat/join-records/join-precommit-inert-commit-020",
+   "description": "Pre-commit check against an earlier record for a different identity: the earlier record is two hours old and its identity is not a member: inert, commit",
+   "section": "2.5 step 4",
+   "inputs": {
+    "own_record": {
+     "nullifiers": [
+      "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+     ],
+     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+     "day": 20711,
+     "seq": 90,
+     "received": 1801007200
+    },
+    "records": [
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "17ea974c3e1118e3e618be10ad78b2b95dad1886f945e41275499ef38322655d",
+      "day": 20711,
+      "seq": 80,
+      "received": 1801000000
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20711,
+      "seq": 90,
+      "received": 1801007200
+     }
+    ],
+    "live_identities": []
+   },
+   "expected": {
+    "decision": "commit",
+    "reason": "no earlier record is live or pending"
+   }
+  },
+  {
+   "id": "chat/join-records/join-no-record-removed-after-grace-021",
+   "description": "No-record backstop: an Add of a new human identity with no join-record, with the organizers group fetched 600 s past the Add: the leaf is removed",
+   "section": "2.5 step 4",
+   "inputs": {
+    "leaf_kind": 1,
+    "was_member": false,
+    "entry_yields_nullifier": true,
+    "add_received": 1801100000,
+    "organizers_fetched_to": 1801100600,
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ]
+   },
+   "expected": {
+    "action": "remove",
+    "reason": "human leaf of a new identity with no join-record after JOIN_GRACE"
+   }
+  },
+  {
+   "id": "chat/join-records/join-no-record-kept-before-grace-022",
+   "description": "No-record backstop: the same Add seen with the organizers group fetched only 599 s past it: kept",
+   "section": "2.5 step 4",
+   "inputs": {
+    "leaf_kind": 1,
+    "was_member": false,
+    "entry_yields_nullifier": true,
+    "add_received": 1801100000,
+    "organizers_fetched_to": 1801100599,
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ]
+   },
+   "expected": {
+    "action": "keep",
+    "reason": "fetched only 599 s past the Add (< JOIN_GRACE)"
+   }
+  },
+  {
+   "id": "chat/join-records/join-no-record-kept-unfetched-023",
+   "description": "No-record backstop: the same Add when the organizers group cannot be fetched: the greeter does nothing",
+   "section": "2.5 step 4",
+   "inputs": {
+    "leaf_kind": 1,
+    "was_member": false,
+    "entry_yields_nullifier": true,
+    "add_received": 1801100000,
+    "organizers_fetched_to": null,
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ]
+   },
+   "expected": {
+    "action": "keep",
+    "reason": "the organizers group could not be fetched: do nothing"
+   }
+  },
+  {
+   "id": "chat/join-records/join-no-record-kept-open-entry-024",
+   "description": "No-record backstop: the same in a context with entry = [0]: kept, no record exists there",
+   "section": "2.5 step 4",
+   "inputs": {
+    "leaf_kind": 1,
+    "was_member": false,
+    "entry_yields_nullifier": false,
+    "add_received": 1801100000,
+    "organizers_fetched_to": 1801100600,
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ]
+   },
+   "expected": {
+    "action": "keep",
+    "reason": "entry is [0]: no record exists in this context"
+   }
+  },
+  {
+   "id": "chat/join-records/join-no-record-kept-agent-leaf-025",
+   "description": "No-record backstop: an agent (kind 2) leaf with no record: kept",
+   "section": "2.5 step 4",
+   "inputs": {
+    "leaf_kind": 2,
+    "was_member": false,
+    "entry_yields_nullifier": true,
+    "add_received": 1801100000,
+    "organizers_fetched_to": 1801100600,
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ]
+   },
+   "expected": {
+    "action": "keep",
+    "reason": "not a human leaf"
+   }
+  },
+  {
+   "id": "chat/join-records/join-no-record-kept-second-device-026",
+   "description": "No-record backstop: a second device of an identity that is already a member, with no record: kept",
+   "section": "2.5 step 4",
+   "inputs": {
+    "leaf_kind": 1,
+    "was_member": true,
+    "entry_yields_nullifier": true,
+    "add_received": 1801100000,
+    "organizers_fetched_to": 1801100600,
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     }
+    ]
+   },
+   "expected": {
+    "action": "keep",
+    "reason": "a new device of an identity that is already a member"
+   }
+  },
+  {
+   "id": "chat/join-records/join-no-record-kept-record-arrived-027",
+   "description": "No-record backstop: a record naming the identity is found by the time of the fetch: kept",
+   "section": "2.5 step 4",
+   "inputs": {
+    "leaf_kind": 1,
+    "was_member": false,
+    "entry_yields_nullifier": true,
+    "add_received": 1801100000,
+    "organizers_fetched_to": 1801100600,
+    "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20710,
+      "seq": 57,
+      "received": 1800864000
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+      "day": 20712,
+      "seq": 95,
+      "received": 1801100030
+     }
+    ]
+   },
+   "expected": {
+    "action": "keep",
+    "reason": "a join-record names this identity"
+   }
+  },
+  {
+   "id": "chat/join-records/join-record-expired-inert-028",
+   "description": "A record 397 days old for a live identity is present and undeleted: a ticket sharing its nullifier is admitted, a greeter's own record after it commits, and the duplicate backstop removes nothing; a record exactly 396 days old still blocks",
+   "section": "5.17",
+   "inputs": {
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "0ca6916f4ff9d0fe82d5f7e3a2760bc96382c0bb7577ee47549dd2a16bcb6b08",
+      "day": 20336,
+      "seq": 3,
+      "received": 1765699200
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20337,
+      "seq": 4,
+      "received": 1765785600
+     }
+    ],
+    "live_identities": [
+     "0ca6916f4ff9d0fe82d5f7e3a2760bc96382c0bb7577ee47549dd2a16bcb6b08",
+     "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+     "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+    ],
+    "today": 20733,
+    "ticket_old": [
+     "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+    ],
+    "ticket_edge": [
+     "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+    ],
+    "own_record": {
+     "nullifiers": [
+      "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+     ],
+     "identity": "e3611a91178bbdcefe8f87e341097f16ace28da36f1f96f77d1d911cef4ad3de",
+     "day": 20733,
+     "seq": 90,
+     "received": 1800000050
+    }
+   },
+   "expected": {
+    "ticket_old": {
+     "decision": "admit",
+     "reason": "no nullifier recorded for a live identity"
+    },
+    "ticket_edge": {
+     "decision": "discard",
+     "reason": "nullifier 4d1a9af8f3a6226d\u2026 recorded for a live identity"
+    },
+    "precommit": {
+     "decision": "commit",
+     "reason": "no earlier record is live or pending"
+    },
+    "backstop_removed": []
+   }
+  },
+  {
+   "id": "chat/join-records/join-record-expired-snapshot-omits-029",
+   "description": "The snapshot sent to a newcomer omits the 397-day-old record and keeps the 396-day-old one",
+   "section": "5.17",
+   "inputs": {
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "0ca6916f4ff9d0fe82d5f7e3a2760bc96382c0bb7577ee47549dd2a16bcb6b08",
+      "day": 20336,
+      "seq": 3,
+      "received": 1765699200
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20337,
+      "seq": 4,
+      "received": 1765785600
+     }
+    ],
+    "today": 20733,
+    "view": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       4,
+       [
+        [
+         [
+          {
+           "hex": "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d"
+          },
+          {
+           "hex": "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+          }
+         ],
+         {
+          "hex": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+         },
+         20700
+        ],
+        [
+         [
+          {
+           "hex": "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+          }
+         ],
+         {
+          "hex": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367"
+         },
+         20337
+        ]
+       ]
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "content_type": "application/vnd.hum.join-record+cbor",
+    "bytes": "a2000104828382582021b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d582040d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1582072fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a1950dc838158204d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8582032bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367194f71",
+    "rows": 2
+   }
+  },
+  {
+   "id": "chat/join-records/join-records-prune-030",
+   "description": "Deletion (advisory, MAY): the reference deletes a record whose identity left and a record more than 396 days old; an implementation that keeps the old record also conforms, since it is inert either way",
+   "section": "5.17",
+   "inputs": {
+    "records": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "9593c55f4d24b5f2197b8e2cb40f07b4f18c3af259c840c421cfec6fb4bc14cb"
+      ],
+      "identity": "0ca6916f4ff9d0fe82d5f7e3a2760bc96382c0bb7577ee47549dd2a16bcb6b08",
+      "day": 20336,
+      "seq": 3,
+      "received": 1765699200
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20337,
+      "seq": 4,
+      "received": 1765785600
+     }
+    ],
+    "live_identities": [
+     "0ca6916f4ff9d0fe82d5f7e3a2760bc96382c0bb7577ee47549dd2a16bcb6b08",
+     "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+     "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a"
+    ],
+    "today": 20733
+   },
+   "expected": {
+    "kept": [
+     {
+      "nullifiers": [
+       "21b6c8aa8480148887cf61e91c11686d9e807c2ecaa9cb2185358fade0fc6e9d",
+       "40d55b1105636a9425c87930cc965b2c6131bf3aa827c033670295f312406bd1"
+      ],
+      "identity": "72fa2aa96ffbfdbd3e28383901452affed64a1f0e40e7e2b9cfb7abf4da69e5a",
+      "day": 20700,
+      "seq": 41,
+      "received": 1800000000
+     },
+     {
+      "nullifiers": [
+       "4d1a9af8f3a6226dfd3f45d15ff795bed222e9f8fd01cb86ac2a77b09d2887f8"
+      ],
+      "identity": "32bd8b76bdf9aefda9e4e859936c932a14880c368d44d8dc5b7303dfac201367",
+      "day": 20337,
+      "seq": 4,
+      "received": 1765785600
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -74,3 +74,18 @@ def test_deck_references_positions_in_its_context(wd):
     assert env[m.REFS]["context"] == wd.ctx.cid
     assert env[m.BODY][dk.CARDS][16][dk.C_ORIGIN] == dk.ORIGIN_GLOBAL
     assert c.floors_of(cbor.decode(wd.ctx.envelope)[m.BODY])["rho"] == c.RHO_MAX
+
+
+def test_d16_clock_free_half_rejects_a_version_after_a_release(wd):
+    cases = {s: (r, b) for s, _d, r, b in wd.releases.deck_cases}
+    rule, b = cases["deck-invalid-D16-after-release"]
+    assert rule == "D16"
+    with pytest.raises(m.Rejection) as e:
+        m.verify_bundle(wd.w.context(now=fixtures.NOW), b)
+    assert (e.value.step, e.value.rule) == (10, "D16")
+
+
+def test_plan_rating_raises_gates0_with_min_voters():
+    assert dk.P_GATES not in dk.plan_rating()
+    p = dk.plan_rating(min_voters=300)
+    assert p[dk.P_MIN_VOTERS] == 300 and p[dk.P_GATES] == {0: 300}

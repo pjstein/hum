@@ -1,17 +1,26 @@
 """Vectors for docs/specs/chat.md that need no MLS state: content bodies (section 5), message ids
-(5.1), padding (4.3) and authenticated data (4.2), the safety code (2.2).
+(5.1), padding (4.3) and authenticated data (4.2), the safety code (2.2), the greeter's
+join-record state machine (2.5 step 4, 5.17) and the delivery service manifest rules DL-1 to
+DL-5 (12.1).
 
 Pending (need an MLS implementation driven from the reference, open for the owner):
-chat/credential, chat/exporter, chat/frank, chat/stamp, chat/tokens, chat/join, chat/roles
-commit matrix, chat/ignore, chat/promote flow, chat/directory replay, chat/agent-limits,
-chat/history, chat/ds-api, chat/no-votes.
+chat/credential, chat/exporter, chat/frank, chat/stamp, chat/tokens, chat/join (the ticket's HPKE
+sealing and proof; the nullifier checks are in chat/join-records), chat/roles commit matrix,
+chat/ignore, chat/promote flow, chat/directory replay, chat/agent-limits, chat/history,
+chat/ds-api, chat/no-votes.
 """
 
 from __future__ import annotations
 
+import copy
+
 from .. import cbor, chat, fixtures, storage
+from .. import manifest as m
+from ..bodies import service as sv
 from ..cid import cid
+from ..keys import key_from_label
 from . import File, hexify, jsonable
+from .manifest_vectors import bundle_json
 
 SPEC = "chat"
 PENDING = (
@@ -84,6 +93,18 @@ def _examples(fx: fixtures.Fixture) -> dict[str, tuple[dict, int]]:
         "checkpoint": ({0: 1, 1: fx.world.log_authority, 2: 36, 3: fx.world.checkpoint().root}, 0),
         "history-offer": ({0: 1, 1: ref.encode(), 2: 1, 3: 400}, 0),
         "join-request": ({0: 1, 1: fixtures.fixed_bytes("group"), 2: [b"h1", b"h2"]}, 0),
+        "join-record": (
+            {
+                0: 1,
+                1: sorted(
+                    [fixtures.fixed_bytes("join-nul-a", 32), fixtures.fixed_bytes("join-nul-b", 32)]
+                ),
+                2: key,
+                3: c2,
+                5: 20733,
+            },
+            0,
+        ),
     }, part
 
 
@@ -342,6 +363,392 @@ def derivations_file(fx: fixtures.Fixture) -> File:
     return f
 
 
+def _nul(label: str) -> bytes:
+    return fixtures.fixed_bytes(f"join-nul-{label}", 32)
+
+
+def _rec_json(r: chat.JoinRecord) -> dict:
+    return {
+        "nullifiers": [hexify(n) for n in r.nullifiers],
+        "identity": hexify(r.identity),
+        "day": r.day,
+        "seq": r.seq,
+        "received": r.received,
+    }
+
+
+def join_records_file() -> File:
+    f = File(
+        SPEC,
+        "join-records",
+        "The greeter's join-record state machine (2.5 step 4, 5.17, ADR 0104, TS9, RT4, RU1, "
+        "RU2): record and snapshot bodies, the ticket decision against the live records, the "
+        "record-before-commit sequence with its pre-commit check (JOIN_PENDING = 3,600 s), the "
+        "two-greeter race, the no-record backstop (JOIN_GRACE = 600 s) and pruning. Times are "
+        "delivery-service receive times in seconds; `seq` is the delivery-service sequence "
+        "number. The ticket's HPKE sealing and its membership proof stay in the pending "
+        "chat/join set; here the nullifiers a proof yields are inputs.",
+    )
+    ctx = cid(b"context")
+    ida, idb, idc, idd = (fixtures.fixed_bytes(f"identity-{x}", 32) for x in "abcd")
+    n1, n2, n3, n4 = sorted(_nul(x) for x in "1234")
+    t0 = 1_800_000_000
+    rec_a = chat.JoinRecord((n1, n2), ida, 20700, 41, t0)
+    rec_b = chat.JoinRecord((n3,), idb, 20710, 57, t0 + 864_000)
+    body = rec_a.body(ctx)
+    data = chat.encode("join-record", body)
+    f.add(
+        "join-record-valid",
+        "A record: two nullifiers sorted bytewise (a two-card entry policy), identity, context, day",
+        "5.17",
+        {"view": jsonable(body)},
+        {"content_type": chat.media_type("join-record"), "bytes": hexify(data)},
+    )
+    snap = chat.join_snapshot_body([rec_a, rec_b])
+    data = chat.encode("join-record", snap)
+    f.add(
+        "join-record-snapshot-valid",
+        "The snapshot a newcomer to the organizers group receives: rows [nullifiers, identity, day]",
+        "5.17",
+        {"view": jsonable(snap)},
+        {"content_type": chat.media_type("join-record"), "bytes": hexify(data)},
+    )
+    for suffix, bad, why in (
+        ("join-record-reject-unsorted", {**body, 1: [n2, n1]}, "nullifiers not sorted bytewise"),
+        ("join-record-reject-duplicate", {**body, 1: [n1, n1]}, "a nullifier listed twice"),
+        ("join-record-reject-nine", {**body, 1: sorted(_nul(str(i)) for i in range(9))}, "nine nullifiers"),
+        ("join-record-reject-mixed", {**body, 4: []}, "a record carrying the snapshot key 4"),
+        ("join-record-reject-no-day", {k: v for k, v in body.items() if k != 5}, "day missing"),
+        ("join-record-reject-old-shape", {**{k: v for k, v in body.items() if k != 1}, 1: n1}, "key 1 as one bstr (the pre-ADR-0104 shape)"),
+    ):  # fmt: skip
+        raw = cbor.encode(bad)
+        try:
+            chat.decode("join-record", raw)
+            raise AssertionError(suffix)
+        except chat.ChatError as e:
+            f.add(
+                suffix,
+                f"Reject: {why}",
+                "5.17",
+                {"view": jsonable(bad), "bytes": hexify(raw)},
+                rejection={"step": None, "check": "content", "reason": str(e)},
+            )
+    records = [rec_a, rec_b]
+    live = {ida, idb}
+    rj = [_rec_json(r) for r in records]
+    for suffix, desc, ticket, live_set in (
+        ("join-ticket-admit-new", "A ticket whose nullifiers are all new", [n4], live),
+        (
+            "join-ticket-discard-second-nullifier-recorded",
+            "A two-card ticket whose first nullifier is new and whose second is recorded for a "
+            "live identity: discarded (any of the proof's nullifiers)",
+            [n4, n2],
+            live,
+        ),
+        (
+            "join-ticket-admit-removed-identity",
+            "The same nullifier recorded only for an identity that has left the all-members group: "
+            "admitted",
+            [n4, n2],
+            {idb},
+        ),
+    ):
+        decision, reason = chat.join_ticket_decision(ticket, records, live_set)
+        f.add(
+            suffix,
+            desc,
+            "2.5 step 4",
+            {
+                "ticket_nullifiers": [hexify(n) for n in ticket],
+                "records": rj,
+                "live_identities": sorted(hexify(i) for i in live_set),
+            },
+            {"decision": decision, "reason": reason},
+        )
+    # ---- the sequence: record first, then the Add commit (RT4)
+    t1 = t0 + 1_000_000
+    rec_d = chat.JoinRecord((n4,), idd, 20711, 70, t1)
+    decision, reason = chat.join_precommit_decision(rec_d, records + [rec_d], live)
+    f.add(
+        "join-greeter-sequence",
+        "The greeter's order (RT4): send the join-record, wait until the delivery service has "
+        "sequenced it, re-check the records, then fetch KeyPackages and commit the Add. Here no "
+        "earlier record shares a nullifier, so the greeter commits",
+        "2.5 step 4",
+        {"own_record": _rec_json(rec_d), "records": [_rec_json(r) for r in records + [rec_d]],
+         "live_identities": sorted(hexify(i) for i in live)},
+        {"sequence": ["join-record", "wait-for-sequencing", "pre-commit-check", "add-commit"],
+         "decision": decision, "reason": reason},
+    )  # fmt: skip
+    # ---- two greeters open two tickets from one card at once
+    rec_c = chat.JoinRecord((n1, n2), idc, 20711, 58, t0 + 864_120)
+    rec_c2 = chat.JoinRecord((n1, n2), idd, 20711, 59, t0 + 864_125)
+    race_records = [rec_a, rec_b, rec_c, rec_c2]
+    first, first_reason = chat.join_precommit_decision(rec_c, race_records, {idb})
+    later, later_reason = chat.join_precommit_decision(rec_c2, race_records, {idb})
+    assert (first, later) == ("commit", "stop")
+    f.add(
+        "join-two-greeters-later-record-stops",
+        "Two tickets from one card (identity a has left, so its record is inert) opened by two "
+        "greeters at once: both send records before committing; the greeter whose record has "
+        "the lower sequence number commits, the one with the later record finds a pending "
+        "earlier record for a different identity and stops (RT4; was a post-commit removal "
+        "under TS9)",
+        "2.5 step 4",
+        {"records": [_rec_json(r) for r in race_records], "live_identities": sorted(hexify(i) for i in {idb})},
+        {"greeters": [
+            {"own_record_seq": rec_c.seq, "decision": first, "reason": first_reason},
+            {"own_record_seq": rec_c2.seq, "decision": later, "reason": later_reason},
+        ]},
+    )  # fmt: skip
+    # ---- the backstop when both committed anyway
+    race = [rec_a, rec_b, rec_c]
+    removed = chat.join_duplicates_to_remove(race, {ida, idb, idc})
+    assert removed == [idc]
+    f.add(
+        "join-two-live-identities-backstop",
+        "Backstop: two live identities whose records share nullifiers (a greeter committed against "
+        "the rule); every greeter removes the identity whose join-record has the higher "
+        "delivery-service sequence number",
+        "2.5 step 4",
+        {"records": [_rec_json(r) for r in race], "live_identities": sorted(hexify(i) for i in {ida, idb, idc})},
+        {"remove": [hexify(i) for i in removed], "keep": sorted(hexify(i) for i in {ida, idb})},
+    )  # fmt: skip
+    decision, reason = chat.join_ticket_decision([n1, n2], race, {ida, idb, idc})
+    f.add(
+        "join-rebase-recheck-drops-add",
+        "A greeter whose Add is rebased onto a new epoch re-checks the records: the other "
+        "greeter's record for the same card is now live, so it drops its Add",
+        "2.5 step 4",
+        {"ticket_nullifiers": [hexify(n1), hexify(n2)], "records": [_rec_json(r) for r in race]},
+        {"decision": decision, "reason": reason},
+    )
+    # ---- a greeter that fails between its record and its commit (RT4)
+    failed = chat.JoinRecord((n4,), idd, 20711, 70, t1)
+    recs = records + [failed]
+    retry_decision, retry_reason = chat.join_ticket_decision([n4], recs, live)
+    pre, pre_reason = chat.join_precommit_decision(failed, recs, live)
+    f.add(
+        "join-greeter-fails-before-commit",
+        "A greeter sends its record and fails before the commit: the record names an identity "
+        "that is not a member, so it is inert. Another greeter opening the same ticket within "
+        "JOIN_PENDING admits the same identity under the existing record (a retried ticket "
+        "matches its own record): the ticket decision ignores records of non-members and the "
+        "pre-commit check ignores a record naming the same identity",
+        "2.5 step 4",
+        {"ticket_nullifiers": [hexify(n4)], "identity": hexify(idd), "records": [_rec_json(r) for r in recs],
+         "live_identities": sorted(hexify(i) for i in live), "retry_at": t1 + 600},
+        {"ticket": {"decision": retry_decision, "reason": retry_reason},
+         "existing_record_usable": chat.join_record_usable(failed, t1 + 600),
+         "pre_commit": {"decision": pre, "reason": pre_reason}},
+    )  # fmt: skip
+    f.add(
+        "join-greeter-record-expired-resend",
+        "The same retry two hours later: the existing record is older than JOIN_PENDING, so the "
+        "greeter sends a fresh record before committing",
+        "2.5 step 4",
+        {"records": [_rec_json(failed)], "retry_at": t1 + 7_200},
+        {"existing_record_usable": chat.join_record_usable(failed, t1 + 7_200), "action": "send-fresh-record"},
+    )  # fmt: skip
+    # ---- the pre-commit check against an earlier record for a different identity (RU2)
+    own = chat.JoinRecord((n4,), idd, 20711, 90, t1 + 7_200)
+    for suffix, desc, earlier, live_set in (
+        ("join-precommit-live-stop", "the earlier record's identity is a live member: stop",
+         chat.JoinRecord((n4,), idc, 20711, 80, t1), {idc}),
+        ("join-precommit-pending-stop", "the earlier record is 30 minutes old and its identity is not a member: pending, stop",
+         chat.JoinRecord((n4,), idc, 20711, 80, t1 + 7_200 - 1_800), set()),
+        ("join-precommit-inert-commit", "the earlier record is two hours old and its identity is not a member: inert, commit",
+         chat.JoinRecord((n4,), idc, 20711, 80, t1), set()),
+    ):  # fmt: skip
+        decision, reason = chat.join_precommit_decision(own, [earlier, own], live_set)
+        f.add(
+            suffix,
+            f"Pre-commit check against an earlier record for a different identity: {desc}",
+            "2.5 step 4",
+            {"own_record": _rec_json(own), "records": [_rec_json(earlier), _rec_json(own)],
+             "live_identities": sorted(hexify(i) for i in live_set)},
+            {"decision": decision, "reason": reason},
+        )  # fmt: skip
+    # ---- the no-record backstop (RU1)
+    add_t = t1 + 100_000
+    base = dict(leaf_kind=1, was_member=False, entry_yields_nullifier=True, add_received=add_t,
+                fetched_to=add_t + 600, identity=idd, records=records)  # fmt: skip
+    for suffix, desc, over in (
+        ("join-no-record-removed-after-grace",
+         "an Add of a new human identity with no join-record, with the organizers group fetched "
+         "600 s past the Add: the leaf is removed", {}),
+        ("join-no-record-kept-before-grace",
+         "the same Add seen with the organizers group fetched only 599 s past it: kept",
+         {"fetched_to": add_t + 599}),
+        ("join-no-record-kept-unfetched",
+         "the same Add when the organizers group cannot be fetched: the greeter does nothing",
+         {"fetched_to": None}),
+        ("join-no-record-kept-open-entry",
+         "the same in a context with entry = [0]: kept, no record exists there",
+         {"entry_yields_nullifier": False}),
+        ("join-no-record-kept-agent-leaf",
+         "an agent (kind 2) leaf with no record: kept", {"leaf_kind": 2}),
+        ("join-no-record-kept-second-device",
+         "a second device of an identity that is already a member, with no record: kept",
+         {"was_member": True}),
+        ("join-no-record-kept-record-arrived",
+         "a record naming the identity is found by the time of the fetch: kept",
+         {"records": records + [chat.JoinRecord((n4,), idd, 20712, 95, add_t + 30)]}),
+    ):  # fmt: skip
+        args = {**base, **over}
+        action, reason = chat.join_backstop_decision(**args)
+        f.add(
+            suffix,
+            f"No-record backstop: {desc}",
+            "2.5 step 4",
+            {"leaf_kind": args["leaf_kind"], "was_member": args["was_member"],
+             "entry_yields_nullifier": args["entry_yields_nullifier"], "add_received": args["add_received"],
+             "organizers_fetched_to": args["fetched_to"], "identity": hexify(idd),
+             "records": [_rec_json(r) for r in args["records"]]},
+            {"action": action, "reason": reason},
+        )  # fmt: skip
+    # ---- 5.17: a record more than 396 days old is inert, deleted or not
+    today = 20733
+    old = chat.JoinRecord(
+        (n4,), fixtures.fixed_bytes("identity-old", 32), today - 397, 3, t0 - 86_400 * 397
+    )
+    edge = chat.JoinRecord((n3,), idb, today - 396, 4, t0 - 86_400 * 396)
+    old_live = {ida, idb, old.identity}
+    held = [rec_a, old, edge]
+    ticket_d, reason_d = chat.join_ticket_decision([n4], held, old_live, today)
+    ticket_e, reason_e = chat.join_ticket_decision([n3], held, old_live, today)
+    own_old = chat.JoinRecord((n4,), idd, today, 90, t0 + 50)
+    pre, pre_reason = chat.join_precommit_decision(own_old, held + [own_old], old_live, today)
+    removed = chat.join_duplicates_to_remove(held + [own_old], old_live | {idd}, today)
+    f.add(
+        "join-record-expired-inert",
+        "A record 397 days old for a live identity is present and undeleted: a ticket sharing its "
+        "nullifier is admitted, a greeter's own record after it commits, and the duplicate "
+        "backstop removes nothing; a record exactly 396 days old still blocks",
+        "5.17",
+        {"records": [_rec_json(r) for r in held], "live_identities": sorted(hexify(i) for i in old_live),
+         "today": today, "ticket_old": [hexify(n4)], "ticket_edge": [hexify(n3)],
+         "own_record": _rec_json(own_old)},
+        {"ticket_old": {"decision": ticket_d, "reason": reason_d},
+         "ticket_edge": {"decision": ticket_e, "reason": reason_e},
+         "precommit": {"decision": pre, "reason": pre_reason},
+         "backstop_removed": [hexify(i) for i in removed]},
+    )  # fmt: skip
+    assert ticket_d == "admit" and ticket_e == "discard" and pre == "commit" and removed == []
+    snap = chat.join_snapshot_body(held, today)
+    f.add(
+        "join-record-expired-snapshot-omits",
+        "The snapshot sent to a newcomer omits the 397-day-old record and keeps the 396-day-old one",
+        "5.17",
+        {"records": [_rec_json(r) for r in held], "today": today, "view": jsonable(snap)},
+        {"content_type": chat.media_type("join-record"), "bytes": hexify(chat.encode("join-record", snap)),
+         "rows": len(snap[4])},
+    )  # fmt: skip
+    kept = chat.join_records_prune(held, old_live, today)
+    f.add(
+        "join-records-prune",
+        "Deletion (advisory, MAY): the reference deletes a record whose identity left and a record "
+        "more than 396 days old; an implementation that keeps the old record also conforms, since "
+        "it is inert either way",
+        "5.17",
+        {"records": [_rec_json(r) for r in held], "live_identities": sorted(hexify(i) for i in old_live), "today": today},
+        {"kept": [_rec_json(r) for r in kept]},
+    )  # fmt: skip
+    return f
+
+
+def delivery_file() -> File:
+    f = File(
+        SPEC,
+        "delivery",
+        "The delivery service's service manifest (kind delivery): DL-1 to DL-5 of 12.1 after "
+        "services.md S-1 to S-8. Built on its own copy of the base world; step-10 failures and "
+        "the version 2 cases were appended by a misbehaving log so a phone reaches the rule. "
+        "DL-4 bounds limits.tokensPerIssuance (64) and limits.commitsPerHour (3,600). Keys that "
+        "do not belong to a delivery manifest are refused at step 4 by services.md S-1, S-3 and "
+        "S-7, which the two S-* cases here show.",
+    )
+    fx = fixtures.build()
+    w = fx.world
+    for suffix in ("", "-rotate"):
+        fx.keys[f"svc-ds{suffix}"] = key_from_label(f"svc-ds{suffix}")
+    ks = fixtures.service_keyset("svc-ds", "svc-ds-rotate", fx.keys)
+    authority = w.append(ks, [(b"svc-ds-rotate", fx.keys["svc-ds-rotate"])]).cid
+    kc = sv.key_config(key_from_label("ds-gateway").public)
+    good = sv.body(
+        "delivery",
+        ["https://ds.example/"],
+        ohttp=kc,
+        token_issuers=[cid(b"ds issuer")],
+        **sv.delivery_defaults(),
+    )
+    signer = [(b"svc-ds", fx.keys["svc-ds"])]
+
+    def log(name, body, version=1, prev=None):
+        env = m.envelope(
+            "service",
+            body,
+            authority=authority,
+            issued=fixtures.ISSUED + version,
+            version=version,
+            lineage=prev.cid if prev is not None else None,
+            prev=prev.cid if prev is not None else None,
+        )
+        return w.append(env, signer)
+
+    v1 = log("v1", good)
+    v2_body = copy.deepcopy(good)
+    v2_body[sv.LIMITS]["sendsPerMinute"] = 1200
+    v2 = log("v2", v2_body, 2, v1)
+    # DL-5 needs its own lineage: a second version 2 of v1's lineage would stop at step 8
+    v1_dl5 = log("dl5-v1", {**copy.deepcopy(good), sv.ENDPOINTS: ["https://ds2.example/"]})
+
+    def mut(fn):
+        b = copy.deepcopy(good)
+        fn(b)
+        return b
+
+    cases = [
+        ("service-delivery-valid", "Valid delivery manifest: VOPRF issuer, six limits, 30-day content retention", v1, None, None),
+        ("service-delivery-valid-v2", "Version 2 raising a limit; issuer.name unchanged", v2, None, None),
+        ("service-delivery-invalid-DL-1-type", "issuer.type 2 (not VOPRF)", log("dl1t", mut(lambda b: b[sv.ISSUER].__setitem__(sv.ISS_TYPE, 2))), 10, "DL-1"),
+        ("service-delivery-invalid-DL-1-rotation", "issuer.rotation 2,592,001 seconds", log("dl1r", mut(lambda b: b[sv.ISSUER].__setitem__(sv.ISS_ROTATION, sv.DL_ROTATION_MAX + 1))), 10, "DL-1"),
+        ("service-delivery-invalid-DL-2-missing", "limits without ticketsPerContextDay", log("dl2m", mut(lambda b: b[sv.LIMITS].pop("ticketsPerContextDay"))), 10, "DL-2"),
+        ("service-delivery-invalid-DL-2-extra", "limits with a seventh name", log("dl2e", mut(lambda b: b[sv.LIMITS].__setitem__("welcomesPerDay", 10))), 10, "DL-2"),
+        ("service-delivery-invalid-DL-2-zero", "commitsPerHour 0", log("dl2z", mut(lambda b: b[sv.LIMITS].__setitem__("commitsPerHour", 0))), 10, "DL-2"),
+        ("service-delivery-invalid-DL-2-absent", "no limits map", log("dl2a", mut(lambda b: b.pop(sv.LIMITS))), 10, "DL-2"),
+        ("service-delivery-invalid-DL-3-content", "retention.content 31 days", log("dl3c", mut(lambda b: b[sv.RETENTION].__setitem__("content", sv.DL_CONTENT_MAX + 1))), 10, "DL-3"),
+        ("service-delivery-invalid-DL-3-no-errors", "retention without errors", log("dl3e", mut(lambda b: b[sv.RETENTION].pop("errors"))), 10, "DL-3"),
+        ("service-delivery-invalid-DL-4-tokens", "limits.tokensPerIssuance 65", log("dl4t", mut(lambda b: b[sv.LIMITS].__setitem__("tokensPerIssuance", sv.DL_TOKENS_PER_ISSUANCE_MAX + 1))), 10, "DL-4"),
+        ("service-delivery-invalid-DL-4-commits", "limits.commitsPerHour 3,601", log("dl4c", mut(lambda b: b[sv.LIMITS].__setitem__("commitsPerHour", sv.DL_COMMITS_PER_HOUR_MAX + 1))), 10, "DL-4"),
+        ("service-delivery-invalid-S-1-key-17", "key 17 (a blob store's limits) on a delivery manifest: refused at step 4 by services.md S-1", log("dl4", mut(lambda b: b.__setitem__(17, {0: 1}))), 4, "S-1"),
+        ("service-delivery-invalid-S-3-origin", "key 7 origin on a delivery manifest: refused at step 4 by services.md S-3", log("dl4o", mut(lambda b: b.__setitem__(sv.ORIGIN, "hum/log/x"))), 4, "S-3"),
+        ("service-delivery-invalid-DL-5-name", "version 2 renaming the issuer", log("dl5", {**mut(lambda b: b[sv.ISSUER].__setitem__(sv.ISS_NAME, "hum-ds-2")), sv.ENDPOINTS: ["https://ds2.example/"]}, 2, v1_dl5), 10, "DL-5"),
+    ]  # fmt: skip
+    w.finalize()
+    ctx = w.context(now=fixtures.NOW)
+    for suffix, desc, bundle, step, rule in cases:
+        inputs = {
+            "bundle": bundle_json(bundle),
+            "view": jsonable(cbor.decode(bundle.envelope)[m.BODY]),
+        }
+        try:
+            env = m.verify_bundle(ctx, bundle)
+        except m.Rejection as e:
+            assert step is not None and (e.step, e.rule) == (step, rule), (suffix, str(e), e.rule)
+            f.add(
+                suffix,
+                desc,
+                "12.1",
+                inputs,
+                rejection={"step": e.step, "rule": e.rule, "reason": e.reason},
+            )
+            continue
+        assert step is None, suffix
+        f.add(suffix, desc, "12.1", inputs, {"accept": True, "kind": env[m.BODY][sv.KIND]})
+    return f
+
+
 def generate() -> list[File]:
     fx = fixtures.build()
-    return [content_file(fx), derivations_file(fx)]
+    return [content_file(fx), derivations_file(fx), join_records_file(), delivery_file()]

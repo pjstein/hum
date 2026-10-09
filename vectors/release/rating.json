@@ -5,7 +5,7 @@
  "cases": [
   {
    "id": "release/rating/release-valid-rating-001",
-   "description": "one-version rating release: parts 0, 3, 8; tallies, group_tallies, group_sizes; groupsK from the source; nHat 250 (below GATE_COMMON, so no consensus table)",
+   "description": "one-version rating release: parts 0, 3, 8; tallies, group_tallies, group_sizes; groupsK from the source; nHat 250 (below GATE_COMMON, so no consensus table); part 3 unlocked with part 0 (R6, its n 900 plays no part in the unlock)",
    "section": "Validation rules (verification step 10 for release)",
    "inputs": {
     "bundle": {
@@ -14,17 +14,18 @@
      "signatures": "d8628440a0f6838347a2012704426c31a0584042a320f4ca137fa603732ec1699e2e04a8928014cba0c9b327eb7bfbe0d38cb0ff71d1f293b5945ed5b5e7d7e7ed1bc3e44905d1d62129d1879f9b9c232e71088347a2012704426831a05840cf106ca6ba00107814cad765bbbb88fc820c0be3842de97bb9258888d1d5a16bbacc5237863f0fe682917291a76065ab06b81f8610742572f869f6f6d6f5aa0a8347a2012704426832a058402dd00f8466a6dc232e583335fbcbead346c8e170a1d3c415362eaa964202f0ce2d4dc64e9ce84994dc09c339d33c3b73a9c6f10be475e8641d188e2073f53504",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 471,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 496,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "2baac7f3e21b8581543e7a469dcc8d947037ffc65392be12bbb0b2004417cbaa",
-       "8cf635bce230744998aec63fbb51cf52200bd8fb35655c59e54b4597bfe980ef",
-       "cbc0b5ee3895da0676e8d6ba1015519fa6e6a377e4d15226ae63e810eb09c786",
-       "e0f62b3bc355ae13193b8500f7c5f9cb24f4603aa887a457e98628c9c4be63e3",
-       "b2e8a1053897489c895dc861fb4bad73f4990bae84361299b1a9f6f11f6b4e69",
-       "f3e00fc34f0b31c0fa62bdb0ab571d0dd39ac2fcf9dd69ebefba8c50fe305a84",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "58325998898c24072b600962028319de432803a8275bce7a820e0d095652dc6a",
+       "2adc5fe70a0c72770a1a2624642dc2d40e32b3736873899de5ba764345f1a7c0",
+       "c169f0eb0aa724ac9416a16b5bdace5c9277c250b8de008780b920a03d1545a7",
+       "080e8ed9a722d2ef97ba3a0a98542db2452b972f05fcdd11fbf89c9ec79c7964",
+       "369bfc6fd0b4ca41cd037c2c72b5c8703f108bff1527042c526bd4ed5658c10b",
+       "1359c7de798b6071c546281f4bfe38cb90346db4ec8fbb9cf1a568de72f02389",
+       "a0979d2d3f4c0306a43f954d79fd56dfa9c9f7ae84d4b9e552f701c0b23162b0",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -196,7 +197,330 @@
    }
   },
   {
-   "id": "release/rating/release-invalid-R5-rating-not-final-002",
+   "id": "release/rating/release-valid-rating-nhat-400-002",
+   "description": "a rating release with nHat 400 and the groups part's n 400, below gate(1) 800: part 3 is unlocked with part 0 (R6, RT3) and unlocked is [0, 3, 8]. Its group cells are filtered at GATE_CELL 300 in post-processing, which the tables (opaque placeholder blobs here) would show; the manifest-level rule is what this case checks",
+   "section": "Validation rules (verification step 10 for release)",
+   "inputs": {
+    "bundle": {
+     "cid": "019390914b6a6a212b99ff05dc282adfc0589452dde4a357a30dddc5d1abd2b0db",
+     "envelope": "a70001016772656c65617365025821013e5da0ffdec0d8904d36be9d074a3e149165ca4d3b051c603ecf4d61d46b40930401061a6b0519d008a5646465636b582101b14962b678031aabca4ef71536858fd9be95a38af86afc6d7e37649e2df773de69742f74616c6c696573582101aafc01500f3ed0f1e0c76258d1e8b3e7ae0ed9be979dbb3a3316b451bbb7b0cd6a72656365697074732f30582101d6092e7ac403c0d6657317bd7888f4cf76ea1e5e52b4da608226f7ded2b25de46d742f67726f75705f73697a65735821018b5178a19fd85b2cf9a5b77d7efdcb96fa74c22f1b29c8c79bcd005578d4d0ce6f742f67726f75705f74616c6c6965735821018c71d3a3269313dad03aa64bae1fa5c619d3c255d591aa2ddf104b1279717dc709ae0000015821016f74688a458162e2b6f0bdb8c79a183447add68aaed420dfabdd3943057da4dd020103f5048201140582011a000f424006a300a30082131903e8011a0166b4960219019003a3008218391907d0011a0124e1ba0219019008a2008201190190011a00d7cab907190190088300030809a1005820c6d198c6939daa6b66fb1d410ea65894e0ade0d533906e185e2723519543884d0a8282582101285a0fdb59d7c48df6e18213e5081de17f4448bc687d01b618090653ba8bfc770282582101a4079e33ec57b7974aab743a3cdf8da4edb99c2f5c87a42c3dcbb631c53b67be030bf40e020ff4",
+     "signatures": "d8628440a0f6838347a2012704426c31a058404e4e51373886e0426160e83387252c491fb489dd4fbcef29a2812ed2ecad51ed78bf45a4d8792a4040a6ae2fc6ba97d068e729d8e4e63ea814667c661f2f88098347a2012704426831a058401773225279073cb23432ae56c67e410d41d1c7413cf93a435620560fa7d6d080600c29cef752467e2da18bf6562d08cd6c9c3a58c4667e4fe80593e4f7ced7058347a2012704426832a05840182eceba6210a7558ff43711fee972c028a2b41cc0dbc6b049673cf087ce0bc0cf5f20f111b02f70d91aa06449b2b1c43e88198a27118799cfb6acd4e4864704",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 497,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
+      "path": [
+       "15a1ffa66f6e1d4f32c69b2d188ddd0c133346ef6204e6956022a8e43b89ca76",
+       "2adc5fe70a0c72770a1a2624642dc2d40e32b3736873899de5ba764345f1a7c0",
+       "c169f0eb0aa724ac9416a16b5bdace5c9277c250b8de008780b920a03d1545a7",
+       "080e8ed9a722d2ef97ba3a0a98542db2452b972f05fcdd11fbf89c9ec79c7964",
+       "369bfc6fd0b4ca41cd037c2c72b5c8703f108bff1527042c526bd4ed5658c10b",
+       "1359c7de798b6071c546281f4bfe38cb90346db4ec8fbb9cf1a568de72f02389",
+       "a0979d2d3f4c0306a43f954d79fd56dfa9c9f7ae84d4b9e552f701c0b23162b0",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "hex": "016f74688a458162e2b6f0bdb8c79a183447add68aaed420dfabdd3943057da4dd"
+       }
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       true
+      ],
+      [
+       4,
+       [
+        1,
+        20
+       ]
+      ],
+      [
+       5,
+       [
+        1,
+        1000000
+       ]
+      ],
+      [
+       6,
+       {
+        "map": [
+         [
+          0,
+          {
+           "map": [
+            [
+             0,
+             [
+              19,
+              1000
+             ]
+            ],
+            [
+             1,
+             23508118
+            ],
+            [
+             2,
+             400
+            ]
+           ]
+          }
+         ],
+         [
+          3,
+          {
+           "map": [
+            [
+             0,
+             [
+              57,
+              2000
+             ]
+            ],
+            [
+             1,
+             19194298
+            ],
+            [
+             2,
+             400
+            ]
+           ]
+          }
+         ],
+         [
+          8,
+          {
+           "map": [
+            [
+             0,
+             [
+              1,
+              400
+             ]
+            ],
+            [
+             1,
+             14142137
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       7,
+       400
+      ],
+      [
+       8,
+       [
+        0,
+        3,
+        8
+       ]
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          0,
+          {
+           "hex": "c6d198c6939daa6b66fb1d410ea65894e0ade0d533906e185e2723519543884d"
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       10,
+       [
+        [
+         {
+          "hex": "01285a0fdb59d7c48df6e18213e5081de17f4448bc687d01b618090653ba8bfc77"
+         },
+         2
+        ],
+        [
+         {
+          "hex": "01a4079e33ec57b7974aab743a3cdf8da4edb99c2f5c87a42c3dcbb631c53b67be"
+         },
+         3
+        ]
+       ]
+      ],
+      [
+       11,
+       false
+      ],
+      [
+       14,
+       2
+      ],
+      [
+       15,
+       false
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "type": "release",
+    "version": 1
+   }
+  },
+  {
+   "id": "release/rating/release-valid-below-minimum-rating-003",
+   "description": "a rating deck below its minimum (nHat 80 under 100): version 1 final, unlocked empty, parts holding part 0 only (no part 3, no part 8), no tables, no receipts, no groupsK in the body (R7)",
+   "section": "Validation rules (verification step 10 for release)",
+   "inputs": {
+    "bundle": {
+     "cid": "01fe872f0ca9c59f60348163a4b87b55393d221f1bf364c0aeb932f02aad518a3d",
+     "envelope": "a70001016772656c65617365025821013e5da0ffdec0d8904d36be9d074a3e149165ca4d3b051c603ecf4d61d46b40930401061a6b0519d008a1646465636b582101c80d762a8f95398929f4a901f78c8440c29d875cb7bd988ccbede897e2dff3bc09ac0000015821016f74688a458162e2b6f0bdb8c79a183447add68aaed420dfabdd3943057da4dd020103f50482131903e80582011a000f424006a100a20082131903e8011a0166b496088009a00a8282582101285a0fdb59d7c48df6e18213e5081de17f4448bc687d01b618090653ba8bfc770282582101a4079e33ec57b7974aab743a3cdf8da4edb99c2f5c87a42c3dcbb631c53b67be030bf40ff4",
+     "signatures": "d8628440a0f6838347a2012704426c31a058400b080269c409f7c06bfb2780e4734db97b24b06a7b074d860e6c9d01bbfb67a910167409d5e8e5a99436166b16678112b018255e42c5954a18fb21b405f400038347a2012704426831a05840f48b2188ef18d269f842a551be7c402873e7e3f7fda07662e2b6228347c98380f07e25e68ac10dbf276c79ccae28151a7b5fd0582554e82fff19ed22434c80078347a2012704426832a058406dca68972b60d6e803ec9695883c811780d11acf431c14bc43be67f46b93f1891918a62141679589f4fab10c03628d2e6c39abd92f9f49b28f438365094d5a00",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 498,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
+      "path": [
+       "030aaed49698400e74d86ce409faf1a742511ec0ac5fe2b1fa502fc34b237104",
+       "75c410838ab0f13bcef93539578edbb069afb53f761df58f366d36da11876b12",
+       "c169f0eb0aa724ac9416a16b5bdace5c9277c250b8de008780b920a03d1545a7",
+       "080e8ed9a722d2ef97ba3a0a98542db2452b972f05fcdd11fbf89c9ec79c7964",
+       "369bfc6fd0b4ca41cd037c2c72b5c8703f108bff1527042c526bd4ed5658c10b",
+       "1359c7de798b6071c546281f4bfe38cb90346db4ec8fbb9cf1a568de72f02389",
+       "a0979d2d3f4c0306a43f954d79fd56dfa9c9f7ae84d4b9e552f701c0b23162b0",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "hex": "016f74688a458162e2b6f0bdb8c79a183447add68aaed420dfabdd3943057da4dd"
+       }
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       true
+      ],
+      [
+       4,
+       [
+        19,
+        1000
+       ]
+      ],
+      [
+       5,
+       [
+        1,
+        1000000
+       ]
+      ],
+      [
+       6,
+       {
+        "map": [
+         [
+          0,
+          {
+           "map": [
+            [
+             0,
+             [
+              19,
+              1000
+             ]
+            ],
+            [
+             1,
+             23508118
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       8,
+       []
+      ],
+      [
+       9,
+       {
+        "map": []
+       }
+      ],
+      [
+       10,
+       [
+        [
+         {
+          "hex": "01285a0fdb59d7c48df6e18213e5081de17f4448bc687d01b618090653ba8bfc77"
+         },
+         2
+        ],
+        [
+         {
+          "hex": "01a4079e33ec57b7974aab743a3cdf8da4edb99c2f5c87a42c3dcbb631c53b67be"
+         },
+         3
+        ]
+       ]
+      ],
+      [
+       11,
+       false
+      ],
+      [
+       15,
+       false
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "type": "release",
+    "version": 1
+   }
+  },
+  {
+   "id": "release/rating/release-invalid-R5-rating-not-final-004",
    "description": "rating release not final",
    "section": "Validation rules (verification step 10 for release)",
    "inputs": {
@@ -206,17 +530,18 @@
      "signatures": "d8628440a0f6838347a2012704426c31a05840e74e56c7dc9ae1c559ead282b2d9ca70829494ee71d0507877fba53e38829ca787dd1e89d71eeade794506fab4f1d77348ae43c022d55e45685ad3a5dbcfbc0e8347a2012704426831a058405315ba4c9ba595d07d2ffbe7536e3f312a7102c1373a7651f10e51ebad388f08801505c38888493f3e0002279ca08b5173446a42e038b376bf2d54984aae3a058347a2012704426832a0584082ca66c724b3d8a72aa7d0e1b376a79468a5d7e2c9deb5ad9e06f970a385b21bcc00b62bbe7dfd58a0bea06cfe85b2aa21e3aaee52ac6faddbfe30d351ebd20d",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 472,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 499,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "6ed99ca3487e7331da13f1a28740b4bf995e4c066a25b0e1e809daade9756033",
-       "f2f568189093948a574f3e416b8142ec67e2a6166e2e5fb0eb1a89bae8b4b9e3",
+       "11f43b1f05a8233badff2a72e751d44f9be2954385b4b3812f6ea51e166d6f80",
+       "75c410838ab0f13bcef93539578edbb069afb53f761df58f366d36da11876b12",
+       "c169f0eb0aa724ac9416a16b5bdace5c9277c250b8de008780b920a03d1545a7",
        "080e8ed9a722d2ef97ba3a0a98542db2452b972f05fcdd11fbf89c9ec79c7964",
-       "3050f0d1694860b7977706c9b92bcf8748e4acb7a2a2bcc20882260d8f01b211",
-       "b2e8a1053897489c895dc861fb4bad73f4990bae84361299b1a9f6f11f6b4e69",
-       "f3e00fc34f0b31c0fa62bdb0ab571d0dd39ac2fcf9dd69ebefba8c50fe305a84",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "369bfc6fd0b4ca41cd037c2c72b5c8703f108bff1527042c526bd4ed5658c10b",
+       "1359c7de798b6071c546281f4bfe38cb90346db4ec8fbb9cf1a568de72f02389",
+       "a0979d2d3f4c0306a43f954d79fd56dfa9c9f7ae84d4b9e552f701c0b23162b0",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -392,7 +717,7 @@
    }
   },
   {
-   "id": "release/rating/release-invalid-R5-rating-groupsk-003",
+   "id": "release/rating/release-invalid-R5-rating-groupsk-005",
    "description": "rating groupsK 3 where the source has 2",
    "section": "Validation rules (verification step 10 for release)",
    "inputs": {
@@ -402,17 +727,18 @@
      "signatures": "d8628440a0f6838347a2012704426c31a0584089657f8b81df59a5f4f2776e7ea9bd3212cd236ce8e6ad4bbffa6322277f9c64e787f29b1156b83d786a7355086715c5ebe963794c6d61084833a2fc2dcce9008347a2012704426831a058402a20f55b22d7eb5ec9569ee1f1a31e5a6749cb8bee308687747075e5098827d494d3ee6c015e5428aa549f0f471436d71867bbcdd185289bdac2302c9729940d8347a2012704426832a05840e7f53f7a666d22bc422f57d66c1e853655adaba94a4e91a66635a79fab010a0ada1c21faeb5c2bdc94d06dbb08dae52af289920b944d00c8d295fcda9f16c10a",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 473,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 500,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "030aaed49698400e74d86ce409faf1a742511ec0ac5fe2b1fa502fc34b237104",
+       "09a9f9453a4f49a3cd41f78572c4bf9a7191a412cff6d21fb3cf33ada7693374",
        "f2f568189093948a574f3e416b8142ec67e2a6166e2e5fb0eb1a89bae8b4b9e3",
+       "434c3729fa473ec14712dfae4fd3116fd0e529b4cae58dadd76ffd2632265e90",
        "080e8ed9a722d2ef97ba3a0a98542db2452b972f05fcdd11fbf89c9ec79c7964",
-       "3050f0d1694860b7977706c9b92bcf8748e4acb7a2a2bcc20882260d8f01b211",
-       "b2e8a1053897489c895dc861fb4bad73f4990bae84361299b1a9f6f11f6b4e69",
-       "f3e00fc34f0b31c0fa62bdb0ab571d0dd39ac2fcf9dd69ebefba8c50fe305a84",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "369bfc6fd0b4ca41cd037c2c72b5c8703f108bff1527042c526bd4ed5658c10b",
+       "1359c7de798b6071c546281f4bfe38cb90346db4ec8fbb9cf1a568de72f02389",
+       "a0979d2d3f4c0306a43f954d79fd56dfa9c9f7ae84d4b9e552f701c0b23162b0",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -584,7 +910,141 @@
    }
   },
   {
-   "id": "release/rating/release-invalid-R7-rating-consensus-004",
+   "id": "release/rating/release-invalid-R7-groupsk-below-minimum-006",
+   "description": "groupsK on a below-minimum rating release (R7: groupsK iff part 0 is unlocked)",
+   "section": "Validation rules (verification step 10 for release)",
+   "inputs": {
+    "bundle": {
+     "cid": "0115e07d7ffdcd99e4a9550ee8075d55917ec00c055d4339634f67afc426d7fdbf",
+     "envelope": "a70001016772656c65617365025821013e5da0ffdec0d8904d36be9d074a3e149165ca4d3b051c603ecf4d61d46b40930401061a6b0519d008a1646465636b582101c80d762a8f95398929f4a901f78c8440c29d875cb7bd988ccbede897e2dff3bc09ad0000015821016f74688a458162e2b6f0bdb8c79a183447add68aaed420dfabdd3943057da4dd020103f50482131903e80582011a000f424006a100a20082131903e8011a0166b496088009a00a8282582101285a0fdb59d7c48df6e18213e5081de17f4448bc687d01b618090653ba8bfc770282582101a4079e33ec57b7974aab743a3cdf8da4edb99c2f5c87a42c3dcbb631c53b67be030bf40e020ff4",
+     "signatures": "d8628440a0f6838347a2012704426c31a05840ad9e118b4b49d1a0b16dee5bc29695282fadd3538b204634e20d327d3596549884d0a21f747c5babee28ec93100d045754cd5298f2a492a03e361d59610b110c8347a2012704426831a058403d195aa9547c68c0c114bca37dd81a9c6239aa2fb8d6130730e471d4d8b125d678164ff690313cb550281412757238c7905f083c9e101016d92d77b34524f60e8347a2012704426832a058404eb3f3f0a552a8c68c8ed5e994a8480b7ab7a6d58e26de071ef1f4bff9eca0a30f0d0260e6cd2feb51a512bf116322e204a4ea242f6e48c10822078b4bc9a409",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 501,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
+      "path": [
+       "6ed99ca3487e7331da13f1a28740b4bf995e4c066a25b0e1e809daade9756033",
+       "f2f568189093948a574f3e416b8142ec67e2a6166e2e5fb0eb1a89bae8b4b9e3",
+       "434c3729fa473ec14712dfae4fd3116fd0e529b4cae58dadd76ffd2632265e90",
+       "080e8ed9a722d2ef97ba3a0a98542db2452b972f05fcdd11fbf89c9ec79c7964",
+       "369bfc6fd0b4ca41cd037c2c72b5c8703f108bff1527042c526bd4ed5658c10b",
+       "1359c7de798b6071c546281f4bfe38cb90346db4ec8fbb9cf1a568de72f02389",
+       "a0979d2d3f4c0306a43f954d79fd56dfa9c9f7ae84d4b9e552f701c0b23162b0",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       {
+        "hex": "016f74688a458162e2b6f0bdb8c79a183447add68aaed420dfabdd3943057da4dd"
+       }
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       true
+      ],
+      [
+       4,
+       [
+        19,
+        1000
+       ]
+      ],
+      [
+       5,
+       [
+        1,
+        1000000
+       ]
+      ],
+      [
+       6,
+       {
+        "map": [
+         [
+          0,
+          {
+           "map": [
+            [
+             0,
+             [
+              19,
+              1000
+             ]
+            ],
+            [
+             1,
+             23508118
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       8,
+       []
+      ],
+      [
+       9,
+       {
+        "map": []
+       }
+      ],
+      [
+       10,
+       [
+        [
+         {
+          "hex": "01285a0fdb59d7c48df6e18213e5081de17f4448bc687d01b618090653ba8bfc77"
+         },
+         2
+        ],
+        [
+         {
+          "hex": "01a4079e33ec57b7974aab743a3cdf8da4edb99c2f5c87a42c3dcbb631c53b67be"
+         },
+         3
+        ]
+       ]
+      ],
+      [
+       11,
+       false
+      ],
+      [
+       14,
+       2
+      ],
+      [
+       15,
+       false
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "R7",
+    "reason": "R7: groupsK presence"
+   }
+  },
+  {
+   "id": "release/rating/release-invalid-R7-rating-consensus-007",
    "description": "t/consensus on a rating release",
    "section": "Validation rules (verification step 10 for release)",
    "inputs": {
@@ -594,17 +1054,18 @@
      "signatures": "d8628440a0f6838347a2012704426c31a05840f30283de90faf5c2c2a5c96d0695d76445603d91d4924862f5489dad7883c136ae07b3f4af486ec8a4cbb48b7d3fdaae3e5456c7624a1d50a541a7998b3e57068347a2012704426831a05840ccc91310d79243410b8654c8c2d7cf7872138b517df5ed5e7cb15f7a983bbd612e7b1509285de89149c81da2cf468214784d3d8875f9a3557b5a903d0a98b8098347a2012704426832a058404d4cf3686ea7358cc40682b1e4f3c1c69fd0feb3693684b802e95b30122126101e095adad598ddf1ffd6736296629ce64d01086ff7c86a600c06a431c7835b08",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 474,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 502,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
        "0deaf9da04a577f75258e3022983f4249ee6fd25089663fed8c59442883df3fd",
-       "70e54c1eac86c73787a46a050997be16cc486140c4340356da17c131ce4a8aa5",
+       "e4b12ed9a457440adee010d30d2c590ec35f987692a2ff0d906a398b234effa2",
+       "434c3729fa473ec14712dfae4fd3116fd0e529b4cae58dadd76ffd2632265e90",
        "080e8ed9a722d2ef97ba3a0a98542db2452b972f05fcdd11fbf89c9ec79c7964",
-       "3050f0d1694860b7977706c9b92bcf8748e4acb7a2a2bcc20882260d8f01b211",
-       "b2e8a1053897489c895dc861fb4bad73f4990bae84361299b1a9f6f11f6b4e69",
-       "f3e00fc34f0b31c0fa62bdb0ab571d0dd39ac2fcf9dd69ebefba8c50fe305a84",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "369bfc6fd0b4ca41cd037c2c72b5c8703f108bff1527042c526bd4ed5658c10b",
+       "1359c7de798b6071c546281f4bfe38cb90346db4ec8fbb9cf1a568de72f02389",
+       "a0979d2d3f4c0306a43f954d79fd56dfa9c9f7ae84d4b9e552f701c0b23162b0",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -776,7 +1237,7 @@
    }
   },
   {
-   "id": "release/rating/release-invalid-R10-third-rating-005",
+   "id": "release/rating/release-invalid-R10-third-rating-008",
    "description": "third rating release for one source within 365 days",
    "section": "Validation rules (verification step 10 for release)",
    "inputs": {
@@ -786,16 +1247,16 @@
      "signatures": "d8628440a0f6838347a2012704426c31a058405c6e3f0f90303679137f26363d0cd3e4534cf0e583638e7f1eeadb2ca07ff22c88e28f950b0824874c560977c6344f33306ed7bae4b78ca4981dedb0969efc0f8347a2012704426831a0584054bbc5160be8d603db2f32d32c270342d3eae62a12564d2ba4457d4ba263a9cdf1fc628bbd1d4fbc17cb5f4b0df7bed1f636cf1393de19e27d05a7340b0b220a8347a2012704426832a05840fde7eae5d822df6bfef4d1bb8f3950ffe02dc26e153f858ac3fca3ac105f37d85fddf048703238e25c74ae01f98c9e5475da38881d4f12faed9d8787a4468f07",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 477,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 505,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
        "2c613ef718c7e089d48bb8fb88a6a798ebde448a3f2b4f118e37583a13700bc2",
-       "ef681a97719702c96ea5b3dfc2ee66d27ad92e25587ca2df0655f63619469ec4",
-       "3050f0d1694860b7977706c9b92bcf8748e4acb7a2a2bcc20882260d8f01b211",
-       "b2e8a1053897489c895dc861fb4bad73f4990bae84361299b1a9f6f11f6b4e69",
-       "f3e00fc34f0b31c0fa62bdb0ab571d0dd39ac2fcf9dd69ebefba8c50fe305a84",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "5f9ea3c6a2462fa3283dc57ffc31a1a21f0e7e6fdc0cdea3043b8c1b3ee7368a",
+       "369bfc6fd0b4ca41cd037c2c72b5c8703f108bff1527042c526bd4ed5658c10b",
+       "1359c7de798b6071c546281f4bfe38cb90346db4ec8fbb9cf1a568de72f02389",
+       "a0979d2d3f4c0306a43f954d79fd56dfa9c9f7ae84d4b9e552f701c0b23162b0",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },

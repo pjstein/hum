@@ -40,7 +40,8 @@ def test_membership_proof_rules(world):
 
     pres = cr.Presentation.decode(a.proof)
     assert pres.context == world.ctx_open.cid and pres.branches == []
-    assert a.nullifier == cr.nullifier(pres.creds[0].pseudonym)
+    assert a.to_item().get(4) is None and im.A_UNUSED_4 == 4
+    assert cr.nullifier(pres.creds[0].pseudonym) in im._all_nullifiers(a)
     env = cbor.decode(b.envelope)
     v_of = {world.verifier_cid: v.V}
     assert im.log_submission_check(b.authorship, env[m.ISSUED], env[m.ISSUED] + 3600, v_of) is None
@@ -65,12 +66,14 @@ def test_log_of_record_and_retry(world):
 
 def test_authorship_round_trip_and_shapes():
     key = key_from_label("chat-alice")
-    a = im.Authorship(1, key=key.public, sig=bytes(64), nullifier=bytes(32), proof=b"p")
+    a = im.Authorship(1, key=key.public, sig=bytes(64), proof=b"p")
     assert im.Authorship.decode(a.encode()).to_item() == a.to_item()
     with pytest.raises(im.TypeRule):
         im.Authorship.decode(cbor.encode({0: 1, 1: key.public}))  # member form without sig
     with pytest.raises(im.TypeRule):
-        im.Authorship.decode(cbor.encode({0: 2, 3: 1, 4: bytes(32), 5: b"p", 1: key.public}))
+        im.Authorship.decode(cbor.encode({0: 2, 3: 1, 5: b"p", 1: key.public}))
+    with pytest.raises(im.TypeRule):
+        im.Authorship.decode(cbor.encode({0: 2, 3: 1, 4: bytes(32), 5: b"p"}))  # key 4 removed
 
 
 def test_scopes_and_bound_message_layout():

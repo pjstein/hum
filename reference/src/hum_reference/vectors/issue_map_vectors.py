@@ -289,14 +289,12 @@ class World:
     ):
         def make(cid_: bytes) -> bytes:
             if form in (im.MEMBER, im.ANONYMOUS):
-                proof, nullifier = self.proof_for(label, ctx_cid, epoch=card_epoch, kid=kid)
+                proof, _nullifier = self.proof_for(label, ctx_cid, epoch=card_epoch, kid=kid)
             if form == im.MEMBER:
                 k = key or self.alice
-                a = im.Authorship(
-                    1, key=k.public, sig=im.sign_author(k, cid_), nullifier=nullifier, proof=proof
-                )
+                a = im.Authorship(1, key=k.public, sig=im.sign_author(k, cid_), proof=proof)
             elif form == im.ANONYMOUS:
-                a = im.Authorship(2, slot=slot, nullifier=nullifier, proof=proof)
+                a = im.Authorship(2, slot=slot, proof=proof)
             else:
                 a = im.Authorship(3, sig=im.sign_author(agent or self.agent_key, cid_))
             if edit_key is not None:
@@ -863,7 +861,6 @@ class World:
                 1,
                 key=self.alice.public,
                 sig=self.bob.sign(im.bound_message(cid_)),
-                nullifier=self.proof_for("badsig", self.ctx_open.cid)[1],
                 proof=self.proof_for("badsig", self.ctx_open.cid)[0],
             ).encode(),
         )
@@ -938,7 +935,6 @@ class World:
                 1,
                 key=carol.public,
                 sig=im.sign_author(carol, cid_),
-                nullifier=self.proof_two("two-cards", self.ctx_two_cards.cid)[1],
                 proof=self.proof_two("two-cards", self.ctx_two_cards.cid)[0],
             ).encode(),
         )
@@ -954,7 +950,6 @@ class World:
                 1,
                 key=carol.public,
                 sig=im.sign_author(carol, cid_),
-                nullifier=self.proof_two("second-try", self.ctx_two_cards.cid, "two-cards")[1],
                 proof=self.proof_two("second-try", self.ctx_two_cards.cid, "two-cards")[0],
             ).encode(),
         )
@@ -969,7 +964,6 @@ class World:
             authorship_override=lambda cid_: im.Authorship(
                 2,
                 slot=5,
-                nullifier=self.proof_for("im-ok-slots-1", self.ctx_open.cid)[1],
                 proof=self.proof_for("im-ok-slots-1", self.ctx_open.cid)[0],
             ).encode(),
         )
@@ -1080,7 +1074,6 @@ class World:
                 1,
                 key=self.alice.public,
                 sig=im.sign_author(self.alice, cid_),
-                nullifier=self.proof_for("noedit", self.ctx_open.cid)[1],
                 proof=self.proof_for("noedit", self.ctx_open.cid)[0],
             ).encode(),
         )
@@ -1341,7 +1334,6 @@ class World:
             authorship_override=lambda cid_: im.Authorship(
                 2,
                 slot=0,
-                nullifier=self.proof_for("im-ok-slots-0", self.ctx_open.cid)[1],
                 proof=self.proof_for("im-ok-slots-0", self.ctx_open.cid)[0],
             ).encode(),
         )
@@ -1471,7 +1463,7 @@ def _scopes(wd: World, b: m.Bundle, env: dict) -> dict | None:
     elif a.form == im.ANONYMOUS:
         ctx_cid = env[m.REFS]["context"]
         ctx_env = cbor.decode(wd.w.bundles[ctx_cid].envelope)
-        window = env[m.ISSUED] // im.UNSIGNED_WINDOW_MIN
+        window = env[m.ISSUED] // im.AUTHOR_WINDOW
         out["window"] = window
         out["scope"] = hexify(im.slot_scope(ctx_env.get(m.LINEAGE, ctx_cid), window, a.slot))
     return out
@@ -1698,6 +1690,11 @@ def authorship_file(wd: World) -> File:
     good = cbor.decode(wd.named["im-ok-issue"].authorship)
     for case, item, why in [
         ("im-authorship-extra-key", {**good, 9: 1}, "unknown key 9"),
+        (
+            "im-authorship-key-4",
+            {**good, 4: fixtures.fixed_bytes("carried-nullifier", 32)},
+            "a carried nullifier: key 4 was removed by ADR 0104 and is not reused",
+        ),
         (
             "im-authorship-scope-carried",
             {**good, 3: 0},

@@ -32,6 +32,7 @@ __all__ = [
     "body",
     "canonical_unlocked",
     "ceil_sigma",
+    "log_of_record",
     "keybox_info",
     "part_record",
     "receipt_padding",
@@ -173,9 +174,17 @@ def keybox_info(deck_cid: bytes) -> tuple[bytes, bytes]:
 
 
 def canonical_unlocked(
-    plan: dict[int, Any], parts: dict[int, dict], n_hat: int | None, stage: int
+    plan: dict[int, Any],
+    parts: dict[int, dict],
+    n_hat: int | None,
+    stage: int,
+    rating: bool = False,
 ) -> list[int]:
-    """R6: the parts whose tables are published at this stage."""
+    """R6: the parts whose tables are published at this stage.
+
+    In a rating deck part 3 is unlocked with part 0 (its group cells are filtered in
+    post-processing at GATE_CELL, which the reference does not model).
+    """
     planned = set(plan[dk.P_PARTS])
     out: set[int] = set()
     if n_hat is None or n_hat < plan[dk.P_MIN_VOTERS]:
@@ -184,6 +193,8 @@ def canonical_unlocked(
     out.add(dk.RECEIPTS)
     if dk.COUNT in planned:
         out.add(dk.COUNT)
+    if rating and dk.GROUPS in planned:
+        out.add(dk.GROUPS)
     for p in (dk.MOVEMENT, dk.RATINGS):
         if p in planned and n_hat >= dk.effective_gate(plan, p):
             out.add(p)
@@ -429,13 +440,14 @@ def rules(view: m.Resolved) -> None:
         total += rho_p
     require(rat_value(b[RHO]) == total, "R4", "rho is not the sum of the parts")
     require(total <= rat_value(plan[dk.P_RHO]), "R4", "rho above the plan's")
-    # R5
+    # R5 (the part lists apply when unlocked is not empty; below the minimum R6 fixes parts)
     n_hat = b.get(N_HAT)
     gate1 = dk.effective_gate(plan, dk.COVARIANCE)
+    above_minimum = bool(b[UNLOCKED])
     if stage == 1:
         require(dk.TALLIES in parts, "R5", "version 1 must record part 0")
         for p in (dk.COUNT, dk.MOVEMENT, dk.RATINGS, dk.BREAKDOWN):
-            if p in plan_parts:
+            if p in plan_parts and above_minimum:
                 require(p in parts, "R5", f"version 1 must record planned part {p}")
         should_final = (
             dk.COVARIANCE not in plan_parts
@@ -459,28 +471,37 @@ def rules(view: m.Resolved) -> None:
             require(n_part is not None, "R5", f"part {new_part} needs n")
             require(final == (n_part < gate1), "R5", f"final at stage {stage} does not follow n")
     if rating_deck:
-        require(
-            set(parts) == {dk.TALLIES, dk.GROUPS, dk.RECEIPTS},
-            "R5",
-            "a rating release records exactly parts 0, 3 and 8",
-        )
+        if above_minimum:
+            require(
+                set(parts) == {dk.TALLIES, dk.GROUPS, dk.RECEIPTS},
+                "R5",
+                "a rating release records exactly parts 0, 3 and 8",
+            )
         require(final, "R5", "a rating release is final")
         source = view.manifest(deck_env[m.REFS].get("source", b""))
-        require(
-            source is not None and b.get(GROUPS_K) == source[m.BODY].get(GROUPS_K),
-            "R5",
-            "groupsK differs from the source release's",
-        )
+        # R5's lists apply when unlocked is not empty; below the minimum there is no groupsK
+        # (R7), so the equality is tested only when part 0 is unlocked.
+        if dk.TALLIES in b[UNLOCKED]:
+            require(
+                source is not None and b.get(GROUPS_K) == source[m.BODY].get(GROUPS_K),
+                "R5",
+                "groupsK differs from the source release's",
+            )
     # R6
-    expected_unlocked = canonical_unlocked(plan, parts, n_hat, stage)
+    expected_unlocked = canonical_unlocked(plan, parts, n_hat, stage, rating=rating_deck)
     require(b[UNLOCKED] == expected_unlocked, "R6", f"unlocked should be {expected_unlocked}")
     require((N_HAT in b) == (dk.TALLIES in b[UNLOCKED]), "R6", "nHat present iff part 0 unlocked")
     tables_in_refs = {k[2:] for k in refs if k.startswith("t/")}
     if N_HAT not in b:
         require(final, "R6", "below the floor the version is final")
         require(not tables_in_refs, "R6", "below the floor no tables are published")
-        allowed = {dk.TALLIES, dk.COUNT, dk.RECEIPTS}
-        require(set(parts) <= allowed, "R6", "below the floor only parts 0, 4 and 8 are recorded")
+        # ADR 0103: only parts 0 and 4 are noised below the floor; part 8's noise is not drawn
+        expected_parts = {dk.TALLIES} | ({dk.COUNT} if dk.COUNT in plan_parts else set())
+        require(
+            set(parts) == expected_parts,
+            "R6",
+            "below the floor parts records parts 0 and 4 (when planned) only",
+        )
         require(all(PR_N not in rec for rec in parts.values()), "R6", "no n below the floor")
     # R7
     must, may = required_tables(plan, b[UNLOCKED], n_hat, stage, final, rating_deck)
@@ -490,7 +511,11 @@ def rules(view: m.Resolved) -> None:
     require(not extra, "R7", f"tables of parts not unlocked {sorted(extra)}")
     # R7's "stage >= 3 and not final at 2" read as: groups exist from stage 3 on, except
     # when stage 3 is final through a dropout (map published, no centroids, no groups).
-    groups_expected = rating_deck or (stage >= 3 and not (stage == 3 and final))
+    # Rating decks: groupsK iff part 0 is unlocked (below the minimum there is no group table
+    # and no groupsK).
+    groups_expected = (
+        (dk.TALLIES in b[UNLOCKED]) if rating_deck else (stage >= 3 and not (stage == 3 and final))
+    )
     require((GROUPS_K in b) == groups_expected, "R7", "groupsK presence")
     # R8
     prev = view.prev_env
@@ -508,9 +533,16 @@ def rules(view: m.Resolved) -> None:
         for name, cid in prev[m.REFS].items():
             if name.startswith("t/") or name.startswith("receipts/"):
                 require(refs.get(name) == cid, "R8", f"ref {name!r} changed or dropped")
-    # R10
+    # R10, in the context's ledger of record (the first entry of ctx.logs, ADR 0103): a release
+    # must be in that log; one that is only in another listed log is invalid
+    record = log_of_record(ctx_body)
+    require(
+        view.bundle.proof is None or view.bundle.proof.log == record,
+        "R10",
+        "the release is not in the context's ledger of record",
+    )
     own_lineage = env.get(m.LINEAGE, view.bundle.cid)
-    for pos, other, bnd in view.all_of_type("release"):
+    for pos, other, bnd in _in_log(view.all_of_type("release"), record):
         if view.position is not None and pos >= view.position:
             continue
         if other.get(m.LINEAGE, bnd.cid) == own_lineage:
@@ -523,7 +555,7 @@ def rules(view: m.Resolved) -> None:
     if rating_deck and env[m.VERSION] == 1:
         source = deck_env[m.REFS].get("source")
         earlier = 0
-        for pos, other, bnd in view.all_of_type("release"):
+        for pos, other, bnd in _in_log(view.all_of_type("release"), record):
             if view.position is not None and pos >= view.position:
                 continue
             if other[m.VERSION] != 1 or other.get(m.LINEAGE, bnd.cid) == own_lineage:
@@ -550,11 +582,12 @@ def rules(view: m.Resolved) -> None:
     # R12
     deck_position = view.position_of(refs["deck"])
     require(b[ASSURANCE] == _accepted_assurance(view, ctx_env, deck_position), "R12", "assurance")
-    # R13
-    rounds = set(range(stage))
-    require(set(b[RECEIPTS]) == rounds, "R13", "receipts must cover rounds 0..stage-1")
+    # R13 (below the minimum nothing is published, a padded leaf count included: ADR 0103)
+    rounds = set(range(stage)) if above_minimum else set()
+    which = "rounds 0..stage-1" if above_minimum else "nothing below the minimum"
+    require(set(b[RECEIPTS]) == rounds, "R13", f"receipts must cover {which}")
     root_refs = {int(k[9:]) for k in refs if k.startswith("receipts/")}
-    require(root_refs == rounds, "R13", "receipts/<n> refs must cover rounds 0..stage-1")
+    require(root_refs == rounds, "R13", f"receipts/<n> refs must cover {which}")
     window = plan.get(dk.P_ROUND_WINDOW, dk.DEFAULT_ROUND_WINDOW)
     if final:
         require(ROUND_DEADLINE not in b, "R13", "roundDeadline on a final version")
@@ -574,12 +607,12 @@ def rules(view: m.Resolved) -> None:
             "R13",
             "no room before expires for the rounds still to run",
         )
-    # R14
+    # R14, counted in the ledger of record as R10
     floors = c.floors_of(ctx_body)
     if stage == 1 and floors["rhoYear"] is not None:
         ctx_lineage = view.lineage_of(deck_env[m.REFS]["context"])
         spent = rat_value(plan[dk.P_RHO])
-        for pos, other, bnd in view.all_of_type("release"):
+        for pos, other, bnd in _in_log(view.all_of_type("release"), record):
             if view.position is not None and pos >= view.position:
                 continue
             if other[m.VERSION] != 1 or bnd.cid == view.bundle.cid:
@@ -595,6 +628,32 @@ def rules(view: m.Resolved) -> None:
     # R15: pending (Parquet tables are not produced in this run).
 
 
+def record_log(view: m.Resolved) -> bytes | None:
+    """Step 7 hook: the ledger of record of the context the pinned deck names, or None when
+    the deck or context is not held (step 9 reports that)."""
+    deck_cid = view.env[m.REFS].get("deck")
+    deck_env = view.manifest(deck_cid) if isinstance(deck_cid, bytes) else None
+    if deck_env is None or not isinstance(deck_env.get(m.REFS), dict):
+        return None
+    ctx_cid = deck_env[m.REFS].get("context")
+    ctx_env = view.manifest(ctx_cid) if isinstance(ctx_cid, bytes) else None
+    try:
+        return log_of_record(ctx_env[m.BODY]) if ctx_env is not None else None
+    except (KeyError, IndexError, TypeError):
+        return None
+
+
+def log_of_record(ctx_body: dict[int, Any]) -> bytes:
+    """The context's ledger of record: the first entry of ``logs`` (ADR 0103; services.md,
+    "Step 10 at the log"). R10, R14 and deck.md D16's clock-free half are decided there."""
+    return ctx_body[c.LOGS][0][c.L_LOG]
+
+
+def _in_log(entries, record: bytes):
+    """The entries of ``all_of_type`` whose bundle is logged in ``record``."""
+    return [(pos, env, bnd) for pos, env, bnd in entries if bnd.proof.log == record]
+
+
 def log_check(env: dict[int, Any], deck_env: dict[int, Any], log_now: int):
     """R13's clock half, run by the ledger at submission: any release version is refused when
     the ledger's own clock is past ``E``, the ``expires`` of the deck version in
@@ -606,4 +665,4 @@ def log_check(env: dict[int, Any], deck_env: dict[int, Any], log_now: int):
     return None
 
 
-m.register("release", schema=schema, rules=rules, signatures=signatures)
+m.register("release", schema=schema, rules=rules, signatures=signatures, record_log=record_log)

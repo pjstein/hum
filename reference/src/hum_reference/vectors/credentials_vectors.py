@@ -1449,6 +1449,16 @@ def issuance_file() -> File:
             "response": hexify(resp),
             "nym_share": hexify(share),
             "phone_checks": "pass",
+            "hpke_info": hexify(b"hum/issue/1" + DISTRICT),
+            "hpke_response_export_labels": [
+                "hum/issue-response/1 key",
+                "hum/issue-response/1 nonce",
+            ],
+            "hpke_response_aad": "the 16-byte session ID",
+            "evidence_aad": "the 16-byte session ID ‖ SHA-256(this request plaintext), 48 "
+            "bytes; the phone builds this request before sealing any evidence item "
+            "(verifier/evidence)",
+            "evidence_request_hash": hexify(hashlib.sha256(req).digest()),
             "sealed_request": "pending HPKE",
             "signature": "pending BBS",
         },

@@ -1,6 +1,6 @@
 # Hum Conformance — Draft 0.1
 
-Oct 7, 2026 · W0-08 · fifth version, after the fifth reference run (sampler option B in `release.md` Noise; owner acceptances of 2026-10-07)
+Oct 9, 2026 · W0-08 · eighth version, after the eighth reference run (spec owners' replies to disagreements 19 to 27 applied) (cross-spec §12.9 to §12.14: ADRs 0103, 0104, 0107, the review fixes TS1 to TS14, RT1 to RT4 and RU1 to RU3)
 
 ## Scope
 
@@ -110,10 +110,13 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 | Checkpoints, origin, key ids, W-1, W-2, tampered timestamp, unlisted witness | `services/checkpoint` (1+5), `log/checkpoint` (7+4) |
 | Witness protocol 200/409/409/422, W-3 | `services/witness-protocol` (5+0) |
 | A-1 payload, A-2 COSE_Sign, A-3 freshness and replay | `services/signed-requests` (3+4) |
-| Task ids per (round, part) over the deck lineage CID, receipt signatures, receipt pages for 100, 4096, 4097, 1,000,000 leaves | `services/aggregator` (10+2) |
+| Task ids per (round, part) over the deck lineage CID, receipt body `{0 leaf, 1 signature, 2 kid}`, receipt pages for 100, 4096, 4097, 1,000,000 leaves with the GET response body, root blob `{0 k, 1 pages}` (never carries the root) and the GET response `{0 root, 1 k, 2 pages}`, which a phone rejects when `k` or `pages` differ from the pinned blob (`receipts-response-matches-blob`, `-k-mismatch`, `-pages-mismatch`, `-root-mismatch`), `404` below the minimum (AG-4, ADR 0103) | `services/aggregator` (13+5) |
 | The log's clock check on logged presentations (`rejected`, rule P5, ADR 0101) | `services/log-submission` (4+4) |
-| Error bodies per code, bare 401 and 404, E-1 | `services/errors` (17+1) |
-| O-3 padding buckets, O-5 relay authority, bootstrap witnesses | `services/relay` (12+3) |
+| Error bodies per code, bare 401 and 404, E-1; host rejection `rule` `vr-<code>`; `too_large` (413) for a presentation over 8 KiB | `services/errors` (20+1) |
+| "Body keys": every row's integer-keyed body, encode and decode; an unknown field rejected. The gallery listing element is `{0 cid, 1 logIndex, 2 rated, 3 hasGroupScore, 4 score, 5 forkCount}` with `score` = take.md's score rounded half to even to six decimals × 10⁶ and absent for an unrated take (`service-body-gallery-takes-unrated-and-tie`: 1/128 → 7812). The six rows for `/v1/log/proof/inclusion`, `/v1/log/proof/consistency` and the four gallery responses are **provisional** (cross-spec §12.10: first defined there) and marked so in the file notes, each description and `inputs.provisional` | `services/bodies` (24+1) |
+| V-2 and V-4: one issuance request per session, identical retry, `conflict` only within the session, a different request in a later session against a spent row gets the masked dedup code (TS8); the host holds evidence sealed and opens it beside the issue call, ending the session on a mismatch (`host-v4-*`); response bytes are placeholders (BBS, HPKE) | `services/host` (4+5) |
+| L-5 and L-6 (TS5, RT2, RU3): L-6's per-service field table with domains for every row (log, witness, aggregator, host, delivery, store, resolver, gallery, relay, gateway), one allowed and one forbidden line per row; L-5's intake rules (no accepted-ballot count at any time, no per-request line, no per-deck, per-round or per-path intake count, `conflict` `duplicate` at no grain, nullifier-dependent codes only in the daily total; gateway no intake counter or ballot-path count). `rule` is L-5 where that rule names the failure, L-6 otherwise; every L-5 failure is also an L-6 failure. The bucketed receipt field is `padded_leaves` | `services/logging` (17+23) |
+| O-3 padding buckets, O-5 relay authority, bootstrap witnesses; a first request with a gateway configuration one rotation old accepted and an unsupported one refused (TS11, structural: key-config id comparison); O-6 relay selection (§12.11, tightened in §12.13): a context relay carries only the context's delivery service, its stores and token issuers, and log or resolver reads; everything else (ballots, receipts, every aggregator request, every log submission, an authored object's text and evidence blob puts and their token issuance) uses the shipped relays only; each connection picks uniformly from the allowed set and re-picks from the rest on failure, never direct. The draws come from a fixed SHA-256 stream under `hum/relay-pick/1`, a reference device, not a protocol rule (`o6-*`, `o6-all-failed` rejected) | `services/relay` (23+5) |
 | Tokens T-1 to T-4 | Gap (Privacy Pass) |
 | LG-1 to LG-8, AG-1 to AG-8, V-1 to V-4, RS-*, G-*, O-4, logging table | Simulator |
 
@@ -139,7 +142,7 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 | Rule | Vectors |
 | --- | --- |
 | Protocol constants, C3, C4, C10 | `release/floors` (4+9) |
-| C1 to C16 on whole manifests, every sub-condition the spec lists (C16: four rejecting, one accepting, ADR 0100) | `context/manifests` (5+63) |
+| C1 to C16 on whole manifests, every sub-condition the spec lists (C16: four rejecting, one accepting, ADR 0100); keys 20 `resolvers` and 21 `relays` with C7 (`context-valid-discovery`, duplicate relay, five relays, empty resolvers, relay equal to the Leader authority, relay equal to the delivery authority; TS10's lookup-free check); C11 `logs[0].log` frozen from version 1 (TS7 option a): `context-invalid-C11-changes-log0`, `context-invalid-C11-swaps-logs`, `context-valid-v2-logs-witnesses-and-second-log` | `context/manifests` (7+71) |
 | Policy evaluation | `context/policy-eval` (11+0), `trust-list/resolution` |
 | Daily count buckets | `context/count` (4+0) |
 | Results key derivation and the mismatch a member refuses | `context/results-key` (3+1) |
@@ -148,9 +151,10 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 
 | Rule | Vectors |
 | --- | --- |
-| D1 to D14, every sub-condition the spec lists, incl. D12's monotone `expires` and D13's upper bound | `deck/manifests` (8+63) |
+| D1 to D14, every sub-condition the spec lists, incl. D12's monotone `expires` and D13's upper bound | `deck/manifests` (8+64) |
 | D16 (the ledger's clock check at admission) | `deck/manifests` `deck-invalid-D16-*`, `{"check": "log-admission"}` |
-| D15 rating decks, deck-valid-rating | `deck/rating` (1+14) |
+| D15 rating decks, deck-valid-rating; `minVoters` = max(GATE_TALLIES, context minimum) with `gates[0]` raised (ADR 0103 item 3): `deck-valid-rating-min-300`, `deck-valid-rating-min-500`, `deck-invalid-D11-gates0-not-raised`, `deck-invalid-D10-minvoters-under-floor`; D11 exempts part 3 (TS6) | `deck/rating` (3+16) |
+| D16 clock-free half: a deck version logged after a release of its lineage (`deck-invalid-D16-after-release`, step 10) | `deck/manifests` |
 | σ² per part, σ_r = n/2²⁰ and `sigma` = round(σ_r × 10⁶) (covariance over `covScale`), Δ_cov for four (M, covScale) pairs | `deck/plan-math` (9+0), `release/sigmas` |
 | Plan floors D8, D10, D11, D14 as plan-only checks | `release/plans` (4+20) |
 
@@ -158,9 +162,11 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 
 | Rule | Vectors |
 | --- | --- |
-| R1 to R14, every sub-condition the spec lists; valid scenarios incl. four stages, dropout, public, ibis, absorbed, below minimum | `release/manifests` (25+52) |
+| R1 to R14, every sub-condition the spec lists; valid scenarios incl. four stages, dropout, public, ibis, absorbed, below minimum | `release/manifests` (27+54) |
+| Below the minimum (ADR 0103 item 1, TS3): `parts` holds 0 and 4 only, `receipts` empty, no `receipts/0`, R5 lists apply only when `unlocked` is non-empty: `release-valid-below-minimum` (rebuilt), `release-valid-below-minimum-ibis`, `release-valid-below-minimum-rating`, `release-invalid-R13-below-minimum-receipt-root` | `release/manifests`, `release/rating` |
+| Ledger of record = first `logs` entry: for `release` and `deck` manifests the step 7 inclusion proof must be against it whichever log served the bundle (`release-invalid-step7-not-in-ledger-of-record`, step 7, one result for either phone); R10 and R14 count only that ledger's history (ADR 0103 item 4); `release-valid-D16-after-release-v1` | `release/manifests` |
 | R13 against the pinned deck's `expires` (phone side) and against the aggregators' clock (log-admission side) | `release/manifests` `release-invalid-R13-*` |
-| Rating releases: exactly `tallies`, `group_tallies`, `group_sizes`; R5 groupsK; R7 no consensus; R10 by source | `release/rating` (1+4), `release/manifests` `release-invalid-R7-rating-consensus` |
+| Rating releases: exactly `tallies`, `group_tallies`, `group_sizes`; part 3 unlocks with part 0 (R6, RT3; `release-valid-rating-nhat-400`, cells filtered at `GATE_CELL` in table post-processing, not modelled); `groupsK` present iff a rating deck with part 0 unlocked (`release-invalid-R7-groupsk-below-minimum`; the below-minimum rating release carries none); R5 groupsK; R7 no consensus; R10 by source | `release/rating` (3+5), `release/manifests` `release-invalid-R7-rating-consensus` |
 | Receipt padding, integer ⌈σ_8⌉ over σ², pages | `release/receipts` (10+0) |
 | R9 two signers | `release/manifests` R9 cases |
 | ε↔ρ, σ, gates, caps, phone round computations, rankings, sampler harness | `release/accounting`, `sigmas`, `gates`, `cap`, `phone`, `ranking`, `sampler` |
@@ -173,7 +179,7 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 | Rule | Vectors |
 | --- | --- |
 | IM-1 to IM-15, every listed im-ok and im-bad case that needs no proof primitive, incl. the logged-presentation cases of ADR 0101 (`im-ok-verified-next-epoch`, `im-ok-kid-removed-after`, `im-bad-proof-epoch-mismatch`, `im-bad-issued-skew`, `im-bad-kid-removed-before`) | `issue-map/objects` (83+42) |
-| Authorship map per form, editSig, rejections | `issue-map/authorship` (4+3) |
+| Authorship map per form without key 4 (ADR 0104 item 4), editSig, rejections incl. `im-authorship-key-4` (IM-6 at step 6); every nullifier derived from the proof; `AUTHOR_WINDOW` | `issue-map/authorship` (4+4) |
 | Edit-key derivation, annotations, duplicate detection | `issue-map/derived` (12+0) |
 | Log of record: the first `logs` entry, an object present only in the second log, a bundle without a record-log proof | `issue-map/objects` `im-ok-two-logs`, `im-ok-two-logs-second-log-accepts`, `im-bad-two-logs-no-record-proof` |
 | Membership proof verification, `im-bad-proof-unbound`, `im-bad-slot-reused-other-log` | Gap |
@@ -204,13 +210,17 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 | Datasets and rule 15; build recipes and rule 16; masking rule 12 | `verifier-runtime/datasets` (5+5), `build` (6+1), `masking` (6+0) |
 | verifier-runtime rules 1–11, 13, 14; decisions; module instantiation | Gap (wasm runtime) |
 | Issuer key `fromEpoch`, key-of-epoch selection, rules 3, 15, 16, 21, 26 as revised | `verifier/manifests` |
+| `KEY_TAIL` = 44,928,000 s: the three-version lineage with ordinary retirement after the tail, an emergency removal, and the capacity of about seven key changes (TS14). All accepting: `verifier.md` states the tail in prose, not as a rule, so the vectors fix the earliest retirement time, not a rejection | `verifier/keys` (3+0) |
+| Evidence sealing: `info` = `hum/evidence/1` ‖ verifier authority CID ‖ item name, `aad` = session ID ‖ SHA-256(issuance request plaintext), 48 bytes (ADR 0107 item 5, TS1, RT1); handover with two commitments in one request (valid, one hash); lost-response retry in a new session (valid, re-sealed under the new session ID and the same hash); a different request in the same session, a session ID replaced in transit, another item name, another verifier (all `rejected`, rule V-4, 422). Structural: exact `info` and `aad` bytes; the HPKE seal itself is the HPKE gap | `verifier/evidence` (3+4) |
 
 ### chat.md
 
 | Rule | Vectors |
 | --- | --- |
-| Content types §5.2–5.16, generic drop rules, ExternalPart count, deck-dealt lineage, release-digest match | `chat/content` (18+11) |
+| Content types §5.2–5.17, generic drop rules, ExternalPart count, deck-dealt lineage, release-digest match | `chat/content` (19+11) |
 | Message ids §5.1, padding §4.3, authenticated data §4.2, safety code §2.2 | `chat/derivations` (9+4) |
+| `join-record` §5.17 (key 1 `nullifiers` sorted bstr(32) ×1..8, key 5 `day`; snapshot rows `[nullifiers, identity, day]`), the greeter sequence record → wait → pre-commit check → Add (RT4), the ticket decision, two greeters admitting one card (the later record's greeter stops, TS9/RT4), a greeter that fails between record and commit, a record older than `JOIN_PENDING` = 3,600 s resent, the pre-commit rule (RU2: live member stop, 30 minutes pending stop, two hours and not a member commit), the no-record backstop (RU1: removed only after the organizers group is fetched `JOIN_GRACE` = 600 s past the Add; kept before that, when unfetched, in an `entry` [0] context, for an agent leaf, for a second device, and when the record arrives), re-check on rebase; a record whose `day` is more than 396 days before the current UTC day blocks nothing and is omitted from snapshots whether or not deleted (`join-record-expired-inert`, `join-record-expired-snapshot-omits`; deletion itself stays MAY, `join-records-prune` advisory) (ADR 0104 item 4). The ordering is a `sequence` list; the MLS messages themselves stay pending | `chat/join-records` (24+6) |
+| DL-1 to DL-5 for the `delivery` service kind (§12.1, ADR 0107 item 7): `service-delivery-valid` and one failing case per rule; DL-4 is `limits.tokensPerIssuance` ≤ 64 and `limits.commitsPerHour` ≤ 3,600 (`service-delivery-invalid-DL-4-tokens`, `-DL-4-commits`); stray keys are S-1 and S-3 at step 4 (`service-delivery-invalid-S-1-key-17`, `-S-3-origin`) | `chat/delivery` (2+13) |
 | Everything that needs a live MLS group | Gap (list below) |
 
 ### credentials.md, ballot.md, shield.md
@@ -224,8 +234,8 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 | Backup and chat-only export plaintexts, refused keys | `credentials/backup` (2+2) |
 | P4 BBS proofs, pseudonyms, blind issuance, sealed issuance bytes, backup wrap | Gap (BBS, HPKE, Argon2id) |
 | Ballot map, body, bound message, frame, round-0 payload and part vectors, rounds 1–3, round1-max | `ballot/round0` (10+0), `ballot/rounds` (5+0) |
-| Receipt leaf, padded tree and page check | `ballot/receipts` (2+0) |
-| B1, B3 set logic, B4–B8, B10 | `ballot/invalid` (0+34) |
+| Receipt leaf, padded tree and page check; `ballot-receipt-kid` (the receipt names the signing key; another listed kid rejected) | `ballot/receipts` (3+1) |
+| B1 (incl. `too_large` for a presentation over 8 KiB), B3 set logic, B4–B8, B10 | `ballot/invalid` (0+34) |
 | Client-side counted hand, movement selection, ratings selection, send schedule | `ballot/client` (6+0) |
 | B2, B3 with real cards, B9, B11, DAP report | Gap (presentations, Prio3) |
 | S1, S2, S8 (window anchored at `settledAt` or `expires`, ADR 0102), S9 (restore by `expires`), compose, fit, window, long decks, states, restore, display, and the refused events | `shield/shield` (46+14) |
@@ -237,7 +247,7 @@ Each needs a library, an owner decision or a sibling artifact. Nothing here is a
 
 | Gap | Reason | Unblocked by |
 | --- | --- | --- |
-| BBS signatures, blind issuance, pseudonyms, P4 proof verification, the completed card in `cred-issue-*`, "same nym secret under two scopes" | No Python implementation of draft-irtf-cfrg-bbs-signatures -12 with the blind-signatures -03 and per-verifier-linkability -03 extensions exists (`docs/research/seam-libraries.md`: PyPI `bbs` is pre-IETF and dead; `pybbs` is not on PyPI); the only library at the cited drafts is the Rust crate `zkryptium`, unaudited | ADR 0110 (accepted 2026-10-07): Hum implements the three drafts in-house in a core crate over a vetted BLS12-381 library, with `zkryptium` as the comparison. Primitive vectors come from the drafts' own JSON fixtures. Still to decide under 0110: the BLS12-381 library, and how composite vectors (cards, presentations, nullifiers in Hum's layout) get a check independent of the crate: a second implementation in this reference over a pairing library, `zkryptium` driven as the cross-check, or both |
+| BBS signatures, blind issuance, pseudonyms, P4 proof verification, the completed card in `cred-issue-*`, "same nym secret under two scopes" | No Python implementation of draft-irtf-cfrg-bbs-signatures -12 with the blind-signatures -03 and per-verifier-linkability -03 extensions exists (`docs/research/seam-libraries.md`: PyPI `bbs` is pre-IETF and dead; `pybbs` is not on PyPI); the only library at the cited drafts is the Rust crate `zkryptium`, unaudited | ADR 0110 (accepted 2026-10-07; libraries decided 2026-10-08): the Rust crate implements the three drafts over `blst` 0.3.17 behind one Hum wrapper, and this reference gets a second, independent implementation over `py_ecc` 8.0.0 (a dev dependency of `reference/`, vectors only; it needs the owner's seam approval when added). Unblocked by: adding `py_ecc` and writing the BBS, blind-BBS and pseudonym operations in `reference/` against the drafts' JSON fixtures, then replacing the fixed proof bytes and `proof_valid` inputs in the credentials, issue-map, agent-sponsor, ballot and host vectors. Not started in run 6 by the lead's instruction |
 | HPKE: issuance request and response sealing (incl. RFC 9180 §9.8 export), the release keybox, the backup wrap, join tickets | `cryptography` 50.0.2 has HPKE but no export interface, no AAD argument and no way to fix the ephemeral key, and Hum needs all three | `pyhpke` or a wrapper, a seam dependency needing approval |
 | Argon2id for the recovery phrase | No gap in the primitive: `cryptography` 50.0.2 has Argon2id (RFC 9106). The backup wrap still waits on HPKE above | HPKE (above) |
 | Parquet tables, R15, `hum.*` metadata, table row checks | No Parquet writer | `pyarrow` (dev) and a decision that table bytes are compared row-wise |
@@ -247,10 +257,11 @@ Each needs a library, an owner decision or a sibling artifact. Nothing here is a
 | Privacy Pass issuance and redemption (T-1 to T-4, store and delivery tokens) | Needs an RFC 9578 implementation | A library decision; the RFC's own vectors for types 0x0001 and 0x0002 |
 | DAP reports, `ballot-dap-report`, B11 | Needs Prio3 | Phase 2 is out of draft 0.1 scope |
 | B2, B3 with real cards, B9 gate disclosure | Need real presentations | BBS (above) |
-| Membership-proof verification in IM-6 and AS-8, `im-bad-proof-unbound`, `im-bad-slot-reused-other-log` | Need credentials primitives; the reference checks structure, scope bytes and bound messages and emits them per case. `im-bad-slot-reused-other-log` also needs the same nullifier seen under two logs' scopes, which only a real pseudonym gives | BBS (above) |
+| Membership-proof verification in IM-6 and AS-8, `im-bad-proof-unbound`, `im-bad-slot-reused-other-log`, the V-2 response bytes in `services/host`, the join ticket's proof and sealing | Need credentials primitives; the reference checks structure, scope bytes and bound messages and emits them per case. `im-bad-slot-reused-other-log` also needs the same nullifier seen under two logs' scopes, which only a real pseudonym gives | BBS (above) |
 | `as-bad-proof-scope` | A wrong scope is only visible inside the BBS proof's `ph` (P4) | BBS (above) |
 | Verifier attribute key 7 `fromEpoch` (attributes appended mid-lineage) | The verifier builders have no parameter for it yet; the credentials layout cases cover it (`cred-present-logged-old-len-after-append`), the issue-map world does not | Next run: a builder parameter |
-| Log-of-record vectors beyond `issue-map/objects` (a lineage absent from the log of record for decks, releases and verifiers) | Only the issue-map world has a second log | A two-log base world |
+| Log-of-record vectors for verifiers (a verifier lineage absent from the ledger of record) | The deck world's second log mirrors the ledger of record and holds the deferred releases only | Extend the deck world's second log |
+| HPKE seals for evidence, issuance, the keybox, backups and join tickets | `cryptography` has no `aad` or export interface; the vectors carry the exact `info` and `aad` bytes and structural cases only | HPKE (above) |
 | Retiring and successor markers | `manifest.md` assigns no envelope key | Manifest spec owner |
 | Tokens, breakdown part 7 at intake, daily count readers | Owner decisions in the specs | — |
 
@@ -269,6 +280,8 @@ Accepted by the owner on 2026-10-07: ADRs 0100, 0101, 0102 item 1, 0105 item 1, 
 - **ADR 0106**: keyset version 1 without `authority`, the two-keyset release rule at step 6, the retired `blob-store` type name, the bundle pointer to `services.md`, the deck example.
 - **ADR 0010 item 3, sampler option B** (`release.md` Noise, normative 2026-10-07): σ² = p/q = Δ²·den/(2·num) in lowest terms, n the least integer with n²·q ≥ p·2⁴⁰ in integer arithmetic, σ_r = n/2²⁰; the sampler takes the rational σ_r, the part's `rho` stays the plan's, `sigma` = round(σ_r × 10⁶) ties to even (covariance round(σ_r/`covScale` × 10⁶)), ⌈σ_8⌉ keeps the integer rule over σ². Every `sigma` in `deck/plan-math`, `release/sigmas`, `release/manifests`, `release/rating` and the deck, take, issue-map and rating worlds changed; covariance `sigma` is now in real units (before: integer units); the R4 case is `release-invalid-R4-sigma-not-rounded-up`. The reference reproduces W0-01's example values (tallies 18386906, covariance 2371813, map 3622619, groups 10337391, count 10000000, receipts 20000000) in `release/sigmas` `example`.
 - **ADR 0110** (BBS in-house): changes the BBS gap's "unblocked by" column above; no vector changed.
+- **ADRs 0103, 0104, 0107 and the review fixes TS1 to TS14** (cross-spec §12.9 and §12.10, applied 2026-10-08): below-minimum releases, D16's clock-free half, rating-deck `minVoters`, ledger of record for R10/R14, `KEY_TAIL`, `join-record` nullifiers and `day`, authorship key 4 removed, context keys 20 and 21, integer body keys in `services.md` with receipt `kid`, evidence `info` and `aad`, `vr-<code>`, `too_large`, DL-1 to DL-5, `AUTHOR_WINDOW`, L-5 without counts. Byte changes: every `authorship` map in `issue-map/` (key 4 gone), the context world's unknown-key case (now key 22), `ballot/invalid` B1 9 KiB (`too_large`), the aggregator receipt and receipts-response bodies. The six new `services.md` "Body keys" rows are provisional, see the services row above.
+- **§12.11 to §12.14** (TS7 and TS10 option a, RT1 to RT4, RU1 to RU3, applied 2026-10-08): C11 freezes `logs[0].log`; O-6 relay selection; evidence `aad` is 48 bytes (session ID ‖ request hash) with rule V-4; gallery element names and score rounding; a rating release unlocks part 3 with part 0; the greeter sends its `join-record` before the Add with `JOIN_PENDING` and `JOIN_GRACE`; L-5 without intake counters. Byte changes: every `verifier/evidence` and `services/host` aad; `service-body-gallery-takes`; the rating release's `unlocked`.
 
 Still open and unchanged in the vectors: envelope keys for the retired marker and successor pointers; ADR 0102 items 2 and 3; ADR 0105 items 2 to 5.
 
@@ -294,6 +307,21 @@ Noted, not resolved; the owning workstream decides. Items from the first run tha
 16. **R2's "highest version logged before `closes`".** Resolved: `release.md` R2 is now clock-free, "the highest version of the deck lineage whose log position is below the release lineage's version 1", checked on every version, with D16 and R13 named as the clocks that make it the version in force at `closes`. The reference already read it that way.
 17. **Rule 31's "ignores the other".** `verifier.md` says a phone uses the lower-index lineage and ignores the other; the reference rejects the higher-index version 1 at step 10, which is the same outcome for every reader of one log.
 18. **`release.md` Receipts, "⌈σ_8⌉ … equal to ⌈σ_r,8⌉ except when σ_8 is within 2⁻²⁰ below an integer, where the two differ by one".** The two never differ: σ_r is the least multiple of 2⁻²⁰ at or above σ, and every integer is such a multiple, so any integer m ≥ σ has σ_r ≤ m, giving ⌈σ_r⌉ = ⌈σ⌉. `release/sigmas` `boundary-below-integer` shows both equal to 20 at σ² = 400 − 2⁻³⁰. Resolved: W0-01 verified the equality and `release.md`'s Receipts parenthetical and release-math vector note now say the two are always equal; the σ² rule stays normative and the reference implements it.
+19. **`deck.md` D15 vector list.** Resolved: the case is listed under D10 and D15's list keeps only reachable cases; `deck-invalid-D10-minvoters-under-floor` stands.
+20. **`release.md` `groupsK` below the minimum.** Resolved: R7 now says `groupsK` is present iff stage ≥ 3 and not final at 2, or a rating deck with part 0 unlocked; the below-minimum rating release carries none and `release-invalid-R7-groupsk-below-minimum` rejects one. One remainder: R5's "`groupsK` equals the source release's" does not say it is skipped below the minimum; the reference tests the equality only when part 0 is unlocked. For W0-01 to add the clause.
+21. **`release.md` across two logs.** Resolved: for `release` and `deck` manifests the step 7 inclusion proof must be against the ledger of record whichever log served the bundle (`release.md` R10, `context.md` "Log entries", `services.md` "Submitting a manifest"), so there is one result, step 7. The reference registers a per-type ledger-of-record hook at step 7 and the vector is `release-invalid-step7-not-in-ledger-of-record`.
+22. **`chat.md` §12.1 DL-4.** Resolved: DL-4 is now the delivery-specific rule `limits.tokensPerIssuance` ≤ 64 and `limits.commitsPerHour` ≤ 3,600, with the stray keys refused at step 4 by `services.md`; the two old cases are relabeled S-1 and S-3 and two DL-4 cases added.
+23. **`issue-map.md` "Sibling specs".** Resolved by W0-04: the sentence now says the authorship field carries no nullifier and the verifier derives every nullifier from the proof; the slot-scope table says "at most once in the log of record". No vector change.
+24. **`services.md` receipts bodies.** Resolved: two distinct bodies are intended and said so; the pinned blob never carries the root, and a phone rejects a GET response whose `k` or `pages` differ from the pinned blob (`services/aggregator` `receipts-response-*`). The spec names no rule id for that rejection; the vectors use `check: "receipts-response"`.
+25. **`verifier.md` `KEY_TAIL`.** Resolved, prose by design: the spec now says at the definition that it is a commitment, not a checkable rule (the log cannot tell early retirement from emergency removal); `verifier/keys` is informative, accepting only.
+26. **`services.md` L-5 field schema.** Resolved: new rule L-6 gives the exact field names and domains per service row; `services/logging` tests one allowed and one forbidden line per row and the bucketed receipt field is `padded_leaves`. Domains the table leaves open and the reference fixed (stated in the file notes): the delivery row's fields (chat.md §12.9 names none: `service`, `day`, `code`, `minute`, `context`), `day` as a day number or `YYYY-MM-DD`, `code` as a string or HTTP status, `minute` as a Unix time multiple of 60, the host `outcome` values, the resolver after-24-hours line as exactly `{cid, count}`. For W0-07 to confirm or tighten.
+27. **`chat.md` §5.17 old records.** Resolved: a record whose `day` is more than 396 days before the current UTC day MUST NOT block a ticket or trigger a removal and MUST NOT appear in a snapshot; deletion stays MAY. `join-record-expired-inert` and `join-record-expired-snapshot-omits` test the outcome (396 days still live, 397 expired); `join-records-prune` is advisory. One reading for W0-05: "trigger a removal" is taken as the two-live-identities backstop; for the no-record backstop (RU1) an expired record still counts as "a record names this identity".
+28. **`release.md` R6, rating part 3 and `n`.** Part 3 of a rating deck now unlocks with part 0, but R6 still says parts 1–3 unlock on "the part's own `n`"; the reference keeps `n` in the rating part 3 record and ignores it for the unlock. If `n` should be absent for a rating part 3, R6 should say so. For W0-01.
+29. **`release.md` Vectors, "a rating release with part 3 unlocked at nHat 400 and cells filtered at 300"** names no id (emitted as `release-valid-rating-nhat-400`) and the cell filter is table content under the Parquet gap; the vector fixes `unlocked` and the part record only. For W0-01.
+30. **`services.md` logging rows.** Superseded by L-6 (item 26): per-deck counts for `malformed`, `too_large`, `rejected`, `forbidden` only, `closed` and `conflict` at no grain, intake paths identified by `/ballots`. Resolved with 26.
+31. **`services.md` V-4** gives one rule for "an item that does not open", so every open failure (other request, other session ID, other item name, other verifier) is rule V-4 with code `rejected`; the detail string `evidence_mismatch` is the reference's. For W0-07 to name the detail or confirm none.
+32. **`services.md` O-6** fixes membership and the re-pick rule; the order of the set (shipped relays first, then the context's in manifest order), the kind vocabulary and the random stream are reference devices and the vectors say so. `o6-all-failed` ("waits, never direct") is the reference's reading of the last sentence. For W0-07.
+33. **`chat.md` §2.5 step 4 and §16.** "Pending" is defined on delivery-service receive time while order is by sequence number (the reference uses both as written); a retried ticket's own record is "usable" within `JOIN_PENDING` of its receive time and a fresh record is sent after that; the §16 row says the backstop fetch is "600 seconds past the Add" while the rule says "at least" (the reference removes at exactly 600 s and keeps at 599 s). For W0-05 to confirm the three readings.
 
 ## Interop milestone
 

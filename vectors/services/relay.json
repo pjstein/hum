@@ -1,7 +1,7 @@
 {
  "spec": "services",
  "file": "relay",
- "notes": "O-3 padding buckets, O-5 relay authority, bootstrap witnesses.",
+ "notes": "O-3 padding buckets, O-5 relay authority, O-6 relay selection, bootstrap gateway configurations and witnesses. O-6 picks come from a fixed stream, SHA-256(hum/relay-pick/1 \u2016 seed \u2016 uint32be(counter)) read as 32-bit draws with rejection sampling over the set in the order given (shipped relays, then the context's): a reference device so the vectors are deterministic, not a protocol rule; a phone uses its CSPRNG and only the set membership and the re-pick rule are normative.",
  "cases": [
   {
    "id": "services/relay/padding-001",
@@ -146,7 +146,365 @@
    }
   },
   {
-   "id": "services/relay/bootstrap-accept-013",
+   "id": "services/relay/bootstrap-gateway-config-one-rotation-old-013",
+   "description": "A first request made with the shipped gateway key configuration one rotation old: the gateway still decrypts under every configuration shipped in a supported build, and the phone then replaces the shipped bundle with the lineage's latest version",
+   "section": "OHTTP relay",
+   "inputs": {
+    "shipped_key_id": 1,
+    "gateway_supported_key_ids": [
+     1,
+     2
+    ],
+    "current_key_id": 2
+   },
+   "expected": {
+    "accepted": true,
+    "phone_refreshes_bundle": true,
+    "uses_key_id_after": 2
+   }
+  },
+  {
+   "id": "services/relay/bootstrap-gateway-config-unsupported-014",
+   "description": "A shipped configuration from a build no longer supported: the gateway does not decrypt it (structural: the key configuration id is what is compared)",
+   "section": "OHTTP relay",
+   "inputs": {
+    "shipped_key_id": 0,
+    "gateway_supported_key_ids": [
+     1,
+     2
+    ],
+    "current_key_id": 2
+   },
+   "rejection": {
+    "step": null,
+    "check": "gateway-config",
+    "reason": "unsupported_key_config"
+   }
+  },
+  {
+   "id": "services/relay/o6-delivery-fetch-015",
+   "description": "A fetch from context A's delivery service: the set is the shipped relays plus A's relay",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "delivery",
+    "context_relays": [
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "stream_seed": "ed7b344411eeafe17d4024c4c31972263dbdb172084ef35ce11c6ba0480be226",
+    "stream_label": "hum/relay-pick/1",
+    "stream_counter_before": 0
+   },
+   "expected": {
+    "relay_set": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25",
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "context_relay_allowed": true,
+    "draws": [
+     4233683177
+    ],
+    "chosen": "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+   }
+  },
+  {
+   "id": "services/relay/o6-ballot-016",
+   "description": "A ballot of context A: shipped relays only; a ballot frame's size is recognisable",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "ballot",
+    "context_relays": [
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "stream_seed": "ed7b344411eeafe17d4024c4c31972263dbdb172084ef35ce11c6ba0480be226",
+    "stream_label": "hum/relay-pick/1",
+    "stream_counter_before": 1
+   },
+   "expected": {
+    "relay_set": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "context_relay_allowed": false,
+    "draws": [
+     3191070471
+    ],
+    "chosen": "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+   }
+  },
+  {
+   "id": "services/relay/o6-deck-status-poll-017",
+   "description": "A deck status poll of context A: every request to an aggregator uses the shipped relays only (12.13)",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "deck-status",
+    "context_relays": [
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "stream_seed": "ed7b344411eeafe17d4024c4c31972263dbdb172084ef35ce11c6ba0480be226",
+    "stream_label": "hum/relay-pick/1",
+    "stream_counter_before": 2
+   },
+   "expected": {
+    "relay_set": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "context_relay_allowed": false,
+    "draws": [
+     1034460602
+    ],
+    "chosen": "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4"
+   }
+  },
+  {
+   "id": "services/relay/o6-authored-text-blob-put-018",
+   "description": "The put of an unsigned issue-map object's text blob to A's store: shipped relays only, so A's relay never sees an address write to the store seconds before the object appears in the log (12.13)",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "store-put-authored-text",
+    "context_relays": [
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "stream_seed": "ed7b344411eeafe17d4024c4c31972263dbdb172084ef35ce11c6ba0480be226",
+    "stream_label": "hum/relay-pick/1",
+    "stream_counter_before": 3
+   },
+   "expected": {
+    "relay_set": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "context_relay_allowed": false,
+    "draws": [
+     688377448
+    ],
+    "chosen": "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4"
+   }
+  },
+  {
+   "id": "services/relay/o6-attachment-put-019",
+   "description": "An ordinary attachment put to A's store: the set includes A's relay",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "store",
+    "context_relays": [
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "stream_seed": "ed7b344411eeafe17d4024c4c31972263dbdb172084ef35ce11c6ba0480be226",
+    "stream_label": "hum/relay-pick/1",
+    "stream_counter_before": 4
+   },
+   "expected": {
+    "relay_set": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25",
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "context_relay_allowed": true,
+    "draws": [
+     3897547748
+    ],
+    "chosen": "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+   }
+  },
+  {
+   "id": "services/relay/o6-log-submit-020",
+   "description": "An unsigned object's POST /v1/log/add: every submission to a log uses the shipped relays only (12.13)",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "log-submit",
+    "context_relays": [
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "stream_seed": "ed7b344411eeafe17d4024c4c31972263dbdb172084ef35ce11c6ba0480be226",
+    "stream_label": "hum/relay-pick/1",
+    "stream_counter_before": 5
+   },
+   "expected": {
+    "relay_set": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "context_relay_allowed": false,
+    "draws": [
+     1336860384
+    ],
+    "chosen": "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4"
+   }
+  },
+  {
+   "id": "services/relay/o6-log-read-021",
+   "description": "A lineage read from A's log for A's own lineage: the set includes A's relay",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "log-read",
+    "context_relays": [
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "stream_seed": "ed7b344411eeafe17d4024c4c31972263dbdb172084ef35ce11c6ba0480be226",
+    "stream_label": "hum/relay-pick/1",
+    "stream_counter_before": 6
+   },
+   "expected": {
+    "relay_set": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25",
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "context_relay_allowed": true,
+    "draws": [
+     2851063009
+    ],
+    "chosen": "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+   }
+  },
+  {
+   "id": "services/relay/o6-second-context-022",
+   "description": "A delivery fetch of context B: the set is the shipped relays plus B's relay, never A's",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "delivery",
+    "context_relays": [
+     "017fff6918adbd723d769992cba6ea775cad0b8084e7269b678867ecbb919f28f4"
+    ],
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "stream_seed": "ed7b344411eeafe17d4024c4c31972263dbdb172084ef35ce11c6ba0480be226",
+    "stream_label": "hum/relay-pick/1",
+    "stream_counter_before": 7
+   },
+   "expected": {
+    "relay_set": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25",
+     "017fff6918adbd723d769992cba6ea775cad0b8084e7269b678867ecbb919f28f4"
+    ],
+    "context_relay_allowed": true,
+    "draws": [
+     859421692
+    ],
+    "chosen": "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+   }
+  },
+  {
+   "id": "services/relay/o6-no-context-023",
+   "description": "A request that belongs to no context (a verifier manifest, the gallery): shipped relays only",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "no-context",
+    "context_relays": [],
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "stream_seed": "ed7b344411eeafe17d4024c4c31972263dbdb172084ef35ce11c6ba0480be226",
+    "stream_label": "hum/relay-pick/1",
+    "stream_counter_before": 8
+   },
+   "expected": {
+    "relay_set": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "context_relay_allowed": false,
+    "draws": [
+     3111763218
+    ],
+    "chosen": "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4"
+   }
+  },
+  {
+   "id": "services/relay/o6-repick-after-failure-024",
+   "description": "The chosen relay for a delivery fetch is unreachable: the next pick is from the rest of the set (never the failed one, never a direct connection)",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "delivery",
+    "context_relays": [
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "stream_seed": "ed7b344411eeafe17d4024c4c31972263dbdb172084ef35ce11c6ba0480be226",
+    "stream_counter_before": 9
+   },
+   "expected": {
+    "relay_set": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25",
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "first_chosen": "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25",
+    "failed": [
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "rest": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "014df24552ee5d724c4bcb72b2ee0d7f0c40a42523347504a8f89327c0394f9802"
+    ],
+    "draws": [
+     3030454765,
+     179804596
+    ],
+    "chosen": "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4"
+   }
+  },
+  {
+   "id": "services/relay/o6-all-failed-025",
+   "description": "Every relay in the set has failed: no pick; the phone waits and never connects directly",
+   "section": "OHTTP relay",
+   "inputs": {
+    "request_kind": "ballot",
+    "shipped_relays": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ],
+    "failed": [
+     "0123281cd288fe3a95b821ca6d3e276096332628a5a447b2d2b63f2ce15d650bb4",
+     "01162e4ed107ff277ef43e90ce246719c3615b37f826442434aa733cd6b3a3bf25"
+    ]
+   },
+   "rejection": {
+    "step": null,
+    "check": "relay-pick",
+    "rule": "O-6",
+    "reason": "no relay left; wait, never direct"
+   }
+  },
+  {
+   "id": "services/relay/bootstrap-accept-026",
    "description": "First checkpoint cosigned by both shipped constant keys",
    "section": "Log and ledger",
    "inputs": {
@@ -164,7 +522,7 @@
    }
   },
   {
-   "id": "services/relay/bootstrap-reject-outside-constants-014",
+   "id": "services/relay/bootstrap-reject-outside-constants-027",
    "description": "Cosigned by two keys outside the constants",
    "section": "Log and ledger",
    "inputs": {
@@ -184,7 +542,7 @@
    }
   },
   {
-   "id": "services/relay/bootstrap-reject-one-constant-015",
+   "id": "services/relay/bootstrap-reject-one-constant-028",
    "description": "Cosigned by one constant key only",
    "section": "Log and ledger",
    "inputs": {

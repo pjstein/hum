@@ -145,8 +145,10 @@ def unframe(
     if not isinstance(ballot[PAYLOAD], dict):
         raise BallotError("B1", "malformed", "payload must be a map")
     pres = ballot[PRESENTATION]
-    if not isinstance(pres, bytes) or len(pres) > PRESENTATION_MAX:
-        raise BallotError("B1", "malformed", "presentation over 8 KiB or not bytes")
+    if not isinstance(pres, bytes):
+        raise BallotError("B1", "malformed", "presentation must be bytes")
+    if len(pres) > PRESENTATION_MAX:
+        raise BallotError("B1", "too_large", "presentation over 8 KiB")
     if deck_versions is not None and ballot[DECK] not in deck_versions:
         raise BallotError("B1", "malformed", "deck is not a version this endpoint serves")
     return ballot

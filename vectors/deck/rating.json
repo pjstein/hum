@@ -14,18 +14,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a05840bb7de0ebda6f6829ebf87c30c1c7f53b700a89f6e3c92628f99271f2a5088973332022ac42ccff68a77c5e5ade0a74f31feef75933e60e282e359f5ab61df6008347a2012704426232a058404dabf1b25fd4559203621f27bace957c51a227307da77c78821da602b5b3376ebca1953e2e4dc091de3a5121177249868255d89c701db2eb4225a0781ac78b00",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 392,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 401,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "71d9f9ab47d02407a8313553fce1a675402f11d806b5f47c8cbebcdd0017b47b",
-       "3f8cb153989fd429c3ece0aaeddead4657e46b259d29dadeb122532ce560247c",
-       "f9723d24ebffc50bc56146179f6a741d02c3284c34837a1b54404e25ce6f1ce0",
-       "f872b61c0a248da30721f822fdf60c4056150280715fb9dca6039cc5b993c9ff",
-       "665917ae574bde79fc477ef9219dd690c663e175182cb836a0cd651284d9e952",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "e7671aa7bed226ccfcfe476b3f02f95b92473e68dfa8da8523c6183df2a6c73f",
+       "2dd74ee9f7f88af68b34abf0a671674212e493456367daeba0a9bffdbf85846f",
+       "d599234986841ca2ce2f7030a6a744c0e3b924964f8a3c2d1a6327663c96b5e9",
+       "21f66997c8638bc353d467a4b20b57d04c6c2977facf65e496df3e3eeed1528e",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -332,18 +332,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a0584071c2e12a88b9dc02bc985d594a7705911a8c8523ee16e5a3f39c6f7df3fd0245d162ee0be30e5951a1efedf07f7ae1bf2631cd4761cd2d7f1181635d18c18a018347a2012704426232a05840a37157d6f140b93c01b48836cfe9193bb4f746e114b25b9c3c7d0041ef11570f0b556aa353b532e9f900c8e8ccb3eb1519ffc93d65a55f24cbf22081190d4e0e",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 393,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 402,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "77298a9395db2d219268398dda4940a9bba0d0d102d5cd02112c620802c14786",
-       "3f8cb153989fd429c3ece0aaeddead4657e46b259d29dadeb122532ce560247c",
-       "f9723d24ebffc50bc56146179f6a741d02c3284c34837a1b54404e25ce6f1ce0",
-       "f872b61c0a248da30721f822fdf60c4056150280715fb9dca6039cc5b993c9ff",
-       "665917ae574bde79fc477ef9219dd690c663e175182cb836a0cd651284d9e952",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "43fbbcc42e5f914156a8bca4805cf0a3c430f026c22a962a94a42da998fb1cd7",
+       "31534dd0f2f54cd599181aa5682a8d1749185f39dd350ab18b3de5f510bed4de",
+       "d599234986841ca2ce2f7030a6a744c0e3b924964f8a3c2d1a6327663c96b5e9",
+       "21f66997c8638bc353d467a4b20b57d04c6c2977facf65e496df3e3eeed1528e",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -664,18 +664,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a05840e14e745a24773f8295af390aa35ef2d4f94bdc8824d5442014c65d828a4f51c4b38e044bee6414d152fef91855021250d1d419ecdec6b00919cae7bfc691f7038347a2012704426232a05840c76d16a4c294e384c380e84b72356af68855714cc4d0f48cc873d81008fdf2cdc1e0027e29a87ef99084eedec03d68426deda92b6be0c4985772236a0f175304",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 394,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 403,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "83f97be54c20cda6334403abd06c15894dfa3a7a49ee1308311874832b1c799a",
-       "a4b0d9ffe3117d88ad6c87dcb9b025b7307dbad1a6998686bbf7bdeb14843deb",
-       "f9723d24ebffc50bc56146179f6a741d02c3284c34837a1b54404e25ce6f1ce0",
-       "f872b61c0a248da30721f822fdf60c4056150280715fb9dca6039cc5b993c9ff",
-       "665917ae574bde79fc477ef9219dd690c663e175182cb836a0cd651284d9e952",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "71d9f9ab47d02407a8313553fce1a675402f11d806b5f47c8cbebcdd0017b47b",
+       "31534dd0f2f54cd599181aa5682a8d1749185f39dd350ab18b3de5f510bed4de",
+       "d599234986841ca2ce2f7030a6a744c0e3b924964f8a3c2d1a6327663c96b5e9",
+       "21f66997c8638bc353d467a4b20b57d04c6c2977facf65e496df3e3eeed1528e",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -975,18 +975,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a05840d29c5a62ca360652194fa4ac4f45ec6d6253a56ada0f029ee5bb06797575e11848c5d2cd1a4cbc33a8b15747fd9756dd4f98d3e29460747e36f2935e0ec1fe018347a2012704426232a058409dafda67289c2acce54144b47f1a3d26bbf6bd30a64830a7921ba667c0333343cc4057e354a4ee42adac2e7d7a68f22252d48a16f03b964d472f7cdcac9b700e",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 395,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 404,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "43fbbcc42e5f914156a8bca4805cf0a3c430f026c22a962a94a42da998fb1cd7",
-       "a4b0d9ffe3117d88ad6c87dcb9b025b7307dbad1a6998686bbf7bdeb14843deb",
-       "f9723d24ebffc50bc56146179f6a741d02c3284c34837a1b54404e25ce6f1ce0",
-       "f872b61c0a248da30721f822fdf60c4056150280715fb9dca6039cc5b993c9ff",
-       "665917ae574bde79fc477ef9219dd690c663e175182cb836a0cd651284d9e952",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "d2146e80a276e42c7b9e0a212fde7c1248b2f874f462e538c0d9f2ac46b7dcfb",
+       "b0a9c97047a2ec2fb414af2c56508a876b2e0618511a6496192cc2e0713cb83a",
+       "76565d2a18d63ca0d4eb9be214437d7f4545d4522d9b316e4d6515a50609f8ec",
+       "21f66997c8638bc353d467a4b20b57d04c6c2977facf65e496df3e3eeed1528e",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -1293,18 +1293,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a0584067ced9e4768a188bd7800d0114b50ba41ec92f168cc8e61cc90b10465de9b2ec4e18143ac3976bdd929bd4e1bfd83baf22f447083f9da23df705da9e2678ff0f8347a2012704426232a05840e2c52c3e33b34d7086e659db32db67d0b72338de30e94433b9facb74a485bd44d3639257c1f45067cd02aba0b93a646db30add7a812b5b7931b9e8474dd53f0e",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 396,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 405,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "e9725e994b5e10389b6e7dde857dd053faa0adc3be5412fc3f34f23bcd71ec0e",
-       "3c2a5f589318ff9915544f6d64207845959aed0d6903d045302561bb95baa9a7",
-       "0d33f8f244b6b050fce2c66f532b94d6561d4430def2172fdb530934c2f08715",
-       "f872b61c0a248da30721f822fdf60c4056150280715fb9dca6039cc5b993c9ff",
-       "665917ae574bde79fc477ef9219dd690c663e175182cb836a0cd651284d9e952",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "83f97be54c20cda6334403abd06c15894dfa3a7a49ee1308311874832b1c799a",
+       "b0a9c97047a2ec2fb414af2c56508a876b2e0618511a6496192cc2e0713cb83a",
+       "76565d2a18d63ca0d4eb9be214437d7f4545d4522d9b316e4d6515a50609f8ec",
+       "21f66997c8638bc353d467a4b20b57d04c6c2977facf65e496df3e3eeed1528e",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -1611,18 +1611,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a058400f90da35d6913c73aa471d67e3bc8a80394c7e7562a228eb2e43e3de2a414f5a78f3ea82ef98fde2968a8d3e4a151efe592d5332c5885d6739d70e37280e000f8347a2012704426232a05840eccf4c5f924d9b9b8e6e876539d57be8f565e1670aefc0ac0e10ff781943f44e737556bb532add786f0a5ffdeb96c24f25974376211a52fa620344e970a1e00e",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 397,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 406,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "d2146e80a276e42c7b9e0a212fde7c1248b2f874f462e538c0d9f2ac46b7dcfb",
-       "3c2a5f589318ff9915544f6d64207845959aed0d6903d045302561bb95baa9a7",
-       "0d33f8f244b6b050fce2c66f532b94d6561d4430def2172fdb530934c2f08715",
-       "f872b61c0a248da30721f822fdf60c4056150280715fb9dca6039cc5b993c9ff",
-       "665917ae574bde79fc477ef9219dd690c663e175182cb836a0cd651284d9e952",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "593dc63caabd5ebfca5bb56c435a0611994b40fe37de97aa4fc7907ab5971a09",
+       "399e52dfc6e7472b827c06158f90ecc89432dd1183d8266190c79feab8bba64b",
+       "76565d2a18d63ca0d4eb9be214437d7f4545d4522d9b316e4d6515a50609f8ec",
+       "21f66997c8638bc353d467a4b20b57d04c6c2977facf65e496df3e3eeed1528e",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -1753,18 +1753,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a058401f03090ffe2450925bc060e67228a6e9c15b42e6eec3abc93035af24e61a44e93ef81fbc68b983ee374f15a7b66e801b3933bcd45deea6a25b90e414696d3f0d8347a2012704426232a058404fc22f904b1fc960ec04dad3d727f9a6ca9158cd209beafeb6337752c5c699a9f5793a2f94fcf3c19119fa91d71cfb108e7da3d47640be57f584b631d5a82f0a",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 398,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 407,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "5622767ba8b6569281b5c3605206d72881bbd88d47aae8289c268d5f3091c51f",
-       "952a16b6c27943fcd47983526f3ab32bb4cd24aad911077d42a89b3f6c7d5dd0",
-       "0d33f8f244b6b050fce2c66f532b94d6561d4430def2172fdb530934c2f08715",
-       "f872b61c0a248da30721f822fdf60c4056150280715fb9dca6039cc5b993c9ff",
-       "665917ae574bde79fc477ef9219dd690c663e175182cb836a0cd651284d9e952",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "e9725e994b5e10389b6e7dde857dd053faa0adc3be5412fc3f34f23bcd71ec0e",
+       "399e52dfc6e7472b827c06158f90ecc89432dd1183d8266190c79feab8bba64b",
+       "76565d2a18d63ca0d4eb9be214437d7f4545d4522d9b316e4d6515a50609f8ec",
+       "21f66997c8638bc353d467a4b20b57d04c6c2977facf65e496df3e3eeed1528e",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -1895,18 +1895,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a0584035b57c83c34d0964997086f55a68b2528453d5b3b2701cf4d5c647ba538698a0dc3417a73ededff3b5b3dbc39bfb04821ece7aca95620371ac92460fd1501a018347a2012704426232a0584098e0c864b91938f1098d67b57de0b0d4544ae1c882b2eeb2c5fab7e275febefbfd0ba8e140bc3329562a1e99025b3db4d00d12b75a5dc2919fd71c4edf3a480a",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 399,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 408,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "593dc63caabd5ebfca5bb56c435a0611994b40fe37de97aa4fc7907ab5971a09",
-       "952a16b6c27943fcd47983526f3ab32bb4cd24aad911077d42a89b3f6c7d5dd0",
-       "0d33f8f244b6b050fce2c66f532b94d6561d4430def2172fdb530934c2f08715",
-       "f872b61c0a248da30721f822fdf60c4056150280715fb9dca6039cc5b993c9ff",
-       "665917ae574bde79fc477ef9219dd690c663e175182cb836a0cd651284d9e952",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "a2d5a13ae7c5e33fb5291d9fa2db9b25a89864a2a1ac37ef59b9db6a2ea6ab82",
+       "56bd67a108fe62c7c9b514af6b15b84c926fc4994606480baf5af292bb0fa0fc",
+       "0141dffb6597641adb7b3cee41fe45c0323f371bbecd159564e9bcc43be0dc12",
+       "1623c1ef1e07a23f3343055b4d540a9f7a0376f5ef832d5d92d5e0a14c1271c1",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -2213,18 +2213,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a0584058f36435401303ef5bebc6c563d1a306774ee3a3eaa1f02aa03943b906437a153e830b2aeba9564a8ea2c04d618d47452d30ed1719f9dcce013301ddc1d2570c8347a2012704426232a05840a61b304d4fd9cb72ffda56053258a2e5c269dc2d2244aaaa530127f57526e2201eb466c642ad63e6e7608cdb422325d3413fcbdbe6b3ac5923d4724167ba3b01",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 400,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 409,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "1167d2ca553a3e17fd591397f3de320886919278daf940e8690ea7e5b5e508a5",
-       "8514b7e8507e4da4c9b58f5c4e1294a9a5c959b1bb8e3814bcb55e71f2f763bc",
-       "db397a010cf31cf56e091f7c1e9237956c97d866dd9f63f74ad5ea1d993f20ad",
-       "cc2f724d0562a5197c12d545d077bcbd7e3695708e631fa067eb9a3fd4a2fddf",
-       "d3a427ec966a8d8640050054563ff02999fbbc9493d171c3f81a4502d1732174",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "5622767ba8b6569281b5c3605206d72881bbd88d47aae8289c268d5f3091c51f",
+       "56bd67a108fe62c7c9b514af6b15b84c926fc4994606480baf5af292bb0fa0fc",
+       "0141dffb6597641adb7b3cee41fe45c0323f371bbecd159564e9bcc43be0dc12",
+       "1623c1ef1e07a23f3343055b4d540a9f7a0376f5ef832d5d92d5e0a14c1271c1",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -2515,18 +2515,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a05840b68a1147829b9bfd7dd6402b578701de17ecb8ad67858aa32c8f5e6d43bdc53a4d8501ce4bc24b596b2e428ec92fae0d839c1208eb9b394d725bd0202a27c20d8347a2012704426232a05840b58ae8aa7100ab457b691c85323442c07039734b1ba7af0a6750a0c4e41c613a98ed3352c6281c4d08408ff30dfd6462a9386e0fe6c6fb3a6cfdf025230d4403",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 401,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 410,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "a2d5a13ae7c5e33fb5291d9fa2db9b25a89864a2a1ac37ef59b9db6a2ea6ab82",
-       "8514b7e8507e4da4c9b58f5c4e1294a9a5c959b1bb8e3814bcb55e71f2f763bc",
-       "db397a010cf31cf56e091f7c1e9237956c97d866dd9f63f74ad5ea1d993f20ad",
-       "cc2f724d0562a5197c12d545d077bcbd7e3695708e631fa067eb9a3fd4a2fddf",
-       "d3a427ec966a8d8640050054563ff02999fbbc9493d171c3f81a4502d1732174",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "092f7c42c0e27d6e2db2f39404384d0f64fd9673e267a2edb1119b66a812e309",
+       "f98393bebe4925ed5c8b3ba54748ef4c81699a50130689dcef9b35f5a5e79db4",
+       "0141dffb6597641adb7b3cee41fe45c0323f371bbecd159564e9bcc43be0dc12",
+       "1623c1ef1e07a23f3343055b4d540a9f7a0376f5ef832d5d92d5e0a14c1271c1",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -2849,18 +2849,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a058403390a4d670a284a7b0849da83b500eead2b947c7e71ccd4f1a3a36dcb93f7b786117f791a55e6a1ec77ea24decc9b92a5025c9b85c1a4ced0338a0f13fae1a018347a2012704426232a058406497a141be179f923230fad887d3b29c6bc5b04c231275f16a065d2eb48026f1cfdd1ab3c1b8685c465456529afc03439678bbda4b0061f85b1c40dfadbab00f",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 402,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 411,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "46dfd25667296f710145b783379e15a5e39e178dd16dc485bce414ab76e90e21",
-       "2709254269d79503832bb7add796093242f376de2736a3dc57d122a870ef0bce",
-       "db397a010cf31cf56e091f7c1e9237956c97d866dd9f63f74ad5ea1d993f20ad",
-       "cc2f724d0562a5197c12d545d077bcbd7e3695708e631fa067eb9a3fd4a2fddf",
-       "d3a427ec966a8d8640050054563ff02999fbbc9493d171c3f81a4502d1732174",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "1167d2ca553a3e17fd591397f3de320886919278daf940e8690ea7e5b5e508a5",
+       "f98393bebe4925ed5c8b3ba54748ef4c81699a50130689dcef9b35f5a5e79db4",
+       "0141dffb6597641adb7b3cee41fe45c0323f371bbecd159564e9bcc43be0dc12",
+       "1623c1ef1e07a23f3343055b4d540a9f7a0376f5ef832d5d92d5e0a14c1271c1",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -3167,18 +3167,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a058407e7e51f8e26c59887a52c097152c8f6b3df5bb748517154232aa86ef432b4047008edc9e2a1919bf77d0089e8ff108b15ecd32e69364dfd9b85ecbdfa22f9f088347a2012704426232a05840a9c5ee4072cbee96533c0feb5b20fc2e74cc598c00266ac8cde242cbbe4806f103c3fe461b0fa820e0537d7869e56360ae45adcb5f0689530039ab20bc175201",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 403,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 412,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "092f7c42c0e27d6e2db2f39404384d0f64fd9673e267a2edb1119b66a812e309",
-       "2709254269d79503832bb7add796093242f376de2736a3dc57d122a870ef0bce",
-       "db397a010cf31cf56e091f7c1e9237956c97d866dd9f63f74ad5ea1d993f20ad",
-       "cc2f724d0562a5197c12d545d077bcbd7e3695708e631fa067eb9a3fd4a2fddf",
-       "d3a427ec966a8d8640050054563ff02999fbbc9493d171c3f81a4502d1732174",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "ed83c7d25041edc8e48da2e9d38bd3280f24cc6aafd2128d752d80d4be57ffbc",
+       "8e9dfbfa7448039d51cae6d6bc4db377b726fa3f008349fc916f808a461e6095",
+       "a3bc466d37664f8f1193f9eb9340e5b30740d43de4b37464d8dac09b89d30611",
+       "1623c1ef1e07a23f3343055b4d540a9f7a0376f5ef832d5d92d5e0a14c1271c1",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -3485,18 +3485,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a058407956ef0dfbcd517bd9526eda4aef892210401a6ecd82fb5b3c6dc90911889246748c30ad8d6c94199f53ab910d754036403e966ae642dbd1a3f92c8a755c5c058347a2012704426232a05840606be2217aa72aea5b5f4f94b3f8b29787a32e358314795113650bf74514e078134e9a2173728bca3882f613662767c404ca0a6204bd67e255721bebc10df20e",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 404,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 413,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "944f144abef8d7393c8ef1aa6ac875dffe45981c4105bdbd02690b82efb5e739",
-       "e981e836fcb55186a0c7f7af0c41167958e1efe7828ad3eef3ec2dff15aef304",
-       "0e95738e7d4c908f3f94258e79c92d32435c6b52ff0858e700f241f7fdd49811",
-       "cc2f724d0562a5197c12d545d077bcbd7e3695708e631fa067eb9a3fd4a2fddf",
-       "d3a427ec966a8d8640050054563ff02999fbbc9493d171c3f81a4502d1732174",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "46dfd25667296f710145b783379e15a5e39e178dd16dc485bce414ab76e90e21",
+       "8e9dfbfa7448039d51cae6d6bc4db377b726fa3f008349fc916f808a461e6095",
+       "a3bc466d37664f8f1193f9eb9340e5b30740d43de4b37464d8dac09b89d30611",
+       "1623c1ef1e07a23f3343055b4d540a9f7a0376f5ef832d5d92d5e0a14c1271c1",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -3927,18 +3927,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a058405d619f8bb1edd12ad530750879efcb0e1c2787ee8b508a0fe4984ded5aecc233c87ecb6d2c60fd7d91dec60a224e632a7acaf5627ef3107c04384c9c34f0f7088347a2012704426232a05840f750b44ab45048627cc8be69d268a1a5c9e4eb78ce7be7ca1ed6baaa04a477c72be0e30e0444a19760c63a6b1f0a9149e02d1731301a3dfd22a4d2597868e70c",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 405,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 414,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "ed83c7d25041edc8e48da2e9d38bd3280f24cc6aafd2128d752d80d4be57ffbc",
-       "e981e836fcb55186a0c7f7af0c41167958e1efe7828ad3eef3ec2dff15aef304",
-       "0e95738e7d4c908f3f94258e79c92d32435c6b52ff0858e700f241f7fdd49811",
-       "cc2f724d0562a5197c12d545d077bcbd7e3695708e631fa067eb9a3fd4a2fddf",
-       "d3a427ec966a8d8640050054563ff02999fbbc9493d171c3f81a4502d1732174",
-       "2247df2a3bf8b14d974cecc3c479fcd653512590c54d01ad99dc6cd41801a0cd",
-       "167d924361ab1f213ad0495089f4a95232a9ae0b766fca517139d98205c4451c",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "60b36779d204ef2a56e99d27346121c4d076a29fba8c963e3fb23c0d925cccad",
+       "d516b121277177fa5cc7eec82d0bbc92d952fa6ce2003e206cf6516ae01c5d6e",
+       "a3bc466d37664f8f1193f9eb9340e5b30740d43de4b37464d8dac09b89d30611",
+       "1623c1ef1e07a23f3343055b4d540a9f7a0376f5ef832d5d92d5e0a14c1271c1",
+       "0179720fdf5761e288b0c06c05be9ccdce10795a5d9f5298fc11f40c199a598b",
+       "fa93ea283dd4d722e8bfbc1bd30c2374a48606e749376e0d4f7a401c0cf3c27d",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },
@@ -4235,7 +4235,1307 @@
    }
   },
   {
-   "id": "deck/rating/deck-invalid-D15-61-cards-015",
+   "id": "deck/rating/deck-invalid-D10-minvoters-under-floor-015",
+   "description": "a rating deck with minVoters 100 in a context whose floor is 300 (D10 fires before D15: minVoters below the context floor)",
+   "section": "Validation rules (verification step 10 for deck)",
+   "inputs": {
+    "bundle": {
+     "cid": "017f895c5a80fef50ecd5d5140165b0a30cf90c935e249ee8a7106dd2d6de875fe",
+     "envelope": "a8000101646465636b02582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30401061a6afd22c0071a6b09004008ae66636172642f305821019014f32902a172ac307f8942ccc1c5d40f8670c39fbab1e37b292ccf37c4268c66636172642f315821016d06f7a23096e16ead30fe0e71c351069fe03b5f60b134e6cb3f0c17f8f52ada66636172642f325821012878b6444c867d2ad60657a97bb60d437bbb49dcab00e1ff7d1ca59291d4982f66636172642f33582101c580593e46b5f8397c64b71f4635c262cc9494f56916968e393566c4fedfc32d66636172642f34582101459a7b4a017652751f103c6e81b6d066675f6a0854336c9689401db7c9686a8466636172642f3558210165756f38d0b38148cd20b2f48b1f0d30c5e3f4d8fde9cc6b67403fad5dab957266636172642f365821013f38edce003de8e31f564d4b41e190a5fa0b14f14bf77d6cb5479e7a2cbdbad566636172642f37582101a1c7aef94224fe034d6aec49c4917ba2dee20b7d8b72396cde2bbcdc1e32bffd66636172642f3858210112f9f9fd113d7b1c50aac21b616cfacba248a04dd28d6f143ce248b4911d267466636172642f395821014902cbcf833a878700aa73482050d38ac7a64dbdd16d4fe6c63a0926e03051a966736f7572636558210196e0b3a0562c98cea51835cb59223e64d01705c875514e98065f15b7836b534467636172642f31305821019813f2c1e7700f3542b8dcfe2502f344ab37d6ea020f0474927f9766ca19209767636172642f3131582101cf1ef07a6eb788199e9d392b4cd39b6fc60f4e161b5e1e41189b23a5ae527f2d67636f6e74657874582101f0b4cf46d8d66c7313d584e6d599f7e89aca6557e71fa1da9a976c783f125cc009a8006e466169722072656164696e67733f011a6afbd140021a6b050bc0038168466169726e657373048ca3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a300020100020005a5008201140182011a000f424002a30082131903e8038218391907d0088201190190031407186406000701",
+     "signatures": "d8628440a0f6828347a2012704426231a05840272d7a8fa632426c5e2f6bb93dcf39c02ceb4fbd00970d5cebea9e4d571b351dd4663d62041a2998fbcc8923ab2bdfed24a554aa7404d58d08626b692d4b460a8347a2012704426232a05840dca3547a5325821cd486989bcd0a3c0b1b5490f42b1e9e408f0d6758a3d7def5f7d481f7a59d8f1536f21bb3e568a2eb3ef484b0c22ffef579d1f7e1fc530704",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 441,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
+      "path": [
+       "d28c79039cca3470abefeb1c63b41c5751597294e4b6dc98a66ebc701f054d17",
+       "1d3f06b8158b4c956538ce8e2d4141deb15952de90f57f0481606d6db2c7e67c",
+       "5d53bd6abc02e1892ca164e1f39571f1a4577321a83c56f9a60c58fd57479e88",
+       "fe44fec8d9486ad1c1bb43ca2b88e2e5c0cb7b62f4c0a14663710c8bb13bc870",
+       "25ea9cbed0e23652cd3a5af85a29b0a20a633e800dbeb179638ffb82abc4ad72",
+       "4b04f96312822adad4326c97c767e2378418a7172b4383cdb910e01527f235ec",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       "Fair readings?"
+      ],
+      [
+       1,
+       1794888000
+      ],
+      [
+       2,
+       1795492800
+      ],
+      [
+       3,
+       [
+        "Fairness"
+       ]
+      ],
+      [
+       4,
+       [
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           20
+          ]
+         ],
+         [
+          1,
+          [
+           1,
+           1000000
+          ]
+         ],
+         [
+          2,
+          {
+           "map": [
+            [
+             0,
+             [
+              19,
+              1000
+             ]
+            ],
+            [
+             3,
+             [
+              57,
+              2000
+             ]
+            ],
+            [
+             8,
+             [
+              1,
+              400
+             ]
+            ]
+           ]
+          }
+         ],
+         [
+          3,
+          20
+         ],
+         [
+          7,
+          100
+         ]
+        ]
+       }
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       7,
+       1
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "D10",
+    "reason": "D10: minVoters below the context floor"
+   }
+  },
+  {
+   "id": "deck/rating/deck-valid-rating-min-300-016",
+   "description": "a rating deck in a context whose floor is 300, with minVoters 300 and gates[0] 300",
+   "section": "Validation rules (verification step 10 for deck)",
+   "inputs": {
+    "bundle": {
+     "cid": "01b4b54791b86d65afad3eaf250a3df4b63be96a90ea8795c2208df678ef8212c4",
+     "envelope": "a8000101646465636b02582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30401061a6afd22c1071a6b09004008ae66636172642f305821019014f32902a172ac307f8942ccc1c5d40f8670c39fbab1e37b292ccf37c4268c66636172642f315821016d06f7a23096e16ead30fe0e71c351069fe03b5f60b134e6cb3f0c17f8f52ada66636172642f325821012878b6444c867d2ad60657a97bb60d437bbb49dcab00e1ff7d1ca59291d4982f66636172642f33582101c580593e46b5f8397c64b71f4635c262cc9494f56916968e393566c4fedfc32d66636172642f34582101459a7b4a017652751f103c6e81b6d066675f6a0854336c9689401db7c9686a8466636172642f3558210165756f38d0b38148cd20b2f48b1f0d30c5e3f4d8fde9cc6b67403fad5dab957266636172642f365821013f38edce003de8e31f564d4b41e190a5fa0b14f14bf77d6cb5479e7a2cbdbad566636172642f37582101a1c7aef94224fe034d6aec49c4917ba2dee20b7d8b72396cde2bbcdc1e32bffd66636172642f3858210112f9f9fd113d7b1c50aac21b616cfacba248a04dd28d6f143ce248b4911d267466636172642f395821014902cbcf833a878700aa73482050d38ac7a64dbdd16d4fe6c63a0926e03051a966736f7572636558210196e0b3a0562c98cea51835cb59223e64d01705c875514e98065f15b7836b534467636172642f31305821019813f2c1e7700f3542b8dcfe2502f344ab37d6ea020f0474927f9766ca19209767636172642f3131582101cf1ef07a6eb788199e9d392b4cd39b6fc60f4e161b5e1e41189b23a5ae527f2d67636f6e74657874582101f0b4cf46d8d66c7313d584e6d599f7e89aca6557e71fa1da9a976c783f125cc009a8006e466169722072656164696e67733f011a6afbd140021a6b050bc0038168466169726e657373048ca3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a300020100020005a6008201140182011a000f424002a30082131903e8038218391907d008820119019003140719012c08a10019012c06000701",
+     "signatures": "d8628440a0f6828347a2012704426231a058400a7e5576d7066355ee26f52ecff989e3698bb28051c3b0964b51b047f34f82028ef159d5989c2d34aa54717e5637325b231b6892fc92666f9bd33fef83a8d1008347a2012704426232a058408aa9c1409308c8c0612d1cf8d1323b0e3cf390b4c1e3dc86e08a1f5389f6b786fa20c0db7ad6688ba80273297c87842d0a8f87827c49b491e8b0cd6cd32b2501",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 442,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
+      "path": [
+       "69f29686952eb822fbcf2b2c7f8daaace464abe5c21392de7256f05a93604848",
+       "098e9f875f6c3a986b51be99be14dfb167bfa464d794c4bf56c41b0ee625a4cc",
+       "5d53bd6abc02e1892ca164e1f39571f1a4577321a83c56f9a60c58fd57479e88",
+       "fe44fec8d9486ad1c1bb43ca2b88e2e5c0cb7b62f4c0a14663710c8bb13bc870",
+       "25ea9cbed0e23652cd3a5af85a29b0a20a633e800dbeb179638ffb82abc4ad72",
+       "4b04f96312822adad4326c97c767e2378418a7172b4383cdb910e01527f235ec",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       "Fair readings?"
+      ],
+      [
+       1,
+       1794888000
+      ],
+      [
+       2,
+       1795492800
+      ],
+      [
+       3,
+       [
+        "Fairness"
+       ]
+      ],
+      [
+       4,
+       [
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           20
+          ]
+         ],
+         [
+          1,
+          [
+           1,
+           1000000
+          ]
+         ],
+         [
+          2,
+          {
+           "map": [
+            [
+             0,
+             [
+              19,
+              1000
+             ]
+            ],
+            [
+             3,
+             [
+              57,
+              2000
+             ]
+            ],
+            [
+             8,
+             [
+              1,
+              400
+             ]
+            ]
+           ]
+          }
+         ],
+         [
+          3,
+          20
+         ],
+         [
+          7,
+          300
+         ],
+         [
+          8,
+          {
+           "map": [
+            [
+             0,
+             300
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       7,
+       1
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "type": "deck",
+    "version": 1
+   }
+  },
+  {
+   "id": "deck/rating/deck-valid-rating-min-500-017",
+   "description": "a rating deck under a context minimum of 500, with minVoters 500 and gates[0] 500: D11 does not test part 3 (gated per group cell)",
+   "section": "Validation rules (verification step 10 for deck)",
+   "inputs": {
+    "bundle": {
+     "cid": "016eeddc315727dd05563742ae455d2a379978ab9b55eac294b25dc552b4788ac7",
+     "envelope": "a8000101646465636b02582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30401061a6afd22c2071a6b09004008ae66636172642f305821019014f32902a172ac307f8942ccc1c5d40f8670c39fbab1e37b292ccf37c4268c66636172642f315821016d06f7a23096e16ead30fe0e71c351069fe03b5f60b134e6cb3f0c17f8f52ada66636172642f325821012878b6444c867d2ad60657a97bb60d437bbb49dcab00e1ff7d1ca59291d4982f66636172642f33582101c580593e46b5f8397c64b71f4635c262cc9494f56916968e393566c4fedfc32d66636172642f34582101459a7b4a017652751f103c6e81b6d066675f6a0854336c9689401db7c9686a8466636172642f3558210165756f38d0b38148cd20b2f48b1f0d30c5e3f4d8fde9cc6b67403fad5dab957266636172642f365821013f38edce003de8e31f564d4b41e190a5fa0b14f14bf77d6cb5479e7a2cbdbad566636172642f37582101a1c7aef94224fe034d6aec49c4917ba2dee20b7d8b72396cde2bbcdc1e32bffd66636172642f3858210112f9f9fd113d7b1c50aac21b616cfacba248a04dd28d6f143ce248b4911d267466636172642f395821014902cbcf833a878700aa73482050d38ac7a64dbdd16d4fe6c63a0926e03051a966736f7572636558210196e0b3a0562c98cea51835cb59223e64d01705c875514e98065f15b7836b534467636172642f31305821019813f2c1e7700f3542b8dcfe2502f344ab37d6ea020f0474927f9766ca19209767636172642f3131582101cf1ef07a6eb788199e9d392b4cd39b6fc60f4e161b5e1e41189b23a5ae527f2d67636f6e746578745821012022ebf2c95783b3da7c545e563b3a992c90f387d884a6a31c58e3955233449b09a8006e466169722072656164696e67733f011a6afbd140021a6b050bc0038168466169726e657373048ca3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a300020100020005a6008201140182011a000f424002a30082131903e8038218391907d00882011901900314071901f408a1001901f406000701",
+     "signatures": "d8628440a0f6828347a2012704426231a058401b1434554305d460676f9a98dd424d2f212e7672199a612469a17dac17d563abefefba139ddd9bb453c2e2ada11c6c6ccd962487ddd6e9aafcbe97240ca0470c8347a2012704426232a0584047104d7bccc2781e7e42e24fe1780215f111f13e6e814dac92e862db98f85a701f9d6e14e4c024d7852394db83aad0c5bc4594afa0b9610bcb3bf0b853b24906",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 443,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
+      "path": [
+       "a5dc4281797fb6e87633a2fd828f76925929ae3d4cd00b61e014af294c96645c",
+       "098e9f875f6c3a986b51be99be14dfb167bfa464d794c4bf56c41b0ee625a4cc",
+       "5d53bd6abc02e1892ca164e1f39571f1a4577321a83c56f9a60c58fd57479e88",
+       "fe44fec8d9486ad1c1bb43ca2b88e2e5c0cb7b62f4c0a14663710c8bb13bc870",
+       "25ea9cbed0e23652cd3a5af85a29b0a20a633e800dbeb179638ffb82abc4ad72",
+       "4b04f96312822adad4326c97c767e2378418a7172b4383cdb910e01527f235ec",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       "Fair readings?"
+      ],
+      [
+       1,
+       1794888000
+      ],
+      [
+       2,
+       1795492800
+      ],
+      [
+       3,
+       [
+        "Fairness"
+       ]
+      ],
+      [
+       4,
+       [
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           20
+          ]
+         ],
+         [
+          1,
+          [
+           1,
+           1000000
+          ]
+         ],
+         [
+          2,
+          {
+           "map": [
+            [
+             0,
+             [
+              19,
+              1000
+             ]
+            ],
+            [
+             3,
+             [
+              57,
+              2000
+             ]
+            ],
+            [
+             8,
+             [
+              1,
+              400
+             ]
+            ]
+           ]
+          }
+         ],
+         [
+          3,
+          20
+         ],
+         [
+          7,
+          500
+         ],
+         [
+          8,
+          {
+           "map": [
+            [
+             0,
+             500
+            ]
+           ]
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       7,
+       1
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "type": "deck",
+    "version": 1
+   }
+  },
+  {
+   "id": "deck/rating/deck-invalid-D11-gates0-not-raised-018",
+   "description": "minVoters 300 under a floor of 300 without gates[0] raised: D11 (minVoters above the tallies gate) fires before D15",
+   "section": "Validation rules (verification step 10 for deck)",
+   "inputs": {
+    "bundle": {
+     "cid": "01e1b79b3a933905acd6d0cf2de933b68e6455557a280ce8ac03deaf64a779ce3c",
+     "envelope": "a8000101646465636b02582101c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a30401061a6afd22c3071a6b09004008ae66636172642f305821019014f32902a172ac307f8942ccc1c5d40f8670c39fbab1e37b292ccf37c4268c66636172642f315821016d06f7a23096e16ead30fe0e71c351069fe03b5f60b134e6cb3f0c17f8f52ada66636172642f325821012878b6444c867d2ad60657a97bb60d437bbb49dcab00e1ff7d1ca59291d4982f66636172642f33582101c580593e46b5f8397c64b71f4635c262cc9494f56916968e393566c4fedfc32d66636172642f34582101459a7b4a017652751f103c6e81b6d066675f6a0854336c9689401db7c9686a8466636172642f3558210165756f38d0b38148cd20b2f48b1f0d30c5e3f4d8fde9cc6b67403fad5dab957266636172642f365821013f38edce003de8e31f564d4b41e190a5fa0b14f14bf77d6cb5479e7a2cbdbad566636172642f37582101a1c7aef94224fe034d6aec49c4917ba2dee20b7d8b72396cde2bbcdc1e32bffd66636172642f3858210112f9f9fd113d7b1c50aac21b616cfacba248a04dd28d6f143ce248b4911d267466636172642f395821014902cbcf833a878700aa73482050d38ac7a64dbdd16d4fe6c63a0926e03051a966736f7572636558210196e0b3a0562c98cea51835cb59223e64d01705c875514e98065f15b7836b534467636172642f31305821019813f2c1e7700f3542b8dcfe2502f344ab37d6ea020f0474927f9766ca19209767636172642f3131582101cf1ef07a6eb788199e9d392b4cd39b6fc60f4e161b5e1e41189b23a5ae527f2d67636f6e74657874582101f0b4cf46d8d66c7313d584e6d599f7e89aca6557e71fa1da9a976c783f125cc009a8006e466169722072656164696e67733f011a6afbd140021a6b050bc0038168466169726e657373048ca3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a3000201000200a300020100020005a6008201140182011a000f424002a30082131903e8038218391907d008820119019003140719012c08a006000701",
+     "signatures": "d8628440a0f6828347a2012704426231a05840cb21e2ac25023553efacc9f36fe4f14c4d8ca17452dd2d2ca238ace3f79d112455d1908fc36538918cb9e41f939d6be8472b5e89b87e2112d6806d0ea2a01b0c8347a2012704426232a05840bcdd88fa46d1db5046780c55fa7a727669cfb1520b4c4d1a9bc8f53a5c22962b720f4e180295845576dd84eb58ed060f2f36f6411cb71d4f529b527e77fa3305",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 444,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
+      "path": [
+       "d64c7109b63e64863ba0545ec8a2175e6e5fa933f1329e3480f015c2de62f47a",
+       "c3a4df85bf4197c2b7ff0820aee2821a3c0bb31c82093286a7f8b6116608c50f",
+       "05028d560992be0e94b7859b18147161f0fa55405a729aa7e34f155c8a0dccfe",
+       "fe44fec8d9486ad1c1bb43ca2b88e2e5c0cb7b62f4c0a14663710c8bb13bc870",
+       "25ea9cbed0e23652cd3a5af85a29b0a20a633e800dbeb179638ffb82abc4ad72",
+       "4b04f96312822adad4326c97c767e2378418a7172b4383cdb910e01527f235ec",
+       "174c907726ed8f717dbcbe47211c38c0c95b501d64e811f1a809aa9432be1098",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
+      ]
+     }
+    },
+    "now": 1791262800,
+    "body_view": {
+     "map": [
+      [
+       0,
+       "Fair readings?"
+      ],
+      [
+       1,
+       1794888000
+      ],
+      [
+       2,
+       1795492800
+      ],
+      [
+       3,
+       [
+        "Fairness"
+       ]
+      ],
+      [
+       4,
+       [
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        },
+        {
+         "map": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          0,
+          [
+           1,
+           20
+          ]
+         ],
+         [
+          1,
+          [
+           1,
+           1000000
+          ]
+         ],
+         [
+          2,
+          {
+           "map": [
+            [
+             0,
+             [
+              19,
+              1000
+             ]
+            ],
+            [
+             3,
+             [
+              57,
+              2000
+             ]
+            ],
+            [
+             8,
+             [
+              1,
+              400
+             ]
+            ]
+           ]
+          }
+         ],
+         [
+          3,
+          20
+         ],
+         [
+          7,
+          300
+         ],
+         [
+          8,
+          {
+           "map": []
+          }
+         ]
+        ]
+       }
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       7,
+       1
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "D11",
+    "reason": "D11: minVoters above the gate of part 0"
+   }
+  },
+  {
+   "id": "deck/rating/deck-invalid-D15-61-cards-019",
    "description": "61 cards where the first 60 eligible takes are the limit",
    "section": "Validation rules (verification step 10 for deck)",
    "inputs": {
@@ -4245,17 +5545,18 @@
      "signatures": "d8628440a0f6828347a2012704426231a058403fb0fbd36ab23fdb7b6e9062c709cbedfd443d8b876dc07369337dd26d4633cbc92bd6ed8cecf0fac54b0f87265f6538fa4506e32d446fe994cc03ce4617ff048347a2012704426232a058409e2841f1c4bdebd756db361e541845a79e9c038237286ecd96f5895eea242f1b67c0f5197d31538f973a8ac2d6e80d087ae53d7caf6fdfadddf0a683fc31ba06",
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
-      "index": 470,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n478\ngjpB/bnOJuyF+4M76XWM41JxvrkLJgucl9RE35xg1uw=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBs8SMWonEO5IkLL6RVDU4oIGfJvq+dFknQ2kczCknhCnO47fDaHJyMvsHyRDbha4iC4petKo0DEkLwTDvHSVBg8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAeoXZkO2GjLn+pWjPwG+SfQXHjcY26liXLh6CizXl73w5eG76VyJPDK/LyaM0x44v646JPoI3NMyHKezahWtUBg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAc5/q6GjITc03GoA9S69nzXHRJ3cWOozruwY59m3Hi0pHpv5mU/18FH/8cG4sXkOK8QW1jRgaPaXI6El4IhP8BA==\n",
+      "index": 495,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n506\nzegPkB4lXcQn1WCygB2u55Ohy1y8dy48X3tuHdmarSc=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBoDvNg3PqT2sXgco27l2b4lYh90T4ptJBRZSm1+M2QiBJTDbgs1S6vzBwLuMk1RUru/EdIMPU288eKtLGvu1Iw8=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJASpbXYENAFPM8YmDQZ2Wo75VgznyccG0X9GuWCVvgeavT1m5V87Z8fBAB84Gr63AhLx8B6ZqByXKqZX76otXbCg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAS+b37Z6jWnA0DfalHAlljw8XUoIRViV72fnEg0matrNGzpaGJAVStVRnFmr1KRnR8d8CZnl9qSURkNrqRW3KDA==\n",
       "path": [
-       "15a1ffa66f6e1d4f32c69b2d188ddd0c133346ef6204e6956022a8e43b89ca76",
-       "8cf635bce230744998aec63fbb51cf52200bd8fb35655c59e54b4597bfe980ef",
-       "cbc0b5ee3895da0676e8d6ba1015519fa6e6a377e4d15226ae63e810eb09c786",
-       "e0f62b3bc355ae13193b8500f7c5f9cb24f4603aa887a457e98628c9c4be63e3",
-       "b2e8a1053897489c895dc861fb4bad73f4990bae84361299b1a9f6f11f6b4e69",
-       "f3e00fc34f0b31c0fa62bdb0ab571d0dd39ac2fcf9dd69ebefba8c50fe305a84",
-       "2985e5f5773ce9062cc990c87c3c21bb44648980c4653c55450cd1b51c0c88b6",
-       "ff026d05bd8d60b7cdfe0f14285690373a5ef90b7028525dcfa4e9f756e77e8d"
+       "999df5043d494357a434f1d7985d4aa94619486ea5293284b3e379e0f19640d4",
+       "d2e70652e22db9f6d8cc0d7185ef9f968ac68fbbf8a4ef20eb88361081857f86",
+       "3d0b9dbb58c708cacb0a9c7127170af8b211f6b042fd0ff186ab68b02e2e6ed5",
+       "27da38914622635a71ea290e10bb9de2f53a1a7872944e3cd2ceeb05530d630c",
+       "600cb0144e755486c7d703e2e3ac5f590b7bd5d4f0214dc3f7640287deee85c8",
+       "1359c7de798b6071c546281f4bfe38cb90346db4ec8fbb9cf1a568de72f02389",
+       "a0979d2d3f4c0306a43f954d79fd56dfa9c9f7ae84d4b9e552f701c0b23162b0",
+       "a82542306d0f243bf6c790f5bdc6bf20a25fe30bd4f1b04fa79c7f27c69dcf5e",
+       "06ac6f23c6c575194c6765d4f1dd1241a855e56329749ecfad0a312365d5aed4"
       ]
      }
     },

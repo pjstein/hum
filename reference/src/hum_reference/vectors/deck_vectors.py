@@ -13,7 +13,7 @@ import functools
 from fractions import Fraction
 from typing import Any
 
-from .. import cbor, cose, fixtures
+from .. import cbor, cose, fixtures, log
 from .. import manifest as m
 from .. import release as rmath
 from ..bodies import context as c
@@ -377,6 +377,25 @@ class World:
             self.context_body({c.AGGREGATORS: [self.leader.cid, self.helper_shared.cid]}),
             tlrefs,
         )
+        # a second log beside the ledger of record (release.md R10, ADR 0103): its keyset is
+        # position 0 of its own world; the context lists it second
+        log2_keys = {"log2": key_from_label("deck-world-log2"),
+                     "log2-rotate": key_from_label("deck-world-log2-rotate")}  # fmt: skip
+        log2_env = fixtures.service_keyset("log2", "log2-rotate", log2_keys)
+        self.w2 = m.World(
+            log_authority=compute_cid(m.encode_envelope(log2_env)),
+            log_key=log2_keys["log2"],
+            witnesses=dict(self.w.witnesses),
+        )
+        self.w2_keyset = self.w2.append(log2_env, [(b"log2-rotate", log2_keys["log2-rotate"])])
+        self.ctx_two_logs = self.context(
+            "two-logs",
+            self.context_body({c.LOGS: [
+                {c.L_LOG: self.w.log_authority, c.L_WITNESSES: self.w.witness_keys()},
+                {c.L_LOG: self.w2.log_authority, c.L_WITNESSES: self.w.witness_keys()},
+            ]}),
+            tlrefs,
+        )  # fmt: skip
         self.ctx_count = self.context(
             "count-cap",
             self.context_body({c.COUNT: {c.CNT_RHO_MAX: rmath.rat(Fraction(1, 400))}}),
@@ -461,6 +480,31 @@ class World:
 
         self.releases = rbv.build_releases(self)
         self.w.finalize()
+        # the second log mirrors every entry of the ledger of record (services.md, "Step 10 at
+        # the log"), then holds the releases that exist only there (release.md R10)
+        for b in self.w.bundles.values():
+            self._mirror(b)
+        self.w2.blobs = dict(self.w.blobs)
+        self.w2.global_context = self.w.global_context
+        for key, env, signers in self.releases.second_log_pending:
+            self.named[key] = self.w2.append(env, signers)
+        self.w2.finalize()
+
+    def _mirror(self, b: m.Bundle) -> m.Bundle:
+        """Append the same entry (envelope, signatures, authorship) to the second log."""
+        env = cbor.decode(b.envelope)
+        position = len(self.w2.leaves)
+        self.w2.leaves.append(
+            log.entry_bytes(
+                b.cid, env[m.TYPE], env.get(m.AUTHORITY, b.cid), env.get(m.LINEAGE), env[m.VERSION]
+            )
+        )
+        copy_ = m.Bundle(
+            b.envelope, b.signatures, b.cid,
+            m.LogProof(self.w2.log_authority, position, "", []), b.authorship,
+        )  # fmt: skip
+        self.w2.bundles[b.cid] = copy_
+        return copy_
 
     def extend(self, v1: m.Bundle, *, closes: int | None = None, expires: int | None = None,
                mutate=None) -> dict:  # fmt: skip
@@ -830,6 +874,10 @@ def manifests_file(wd: World, invalid) -> File:
                    "plan_view": jsonable(plan_)})  # fmt: skip
     for rule, name, desc, b in invalid:
         run(f, wd, f"deck-invalid-{rule}-{name}", desc, b, step=10, rule=rule,
+            extra={"context": hexify(cbor.decode(b.envelope)[m.REFS]["context"])})  # fmt: skip
+    # D16's clock-free half: a deck version logged after a release of its lineage
+    for suffix, desc, rule, b in wd.releases.deck_cases:
+        run(f, wd, suffix, desc, b, step=10, rule=rule,
             extra={"context": hexify(cbor.decode(b.envelope)[m.REFS]["context"])})  # fmt: skip
     # D16: a submission-time rule the ledger and aggregators run with their own clock (phones
     # never do: the same version 2 verifies at steps 1 to 11 at any clock). One version 2,

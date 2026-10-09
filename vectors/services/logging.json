@@ -1,0 +1,777 @@
+{
+ "spec": "services",
+ "file": "logging",
+ "notes": "L-6 and L-5 (RT2, RU3): a log line is a map of named fields; L-6's table is the complete set of field names each service may write, with domains, and a line with any other field or a value outside its domain is forbidden. One allowed and one forbidden line per service row, plus the aggregator and gateway cases of L-5: never a count of accepted ballots for a deck or a round, exact or bucketed, before or after the final version; for ballot intake no line per request, no per-request minute and no count per deck, round or path; rejections counted by code per deck only for malformed, too_large, rejected and forbidden; closed and conflict counted at no grain, appearing only in the service's daily total (rejected_count with no deck and no code). The gateway logs a path and result code with no connection identifier, or counts per path, nothing for a ballot-intake path and no intake counter at any grain: ballot requests appear only inside its daily total of all requests (count with no path). `rule` is L-5 where that rule names the failure (every L-5 failure is also an L-6 failure) and L-6 otherwise. Readings the spec leaves open: the delivery row defers to chat.md \u00a712.9's error-log row, which names no fields (the reference uses service, day, code, minute, context); `day` is a day number or YYYY-MM-DD; `code` is an error code string or an HTTP status; `minute` is a Unix time that is a multiple of 60; the resolver's after-24-hours shape is exactly {cid, count}.",
+ "cases": [
+  {
+   "id": "services/logging/log-line-accepted-noised-before-final-001",
+   "description": "allowed fields only while round 0 is open: a per-deck count of a code that says nothing about a voter",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20740,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "round": 0,
+     "state": "round 0",
+     "code": "malformed",
+     "rejected_count": 3
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-accepted-noised-after-final-002",
+   "description": "allowed fields only after the final version: already-noised and public values",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20761,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "round": 3,
+     "state": "final",
+     "n_hat": 812,
+     "part": 1,
+     "part_n": 790,
+     "padded_leaves": 1184,
+     "k": 1,
+     "release": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "version": 4
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-daily-series-003",
+   "description": "the noised daily series: a bucket and its noised increment",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20741,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "daily_bucket": 3,
+     "daily_increment": -3
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-daily-total-rejections-004",
+   "description": "the service's daily total of rejected requests of every code, with no deck and no code: the only place closed and conflict rejections appear (RU3)",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20741,
+     "rejected_count": 41
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-exact-count-before-final-005",
+   "description": "an exact count of accepted ballots while round 0 is open",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20740,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "round": 0,
+     "accepted": 807
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-5"
+   }
+  },
+  {
+   "id": "services/logging/log-line-exact-count-after-final-006",
+   "description": "an exact count after the final version",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20761,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "round": 3,
+     "release": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "ballots": 807
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-5"
+   }
+  },
+  {
+   "id": "services/logging/log-line-bucketed-count-007",
+   "description": "a count bucketed to the nearest 50 from the exact value (12.10 replaces the bucket of 50 of 12.9)",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20740,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "round": 0,
+     "accepted_bucket_50": 800
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-5"
+   }
+  },
+  {
+   "id": "services/logging/log-line-per-request-intake-008",
+   "description": "one line per ballot-intake request, marked by a per-request minute (RT2)",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20740,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "round": 0,
+     "minute": 1791849600
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-5"
+   }
+  },
+  {
+   "id": "services/logging/log-line-conflict-duplicate-per-deck-009",
+   "description": "a per-deck count of conflict (detail duplicate): with one open deck it is a per-deck count of pseudonyms that voted before (RT2); the code domain with deck present is the four voter-neutral codes",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20740,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "round": 0,
+     "code": "conflict",
+     "rejected_count": 2
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-5"
+   }
+  },
+  {
+   "id": "services/logging/log-line-conflict-duplicate-any-grain-010",
+   "description": "a count of conflict with no deck, service-wide: still a count by a nullifier-dependent code; it may appear only inside the daily total (RU3)",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20740,
+     "code": "conflict",
+     "rejected_count": 2
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-5"
+   }
+  },
+  {
+   "id": "services/logging/log-line-closed-per-deck-011",
+   "description": "a per-deck count of closed on a different round-0 body (nullifier-dependent)",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20745,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "round": 1,
+     "code": "closed",
+     "rejected_count": 5
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-5"
+   }
+  },
+  {
+   "id": "services/logging/log-line-nullifier-field-012",
+   "description": "a nullifier in a log line: a field outside the aggregator row (and invariant 1)",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20740,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "nullifier": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-round-out-of-domain-013",
+   "description": "round 7: a value outside its domain (0..3)",
+   "section": "What services log",
+   "inputs": {
+    "service": "aggregator",
+    "line": {
+     "service": "aggregator",
+     "day": 20740,
+     "deck": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "round": 7
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-gateway-path-count-non-ballot-014",
+   "description": "a per-path count for a path that is not ballot intake",
+   "section": "What services log",
+   "inputs": {
+    "service": "gateway",
+    "line": {
+     "service": "gateway",
+     "day": 20740,
+     "path": "/v1/log/entry",
+     "code": 200,
+     "count": 1203
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-gateway-daily-total-all-015",
+   "description": "the gateway's daily total of all requests to every service it fronts (count with no path): the only place ballot requests appear",
+   "section": "What services log",
+   "inputs": {
+    "service": "gateway",
+    "line": {
+     "service": "gateway",
+     "day": 20740,
+     "count": 48211
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-gateway-path-count-ballot-016",
+   "description": "a per-path count for a ballot-intake path: a count of accepted sends (RT2)",
+   "section": "What services log",
+   "inputs": {
+    "service": "gateway",
+    "line": {
+     "service": "gateway",
+     "day": 20740,
+     "path": "/v1/agg/decks/01ed2377d63c/rounds/0/ballots",
+     "count": 807
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-5"
+   }
+  },
+  {
+   "id": "services/logging/log-line-gateway-ballot-line-017",
+   "description": "one line per request on a ballot-intake path, even without a connection identifier",
+   "section": "What services log",
+   "inputs": {
+    "service": "gateway",
+    "line": {
+     "service": "gateway",
+     "day": 20740,
+     "path": "/v1/agg/decks/01ed2377d63c/rounds/0/ballots",
+     "code": 200
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-5"
+   }
+  },
+  {
+   "id": "services/logging/log-line-gateway-intake-daily-counter-018",
+   "description": "a daily counter for ballot intake: with one open deck it equals that deck's accepted sends (RU3)",
+   "section": "What services log",
+   "inputs": {
+    "service": "gateway",
+    "line": {
+     "service": "gateway",
+     "day": 20740,
+     "ballot_intake_daily": 807
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-5"
+   }
+  },
+  {
+   "id": "services/logging/log-line-gateway-connection-019",
+   "description": "a connection identifier beside a path: joins a relay connection to a request",
+   "section": "What services log",
+   "inputs": {
+    "service": "gateway",
+    "line": {
+     "service": "gateway",
+     "day": 20740,
+     "path": "/v1/log/entry",
+     "code": 200,
+     "connection": 4471
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-log-ok-020",
+   "description": "a submission line: CID, type, authority, result code, leaf index, minute, size",
+   "section": "What services log",
+   "inputs": {
+    "service": "log",
+    "line": {
+     "service": "log",
+     "day": 20740,
+     "cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "type": "deck",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "code": 201,
+     "index": 36,
+     "minute": 1791849600,
+     "size": 1402
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-log-rate-counter-021",
+   "description": "the rate-limit counters for one AUTHOR_WINDOW",
+   "section": "What services log",
+   "inputs": {
+    "service": "log",
+    "line": {
+     "service": "log",
+     "day": 20740,
+     "window": 20740,
+     "chat_key_count": 3,
+     "nullifier_set_size": 1207
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-log-relay-connection-022",
+   "description": "which relay connection submitted what",
+   "section": "What services log",
+   "inputs": {
+    "service": "log",
+    "line": {
+     "service": "log",
+     "day": 20740,
+     "cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "code": 201,
+     "relay_connection": 9
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-log-minute-not-rounded-023",
+   "description": "a timestamp not rounded to the minute (L-1): outside the minute domain",
+   "section": "What services log",
+   "inputs": {
+    "service": "log",
+    "line": {
+     "service": "log",
+     "day": 20740,
+     "cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "code": 201,
+     "minute": 1791849617
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-witness-ok-024",
+   "description": "origin, tree size, result code, minute",
+   "section": "What services log",
+   "inputs": {
+    "service": "witness",
+    "line": {
+     "service": "witness",
+     "day": 20740,
+     "origin": "hum/log/caaaaaaaaaaaaaaaaaaaa",
+     "tree_size": 4096,
+     "code": 200,
+     "minute": 1791849600
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-witness-client-025",
+   "description": "who fetched a checkpoint",
+   "section": "What services log",
+   "inputs": {
+    "service": "witness",
+    "line": {
+     "service": "witness",
+     "day": 20740,
+     "origin": "hum/log/x",
+     "client_ip": "203.0.113.9"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-host-session-ok-026",
+   "description": "the session log line of verifier-runtime.md, exactly",
+   "section": "What services log",
+   "inputs": {
+    "service": "host",
+    "line": {
+     "session_id": "00112233445566778899aabbccddeeff",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "version": 3,
+     "day": 20740,
+     "outcome": "issued",
+     "memory_bucket": 2,
+     "fuel_bucket": 1
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-host-session-rejected-027",
+   "description": "the true outcome: rejection code 1 even when the phone saw 0",
+   "section": "What services log",
+   "inputs": {
+    "service": "host",
+    "line": {
+     "session_id": "ffeeddccbbaa99887766554433221100",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "version": 3,
+     "day": 20740,
+     "outcome": 1,
+     "memory_bucket": 2,
+     "fuel_bucket": 1
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-host-dedup-hash-028",
+   "description": "a dedup key's hash",
+   "section": "What services log",
+   "inputs": {
+    "service": "host",
+    "line": {
+     "session_id": "00112233445566778899aabbccddeeff",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "version": 3,
+     "day": 20740,
+     "outcome": "issued",
+     "dedup_hash": "abababababababababababababababababababababababababababababababab"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-host-short-session-id-029",
+   "description": "a session ID that is not 16 bytes",
+   "section": "What services log",
+   "inputs": {
+    "service": "host",
+    "line": {
+     "session_id": "0011",
+     "authority": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "version": 3,
+     "day": 20740,
+     "outcome": "issued"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-delivery-error-ok-030",
+   "description": "an error line: no body, no client address, minute-rounded (chat.md \u00a712.9)",
+   "section": "What services log",
+   "inputs": {
+    "service": "delivery",
+    "line": {
+     "service": "delivery",
+     "day": 20740,
+     "code": 429,
+     "minute": 1791849600,
+     "context": "013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda69"
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-delivery-sender-031",
+   "description": "a sender identity",
+   "section": "What services log",
+   "inputs": {
+    "service": "delivery",
+    "line": {
+     "service": "delivery",
+     "day": 20740,
+     "code": 200,
+     "sender": "alice"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-store-counters-ok-032",
+   "description": "per-context counters and per-key redeemed nonce counts (storage.md \u00a76.8)",
+   "section": "What services log",
+   "inputs": {
+    "service": "store",
+    "line": {
+     "context": "013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda69",
+     "counter": "bytes_stored",
+     "value": 10485760,
+     "token_key_id": 2,
+     "nonce_count": 311
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-store-cid-033",
+   "description": "a CID in a store log line",
+   "section": "What services log",
+   "inputs": {
+    "service": "store",
+    "line": {
+     "context": "013730d7cab51f327e90bd2da55755c0d47e4822e03d5eb090a55dc921329fda69",
+     "counter": "bytes_stored",
+     "value": 1,
+     "cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-resolver-ok-034",
+   "description": "CID requested, result code, size, minute",
+   "section": "What services log",
+   "inputs": {
+    "service": "resolver",
+    "line": {
+     "service": "resolver",
+     "day": 20740,
+     "cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "code": 200,
+     "size": 1402,
+     "minute": 1791849600
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-resolver-after-24h-035",
+   "description": "after 24 hours only cid and count",
+   "section": "What services log",
+   "inputs": {
+    "service": "resolver",
+    "line": {
+     "cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "count": 17
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-resolver-count-with-minute-036",
+   "description": "a count beside a minute: the after-24-hours shape is exactly {cid, count}",
+   "section": "What services log",
+   "inputs": {
+    "service": "resolver",
+    "line": {
+     "cid": "01ed2377d63cb333d09d6c4a9aecd6b1f76d065480cd5a606c02ba40a1f18a4875",
+     "count": 17,
+     "minute": 1791849600
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-gallery-ok-037",
+   "description": "query shape, result code, minute",
+   "section": "What services log",
+   "inputs": {
+    "service": "gallery",
+    "line": {
+     "service": "gallery",
+     "day": 20740,
+     "query_shape": "takes?context&cursor",
+     "code": 200,
+     "minute": 1791849600
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-gallery-viewer-038",
+   "description": "a per-viewer identifier",
+   "section": "What services log",
+   "inputs": {
+    "service": "gallery",
+    "line": {
+     "service": "gallery",
+     "day": 20740,
+     "query_shape": "takes",
+     "viewer": "v-19"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  },
+  {
+   "id": "services/logging/log-line-relay-ok-039",
+   "description": "client IP and request count per window, gateway, result code",
+   "section": "What services log",
+   "inputs": {
+    "service": "relay",
+    "line": {
+     "day": 20740,
+     "client_ip": "203.0.113.9",
+     "window": 20740,
+     "request_count": 240,
+     "gateway": "01c1dfb332f023912547786d4589e91e2e40b2cc9f2669d12ae9d47c7a780311a3",
+     "code": 200
+    }
+   },
+   "expected": {
+    "allowed": true
+   }
+  },
+  {
+   "id": "services/logging/log-line-relay-path-040",
+   "description": "a client paired with a request's content",
+   "section": "What services log",
+   "inputs": {
+    "service": "relay",
+    "line": {
+     "day": 20740,
+     "client_ip": "203.0.113.9",
+     "window": 20740,
+     "request_count": 1,
+     "path": "/v1/log/add"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "log-line",
+    "rule": "L-6"
+   }
+  }
+ ]
+}

@@ -1,0 +1,1883 @@
+{
+ "spec": "chat",
+ "file": "delivery",
+ "notes": "The delivery service's service manifest (kind delivery): DL-1 to DL-5 of 12.1 after services.md S-1 to S-8. Built on its own copy of the base world; step-10 failures and the version 2 cases were appended by a misbehaving log so a phone reaches the rule. DL-4 bounds limits.tokensPerIssuance (64) and limits.commitsPerHour (3,600). Keys that do not belong to a delivery manifest are refused at step 4 by services.md S-1, S-3 and S-7, which the two S-* cases here show.",
+ "cases": [
+  {
+   "id": "chat/delivery/service-delivery-valid-001",
+   "description": "Valid delivery manifest: VOPRF issuer, six limits, 30-day content retention",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "01ffe86ad00fa7a5ebd4ec37a39466bd02aeb3b6079018f0ee1f324f2efbcfbe06",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a05840055304abe73ad6b6da02cec3141a41eec5945c46b0fbbc48faef3b0f0aba4bf0e3923b228b08450a844f0e19a56059d1ec960a0c3395b2ac24f08679d2b4c505",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 37,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "6195d54be6a2e258287282eaf3a939fec9a7f06515799578005b7367e0acfb8e",
+       "335f0b7b9b6f54107ffa20d94e2398e9ec61f25c76177dd1c7383a4e47628906",
+       "8467bd887f37a0a5f9602deaf2f5ab5d95d1e01b678d2511104da06b258a565d",
+       "488904991ab90c2b8983859b32041d102c114f625ab8bc55b21bd1464badd982",
+       "c278fbf51a7de877c15b57376752ab6d2386ec684925af25fbeee1af17b674e6",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "delivery"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-valid-v2-002",
+   "description": "Version 2 raising a limit; issuer.name unchanged",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "011dbf0b5695feed5a5d69920556f92f7f8c75174bb8dd765f5667e16f912c3103",
+     "envelope": "a9000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee2730303582101ffe86ad00fa7a5ebd4ec37a39466bd02aeb3b6079018f0ee1f324f2efbcfbe06040205582101ffe86ad00fa7a5ebd4ec37a39466bd02aeb3b6079018f0ee1f324f2efbcfbe06061a6ac4724208a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651904b06f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a05840e14520442864daebebacadc41b09c916562c9cdb4601eaaa29e2a7b4ede5a5ebc7e3747633bd370c7a4f62b6f83326deaf64834155b168f625c12e86bdd0e504",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 38,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "13254c6d4d44f1fa27b88a29947eedab509a41d3d7bfdb6a45407e7ac99cfacb",
+       "9c08f4e4ebc092561ed9af9efe751323f9ef08cf2abd265d84c9e78ad31f44ee",
+       "8467bd887f37a0a5f9602deaf2f5ab5d95d1e01b678d2511104da06b258a565d",
+       "488904991ab90c2b8983859b32041d102c114f625ab8bc55b21bd1464badd982",
+       "c278fbf51a7de877c15b57376752ab6d2386ec684925af25fbeee1af17b674e6",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          1200
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "expected": {
+    "accept": true,
+    "kind": "delivery"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-1-type-003",
+   "description": "issuer.type 2 (not VOPRF)",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "01bda636f87e1d237d47377cf281951ec88734c7dbd1ee88c7d859a55e82b3b1d3",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730102021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a058402a84da49b185744b73d52a499fd0a7018cdda5fdfe549d3359e6673fca88ea44764ad1e23666f29c8e7634513795acf05e35919b293908b2c8c8fc6ba794860f",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 40,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "9c410ccc9400f73be79b1b013f3cda301532b3b9b24f057e0cf26abec6593967",
+       "5b19da9cf768ae5c744b9539ace75a8b44ef4f82abe789d08aec28b02f887ada",
+       "67d2f584d5ccbaa777cbf907f13c82755c67895857ae5582a0f1c202f526aa54",
+       "42e080eda8480e1658bbb7078941b9b4126c5c457e11430d6b81cb0fd33a680a",
+       "c278fbf51a7de877c15b57376752ab6d2386ec684925af25fbeee1af17b674e6",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          2
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-1",
+    "reason": "DL-1: issuer.type must be 1 (VOPRF)"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-1-rotation-004",
+   "description": "issuer.rotation 2,592,001 seconds",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "01679c2de8a5c1b3f08ddc31c4e841124113a8e8bf67f8d281e87ac0e1806d5b64",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d01",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a0584012c3487e2fed2f639faaf9ff06f733c2a20723729138d13e1cd078c03543689cd2b46f20c8bc3c364f16571bbc94ab7bf3aa46a17aef9dae23b35f381f848306",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 41,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "dbfce170dcc983c63e3da75a32a30d9638bc2ce9253b6485fa67ad23b7d297d5",
+       "5b19da9cf768ae5c744b9539ace75a8b44ef4f82abe789d08aec28b02f887ada",
+       "67d2f584d5ccbaa777cbf907f13c82755c67895857ae5582a0f1c202f526aa54",
+       "42e080eda8480e1658bbb7078941b9b4126c5c457e11430d6b81cb0fd33a680a",
+       "c278fbf51a7de877c15b57376752ab6d2386ec684925af25fbeee1af17b674e6",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592001
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-1",
+    "reason": "DL-1: issuer.rotation above 2,592,000 seconds"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-2-missing-005",
+   "description": "limits without ticketsPerContextDay",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "01a1b63a615254ab318dfc9953c4a9a48b1df648e8798bd35e686fff83d8f38876",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a56e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e809a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a0584071caee5e474ea9ef1a1ef3e865e39d9490a0be12b62acf3b3a1ae9e3927a7b74befb690efb4daad509e473f083c96d796c4eff4afbdeb6c2b3772038707e2505",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 42,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "356bbcb952d9f4e5fbfd161be226dd1a4b4d19dcab7d8c997f49980520899388",
+       "aa4c301fd4b31e0d6f7a7c6425024e44209aad1826c73e3bdb83fd9c551273ae",
+       "67d2f584d5ccbaa777cbf907f13c82755c67895857ae5582a0f1c202f526aa54",
+       "42e080eda8480e1658bbb7078941b9b4126c5c457e11430d6b81cb0fd33a680a",
+       "c278fbf51a7de877c15b57376752ab6d2386ec684925af25fbeee1af17b674e6",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-2",
+    "reason": "DL-2: limits must hold exactly the six names"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-2-extra-006",
+   "description": "limits with a seventh name",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "010207c142107ae4944c665a4a68c178cf932b296e81240df168529084a2d5147a",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a76e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586e77656c636f6d65735065724461790a6f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a0584074263e3a8930402ef2b897eb83935b0e455a6ba8b874c117a24d6d83151272fa50ab264a426dc2441d7000fa44e610d3d74b96799f9003ddf44d05a96bd9240c",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 43,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "af6883c85968b9df7f966ee01c9bb00fcd89945069d220e5cecb24b6a9e7b9eb",
+       "aa4c301fd4b31e0d6f7a7c6425024e44209aad1826c73e3bdb83fd9c551273ae",
+       "67d2f584d5ccbaa777cbf907f13c82755c67895857ae5582a0f1c202f526aa54",
+       "42e080eda8480e1658bbb7078941b9b4126c5c457e11430d6b81cb0fd33a680a",
+       "c278fbf51a7de877c15b57376752ab6d2386ec684925af25fbeee1af17b674e6",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "welcomesPerDay",
+          10
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-2",
+    "reason": "DL-2: limits must hold exactly the six names"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-2-zero-007",
+   "description": "commitsPerHour 0",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "011836e529f3da593be4341574f66a4bf55bd91598be7ecf653a03679687261e19",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f7572006e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a058401825d59c50f019fb7560be15c2af7659ed80e5476ea508da7db26255a2ddbec729e5dc81d207bf1f54cc222c0352a830ebdacf56871c744b6715693e3278e606",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 44,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "8cc76b071bf5b9b5ec6c21937e7ddbaacfb4fb0ae795a8be681dfbffaff6243d",
+       "30a68769c455f7ae03dfb7f1450525e8aa477cb6536cce3a3b970e99a750f09d",
+       "d8348b21e79bd298efcdc5621cfcabd5b51ab5323e2a1d7ea76da128db57ff4c",
+       "42e080eda8480e1658bbb7078941b9b4126c5c457e11430d6b81cb0fd33a680a",
+       "c278fbf51a7de877c15b57376752ab6d2386ec684925af25fbeee1af17b674e6",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          0
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-2",
+    "reason": "DL-2: every limit is a uint >= 1"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-2-absent-008",
+   "description": "no limits map",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "01b26a782487b36574c56d4f73c77ad9d593c3a15c1539f8dae60875d8d8b0726b",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a7006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e09a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a05840370e4557e58789d26da7ec490307cafca8c8a2ae6081093b23e65654aa5910567c527448352723254c72c6b1db85360738967768486251d2dbc36039f9075e0d",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 45,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "34974917aaa2ae5a5e1926abd2f56a59d20db48a2a61a57ae65dcdc55810de97",
+       "30a68769c455f7ae03dfb7f1450525e8aa477cb6536cce3a3b970e99a750f09d",
+       "d8348b21e79bd298efcdc5621cfcabd5b51ab5323e2a1d7ea76da128db57ff4c",
+       "42e080eda8480e1658bbb7078941b9b4126c5c457e11430d6b81cb0fd33a680a",
+       "c278fbf51a7de877c15b57376752ab6d2386ec684925af25fbeee1af17b674e6",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-2",
+    "reason": "DL-2: limits required"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-3-content-009",
+   "description": "retention.content 31 days",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "01a47f51cc5bd842962ff0471141d36871d9e6bf07ddb6ecd3ee6bd2e39b977f77",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0110a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a0584084075d90fdcfd39125332bae2023686c9f9bba8a0c1d3bb904540977f201472bbb0756eb1e013413a707963ad4446736f36244d76c60b48210b6c7a2dfee8701",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 46,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "6fff62dca8afda2d820e368a92b34ec398c33333369de0e2be9f76eb7cf85c02",
+       "3f77a02a24986fd87542ad16270a1e852ff3f4980bb1081f30b09eb1ddc16427",
+       "d8348b21e79bd298efcdc5621cfcabd5b51ab5323e2a1d7ea76da128db57ff4c",
+       "42e080eda8480e1658bbb7078941b9b4126c5c457e11430d6b81cb0fd33a680a",
+       "c278fbf51a7de877c15b57376752ab6d2386ec684925af25fbeee1af17b674e6",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592001
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-3",
+    "reason": "DL-3: retention.content must be declared and at most 2,592,000 seconds"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-3-no-errors-010",
+   "description": "retention without errors",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "017bc0ab234bf48deff636fe68275a5ccb4c56f0373d824e6724f8dc570cdc6e0a",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a167636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a058406a5d230497d70f1ceb7e1f8a963081900c11936fb8f117938a7e43cdaa5d38d17f7b331f121bfbc1eea69136e9eda80f3cb929c38d1e6c599484de071a18540d",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 47,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "006ba24697bbe887e9a0cec4a35e8d441731ccd011e831e9800e901cbe2faef9",
+       "3f77a02a24986fd87542ad16270a1e852ff3f4980bb1081f30b09eb1ddc16427",
+       "d8348b21e79bd298efcdc5621cfcabd5b51ab5323e2a1d7ea76da128db57ff4c",
+       "42e080eda8480e1658bbb7078941b9b4126c5c457e11430d6b81cb0fd33a680a",
+       "c278fbf51a7de877c15b57376752ab6d2386ec684925af25fbeee1af17b674e6",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-3",
+    "reason": "DL-3: retention.errors must be declared and at most 86,400 seconds"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-4-tokens-011",
+   "description": "limits.tokensPerIssuance 65",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "015e057064fc0191381a435b73dffdb8313912ec9c9d7df5ce4a4199308d787fe6",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651841726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a05840c9cbe55ad67da6a66b6aaf6b071a95ecf3b78e339a02aa2bcd821ba1d8b2b4629dc22c33ed33020306abbdeafbb789cfca3c6607fa087611f7a7fa4902bdd10b",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 48,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "e47aaca58fe50732f9e687e238af65fc70b566d3366370ec6d7461293a4935e8",
+       "8a0578b67543c13652c075bc71ebfac6a46472015e567f691d6545af9be2d968",
+       "1d421aaff6c9b0297f1f23697f652f5930777bfb04f33bae90e32b0be51a2686",
+       "bd37f066edd02c4f8453782144cf1de32782ac3c7fefdd797a1c0c349809396d",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          65
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-4",
+    "reason": "DL-4: limits.tokensPerIssuance above 64 (12.3 caps an issuance request there)"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-4-commits-012",
+   "description": "limits.commitsPerHour 3,601",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "01c95014a4366f0987472ea34b7d7feae1076dba5713049bafbb76815e6d7eb796",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a8006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f7572190e116e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a0584057bbcfe3b12e01e36a8092cb8f6850269d5063b99a7bbc1851a5e533294ef70708ff6f8f6c4a9717de68b801145cd9b33c3b183c569b79f381b168ba7f675901",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 49,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "d468ab6ff9d04aa227ded8b1a8225bf8a581833472875ee23aec98286eeb955e",
+       "8a0578b67543c13652c075bc71ebfac6a46472015e567f691d6545af9be2d968",
+       "1d421aaff6c9b0297f1f23697f652f5930777bfb04f33bae90e32b0be51a2686",
+       "bd37f066edd02c4f8453782144cf1de32782ac3c7fefdd797a1c0c349809396d",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          3601
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-4",
+    "reason": "DL-4: limits.commitsPerHour above 3,600 (one commit a second)"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-S-1-key-17-013",
+   "description": "key 17 (a blob store's limits) on a delivery manifest: refused at step 4 by services.md S-1",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "010b49230a97c81f50150382e20925bfc446c4f1f5ceeb997cf92b6e7128d7765d",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a9006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d0011a10001",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a0584057d3c3e648bd8f694788b9a9d34317a98b43a7ded89068f8d5655771270b0680865c8a54891cf6eb5d996378e4f3e39042040e5bfc1d7c5788c130c8f109510b",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 50,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "229ad3682817770e0e0aeb64d4566d3d7a17906ea0adbd179e5468536662fed2",
+       "8fa4d2fa3b0c615e8b02e108fdde37b457d32d0eb761e01ab3824b1355674229",
+       "1d421aaff6c9b0297f1f23697f652f5930777bfb04f33bae90e32b0be51a2686",
+       "bd37f066edd02c4f8453782144cf1de32782ac3c7fefdd797a1c0c349809396d",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       17,
+       {
+        "map": [
+         [
+          0,
+          1
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-1",
+    "reason": "S-1: body has unknown keys [17]"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-S-3-origin-014",
+   "description": "key 7 origin on a delivery manifest: refused at step 4 by services.md S-3",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "01267702869e2ec22e01b06daa6f9fbe45f439a1b72f754ef71e0694d8f51375be",
+     "envelope": "a7000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030401061a6ac4724108a009a9006864656c697665727901817368747470733a2f2f64732e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e74657874446179192710076968756d2f6c6f672f7809a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006668756d2d64730101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a0584017a65adf004abb4b40fcf2e4bf5210a96f8d95508393f913a7ca41b5d7b594298ef6259239b79bf0f938594fd92946c569f84cbe737335192cb575f41a25c403",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 51,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "82cb6048bb5feaf048219ad46a28d089ba9a87cc53df08a2660904d4e66d32a7",
+       "8fa4d2fa3b0c615e8b02e108fdde37b457d32d0eb761e01ab3824b1355674229",
+       "1d421aaff6c9b0297f1f23697f652f5930777bfb04f33bae90e32b0be51a2686",
+       "bd37f066edd02c4f8453782144cf1de32782ac3c7fefdd797a1c0c349809396d",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       7,
+       "hum/log/x"
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 4,
+    "rule": "S-3",
+    "reason": "S-3: origin and witnesses are log-only"
+   }
+  },
+  {
+   "id": "chat/delivery/service-delivery-invalid-DL-5-name-015",
+   "description": "version 2 renaming the issuer",
+   "section": "12.1",
+   "inputs": {
+    "bundle": {
+     "cid": "010a2dd38af346b96502881beda24314e1f6d5c8f90fb4306dae581d462f2c53ef",
+     "envelope": "a9000101677365727669636502582101eb2b87ccb6ce6868891e2787f5a048f257340c2ddb4b7e3fa58b145eeee273030358210156649a15ce859f92848b74f8cb255b0311453c18c4b3becc75795918f9cab46704020558210156649a15ce859f92848b74f8cb255b0311453c18c4b3becc75795918f9cab467061a6ac4724208a009a8006864656c697665727901817468747470733a2f2f6473322e6578616d706c652f0201035829010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a13809300040001000104815821014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e05a66e636f6d6d697473506572486f75721902586e73656e64735065724d696e7574651902586f62797465735065724368616e6e656c1a1000000071746f6b656e7350657249737375616e63651840726368616e6e656c73506572436f6e746578741903e8747469636b657473506572436f6e7465787444617919271009a2666572726f72731a0001518067636f6e74656e741a00278d0010a3006868756d2d64732d320101021a00278d00",
+     "signatures": "d8628440a0f681834ba2012704467376632d6473a05840046d598f7eb82cb86b7868c8098c99eea5f3626f0700fabb01cf79f7fc7efd62635db2cde3ebb9ef096c5151b12541dcc495ae5873d8d855e502614fd6b41700",
+     "log": {
+      "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
+      "index": 52,
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n53\nWXGPhk4KydeLTtCeIBoarmvoAC7fh94HRVF0gyuVWrs=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBshuoRkXR15GCuYuqv2dvxZAyG5dzdL5Thg6T8kWOy5eJI6OJCfn/SUz+hl7cO8+AjCV5vDF4RzpZ2HZ5v1GfQQ=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJALIwpMkQbkhRxZJn6C5rNV0YoqXO9sRWBzv/JRBgGNI3OSVxhvHfMiNHovUTHOOuhFQEq1WmL6/gtGhMU/XNJCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAM+CeWI32uwMizuMiAv5WvhfN3ksRdQPSz70Q73cdZtGdvqNryqlaqVX9QEw4tKvOFgKpQjWgmWMifSWtW1pKCw==\n",
+      "path": [
+       "c48d54b1463f1b3d9dafac74941ee6bf5051e86a91176f225f4ceba9120f20d2",
+       "bd37f066edd02c4f8453782144cf1de32782ac3c7fefdd797a1c0c349809396d",
+       "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc"
+      ]
+     }
+    },
+    "view": {
+     "map": [
+      [
+       0,
+       "delivery"
+      ],
+      [
+       1,
+       [
+        "https://ds2.example/"
+       ]
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       {
+        "hex": "010020a8afa1d418e63f19b846d4be5a075432a525405b45bf45f82e1b738f7a138093000400010001"
+       }
+      ],
+      [
+       4,
+       [
+        {
+         "hex": "014ec21b5d5e08bf8f6eaa2c524c4ea836838d72a6c4e008f27cbf60b6f882ae5e"
+        }
+       ]
+      ],
+      [
+       5,
+       {
+        "map": [
+         [
+          "commitsPerHour",
+          600
+         ],
+         [
+          "sendsPerMinute",
+          600
+         ],
+         [
+          "bytesPerChannel",
+          268435456
+         ],
+         [
+          "tokensPerIssuance",
+          64
+         ],
+         [
+          "channelsPerContext",
+          1000
+         ],
+         [
+          "ticketsPerContextDay",
+          10000
+         ]
+        ]
+       }
+      ],
+      [
+       9,
+       {
+        "map": [
+         [
+          "errors",
+          86400
+         ],
+         [
+          "content",
+          2592000
+         ]
+        ]
+       }
+      ],
+      [
+       16,
+       {
+        "map": [
+         [
+          0,
+          "hum-ds-2"
+         ],
+         [
+          1,
+          1
+         ],
+         [
+          2,
+          2592000
+         ]
+        ]
+       }
+      ]
+     ]
+    }
+   },
+   "rejection": {
+    "step": 10,
+    "rule": "DL-5",
+    "reason": "DL-5: issuer.name changed"
+   }
+  }
+ ]
+}

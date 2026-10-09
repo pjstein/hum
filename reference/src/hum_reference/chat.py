@@ -23,6 +23,7 @@ seam: ``hum/chat-roles/1`` (signature), ``hum/safety/1`` (hash).
 from __future__ import annotations
 
 import hashlib
+from dataclasses import dataclass
 from typing import Any
 
 from . import cbor, cose, storage
@@ -75,7 +76,17 @@ TYPES: dict[str, dict[str, Any]] = {
     "checkpoint": {"req": {0, 1, 2, 3}, "opt": set(), "max": {}},
     "history-offer": {"req": {0, 1, 2, 3}, "opt": {4}, "max": {}},
     "join-request": {"req": {0, 1, 2}, "opt": set(), "max": {2: 8}},
+    # 5.17: a record {0, 1 nullifiers, 2 identity, 3 context, 5 day} or a snapshot {0, 4 records}
+    "join-record": {"req": {0}, "opt": {1, 2, 3, 4, 5}, "max": {1: 8, 4: 50_000}},
 }
+JOIN_RECORD_KEYS = {1, 2, 3, 5}
+JOIN_RECORD_MAX_AGE_DAYS = 396
+JOIN_PENDING = 3_600
+"""2.5 step 4: an earlier record younger than this (by delivery-service receive time) blocks a
+commit for a different identity; a greeter commits within it or sends a fresh record."""
+JOIN_GRACE = 600
+"""2.5 step 4: a leaf added with no join-record is removed only after the organizers group
+has been fetched to a receive time at least this far past the Add commit."""
 CONTENT_TYPES = {name: f"application/vnd.hum.{name}+cbor" for name in TYPES}
 # ops that carry exactly one ExternalPart
 FILE_OP_WITH_PART = {1, 4, 6}
@@ -188,7 +199,31 @@ _FIELD_CHECKS: dict[str, dict[int, Any]] = {
         1: lambda v: _b(v, 32),
         2: lambda v: isinstance(v, list) and all(_b(h) for h in v),
     },
+    "join-record": {
+        1: lambda v: _nullifier_list(v),
+        2: lambda v: _b(v, 32),
+        3: _is_cid,
+        4: lambda v: isinstance(v, list) and all(_join_row(r) for r in v),
+        5: _u,
+    },
 }
+
+
+def _nullifier_list(v: Any) -> bool:
+    """1 to 8 join-scope nullifiers, bstr(32), sorted bytewise and distinct (5.17)."""
+    return (
+        isinstance(v, list)
+        and 1 <= len(v) <= 8
+        and all(_b(n, 32) for n in v)
+        and all(v[i] < v[i + 1] for i in range(len(v) - 1))
+    )
+
+
+def _join_row(r: Any) -> bool:
+    return (
+        isinstance(r, list) and len(r) == 3 and _nullifier_list(r[0]) and _b(r[1], 32) and _u(r[2])
+    )
+
 
 _FILE_OP_REQUIRED = {1: {3, 4}, 2: {3}, 3: {4}, 4: {5}, 5: set(), 6: {3, 4, 6}, 7: set()}
 
@@ -240,7 +275,151 @@ def decode(name: str, data: bytes, *, external_parts: int = 0) -> dict[int, Any]
         raise ChatError("runtime 1 needs host")
     if name == "promote-confirm" and body[2] == 1 and 3 not in body:
         raise ChatError("confirmed needs object")
+    if name == "join-record":
+        present = set(body) - {0}
+        if present != JOIN_RECORD_KEYS and present != {4}:
+            raise ChatError("join-record is a record (keys 1, 2, 3, 5) or a snapshot (key 4)")
     return body
+
+
+# ---------------------------------------------------------------- join records (2.5 step 4, 5.17)
+
+
+@dataclass(frozen=True)
+class JoinRecord:
+    """One live ``join-record`` as a greeter holds it: the sorted nullifiers, the admitted chat
+    identity key, the UTC day it was written, and the delivery-service sequence number of the
+    message in the organizers group (TS9: ties between two live records go to the lower one)."""
+
+    nullifiers: tuple[bytes, ...]
+    identity: bytes
+    day: int
+    seq: int
+    received: int = 0
+    """Delivery-service receive time in seconds (JOIN_PENDING is measured on it)."""
+
+    def body(self, context: bytes) -> dict[int, Any]:
+        return {0: 1, 1: list(self.nullifiers), 2: self.identity, 3: context, 5: self.day}
+
+
+def join_record_expired(record: JoinRecord, today: int | None) -> bool:
+    """5.17: a record whose ``day`` is more than 396 days before the current UTC day MUST NOT
+    block a ticket or trigger a removal, deleted or not, and a snapshot MUST NOT include it."""
+    return today is not None and today - record.day > JOIN_RECORD_MAX_AGE_DAYS
+
+
+def _effective(records: list[JoinRecord], today: int | None) -> list[JoinRecord]:
+    return [r for r in records if not join_record_expired(r, today)]
+
+
+def join_snapshot_body(records: list[JoinRecord], today: int | None = None) -> dict[int, Any]:
+    """The ``join-record`` snapshot a newcomer to the organizers group receives (5.17); records
+    older than 396 days are omitted."""
+    return {0: 1, 4: [[list(r.nullifiers), r.identity, r.day] for r in _effective(records, today)]}
+
+
+def join_ticket_decision(
+    ticket_nullifiers: list[bytes],
+    records: list[JoinRecord],
+    live: set[bytes],
+    today: int | None = None,
+) -> tuple[str, str]:
+    """Section 2.5 step 4: a ticket is discarded when any of the nullifiers its proof yields is
+    recorded for a chat identity still in the all-members group; records of identities that have
+    since been removed, and records older than 396 days (5.17), admit the new identity.
+    Returns ("admit" | "discard", reason)."""
+    seen = set(ticket_nullifiers)
+    for r in _effective(records, today):
+        if r.identity in live and seen & set(r.nullifiers):
+            hit = sorted(seen & set(r.nullifiers))[0]
+            return "discard", f"nullifier {hit.hex()[:16]}… recorded for a live identity"
+    return "admit", "no nullifier recorded for a live identity"
+
+
+def join_precommit_decision(
+    own: JoinRecord, records: list[JoinRecord], live: set[bytes], today: int | None = None
+) -> tuple[str, str]:
+    """Section 2.5 step 4 (RT4, RU2): after its own record is sequenced, a greeter checks the
+    records once more. An earlier record (lower seq) that shares a nullifier and names a
+    different identity blocks the commit in exactly two cases: that identity is in the
+    all-members group, or the record is pending (received less than ``JOIN_PENDING`` seconds
+    before the greeter's own). Any other earlier record is inert. A record naming the same
+    identity is the greeter's own, or one a retried ticket matches, and never blocks.
+    Returns ("commit" | "stop", reason)."""
+    mine = set(own.nullifiers)
+    for r in sorted(_effective(records, today), key=lambda r: r.seq):
+        if r.seq >= own.seq or r.identity == own.identity or not (mine & set(r.nullifiers)):
+            continue
+        if r.identity in live:
+            return "stop", f"earlier record seq {r.seq} names a live identity"
+        age = own.received - r.received
+        if age < JOIN_PENDING:
+            return "stop", f"earlier record seq {r.seq} is pending ({age} s < JOIN_PENDING)"
+    return "commit", "no earlier record is live or pending"
+
+
+def join_record_usable(record: JoinRecord, now: int) -> bool:
+    """A greeter commits within ``JOIN_PENDING`` of its record or sends a fresh one first; a
+    retried ticket may commit under an existing record for the same identity on the same terms."""
+    return now - record.received <= JOIN_PENDING
+
+
+def join_backstop_decision(
+    *,
+    leaf_kind: int,
+    was_member: bool,
+    entry_yields_nullifier: bool,
+    add_received: int,
+    fetched_to: int | None,
+    identity: bytes,
+    records: list[JoinRecord],
+) -> tuple[str, str]:
+    """Section 2.5 step 4 (RU1): a greeter removes a leaf that was added with no join-record only
+    when every condition holds: a kind 1 (human) leaf; its identity was not in the all-members
+    group before the Add; the context's ``entry`` yields a nullifier; the organizers group has
+    been fetched to a receive time at least ``JOIN_GRACE`` past the Add commit; and no record
+    names the identity. Returns ("remove" | "keep", reason)."""
+    if not entry_yields_nullifier:
+        return "keep", "entry is [0]: no record exists in this context"
+    if leaf_kind != 1:
+        return "keep", "not a human leaf"
+    if was_member:
+        return "keep", "a new device of an identity that is already a member"
+    if any(r.identity == identity for r in records):
+        return "keep", "a join-record names this identity"
+    if fetched_to is None:
+        return "keep", "the organizers group could not be fetched: do nothing"
+    if fetched_to - add_received < JOIN_GRACE:
+        return "keep", f"fetched only {fetched_to - add_received} s past the Add (< JOIN_GRACE)"
+    return "remove", "human leaf of a new identity with no join-record after JOIN_GRACE"
+
+
+def join_duplicates_to_remove(
+    records: list[JoinRecord], live: set[bytes], today: int | None = None
+) -> list[bytes]:
+    """Backstop of 2.5 step 4: of two live identities whose records share a nullifier, the one
+    whose ``join-record`` has the higher delivery-service sequence number is removed, so every
+    greeter removes the same one. With records sent before commits (RT4) this should not
+    arise; it remains for a greeter that committed against the rule.
+    Returns the identities to remove, in the order found (sorted by seq)."""
+    out: list[bytes] = []
+    live_records = sorted(
+        (r for r in _effective(records, today) if r.identity in live), key=lambda r: r.seq
+    )
+    for i, r in enumerate(live_records):
+        for earlier in live_records[:i]:
+            if set(r.nullifiers) & set(earlier.nullifiers) and earlier.identity not in out:
+                if r.identity not in out:
+                    out.append(r.identity)
+                break
+    return out
+
+
+def join_records_prune(records: list[JoinRecord], live: set[bytes], today: int) -> list[JoinRecord]:
+    """5.17: a record is deleted when its identity leaves the all-members group, and MAY be
+    deleted once its ``day`` is more than 396 days old. The reference deletes both; deletion of
+    an old record is advisory, since ``join_record_expired`` already makes it inert."""
+    return [r for r in records if r.identity in live and today - r.day <= JOIN_RECORD_MAX_AGE_DAYS]
 
 
 # ---------------------------------------------------------------- roles signature (5.8)

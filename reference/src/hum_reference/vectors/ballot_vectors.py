@@ -13,7 +13,7 @@ import hashlib
 import math
 
 from .. import ballot as bl
-from .. import cbor
+from .. import cbor, fixtures, services
 from .. import manifest as m
 from .. import release as rmath
 from ..bodies import deck as dk
@@ -485,6 +485,45 @@ def generate() -> list[File]:
             "check_absent": absent,
         },
     )
+    from ..keys import key_from_label
+
+    leader_keys = {
+        fixtures.fixed_bytes("leader-sign-1", 8): key_from_label("leader-sign-1"),
+        fixtures.fixed_bytes("leader-sign-2", 8): key_from_label("leader-sign-2"),
+    }
+    kids = sorted(leader_keys)
+    task0 = services.task_id(lineage_full, 0, 0)
+    sig = services.receipt_sign(leader_keys[kids[0]], task0, leaf)
+    rcpt = services.receipt_body(leaf, sig, kids[0])
+    pubs = {k: v.public for k, v in leader_keys.items()}
+    assert services.verify_receipt_body(rcpt, pubs, task0)
+    rcpt_other = services.receipt_body(leaf, sig, kids[1])
+    assert not services.verify_receipt_body(rcpt_other, pubs, task0)
+    f.add(
+        "ballot-receipt-kid",
+        "A receipt {0: leaf, 1: signature, 2: kid}, verified under the Leader keyset's sign key "
+        "that kid names",
+        "Receipts",
+        {
+            "leader_sign_keys": {hexify(k): hexify(v.public) for k, v in leader_keys.items()},
+            "task_id": hexify(task0),
+            "leaf": hexify(leaf),
+            "receipt": hexify(rcpt),
+        },
+        {"view": {"leaf": hexify(leaf), "signature": hexify(sig), "kid": hexify(kids[0])}, "verifies": True},
+    )  # fmt: skip
+    f.add(
+        "ballot-receipt-kid",
+        "The same signature with another listed kid: verified under that key, it fails",
+        "Receipts",
+        {
+            "leader_sign_keys": {hexify(k): hexify(v.public) for k, v in leader_keys.items()},
+            "task_id": hexify(task0),
+            "leaf": hexify(leaf),
+            "receipt": hexify(rcpt_other),
+        },
+        rejection={"step": None, "check": "receipt-verify", "reason": "kid names a key that did not sign"},
+    )  # fmt: skip
     disp = bl.Intake(CLOSES)
     disp.round0(b0, o1, CLOSES - 100)
     disp.round0(b0b, o1, CLOSES - 50)
@@ -542,13 +581,13 @@ def generate() -> list[File]:
     reject(
         f,
         "ballot-invalid-B1-presentation-9k",
-        "a 9 KiB presentation",
+        "a 9 KiB presentation: too_large, services.md intake check 1",
         {"presentation_bytes": 9216},
         lambda: bl.unframe(
             bl.frame(cbor.encode(bl.ballot_map(full.cid, 0, h("n"), payload, bytes(9216))))
         ),
         "B1",
-        "malformed",
+        "too_large",
     )
     reject(
         f,

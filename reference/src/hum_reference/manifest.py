@@ -303,6 +303,12 @@ TYPE_SCHEMAS: dict[str, Callable[[dict[int, Any]], None]] = {}
 TYPE_RULES: dict[str, Callable[[Resolved], None]] = {}
 # Step-6 replacements: (view, decoded COSE signatures or None, keyset body, revoked) -> None.
 SIGNATURE_CHECKS: dict[str, Callable[..., None]] = {}
+# Step-7 ledger-of-record hooks: (view) -> the log authority the inclusion proof must be
+# against, or None when the context cannot be read yet (steps 8 and 9 then report that).
+# `deck` and `release` manifests must be proven in the context's ledger of record whichever
+# log the phone fetched the bundle from (services.md "Submitting a manifest"; release.md R10;
+# context.md "Log entries"; ADR 0103).
+RECORD_LOGS: dict[str, Callable[[Resolved], bytes | None]] = {}
 
 
 def register(
@@ -311,6 +317,7 @@ def register(
     schema: Callable[[dict[int, Any]], None] | None = None,
     rules: Callable[[Resolved], None] | None = None,
     signatures: Callable[..., None] | None = None,
+    record_log: Callable[[Resolved], bytes | None] | None = None,
 ) -> None:
     if schema is not None:
         TYPE_SCHEMAS[type_] = schema
@@ -318,6 +325,8 @@ def register(
         TYPE_RULES[type_] = rules
     if signatures is not None:
         SIGNATURE_CHECKS[type_] = signatures
+    if record_log is not None:
+        RECORD_LOGS[type_] = record_log
 
 
 # ---------------------------------------------------------------- verification
@@ -539,6 +548,11 @@ def _verify_log(ctx: VerificationContext, bundle: Bundle, env: dict[int, Any]) -
     cp = note.checkpoint
     if proof.log != ctx.log_authority or cp.origin != log.log_origin(ctx.log_authority):
         raise Rejection(7, "proof is not from the accepted log")
+    record_of = RECORD_LOGS.get(env[TYPE])
+    if record_of is not None:
+        record = record_of(Resolved(ctx, bundle, env, proof.position))
+        if record is not None and proof.log != record:
+            raise Rejection(7, "proof is not against the context's ledger of record")
     leaf = log.entry_leaf(
         bundle.cid, env[TYPE], env.get(AUTHORITY, bundle.cid), env.get(LINEAGE), env[VERSION]
     )

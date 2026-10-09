@@ -20,6 +20,7 @@ from .. import manifest as m
 from ..bodies import context as c
 from ..bodies import trust_list as tl
 from ..bodies import verifier as vf
+from ..cid import cid as compute_cid
 from ..keys import SigningKey, key_from_label
 from . import File, hexify, jsonable
 from .manifest_vectors import bundle_json
@@ -256,6 +257,19 @@ class World:
                 {**erefs, "parent": self.parent.cid},
             ),
         )
+        dbody = copy.deepcopy(obody)
+        dbody[c.RESOLVERS] = [compute_cid(cbor.encode(b"resolver authority"))]
+        dbody[c.RELAYS] = [
+            compute_cid(cbor.encode(b"relay authority A")),
+            compute_cid(cbor.encode(b"relay authority B")),
+        ]
+        self.case(
+            "valid-discovery",
+            "the open context plus resolvers (key 20, one entry) and relays (key 21, two entries "
+            "under their own authorities)",
+            None,
+            self.log("context-valid-discovery", self.context_env(dbody, orefs)),
+        )
         cbody = copy.deepcopy(obody)
         cbody[c.COUNT] = {c.CNT_RHO_MAX: [1, 400]}
         self.case(
@@ -329,7 +343,13 @@ class World:
         area1 = leaf("area", [c.PRED_SET, [1]])
         # C1
         bad("C1", "missing-logs", "logs absent", lambda b, r: b.pop(c.LOGS))
-        bad("C1", "unknown-key", "unknown body key 20", lambda b, r: b.__setitem__(20, 1))
+        bad("C1", "unknown-key", "unknown body key 22", lambda b, r: b.__setitem__(22, 1))
+        bad(
+            "C1",
+            "relays-not-auth",
+            "relays holding a 32-byte string that is not a CID",
+            lambda b, r: b.__setitem__(c.RELAYS, [fixtures.fixed_bytes("not-a-cid", 32)]),
+        )
         bad(
             "C1",
             "rat-not-lowest",
@@ -521,6 +541,39 @@ class World:
             "the same store twice",
             lambda b, r: b.__setitem__(c.STORES, b[c.STORES] * 2),
         )
+        relay_a = compute_cid(cbor.encode(b"relay authority A"))
+        bad(
+            "C7",
+            "duplicate-relay",
+            "the same relay twice",
+            lambda b, r: b.__setitem__(c.RELAYS, [relay_a, relay_a]),
+        )
+        bad(
+            "C7",
+            "five-relays",
+            "five relays (the limit is 4)",
+            lambda b, r: b.__setitem__(
+                c.RELAYS, [compute_cid(cbor.encode(f"relay {i}".encode())) for i in range(5)]
+            ),
+        )
+        bad(
+            "C7",
+            "empty-resolvers",
+            "an empty resolvers array (1..8 when present)",
+            lambda b, r: b.__setitem__(c.RESOLVERS, []),
+        )
+        bad(
+            "C7",
+            "relay-is-leader",
+            "a relay equal to the context's Leader authority (services.md O-5, the lookup-free part)",
+            lambda b, r: b.__setitem__(c.RELAYS, [b[c.AGGREGATORS][0]]),
+        )
+        bad(
+            "C7",
+            "relay-is-delivery",
+            "a relay equal to chat.delivery",
+            lambda b, r: b.__setitem__(c.RELAYS, [b[c.CHAT][c.CH_DELIVERY]]),
+        )
         # C8
         bad(
             "C8",
@@ -618,6 +671,42 @@ class World:
             "changes-sealed",
             "version 2 changes sealed",
             lambda b: (b.__setitem__(c.SEALED, False), b.pop(c.ABOUT_EPOCH)),
+        )
+        other_log = compute_cid(cbor.encode(b"another log authority"))
+        other_witnesses = [fixtures.fixed_bytes(f"other-witness-{i}", 32) for i in range(3)]
+        badv2(
+            "C11",
+            "changes-log0",
+            "version 2 changes logs[0].log (the ledger of record is frozen from version 1; "
+            "TS7 option a)",
+            lambda b: b[c.LOGS][0].__setitem__(c.L_LOG, other_log),
+        )
+        badv2(
+            "C11",
+            "swaps-logs",
+            "version 2 swaps the first two logs entries: the second log becomes logs[0]",
+            lambda b: b.__setitem__(c.LOGS, [b[c.LOGS][1], b[c.LOGS][0]]),
+            v1_changes={
+                c.LOGS: [
+                    {c.L_LOG: self.w.log_authority, c.L_WITNESSES: self.witnesses3},
+                    {c.L_LOG: other_log, c.L_WITNESSES: other_witnesses},
+                ]
+            },
+        )
+        body1 = copy.deepcopy(ebody)
+        body1[c.NAME] = "Example for C11 valid logs change"
+        v1_logs = self.log("context-v1-for-C11-valid-logs", self.context_env(body1, erefs))
+        body2 = copy.deepcopy(body1)
+        body2[c.LOGS] = [
+            {c.L_LOG: self.w.log_authority, c.L_WITNESSES: other_witnesses},
+            {c.L_LOG: other_log, c.L_WITNESSES: self.witnesses3},
+        ]
+        self.case(
+            "valid-v2-logs-witnesses-and-second-log",
+            "version 2 keeps logs[0].log, replaces logs[0].witnesses and adds a second log: "
+            "valid under C11",
+            None,
+            self.v2("context-valid-v2-logs", v1_logs, body2, erefs),
         )
         bad(
             "C11",

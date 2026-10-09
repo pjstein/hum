@@ -81,9 +81,11 @@ KIND, AUTHOR, EDIT_KEY, STATE, SEALED, EPOCH, LANG, ORIGIN, ASSISTED, MODERATION
 REQUIRED = {KIND, AUTHOR, EDIT_KEY, STATE, SEALED}
 ALL_KEYS = set(range(10))
 
-A_FORM, A_KEY, A_SIG, A_SLOT, A_NULLIFIER, A_PROOF, A_EDITSIG = range(7)
+A_FORM, A_KEY, A_SIG, A_SLOT, A_UNUSED_4, A_PROOF, A_EDITSIG = range(7)
+# Key 4 was ``nullifier``; removed by ADR 0104 and never reused. A map carrying it is invalid.
+A_KEYS = {A_FORM, A_KEY, A_SIG, A_SLOT, A_PROOF, A_EDITSIG}
 
-UNSIGNED_WINDOW_MIN = 86_400
+AUTHOR_WINDOW = ctxspec.AUTHOR_WINDOW  # the one window for every author form (context.md)
 UNSIGNED_PER_WINDOW_MAX = 20
 SIGNED_PER_WINDOW_MAX = 60
 AGENT_OBJECTS_MAX = 20
@@ -151,7 +153,6 @@ class Authorship:
         key: bytes | None = None,
         sig: bytes | None = None,
         slot: int | None = None,
-        nullifier: bytes | None = None,
         proof: bytes | None = None,
         edit_sig: bytes | None = None,
     ) -> None:
@@ -159,7 +160,6 @@ class Authorship:
         self.key = key
         self.sig = sig
         self.slot = slot
-        self.nullifier = nullifier
         self.proof = proof
         self.edit_sig = edit_sig
 
@@ -169,7 +169,6 @@ class Authorship:
             (A_KEY, self.key),
             (A_SIG, self.sig),
             (A_SLOT, self.slot),
-            (A_NULLIFIER, self.nullifier),
             (A_PROOF, self.proof),
             (A_EDITSIG, self.edit_sig),
         ):
@@ -187,7 +186,10 @@ class Authorship:
         except cbor.CborError as e:
             raise TypeRule("IM-6", f"authorship is not deterministic CBOR: {e}") from e
         require(isinstance(item, dict) and A_FORM in item, "IM-6", "authorship shape")
-        no_unknown_keys(item, set(range(7)), "IM-6", "authorship")
+        require(
+            A_UNUSED_4 not in item, "IM-6", "authorship key 4 is removed (ADR 0104) and not reused"
+        )
+        no_unknown_keys(item, A_KEYS, "IM-6", "authorship")
         form = item[A_FORM]
         require(form in (MEMBER, ANONYMOUS, AGENT), "IM-6", "authorship form")
         a = cls(
@@ -195,14 +197,13 @@ class Authorship:
             key=item.get(A_KEY),
             sig=item.get(A_SIG),
             slot=item.get(A_SLOT),
-            nullifier=item.get(A_NULLIFIER),
             proof=item.get(A_PROOF),
             edit_sig=item.get(A_EDITSIG),
         )
         present = {k for k in item if k != A_FORM and k != A_EDITSIG}
         expected = {
-            MEMBER: {A_KEY, A_SIG, A_NULLIFIER, A_PROOF},
-            ANONYMOUS: {A_SLOT, A_NULLIFIER, A_PROOF},
+            MEMBER: {A_KEY, A_SIG, A_PROOF},
+            ANONYMOUS: {A_SLOT, A_PROOF},
             AGENT: {A_SIG},
         }
         require(
@@ -216,8 +217,6 @@ class Authorship:
             require(is_bytes(a.sig, 64), "IM-6", "authorship sig must be 64 bytes")
         if a.slot is not None:
             require(is_uint(a.slot), "IM-6", "slot must be a uint")
-        if a.nullifier is not None:
-            require(is_bytes(a.nullifier, 32), "IM-6", "nullifier must be 32 bytes")
         if a.proof is not None:
             require(is_bytes(a.proof) and len(a.proof) > 0, "IM-6", "proof must be non-empty bytes")
         if a.edit_sig is not None:
@@ -285,7 +284,7 @@ def _context_lineage(view: m.Resolved) -> bytes:
 def _effective_limits(ctx_body: dict[int, Any]) -> dict[str, int]:
     mp = ctx_body.get(ctxspec.MAP, {})
     return {
-        "window": UNSIGNED_WINDOW_MIN,  # the window is the protocol constant (context.md)
+        "window": AUTHOR_WINDOW,  # the window is the protocol constant (context.md)
         "unsigned": min(
             mp.get(ctxspec.MAP_UNSIGNED, UNSIGNED_PER_WINDOW_MAX), UNSIGNED_PER_WINDOW_MAX
         ),
@@ -407,10 +406,11 @@ def membership_proof(
 ) -> dict[str, Any]:
     """IM-6's membership proof: ``a.proof`` is a credentials.md presentation of the pinned
     context's ``entry`` policy, verified with the logged-presentation rule (the object's
-    ``issued`` and log position, no clock). The authorship ``nullifier`` is the primary one:
-    the nullifier of the card the context's designated ``nullifier`` leaf (context.md key 19,
-    C6) names. Returns what ``verify_presentation`` returns; ``"nullifiers"`` holds one per
-    card, all of which IM-7 counts."""
+    ``issued`` and log position, no clock). The ``authorship`` map carries no nullifier (ADR
+    0104): every nullifier is derived from ``proof``, the primary one being that of the card the
+    context's designated ``nullifier`` leaf (context.md key 19, C6) names. Returns what
+    ``verify_presentation`` returns; ``"nullifiers"`` holds one per card, all of which IM-7
+    counts."""
     env = view.env
     nul = ctx_env[m.BODY].get(ctxspec.NULLIFIER)
     designated = (list(nul[0]), nul[1]) if nul is not None else None
@@ -442,25 +442,19 @@ def membership_proof(
     except cr.PresentationError as e:
         raise TypeRule("IM-6", f"membership proof fails {e.rule}: {e.reason}") from e
     require(out["primary"] is not None, "IM-6", "the entry policy yields no nullifier")
-    require(
-        a.nullifier == out["primary"], "IM-6", "authorship nullifier is not the designated card's"
-    )
     return out
 
 
 def _all_nullifiers(a: Authorship | None) -> set[bytes]:
-    """Every nullifier an authorship's presentation yields, one per card, plus the primary it
-    carries (credentials.md, "Every nullifier counts")."""
-    if a is None or a.nullifier is None:
+    """Every nullifier an authorship's presentation yields, one per card, all derived from
+    ``proof`` (credentials.md, "Every nullifier counts"; ADR 0104)."""
+    if a is None or a.proof is None:
         return set()
-    out = {a.nullifier}
-    if a.proof is not None:
-        try:
-            pres = cr.Presentation.decode(a.proof)
-        except cr.PresentationError:
-            return out
-        out.update(cr.nullifier(cp.pseudonym) for cp in pres.creds)
-    return out
+    try:
+        pres = cr.Presentation.decode(a.proof)
+    except cr.PresentationError:
+        return set()
+    return {cr.nullifier(cp.pseudonym) for cp in pres.creds}
 
 
 def log_submission_check(

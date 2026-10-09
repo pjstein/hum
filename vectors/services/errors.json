@@ -283,7 +283,48 @@
    }
   },
   {
-   "id": "services/errors/error-reject-detail-leak-018",
+   "id": "services/errors/error-rejected-host-018",
+   "description": "A verifier host's rejection carries the masked verifier-runtime code as rule vr-0",
+   "section": "Errors",
+   "inputs": {
+    "code": "rejected",
+    "masked_code": 0
+   },
+   "expected": {
+    "status": 422,
+    "rule": "vr-0",
+    "body": "a2006872656a6563746564036476722d30"
+   }
+  },
+  {
+   "id": "services/errors/error-rejected-host-019",
+   "description": "A verifier host's rejection carries the masked verifier-runtime code as rule vr-3",
+   "section": "Errors",
+   "inputs": {
+    "code": "rejected",
+    "masked_code": 3
+   },
+   "expected": {
+    "status": 422,
+    "rule": "vr-3",
+    "body": "a2006872656a6563746564036476722d33"
+   }
+  },
+  {
+   "id": "services/errors/error-too_large-presentation-020",
+   "description": "A ballot whose presentation is over 8 KiB: too_large (services.md intake check 1, ballot.md B1)",
+   "section": "Errors",
+   "inputs": {
+    "code": "too_large",
+    "presentation_bytes": 9216
+   },
+   "expected": {
+    "status": 413,
+    "body": "a10069746f6f5f6c61726765"
+   }
+  },
+  {
+   "id": "services/errors/error-reject-detail-leak-021",
    "description": "A detail that is not a fixed string (a CID text) is refused by the encoder (E-1)",
    "section": "Errors",
    "inputs": {

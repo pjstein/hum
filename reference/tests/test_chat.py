@@ -107,3 +107,54 @@ def test_external_part_mapping_and_reverse_rule():
         with pytest.raises(chat.ChatError):
             chat.external_part_to_reference(bad)
     _ = fixtures  # keep the fixture import meaningful for determinism checks elsewhere
+
+
+def test_join_precommit_and_backstop_rules():
+    n = bytes([1]) * 32
+    a, b = bytes([2]) * 32, bytes([3]) * 32
+    earlier = chat.JoinRecord((n,), a, 20700, 10, 1_000_000)
+    own = chat.JoinRecord((n,), b, 20700, 20, 1_000_000 + chat.JOIN_PENDING)
+    # live identity blocks; pending blocks; inert commits; same identity never blocks
+    assert chat.join_precommit_decision(own, [earlier, own], {a})[0] == "stop"
+    pending = chat.JoinRecord((n,), a, 20700, 10, own.received - chat.JOIN_PENDING + 1)
+    assert chat.join_precommit_decision(own, [pending, own], set())[0] == "stop"
+    assert chat.join_precommit_decision(own, [earlier, own], set())[0] == "commit"
+    same = chat.JoinRecord((n,), b, 20700, 10, own.received - 1)
+    assert chat.join_precommit_decision(own, [same, own], set())[0] == "commit"
+    assert chat.join_record_usable(earlier, earlier.received + chat.JOIN_PENDING)
+    assert not chat.join_record_usable(earlier, earlier.received + chat.JOIN_PENDING + 1)
+    base = dict(
+        leaf_kind=1,
+        was_member=False,
+        entry_yields_nullifier=True,
+        add_received=5_000,
+        fetched_to=5_000 + chat.JOIN_GRACE,
+        identity=b,
+        records=[],
+    )
+    assert chat.join_backstop_decision(**base)[0] == "remove"
+    for over in (
+        {"fetched_to": 5_000 + chat.JOIN_GRACE - 1},
+        {"fetched_to": None},
+        {"entry_yields_nullifier": False},
+        {"leaf_kind": 2},
+        {"was_member": True},
+        {"records": [own]},
+    ):
+        assert chat.join_backstop_decision(**{**base, **over})[0] == "keep", over
+
+
+def test_join_record_expired_is_inert_and_omitted():
+    n = bytes([1]) * 32
+    a, b = bytes([2]) * 32, bytes([3]) * 32
+    old = chat.JoinRecord((n,), a, 20000, 1, 0)
+    edge = chat.JoinRecord((n,), a, 20001, 2, 0)
+    today = 20000 + chat.JOIN_RECORD_MAX_AGE_DAYS + 1
+    assert chat.join_record_expired(old, today) and not chat.join_record_expired(edge, today)
+    assert chat.join_ticket_decision([n], [old], {a}, today)[0] == "admit"
+    assert chat.join_ticket_decision([n], [edge], {a}, today)[0] == "discard"
+    assert chat.join_ticket_decision([n], [old], {a})[0] == "discard"
+    own = chat.JoinRecord((n,), b, today, 9, 10)
+    assert chat.join_precommit_decision(own, [old, own], {a}, today)[0] == "commit"
+    assert chat.join_duplicates_to_remove([old, own], {a, b}, today) == []
+    assert chat.join_snapshot_body([old, edge], today)[4] == [[[n], a, 20001]]

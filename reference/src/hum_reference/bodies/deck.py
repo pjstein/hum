@@ -179,8 +179,12 @@ def plan_tallies_only(cap: int, rho: Fraction = c.RHO_MAX, *, count: bool = True
     return plan(rho, _split(rho, {TALLIES: Fraction(1)}, extras), cap, **kw)
 
 
-def plan_ibis(cap: int, rho: Fraction = c.RHO_MAX, *, cap_movement=10, cap_ratings=10, **kw):
+def plan_ibis(
+    cap: int, rho: Fraction = c.RHO_MAX, *, cap_movement=10, cap_ratings=10, count=False, **kw
+):
     extras = {RECEIPTS: Fraction(1, 200)}
+    if count:
+        extras[COUNT] = Fraction(1, 200)
     return plan(
         rho,
         _split(rho, IBIS_SHARES, extras),
@@ -200,11 +204,17 @@ def plan_breakdown(cap: int, source: list[int], name: str, values: list[int], **
     return plan(rho, _split(rho, shares, extras), cap, breakdown=(source, name, values), **kw)
 
 
-def plan_rating(cap: int = 20, rho: Fraction = PLAN_RATING_RHO_MAX, **kw) -> dict:
-    """Parts 0, 3 and 8: tallies 0.4 and groups 0.6 of what is left after part 8 (take.md)."""
+def plan_rating(
+    cap: int = 20, rho: Fraction = PLAN_RATING_RHO_MAX, *, min_voters: int = c.GATE_TALLIES, **kw
+) -> dict:
+    """Parts 0, 3 and 8: tallies 0.4 and groups 0.6 of what is left after part 8 (take.md).
+    ``min_voters`` = max(GATE_TALLIES, the context's minimum); above GATE_TALLIES the plan sets
+    gates[0] to the same value so D11 holds (deck.md D15, ADR 0103)."""
     extras = {RECEIPTS: Fraction(1, 400)}
     shares = {TALLIES: Fraction(2, 5), GROUPS: Fraction(3, 5)}
-    return plan(rho, _split(rho, shares, extras), cap, c.GATE_TALLIES, **kw)
+    if min_voters > c.GATE_TALLIES and "gates" not in kw:
+        kw["gates"] = {TALLIES: min_voters}
+    return plan(rho, _split(rho, shares, extras), cap, min_voters, **kw)
 
 
 def card(kind: int, topic: int, origin: int = ORIGIN_LOCAL, epoch: int | None = None) -> dict:
@@ -586,6 +596,10 @@ def rules(view: m.Resolved) -> None:
         require(g >= GATE_OF[part], "D11", f"gate for part {part} below the protocol gate")
     for part in parts:
         g = effective_gate(p, part)
+        if rating and part == GROUPS:
+            # a rating deck's part 3 is gated per group cell (GATE_CELL) in post-processing,
+            # like part 7, so it is outside the minVoters test (ADR 0103, TS6)
+            continue
         if part in GATED and g is not None:
             require(p[P_MIN_VOTERS] <= g, "D11", f"minVoters above the gate of part {part}")
     require(
@@ -640,6 +654,16 @@ def rules(view: m.Resolved) -> None:
     else:
         require("source" not in refs, "D15", "vote deck with a source ref")
         require(all(cd[C_KIND] != CARD_TAKE for cd in cards), "D15", "take card in a vote deck")
+    # D16, the clock-free half (ADR 0103 item 2): a deck version is invalid when a release
+    # version that pins its lineage has a lower index in the context's ledger of record
+    record = ctx_body[c.LOGS][0][c.L_LOG]
+    own_lineage = env.get(m.LINEAGE, view.bundle.cid)
+    for pos, rel, bnd in view.all_of_type("release"):
+        if bnd.proof.log != record or (view.position is not None and pos >= view.position):
+            continue
+        pinned = rel[m.REFS].get("deck")
+        if pinned is not None and view.lineage_of(pinned) == own_lineage:
+            raise TypeRule("D16", f"a release pinning this lineage is logged earlier (index {pos})")
 
 
 def log_check(env: dict[int, Any], prev_env: dict[int, Any] | None, log_now: int):
@@ -674,7 +698,20 @@ def _rating_rules(view, b, p, parts, cards, card_cids, side_refs, ctx_lineage) -
     want = [cid for _, cid in eligible][:RATING_CARDS_MAX]
     got = [card_cids[i] for i in range(len(cards))]
     require(got == want, "D15", "cards are not exactly the eligible takes in log order")
-    # parts are exactly 0, 3 and 8 by D8; minVoters is pinned to GATE_TALLIES by D10 and D11
+    # parts are exactly 0, 3 and 8 by D8
+    floor_min = c.floors_of(view.manifest(refs["context"])[m.BODY])["minVoters"]
+    want_min = max(c.GATE_TALLIES, floor_min)
+    require(
+        p[P_MIN_VOTERS] == want_min,
+        "D15",
+        f"rating minVoters must be max(GATE_TALLIES, the context's minimum) = {want_min}",
+    )
+    if want_min > c.GATE_TALLIES:
+        require(
+            p.get(P_GATES, {}).get(TALLIES) == want_min,
+            "D15",
+            "a rating deck above GATE_TALLIES sets gates[0] to its minVoters",
+        )
     require(rat_value(p[P_RHO]) <= PLAN_RATING_RHO_MAX, "D15", "rating rho above 1/20")
     require(p[P_CAP] <= RATING_CAP_MAX, "D15", "rating cap above 20")
     require(len(b[TOPICS]) == 1, "D15", "rating deck topics must have one entry")
@@ -706,4 +743,15 @@ def schema(env: dict[int, Any]) -> None:
         raise TypeRule("D1", "body must be a map")
 
 
-m.register("deck", schema=schema, rules=rules)
+def record_log(view: m.Resolved) -> bytes | None:
+    """Step 7 hook: the ledger of record of the context this deck names (the first entry of
+    its ``logs``), or None when the context is not held (step 9 reports that)."""
+    ctx_cid = view.env[m.REFS].get("context")
+    ctx_env = view.manifest(ctx_cid) if isinstance(ctx_cid, bytes) else None
+    try:
+        return ctx_env[m.BODY][c.LOGS][0][c.L_LOG] if ctx_env is not None else None
+    except (KeyError, IndexError, TypeError):
+        return None
+
+
+m.register("deck", schema=schema, rules=rules, record_log=record_log)

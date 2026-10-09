@@ -11,7 +11,7 @@ def test_context_vectors_counts_and_determinism():
     manifests = by_name["manifests"]
     accepting = [c for c in manifests.cases if "expected" in c]
     rejecting = [c for c in manifests.cases if "rejection" in c]
-    assert len(accepting) == 5
+    assert len(accepting) == 7  # valid-discovery (run 5), valid-v2-logs (C11, run 6)
     rules = {c["rejection"]["rule"] for c in rejecting}
     assert rules == set(RULES)
     assert sum(1 for c in rejecting if c["rejection"]["rule"] == "C16") == 4

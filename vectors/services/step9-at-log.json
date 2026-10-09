@@ -15,12 +15,12 @@
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
       "index": 63,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\netFTQ5DJIhRkjFvjdLAaYM2O+EWSu1AvnOsbT+cmjOg=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBlpsk9GrxNoP1xFLP5gNeu/xoCY7Hhfq6UbFm6FaqzrLq0RgXKHUU5DPrXXBq1QRctdxXVHEhCm32NJZ24RIKAM=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAOp44HbLc11SMyGw+KqOBwLuC1bB2JYkvoak8yF8cxlOzaZaJ0VK0VuUtudeKoyIhhZyLCR24KcziuJ6c03GdCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAVV7kkUDXfE6nlnGXXqxQHw8R7WTFS6zrruUjj8c64QLDKdsQ0J2wwShD9L+6GX4aUPWS+EYfISesXRkrOGPGCA==\n",
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\nLW8U5zukcMyhAd8fjUVu7q3oa6ck1M0KS9aRcEeR4SI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBl6TSQwp6RgLHnZJWsZjlkRqgRaBzHZDQdLPUHKbElBiO0M69txt85fVdTYnIk8LyXaqiJQFaxBuPjhvpG+IdA0=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJADqsKVuxcjnwAjtMWBkpWIy9NIejlll7zWTe9IKAiyV2rOgaBg9ywS77lR5uuGdrluGN30s1/HVPobGcgZdf1Dg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAVSDReGuRimDX3JDFDvjo4PzL8o4apZyZbDfclwCIXDxPtzH+9+IQJg0i6hpbogLeubm01Q/doFTS1yB8OallDA==\n",
       "path": [
        "a8dc5c2056ac1c8d160e932fd69a677970422d88b3a4988d67695b464b23380e",
        "b1bb61eaebf907e73cce17ad9ad02c2accd8816ce3878252a352762d8e46d7b6",
        "36162dbca216b508b07a81b122970c90465455e706b29c12255fe48c5e5f1a2c",
-       "2a63cc8c4879c14d87b02d9858c9310d01c933558be402291a269aed5303742d",
+       "30c28bcd0e8ab0c9566a2ad5f46a7953de8fdb4ccb86433911cb7ffa2e9c7bc7",
        "dbf696dfe7afc680bf07c76219120774e12e48a8b9412d6b8b9ceea1a25f0908",
        "6e5c821bc0f2f608bc521559e29e613c26b71e7e52416b0fc786706d280203bc",
        "754e3c3bcc7eeec0493b7ca844360f0c81c4e58f663d5b6ff348421c48c016fb"
@@ -44,10 +44,10 @@
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
       "index": 64,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\netFTQ5DJIhRkjFvjdLAaYM2O+EWSu1AvnOsbT+cmjOg=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBlpsk9GrxNoP1xFLP5gNeu/xoCY7Hhfq6UbFm6FaqzrLq0RgXKHUU5DPrXXBq1QRctdxXVHEhCm32NJZ24RIKAM=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAOp44HbLc11SMyGw+KqOBwLuC1bB2JYkvoak8yF8cxlOzaZaJ0VK0VuUtudeKoyIhhZyLCR24KcziuJ6c03GdCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAVV7kkUDXfE6nlnGXXqxQHw8R7WTFS6zrruUjj8c64QLDKdsQ0J2wwShD9L+6GX4aUPWS+EYfISesXRkrOGPGCA==\n",
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\nLW8U5zukcMyhAd8fjUVu7q3oa6ck1M0KS9aRcEeR4SI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBl6TSQwp6RgLHnZJWsZjlkRqgRaBzHZDQdLPUHKbElBiO0M69txt85fVdTYnIk8LyXaqiJQFaxBuPjhvpG+IdA0=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJADqsKVuxcjnwAjtMWBkpWIy9NIejlll7zWTe9IKAiyV2rOgaBg9ywS77lR5uuGdrluGN30s1/HVPobGcgZdf1Dg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAVSDReGuRimDX3JDFDvjo4PzL8o4apZyZbDfclwCIXDxPtzH+9+IQJg0i6hpbogLeubm01Q/doFTS1yB8OallDA==\n",
       "path": [
        "f5e3fdc4b6f282674cbac96b8849a9dc3ed53a45a1fbf75afa94340aae8d750f",
-       "8a7f21a02d8df26b31b77cbbfb325423171af7630457402a46ea435aed78927b"
+       "d13690b82c74ea7727f11d5b69caa32a5bfc4d1f3f93a352c06f65bc8d5fd6f3"
       ]
      }
     },
@@ -69,10 +69,10 @@
      "log": {
       "log": "017733f20c8357b223c8d480c421edf4aa84b530ae500e97e78a5216f55ba84f53",
       "index": 65,
-      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\netFTQ5DJIhRkjFvjdLAaYM2O+EWSu1AvnOsbT+cmjOg=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBlpsk9GrxNoP1xFLP5gNeu/xoCY7Hhfq6UbFm6FaqzrLq0RgXKHUU5DPrXXBq1QRctdxXVHEhCm32NJZ24RIKAM=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJAOp44HbLc11SMyGw+KqOBwLuC1bB2JYkvoak8yF8cxlOzaZaJ0VK0VuUtudeKoyIhhZyLCR24KcziuJ6c03GdCA==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAVV7kkUDXfE6nlnGXXqxQHw8R7WTFS6zrruUjj8c64QLDKdsQ0J2wwShD9L+6GX4aUPWS+EYfISesXRkrOGPGCA==\n",
+      "checkpoint": "hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg\n66\nLW8U5zukcMyhAd8fjUVu7q3oa6ck1M0KS9aRcEeR4SI=\n\n\u2014 hum/log/caf3th4qmqnl3ei6i2samiipn6svijnjqvzia5f7hrjjbn5k3vbhvg W+FwBl6TSQwp6RgLHnZJWsZjlkRqgRaBzHZDQdLPUHKbElBiO0M69txt85fVdTYnIk8LyXaqiJQFaxBuPjhvpG+IdA0=\n\u2014 hum/witness/cafuhmymdbammsskwetaq2byqtcj6hdqtypry5ywrtg7igzxue4dl4 RGX2LwAAAABqxHJADqsKVuxcjnwAjtMWBkpWIy9NIejlll7zWTe9IKAiyV2rOgaBg9ywS77lR5uuGdrluGN30s1/HVPobGcgZdf1Dg==\n\u2014 hum/witness/cahjxru33ca3fnzh4sf26752tl5gqoxkwsnkzuh4nfgrxz5yfpmi7u SQUYRAAAAABqxHJAVSDReGuRimDX3JDFDvjo4PzL8o4apZyZbDfclwCIXDxPtzH+9+IQJg0i6hpbogLeubm01Q/doFTS1yB8OallDA==\n",
       "path": [
        "adfa6be3ba1f9e5c4b149dd25f12c6abc3f0d5a8c310377d06929b3ec43bf8a7",
-       "8a7f21a02d8df26b31b77cbbfb325423171af7630457402a46ea435aed78927b"
+       "d13690b82c74ea7727f11d5b69caa32a5bfc4d1f3f93a352c06f65bc8d5fd6f3"
       ]
      }
     }

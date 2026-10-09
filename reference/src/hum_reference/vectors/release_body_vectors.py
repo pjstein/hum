@@ -42,6 +42,12 @@ class Builder:
         self.wd = wd
         self.cases: list[tuple[str, str, str | None, m.Bundle]] = []  # (name, desc, rule, b)
         self.extra: dict[str, dict] = {}
+        # deck cases this builder creates (D16's clock-free half): (suffix, desc, rule, bundle)
+        self.deck_cases: list[tuple[str, str, str, m.Bundle]] = []
+        # releases logged only in the context's second log (R10): (named key, env, signers)
+        # and their cases (suffix, desc, named key)
+        self.second_log_pending: list[tuple[str, dict, list]] = []
+        self.second_log_cases: list[tuple[str, str, str]] = []
         # (name, desc, bundle, log_now): cases for the ledger's clock check (R13, log_check)
         self.log_cases: list[tuple[str, str, m.Bundle, int]] = []
 
@@ -78,6 +84,7 @@ class Builder:
         desc: str | None = None,
         rule: str | None = None,
         record: bool = True,
+        log=None,
     ) -> m.Bundle:
         wd = self.wd
         deck_env = cbor.decode(deck.envelope)
@@ -106,8 +113,8 @@ class Builder:
             for p in (dk.TALLIES, dk.COUNT, dk.MOVEMENT, dk.RATINGS, dk.BREAKDOWN, dk.RECEIPTS):
                 if p not in plan_parts:
                     continue
-                if below and p not in (dk.TALLIES, dk.COUNT, dk.RECEIPTS):
-                    continue
+                if below and p not in (dk.TALLIES, dk.COUNT):
+                    continue  # ADR 0103: below the minimum only parts 0 and 4 are noised
                 rho_p = plan_parts[p]
                 if p == dk.TALLIES and absorbed:
                     rho_p = sum(
@@ -151,7 +158,7 @@ class Builder:
             if f"t/{t}" not in refs:
                 refs[f"t/{t}"] = self.table_blob(f"{name}-{t}", sealed)
         receipts: dict[int, bytes] = dict(prev_body[rb.RECEIPTS]) if prev_body else {}
-        for r in range(stage):
+        for r in range(stage if unlocked else 0):  # no receipt tree below the minimum
             if r not in receipts:
                 root, root_cid = self.receipt_root(f"{name}-round-{r}")
                 receipts[r] = root
@@ -195,6 +202,11 @@ class Builder:
         )
         if mutate is not None:
             mutate(env)
+        if log is not None:
+            # logged only in the context's second log, after the world is complete: the second
+            # log mirrors every entry of the ledger of record and then holds this release
+            self.second_log_pending.append((f"release-{name}", env, signers or self.signers()))
+            return None
         b = wd.append(f"release-{name}", env, signers or self.signers())
         if record:
             self.cases.append((name, desc or name, rule, b))
@@ -251,7 +263,32 @@ def build_releases(wd) -> Builder:
         "valid-below-minimum",
         d,
         n_hat=80,
-        desc="nHat 80 under minVoters 100: final, unlocked empty, no tables, nHat absent",
+        desc="nHat 80 under minVoters 100: final, unlocked empty, no tables, nHat absent, "
+        "receipts empty and no receipts/0 ref, parts holding 0 and 4 only (no part 8; ADR 0103)",
+    )
+    d = deck("below-minimum-ibis", plan_=dk.plan_ibis(CARDS_, count=True))
+    bld.version(
+        "valid-below-minimum-ibis",
+        d,
+        n_hat=80,
+        desc="an IBIS plan with parts 5 and 6 and the daily count, below the minimum: parts "
+        "holding 0 and 4 only, no receipts, no tables",
+    )
+    d = deck("R13-below-minimum-receipt-root", plan_=tallies_plan)
+
+    def add_root(e):
+        root, root_cid = bld.receipt_root("below-minimum-root")
+        e[m.BODY][rb.RECEIPTS] = {0: root}
+        e[m.REFS]["receipts/0"] = root_cid
+
+    bld.version(
+        "invalid-R13-below-minimum-receipt-root",
+        d,
+        n_hat=80,
+        mutate=add_root,
+        desc="a below-minimum version 1 that carries a receipts/0 root: nothing is published "
+        "below the minimum, a padded leaf count included",
+        rule="R13",
     )
     d = deck("absorbed", plan_=dk.plan_full(CARDS_, cov_statements=CARDS_, absorb=True))
     bld.version(
@@ -817,6 +854,36 @@ def build_releases(wd) -> Builder:
         desc="version 2 issued after the pinned deck version's expires and before a later deck "
         "version's expires",
     )  # fmt: skip
+    # D16, the clock-free half: a deck version 2 logged after release version 1 of its lineage
+    d = deck("D16-after-release", plan_=tallies_plan)
+    bld.version("valid-D16-after-release-v1", d, n_hat=350, desc="version 1 of the release "
+                "whose deck is extended afterwards; valid on its own")  # fmt: skip
+    from .deck_vectors import CLOSES as _CLOSES
+
+    d2 = wd.deck(
+        "for-release-D16-after-release-v2",
+        wd.extend(d, closes=_CLOSES + DAY, expires=_CLOSES + WINDOW + DAY),
+    )
+    bld.deck_cases.append((
+        "deck-invalid-D16-after-release",
+        "deck version 2 logged after release version 1 of the same lineage: invalid for every "
+        "verifier, with no clock (ADR 0103 item 2)",
+        "D16",
+        d2,
+    ))  # fmt: skip
+    # step 7: a release present only in the context's second log (not in the ledger of record)
+    d = deck("step7-second-log", ctx=wd.ctx_two_logs, plan_=tallies_plan)
+    bld.version("step7-not-in-ledger-of-record", d, n_hat=350, record=False, log=wd.w2)
+    bld.second_log_cases.append((
+        "release-invalid-step7-not-in-ledger-of-record",
+        "a release logged only in the context's second listed log (which mirrors every entry "
+        "of the ledger of record), verified by a phone that accepted that log: for release and "
+        "deck manifests step 7's inclusion proof must be against the ledger of record (the "
+        "first entry of logs) whichever log the bundle came from, so it fails at step 7 before "
+        "R10 is reached; a phone following the ledger of record fails step 7 too (the proof is "
+        "not from its accepted log). One expected result: step 7",
+        "release-step7-not-in-ledger-of-record",
+    ))  # fmt: skip
     # R14: four releases at rho 1/4 fit rhoYear 1; the fifth does not
     quarter = dk.plan_tallies_only(CARDS_, rho=Fraction(1, 4))
     for i in range(4):
@@ -940,6 +1007,38 @@ def manifests_file(wd, bld: Builder) -> File:
                 extra=extra,
                 section=S_RULES,
             )
+    # step 7: a release only in the second log. The phone accepted the second log, which holds
+    # every entry of the ledger of record (at index + 1, after its own keyset) and then this
+    # release; it resolves everything from that log and fails step 7 (services.md, "Submitting
+    # a manifest"; release.md R10; conformance.md disagreement 21).
+    for suffix, desc, key in bld.second_log_cases:
+        b = wd.named[key]
+        env = cbor.decode(b.envelope)
+        ctx2 = wd.w2.context(now=NOW)
+        deck_env = cbor.decode(wd.w.bundles[env[m.REFS]["deck"]].envelope)
+        cbody = cbor.decode(wd.w.bundles[deck_env[m.REFS]["context"]].envelope)[m.BODY]
+        inputs = {
+            "bundle": bundle_json(b),
+            "now": NOW,
+            "deck": hexify(env[m.REFS]["deck"]),
+            "body_view": jsonable(env[m.BODY]),
+            "context_logs": [hexify(e[c.L_LOG]) for e in cbody[c.LOGS]],
+            "ledger_of_record": hexify(cbody[c.LOGS][0][c.L_LOG]),
+            "accepted_log": hexify(wd.w2.log_authority),
+            "accepted_log_keyset": bundle_json(wd.w2_keyset),
+            "accepted_log_public_key": hexify(wd.w2.log_public),
+            "accepted_log_entries": "the accepted log's keyset at index 0, then every entry "
+            "of deck/world.json at its index + 1 (same envelope, signatures and authorship), "
+            "then this release; resolve references against that log with its checkpoint",
+            "accepted_log_checkpoint": wd.w2.note().text(),
+        }
+        try:
+            m.verify_bundle(ctx2, b)
+            raise AssertionError(f"{suffix}: accepted")
+        except m.Rejection as e:
+            assert (e.step, e.rule) == (7, None), (suffix, str(e))
+            f.add(f"{suffix}", desc, "Verification step 7, the ledger of record", inputs,
+                  rejection={"step": 7, "reason": e.reason})  # fmt: skip
     # R13's clock half: the ledger refuses a submission once its own clock is past expires
     for name, desc, b, log_now in bld.log_cases:
         env = cbor.decode(b.envelope)

@@ -62,7 +62,8 @@ def _write_readme(out: Path, summary: dict) -> None:
         "release": "`docs/specs/deck.md` (release plan), `docs/specs/release.md` (noise, rounds), "
         "`docs/specs/context.md` (constants, floors)",
         "services": "`docs/specs/services.md`",
-        "chat": "`docs/specs/chat.md` (content types, framing, message ids)",
+        "chat": "`docs/specs/chat.md` (content types, framing, message ids, join records, "
+        "delivery rules)",
         "issue-map": "`docs/specs/issue-map.md`",
         "agent-sponsor": "`docs/specs/agent-sponsor.md`",
         "verifier": "`docs/specs/verifier.md`",

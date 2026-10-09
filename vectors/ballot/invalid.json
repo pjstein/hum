@@ -50,7 +50,7 @@
   },
   {
    "id": "ballot/invalid/ballot-invalid-B1-presentation-9k-004",
-   "description": "a 9 KiB presentation",
+   "description": "a 9 KiB presentation: too_large, services.md intake check 1",
    "section": "Validation rules",
    "inputs": {
     "presentation_bytes": 9216
@@ -59,8 +59,8 @@
     "step": null,
     "check": "ballot-intake",
     "rule": "B1",
-    "error": "malformed",
-    "reason": "presentation over 8 KiB or not bytes"
+    "error": "too_large",
+    "reason": "presentation over 8 KiB"
    }
   },
   {
