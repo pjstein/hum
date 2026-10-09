@@ -75,7 +75,7 @@ An `image` is JPEG or PNG bytes, at most 4 MiB, with EXIF stripped by the phone 
 
 | Function | Signature | Meaning |
 | --- | --- | --- |
-| `decide` | `() -> result<decision, rejection>` | Run once per issuance session, after all required evidence has arrived |
+| `decide` | `() -> result<decision, rejection>` | Run once per issuance session, after all required evidence and the issuance request have arrived and the host has opened each evidence item under the request's hash (`verifier.md`, "Host key"). The module still never sees the request |
 
 ```
 record decision {

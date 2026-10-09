@@ -1,6 +1,8 @@
 # 0103 · What may be published below the voter minimum, and when `closes` may move
 
-**Status:** open, needs the owner (W0-10, 2026-10-06). Item 2 is partly applied as `deck.md` D16 (the ledger and aggregators refuse a deck version after the previous version's `closes`), because `release.md` R13 needed it; applied 2026-10-06 on the owner's go-ahead, pending owner review of the diff · `seam:` release tiers and floor checks · invariant 3
+**Status:** accepted by the owner 2026-10-08, applied; seam, the diff still gets the owner's read before merge · `seam:` release tiers and floor checks · invariant 3
+
+*2026-10-08:* The owner said to apply every recommended item. All four are applied; see `cross-spec.md` section 12.9. `CLAUDE.md` invariant 3 now names the daily count exception (edited by the orchestrator on 2026-10-08); that follow-up is done.
 
 ## Context
 
@@ -19,6 +21,8 @@ Four places where a floor in `CLAUDE.md` invariant 3 has a path around it or a r
 4. **A release names the log that counts.** For R10 and R14 the first log in the context's `logs` array is the ledger of record; a release must be in it, and phones apply R10 and R14 against it.
 
 ## Consequences
+
+- After review (2026-10-08): below the minimum only parts 0 and 4 are noised; phones check R10 against the ledger of record and R14 stays with the ledger and aggregators; a context version that changes its first log restarts R10 and R14, which is filed as an owner choice in `docs/DECISIONS.md`.
 
 - `release.md` R6, R13 and the `release-valid-below-minimum` vector change with item 1. `services.md` AG-4 and the receipts endpoint answer `404` for a below-minimum round.
 - `deck.md` D12 or a new D16, `services.md` "Opening a deck", `release.md` R2 and the `deck-valid-v2-extend` vector change with item 2.

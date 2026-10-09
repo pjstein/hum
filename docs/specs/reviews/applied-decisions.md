@@ -4,6 +4,8 @@ Oct 6, 2026 · adversarial review of ADRs 0100, 0101, 0102 (item 1), 0105 (item 
 
 **Update, later on 2026-10-06.** AB1 and AS1 to AS15 were reported applied (`cross-spec.md` §12.6). The "Re-review" section at the end checks them and carries the final verdict. The sections before it are kept as written and describe the specs before those fixes.
 
+**Update, 2026-10-08.** ADRs 0103, 0104 and 0107 were applied (`cross-spec.md` §12.9). The section "ADRs 0103, 0104, 0107" reviews them and carries its own verdict. "Re-review of TS1 to TS14" checks the fixes recorded in §12.10. The last two sections, "TS7, TS10 and rule O-6" and "Confirming check of RT1 to RT4", cover §12.11 to §12.13 and end with the final verdict for that round.
+
 ## Verdict
 
 **Approve with fixes.** One blocker, fifteen should-fix items, nine notes.
@@ -274,3 +276,253 @@ The tie-break for phones ("the one with the lower log index") should name the lo
 | RS6 | Should fix | `credentials.md`, `agent-sponsor.md` | A context-independent rule for sponsor manifests |
 
 Notes AN1 to AN9 remain open as §12.6 records. AB1's two original attacks, AS1 to AS4, AS10 and AS11 are closed as checked here. With RB1 fixed I have no blocker left against ADRs 0100, 0101, 0102 item 1, 0105 item 1 or 0106.
+
+## ADRs 0103, 0104, 0107
+
+2026-10-08 · adversarial review of the change set recorded in `cross-spec.md` §12.9 · `seam:` release tiers and floor checks, credential issuance, nullifiers, what leaves the phone, canonical encoding · no spec edited, no code run
+
+**Verdict: approve with fixes. No blocker.** Fourteen should-fix items and one group of notes. TS1 is the one I would land first: it lets a network edge the specs already distrust obtain a card on another person's evidence.
+
+**How I checked.** I had no shell in this session, so I did not run `git diff`. I worked from §12.9 and read each section it lists in the spec files: `release.md` ("Receipts", R1 to R15, vectors); `deck.md` ("Rating decks", D10 to D16); `context.md` ("Body fields" keys 20 and 21, "Log entries", "The noised daily count", C7); `services.md` ("Body keys", "Errors", "What services log", the registry, "Step 10 at the log", "Opening a deck" to "Publishing a release", AG-1 to AG-8, "Issuer and verifier host", "Resolver and mirrors", "OHTTP relay"); `chat.md` (§2.5, §5.17, §12.1 to §12.5, §12.9, §12.10); `issue-map.md` ("Membership proofs", "The `authorship` bundle field", IM-7); `verifier.md` ("Issuer key", "Host key", "Lifetime", rules 26 to 31, the security table); `simulator.md` ("Leak checks"); ADRs 0103, 0104, 0107 and 0110. Edits outside those sections are not covered. `take.md`, `storage.md`, `ballot.md`, `shield.md`, `credentials.md`, `manifest.md` and the threat model were checked by search at the lines §12.9 names.
+
+### Should fix
+
+**TS1 — `verifier.md` "Host key"; `services.md` "Sessions and evidence". A sealed evidence item can be replayed into another session.** Evidence is sealed with `info` = `hum/evidence/1` ‖ authority CID ‖ item name and an empty `aad`. That binds the item to the verifier and to the item name, as the text says. It does not bind it to the session. `verifier.md` says TLS is transport only and that an edge in front of the host sees ciphertext. Such an edge can copy a person's sealed items, open its own session, submit them, and send its own issuance request. The module sees valid evidence and the host signs the edge's commitment. The edge now holds a card, and the person whose evidence it was is refused as a duplicate. The issuance response already uses the 16-byte session ID as AAD; evidence should too. Fix: `aad` = the session ID, in both specs. Vector: an evidence item sealed for one session and submitted in another (rejected). An item that is a bearer secret by nature, such as a one-time code, still depends on the host; say so.
+
+**TS2 — `credentials.md` "Issuance request and response", the HPKE table.** The row "Evidence and issuance request to a host" gives one `info`, `hum/issue/1` ‖ verifier authority CID, for both. `verifier.md` and `services.md` give evidence `hum/evidence/1` ‖ authority CID ‖ item name. The paragraph above the table was updated and the table was not. Split the row.
+
+**TS3 — `release.md` R5 against R6, below the minimum.** R6 now says a below-minimum version records parts 0 and 4 only. R5 still says version 1 "contains part 0 (and 4–7 when planned)" and that a rating deck's version 1 "contains parts 0, 3 and 8". A below-minimum deck with part 5, 6 or 7 planned, and every below-minimum rating deck, cannot satisfy both. Fix: R5 applies when `unlocked` is not empty; below the minimum R6 lists `parts`. Say whether noise for parts 3, 5, 6 and 7 is drawn below the minimum; R6 implies it is not. Vectors: a below-minimum rating release, and a below-minimum release of a plan with part 5.
+
+**TS4 — `ballot.md` "Receipts"; `release.md` "Receipts"; `docs/threat-model.md` "The operator", Remains.** Below the minimum there is no receipt tree, so a voter can no longer detect a dropped ballot. No text says this is a loss. `release.md` says "nothing was published, so there is nothing for a receipt to confirm". There is something: a Leader can now end any deck by reporting it below the minimum, and no voter holds checkable evidence against that. Signed receipts do not help, because a receipt carries a leaf and no nullifier, so a set of receipts does not prove a number of distinct voters. Phase 1 already trusts the Leader for the noise draw, so this is a stated-assumption gap and not a new break. Fix: one sentence in `ballot.md` "What a receipt proves" and one in the threat model.
+
+**TS5 — `services.md` L-5 and the logging table.** L-5 bans exact ballot counts "for a deck that has no final release version". After the final version an aggregator may therefore log exact counts and keep them for the log retention. The rule's own reason, that an exact count beside `nHat` undoes the noise, holds after the final version too. Bucketing to the nearest 50 is rounding, not noise: at a bucket edge one ballot moves the logged value. Fix: no exact count at any time; aggregator logs carry only values that are already public (`nHat`, the padded leaf count, the noised daily series) or a bucket of those.
+
+**TS6 — `deck.md` D11 against D15, rating decks.** D15 sets `minVoters` = max(`GATE_TALLIES`, the context's minimum) and raises `gates[0]` "so D11 holds". D11 also requires `minVoters` ≤ the effective gate of part 3. For a rating deck that gate is `GATE_CELL` per group, 300. A context whose minimum is above 300 then fails D11 on part 3, or passes if the reader takes the vote-deck gate of 800. Fix: D11 treats part 3 of a rating deck as a per-cell gate, outside the `minVoters` test, as it already treats part 7. Vector: a rating deck under a context minimum of 500 (valid).
+
+**TS7 — `release.md` R10 and R14; `context.md` "Log entries" and C11.** The ledger of record is the first entry of `ctx.logs`, read from the context version the deck pins. A context version may reorder or replace `logs`. A new first log has no history, so R14's yearly sum for `rhoYear` and R10's count of rating releases per source both restart. `rhoYear` is a context floor that C10 lets only tighten. This is not new: before this change, dropping a log from `logs` had the same effect. It is now one field. Fix: C11 freezes `logs[0].log` from version 1, or R14 and R10 also count in every log that was first in an earlier context version. The person's shield is not affected either way.
+
+**TS8 — `services.md` V-2.** "A different request answers `conflict`" has no scope. Within one session that is right. In a later session that maps to a spent dedup row, `credentials.md` and `verifier-runtime.md` answer with the masked dedup code, so the phone cannot tell a duplicate from another refusal. Read literally, V-2 answers `conflict` there and reveals the duplicate. Fix: "a different request in the same session answers `conflict`; in a later session the dedup rule and its masked code apply".
+
+**TS9 — `chat.md` §2.5 step 4 and §5.17.** In sequence, one card cannot admit two identities: a ticket is refused when any of its nullifiers is recorded for a live identity, and I checked pooled cards under an `all` policy and a second ticket under the next context version. The remaining path is a race. Two greeters open two tickets from one card before either `join-record` arrives, and both commit an Add. The `join-record` is sent after the commit. Fix: a greeter that sees two live records sharing a nullifier removes the identity whose record is later in the organizers group's order, and a greeter re-checks the records when its Add is rebased onto a new epoch. Vector: two tickets, one card, two greeters.
+
+**TS10 — `context.md` key 21 `relays`; `services.md` "Who runs it" and O-5; `docs/threat-model.md`.** Three gaps:
+
+- No rule says which relay a phone picks, or whether a context relay may carry another context's requests. Two phones will behave differently.
+- A relay that only context X names learns that each client address it sees belongs to a member of X. The relay row of the threat model does not list that, and membership is a protected asset there.
+- `context.md` says a named relay "must pass O-5", and C7 does not check it. The part that needs no lookup can be a C7 rule: no entry of `relays` equals any authority the context names in `logs`, `aggregators`, `stores`, `resolvers` or `chat.delivery`.
+
+Fix: state the selection rule (a context relay is used only for that context's requests, in rotation with the shipped relays), add the C7 check and a vector, and add the sentence to the threat model. Invariant 6 holds for both new fields: they name services by key, and absence falls back to constants in the audited build.
+
+**TS11 — `services.md` "Who runs it, and how a phone finds one", the shipped bundles.** The shipped bundle of the reference log's `service` manifest carries the gateway key configuration of the day the build was made. O-2 accepts a new configuration only from a logged manifest, and the phone cannot read the log without a working configuration. After a key rotation a fresh install cannot make its first request. Fix: the reference gateway keeps decrypting under every key configuration shipped in a supported build; and at first contact the phone replaces each shipped bundle with the latest version of its lineage from the log. Vector or simulator case: a first request with a shipped configuration one rotation old.
+
+**TS12 — `services.md` "Body keys" against its neighbours.** I found no key collision and no gap inside a row, and the issuance and token bodies agree with `credentials.md`, `storage.md` §6.2 and `chat.md` §12.3 to §12.5. What does not agree:
+
+- `ballot.md` "Receipts" and its phase 2 section still give the receipt as `{leaf, signature}`. The table has `{0: leaf, 1: signature, 2: kid}`, and the list of what the phone keeps has no `kid`.
+- The gallery responses and the two `/v1/log/proof/` responses have no row and no body shape anywhere. ADR 0107 item 3 said every body.
+- "Step 10 at the log", `service` row, names `storage.md` BS-1 to BS-6 and not `chat.md` DL-1 to DL-5.
+
+**TS13 — `simulator.md` "Leak checks".** Three points:
+
+- "The checker fails if two phones of one context register different tuples" will fail on correct runs: a ballot carries the epoch of the deck's version-1 `closes` while an authorship proof carries the current epoch, two context versions may differ, and the first hour after an epoch turn allows two values. Compare per use and per context version, and exempt the grace hour.
+- The registry holds nullifiers. A presentation carries the 48-byte pseudonym, and the nullifier is its hash. A pseudonym that reaches the wrong service is not found by a scan for the nullifier. Register both for every scope.
+- The ledger row still says authored objects "carry an author nullifier". They no longer do; the log derives it.
+
+**TS14 — `verifier.md` "Issuer key".** The text is honest that `KEY_TAIL` is a waiting time no rule enforces, and the arithmetic is right: one year of extension, 150 days to `expires`, 5 days of margin. What relies on it is every replacement and later round of a long deck, through P3. One consequence is not stated: `issuerKeys` holds at most 8 keys, a flaw fix requires a new `kid`, and a replaced key now stays listed for 520 days. A verifier can change keys about seven times in 17 months before the next change forces an emergency removal, which ends the later rounds of open decks. State the limit, or raise the cap.
+
+### Notes
+
+- **Stale sentences left by these edits.** `credentials.md` "One voting device" and "Open questions" still say the two-phone risk awaits the owner. `shield.md` "Open questions" says draft 0.1 has neither exception. `issue-map.md` "Rate limits" still asks `services.md` to name the counter retention, and its assumptions list still says "count IM-15 per log". `services.md` "Publishing a release" step 3 submits to "every log" with no order. `chat.md` §12.1 lists relay rules O-1 to O-4 and omits O-5. ADR 0101's and `credentials.md`'s "epoch plus the retirement tail" is now 520 days of exposure to a lax log, not 30; the wording is right and the size changed.
+- **`deck.md` D16, second half.** "A release that pins its lineage" should say a valid release version.
+- **`release.md`.** ADR 0103 item 4 has phones apply R14; the spec has phones run R1 to R13. Pick one.
+- **`chat.md` §5.17.** When a context version moves `entry` to a different verifier, one person can hold one identity per card across the change. That follows from "one identity per card" and is the organizer's doing. The snapshot of 50,000 rows of up to eight nullifiers is about 15 MB in one message.
+- **ADR 0110.** A second implementation in the Python reference keeps vectors away from the code under test. It is independent only if it is written from the drafts by a different workstream and shares no code or helper with the crate; the ADR should say so. Both sides read the same Hum layout text, so a shared misreading of the header or the presentation header passes. Keep `zkryptium` as a third check where its draft versions match.
+- **Owner-only edits still pending.** `CLAUDE.md` invariant 3 needs the daily-count clause, and `sim/src/leak.rs` needs the allow-table change. §12.9 records both.
+
+### Answers to the six questions
+
+**1. ADR 0103 item 1.**
+
+- **Does anything below the minimum reveal an exact or unbudgeted count?** No. A below-minimum version publishes `final`, an empty `unlocked`, `absorbed`, and ρ and σ for parts 0 and 4. The fact of being below the minimum is a function of the noised `nHat`, paid for by part 0. `absorbed` is a function of the noised daily total, paid for by part 4. The absence of receipts, the `404` and the missing `nHat` add nothing to that one fact. The daily series stays with organizers and is noised. The exception to this answer is the aggregator's own logs; see TS5.
+- **Is the phone's charge still an upper bound?** Yes. The phone charges `plan.rho`, D8 still requires part 8 in the plan, and not drawing part 8's noise leaves ρ unspent.
+- **Does a voter lose the ability to detect a dropped ballot, and is that stated?** Yes, and no. See TS4.
+
+**2. ADR 0103 items 2 to 4.** D16's clock-free half agrees with R2: the release pins the highest deck version below it, and a deck version above a release is invalid. The rating-deck minimum has the gap in TS6. R10 and R14 against the ledger of record agree across `release.md`, `services.md` and `context.md`, with the gap in TS7.
+
+**3. ADR 0104.**
+
+- **`KEY_TAIL`.** Honest about not being enforced. See TS14.
+- **Emergency key removal mid-deck.** `verifier.md` "Lifetime" and `ballot.md` "Security considerations" say the same thing, including the second count a modified client gets.
+- **V-2.** See TS8.
+- **Can one card admit two identities?** Not in sequence. By a race, yes; see TS9. Deleting a record when its identity leaves lets the same card join again under a new identity, which the text states and which predates this change.
+- **Does the array or `day` link a join to anything else?** No. The nullifiers are under the join scope, sorted so position says nothing, and never leave the organizers group. `day` is the day of a join the group already sees in the tree. The maximum `validity` is 366 days, which gives epochs of at most 364 days, so the 396-day drop cannot remove a record whose card is still valid.
+- **`authorship` without key 4.** A verifier can still recompute every nullifier. Each card proof carries its pseudonym, and the nullifier is the hash of `hum/nullifier/1` and that pseudonym. IM-7, the example and the log's counter row agree.
+
+**4. ADR 0107.**
+
+- **Keys 20 and 21.** See TS10.
+- **Shipped bundles.** See TS11.
+- **Body keys.** See TS12.
+- **Evidence `info`.** `verifier.md` and `services.md` agree. `credentials.md`'s table does not (TS2), and the missing session binding is TS1.
+- **DL-1 to DL-5.** They are checkable from the manifest and the previous version, and each has a vector. They are missing from the log's step-10 table (TS12).
+- **`AUTHOR_WINDOW`.** Control search: `AUTHOR_WINDOW` matches on 10 lines in `services.md`, `issue-map.md` and `context.md`. The same search for `unsignedWindow` and `UNSIGNED_WINDOW` across `docs/specs/*.md`, the threat model and `docs/design.md` matches nothing. The rename is complete.
+- **L-5.** See TS5.
+- **The simulator allow table.** Delivery and device key are "no", and the four new kinds are placed as ADR 0107 says. See TS13.
+
+**5. The two recorded decisions.** The two-phone risk is stated the same way in the threat model ("A compromised phone" and the assumptions table) and in `shield.md` ("Restore" and "Security considerations"), with the stale lines in the notes. ADR 0110: see the notes.
+
+**6. Contradictions, the registry, stale text.** New contradictions: TS2, TS3, TS6, TS8 and TS12. Registry: I listed every `hum/…` string in the fourteen other spec files and compared them with the `services.md` table; none is missing, and `hum/evidence/1` is there. `hum/reissue/1` appears in `credentials.md` only as a withdrawn name. Stale text: the notes.
+
+### Vectors these findings add
+
+An evidence item replayed into another session (TS1); below-minimum rating release and below-minimum release with part 5 (TS3); an aggregator log line with an exact count after the final version (TS5); a rating deck under a context minimum of 500 (TS6); a context version that changes its first log, with R14 across the change (TS7); a different issuance request in a later session against a spent row (TS8); two tickets, one card, two greeters (TS9); a relay equal to a named service authority (TS10); a first request with a rotated gateway key (TS11); a receipt with `kid` in `ballot.md`'s vectors (TS12); public card fields for a ballot and an authorship proof of one phone (TS13).
+
+### Verdict
+
+Approve with fixes. No blocker. TS1, TS2, TS3, TS6 and TS12 change bytes or expected results, so they should land before W0-08 regenerates vectors. TS7 and TS10 need an owner choice between two fixes.
+
+## Re-review of TS1 to TS14
+
+2026-10-08 · targeted confirming pass on the fixes recorded in `cross-spec.md` §12.10 · no spec edited, no code run
+
+**Final verdict: approve with fixes. No blocker.** Eleven of the fourteen are closed as written. TS1 and TS5 are each closed for the case I described and open for a neighbouring case (RT1, RT2). TS7 and TS10 stay with the owner, as recorded. Two small items follow (RT3, RT4).
+
+Read for this pass: §12.10; `verifier.md` "Host key", "Issuer key"; `services.md` "Body keys", L-5 and the logging table, "Sessions and evidence", "Issuance", V-2, "Who runs it"; `credentials.md` HPKE table; `release.md` R5, R6; `deck.md` D11, D15; `context.md` C7; `chat.md` §2.5 step 4; `ballot.md` "Receipts"; `take.md` "Gallery ranking"; `simulator.md` "Leak checks"; the threat model by search. I did not find the threat-model sentence on what a context-named relay learns by search, so that one line is not confirmed.
+
+### Still open
+
+**RT1 (should fix, land first) — `verifier.md` "Host key"; `services.md` "Sessions and evidence", "Issuance". The session ID binds nothing the edge cannot choose, so the edge can still get a card on a person's evidence.** Replay into another session now fails: the AEAD does not open under another session ID. That closes TS1 as I wrote it. The claim `verifier.md` now makes is wider, and it does not hold, for two reasons:
+
+- The session ID is 16 bytes the host returns in a plain response. The edge terminates TLS, so it sees the ID and can replace it. It can open its own session and hand that ID to the phone. The phone then seals its evidence for the edge's session.
+- The edge does not need a second session. The session ID is the only credential for the `issue` call. The edge lets the phone's evidence through, drops the phone's issuance request, and sends its own sealed request in the same session. The host signs the edge's commitment and seals the response to the edge's HPKE context.
+
+Either way the edge holds a card and the person is refused as a duplicate. Nothing ties the evidence to the issuance request that will be signed. Fix: the phone builds the issuance request first, and evidence `aad` = session ID ‖ SHA-256(issuance request plaintext). The host opens the issuance request, recomputes the hash, and refuses the session if any evidence item was sealed under another. The `credential` evidence kind already binds to that same hash as its bound message, so this is the existing pattern. The edge then cannot swap the request without the evidence failing to open. It can still deny service. Vectors: an issuance request that differs from the one the evidence was sealed for (rejected); a session ID replaced in transit (the phone's items open only with the matching request). This is not a blocker by this review's definition, since no `CLAUDE.md` invariant breaks, but the sentence "cannot be replayed … into another session" should not stand as the whole defence until it lands.
+
+**RT2 (should fix) — `services.md` logging table, Aggregator and Gateway rows; L-1, L-5. Request logs still count accepted ballots.** L-5 now bans any count of accepted ballots, before and after the final version. Two rows of the same table let the count back in:
+
+- The Aggregator row allows "timing per request without a ballot identifier" beside the deck CID and round. One line per request is a count.
+- The Gateway row allows "decrypted request's path and result code … or counts per path", kept 30 days. A ballot path holds the deck CID and the round. The number of `200` answers on that path is the number of accepted round-0 sends: voters plus replacements. For a below-minimum deck that is a near-exact turnout the release withheld.
+
+Fix: for ballot-intake paths the gateway and the aggregator log no per-request line and no per-path count. They may keep one counter per service per day, or the path with the deck CID removed. Extend the L-5 vector to a gateway log.
+
+**On the rejected-request counts that were kept.** They cannot reveal turnout: a rejection adds no voter. They are not all voter-free, though. `closed` on a different round-0 body after `closes`, `conflict` with detail `duplicate` in rounds 1 to 3, and `conflict` with detail `nullifiers` each come from a pseudonym that already voted. An exact per-deck count of those says how many voters tried again, which is small, exact and unbudgeted. `malformed`, `too_large`, `rejected` and `forbidden` say nothing about voters. Fix inside RT2: count nullifier-dependent codes per service, not per deck and round. No single person is identified by any of these counts.
+
+**RT3 (should fix, small) — `release.md` R6, rating decks.** TS6 is closed in `deck.md`: under a context minimum of 500 a rating deck has `minVoters` 500 and `gates[0]` 500, and D11 no longer tests part 3. R6 still unlocks "parts 1–3 iff planned and the part's own `n` ≥ gate(1)". For a rating deck that reads as 800, while `deck.md` gates part 3 per group at `GATE_CELL` in post-processing. Say in R6 that a rating deck's part 3 is unlocked with part 0 and its cells are filtered like part 7's. The new rating vector depends on it.
+
+**RT4 (note) — `chat.md` §2.5 step 4.** The tie-break is sound: the delivery-service sequence number is the same for every member of the organizers group, so every greeter removes the same identity, and the re-check on rebase removes most races before they land. One gap remains: a greeter that commits the Add and fails before sending the `join-record` leaves no record, so the card can join again. Have any greeter that sees an Add with no record within a set time write the record or remove the leaf.
+
+### Confirmed closed
+
+| Item | What I checked | Result |
+| --- | --- | --- |
+| TS2 | `credentials.md` HPKE table | Two rows; evidence row gives `hum/evidence/1` ‖ authority CID ‖ item name with the session ID as `aad` |
+| TS3 | R5 against R6 | R5's part lists apply only when `unlocked` is not empty. Below the minimum only parts 0 and 4 are noised, for vote, IBIS and rating decks. Not drawing noise for parts 3, 5, 6, 7 and 8 publishes nothing and leaves ρ unspent |
+| TS4 | `ballot.md` "Receipts"; threat model "The operator" | Both state the loss |
+| TS6 | D11, D15 at a minimum of 500 | Valid under `deck.md`; see RT3 for `release.md` |
+| TS8 | V-2 | `conflict` in the same session only; the masked code in a later one |
+| TS9 | §2.5 step 4 | See RT4 |
+| TS11 | "Who runs it" | The gateway keeps shipped configurations; the phone refreshes at first contact |
+| TS12 | `ballot.md`; "Body keys"; the log's step-10 table | The receipt carries `kid` in both places and in the kept set. No collision in the six new rows. The proof rows match the endpoint parameters. DL-1 to DL-5 are in the table |
+| TS13 | "Leak checks" | Pseudonym and nullifier both registered; the tuple check is per use and per context version with the grace allowed; the ledger row is corrected |
+| TS14 | "Issuer key" | The limit is stated |
+| C7 | The lookup-free O-5 check | Present, with a vector. It also covers `issuers`, which is stricter than O-5 needs and harmless |
+
+**On the six provisional "Body keys" rows.** Three loose ends against `take.md`'s sort key `(rated, hasGroupScore, score, forkCount, logIndex)`: the row calls the fourth element `forks` and the fifth `index`; `score` × 10⁶ needs the same rounding rule `take.md` uses for six decimals, with ties stated; and the row does not say what `score` holds for an unrated take. One sentence each.
+
+**Stale sentences.** The seven phrases I listed in the earlier notes no longer match in `credentials.md`, `shield.md`, `issue-map.md`, `chat.md` or `services.md`. `services.md` "Publishing a release" step 3 now names the ledger of record first. I found no new stale sentence in the sections read.
+
+### Open after this pass
+
+| Id | Severity | Where | Fix in one line |
+| --- | --- | --- | --- |
+| RT1 | Should fix, first | `verifier.md`, `services.md` | Bind evidence to the hash of the issuance request, not to the session ID alone |
+| RT2 | Should fix | `services.md` logging table | No per-request line or per-path count for ballot intake, at the aggregator or the gateway |
+| RT3 | Should fix | `release.md` R6 | A rating deck's part 3 unlock rule |
+| RT4 | Note | `chat.md` §2.5 | An Add with no `join-record` |
+| TS7 | Owner choice | `context.md` C11 or `release.md` R10, R14 | Freeze the first log, or count across earlier first logs |
+| TS10 | Owner choice | `services.md`, `context.md` | Which relay a phone picks for a context |
+| — | Wording | `services.md` "Body keys" | The three gallery loose ends |
+
+RT1 and RT3 change bytes or expected results and should land before W0-08 regenerates vectors.
+
+## TS7, TS10 and rule O-6
+
+2026-10-08 · check of the owner choices recorded in `cross-spec.md` §12.11 and the tightening in §12.13 · no spec edited, no code run
+
+**Both are closed.** One residual is recorded as a note.
+
+Read: `context.md` C11, key 7, key 21 and the C11 line of its vector list; `release.md` R14; `services.md` rule O-6 as it stands after §12.13.
+
+**TS7.** `context.md` C11 freezes `logs[0].log` from version 1. The witnesses of that entry and the other entries may change. The ledger of record, and the log of record for authored objects, are therefore the same log for the whole life of a context lineage, so the counts of `release.md` R10 and R14 cannot restart. The cost is stated: a context whose first log must change starts a new lineage. The vector list in `context.md` has the cases: version 2 changes `logs[0].log` (rejected); version 2 swaps the first two entries (rejected); version 2 changes `logs[0].witnesses` and adds a second log (valid). I verified the line is there.
+
+**TS10 and rule O-6.** The selection rule can be tested and never falls back to a direct connection: the relay set is built per request, the pick is uniform at random per new connection, a failure picks again from the rest, and a relay named by context A never carries a request of context B. Two kinds of request use the shipped relays only, whichever context they belong to:
+
+- every request to an aggregator: ballots, receipt lookups, receipt pages, deck status and published rounds;
+- every submission to a log, with its poll.
+
+The first version of O-6 held back only ballots and receipt fetches. I raised two gaps and both are now closed in the text. An organizer-chosen relay could time deck status polls and round fetches, which mark an address as a probable voter. It could also time log submissions against the public log, and so tie an unsigned object to an address without any collusion. Log reads may still use a context relay, which is fine.
+
+**Residual (note).** The phone puts an object's text blob to the store just before it submits the object to the log, and that put may still go through a context relay. The relay sees an address write to the store's gateway a few seconds before an unsigned object appears in the public log. The signal is weak: store puts are frequent, and the relay cannot tell a text blob from an attachment in the same size bucket. Either send the text-blob put for an unsigned object over a shipped relay, or delay the submission by a random time, or record it with the other timing residuals in the threat model.
+
+## Confirming check of RT1 to RT4
+
+2026-10-08 · check of the fixes recorded in `cross-spec.md` §12.12 · no spec edited, no code run
+
+**RT1, RT2 and RT3 are closed. RT4's fix is right in its main rule and has two should-fix gaps in the rules around it (RU1, RU2). One small item remains under RT2 (RU3).**
+
+Read: §12.12; `verifier.md` "Host key"; `services.md` "Sessions and evidence", "Issuance", V-1 to V-4, the Aggregator and Gateway rows and L-5; `release.md` R6; `chat.md` §2.5 step 4. I did not re-read `credentials.md` or `verifier-runtime.md` for RT1 and take §12.12's word that they follow.
+
+### RT1 — closed
+
+Evidence `aad` is now the session ID followed by SHA-256 of the issuance request plaintext. The host holds items sealed until the issue call, opens the request, and opens each item under its hash. I tried each path an edge has:
+
+| The edge does | Result |
+| --- | --- |
+| Sends its own issuance request with the person's evidence, same session or its own | No item opens under the edge's request hash. `rejected`, rule V-4. No card |
+| Hands the phone the ID of a session the edge opened | The phone's items are bound to the phone's own request. Only that request opens them, and the card it yields is the phone's |
+| Reorders: its own request first, the person's evidence after | Same as the first row. The host runs nothing until it has the request and every item |
+| Replays both the evidence and the person's request, in any session | The host signs the person's commitment. The response is sealed to the HPKE context of the person's request, and completing the card needs the person's own nym share. The edge gets nothing it can use. The dedup row stores that request's hash, so the person's own retry gets the identical response |
+| Forges evidence for its own request | It cannot. The request plaintext holds fresh commitments and is sealed, so the edge cannot compute the hash of a request it did not make and cannot read the evidence to re-seal it |
+
+Handover: one request with two commitments, one hash. Lost response: a new session, the same request plaintext, evidence sealed again under the new session ID and the same hash, identical response. Both work.
+
+What remains is denial of service, which the text states. Three small points, none a finding: the host now stores sealed items for up to an hour before it can inspect them, so the per-session size cap must apply to ciphertext; `sessionCap` counted by the `device` item can only be applied at the issue call; and V-4 is listed before V-3.
+
+### RT2 — closed, with one small item
+
+The Aggregator row has no line per request, no timing per request and no count per deck, round or path for ballot intake. The Gateway row strips the deck CID and round from ballot paths and forbids a count of `200` answers per path. L-5 covers the gateway. Rejection codes that only an earlier voter can cause are counted per service per day; the others may be counted per deck. The table and L-5 agree.
+
+**RU3 (should fix, small) — `services.md` Gateway row.** "The only counter is one per service per day." When an aggregator has one open deck on a given day, that counter is the number of accepted sends for that deck on that day, exact. That is common in a small network. Fix: the counter covers every request to the aggregator, whatever the path or result, so status polls and receipt fetches are mixed in; or it is dropped for ballot intake.
+
+### RT3 — closed
+
+`release.md` R6 unlocks a rating deck's part 3 with part 0 and filters its group cells at `GATE_CELL`, as part 7's are. It agrees with `deck.md` D11 and D15 and with R5.
+
+### RT4 — main rule sound, two gaps
+
+Sending the `join-record` before the Add is the right order. Every greeter sees records in one sequence, the greeter with the later record stops, and a greeter that fails between the two leaves a record and no member. Two tickets from one card cannot both be admitted by honest greeters.
+
+**RU1 (should fix) — `chat.md` §2.5 step 4, the backstop "an Add of a new identity with no `join-record` … removes the leaf".** A malicious greeter gains nothing from it, since a greeter can already remove members. An honest greeter following the rule as written can remove legitimate members in four cases:
+
+- **Open contexts.** §5.17 says a context whose entry policy is `[0]` produces no `join-record`. Every Add there has no record, so the backstop removes everyone.
+- **Agents.** A shared agent is added with no card and no ticket, so it never has a record.
+- **Ordering across two groups.** The record is in the organizers group and the Add is in the all-members group. A greeter that has processed the commit and not yet fetched the record sees an Add with no record.
+- **A withholding delivery service.** A delivery service that delays the record to one greeter makes that greeter remove a legitimate member. Before this rule a delivery service could only drop messages.
+
+Fix: the backstop applies only to an identity with a person credential, in a context whose entry policy yields a nullifier, and not to a new device of an existing identity. Before acting, the greeter fetches the organizers group past the time of the Add and waits a fixed grace, for example ten minutes. Vectors: an open context (no removal); an agent Add (no removal); a record that arrives after the commit within the grace (no removal).
+
+**RU2 (should fix) — `chat.md` §2.5 step 4, the pre-commit check against "an earlier record … [that] names a different identity".** The same paragraph says a record whose identity is not a member is inert and blocks nothing. The check does not say the earlier record must be live. Read literally, an inert record blocks the card for 396 days in two ordinary cases: a person whose first ticket failed after its record and who retries under a new chat identity after reinstalling; and a person who left, whose record a greeter has not yet deleted. The check cannot simply require a live identity, because in the race neither identity is live yet. Fix: the earlier record blocks when its identity is a member, or when the record is younger than a fixed pending time, for example one hour. Vector: a retry under a new identity one day after a failed greeter (admitted).
+
+### Open after this pass
+
+| Id | Severity | Where | Fix in one line |
+| --- | --- | --- | --- |
+| RU1 | Should fix | `chat.md` §2.5 step 4 | Scope the no-record backstop and add a fetch and a grace |
+| RU2 | Should fix | `chat.md` §2.5 step 4 | An earlier record blocks only when live or recent |
+| RU3 | Should fix, small | `services.md` Gateway row | The daily counter must not equal one deck's intake |
+| — | Note | `services.md` O-6 | The text-blob put before an unsigned submission |
+
+Neither RU1 nor RU2 changes bytes. Both change expected results in the `chat/join` vectors.
+
+### Final verdict for the ADR 0103, 0104 and 0107 round
+
+**Approve with fixes. No blocker remains.** TS1 to TS14, RT1 to RT3, and the owner choices for TS7 and TS10 are closed. RU1, RU2 and RU3 are open as should-fix, and one timing residual is recorded as a note.

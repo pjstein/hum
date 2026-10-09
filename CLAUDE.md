@@ -23,7 +23,7 @@ The specs are normative. `docs/design.md` explains intent. When they disagree, t
 
 1. **No vote is attributable.** Votes leave a phone only as ballots to aggregators. Nothing else (chat, storage, logs, analytics, crash reports, agents) ever carries a vote, a hand or a shield.
 2. **Three identities are never linked:** the resident card (anonymous credential), the per-context voting pseudonym, and the chat name. No code path, log line, cache key or metric may join two of them.
-3. **Floors are enforced at the edges** (phone, aggregator, ledger) and can only get stricter. Draft 0.1 minimums: ρ ≤ 0.254 per release (ε 4 at δ 10⁻⁶), δ ≤ 10⁻⁶, at least 100 noised voters to publish, one release per deck, a declared contribution cap, a yearly shield of at most ε 20.
+3. **Floors are enforced at the edges** (phone, aggregator, ledger) and can only get stricter. Draft 0.1 minimums: ρ ≤ 0.254 per release (ε 4 at δ 10⁻⁶), δ ≤ 10⁻⁶, at least 100 noised voters to publish anything except the organizer's noised daily count, which is served while a deck is open and is inside the deck's declared ρ, one release per deck, a declared contribution cap, a yearly shield of at most ε 20.
 4. **Manifests carry no personal data,** and sealed-blob keys never appear in a manifest, a log, or a request to a store.
 5. **Every release is a sum** of per-person contributions, so central DP can be replaced by two-server aggregation without changing the math.
 6. **Nothing trusts a server for being the reference.** Clients accept only what's signed by the keys a manifest names and proven in a witnessed log. Manifests name services by key, never by hostname.

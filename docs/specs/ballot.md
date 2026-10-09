@@ -133,7 +133,7 @@ A phone that lost its hand (restore, `credentials.md`) sits later rounds out. On
 
 ## Receipts
 
-On acceptance the Leader returns `{leaf, signature}` (`services.md`, "Ballot intake"). The leaf is:
+On acceptance the Leader returns `{0: leaf, 1: signature, 2: kid}` (`services.md`, "Ballot intake" and "Body keys"), where `kid` names the aggregator `sign` key that signed. The leaf is:
 
 ```
 commitment = SHA-256(canonical CBOR of payload)
@@ -142,11 +142,13 @@ leaf       = SHA-256("hum/receipt-leaf/1" ‖ uint8(round) ‖ nonce ‖ commitm
 
 A leaf is a fixed-length hash output and carries neither the nullifier nor the pseudonym, so the public receipt pages link nothing across rounds, and a dummy leaf (the hash of 32 random bytes, `release.md`) is indistinguishable from a real one.
 
-The phone keeps, per deck and round: `nonce`, `commitment`, `leaf`, the Leader's signature over `hum/receipt/1 ‖ taskId(round, firstPart) ‖ leaf` where `firstPart` is the round's first part in plan order (`services.md`), and the deck CID. Nothing in that set identifies the phone to anyone who sees the pages.
+The phone keeps, per deck and round: `nonce`, `commitment`, `leaf`, the signing key's `kid`, the Leader's signature over `hum/receipt/1 ‖ taskId(round, firstPart) ‖ leaf` where `firstPart` is the round's first part in plan order (`services.md`), and the deck CID. Nothing in that set identifies the phone to anyone who sees the pages.
+
+**What a receipt cannot do below the minimum.** A release below the minimum has no receipt tree (`release.md` R13). A voter then cannot detect a dropped ballot, and a Leader can end a deck by reporting it below the minimum; the receipts voters hold do not disprove it, because a leaf names no voter and receipts cannot be counted into distinct people. This is part of the phase-1 trust in the Leader, like the noise draw.
 
 **What a receipt proves.** A round-0 receipt proves that the Leader accepted that body at some time, not that it is in the sum: it may have been replaced by a later ballot from the same person. A missing round-0 leaf is therefore evidence only together with the ballot: the complainant shows the ballot and receipt, and the Leader rebuts only by showing a later valid ballot under the same primary nullifier, whose presentation and leaf anyone can check. The Leader can rebut only while it holds that later ballot, which `services.md` AG-5 deletes 24 hours after the final version, so a round-0 dispute must be raised before then; after that the Leader holds nothing and an unanswered dispute proves nothing either way. Raising a dispute reveals the complainant's ballot and nullifier to whoever judges it, and a rebuttal reveals their later hand; the app says so before sending anything. For rounds 1 to 3 there is no replacement, so a missing leaf with a valid receipt is evidence on its own. `release.md` is asked to state this under "Receipts".
 
-**Checking a receipt**, once the release version carrying the round's root is logged and verified:
+**Checking a receipt**, once the release version carrying the round's root is logged and verified. A release below the minimum carries no root and has no pages (`release.md` R13); the phone shows "this deck did not reach its minimum" and checks nothing.
 
 1. Fetch `GET .../rounds/{n}/receipts` through the relay; read `k` and the page CIDs; check the root blob's CID against `refs["receipts/<n>"]`.
 2. Fetch the one page whose index is the first `k` bits of `leaf`. Each page fetch uses its own fresh relay connection carrying nothing else, at a random delay of up to 24 hours after the version was logged, and never on a connection used for another round's page or any other request. Four prefixes on one connection would select one leaf in a large deck. With `k = 0` there is one page and nothing to hide. `services.md` O-4 is asked to say so for receipt pages.
@@ -166,7 +168,7 @@ The payload is the plain values above. The Leader verifies the presentation, der
 The same values travel as Prio3 input shares inside DAP reports, so the Leader and Helper each see a share that reveals nothing alone, and the sums come out identical to phase 1.
 
 - **Tasks.** One DAP task per (round, part): `taskId(round, part) = SHA-256("hum/dap-task/1" ‖ deck lineage CID ‖ uint8(round) ‖ uint8(part))`. The lineage CID, not the version CID, so a `closes` extension does not split a deck's reports. Each part has its own weight bound, which one combined vector could not enforce. Task parameters (VDAF type, lengths, weights, time-interval batch mode, minimum batch size `minVoters`) come from the deck manifest, not from a provisioning API.
-- **Payload.** `{part: DAP Report bytes}` for every part the round carries. Each report's `report_id` is the first 16 bytes of `SHA-256(nonce ‖ uint8(part))`, so two parts of one ballot do not share an ID. The public extension `hum-authorization` carries, for rounds 1 to 3, the round-0 receipt `{leaf, signature}`, which the Leader checks against round 0's accepted set. The presentation and nullifiers stay outside the report, in the ballot envelope, so the Leader does the membership check and the Helper trusts the Leader's admission as DAP's model already has it.
+- **Payload.** `{part: DAP Report bytes}` for every part the round carries. Each report's `report_id` is the first 16 bytes of `SHA-256(nonce ‖ uint8(part))`, so two parts of one ballot do not share an ID. The public extension `hum-authorization` carries, for rounds 1 to 3, the round-0 receipt `{0: leaf, 1: signature, 2: kid}`, which the Leader checks against round 0's accepted set. The presentation and nullifiers stay outside the report, in the ballot envelope, so the Leader does the membership check and the Helper trusts the Leader's admission as DAP's model already has it.
 - **Types.** The flattened vectors map onto draft types with no change to what is measured:
 
 | Part | Prio3 type | Parameters |
@@ -189,7 +191,7 @@ The Leader runs these after `services.md`'s intake parse check and before record
 
 | Rule | Check | Error |
 | --- | --- | --- |
-| B1 | The request body is exactly `BALLOT_BYTES`; the length prefix is at most `BALLOT_BYTES − 4`; the bytes after the ballot are all zero; the ballot is canonical CBOR with exactly keys 0–5; `presentation` is at most 8,192 bytes; `round` matches the URL; `nonce` is 32 bytes; `deck` is a version of the deck this endpoint serves | `malformed` |
+| B1 | The request body is exactly `BALLOT_BYTES`; the length prefix is at most `BALLOT_BYTES − 4`; the bytes after the ballot are all zero; the ballot is canonical CBOR with exactly keys 0–5; `round` matches the URL; `nonce` is 32 bytes; `deck` is a version of the deck this endpoint serves. `presentation` is at most 8,192 bytes | `malformed`; `too_large` for the presentation cap, as `services.md` intake check 1 answers |
 | B2 | `presentation` verifies under `credentials.md` P1–P8 for the ballot row of its uses table: scope `hum/ballot/1 ‖ deck lineage CID`, bound message `hum/ballot-bound/1 ‖ SHA-256(keys 0–4)`, policy `[1, [entry, vote]]` of the deck's pinned context version as `context`, every card's `epoch` equal to the epoch of the deck lineage's version-1 `closes` and already started | `rejected`, rule P1–P8 |
 | B3 | Every card in the presentation is from a `person`-class verifier in the context's accepted set for a leaf it satisfies; a ballot with no card proof, or whose presentation satisfies no leaf, is rejected (the "agents never vote" vector). Every nullifier the presentation yields is new for this deck, except under an identical retry or a replacement by the same person (B7) | `rejected` B3; `conflict`, detail `nullifier` |
 | B4 | Round 0: `votes` has length `C`, every byte in 0..3, at most `K` non-zero; in a rating deck `group` is present and `< source.groupsK`, in a vote deck absent | `rejected` B4 |
@@ -223,6 +225,7 @@ B12 and B13 are client conformance rules, tested by the simulator's instrumented
 - Nullifiers come from blindly issued secrets under a per-deck scope; two decks' nullifiers are unlinkable, and so are a ballot's and any token, join or authorship nullifier (`credentials.md`). A presentation's public fields are the same for every member of a context (`context.md` C16), so they link no two decks and no ballot to a chat name. Before ADR 0100 a policy with an `any` node or a multi-verifier trust-list source let those fields differ between members; such contexts are now invalid.
 - The bound message makes every presentation single-use and the body tamper-evident; an aggregator cannot alter a payload and keep a valid presentation, and a relay cannot splice.
 - One person, one counted ballot: every nullifier in a presentation must be new (pooled cards are spent for their owner), one card per issuer is valid through any `closes` (`credentials.md`, renewal and the ballot window), and replacement is keyed by the primary nullifier.
+- If an issuer removes a key in an emergency while a deck is open, ballots already accepted under it stand, and those voters can neither replace them nor answer rounds 1 to 3: the phone stays pinned to the dead card (B12, `shield.md` S11) and B2 rejects it. A modified client that re-enrols can send a second round-0 ballot under its new card, whose nullifier is new for the deck; an honest phone cannot. This is the one known way to be counted twice, it needs an issuer emergency, and it is recorded in `verifier.md` "Lifetime" (ADR 0104).
 - Caps are enforced on the phone (the counted hand), at intake (weight), and in phase 2 by the VDAF, so a malicious phone's contribution is bounded in every phase. A malicious phone can still misreport inside the bounds; that is data quality, which DP does not promise to protect.
 - Fixed-size ballots and the send schedule deny the relay and the Leader a per-pseudonym activity trace beyond a handful of sends per deck.
 - Receipt pages leak a `k`-bit prefix per fetch; separate connections and random delays keep the prefixes of one person's rounds apart.
@@ -243,13 +246,14 @@ Valid:
 - `ballot-round0-identical`: the same body twice with two different presentations, one receipt; and the same after `closes`, still the original receipt.
 - `ballot-rejected-keeps-nullifier`: a B4 failure followed by a valid ballot under the same nullifier, accepted (`services.md` AG-8).
 - `ballot-round1`, `ballot-round2`, `ballot-round3`: from `release.md`'s round vectors, with `cov` as fixed-width bytes and its integer norm, and round 3 reusing round 0's bytes; `ballot-round1-max`: M = 128 at the size limit, and the part-3 layout with ratings.
+- `ballot-receipt-kid`: a receipt with its `kid`, verified under that key of the Leader's keyset; the same signature with another listed `kid` (rejected).
 - `ballot-receipt-check`: a padded tree with a fixed `Y_r`, a leaf, its page, and the expected result; one with an absent leaf; a dispute rebutted by a later ballot.
 - `ballot-dap-report`: the round-0 part-0 vector as a `Prio3MultihotCountVec` measurement with fixed shares, task ID and `report_id`; the part-4 histogram report.
 - `ballot-task-ids`: `taskId(round, part)` for a fixed deck lineage CID and a second version of the same deck (same IDs).
 
 Invalid, one per rule, named `ballot-invalid-<rule>-<case>`:
 
-- B1: 48 KiB + 1; a non-zero byte after the ballot; a length prefix larger than the frame; a 9 KiB presentation; `round` 4; `nonce` 31 bytes; unknown key 6; a key holding an `agentKey` signature; a different deck.
+- B1: 48 KiB + 1; a non-zero byte after the ballot; a length prefix larger than the frame; a 9 KiB presentation (`too_large`); `round` 4; `nonce` 31 bytes; unknown key 6; a key holding an `agentKey` signature; a different deck.
 - B2: presentation under another deck's scope; bound to another body; against the wrong context version; a card of the epoch before the original close; a card of the epoch after it, in a deck whose `closes` was extended into that epoch (the extension vector); a post-dated card that has not started.
 - B3: no card proof (the "agents never vote" vector); an agent-class card; a presentation satisfying `entry` but not `vote`; a pooled presentation whose second nullifier is already in the deck.
 - B4: `votes` of length `C − 1`; a byte of 4; `K + 1` non-zero bytes; `group` in a vote deck; `group` ≥ `groupsK`.

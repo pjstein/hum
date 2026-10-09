@@ -386,7 +386,7 @@ Body:
 ```
 {
   0: context   (bstr 33, CID of the context version the phone holds),
-  1: proof     (bstr, membership proof for this context, scope as §6.1),
+  1: proof     (bstr, membership proof for this context, scope as §6.1, bound message SHA-256 of the canonical CBOR of `requests`),
   2: requests  ([bstr, …], 1 to 64 RFC 9578 TokenRequest structures)
 }
 ```

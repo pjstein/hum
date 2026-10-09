@@ -858,3 +858,227 @@ New vectors for the reference; no new field and no byte change:
 - `verifier.md` rule 30: `fromEpoch = E_now + 3` (rejected); version 1 with `fromEpoch` 500 (rejected).
 - `issue-map.md`: `im-ok-lost-response-retry`, `im-bad-rebuilt-after-logged`; `im-ok-two-logs` now counts in the log of record.
 
+### 12.9 Decisions of 2026-10-08, applied
+
+The owner said to apply every recommended item of ADRs 0103, 0104 and 0107, accepted the two-phone residual risk, and decided the independent check for the BBS crate. Seams; the diff still gets the owner's read before merge. Nothing committed by this review.
+
+**ADR 0103**
+
+| Item | File | Section | Change |
+| --- | --- | --- | --- |
+| 1 | `context.md` | "The noised daily count" | The daily count is the one declared output with no voter minimum |
+| 1 | `release.md` | R6; R13; "Receipts"; vectors | Below the minimum: no receipt root, no pages, part 8's noise not drawn, `parts` holds 0 and 4 only |
+| 1 | `services.md` | "Receipts"; AG-4; deck state paragraph | The receipts endpoint answers `404` below the minimum |
+| 1 | `manifest.md`, `ballot.md`, `shield.md` | "Privacy floors"; "Receipts"; "What is charged" | Name the exception; nothing to check below the minimum; noise is drawn for parts 0 and 4 |
+| 2 | `deck.md` | D16; vectors | Second, clock-free half: a deck version logged after a release of its lineage is invalid. The clock half was already in |
+| 3 | `deck.md`, `take.md` | "Rating decks" table, D15, vectors; "A rating round is a deck" | `minVoters` = max(`GATE_TALLIES`, the context's minimum), with `gates[0]` raised to match |
+| 4 | `release.md`, `services.md`, `context.md` | R10, R14, vectors; "Step 10 at the log"; "Log entries" | The first entry of `logs` is the ledger of record for decks and releases |
+
+Checked for item 1: `deck.md` D8 still requires part 8 in every plan, and the phone still charges `plan.rho`. Not drawing part 8's noise below the minimum leaves ρ unspent, which only lowers what a release costs. `shield.md` charges the plan's maximum whatever is drawn.
+
+**ADR 0104**
+
+| Item | File | Section | Change |
+| --- | --- | --- | --- |
+| 1 | `verifier.md` | "Issuer key"; security table; vectors | `KEY_TAIL` = 44,928,000 seconds (520 days) before ordinary retirement |
+| 2 | `verifier.md`, `ballot.md` | "Lifetime", security table; "Security considerations" | What an emergency key removal does to open decks, and the double-count a modified client gets |
+| 3 | `services.md` | "Issuance"; V-2 | One issuance request per session, one or two cards, identical retry |
+| 4 | `chat.md` | §2.5 step 4 and the paragraph after the flow; §5.17; `chat/join` vectors | `join-record` key 1 is `nullifiers`, an array; new key 5 `day`; snapshot rows `[nullifiers, identity, day]`; records deleted when the identity leaves or after 396 days |
+| 4 | `issue-map.md` | "The `authorship` bundle field"; IM-7; example; vectors | Key 4 removed and not reused |
+| 4 | `credentials.md`, `services.md` | Identifier table; logging table | The same: every nullifier, derived from the proof; counters kept two windows |
+
+**ADR 0107**
+
+| Item | File | Section | Change |
+| --- | --- | --- | --- |
+| 1 | `context.md`, `services.md` | "Body fields" keys 20 `resolvers` and 21 `relays`, C7, vectors; "Location hints", "Who runs it", open questions | The two discovery fields |
+| 2 | `services.md` | "Who runs it, and how a phone finds one" | The app ships the signed bootstrap bundles of the reference log and relays |
+| 3, 4 | `services.md` | New "Body keys"; "Ballot intake"; "Receipts" | Integer keys for every body; receipt `{0: leaf, 1: signature, 2: kid}`; root blob `{0: k, 1: pages}` |
+| 5 | `verifier.md`, `services.md`, `credentials.md` | "Host key"; "Sessions and evidence", registry; "Issuance request and response" | `info` = `hum/evidence/1` ‖ authority CID ‖ item name |
+| 6 | `services.md` | "Errors", `rule` | A host rejection is `vr-<code>` |
+| 7 | `chat.md` | §12.1 | Rules DL-1 to DL-5 for the `delivery` kind |
+| 8 | `storage.md`, `chat.md`, `verifier.md` | §6.2; §12.3; "Evidence item" | The bound message beside each scope (`agent-sponsor.md` AS-8 already had it) |
+| 9 | `issue-map.md`, `context.md`, `services.md` | "Membership proofs" (Limits, constants, scope table), "Rate limits"; "Open questions"; logging table | `AUTHOR_WINDOW` only; counters two windows. `context.md`'s `map` keys 1 to 3 already agreed |
+| 10 | `ballot.md` | B1, vectors | `too_large` for the presentation cap |
+| 11 | `services.md`, `release.md` | L-5, logging table; "Receipts" | Aggregator counts bucketed to the nearest 50 |
+| 12 | `simulator.md` | "Leak checks": registry kinds, allow table | Delivery may not see a device key; four new kinds with where each is allowed |
+
+**Other decisions**
+
+| Decision | File | Section |
+| --- | --- | --- |
+| Two-phone residual risk: accept and disclose | `docs/threat-model.md`; `shield.md`; ADR 0023 | "A compromised phone" and the assumptions table; "Restore" and "Security considerations"; status |
+| Independent check for the BBS crate | ADR 0110 | Status and note |
+
+**Not applied**
+
+- `CLAUDE.md` invariant 3 (ADR 0103 item 1). Not this review's file. Proposed sentence, replacing the "at least 100 noised voters to publish" clause: "at least 100 noised voters to publish anything except the organizer's noised daily count, which is served while a deck is open and is inside the deck's declared ρ".
+- `sim/src/leak.rs` (ADR 0107 item 12). W0-09's. The change: in `ALLOWED`, set delivery and device key to not allowed; add the kinds token-scope nullifier, join nullifier, issuance nullifier and public card fields to the registry with the placements in `simulator.md`; add the check that two phones of one context register the same public-card-fields tuple; add one failing fixture per new rule.
+- `KEY_TAIL` is not enforced by a rule. A verifier can always remove a key early, which is the emergency path, so the tail is what an honest verifier waits for ordinary retirement.
+
+**For the reference: byte-level changes**
+
+| Change | Where |
+| --- | --- |
+| `join-record`: key 1 becomes `nullifiers` (array of bstr(32), sorted); new key 5 `day`; snapshot rows are `[nullifiers, identity, day]` | `chat.md` §5.17 |
+| `authorship` map: key 4 removed | `issue-map.md` |
+| `context` body: optional keys 20 `resolvers` and 21 `relays` | `context.md` |
+| Integer keys for every `services.md` body; receipt gains key 2 `kid`; receipt root blob `{0: k, 1: pages}` | `services.md` "Body keys" |
+| Evidence HPKE `info` = `hum/evidence/1` ‖ authority CID ‖ item name; new registry string | `verifier.md`, `services.md` |
+| Below-minimum release: empty `receipts`, no `receipts/0` ref, `parts` without part 8 | `release.md` R6, R13 |
+| Error `rule` value `vr-<code>` for host rejections; `too_large` for an oversized presentation | `services.md`, `ballot.md` |
+| New constant `KEY_TAIL` = 44,928,000 (no bytes) | `verifier.md` |
+
+**For the reference: new vectors**
+
+- `release.md`: `release-valid-below-minimum` rebuilt; a below-minimum version with a `receipts/0` root (rejected); a release only in the second log (invalid).
+- `deck.md`: D16 version 2 logged after release version 1 (invalid); D15 rating deck at `minVoters` 100 under a floor of 300 (rejected) and at 300 with `gates[0]` 300 (valid).
+- `chat.md`: `join-record` and its snapshot with the new shape; a ticket refused because its second nullifier is recorded; `service-delivery-valid` and one failing per DL rule.
+- `issue-map.md`: every `im-authorship-*` vector without key 4; `im-authorship-key-4` (rejected).
+- `context.md`: C7 cases for `resolvers` and `relays`.
+- `services.md`: `service-body-*` for each row of "Body keys"; an evidence item sealed under `hum/evidence/1` and one sealed for another item name (rejected); an aggregator log line with an exact count (rejected, L-5).
+- `verifier.md`: the three-version lineage with retirement after `KEY_TAIL`.
+
+### 12.10 Fixes after the review of ADRs 0103, 0104 and 0107
+
+`applied-decisions.md`, section "ADRs 0103, 0104, 0107": no blocker, fourteen should-fix items (TS1 to TS14) and notes. Twelve are applied in full. TS7 and TS10 are owner choices: only the statement of current behaviour and risk is applied, and both are filed under "Open" in `docs/DECISIONS.md`. Seams; nothing committed.
+
+| Finding | File | Section | Change |
+| --- | --- | --- | --- |
+| TS1 | `verifier.md`, `services.md`, `credentials.md` | "Host key", vectors; "Sessions and evidence"; "Issuance request and response" | Evidence HPKE `aad` = the 16-byte session ID |
+| TS2 | `credentials.md` | The HPKE table | One row for the issuance request (`hum/issue/1`), one for evidence (`hum/evidence/1`) |
+| TS3 | `release.md` | R5, R6, vectors | R5's part lists apply when `unlocked` is not empty; below the minimum only parts 0 and 4 are noised, for rating decks too |
+| TS4 | `ballot.md`, `release.md`, `docs/threat-model.md` | "Receipts"; "Receipts"; "The operator", Remains | Below the minimum a voter cannot detect a dropped ballot, and a Leader can end a deck that way |
+| TS5 | `services.md`, `release.md` | L-5, logging table; "Receipts" | No count of accepted ballots at any time; only values already public or noised |
+| TS6 | `deck.md` | D11, D15 vectors | Part 3 of a rating deck is a per-cell gate, outside the `minVoters` test |
+| TS7 (statement only) | `docs/threat-model.md` | Assumptions | A context that changes its first log restarts R10 and R14 |
+| TS8 | `services.md` | V-2 | `conflict` only within the session; a later session gets the masked dedup code |
+| TS9 | `chat.md` | §2.5 step 4; `chat/join` vectors | Re-check on rebase; of two live records sharing a nullifier, the one later in delivery-service sequence loses |
+| TS10 (statement and the lookup-free check) | `context.md`, `docs/threat-model.md` | Key 21, C7, vectors; the relay row | C7: no relay equals an authority the context names; what a context-named relay learns |
+| TS11 | `services.md` | "Who runs it, and how a phone finds one"; vectors | The gateway keeps shipped configurations alive; the phone refreshes its bundles at first contact |
+| TS12 | `ballot.md`, `services.md` | "Receipts", phase 2 payload, vectors; "Body keys", "Step 10 at the log" | Receipt carries `kid`; keys for the two log proof responses and four gallery responses; DL-1 to DL-5 in the log's table |
+| TS13 | `simulator.md` | "Leak checks": registry, allow table, new-kinds table; the W1-05 row | Pseudonyms registered beside nullifiers; the card-fields check is per use and per context version with the grace allowed; the ledger row; chat registers device keys so their absence at delivery can be checked |
+| TS14 | `verifier.md` | "Issuer key" | About seven key changes fit in 520 days; an eighth forces an emergency removal |
+| Notes | `credentials.md`, `shield.md`, `issue-map.md`, `services.md`, `chat.md`, `deck.md`, `release.md`; ADRs 0101, 0103, 0107, 0110 | Six stale sentences; D16 "valid release version"; phones run R1 to R13 with R10 against the ledger of record; the independence condition for the BBS reference | Wording |
+
+**Not applied**
+
+- TS7's fix and TS10's selection rule: owner choices, filed with options and a recommendation.
+- The note on the `join-record` snapshot size (about 15 MB at the cap) and on one identity per card across a change of verifier. Both are true and need no rule.
+- `sim/src/leak.rs` remains as in 12.9. `CLAUDE.md` invariant 3 has since been edited by the orchestrator to name the daily count, so that follow-up is done.
+
+**Choices made here that the reference should treat as provisional:** the key numbers and shapes of the six new "Body keys" rows (two log proofs, four gallery responses) had no earlier definition anywhere.
+
+**For the reference: byte-level changes beyond 12.9**
+
+| Change | Where |
+| --- | --- |
+| Evidence HPKE `aad` = the 16-byte session ID (was empty) | `verifier.md`, `services.md` |
+| Below-minimum release: `parts` holds 0 and 4 only, for every plan and for rating decks | `release.md` R5, R6 |
+| Bodies for `/v1/log/proof/inclusion`, `/v1/log/proof/consistency` and the four gallery endpoints | `services.md` "Body keys" |
+| Aggregator log lines carry no count of accepted ballots (replaces the bucket of 50 in 12.9) | `services.md` L-5 |
+
+**For the reference: new vectors beyond 12.9**
+
+- Evidence sealed for one session and submitted in another (rejected); evidence sealed under another item's name (rejected).
+- `release-valid-below-minimum-rating`, `release-valid-below-minimum-ibis`.
+- A rating deck under a context minimum of 500 (valid).
+- A relay equal to the context's Leader authority (C7, rejected).
+- A different issuance request in a later session against a spent row (masked code, not `conflict`).
+- Two tickets from one card opened by two greeters.
+- A first request with a gateway configuration one rotation old.
+- `ballot-receipt-kid`.
+- An aggregator log line with any accepted-ballot count (rejected), before and after the final version.
+- `service-body-*` for the six new rows.
+
+**For the simulator (W0-09), beyond 12.9:** register the pseudonym as well as the nullifier for every scope; make the public-card-fields check per use and per context version, with two epoch values allowed in the grace window; have the chat plug-in register device keys so the checker can prove they never reach delivery.
+
+### 12.11 Owner choices on TS7 and TS10, and two recorded decisions
+
+The owner chose option (a) for both on 2026-10-08. Seams; nothing committed.
+
+| Decision | File | Section | Change |
+| --- | --- | --- | --- |
+| TS7 (a) | `context.md` | "Body fields" key 7; "Log entries"; C11; vectors | `logs[0].log` is frozen from version 1. Its witnesses and the other entries may change |
+| TS7 (a) | `release.md` | R14 | Notes that the ledger of record is one log for a context's whole life. R10 needed no change |
+| TS7 (a) | `docs/threat-model.md` | Assumptions | The row now says the restart is closed and what remains: trust that the ledger keeps its history |
+| TS10 (a) | `services.md` | New rule O-6; "Who runs it" (services screen text); vectors | The selection rule |
+| TS10 (a) | `context.md` | Key 21 | Points at O-6 |
+| TS10 (a) | `docs/threat-model.md` | The relay row | What a context relay learns, and that it never carries a ballot |
+| Both | `docs/DECISIONS.md` | "Accepted by the owner on 2026-10-08" items 32, 33; "Open" | Two Open lines removed |
+
+**O-6 in short.** A context relay is used only for that context's requests: its delivery service, stores and token issuers, its aggregators for status and published rounds, and log or resolver traffic for its lineage and objects. Each new connection picks one relay uniformly at random from the shipped relays plus that context's. On failure the phone picks again from the rest and never connects directly.
+
+**One addition beyond the option as written:** ballots, receipt lookups and receipt-page fetches use the shipped relays only. A ballot frame has a recognisable size, so a relay the organizer chose could otherwise see which member addresses voted and when, and the threat model says organizers must never learn whether a given member voted.
+
+**Recorded earlier and confirmed here:** `blst` 0.3.17 (Rust, behind one Hum wrapper) and `py_ecc` 8.0.0 (Python reference) are in the Libraries table and item 30 of the 2026-10-08 subsection, and ADR 0110's status line names them. `CLAUDE.md` invariant 3 names the daily count exception (item 31), and ADR 0103's note marks that follow-up done.
+
+**For the reference.** No byte-level change: C11 and O-6 add no field. New vectors: `context.md` C11, a version 2 that changes `logs[0].log` (rejected), one that swaps the first two entries (rejected), one that changes only `logs[0].witnesses` and adds a second log (valid); `services.md` O-6, the four relay-choice cases from a fixed random stream.
+
+**For the simulator (W0-09).** Two checks: no ballot or receipt fetch reaches a context-named relay; no request of one context reaches a relay only another context names.
+
+### 12.12 Fixes after the confirming review of TS1 to TS14
+
+"Re-review of TS1 to TS14" in `applied-decisions.md` closed eleven items and left RT1 to RT4 and three wording points on the gallery rows. All are applied. Seams; nothing committed.
+
+| Finding | File | Section | Change |
+| --- | --- | --- | --- |
+| RT1 | `verifier.md` | "Host key"; vectors | Evidence `aad` = session ID ‖ SHA-256(issuance request plaintext), 48 bytes. The phone builds the request first. The host holds evidence sealed until the issue call |
+| RT1 | `services.md` | "Sessions and evidence"; new rule V-4; simulator list | The host opens evidence only beside the request; a mismatch ends the session with `rejected`, rule `V-4` |
+| RT1 | `credentials.md` | "Issuance" steps 2 and 3; the paragraph and HPKE table under "Issuance request and response" | The same order and `aad` |
+| RT1 | `verifier-runtime.md` | Exports, `decide` | Runs after the request has arrived and the items have opened under its hash |
+| RT2 | `services.md` | Logging table (Aggregator, Gateway); L-5 | No per-request line and no per-deck, per-round or per-path count for ballot intake. Nullifier-dependent rejection codes are counted per service per day |
+| RT3 | `release.md` | R6 | A rating deck's part 3 unlocks with part 0; its cells are filtered at `GATE_CELL` |
+| RT4 | `chat.md` | §2.5 step 4; §5.17; `chat/join` vectors | The greeter sends the `join-record` before its Add and commits only if no earlier record conflicts. A record with no member is inert |
+| Gallery rows | `services.md`, `take.md` | "Body keys"; "Gallery ranking" | Names `logIndex` and `forkCount`; score rounded half to even to six decimals, times 10⁶; absent for an unrated take |
+
+**RT1, checked against the two cases asked about.** Handover: a first session in handover sends one request that holds two commitments, so there is one hash and every item is sealed under it. Lost response: a retry in a new session re-seals the evidence under the new session ID and the same request hash; the request plaintext is identical, so the host returns the identical response.
+
+**RT4, why the record goes first.** With the record before the commit, a failed greeter leaves a record and no member, which blocks nothing. Every Add is preceded by its record and all greeters see records in one order, so of two tickets from one card the later record's greeter stops. The other option, writing a missing record after the fact, leaves a window in which the card has a member and no record.
+
+**Threat model.** The sentence on what a context-named relay learns is in the "OHTTP relay" row of the party table: "also learns that each client address it serves belongs to a member of that context, and roughly when that member's phone is active there". It was added in 12.10 and reworded in 12.11.
+
+**For the reference: byte-level changes**
+
+| Change | Where |
+| --- | --- |
+| Evidence HPKE `aad` is 48 bytes: session ID ‖ SHA-256(issuance request plaintext). It was the 16-byte session ID in 12.10 | `verifier.md`, `services.md`, `credentials.md` |
+| Gallery listing element is `{0: cid, 1: logIndex, 2: rated, 3: hasGroupScore, 4: score, 5: forkCount}`; `score` absent when unrated | `services.md` "Body keys" |
+| A rating release unlocks part 3 with part 0 | `release.md` R6 |
+
+**New vectors**
+
+- Evidence: an issuance request that differs from the one the evidence was sealed for, in the same session (rejected, V-4); a session ID replaced in transit (rejected); the handover case with two commitments (valid); the lost-response retry in a new session (valid, identical response).
+- Logging: a gateway log with a per-path count for a ballot path (rejected); an aggregator log with a per-deck count of `conflict` `duplicate` (rejected).
+- `release.md`: a rating release with part 3 unlocked at `nHat` 400 and cells filtered at 300.
+- `chat/join`: a greeter that fails after its record and before its commit; an Add of a new identity with no record.
+- Gallery: a listing with one unrated take (no `score`) and one score exactly on a rounding tie.
+
+### 12.13 O-6 tightened after rev-11's check of TS7 and TS10
+
+rev-11 confirmed TS7 as closed and the C11 vectors as present, and found two requests that O-6 still let through a context-named relay. Both are fixed; both only tighten the rule. Seam (what leaves the phone); nothing committed.
+
+| Gap | File | Section | Change |
+| --- | --- | --- | --- |
+| A log submission through a context relay lets that relay tie an unsigned object to an address, because the public log shows when the object appeared | `services.md` | O-6; vectors | Every submission to a log uses the shipped relays only. Log reads may still use a context relay |
+| A deck status poll or a fetch of a round's publication marks an address as a probable voter | `services.md` | O-6; vectors | Every request to an aggregator uses the shipped relays only, not just ballots and receipts |
+| Both | `services.md`, `context.md`, `docs/threat-model.md` | The services-screen text; key 21; the relay row | Say the same |
+
+A context relay now carries only the context's chat (delivery service), files (stores and their token issuers) and log or resolver reads. O-6 now lists these four kinds exhaustively and sends everything else through the shipped relays. This closes the item left open after 12.12.
+
+For the reference: no byte change. The O-6 vector gains two cases: an unsigned object's submission and a deck status poll each choose from the shipped relays only. For the simulator: no request to an aggregator and no log submission reaches a context-named relay.
+
+**Added after rev-11's second note.** The put of an authored object's text and evidence blobs, and the token issuance that pays for it, also use the shipped relays only (`services.md` O-6, `context.md` key 21, the threat-model relay row). A context relay could otherwise see an address write to the store seconds before an unsigned object appears in the public log. Residual, recorded in the threat model: later fetches of the object's sealed text may go through a context relay, which marks readers and not the author. The O-6 vector gains one case: an unsigned object's text-blob put chooses from the shipped relays only.
+
+### 12.14 Last three fixes for the 0103, 0104, 0107 round
+
+"Confirming check of RT1 to RT4" in `applied-decisions.md`: approve with fixes, no blocker, three should-fix items. All three are applied. Seams; nothing committed.
+
+| Finding | File | Section | Change |
+| --- | --- | --- | --- |
+| RU1 | `chat.md` | §2.5 step 4; `chat/join` vectors | The backstop that removes an Add with no `join-record` applies only to a human leaf of a new identity in a context whose `entry` yields a nullifier. It never applies to an `entry` = `[0]` context, an agent leaf or a member's new device. The greeter must first fetch the organizers group to at least `JOIN_GRACE` = 600 seconds past the Add, and does nothing if it cannot |
+| RU2 | `chat.md` | §2.5 step 4; `chat/join` vectors | An earlier record for a different identity blocks a commit only when that identity is a member or the record is younger than `JOIN_PENDING` = 3,600 seconds. Otherwise it is inert. A greeter commits within `JOIN_PENDING` of its record or sends a fresh one |
+| RU3 | `services.md` | Logging table (Gateway, Aggregator); L-5 | No counter for ballot intake at the gateway. Nullifier-dependent rejection codes are not counted by code; they appear only in a daily total of all rejections |
+
+For the reference: no byte change. Two new constants, `JOIN_PENDING` and `JOIN_GRACE`. Changed expected results in `chat/join`: the no-record Add is removed only after the 600-second fetch, and is kept in an open context, for an agent leaf and for a second device; the pre-commit check has three cases (live: stop; pending 30 minutes: stop; not a member and two hours old: commit). The log-content cases for RU3: a gateway daily counter for ballot intake (rejected) and an aggregator count of `conflict` `duplicate` at any grain (rejected).
+

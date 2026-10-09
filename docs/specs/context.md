@@ -61,7 +61,7 @@ The ρ for ε 4 is 0.25398…; `RHO_MAX` rounds it to three decimals as the desi
 | 4 | `issuers` | array of `auth` ≤ 64 | no | Single verifier authorities the policies may name, beside the trust lists in `refs` | no |
 | 5 | `perms` | map | yes | Organizer settings that are not floors (table below) | no |
 | 6 | `floors` | map | yes | The context's privacy floors (table below) | no, but may only tighten (rule C10) |
-| 7 | `logs` | array of log entries, 1..8 | yes | Transparency logs this context accepts | no |
+| 7 | `logs` | array of log entries, 1..8 | yes | Transparency logs this context accepts. The first entry is the ledger of record | the first entry's `log` from version 1; its `witnesses` and the other entries may change |
 | 8 | `aggregators` | array `[leader, helper]` of `auth` | yes | The two aggregator authorities every deck of this context uses | no |
 | 9 | `stores` | array of `auth`, 1..8 | yes | Blob store authorities members may use | no |
 | 10 | `storage` | map | yes | Storage policy (table below) | no |
@@ -74,6 +74,8 @@ The ρ for ε 4 is 0.25398…; `RHO_MAX` rounds it to three decimals as the desi
 | 17 | `agents` | map | no | Which agent sponsors are admitted and what they may do (table below); absent means every default | no |
 | 18 | `aboutEpoch` | uint | iff `sealed` and `refs["about"]` present | Keyring epoch that decrypts the `about` blob | no |
 | 19 | `nullifier` | array `[source, name]` | yes | The credential the voting pseudonym and nullifier are bound to (see Entry policy) | no |
+| 20 | `resolvers` | array of `auth`, 1..8 | no | Resolver authorities members try first when fetching bytes by CID (`services.md`, "Resolver and mirrors"). Absent means the app's shipped defaults | no |
+| 21 | `relays` | array of `auth`, 1..4 | no | OHTTP relay authorities members may use for this context's requests, beside the app's shipped relays (`services.md`, "OHTTP relay"). Absent means the shipped relays only. A relay named here must pass `services.md` rule O-5; C7 checks the part of it that needs no lookup. A relay named here carries only this context's requests, in rotation with the shipped relays, and never a request to an aggregator, a submission to a log or the blob puts of an authored object (`services.md` rule O-6). A relay that only this context names learns that each client address it sees belongs to a member, and the services screen says so | no |
 
 `refs` names:
 
@@ -131,7 +133,7 @@ Each entry is a map:
 | 0 | `log` | auth | The log's authority |
 | 1 | `witnesses` | array of bytes32, 2..16 | Ed25519 public keys of witnesses whose cosignatures count for this log |
 
-A checkpoint of this log counts for the context when at least `floors.minWitnesses` of the listed witnesses cosigned it. A manifest the context's members act on must be proven in at least one listed log. The first entry is the context's **log of record**: an authored issue-map object must be in it, its authorship proof is checked there, and nullifier and rate-limit counts are taken there (`credentials.md`, "Verification rules"; `issue-map.md`). The order of `logs` therefore carries meaning.
+A checkpoint of this log counts for the context when at least `floors.minWitnesses` of the listed witnesses cosigned it. A manifest the context's members act on must be proven in at least one listed log. The first entry is the context's **log of record**, and its ledger of record for decks and releases (`release.md` R10, R14; `deck.md` D16): an authored issue-map object must be in it, its authorship proof is checked there, and nullifier and rate-limit counts are taken there (`credentials.md`, "Verification rules"; `issue-map.md`). The order of `logs` therefore carries meaning, and the first entry's `log` is frozen from version 1 (C11).
 
 ### `storage` (key 10)
 
@@ -254,6 +256,7 @@ Organizers see how many people have played an open deck so far, once a day, with
 - **Why increments.** A person appears in exactly one day's increment, so the whole series of any length is one sum with L2 sensitivity 1. A series of running totals would charge √(days).
 - **Budget.** The deck's release plan gives the `count` part a ρ, at most `count.rhoMax` (default 1/200, never above `COUNT_RHO_MAX`). Noise is the discrete Gaussian of `release.md` with σ = 1/√(2ρ) (rounded up to σ_r as that spec defines), so the default σ is 10 ballots per day. The running sum over a 20-day deck has σ about 45. The part is inside the plan's total, so it is inside `floors.rho` and the shield charges it with everything else.
 - **Accounting.** The aggregator adds noise to each day's increment once, at the end of that day, and publishes nothing else about intake. The series goes to organizers through the aggregator API (`services.md`) and is included in the release as the `count` table so the spend is auditable.
+- **The one exception to the voter minimum.** The daily count is served while the deck is open, before anyone knows whether the deck will reach `minVoters`, so it has no voter minimum. It is the only output that has none (ADR 0103). It is noised, capped at `COUNT_RHO_MAX`, inside the plan's ρ, and seen by organizers only until release. A below-minimum release publishes nothing else: no table, no `nHat`, no receipt tree.
 - **Phase 2.** The increment is a one-hot over day buckets; DAP time-interval batches produce the same sums.
 
 A deck whose plan omits the `count` part gives organizers no count at all. A plan may not give it more than `count.rhoMax`.
@@ -272,11 +275,11 @@ Each rule is phrased so one vector can test it. A failing rule rejects the manif
 | C4 | If `rhoYear` is present, `rhoYear` ≥ `rho` |
 | C5 | Every policy node is well-formed: known kinds; `all` and `any` have 1..32 children; depth ≤ `MAX_POLICY_DEPTH`; `attr` leaves ≤ `MAX_POLICY_LEAVES`; every `[0, i]` source has `refs["tl/<i>"]`; every `[1, i]` source has `issuers[i]`; `name` matches `^[a-z][a-z0-9-]{0,31}$`; in draft 0.1 `[1, …]` has exactly one uint, `[2, lo, hi]` has `lo = hi`, and `[0]` is on an attribute the verifier declares as `bool` (checked after step 9 resolves the source); no `any` node has two leaf children on the same (source, name) |
 | C6 | `nullifier` names a source that exists, and the effective voting policy `[1, [entry, vote]]` (or `entry` alone) has an `attr` leaf with that source and name reachable from the root through `all` nodes only (no `any` on the path) |
-| C7 | `refs` trust lists are named `tl/0`, `tl/1`, … with no gaps; no trust list is unused by both policies; `aggregators[0] ≠ aggregators[1]`; no duplicate in `stores`, `logs` or `issuers` |
+| C7 | `refs` trust lists are named `tl/0`, `tl/1`, … with no gaps; no trust list is unused by both policies; `aggregators[0] ≠ aggregators[1]`; no duplicate in `stores`, `logs`, `issuers`, `resolvers` or `relays`; `resolvers` has 1..8 and `relays` 1..4 entries when present; no entry of `relays` equals any authority this context names in `logs`, `aggregators`, `stores`, `resolvers`, `issuers` or `chat.delivery` (the part of `services.md` rule O-5 that needs no lookup) |
 | C8 | Each log entry has 2..16 distinct witness keys, and `floors.minWitnesses` ≤ the number of witnesses of every log entry |
 | C9 | `storage.retention` has all five kinds; `maxBlob` ≥ 65536; `history` ∈ {0,1,2}; `keyringHistory` ∈ {0,1}; `sensitiveMax` ≥ 1048576 |
 | C10 | Version > 1: `floors.rho` ≤ prev, `floors.delta` ≤ prev, `floors.minVoters` ≥ prev, `floors.minWitnesses` ≥ prev; if prev had `rhoYear`, this version has `rhoYear` ≤ prev's |
-| C11 | Version > 1: `sealed` and `chat.allMembers` equal prev; `chat.greeting` is a 32-byte string and `chat.issuerKeys` has both entries in every version |
+| C11 | Version > 1: `sealed`, `chat.allMembers` and `logs[0].log` equal prev (the ledger of record never changes within a context lineage, so the counts of `release.md` R10 and R14 cannot be restarted; a context that must move ledgers starts a new lineage, in the open); `chat.greeting` is a 32-byte string and `chat.issuerKeys` has both entries in every version |
 | C12 | `perms.results` ∈ {0, 1}; if 1, `resultsKey` and `resultsEpoch` are present; if 0, both are absent; `aboutEpoch` present iff `sealed` and `refs["about"]` present |
 | C13 | If `refs["parent"]` is present, it resolves to a `context` manifest whose `floors` are no stricter than this one's on `rho`, `delta`, `minVoters` and `minWitnesses`, and whose lineage is not this one's |
 | C14 | If `count` is present, `count.rhoMax` ≤ `COUNT_RHO_MAX` |
@@ -352,11 +355,11 @@ Invalid, one per sub-condition, named `context-invalid-<rule>-<case>`:
 - C4: `rhoYear` < `rho`.
 - C5: unknown node kind; `all` with no children; depth 5; 33 leaves; `[0, 2]` with only `tl/0`; `[1, 3]` with one issuer; text value in a predicate; a two-value set; `lo < hi`; `lo > hi`; `[0]` on an enum attribute; an `any` with two leaves on the same (source, name); bad attribute name.
 - C6: `nullifier` source missing; nullifier leaf absent from the policy; nullifier leaf only under an `any`.
-- C7: gapped `tl/`; unused trust list; equal aggregators; duplicate store.
+- C7: gapped `tl/`; unused trust list; equal aggregators; duplicate store; duplicate relay; five relays; an empty `resolvers` array; a relay equal to the context's Leader authority.
 - C8: `minWitnesses` 3 with two witnesses; duplicate witness key.
 - C9: retention missing kind 4; `maxBlob` 1000; `history` 3; `keyringHistory` 2; `sensitiveMax` too small.
 - C10: version 2 raises `rho`; raises `delta`; lowers `minVoters`; lowers `minWitnesses`; drops `rhoYear`; raises `rhoYear`.
-- C11: version 2 changes `allMembers`; changes `sealed`; `greeting` missing; `issuerKeys` with one entry.
+- C11: version 2 changes `allMembers`; changes `sealed`; changes `logs[0].log`; swaps the first two `logs` entries; valid: version 2 changes `logs[0].witnesses` and adds a second log; `greeting` missing; `issuerKeys` with one entry.
 - C12: `results` 2; `results` 1 without `resultsKey`; `results` 0 with `resultsKey`; sealed `about` without `aboutEpoch`.
 - C13: parent with stricter `minVoters`; parent in the same lineage.
 - C14: `count.rhoMax` 1/20.
@@ -387,7 +390,7 @@ Filed in `docs/decisions/`:
 Where this spec and its siblings differ in names:
 
 - `chat.md` has three chat roles, `organizer`, `moderator`, `member`; `admin` here is a keyset role (a `rotate` key) with no chat meaning. `chat.md` §3.1 reads `agents.addRole` from the pinned context version; `agent-sponsor.md` reads the same field.
-- `issue-map.md` asks for `unsignedPerWindow`, `signedPerWindow`, `unsignedWindow` and an agent object cap: `map` (key 16), with the window fixed at `AUTHOR_WINDOW` because the log computes slot scopes with it. Admitted sponsors: `agents` (key 17). Map visibility: `sealed`. Write policy: `perms.cards`.
+- `issue-map.md` uses `unsignedPerWindow`, `signedPerWindow` and an agent object cap: `map` (key 16), with the window fixed at `AUTHOR_WINDOW` because the log computes slot scopes with it. Admitted sponsors: `agents` (key 17). Map visibility: `sealed`. Write policy: `perms.cards`.
 - `agent-sponsor.md` asks for admitted sponsors, agent caps, the role that may add agents, and the `agent-sponsor` rule: `agents` and C15.
 - `storage.md` A3 asks for a keyring-history switch and a sensitive-folder cap: `storage.keyringHistory` and `storage.sensitiveMax`.
 

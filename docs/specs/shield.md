@@ -63,7 +63,7 @@ The ledger never leaves the phone: not to backup, chat, storage, logs, analytics
 
 **What is charged** is the plan's total, `plan.rho`, including every part the plan lists: tallies, the map tier whether or not it unlocks, the daily count, movement, ratings and receipt padding. Not the parts the person's behavior touches, and not what the release later reports as spent. Three reasons:
 
-- The guarantee is user-level over the whole release. Whether a tier unlocks depends on everyone's participation, which the phone cannot know when it votes, and the aggregator draws noise for parts 0, 4 and 8 even below the floor (`release.md` R6).
+- The guarantee is user-level over the whole release. Whether a tier unlocks depends on everyone's participation, which the phone cannot know when it votes, and the aggregator draws noise for parts 0 and 4 even below the floor (`release.md` R6).
 - A plan that declares ρ is a promise that no release under it costs more; charging the maximum means an unused tier never costs more than declared, and never less than the person was told.
 - A charge that depended on behavior (did you re-vote, did you consent) would make the ledger a record of behavior.
 
@@ -108,7 +108,7 @@ An `estimated` entry is treated as spent and cannot be removed by the person in 
 
 The cost is stated plainly: after a restore a person in a busy context may be shown as fully spent until 365 days after the latest `expires` among the estimated decks. For a deck that had already ended that is under a year. For a deck still open at the restore it can be longer: a deck may stay open a year (`deck.md` D2) and its `expires` may be up to 150 days after `closes` (D13), so the bound is about two years and five months after that deck opened. It is bounded, because `expires` is. A person who loses both the phone and the phrase starts with an empty ledger once dedup lets them get a card, and the lost phone's votes inside the window are not counted; accepted.
 
-A person who restores onto a second phone while still voting from the first has two ledgers, each missing the other's entries: the two phones together can spend up to twice one shield across different decks. The duplicate-nullifier rule means they still count once per deck. The app says so during restore. It is a floor an unmodified app can exceed and needs the owner's explicit acceptance ([`0023-w0-02-backup-and-voting-device.md`](../decisions/0023-w0-02-backup-and-voting-device.md)); the chat-only export in `credentials.md` removes the accidental route to it.
+A person who restores onto a second phone while still voting from the first has two ledgers, each missing the other's entries: the two phones together can spend up to twice one shield across different decks. The duplicate-nullifier rule means they still count once per deck. The app says so during restore. It is a floor an unmodified app can exceed. The owner accepted it for draft 0.1 on 2026-10-08, to be disclosed and not prevented; device-bound cards stay a filed alternative ([`0023-w0-02-backup-and-voting-device.md`](../decisions/0023-w0-02-backup-and-voting-device.md)); the chat-only export in `credentials.md` removes the accidental route to it.
 
 ## What the person sees
 
@@ -157,6 +157,7 @@ Simulator scenarios (`simulator.md`): `sim-shield-sit-out`, `sim-shield-restore`
 - Conservative restore errs toward sitting out, by design.
 - The threshold prompt changes nothing about what is sent, only when the person is asked.
 - A modified client can ignore its shield. That loosens the floor for that person alone; it cannot make a release cost anyone else more (`manifest.md`, "Privacy floors").
+- **Accepted residual: two phones.** A person who restores the full backup onto a second phone and keeps voting from the first has two ledgers, and together they can spend up to twice `SHIELD_RHO` in a year across different decks. This happens with an unmodified app, so it is stated here plainly. It affects only that person's own bound, they are counted once per deck, the app warns during restore, and the owner accepted it for draft 0.1 on 2026-10-08 (ADR 0023).
 - The receipt-padding clamp adds at most 4·10⁻⁹ to δ per release (`release.md`), below 10⁻⁷ over 17 releases; it is ignored consistently with `release.md`, pending the outside review.
 
 ## Open questions
@@ -165,7 +166,7 @@ Filed in `docs/decisions/`:
 
 - **Window anchor** ([`0102-w0-10-shield-window-and-padding-delta.md`](../decisions/0102-w0-10-shield-window-and-padding-delta.md)): applied; an entry leaves the window 365 days after its release could first be seen. After review, `deck.md` D13 bounds `expires` above and `release.md` R13 forbids any release version after it, which is what makes the anchor sound. One thing stays open there: counting the receipt clamp's δ inside the plan's δ.
 - **Sliding window, no refund after send, conservative restore** ([`0025-w0-02-shield-window-and-restore.md`](../decisions/0025-w0-02-shield-window-and-restore.md)): the board's "recharges Jan 1" wording; the "I did not vote in this deck" control, filed as an owner decision and not in 0.1.
-- **Two voting devices and direct transfer** ([`0023-w0-02-backup-and-voting-device.md`](../decisions/0023-w0-02-backup-and-voting-device.md)): both are exceptions a floor or invariant 1 would need the owner to accept; draft 0.1 has neither.
+- **Two voting devices and direct transfer** ([`0023-w0-02-backup-and-voting-device.md`](../decisions/0023-w0-02-backup-and-voting-device.md)): both stay off in draft 0.1 (owner, 2026-10-07). The two-phone residual risk that remains was accepted on 2026-10-08, to be disclosed.
 - **The target itself:** ε 20 is the design doc's placeholder; `SHIELD_RHO` follows from whatever the owner sets.
 - **Display in ε:** the nonlinear bar is faithful to the board; a linear ρ bar would be simpler to explain. UX question.
 

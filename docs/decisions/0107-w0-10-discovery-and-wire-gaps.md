@@ -1,6 +1,8 @@
 # 0107 · Discovery fields and wire-format gaps between specs
 
-**Status:** proposed (W0-10, 2026-10-06) · `seam:` what leaves the phone (relay and resolver discovery), canonical encoding
+**Status:** accepted by the owner 2026-10-08, applied; seam, the diff still gets the owner's read before merge · `seam:` what leaves the phone (relay and resolver discovery), canonical encoding
+
+*2026-10-08:* The owner said to apply every recommended item. All twelve are applied in the specs; see `cross-spec.md` section 12.9. Item 12 also needs a code change in `sim/src/leak.rs`, which is W0-09's.
 
 ## Context
 
@@ -43,6 +45,9 @@ Gaps where one spec relies on a field or a format that no spec defines. Each nee
 12. `simulator.md` sets delivery and device key to "no", and adds the four registry kinds with where each is allowed: a token-scope nullifier at its issuer only, a join nullifier at no service, an issuance nullifier at the issuing host only, the public card fields wherever a presentation is allowed.
 
 ## Consequences
+
+- After the confirming review (2026-10-08): evidence `aad` is the session ID ‖ SHA-256(issuance request plaintext), the host opens evidence only once the request has arrived (V-4), and ballot intake leaves no per-request line or per-path count at the aggregator or the gateway.
+- After review (2026-10-08): evidence `aad` is the 16-byte session ID; L-5 bans every count of accepted ballots, not a bucket of 50; the log proof and gallery bodies have keys; relay selection is filed as an owner choice in `docs/DECISIONS.md`.
 
 - Items 1, 3, 4, 5 and 9 change bytes that no implementation has built yet.
 - Item 12 changes the constant `ALLOWED` in `sim/src/leak.rs`, which is W0-09's.

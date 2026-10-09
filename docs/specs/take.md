@@ -163,7 +163,7 @@ A context's authority deals a **rating deck**: a `deck` manifest with `kind` = 1
 | Contribution cap | `cap` (K) at most 20 takes per person per rating deck. The phone deals cards in its own random order and stops counting after K |
 | Release plan | `parts`: tallies 0.4 and groups 0.6 of what is left after part 8's share (`deck.md`); `rho` at most 1/20 (0.05) |
 | Rounds | At most two rating releases per source release per year; the ledger enforces it by `source` (`release.md`, rule R10) |
-| Floors | `GATE_TALLIES` (100) noised raters to publish overall fairness; `GATE_CELL` (300) in a group's noised size to publish that group's share (`deck.md` gates part 3 per group for rating decks). Below that, the take shows overall fairness only, or "not enough ratings yet" |
+| Floors | `GATE_TALLIES` (100) noised raters to publish overall fairness, or the context's `floors.minVoters` when that is higher (`deck.md` D15); `GATE_CELL` (300) in a group's noised size to publish that group's share (`deck.md` gates part 3 per group for rating decks). Below that, the take shows overall fairness only, or "not enough ratings yet" |
 | Shield | Each rating deck charges its planned ρ to the rater's shield like any deck. At ρ 0.05, a rating deck costs about a fifth of a full release |
 
 In phase 1 the rating ballot tells the aggregator the pseudonym's source-release group. That is inside the phase-1 model, where the aggregator sees pseudonymous votes by design, and the group is one one-hot coordinate inside the noised groups part, so the published guarantee is unchanged. In phase 2 the group slot is a share like any other. `ballot.md` should state it the same way.
@@ -197,7 +197,7 @@ score = min over cells of f_low
 - A take with an overall `tallies` row but no group cell past `GATE_CELL` gets `score` from the overall row and `hasGroupScore` = false.
 - Agent-authored takes rank by the same rule and keep their label.
 
-The sort key is the tuple `(rated, hasGroupScore, score rounded to six decimals, forkCount, logIndex)`, compared element by element, every element descending, where `logIndex` is the take's version 1 leaf index in the log of record. So unrated takes sort last, and among ties and among unrated takes the most recently logged comes first.
+The sort key is the tuple `(rated, hasGroupScore, score rounded to six decimals, forkCount, logIndex)`, with the rounding done half to even in binary64, compared element by element, every element descending, where `logIndex` is the take's version 1 leaf index in the log of record. So unrated takes sort last, and among ties and among unrated takes the most recently logged comes first.
 
 The reference client shows the per-group point estimates ("Fair to A 64% · B 58%") and uses `score` for order. A gallery index service (`services.md`) may precompute the order, but every phone can recompute it from the rating releases, and the conformance suite checks that it does (`take-rank-*`).
 

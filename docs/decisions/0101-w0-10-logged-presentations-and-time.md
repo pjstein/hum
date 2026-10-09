@@ -38,7 +38,7 @@ Add a third row to the "Validity" table in `credentials.md` for logged presentat
 ## Consequences
 
 - The log's clock check is the only clock in the path, as it already is for slot windows.
-- **Corrected after review (AS9).** `issued` is chosen by the author and bounded only by one log's clock at submission. Witnesses check consistency and never times, and later verifiers use no clock. A log of record that skips the check admits a proof from an expired card with a back-dated `issued` for as long as the `kid` stays in `issuerKeys`, and unlimited unsigned slots back-dated into old windows. That is wider than the one-hour grace, which an earlier version of this line claimed it equalled. It is now a stated assumption in `docs/threat-model.md`.
+- **Corrected after review (AS9).** `issued` is chosen by the author and bounded only by one log's clock at submission. Witnesses check consistency and never times, and later verifiers use no clock. A log of record that skips the check admits a proof from an expired card with a back-dated `issued` for as long as the `kid` stays in `issuerKeys`, which since ADR 0104 is the epoch plus `KEY_TAIL` (520 days, not 30), and unlimited unsigned slots back-dated into old windows. That is wider than the one-hour grace, which an earlier version of this line claimed it equalled. It is now a stated assumption in `docs/threat-model.md`.
 - **Log of record (AS11).** As applied, "the log" is the first entry of the context's `logs`. Other listed logs accept an object on proof of inclusion there.
 - **Layout without a clock (AS10).** As applied, `verifier.md` attributes carry `fromEpoch`, so a later verifier computes the message count of an epoch from any manifest version.
 

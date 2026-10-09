@@ -221,14 +221,14 @@ Draft 0.1 defines the twelve type names in this table. Each gets its own body sp
 
 Floors come in three layers that can only get stricter: protocol minimums built into every conforming client, context floors in the context manifest, and each person's shield on their phone. Every party that would have to break a floor checks it.
 
-- **Protocol minimums (draft 0.1):** at most ρ 0.254 per release (ε 4 at δ 10⁻⁶), δ at most 10⁻⁶, at least 100 noised voters to publish, one release per deck, a declared contribution cap, and a yearly shield of at most ε 20 per person.
+- **Protocol minimums (draft 0.1):** at most ρ 0.254 per release (ε 4 at δ 10⁻⁶), δ at most 10⁻⁶, at least 100 noised voters to publish (the organizer's noised daily count is the one declared exception: it is served while a deck is open, inside the plan's ρ; `context.md`), one release per deck, a declared contribution cap, and a yearly shield of at most ε 20 per person.
 - **Context floors** may be stricter but never looser: a lower ρ, a higher minimum, fewer releases a year. A deck's release plan must satisfy the floors of the context version it pins.
 - **Size gates live in the release plan.** A plan lists its parts by tier (tallies, common ground, map and groups). Aggregators compute only the tiers the noised voter count unlocks. Phones charge their shield for the plan's maximum, so an unused tier never costs more than declared.
 
 | Who checks | What | If it fails |
 | --- | --- | --- |
 | Phone | Deck's release plan against protocol and context floors; the planned ρ against the person's remaining shield | Refuses to vote, or sits the deck out |
-| Aggregators | Plan against floors; the noised voter count against the minimum; noise added exactly as planned | Refuse to release |
+| Aggregators | Plan against floors; the noised voter count against the minimum; noise added exactly as planned | Below the minimum, log a final release version with no tables and no receipt pages; otherwise refuse |
 | Release ledger | Release parameters against the pinned deck and its floors | Refuses to log the release, so honest clients never display it |
 | Studio and gallery | Nothing: they only post-process releases | — |
 

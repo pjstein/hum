@@ -85,17 +85,17 @@ The policy a membership proof proves is the pinned context's `entry` policy (`co
 | Use | Scope bytes | Nullifier rule |
 | --- | --- | --- |
 | Signed object, any version | `hum/author-once/1` ‖ object CID | Each nullifier appears at most once. It links nothing, because the scope is unique to this object |
-| Unsigned object, any version | `hum/author-slot/1` ‖ context lineage CID ‖ window (uint64, big-endian) ‖ slot (uint16, big-endian) | Each nullifier appears at most once across the context's logs. `window` is `issued ÷ effective window` (integer division; see Limits). `slot` is less than the effective unsigned limit |
+| Unsigned object, any version | `hum/author-slot/1` ‖ context lineage CID ‖ window (uint64, big-endian) ‖ slot (uint16, big-endian) | Each nullifier appears at most once across the context's logs. `window` is `issued ÷ AUTHOR_WINDOW` (integer division; see Limits). `slot` is less than the effective unsigned limit |
 
 Why the signed form carries a membership proof at all: a log must check membership before appending, and a log is not a member, so it can't check a chat identity key against the MLS tree. The proof costs the author nothing and reveals only "some member".
 
 Why unsigned objects use slots instead of one scope per window: with one scope per window, all of a person's unsigned posts in a week would share a nullifier, and one slip (a signed object with the same nullifier) would unmask all of them. With slots, the verifier sees `(window, slot)` in the clear, checks the slot is in range, and rejects a reused nullifier. Nothing links slot 3 to slot 4, and nothing links either to a signed object, a chat name or a vote. The cost is that unsigned posting is capped per window.
 
-**Limits.** `context.md` key 16 (`map`) carries `unsignedWindow`, `unsignedPerWindow`, `signedPerWindow` and `agentObjects`. The protocol constants below bound them: for the per-window counts the effective limit is the smaller of the context's value and the ceiling, and for the window length the effective window is the larger of the context's value and the floor. A context can tighten and never loosen. Changing `unsignedWindow` changes every slot scope, so a tightening hands every member a fresh set of slots once; accepted.
+**Limits.** `context.md` key 16 (`map`) carries `unsignedPerWindow`, `signedPerWindow` and `agentObjects`. The protocol constants below bound them: the effective limit is the smaller of the context's value and the ceiling. A context can tighten and never loosen. The window length is not a context setting: it is the protocol constant `AUTHOR_WINDOW` (86,400 seconds, `context.md`), because the log computes slot scopes with it and a per-context window would change every slot scope when it moved.
 
 | Name | Value | Meaning |
 | --- | --- | --- |
-| `UNSIGNED_WINDOW_MIN` | 86,400 s | Floor on `ctx.map.unsignedWindow`; the effective window is max(context value, floor) |
+| `AUTHOR_WINDOW` | 86,400 s | The rate-limit window for every author form, defined in `context.md`; `window` in a slot scope is `issued ÷ AUTHOR_WINDOW` |
 | `UNSIGNED_PER_WINDOW_MAX` | 20 | Ceiling on `ctx.map.unsignedPerWindow` |
 | `SIGNED_PER_WINDOW_MAX` | 60 | Ceiling on `ctx.map.signedPerWindow` |
 | `AGENT_OBJECTS_MAX` | 20 | Ceiling on `ctx.map.agentObjects` |
@@ -119,7 +119,7 @@ Authoring proves the `entry` set; ballots prove `vote` under different scopes, a
 | 1 | key | bytes(32) | 1 | The chat identity public key |
 | 2 | sig | bytes(64) | 1, 3 | Ed25519 signature over `hum/author/1` ‖ CID |
 | 3 | slot | uint | 2 | The slot index; the verifier recomputes the scope from the context lineage, `issued` and this slot |
-| 4 | nullifier | bytes(32) | 1, 2 | The primary nullifier: the one from the card the context's designated `nullifier` leaf names (`context.md` key 19, rule C6). The presentation in `proof` yields one nullifier per card, and the others are read from it |
+| 4 | (unused) | — | — | Was `nullifier`. Removed (ADR 0104): a proof yields one nullifier per card and the verifier derives all of them from `proof`, so a carried copy added nothing. The key is not reused, and a field with key 4 makes the `authorship` map invalid |
 | 5 | proof | bytes | 1, 2 | The membership proof, encoded as `credentials.md` defines, over the recomputed scope and the bound message `hum/author/1` ‖ CID |
 | 6 | editSig | bytes(64) | version > 1 | Ed25519 signature over `hum/edit/1` ‖ CID by the object's `editKey` |
 
@@ -257,14 +257,14 @@ Moderation reports travel in chat with message franking (`chat.md`). The map's p
 
 Agents are the easiest way to flood a map; people with scripts are the second. Limits are enforced where the proofs are visible: at the log on submission, and on every phone when it syncs.
 
-| Author form | Counted by | Effective limit per `ctx.map.unsignedWindow` |
+| Author form | Counted by | Effective limit per `AUTHOR_WINDOW` |
 | --- | --- | --- |
 | anonymous | Slots per window, in the proof scope | min(`ctx.map.unsignedPerWindow`, `UNSIGNED_PER_WINDOW_MAX`) per person |
 | member | Chat identity key in `authorship` | min(`ctx.map.signedPerWindow`, `SIGNED_PER_WINDOW_MAX`) per key |
 | agent | Sponsor authority, and all agents together | Both hold: the sponsor manifest's `rateLimits.mapObjects` per its own `window`, summed over the sponsor's agents in this context; and min(`ctx.map.agentObjects`, `AGENT_OBJECTS_MAX`) over every agent in the context |
 | authority | — | None |
 
-Each version counts as one object. A log that receives an over-limit object refuses it with a retry-after. To count the member form the log keeps `(chat identity key, count)` for the current and previous window and nothing longer; `services.md`'s logging table should name that retention. A phone that sees over-limit objects (because a log was lax) ignores the excess, in log order.
+Each version counts as one object. A log that receives an over-limit object refuses it with a retry-after. To count the member form the log keeps `(chat identity key, count)` for the current and previous window and nothing longer; `services.md`'s logging table names that retention. A phone that sees over-limit objects (because a log was lax) ignores the excess, in log order.
 
 Size limits: text limits above, at most 8 evidence refs, and the active caps in "States and moderation".
 
@@ -306,7 +306,7 @@ Verification for these three types replaces `manifest.md` step 6 with the author
 | IM-4b | Phones only: when `sealed`, the blob's first byte is `0x02` (keyring form, `storage.md` §4.3); when not sealed, media type is `text/plain; charset=utf-8`; the plaintext is within the byte limit for `kind` | wrong format; over-length |
 | IM-5 | `sealed` equals the pinned context version's `sealed` | plain text in a sealed context; sealed text in a public one |
 | IM-6 | Either the version is a moderation version (version > 1, `signatures` carries the context's `sign` threshold under `hum/manifest/1`, no `authorship`, `moderation` set), or `authorship.form` equals `author` and verifies: form 1, `sig` by `key` over `hum/author/1` ‖ CID and a valid membership proof (valid under `credentials.md` P1–P8 with the logged-presentation epoch rule: the log's clock and `issued` within one hour at submission, the object's `issued` and log position afterwards) with scope `hum/author-once/1` ‖ CID and bound message `hum/author/1` ‖ CID; form 2, a valid membership proof with the recomputed slot scope, `slot` below the effective unsigned limit, and the same bound message; form 3, `sig` by the `agentKey` of the manifest `refs.sponsor` names over `hum/author/1` ‖ CID, that manifest valid, unexpired and unretired at this log position, its `tier` shared, its `capabilities` including `author-map`, and its envelope `authority` admitted by the pinned context's `agents` (`anySponsor`, or listed in `sponsors`); form 0 at version 1, `signatures` carries the context's `sign` threshold | every mismatch and every bad proof; agent not admitted |
-| IM-7 | Every nullifier the presentation yields, one per card (`credentials.md`, "Every nullifier counts"), is new under `hum/author-once/1` or `hum/author-slot/1` for a different CID in the log of record. `authorship.nullifier` is the primary one and must equal the designated card's; the rest are read from `proof`. Under `context.md` C16 every member presents the same set of authorities, so the count of nullifiers is the same for everyone. The log's seen-set holds all of them | reused slot or proof, by any card |
+| IM-7 | Every nullifier the presentation yields, one per card (`credentials.md`, "Every nullifier counts"), is new under `hum/author-once/1` or `hum/author-slot/1` for a different CID in the log of record. All of them are derived from `proof`; the `authorship` field carries no nullifier. Under `context.md` C16 every member presents the same set of authorities, so the count of nullifiers is the same for everyone. The log's seen-set holds all of them | reused slot or proof, by any card |
 | IM-8 | `origin` absent unless `author` = 1 | origin on an unsigned or agent object |
 | IM-9 | `sponsor` present iff `author` = 3; `moderation` present iff the version is a moderation version | label stripped or misplaced; authority signature with no `moderation` |
 | IM-10 | Version 1 `state` matches the pinned context's `perms.cards` and the author form per the initial-state table, with the active-cap override counted at this log position | agent object born active; 201st active position born active |
@@ -344,7 +344,7 @@ The readable JSON view of a con argument, unsigned, in a sealed context:
 }
 ```
 
-Beside it in the bundle: `authorship` = `{0: 2, 3: 2, 4: <nullifier>, 5: <proof>}`, where the proof's scope is `hum/author-slot/1 ‖ c6a0te…p3e ‖ 20733 ‖ 2` and its bound message is `hum/author/1 ‖ <this CID>`, plus a log inclusion proof. No signature, no chat key, no origin.
+Beside it in the bundle: `authorship` = `{0: 2, 3: 2, 5: <proof>}`, where the proof's scope is `hum/author-slot/1 ‖ c6a0te…p3e ‖ 20733 ‖ 2` and its bound message is `hum/author/1 ‖ <this CID>`, plus a log inclusion proof. No signature, no chat key, no origin.
 
 Version 2 of the same object after a merge by its author adds `"state": 3`, `"refs": {"mergedInto": "c1m9wz…x8r", …}`, and the bundle carries an `editSig` plus a fresh slot proof. A moderation version hiding it instead carries `"state": 4, "moderation": 1` and the context's signatures.
 
@@ -371,7 +371,7 @@ Valid:
 
 Invalid, one per rule: `im-bad-kind-type` (IM-1); `im-bad-parent-type`, `im-bad-parent-not-v1` (IM-2); `im-bad-authority`, `im-bad-stale-context-version` (IM-3); `im-bad-text-missing`, `im-bad-sealed-no-epoch` (IM-4a); `im-bad-sealed-format`, `im-bad-text-long` (IM-4b); `im-bad-plain-in-private` (IM-5); `im-bad-sig`, `im-bad-form-mismatch`, `im-bad-slot-range`, `im-bad-proof-unbound` (a valid slot proof lifted from another object's bundle), `im-bad-proof-epoch-mismatch` (disclosed epoch is not that of `issued`), `im-bad-issued-skew` (at the log: `issued` two hours from the log's clock), `im-bad-kid-removed-before` (issuer key removed at a lower log index), `im-bad-agent-capability`, `im-bad-agent-not-admitted`, `im-bad-sponsor-missing` (an agent-signed bundle whose body has no `sponsor` ref fails the authorship check before anything else) (IM-6); `im-bad-slot-reused`, `im-bad-slot-reused-other-log`, `im-bad-secondary-nullifier-reused` (primary new, a second card's nullifier seen) (IM-7); `im-bad-origin-anon` (IM-8); `im-bad-sponsor-on-member`, `im-bad-authority-no-moderation` (an authority-signed version > 1 with `moderation` absent; this is the only way a moderation-version mismatch can present) (IM-9); `im-bad-agent-active`, `im-bad-cap-active` (IM-10); `im-bad-frozen-editkey`, `im-bad-no-editsig`, `im-bad-transition-from-withdrawn`, `im-bad-reparent-unrelated`, `im-bad-moderation-changes-text` (IM-11); `im-bad-edit-after-dealt` (IM-12); `im-bad-agent-no-expiry` (IM-13); `im-bad-evidence-count`, `im-bad-lang` (IM-14); `im-bad-rate-limit`, `im-bad-rate-limit-context` (over `ctx.map` but under the ceiling), `im-bad-window-stale` (IM-15).
 
-Bundle encoding: `im-authorship-member`, `im-authorship-anon`, `im-authorship-agent`, `im-authorship-v2` (with `editSig`), and failing `im-authorship-extra-key`, `im-authorship-non-canonical`, `im-authorship-scope-carried`.
+Bundle encoding: `im-authorship-member`, `im-authorship-anon`, `im-authorship-agent`, `im-authorship-v2` (with `editSig`), and failing `im-authorship-extra-key`, `im-authorship-key-4` (a carried nullifier), `im-authorship-non-canonical`, `im-authorship-scope-carried`.
 
 Derived checks, not manifests: `im-annotate` (a small release table set and the expected labels per position, binary64); `im-dup-detect` (informative pairs at threshold 0.8); `im-edit-key-derive` (edit root, the version 1 envelope, the stripped canonical bytes with body key 2 removed and their SHA-256, expected public key).
 
@@ -415,7 +415,7 @@ Checked against the drafts on disk on 2026-10-06. Each remaining assumption is a
 - `deck.md` (W0-01, exists): `card/<i>` pins position versions, `card/<i>/pro|con` argument versions, and D7 checks `active`.
 - `release.md` (W0-01, exists): tables carry the dealt CID in `statement` or `argument`; releases carry no statement text.
 - `storage.md` (W0-06, exists): keyring-form references, format 2, salt in the header.
-- `services.md` (W0-07, exists): carries `authorship` as defined here; the bundle table should say `signatures` is used by the authority form of these types. Requested: run the log-side step-10 rules listed above at submission, keep the member-form window counters for two windows only, and count IM-15 per log.
+- `services.md` (W0-07, exists): carries `authorship` as defined here; the bundle table should say `signatures` is used by the authority form of these types. Requested: run the log-side step-10 rules listed above at submission, keep the member-form window counters for two windows only, and count IM-15 in the log of record.
 
 ## Seam
 

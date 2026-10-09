@@ -1,6 +1,8 @@
 # 0023 · Per-person backup, the chat identity key, one voting device, and no transfer of hand or shield
 
-**Status:** proposed, revised after review (W0-02, 2026-10-06). The owner confirmed on 2026-10-07 that phone-to-phone transfer and two voting devices are off in draft 0.1. **The two-phone residual risk still needs the owner's explicit acceptance** · `seam:` key storage; what leaves the phone · **two items need the owner's explicit decision**
+**Status:** proposed, revised after review (W0-02, 2026-10-06). Phone-to-phone transfer and two voting devices confirmed off in draft 0.1 (owner, 2026-10-07). **The two-phone residual risk is accepted by the owner for draft 0.1 (2026-10-08): accept and disclose** · `seam:` key storage; what leaves the phone · **two items need the owner's explicit decision**
+
+*2026-10-08:* The owner chose "accept and disclose" for the two-phone residual risk. It is stated in `docs/threat-model.md` and `shield.md`. Device-bound cards stay a filed alternative, not adopted.
 
 *2026-10-07:* Confirmed off in draft 0.1; the alternatives stay open for a later decision. The residual risk is not yet accepted. Previous status: proposed, revised after review (W0-02, 2026-10-06).
 

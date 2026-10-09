@@ -1,6 +1,8 @@
 # 0104 · Issuer epochs where they meet decks, sessions and admission
 
-**Status:** proposed (W0-10, 2026-10-06) · `seam:` credential issuance and presentation, nullifiers
+**Status:** accepted by the owner 2026-10-08, applied; seam, the diff still gets the owner's read before merge · `seam:` credential issuance and presentation, nullifiers
+
+*2026-10-08:* The owner said to apply every recommended item. All four are applied, with `KEY_TAIL` fixed at 520 days; see `cross-spec.md` section 12.9. `KEY_TAIL` governs ordinary retirement only: an emergency removal is always possible and its cost is stated in `verifier.md`.
 
 ## Context
 
@@ -19,6 +21,8 @@ The epoch model (ADR 0026) is consistent across `credentials.md`, `verifier.md`,
 4. For uses that prove `entry`, the unit is the nullifier set. `join-record` key 1 becomes an array of every nullifier in the ticket's proof, and a ticket is refused when any of them is recorded for a live identity. The `authorship` map drops key 4, since the log derives every nullifier from the proof. A greeter deletes a `join-record` when its identity leaves the all-members group, and stamps each record with the day it was written so records older than 396 days can be dropped.
 
 ## Consequences
+
+- After the confirming review (2026-10-08): a greeter sends the `join-record` before its Add commit, so a failure between the two leaves an inert record and never a member without one.
 
 - Item 1 changes `verifier.md` "Issuer key", rule 24's prose, and the three-version district vector.
 - Item 4 changes bytes in `chat.md` §5.17 and `issue-map.md` "The `authorship` bundle field" before any implementation exists.
