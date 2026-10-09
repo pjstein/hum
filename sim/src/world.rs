@@ -149,6 +149,14 @@ impl World {
         &mut self.rng
     }
 
+    /// What the delivery service sees of a member: an opaque leaf reference
+    /// (the handshake is a `PrivateMessage`), never the device key.
+    fn mls_leaf(&mut self, phone: usize) -> String {
+        let dk = self.phones[phone].device_key();
+        let (_key, ct) = self.seal(&format!("leaf/{dk}"));
+        ct
+    }
+
     fn called(&mut self, port: &'static str) {
         *self.calls.entry(port).or_insert(0) += 1;
     }
@@ -229,9 +237,26 @@ impl World {
         let ctx = self.contexts.get_mut(context).expect("context exists");
         ctx.members.push(phone);
         let channel = ctx.channel.clone();
-        let dk = self.phones[phone].device_key();
+        // The join nullifier lives only in the organizers' MLS messages; the
+        // public card fields are what every presentation shows (C16).
+        let jp = format!(
+            "jp_{}",
+            fake_hex(
+                format!(
+                    "hum/join/1/pseudonym/{context}/{}",
+                    self.phones[phone].hand_canary()
+                )
+                .as_bytes()
+            )
+        );
+        let jn = format!("jn_{}", fake_hex(format!("hum/join/1/{jp}").as_bytes()));
+        self.secrets
+            .register_card_scope(phone, Kind::JoinNullifier, jp.as_bytes(), jn.as_bytes());
+        self.secrets
+            .register_card_fields(phone, &context.0, FAKE_CARD_FIELDS, FAKE_EPOCH, false);
+        let leaf = self.mls_leaf(phone);
         self.called("delivery");
-        self.delivery.membership(&channel, &format!("join {dk}"))?;
+        self.delivery.membership(&channel, &format!("add {leaf}"))?;
         Ok(())
     }
 
@@ -400,8 +425,16 @@ impl World {
         let plan = self.phones[phone].check_deck(&manifest, &floors)?;
         self.phones[phone].cast(deck, hand, plan.cap as usize);
         let ballot = self.phones[phone].ballot(deck)?;
+        // The presentation carries the pseudonym; the nullifier is its hash.
+        // Both are registered. The ballot's card fields belong to this deck's use.
+        self.secrets.register_card_scope(
+            phone,
+            Kind::Pseudonym,
+            ballot.presentation.as_bytes(),
+            ballot.pseudonym.as_bytes(),
+        );
         self.secrets
-            .register(phone, Kind::Pseudonym, ballot.pseudonym.as_bytes());
+            .register_card_fields(phone, &deck.0, FAKE_CARD_FIELDS, FAKE_EPOCH, false);
         self.called("aggregator");
         self.aggregator.submit(&ballot)?;
         self.phones[phone].receipt(deck);
@@ -431,6 +464,7 @@ impl World {
         self.phones[phone].restore_from_backup(&known);
         let dk = self.phones[phone].device_key();
         self.secrets.register(phone, Kind::DeviceKey, dk.as_bytes());
+        let leaf = self.mls_leaf(phone);
         let channels: Vec<String> = self
             .contexts
             .values()
@@ -440,7 +474,7 @@ impl World {
         for channel in channels {
             self.called("delivery");
             self.delivery
-                .membership(&channel, &format!("join {dk}"))
+                .membership(&channel, &format!("add {leaf}"))
                 .expect("membership event");
         }
     }
@@ -693,6 +727,11 @@ impl World {
     }
 }
 
+/// The public card fields every fake card presents: issuer, `kid`, `len`.
+pub const FAKE_CARD_FIELDS: &[u8] = b"issuer-fake/kid-1/len-32";
+/// The fake has one issuer epoch.
+pub const FAKE_EPOCH: u64 = 1;
+
 /// A release plan for a deck of `statements` cards at ρ with the research
 /// defaults (cap 60, all four parts).
 pub fn research_plan(rho: f64, statements: usize) -> ReleasePlan {
@@ -760,6 +799,19 @@ mod tests {
                 .iter()
                 .all(|p| p.shield.entries.iter().all(|e| e.state == Charge::Charged))
         );
+        // Device keys are registered (the chat plug-in point) and never reach delivery.
+        let tape = w.tape.borrow();
+        for p in &w.phones {
+            let dk = p.device_key();
+            assert!(
+                tape.records
+                    .iter()
+                    .filter(|r| r.service == "delivery")
+                    .all(|r| !r.payload.contains(&dk)),
+                "{dk} reached delivery"
+            );
+        }
+        assert!(leak.secrets >= 4 * w.phones.len());
     }
 
     #[test]

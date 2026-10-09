@@ -9,8 +9,10 @@
 //! for the simulator's own field names (`votes`, `hand`, `shield`).
 //!
 //! The allow table [`ALLOWED`] is derived from `docs/design.md`'s who-sees-what
-//! table and `services.md`'s logging table, one row per service and one entry
-//! per identity class. Everything not listed is forbidden.
+//! table, `services.md`'s logging table and ADR 0107, one row per service and
+//! one entry per identity class. Everything not listed is forbidden. Two
+//! kinds are scoped: a token-scope nullifier and an issuance nullifier are
+//! allowed only at the one service named when they were registered.
 //!
 //! Vacuity: the world counts calls per port. A port that was called and has
 //! no tape records fails the check, so a real component wired without its
@@ -35,30 +37,50 @@ pub enum Kind {
     SealedKey,
     /// The canary seeded into a hand.
     HandCanary,
-    /// A device key (an MLS leaf).
+    /// A device key (an MLS leaf's credential). Never reaches any service.
     DeviceKey,
     /// An authored-object nullifier (`hum/author-once/1`, `hum/author-slot/1`).
     AuthorNullifier,
+    /// A token-scope nullifier (`hum/blob-tokens/1`, `hum/delivery-tokens/1`):
+    /// allowed only at the token issuer it was presented to, named at registration.
+    TokenScopeNullifier,
+    /// A join nullifier (`hum/join/1`): lives only inside MLS ciphertext.
+    JoinNullifier,
+    /// An issuance nullifier (`hum/issuance/1`): allowed only at the issuing
+    /// host that asked for the card, named at registration.
+    IssuanceNullifier,
+    /// The public card fields (issuer, `kid`, `len`, epoch) as one tuple:
+    /// allowed wherever a presentation is allowed; equal across a context (C16).
+    PublicCardFields,
 }
 
-/// Which identity classes each service may see. Derived from `design.md`,
-/// "Privacy model and trust", and `services.md`, "What services log":
+/// Which identity classes each service may see (`docs/specs/simulator.md`,
+/// "The allow table"):
 ///
 /// | Service | May see |
 /// | --- | --- |
-/// | aggregator | pseudonym (phase 1 sees pseudonymous ballots) |
-/// | ledger (the log) | chat key as an author's signing key; author nullifiers |
-/// | delivery | device keys (MLS members are visible to the group) |
-/// | issuer, store | nothing |
+/// | aggregator | pseudonym (phase 1 sees pseudonymous ballots); public card fields |
+/// | ledger (the log) | chat key as an author's signing key; author nullifiers; public card fields |
+/// | delivery | public card fields (as a token issuer). Device keys never reach it: every handshake is a `PrivateMessage` and `KeyPackage`s are sealed blobs (`chat.md` §12.9) |
+/// | issuer | public card fields |
+/// | store | public card fields (as a token issuer) |
 ///
-/// Resident cards, sealed keys and hand canaries are allowed nowhere.
+/// Resident cards, sealed keys, hand canaries, device keys and join nullifiers
+/// are allowed nowhere. Token-scope and issuance nullifiers are allowed only at
+/// the one service named when they were registered (ADR 0107).
 pub const ALLOWED: &[(&str, &[Kind])] = &[
-    ("aggregator", &[Kind::Pseudonym]),
-    ("ledger", &[Kind::ChatKey, Kind::AuthorNullifier]),
-    ("delivery", &[Kind::DeviceKey]),
-    ("issuer", &[]),
-    ("store", &[]),
+    ("aggregator", &[Kind::Pseudonym, Kind::PublicCardFields]),
+    (
+        "ledger",
+        &[Kind::ChatKey, Kind::AuthorNullifier, Kind::PublicCardFields],
+    ),
+    ("delivery", &[Kind::PublicCardFields]),
+    ("issuer", &[Kind::PublicCardFields]),
+    ("store", &[Kind::PublicCardFields]),
 ];
+
+/// Kinds that are allowed only at the service named at registration.
+pub const SCOPED: &[Kind] = &[Kind::TokenScopeNullifier, Kind::IssuanceNullifier];
 
 /// Pairs of kinds that may never share one record, even where each is
 /// allowed on its own.
@@ -73,12 +95,38 @@ fn allowed(service: &str, kind: Kind) -> bool {
         .any(|(s, kinds)| *s == service && kinds.contains(&kind))
 }
 
+/// One registered secret in one form.
+#[derive(Debug, Clone)]
+struct Entry {
+    phone: usize,
+    kind: Kind,
+    form: Vec<u8>,
+    /// For scoped kinds: the one service allowed to see it.
+    scope: Option<&'static str>,
+}
+
 /// Registered secrets, by phone and kind, in every form the scan looks for.
 #[derive(Debug, Default)]
 pub struct Secrets {
-    entries: Vec<(usize, Kind, Vec<u8>)>,
+    entries: Vec<Entry>,
     /// First four bytes of each registered form → entry indices.
     index: HashMap<[u8; 4], Vec<usize>>,
+    /// Public card fields per use (one deck's ballots, or one context
+    /// version's join, token and authorship presentations), for C16.
+    card_fields: Vec<CardFieldsUse>,
+}
+
+/// One presentation's public card fields, as registered for a use.
+#[derive(Debug, Clone)]
+struct CardFieldsUse {
+    use_label: String,
+    phone: usize,
+    /// Issuer, `kid` and `len`, without the epoch.
+    fields: Vec<u8>,
+    epoch: u64,
+    /// The use fell inside the grace window after an epoch turn, so two
+    /// adjacent epochs are allowed in it.
+    in_grace: bool,
 }
 
 const B64: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
@@ -111,17 +159,103 @@ fn hex(bytes: &[u8]) -> Vec<u8> {
         .collect()
 }
 
+/// A hit: which phone's secret of which kind, and its scope if any.
+type Hit = (usize, Kind, Option<&'static str>);
+
 impl Secrets {
     /// Register one secret for a phone. Values shorter than 8 bytes are
-    /// refused: they would match by accident.
+    /// refused: they would match by accident. Scoped kinds must use
+    /// [`Secrets::register_scoped`].
     pub fn register(&mut self, phone: usize, kind: Kind, value: &[u8]) {
+        assert!(!SCOPED.contains(&kind), "{kind:?} needs register_scoped");
+        self.push(phone, kind, value, None);
+    }
+
+    /// Register a token-scope or issuance nullifier, allowed only at `service`.
+    pub fn register_scoped(
+        &mut self,
+        phone: usize,
+        kind: Kind,
+        value: &[u8],
+        service: &'static str,
+    ) {
+        assert!(SCOPED.contains(&kind), "{kind:?} is not a scoped kind");
+        self.push(phone, kind, value, Some(service));
+    }
+
+    /// Register a phone's public card fields tuple as presented in `context`.
+    /// Every member of a context must register the same tuple (C16).
+    /// Register a card-derived scope twice: the pseudonym a presentation
+    /// carries and the nullifier that is its hash. Both get the same kind and
+    /// the same allow rule, because a pseudonym that reached the wrong service
+    /// would not be found by a scan for its nullifier.
+    pub fn register_card_scope(
+        &mut self,
+        phone: usize,
+        kind: Kind,
+        pseudonym: &[u8],
+        nullifier: &[u8],
+    ) {
+        assert!(
+            !SCOPED.contains(&kind),
+            "{kind:?} needs register_card_scope_at"
+        );
+        self.push(phone, kind, pseudonym, None);
+        self.push(phone, kind, nullifier, None);
+    }
+
+    /// The scoped form of [`Secrets::register_card_scope`].
+    pub fn register_card_scope_at(
+        &mut self,
+        phone: usize,
+        kind: Kind,
+        pseudonym: &[u8],
+        nullifier: &[u8],
+        service: &'static str,
+    ) {
+        assert!(SCOPED.contains(&kind), "{kind:?} is not a scoped kind");
+        self.push(phone, kind, pseudonym, Some(service));
+        self.push(phone, kind, nullifier, Some(service));
+    }
+
+    /// Register the public card fields one presentation shows, for one use:
+    /// `use_label` is the deck CID for a ballot, or the context version CID
+    /// for a join, token or authorship presentation. `fields` is issuer,
+    /// `kid` and `len`; `epoch` the card's epoch; `in_grace` whether the use
+    /// fell in the first hour after an epoch turn (two hours for a logged
+    /// object), when two adjacent epochs may appear together (C16).
+    pub fn register_card_fields(
+        &mut self,
+        phone: usize,
+        use_label: &str,
+        fields: &[u8],
+        epoch: u64,
+        in_grace: bool,
+    ) {
+        let tuple = format!("{}/epoch-{epoch}", String::from_utf8_lossy(fields));
+        self.push(phone, Kind::PublicCardFields, tuple.as_bytes(), None);
+        self.card_fields.push(CardFieldsUse {
+            use_label: use_label.to_string(),
+            phone,
+            fields: fields.to_vec(),
+            epoch,
+            in_grace,
+        });
+    }
+
+    fn push(&mut self, phone: usize, kind: Kind, value: &[u8], scope: Option<&'static str>) {
         assert!(
             value.len() >= 8,
             "a registered secret needs at least 8 bytes"
         );
         for form in [value.to_vec(), hex(value), base64url(value)] {
             let key: [u8; 4] = form[..4].try_into().expect("at least 4 bytes");
-            self.entries.push((phone, kind, form));
+            self.entries.push(Entry {
+                phone,
+                kind,
+                form,
+                scope,
+            });
             self.index
                 .entry(key)
                 .or_default()
@@ -139,9 +273,47 @@ impl Secrets {
         self.entries.is_empty()
     }
 
-    /// Every (phone, kind) found in `haystack`, deduplicated.
-    fn find(&self, haystack: &[u8]) -> Vec<(usize, Kind)> {
-        let mut found: Vec<(usize, Kind)> = vec![];
+    /// Contexts whose members registered different public card field tuples.
+    /// Uses whose presentations show different public card fields (C16):
+    /// within one use every presentation shows the same issuer, `kid` and
+    /// `len`, and one epoch, or two adjacent epochs when the use fell in the
+    /// grace window after an epoch turn.
+    fn card_field_mismatches(&self) -> Vec<String> {
+        let mut by_use: BTreeMap<&str, Vec<&CardFieldsUse>> = BTreeMap::new();
+        for u in &self.card_fields {
+            by_use.entry(u.use_label.as_str()).or_default().push(u);
+        }
+        let mut out = vec![];
+        for (label, uses) in by_use {
+            let first = uses[0];
+            if let Some(other) = uses.iter().find(|u| u.fields != first.fields) {
+                out.push(format!(
+                    "use {label}: phone {} and phone {} present different issuer, kid or len",
+                    first.phone, other.phone
+                ));
+                continue;
+            }
+            let mut epochs: Vec<u64> = uses.iter().map(|u| u.epoch).collect();
+            epochs.sort_unstable();
+            epochs.dedup();
+            let grace = uses.iter().any(|u| u.in_grace);
+            let ok = match epochs.as_slice() {
+                [_] => true,
+                [a, b] => grace && b - a == 1,
+                _ => false,
+            };
+            if !ok {
+                out.push(format!(
+                    "use {label}: epochs {epochs:?} in one use (grace window: {grace})"
+                ));
+            }
+        }
+        out
+    }
+
+    /// Every hit in `haystack`, deduplicated.
+    fn find(&self, haystack: &[u8]) -> Vec<Hit> {
+        let mut found: Vec<Hit> = vec![];
         if haystack.len() < 4 {
             return found;
         }
@@ -149,9 +321,10 @@ impl Secrets {
             let key: [u8; 4] = haystack[i..i + 4].try_into().expect("4 bytes");
             if let Some(cands) = self.index.get(&key) {
                 for &c in cands {
-                    let (phone, kind, ref form) = self.entries[c];
-                    if haystack[i..].starts_with(form) && !found.contains(&(phone, kind)) {
-                        found.push((phone, kind));
+                    let e = &self.entries[c];
+                    let hit = (e.phone, e.kind, e.scope);
+                    if haystack[i..].starts_with(&e.form) && !found.contains(&hit) {
+                        found.push(hit);
                     }
                 }
             }
@@ -257,6 +430,15 @@ pub fn check(tape: &Tape, secrets: &Secrets, calls: &BTreeMap<&'static str, usiz
             detail: "the registry is empty; nothing could have been found".into(),
         });
     }
+    // C16: one public-card-fields tuple per context.
+    for detail in secrets.card_field_mismatches() {
+        report.violations.push(Violation {
+            rule: "card-fields-differ-in-context",
+            service: String::new(),
+            op: String::new(),
+            detail,
+        });
+    }
     for r in &tape.records {
         let mut push = |rule: &'static str, detail: String| {
             report.violations.push(Violation {
@@ -281,8 +463,12 @@ pub fn check(tape: &Tape, secrets: &Secrets, calls: &BTreeMap<&'static str, usiz
         // Registered secrets in any form.
         let found = secrets.find(&r.raw);
         let mut by_phone: HashMap<usize, Vec<Kind>> = HashMap::new();
-        for (phone, kind) in &found {
-            if !allowed(r.service, *kind) {
+        for (phone, kind, scope) in &found {
+            let ok = match scope {
+                Some(service) => *service == r.service,
+                None => allowed(r.service, *kind),
+            };
+            if !ok {
                 push(
                     "identity-not-allowed-here",
                     format!("{} saw a {kind:?}", r.service),
@@ -297,6 +483,8 @@ pub fn check(tape: &Tape, secrets: &Secrets, calls: &BTreeMap<&'static str, usiz
         phones.sort();
         for (phone, mut kinds) in phones {
             kinds.sort();
+            // Public card fields are the same for everyone and identify nobody.
+            kinds.retain(|k| *k != Kind::PublicCardFields);
             if kinds.len() > 1 {
                 push(
                     "identities-joined",
@@ -304,7 +492,7 @@ pub fn check(tape: &Tape, secrets: &Secrets, calls: &BTreeMap<&'static str, usiz
                 );
             }
         }
-        let kinds_in_record: Vec<Kind> = found.iter().map(|(_, k)| *k).collect();
+        let kinds_in_record: Vec<Kind> = found.iter().map(|(_, k, _)| *k).collect();
         for (a, b) in NEVER_TOGETHER {
             if kinds_in_record.contains(a) && kinds_in_record.contains(b) {
                 push(
@@ -316,7 +504,8 @@ pub fn check(tape: &Tape, secrets: &Secrets, calls: &BTreeMap<&'static str, usiz
         // Identity-shaped tokens that no phone owns (forgeries).
         for (prefix, kind) in IDENTITY_PREFIXES {
             for tok in sim_tokens_in(p, prefix) {
-                if !found.iter().any(|(_, k)| *k == kind) || secrets.find(tok.as_bytes()).is_empty()
+                if !found.iter().any(|(_, k, _)| *k == kind)
+                    || secrets.find(tok.as_bytes()).is_empty()
                 {
                     push(
                         "unknown-identity-token",
@@ -360,6 +549,15 @@ mod tests {
         r.violations.iter().map(|v| v.rule).collect()
     }
 
+    fn ballot(vp: String) -> Ballot {
+        Ballot {
+            deck: Cid("fakecid_d".into()),
+            pseudonym: vp,
+            presentation: "zk_x".into(),
+            votes: vec![Some(Vote::Agree)],
+        }
+    }
+
     #[test]
     fn empty_tape_does_not_pass() {
         let (s, ..) = setup();
@@ -370,16 +568,7 @@ mod tests {
     fn a_called_port_with_no_records_fails() {
         let (s, _, vp, ..) = setup();
         let mut t = Tape::default();
-        t.see(
-            "aggregator",
-            "submit",
-            &Ballot {
-                deck: Cid("fakecid_d".into()),
-                pseudonym: vp,
-                presentation: "zk_x".into(),
-                votes: vec![Some(Vote::Agree)],
-            },
-        );
+        t.see("aggregator", "submit", &ballot(vp));
         let r = check(&t, &s, &calls(&[("aggregator", 1), ("delivery", 3)]));
         assert_eq!(rules(&r), vec!["port-not-taped"], "{r:?}");
         assert!(check(&t, &s, &calls(&[("aggregator", 1)])).passed());
@@ -482,19 +671,144 @@ mod tests {
     }
 
     #[test]
+    fn a_device_key_at_delivery_is_not_allowed() {
+        let (mut s, ..) = setup();
+        let dk = "dk_7777666655554444";
+        s.register(0, Kind::DeviceKey, dk.as_bytes());
+        let mut t = Tape::default();
+        t.see("delivery", "membership", &format!("join {dk}"));
+        assert!(
+            rules(&check(&t, &s, &calls(&[("delivery", 1)])))
+                .contains(&"identity-not-allowed-here")
+        );
+    }
+
+    #[test]
+    fn a_token_scope_nullifier_is_allowed_only_where_it_was_presented() {
+        let (mut s, ..) = setup();
+        let tn = "tn_1212121212121212";
+        s.register_scoped(0, Kind::TokenScopeNullifier, tn.as_bytes(), "store");
+        let mut t = Tape::default();
+        t.see("store", "token", &tn);
+        assert!(check(&t, &s, &calls(&[("store", 1)])).passed());
+        t.see("delivery", "token", &tn);
+        assert!(
+            rules(&check(&t, &s, &calls(&[("store", 1), ("delivery", 1)])))
+                .contains(&"identity-not-allowed-here")
+        );
+    }
+
+    #[test]
+    fn a_join_nullifier_is_allowed_nowhere() {
+        let (mut s, ..) = setup();
+        let jn = "jn_3434343434343434";
+        s.register(0, Kind::JoinNullifier, jn.as_bytes());
+        let mut t = Tape::default();
+        t.see("ledger", "add", &jn);
+        assert!(
+            rules(&check(&t, &s, &calls(&[("ledger", 1)]))).contains(&"identity-not-allowed-here")
+        );
+    }
+
+    #[test]
+    fn an_issuance_nullifier_is_allowed_only_at_the_asking_issuer() {
+        let (mut s, ..) = setup();
+        let inn = "in_5656565656565656";
+        s.register_scoped(0, Kind::IssuanceNullifier, inn.as_bytes(), "issuer");
+        let mut t = Tape::default();
+        t.see("issuer", "issue", &inn);
+        assert!(check(&t, &s, &calls(&[("issuer", 1)])).passed());
+        t.see("aggregator", "submit", &inn);
+        assert!(
+            rules(&check(&t, &s, &calls(&[("issuer", 1), ("aggregator", 1)])))
+                .contains(&"identity-not-allowed-here")
+        );
+    }
+
+    #[test]
+    fn public_card_fields_must_match_within_a_use() {
+        let (mut s, ..) = setup();
+        s.register_card_fields(0, "deck-a", b"issuer-fake/k1/32", 7, false);
+        s.register_card_fields(1, "deck-a", b"issuer-fake/k1/32", 7, false);
+        let mut t = Tape::default();
+        t.see("aggregator", "submit", &"issuer-fake/k1/32/epoch-7");
+        t.see("delivery", "token", &"issuer-fake/k1/32/epoch-7");
+        assert!(check(&t, &s, &calls(&[("aggregator", 1), ("delivery", 1)])).passed());
+        s.register_card_fields(2, "deck-a", b"issuer-fake/k2/32", 7, false);
+        let r = check(&t, &s, &calls(&[("aggregator", 1), ("delivery", 1)]));
+        assert!(
+            rules(&r).contains(&"card-fields-differ-in-context"),
+            "{r:?}"
+        );
+    }
+
+    #[test]
+    fn two_epochs_in_one_use_need_the_grace_window_and_adjacency() {
+        let mut t = Tape::default();
+        t.see("aggregator", "submit", &"x");
+        let c = calls(&[("aggregator", 1)]);
+        // Different uses may carry different epochs: a ballot's epoch is fixed
+        // by its deck's version-1 closes.
+        let (mut s, ..) = setup();
+        s.register_card_fields(0, "deck-a", b"issuer-fake/k1/32", 7, false);
+        s.register_card_fields(1, "deck-b", b"issuer-fake/k1/32", 8, false);
+        assert!(check(&t, &s, &c).passed());
+        // Adjacent epochs inside the grace window pass.
+        s.register_card_fields(2, "deck-a", b"issuer-fake/k1/32", 8, true);
+        assert!(check(&t, &s, &c).passed());
+        // Outside the window they fail.
+        let (mut s2, ..) = setup();
+        s2.register_card_fields(0, "deck-c", b"issuer-fake/k1/32", 7, false);
+        s2.register_card_fields(1, "deck-c", b"issuer-fake/k1/32", 8, false);
+        assert!(rules(&check(&t, &s2, &c)).contains(&"card-fields-differ-in-context"));
+        // Non-adjacent epochs fail even in the window.
+        let (mut s3, ..) = setup();
+        s3.register_card_fields(0, "deck-d", b"issuer-fake/k1/32", 7, true);
+        s3.register_card_fields(1, "deck-d", b"issuer-fake/k1/32", 9, true);
+        assert!(rules(&check(&t, &s3, &c)).contains(&"card-fields-differ-in-context"));
+    }
+
+    #[test]
+    fn a_pseudonym_is_found_where_only_its_nullifier_was_known_before() {
+        let mut s = Secrets::default();
+        let pseudonym = "ps_abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcd";
+        let nullifier = "vp_0f0f0f0f0f0f0f0f";
+        s.register_card_scope(
+            0,
+            Kind::Pseudonym,
+            pseudonym.as_bytes(),
+            nullifier.as_bytes(),
+        );
+        let mut t = Tape::default();
+        t.see("aggregator", "submit", &pseudonym);
+        assert!(check(&t, &s, &calls(&[("aggregator", 1)])).passed());
+        t.see("ledger", "add", &pseudonym);
+        assert!(
+            rules(&check(&t, &s, &calls(&[("aggregator", 1), ("ledger", 1)])))
+                .contains(&"identity-not-allowed-here")
+        );
+        // The scoped form behaves the same.
+        let mut s2 = Secrets::default();
+        s2.register_card_scope_at(
+            0,
+            Kind::TokenScopeNullifier,
+            pseudonym.as_bytes(),
+            nullifier.as_bytes(),
+            "store",
+        );
+        let mut t2 = Tape::default();
+        t2.see("delivery", "token", &pseudonym);
+        assert!(
+            rules(&check(&t2, &s2, &calls(&[("delivery", 1)])))
+                .contains(&"identity-not-allowed-here")
+        );
+    }
+
+    #[test]
     fn a_ballot_to_the_aggregator_is_fine() {
         let (s, _, vp, ..) = setup();
         let mut t = Tape::default();
-        t.see(
-            "aggregator",
-            "submit",
-            &Ballot {
-                deck: Cid("fakecid_d".into()),
-                pseudonym: vp,
-                presentation: "zk_x".into(),
-                votes: vec![Some(Vote::Agree)],
-            },
-        );
+        t.see("aggregator", "submit", &ballot(vp));
         let r = check(&t, &s, &calls(&[("aggregator", 1)]));
         assert!(r.passed(), "{r:?}");
     }
