@@ -87,8 +87,8 @@ Request and response bodies this spec defines are deterministic CBOR maps with i
 | `POST /v1/agg/decks` response | `{0: taskIds, 1: round0 {0: opens, 1: closes}, 2: cap, 3: phase, 4: leader, 5: helper}` |
 | `GET /v1/agg/decks/{cid}` | The keys above, plus `{6: state, 7: rounds [{0: n, 1: opens, 2: closes, 3: version}], 8: versions}` |
 | Ballot receipt | `{0: leaf, 1: signature, 2: kid}`; `kid` is the key ID of the aggregator `sign` key that made the signature |
-| `GET .../rounds/{n}/receipts` | `{0: root, 1: k, 2: pages}` |
-| Receipt root blob, pinned as `refs["receipts/<n>"]` | `{0: k, 1: pages}`, with `pages` the array of page CIDs in page order; media type `application/cbor` |
+| `GET .../rounds/{n}/receipts` | `{0: root, 1: k, 2: pages}`. A different body from the root blob below, on purpose: the response adds `root` for the phone's convenience, and the phone checks it against the release body |
+| Receipt root blob, pinned as `refs["receipts/<n>"]` | `{0: k, 1: pages}`, with `pages` the array of page CIDs in page order; media type `application/cbor`. It carries no `root`, because it is the object the release commits to and the root is already in the release body |
 | `GET .../daily` | `{0: sigma, 1: buckets [{0: bucket, 1: increment}], 2: total}` |
 | `POST .../propose` request; response | `{0: bundle, 1: tables, 2: pages}`; `{0: signature}` |
 | `POST /v1/verifier/sessions` request; response | `{0: manifest}`; `{0: id, 1: expires}` |
@@ -261,6 +261,21 @@ Logging rules:
 - L-3. Crash reports go through the same filter as logs.
 - L-4. A service's `retention` field in its manifest states these values or shorter ones, and a context may require shorter still.
 - L-5. An aggregator's logs and metrics never hold a count of accepted ballots for a deck or a round, exact or bucketed from the exact value, before or after the final release version. Rounding an exact count is not noise: at a bucket edge one ballot moves the logged value. Where a log needs a size, it carries only values that are already public or already noised: `nHat`, a part's `n`, the padded leaf count, the noised daily series. The rule covers the gateway in front of the aggregator as well: one log line per accepted request, or a count of `200` answers per ballot path, is a count of accepted ballots. Counts of rejected requests by error code are allowed per deck only for codes that say nothing about a voter (`malformed`, `too_large`, `rejected`, `forbidden`); codes that only a pseudonym that already voted can cause are not counted separately and appear only in a daily total of all rejections.
+- L-6. Field schema. A log line is a map of named fields. The table below is the complete set of field names each service may write; a line with any other field is forbidden, and a line whose field holds a value outside its stated domain is forbidden. W0-08's `services/logging` vectors test one allowed and one forbidden line per service.
+
+| Service | Allowed fields and their domains |
+| --- | --- |
+| Log | `service`, `day`, `cid`, `type`, `authority`, `code`, `index`, `minute` (timestamp rounded to the minute), `size`, `window` and `chat_key_count` (the per-chat-key counter for one window), `nullifier_set_size` |
+| Witness | `service`, `day`, `origin`, `tree_size`, `code`, `minute` |
+| Aggregator | `service`, `day`, `deck` (CID), `round`, `state`, `code` (one of `malformed`, `too_large`, `rejected`, `forbidden` when `deck` is present; any code when it is not), `rejected_count` (per deck only for those four codes; otherwise the service's daily total), `n_hat`, `part`, `part_n`, `padded_leaves`, `k`, `daily_bucket`, `daily_increment` (the noised value), `release` (CID), `version`. No `accepted`, `ballots`, `leaves`, `nullifiers`, `received` or any other count of accepted ballots, no per-request `minute`, no `nonce`, `leaf`, `receipt`, `nullifier` or `pseudonym` |
+| Issuer and verifier host | `session_id` (16 random bytes), `authority`, `version`, `day`, `outcome`, `memory_bucket`, `fuel_bucket` ([verifier-runtime.md](verifier-runtime.md#transparency-who-sees-what)) |
+| Delivery service | Per [chat.md §12.9](chat.md#129-what-the-ds-stores) |
+| Blob store | `context` (CID), `counter` name and value, `token_key_id`, `nonce_count` ([storage.md §6.8](storage.md#68-what-the-store-sees)) |
+| Resolver and mirrors | `service`, `day`, `cid`, `code`, `size`, `minute`; after 24 hours only `cid`, `count` |
+| Gallery | `service`, `day`, `query_shape`, `code`, `minute` |
+| Relay | `day`, `client_ip` (24 hours), `window`, `request_count`, `gateway`, `code` |
+| Gateway | `service`, `day`, `path` (never a ballot-intake path), `code`, `count`; no `connection` |
+
 
 ### Domain strings and scopes
 
@@ -385,7 +400,7 @@ Refs that name a lineage rather than a version (`parent`, `replaces`, `mergedInt
 | `trust-list` | Its numbered rules that read the body and the previous version ([trust-list.md](trust-list.md#validation-rules)) | Live-state checks (attribute names exist in the verifier's current version, attested CIDs match a logged `code` ref), which trust-list.md says make a row inert rather than the list invalid |
 | `service` | S-1 to S-8 and the kind's own rules (storage.md BS-1 to BS-6 for stores, chat.md DL-1 to DL-5 for delivery services) | — |
 
-When a context names more than one log, the first entry of its `logs` is the ledger of record: a release, and every deck version, must be in it, and R10, R14 and deck.md D16 are decided there by every party (ADR 0103). Another listed log may hold the same entries and runs the same rules against its own history; a release it refuses is still valid when the ledger of record accepted it.
+When a context names more than one log, the first entry of its `logs` is the ledger of record: a release, and every deck version, must be in it, and R10, R14 and deck.md D16 are decided there by every party (ADR 0103). Another listed log may hold the same entries and runs the same rules against its own history; a release it refuses is still valid when the ledger of record accepted it. For a `release` or `deck` manifest, the inclusion proof verification step 7 requires is one against the ledger of record, whichever log the phone fetched the bundle from; a bundle whose only proof is from another listed log fails at step 7, before R10 is reached. R10 restates the same requirement for the ledger's own check. One expected result, so the conformance vector for a release only in a context's second log fails at step 7 (release.md R10, context.md; conformance.md disagreement 21).
 
 Responses:
 
@@ -550,7 +565,7 @@ Each round has its own receipt root in the release's `receipts` map, a Merkle ro
 - Let `L` be the padded tree's leaf count, never the accepted count. The page count is `P = 2^k` with `k` the smallest integer such that `L / 2^k ≤ 4096`, and `k = 0` when `L ≤ 4096`.
 - The leaf list is the padded list: real and dummy leaves together, sorted bytewise before the tree is built, so a leaf's position says nothing about when it arrived. Page `i` (`0 ≤ i < P`) holds, in that sorted order, every leaf whose first `k` bits equal `i`, as a public blob of 32-byte leaves concatenated; the pages are therefore contiguous ranges of the sorted list and of the tree.
 - A root blob, the CBOR map `{0: k, 1: [page CIDs in order]}`, lists `k` and the `P` page CIDs in order, and its CID is pinned in the release version as `refs["receipts/<n>"]`; release.md's rule R13 requires one per completed round.
-- `GET .../rounds/{n}/receipts` answers `404` for a release that is below the minimum, which has no receipt tree (release.md R13). Otherwise it returns `{ root: bstr(32), k: uint, pages: [CID] }` and nothing else: no exact count appears in this response, in the root blob or in any log line, and dummy leaves are indistinguishable from real ones in the pages.
+- `GET .../rounds/{n}/receipts` answers `404` for a release that is below the minimum, which has no receipt tree (release.md R13). Otherwise it returns `{ root: bstr(32), k: uint, pages: [CID] }` and nothing else. The response and the pinned root blob are two distinct bodies by design: the blob is `{0: k, 1: pages}` and never carries the root, since the release body already holds it and the blob is what the release pins; the response repeats `k` and `pages` from the blob and adds `root` so a phone can check all three against the logged release before fetching a page. A phone rejects a response whose `k` or `pages` differ from the pinned blob's. No exact count appears in this response, in the root blob or in any log line, and dummy leaves are indistinguishable from real ones in the pages.
 
 A phone fetches the root blob and the one page its leaf's first `k` bits select, through the relay on a connection of its own at a random delay (rule O-4), inside the 4 KiB request bucket (rule O-3). What the fetch reveals is a `k`-bit prefix shared with about 4,096 other leaves; it never asks for a proof of one leaf. The phone then checks that its leaf is in the page and that the pages hash to the root.
 
@@ -639,8 +654,8 @@ Verifier host rules the conformance suite tests:
 
 - V-1. An evidence item whose `name` is not in the manifest is refused and never reaches the module.
 - V-2. A session answers at most one issuance request. The response holds one card, or two in a first session during handover. An identical request, in the session or in a later one that maps to the same dedup row, gets the identical response. A different request in the same session answers `conflict`. A different request in a later session that maps to a spent dedup row is a duplicate: the dedup rule applies and the phone gets the masked rejection code of verifier-runtime.md, never `conflict`, so the answer does not reveal that the evidence already holds a card.
-- V-4. Evidence opens only under `aad` = session ID ‖ SHA-256(issuance request plaintext) for the request submitted in the same session; a session whose request differs from the one its evidence was sealed for issues nothing.
 - V-3. The host's per-session log line has exactly the fields verifier-runtime.md lists, and nothing from the `issue` request is in any log or store other than the keyed dedup hash.
+- V-4. Evidence opens only under `aad` = session ID ‖ SHA-256(issuance request plaintext) for the request submitted in the same session; a session whose request differs from the one its evidence was sealed for issues nothing.
 
 ## Delivery service and blob store
 

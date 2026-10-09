@@ -133,7 +133,7 @@ Each entry is a map:
 | 0 | `log` | auth | The log's authority |
 | 1 | `witnesses` | array of bytes32, 2..16 | Ed25519 public keys of witnesses whose cosignatures count for this log |
 
-A checkpoint of this log counts for the context when at least `floors.minWitnesses` of the listed witnesses cosigned it. A manifest the context's members act on must be proven in at least one listed log. The first entry is the context's **log of record**, and its ledger of record for decks and releases (`release.md` R10, R14; `deck.md` D16): an authored issue-map object must be in it, its authorship proof is checked there, and nullifier and rate-limit counts are taken there (`credentials.md`, "Verification rules"; `issue-map.md`). The order of `logs` therefore carries meaning, and the first entry's `log` is frozen from version 1 (C11).
+A checkpoint of this log counts for the context when at least `floors.minWitnesses` of the listed witnesses cosigned it. The first entry is the ledger of record: `deck` and `release` manifests must be proven in it (verification step 7 for those types; `release.md` R10), and every other manifest the context's members act on must be proven in at least one listed log. The first entry is the context's **log of record**, and its ledger of record for decks and releases (`release.md` R10, R14; `deck.md` D16): an authored issue-map object must be in it, its authorship proof is checked there, and nullifier and rate-limit counts are taken there (`credentials.md`, "Verification rules"; `issue-map.md`). The order of `logs` therefore carries meaning, and the first entry's `log` is frozen from version 1 (C11).
 
 ### `storage` (key 10)
 
