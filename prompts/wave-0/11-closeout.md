@@ -17,7 +17,7 @@ Wave 0 is committed on branch `wave-0/contracts` with one more round of approved
 4. **Reference and vectors.** Apply the byte-level changes and add the vectors listed in section 12.9. Update `docs/specs/conformance.md`. Any vector that disagrees with a spec is a bug in one of them: fix it or file it.
 5. **Verify yourself.** `just check` exits 0 and `just sim-fast` passes. Report the actual output.
 6. **Commit** on `wave-0/contracts`, one commit per concern, with `seam:` in the message where it applies. Do not push or merge.
-7. **Library research.** If `docs/research/bls12-381-libraries.md` is missing, run the research described in the handoff and bring the owner a recommendation for the Rust crate and the Python reference.
+7. **Library choice.** `docs/research/bls12-381-libraries.md` is written. Bring the owner its recommendation and risks as a question; record the answer in `docs/DECISIONS.md` and record 0110.
 
 ## Rules
 

@@ -36,7 +36,7 @@ These agents do not survive the session. Check for their output files before red
    - **Owner choices inside it:** TS7 (a context that changes its first log restarts the yearly budget count; freeze the first log or count across earlier ones) and TS10 (how a phone picks a relay, and that a context-named relay learns who its members are).
    - **The rest** (TS4, TS5, TS8, TS9, TS11, TS13, TS14 and six stale sentences) are text fixes. TS13 says the simulator's "same public card fields" check will fail on correct runs once real components land.
 2. **Simulator change.** Done and verified at the end of the session, uncommitted: `sim/src/leak.rs` and `sim/src/world.rs` follow the new allow table. The format check and clippy were clean, `cargo test --workspace --locked` passed 47 tests, and `just sim-fast` passed 5 scenarios. One stale line remains in `docs/specs/simulator.md`: the W1-05 plug-in row still says chat registers "device keys as MLS leaves", which the new table forbids at the delivery service. Fix that row.
-3. **BLS12-381 library research.** If it finished, `docs/research/bls12-381-libraries.md` exists.
+3. **BLS12-381 library research.** Done: `docs/research/bls12-381-libraries.md`, committed. It recommends `blst` 0.3.17 for the Rust crate, behind one small wrapper holding all the unsafe code, and `py_ecc` 8.0.0 for the Python reference. The owner has not chosen yet. Risks to put to the owner: the `blst` audit is from 2020 and predates its multi-scalar code; `blst` does not check the subgroup on decompression, so the wrapper must; its multi-scalar multiplication is not constant time, so sums over secret scalars need separate multiplications; the Android build was not tried. "Vetted" can only mean audited for `blst`; every pure-Rust candidate and `py_ecc` say they are unaudited.
 
 ## Remaining steps to close wave 0
 
@@ -49,7 +49,7 @@ These agents do not survive the session. Check for their output files before red
 ## Decisions waiting on the owner
 
 - **`CLAUDE.md` invariant 3 wording.** Record 0103 asks to replace "at least 100 noised voters to publish," with "at least 100 noised voters to publish anything except the organizer's noised daily count, which is served while a deck is open and is inside the deck's declared ρ,". Not applied. Ask before editing.
-- **BLS12-381 library** for the in-house BBS crate, Rust and Python sides. Research was running.
+- **BLS12-381 library** for the in-house BBS crate. The research recommends `blst` for Rust and `py_ecc` for Python; the owner decides, and should say whether production history counts as "vetted" where no audit exists.
 - **Privacy targets.** ε 4 per release and ε 20 per year are placeholders. The rating-deck budget depends on them.
 - **Receipt clamp δ** (record 0102 items 2 and 3). Adopting it changes every reported ε.
 - **Outside cryptography reviewer.** Scope so far: records 0022 and 0026, and the BBS crate.
