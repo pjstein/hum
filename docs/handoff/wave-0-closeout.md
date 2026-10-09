@@ -31,14 +31,17 @@ Applied on 2026-10-08 on the owner's answer "apply all recommended". The record 
 
 These agents do not survive the session. Check for their output files before redoing the work.
 
-1. **Review of the 0103, 0104, 0107 edits.** If it finished, `docs/specs/reviews/applied-decisions.md` has a section titled "ADRs 0103, 0104, 0107". If that section is missing, run the review again.
+1. **Review of the 0103, 0104, 0107 edits.** Done. `docs/specs/reviews/applied-decisions.md` has the section "ADRs 0103, 0104, 0107": approve with fixes, no blocker, fourteen should-fix items (TS1 to TS14), none applied yet. The reviewer had no shell, so it read the sections listed in `cross-spec.md` section 12.9 and did not check edits outside them.
+   - **Apply before regenerating vectors**, because they change bytes or expected results: TS1 (evidence sealed with empty aad is replayable into another session; use the 16-byte session ID as aad), TS2 (split the HPKE table row in `credentials.md`), TS3 (`release.md` R5 against R6 for a below-minimum rating deck), TS6 (`deck.md` D11 against D15 for a rating deck under a high context minimum), TS12 (`ballot.md` still shows the receipt without `kid`; missing body-key rows; DL-1 to DL-5 missing from the log's step-10 table).
+   - **Owner choices inside it:** TS7 (a context that changes its first log restarts the yearly budget count; freeze the first log or count across earlier ones) and TS10 (how a phone picks a relay, and that a context-named relay learns who its members are).
+   - **The rest** (TS4, TS5, TS8, TS9, TS11, TS13, TS14 and six stale sentences) are text fixes. TS13 says the simulator's "same public card fields" check will fail on correct runs once real components land.
 2. **Simulator change.** Done and verified at the end of the session, uncommitted: `sim/src/leak.rs` and `sim/src/world.rs` follow the new allow table. The format check and clippy were clean, `cargo test --workspace --locked` passed 47 tests, and `just sim-fast` passed 5 scenarios. One stale line remains in `docs/specs/simulator.md`: the W1-05 plug-in row still says chat registers "device keys as MLS leaves", which the new table forbids at the delivery service. Fix that row.
 3. **BLS12-381 library research.** If it finished, `docs/research/bls12-381-libraries.md` exists.
 
 ## Remaining steps to close wave 0
 
 1. Finish or redo the three items above.
-2. Fix whatever the review of 0103, 0104, 0107 finds. Earlier rounds each found one or two real blockers, so expect some.
+2. Apply the fourteen should-fix items from the review of 0103, 0104, 0107, then have the reviewer confirm. Bring TS7 and TS10 to the owner as questions.
 3. Bring the reference and vectors in line with section 12.9. Byte-level changes: `join-record` key 1 becomes an array `nullifiers` with a new key 5 `day`; the `authorship` map loses key 4; `context` gains optional keys 20 `resolvers` and 21 `relays`; every `services.md` body gets integer keys and the receipt gains `kid`; evidence is sealed under `hum/evidence/1`; a below-minimum release has no receipt root and no part 8. The new vector names are listed in section 12.9.
 4. Run `just check` and `just sim-fast` yourself. Do not accept an agent's report of a green gate.
 5. Commit on `wave-0/contracts`. The owner reviews the seam diffs before merging to `main`.
