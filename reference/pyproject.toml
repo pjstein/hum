@@ -16,6 +16,10 @@ dev = [
   "pytest>=8",
   "ruff>=0.6",
   "numpy>=1.26",
+  "py-ecc==8.0.0",
+  "pyhpke==0.6.5",
+  "pyarrow==25.0.1",
+  "wasmtime==49.0.0",
 ]
 
 [build-system]

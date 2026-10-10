@@ -1,0 +1,26 @@
+{
+  "source": "https://github.com/awslabs/mls-rs",
+  "tag": "0.56.0",
+  "commit": "8f1b43f447a792ff9307f1c2c7f54da63914870e",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "mode": "synchronous generated Python bindings",
+  "baseline_tests": {
+    "rust_unit": 3,
+    "python_scenarios": 6
+  },
+  "patched_tests": {
+    "rust_unit": 3,
+    "python_scenarios": 6
+  },
+  "files": {
+    "uniffi-hum-profile.patch": {
+      "sha256": "2952e87a6c91b2b11ae06e92f93e6b630fd05a423dba349d05df7e16d65ec8fd"
+    },
+    "upstream.Cargo.lock": {
+      "sha256": "4929bd58021f8310a268ffeb68dc3b482844de71e4468279742dfed64d835cb2"
+    },
+    "profile_checks.py": {
+      "sha256": "ed35259ae60401f74f4db185b24793e1217af525da027a160477a1f6bbd7e1f3"
+    }
+  }
+}

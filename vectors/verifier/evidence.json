@@ -1,13 +1,17 @@
 {
  "spec": "verifier",
  "file": "evidence",
- "notes": "Evidence sealing strings (Host key, RT1): HPKE base mode to the host key, info = hum/evidence/1 \u2016 verifier authority CID (33) \u2016 item name, aad = the 16-byte session ID \u2016 SHA-256(issuance request plaintext, canonical CBOR), 48 bytes. The phone builds the request before sealing; the host holds items sealed until the issue call, recomputes the hash from the request it receives and opens each item under it; any item that does not open ends the session with rejected, rule V-4. HPKE itself is pending a library (the Python `cryptography` HPKE has no aad argument): each case gives the exact info and aad bytes an implementation must seal and open under, and the rejections name which of the two would make the AEAD fail. Ciphertexts are placeholders.",
+ "notes": "Actual HPKE evidence seals (pyhpke 0.6.5): info binds verifier and item name; aad binds the session ID and SHA-256 of the canonical issuance request. All private and ephemeral keys are public synthetic fixtures. Cryptographic opening is asserted for every accepting and rejecting case.",
  "cases": [
   {
    "id": "verifier/evidence/verifier-evidence-sealed-001",
    "description": "An evidence item sealed for this verifier, this item name, this session and the issuance request the phone then submits: opens",
    "section": "Host key",
    "inputs": {
+    "host_private": "fa1afd127a28352afe488b97d5c9c757c9324d2779610a0f5265b325a3011728",
+    "host_public": "c95f25bc12824a125365077b4b3376f75a383842bc1a1e93d0532f688f1df833",
+    "ephemeral_private": "fce8396f0e28a826c7318db6b90f8e2bdac829b21e399a17eb2e7b12209ea2db",
+    "plaintext": "73796e7468657469632065766964656e6365206974656d",
     "verifier_authority": "01cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811",
     "host_kid": "43de5f9cbce0bdee",
     "session_id": "b789f1ce638ee7582d5b04ba8c2b0c7a",
@@ -17,7 +21,7 @@
     "suite": "hpke-x25519-sha256-chacha20poly1305, base mode",
     "sealed_info": "68756d2f65766964656e63652f3101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a8116d61746368",
     "sealed_aad": "b789f1ce638ee7582d5b04ba8c2b0c7a8d8443b24f06ad28d4393bea8a5c6fd51aecf53d1f1c7a035f2566aff504851a",
-    "request_body": "a300656d61746368014843de5f9cbce0bdee02583087a998b278b8da318b6299636a07062b72a20e5350793bdaedb94f69a2856cb0818d371f8f48ff81fd5bf9303cc02fbd"
+    "request_body": "a300656d61746368014843de5f9cbce0bdee025847ae85f8ae6c2ffae79b98572a6b72c05e3896ca434c9caf917f7206e010c6994b3ab99321c85e457c651de9a44703d8c6a311dc4c6cb316a17e0155e4e6166f50cd283e97eff481"
    },
    "expected": {
     "info": "68756d2f65766964656e63652f3101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a8116d61746368",
@@ -31,6 +35,10 @@
    "description": "A first session during handover: one request with two commitments, one hash, every item sealed under it (valid)",
    "section": "Host key",
    "inputs": {
+    "host_private": "fa1afd127a28352afe488b97d5c9c757c9324d2779610a0f5265b325a3011728",
+    "host_public": "c95f25bc12824a125365077b4b3376f75a383842bc1a1e93d0532f688f1df833",
+    "ephemeral_private": "fce8396f0e28a826c7318db6b90f8e2bdac829b21e399a17eb2e7b12209ea2db",
+    "plaintext": "73796e7468657469632065766964656e6365206974656d",
     "verifier_authority": "01cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811",
     "host_kid": "43de5f9cbce0bdee",
     "session_id": "b789f1ce638ee7582d5b04ba8c2b0c7a",
@@ -40,7 +48,7 @@
     "suite": "hpke-x25519-sha256-chacha20poly1305, base mode",
     "sealed_info": "68756d2f65766964656e63652f3101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a8116d61746368",
     "sealed_aad": "b789f1ce638ee7582d5b04ba8c2b0c7ae63846d196c07bcec966c3195b6dc6798b496d228817794f0571ee177e75f65c",
-    "request_body": "a300656d61746368014843de5f9cbce0bdee02583087a998b278b8da318b6299636a07062b72a20e5350793bdaedb94f69a2856cb0818d371f8f48ff81fd5bf9303cc02fbd"
+    "request_body": "a300656d61746368014843de5f9cbce0bdee025847ae85f8ae6c2ffae79b98572a6b72c05e3896ca434c9caf917f7206e010c6994b3ab99321c85e457c651de9a44703d8c6a311dc4c6cb3169a6f168ca1bb31a3287d016352ed8274"
    },
    "expected": {
     "info": "68756d2f65766964656e63652f3101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a8116d61746368",
@@ -54,6 +62,10 @@
    "description": "A lost-response retry in a new session: the evidence is re-sealed under the new session ID and the same request hash; the identical request gets the identical response (services/host host-v2-identical-retry-new-session)",
    "section": "Host key",
    "inputs": {
+    "host_private": "fa1afd127a28352afe488b97d5c9c757c9324d2779610a0f5265b325a3011728",
+    "host_public": "c95f25bc12824a125365077b4b3376f75a383842bc1a1e93d0532f688f1df833",
+    "ephemeral_private": "fce8396f0e28a826c7318db6b90f8e2bdac829b21e399a17eb2e7b12209ea2db",
+    "plaintext": "73796e7468657469632065766964656e6365206974656d",
     "verifier_authority": "01cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811",
     "host_kid": "43de5f9cbce0bdee",
     "session_id": "ffd526b1c4cabc7d6ae144946918d71f",
@@ -63,7 +75,7 @@
     "suite": "hpke-x25519-sha256-chacha20poly1305, base mode",
     "sealed_info": "68756d2f65766964656e63652f3101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a8116d61746368",
     "sealed_aad": "ffd526b1c4cabc7d6ae144946918d71f8d8443b24f06ad28d4393bea8a5c6fd51aecf53d1f1c7a035f2566aff504851a",
-    "request_body": "a300656d61746368014843de5f9cbce0bdee02583087a998b278b8da318b6299636a07062b72a20e5350793bdaedb94f69a2856cb0818d371f8f48ff81fd5bf9303cc02fbd"
+    "request_body": "a300656d61746368014843de5f9cbce0bdee025847ae85f8ae6c2ffae79b98572a6b72c05e3896ca434c9caf917f7206e010c6994b3ab99321c85e457c651de9a44703d8c6a311dc4c6cb316ac5569d1f406214825aba3b5b1073934"
    },
    "expected": {
     "info": "68756d2f65766964656e63652f3101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a8116d61746368",
@@ -77,6 +89,10 @@
    "description": "The issuance request submitted in the session differs from the one the evidence was sealed for: the aad's hash half differs, the AEAD fails, the session ends with rejected, rule V-4",
    "section": "Host key",
    "inputs": {
+    "host_private": "fa1afd127a28352afe488b97d5c9c757c9324d2779610a0f5265b325a3011728",
+    "host_public": "c95f25bc12824a125365077b4b3376f75a383842bc1a1e93d0532f688f1df833",
+    "ephemeral_private": "fce8396f0e28a826c7318db6b90f8e2bdac829b21e399a17eb2e7b12209ea2db",
+    "plaintext": "73796e7468657469632065766964656e6365206974656d",
     "verifier_authority": "01cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811",
     "host_kid": "43de5f9cbce0bdee",
     "session_id": "b789f1ce638ee7582d5b04ba8c2b0c7a",
@@ -86,7 +102,7 @@
     "suite": "hpke-x25519-sha256-chacha20poly1305, base mode",
     "sealed_info": "68756d2f65766964656e63652f3101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a8116d61746368",
     "sealed_aad": "b789f1ce638ee7582d5b04ba8c2b0c7a8d8443b24f06ad28d4393bea8a5c6fd51aecf53d1f1c7a035f2566aff504851a",
-    "request_body": "a300656d61746368014843de5f9cbce0bdee02583087a998b278b8da318b6299636a07062b72a20e5350793bdaedb94f69a2856cb0818d371f8f48ff81fd5bf9303cc02fbd"
+    "request_body": "a300656d61746368014843de5f9cbce0bdee025847ae85f8ae6c2ffae79b98572a6b72c05e3896ca434c9caf917f7206e010c6994b3ab99321c85e457c651de9a44703d8c6a311dc4c6cb316a17e0155e4e6166f50cd283e97eff481"
    },
    "rejection": {
     "step": null,
@@ -102,6 +118,10 @@
    "description": "The session ID was replaced in transit (an edge handed the phone another session's ID): the aad's first 16 bytes differ, the AEAD fails (V-4)",
    "section": "Host key",
    "inputs": {
+    "host_private": "fa1afd127a28352afe488b97d5c9c757c9324d2779610a0f5265b325a3011728",
+    "host_public": "c95f25bc12824a125365077b4b3376f75a383842bc1a1e93d0532f688f1df833",
+    "ephemeral_private": "fce8396f0e28a826c7318db6b90f8e2bdac829b21e399a17eb2e7b12209ea2db",
+    "plaintext": "73796e7468657469632065766964656e6365206974656d",
     "verifier_authority": "01cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811",
     "host_kid": "43de5f9cbce0bdee",
     "session_id": "ffd526b1c4cabc7d6ae144946918d71f",
@@ -111,7 +131,7 @@
     "suite": "hpke-x25519-sha256-chacha20poly1305, base mode",
     "sealed_info": "68756d2f65766964656e63652f3101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a8116d61746368",
     "sealed_aad": "b789f1ce638ee7582d5b04ba8c2b0c7a8d8443b24f06ad28d4393bea8a5c6fd51aecf53d1f1c7a035f2566aff504851a",
-    "request_body": "a300656d61746368014843de5f9cbce0bdee02583087a998b278b8da318b6299636a07062b72a20e5350793bdaedb94f69a2856cb0818d371f8f48ff81fd5bf9303cc02fbd"
+    "request_body": "a300656d61746368014843de5f9cbce0bdee025847ae85f8ae6c2ffae79b98572a6b72c05e3896ca434c9caf917f7206e010c6994b3ab99321c85e457c651de9a44703d8c6a311dc4c6cb316a17e0155e4e6166f50cd283e97eff481"
    },
    "rejection": {
     "step": null,
@@ -127,6 +147,10 @@
    "description": "Sealed under another item's name: the info differs, the AEAD fails (V-4)",
    "section": "Host key",
    "inputs": {
+    "host_private": "fa1afd127a28352afe488b97d5c9c757c9324d2779610a0f5265b325a3011728",
+    "host_public": "c95f25bc12824a125365077b4b3376f75a383842bc1a1e93d0532f688f1df833",
+    "ephemeral_private": "fce8396f0e28a826c7318db6b90f8e2bdac829b21e399a17eb2e7b12209ea2db",
+    "plaintext": "73796e7468657469632065766964656e6365206974656d",
     "verifier_authority": "01cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811",
     "host_kid": "43de5f9cbce0bdee",
     "session_id": "b789f1ce638ee7582d5b04ba8c2b0c7a",
@@ -136,7 +160,7 @@
     "suite": "hpke-x25519-sha256-chacha20poly1305, base mode",
     "sealed_info": "68756d2f65766964656e63652f3101cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a81161646472657373",
     "sealed_aad": "b789f1ce638ee7582d5b04ba8c2b0c7a8d8443b24f06ad28d4393bea8a5c6fd51aecf53d1f1c7a035f2566aff504851a",
-    "request_body": "a300656d61746368014843de5f9cbce0bdee02583087a998b278b8da318b6299636a07062b72a20e5350793bdaedb94f69a2856cb0818d371f8f48ff81fd5bf9303cc02fbd"
+    "request_body": "a300656d61746368014843de5f9cbce0bdee025847ae85f8ae6c2ffae79b98572a6b72c05e3896ca434c9caf917f7206e010c6994bdd8a6056abf8231699fd3bac96dbe28aadc8c3a7b176a52583b547d18022d2f793a3dd1302996d"
    },
    "rejection": {
     "step": null,
@@ -152,6 +176,10 @@
    "description": "Sealed for another verifier's authority: the info differs, the AEAD fails (V-4)",
    "section": "Host key",
    "inputs": {
+    "host_private": "fa1afd127a28352afe488b97d5c9c757c9324d2779610a0f5265b325a3011728",
+    "host_public": "c95f25bc12824a125365077b4b3376f75a383842bc1a1e93d0532f688f1df833",
+    "ephemeral_private": "fce8396f0e28a826c7318db6b90f8e2bdac829b21e399a17eb2e7b12209ea2db",
+    "plaintext": "73796e7468657469632065766964656e6365206974656d",
     "verifier_authority": "01cd68608e1da9a795c5c5d59f4fe762a16581502dffd05be88d724a44e584a811",
     "host_kid": "43de5f9cbce0bdee",
     "session_id": "b789f1ce638ee7582d5b04ba8c2b0c7a",
@@ -161,7 +189,7 @@
     "suite": "hpke-x25519-sha256-chacha20poly1305, base mode",
     "sealed_info": "68756d2f65766964656e63652f3101244ba80704a3f4904d64cb0718eeba6341248617907855446f980bf95790ffe26d61746368",
     "sealed_aad": "b789f1ce638ee7582d5b04ba8c2b0c7a8d8443b24f06ad28d4393bea8a5c6fd51aecf53d1f1c7a035f2566aff504851a",
-    "request_body": "a300656d61746368014843de5f9cbce0bdee02583087a998b278b8da318b6299636a07062b72a20e5350793bdaedb94f69a2856cb0818d371f8f48ff81fd5bf9303cc02fbd"
+    "request_body": "a300656d61746368014843de5f9cbce0bdee025847ae85f8ae6c2ffae79b98572a6b72c05e3896ca434c9caf917f7206e010c6994bfafe2cdd9540dfdbf0cace0aa1111706edf8d09a34f97ca754fe8182d7077eaba9a5a916df2b7d"
    },
    "rejection": {
     "step": null,

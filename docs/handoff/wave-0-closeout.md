@@ -6,6 +6,13 @@ Updated 2026-10-09. Read this before continuing wave 0 or starting wave 1.
 
 W0-11 is complete on `wave-0/contracts`: the requested disagreement tail is closed, the spec reviewer approves, and the orchestrator reran the full gates on frozen reference sources and generated vectors. `just check` exited 0 with 284 reference tests and 908 accepting plus 839 rejecting vectors; `just sim-fast` exited 0 with 5 passing scenarios and 4 adversarial hooks pending. The closeout is ready for owner seam review, not an automatic merge or a production-readiness claim. No wave 1 work was started. The owner's later request pushed the existing bootstrap commit `f8f76d3` from local `main` to `origin/main`; the wave-0 branch was not merged or pushed.
 
+## Subsequent approved-library work
+
+The owner subsequently requested all seven library follow-up lanes. See
+[library-lanes.md](library-lanes.md) for the newer implementations, gate results,
+review findings and remaining boundaries. The W0-11 results below are the historical
+closeout gate; they do not include those subsequent additions.
+
 ## W0-11 gate record
 
 The initial tree was clean at `4899908`. The baseline gate was restarted against an isolated archive of that commit so subsequent reference edits could not change its result. Baseline `just check` exited 0, with this actual output:

@@ -1,7 +1,7 @@
 {
  "spec": "release",
  "file": "receipts",
- "notes": "Receipt padding (release.md Receipts): integer \u2308\u03c3_8\u2309 from the exact rational \u03c3\u00b2, Y_r = 6\u00b7\u2308\u03c3_8\u2309 + Z_r clamped at 0 with Z_r an input, and a padded tree with its pages. Dummy leaves here are fixed bytes; a real aggregator draws them. The keybox seal is pending an HPKE library; only its info and aad bytes are given.",
+ "notes": "Receipt padding (release.md Receipts): integer \u2308\u03c3_8\u2309 from the exact rational \u03c3\u00b2, Y_r = 6\u00b7\u2308\u03c3_8\u2309 + Z_r clamped at 0 with Z_r an input, and a padded tree with its pages. Dummy leaves here are fixed bytes; a real aggregator draws them. The keybox has a real HPKE seal.",
  "cases": [
   {
    "id": "release/receipts/ceil-sigma-001",
@@ -183,15 +183,19 @@
   },
   {
    "id": "release/receipts/keybox-layout-010",
-   "description": "HPKE info and aad for the keybox (the seal itself is pending)",
+   "description": "HPKE seal and open of an empty keybox",
    "section": "Members-only results",
    "inputs": {
-    "deck_cid": "0181bb07ef759f1f09f3d1d2e78d0cd00b7f680d0b1c07566322260a2d15dd11e7"
+    "deck_cid": "0181bb07ef759f1f09f3d1d2e78d0cd00b7f680d0b1c07566322260a2d15dd11e7",
+    "recipient_private": "77c533a5bce49cb5d3e1e61f7971cfcf7fd67e166879242dfeb32e77e9da2e29",
+    "recipient_public": "e5e4ac033aaca730c2c8d47cbfcea787336b674468404fdd89764d3e01b3b256",
+    "ephemeral_private": "62c903c0540b191b0379dd4d7461338c4db298cec5f8a7799f2863d17dd19fbe",
+    "plaintext": "80"
    },
    "expected": {
     "info": "68756d2f726573756c74732d6b6579626f782f310181bb07ef759f1f09f3d1d2e78d0cd00b7f680d0b1c07566322260a2d15dd11e7",
     "aad": "0181bb07ef759f1f09f3d1d2e78d0cd00b7f680d0b1c07566322260a2d15dd11e7",
-    "pending": "HPKE seal needs a library"
+    "sealed": "0126559b3b298e7aec69b7a782334ec33d4113335b0c3d513eae362668da4a67304f92193bfa48c26a00753f75c5b6556313"
    }
   }
  ]

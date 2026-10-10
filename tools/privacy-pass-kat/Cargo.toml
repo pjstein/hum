@@ -1,0 +1,17 @@
+[package]
+name = "hum-privacy-pass-kat"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+privacypass = { version = "=0.2.0-pre.3", features = ["kat", "test-utils"] }
+p384 = "=0.13.1"
+voprf = { package = "voprf-ng", version = "=0.6.0-pre.3" }
+tls_codec = "=0.5.0"
+serde_json = "1"
+hex = "0.4"
+tokio = { version = "1", features = ["macros", "rt"] }
+blind-rsa-signatures = "=0.17.2"

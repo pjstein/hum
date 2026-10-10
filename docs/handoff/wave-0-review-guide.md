@@ -4,9 +4,18 @@ W0-11 · 2026-10-09 · `wave-0/contracts`
 
 This is a contracts closeout, not a claim that the network or applications are implemented. The owner must review the seams before merge. No wave 1 work is included.
 
+## Subsequent library follow-up
+
+The owner subsequently requested all seven approved-library lanes. Review
+[library-lanes.md](library-lanes.md), [ADR 0112](../decisions/0112-w0-library-reference-evidence.md)
+and [the independent lane review](../specs/reviews/library-lanes.md) alongside
+this guide. They add real cryptographic and runtime reference work while retaining
+the full P4, host-world, MLS-policy and device-execution gaps. The original seam
+list and unanswered owner questions below still apply.
+
 ## Read the seams in this order
 
-Line numbers refer to this closeout tree. Each entry names the section as well so the guide survives later edits.
+Line numbers refer to closeout commit `0ae01ca`. Each entry names the section as well so the guide survives later edits.
 
 | Order | File and line | What changed / what to check |
 | --- | --- | --- |

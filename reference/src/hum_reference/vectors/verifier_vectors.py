@@ -1412,16 +1412,10 @@ def evidence_file(w: World, built: dict[str, Any]) -> File:
     f = File(
         SPEC,
         "evidence",
-        "Evidence sealing strings (Host key, RT1): HPKE base mode to the host key, info = "
-        "hum/evidence/1 ‖ verifier authority CID (33) ‖ item name, aad = the 16-byte session "
-        "ID ‖ SHA-256(issuance request plaintext, canonical CBOR), 48 bytes. The phone builds "
-        "the request before sealing; the host holds items sealed until the issue call, "
-        "recomputes the hash from the request it receives and opens each item under it; any "
-        "item that does not open ends the session with rejected, rule V-4. HPKE itself is "
-        "pending a library (the Python `cryptography` HPKE has no aad argument): each case "
-        "gives the exact info and aad bytes an implementation must seal and open under, and "
-        "the rejections name which of the two would make the AEAD fail. Ciphertexts are "
-        "placeholders.",
+        "Actual HPKE evidence seals (pyhpke 0.6.5): info binds verifier and item name; "
+        "aad binds the session ID and SHA-256 of the canonical issuance request. "
+        "All private and ephemeral keys are public synthetic fixtures. Cryptographic "
+        "opening is asserted for every accepting and rejecting case.",
     )
     d1 = cbor.decode(built["valid"]["district-v1"].envelope)
     authority = d1[m.AUTHORITY]
@@ -1451,8 +1445,41 @@ def evidence_file(w: World, built: dict[str, Any]) -> File:
             )
         )
 
+    from pyhpke.exceptions import PyHPKEError
+
+    from .. import hpke
+
+    host_private = fixtures.fixed_bytes("evidence-real-host-private")
+    host_public = hpke.public_key(host_private)
+    evidence_plaintext = b"synthetic evidence item"
+
     def inputs(sess, rq, item):
+        # Each metadata tuple identifies what the sender actually sealed under.
+        item = dict(item)
+        item["ciphertext"], _ = hpke.seal(
+            host_public,
+            item["info"],
+            evidence_plaintext,
+            aad=item["aad"],
+            aead=hpke.CHACHA,
+            ephemeral_private=fixtures.fixed_bytes("evidence-real-ephemeral"),
+        )
+        expected_open = (
+            services.open_evidence_structural(item, authority, "match", sess, rq) is None
+        )
+        try:
+            plaintext = hpke.open_evidence(
+                host_private, authority, "match", sess, rq, item["ciphertext"]
+            )
+        except PyHPKEError:
+            assert not expected_open
+        else:
+            assert expected_open and plaintext == evidence_plaintext
         return {
+            "host_private": hexify(host_private),
+            "host_public": hexify(host_public),
+            "ephemeral_private": hexify(fixtures.fixed_bytes("evidence-real-ephemeral")),
+            "plaintext": hexify(evidence_plaintext),
             "verifier_authority": hexify(authority),
             "host_kid": hexify(host_kid),
             "session_id": hexify(sess),

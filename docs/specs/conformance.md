@@ -1,6 +1,6 @@
 # Hum Conformance — Draft 0.1
 
-Oct 9, 2026 · W0-11 closeout · disagreement tail resolved; reviewed changes and remaining coverage gaps below
+Oct 9, 2026 · W0-11 library follow-up · executed coverage and remaining gaps below
 
 ## Scope
 
@@ -134,8 +134,8 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 | Store API §6: visibility table, put order, re-put, tombstone in another context, promotion | `storage/store-api` (23+7) |
 | Store manifest §7 | `services/service-manifests` |
 | Delete secret §8.1, delete orders §8.2 | `storage/delete` (1+2), `storage/delete-order` (1+4) |
-| Keybox §9.1 | Gap (HPKE) |
-| Tokens, §11 | Gap (Privacy Pass); simulator |
+| Keybox §9.1 | Real HPKE keybox seals in `release/receipts` and `release/manifests`; `credentials/hpke` transport cases. Table payload validation remains separate |
+| RFC 9578 type-1/type-2 framing and type-2 RSA verification | `storage/privacy-pass-rfc9578` (10+10). The isolated Rust probe separately exercises issuance and redemption for all ten RFC fixtures; Hum T-1 to T-4 and delivery composition remain pending |
 
 ### context.md
 
@@ -171,8 +171,9 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 | R9 two signers | `release/manifests` R9 cases |
 | ε↔ρ, σ, gates, caps, phone round computations, rankings, sampler harness | `release/accounting`, `sigmas`, `gates`, `cap`, `phone`, `ranking`, `sampler` |
 | σ_r rule (`release.md` Noise, option B): the example plan's six parts, σ² a perfect square (n at the bound), the square of a dyadic, one unit of 2⁻⁴⁰ below a square (n rounds up), σ within 2⁻²⁰ below an integer with both ⌈σ_8⌉ forms; R4 `sigma` from σ instead of σ_r | `release/sigmas` `example`, `boundary-*`; `release/manifests` `release-invalid-R4-sigma-not-rounded-up` |
-| R15 Parquet tables | Gap |
-| Keybox, eigenvector sign convention, blur and k-means | Gap |
+| R15 opened Parquet tables against a caller-supplied trusted contract; eighteen-card tallies, metadata, ordering, nulls, CID binding | `release/parquet` (1+11); all 16 logical schemas unit-tested. Complete release-world R15 remains pending |
+| Keybox seal/open and direct-reference array | `release/receipts`, `release/manifests`, `credentials/hpke` |
+| Eigenvector sign convention, blur and k-means | Gap |
 
 ### issue-map.md
 
@@ -208,10 +209,10 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 | trust-list rules 1–9, 11–13; core v1–v3, community, agent lists | `trust-list/manifests` (5+22) |
 | Resolution rows, `minVersion`, agent rows and `vote` | `trust-list/resolution` (11+0) |
 | Datasets and rule 15; build recipes and rule 16; masking rule 12 | `verifier-runtime/datasets` (5+5), `build` (6+1), `masking` (6+0) |
-| verifier-runtime rules 1–11, 13, 14; decisions; module instantiation | Gap (wasm runtime) |
+| Actual component decision/rejection, code CID, module size, memory/stack/fuel/deadline limits, disabled threads/relaxed SIMD, NaN canonicalization; host decision checks | `verifier-runtime/component-sandbox` (4+9), plus unit tests. No-import probes only; complete host world and profiles pending |
 | Issuer key `fromEpoch`, key-of-epoch selection, rules 3, 15, 16, 21, 26 as revised | `verifier/manifests` |
 | `KEY_TAIL` = 44,928,000 s: the three-version lineage with ordinary retirement after the tail, an emergency removal, and the capacity of about seven key changes (TS14). All accepting: `verifier.md` states the tail in prose, not as a rule, so the vectors fix the earliest retirement time, not a rejection | `verifier/keys` (3+0) |
-| Evidence sealing: `info` = `hum/evidence/1` ‖ verifier authority CID ‖ item name, `aad` = session ID ‖ SHA-256(issuance request plaintext), 48 bytes (ADR 0107 item 5, TS1, RT1); handover with two commitments in one request (valid, one hash); lost-response retry in a new session (valid, re-sealed under the new session ID and the same hash); a different request in the same session, a session ID replaced in transit, another item name, another verifier (all `rejected`, rule V-4, 422). Structural: exact `info` and `aad` bytes; the HPKE seal itself is the HPKE gap | `verifier/evidence` (3+4) |
+| Evidence sealing: `info` = `hum/evidence/1` ‖ verifier authority CID ‖ item name, `aad` = session ID ‖ SHA-256(issuance request plaintext), 48 bytes (ADR 0107 item 5, TS1, RT1); handover with two commitments in one request (valid, one hash); lost-response retry in a new session (valid, re-sealed under the new session ID and the same hash); a different request in the same session, a session ID replaced in transit, another item name, another verifier (all `rejected`, rule V-4, 422). Real HPKE seals and opening checks, including tampered AAD and info | `verifier/evidence` (3+4) |
 
 ### chat.md
 
@@ -232,7 +233,8 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 | P1, P2, P3 (in force at the log position for logged presentations), P5 (three validity rows), P6 (one cell per context: `branches` always `[]`, no `any`, one verifier per leaf), P7, P8; one presentation per use; `cred-present-entry-one-cell`; `cred-present-entry-any` withdrawn | `credentials/presentations` (22+42) |
 | Issuance plaintexts, host epoch decisions, nym share, phone checks | `credentials/issuance` (8+9) |
 | Backup and chat-only export plaintexts, refused keys | `credentials/backup` (2+2) |
-| P4 BBS proofs, pseudonyms, blind issuance, sealed issuance bytes, backup wrap | Gap (BBS, HPKE, Argon2id) |
+| Base BBS signatures and selective-disclosure proofs | `credentials/bbs-base` (4+12); pinned base -12 known answers and seven N=1 pseudonym verification fixtures in unit tests. Full blind issuance and Hum P4 remain pending |
+| HPKE issuance request/response exporter, evidence, release keybox, join-ticket framing, backup Argon2id/X25519/key wrap | `credentials/hpke` (6+13); both RFC 9180 suites checked in unit tests. Proof contents remain opaque; backup outer framing is not defined |
 | Ballot map, body, bound message, frame, round-0 payload and part vectors, rounds 1–3, round1-max | `ballot/round0` (10+0), `ballot/rounds` (5+0) |
 | Receipt leaf, padded tree and page check; `ballot-receipt-kid` (the receipt names the signing key; another listed kid rejected) | `ballot/receipts` (3+1) |
 | B1 (incl. `too_large` for a presentation over 8 KiB), B3 set logic, B4–B8, B10 | `ballot/invalid` (0+34) |
@@ -243,31 +245,31 @@ Every one of the eleven steps has at least one rejecting case: 1 (1), 2 (5), 3 (
 
 ## Gaps
 
-Each needs a library, an owner decision or a sibling artifact. Nothing here is a reading the reference could have made on its own.
+Remaining gaps require additional integration, sibling artifacts or explicit owner/spec decisions. Library availability alone does not close them.
 
 | Gap | Reason | Unblocked by |
 | --- | --- | --- |
-| BBS signatures, blind issuance, pseudonyms, P4 proof verification, the completed card in `cred-issue-*`, "same nym secret under two scopes" | No Python implementation of draft-irtf-cfrg-bbs-signatures -12 with the blind-signatures -03 and per-verifier-linkability -03 extensions exists (`docs/research/seam-libraries.md`: PyPI `bbs` is pre-IETF and dead; `pybbs` is not on PyPI); the only library at the cited drafts is the Rust crate `zkryptium`, unaudited | ADR 0110 (accepted 2026-10-07; libraries decided 2026-10-08): the Rust crate implements the three drafts over `blst` 0.3.17 behind one Hum wrapper, and this reference gets a second, independent implementation over `py_ecc` 8.0.0 (a dev dependency of `reference/`, vectors only; approved by the owner on 2026-10-08). Unblocked by: adding `py_ecc` and writing the BBS, blind-BBS and pseudonym operations in `reference/` against the drafts' JSON fixtures, then replacing the fixed proof bytes and `proof_valid` inputs in the credentials, issue-map, agent-sponsor, ballot and host vectors. Not started in run 6 by the lead's instruction |
-| HPKE: issuance request and response sealing (incl. RFC 9180 §9.8 export), the release keybox, the backup wrap, join tickets | `cryptography` 50.0.2 has HPKE but no export interface, no AAD argument and no way to fix the ephemeral key, and Hum needs all three | Approved `pyhpke` 0.6.5; implement and check the seals and RFC fixtures |
-| Argon2id for the recovery phrase | No gap in the primitive: `cryptography` 50.0.2 has Argon2id (RFC 9106). The backup wrap still waits on HPKE above | HPKE (above) |
-| Parquet tables, R15, `hum.*` metadata, table row checks | No Parquet writer | Approved `pyarrow` 25.0.1 (dev), with row-wise comparison as already accepted |
+| Full blind issuance, pseudonym generation, Hum P4 and composite presentation vectors | Base -12 implementation and public N=1 verification now exist over py_ecc 8.0.0; pinned blind/nym -03 have undefined inputs, inconsistent interfaces and incomplete generation fixtures | Reviewed, versioned draft resolution and independent complete fixtures; see `docs/research/bbs-pinned-draft-findings.md`. Existing Hum proof placeholders remain explicit |
+| Full protocol composition around HPKE | pyhpke 0.6.5 seals, response export, keybox and ticket frames now execute; credential proof contents remain opaque | Full BBS cards and protocol state adapters, rather than another HPKE library |
+| Complete recovery-phrase backup envelope | Argon2id and X25519/HPKE key wrap execute; phrase encoding and outer salt/encapsulation framing are not specified | Pin the backup envelope/phrase encoding before claiming end-to-end interoperability |
+| Complete R15 release-world integration and group-cell suppression | pyarrow 25.0.1 writer and all sixteen schema validators now exist; trusted complete contracts must supply plan-derived row domains, metadata and CID bindings. Release worlds still use opaque payloads | Connect opened tables to verified decks/plans/bodies; add full group-cell filtering cases |
 | Eigenvector sign convention, box half-widths, blur and threshold, k-means centroids | Needs a numeric library at generation time; vector bytes would depend on a BLAS build | Decide whether these are vectors with a stated tolerance or simulator comparisons against the oracle |
-| verifier-runtime rules 1–11, 13, 14; decision, replay and instantiation vectors; the profile binaries | Needs a WebAssembly component runtime and the built modules | Approved `wasmtime` (wasmtime-py) 49.x with component support, plus the W1 profile builds |
-| Chat vectors needing MLS state (list below) | Needs an MLS implementation driven from the reference | Approved `mls-rs` 0.56.0 through uniffi for the reference; integration and binding capability checks remain |
-| Privacy Pass issuance and redemption (T-1 to T-4, store and delivery tokens) | Needs an RFC 9578 implementation | The approved Privacy Pass library plan in `docs/DECISIONS.md`, plus RFC vectors for types 0x0001 and 0x0002 |
+| Complete verifier host world, replay and five profile binaries | Wasmtime 49.0.0 executes sandbox probes; dotted import names and interface version `@0.1` are not valid literal component ABI names. No canonical WIT exists; adapter conservatively permits one memory | Pin exact valid WIT names/version, implement host adapters, aggregate multi-memory limits and W1 profile builds |
+| Complete chat vectors needing MLS state (list below) | Real mls-rs 0.56.0 UniFFI groups and 26 checks now execute via a wrapper patch; deterministic inputs and Hum policy remain missing. Failed authentication consumes receive generation | `tools/mls-reference` plus Hum policy adapters, deterministic state/randomness, and reviewed handling of the observed failure state; see research report |
+| Hum Privacy Pass admission (T-1 to T-4, store and delivery tokens) | Approved privacypass 0.2.0-pre.3 now reproduces all ten RFC fixtures in an isolated probe; Python frames both types and verifies type 2, but lacks issuance/type-1 bindings | Python reference adapter, delivery issuer-key derivation from the DS master secret and group ID (RFC 9497 DeriveKeyPair), context/key binding and durable atomic nonce policy |
 | DAP reports, `ballot-dap-report`, B11 | Needs Prio3 | Phase 2 is out of draft 0.1 scope |
 | B2, B3 with real cards, B9 gate disclosure | Need real presentations | BBS (above) |
-| Membership-proof verification in IM-6 and AS-8, `im-bad-proof-unbound`, `im-bad-slot-reused-other-log`, the V-2 response bytes in `services/host`, the join ticket's proof and sealing | Need credentials primitives; the reference checks structure, scope bytes and bound messages and emits them per case. `im-bad-slot-reused-other-log` also needs the same nullifier seen under two logs' scopes, which only a real pseudonym gives | BBS (above) |
+| Membership-proof verification in IM-6 and AS-8, `im-bad-proof-unbound`, `im-bad-slot-reused-other-log`, the V-2 response bytes in `services/host`, proof-bearing join-ticket composition | Need credentials primitives; the reference checks structure, scope bytes and bound messages and emits them per case. `im-bad-slot-reused-other-log` also needs the same nullifier seen under two logs' scopes, which only a real pseudonym gives | BBS (above) |
 | `as-bad-proof-scope` | A wrong scope is only visible inside the BBS proof's `ph` (P4) | BBS (above) |
 | Verifier attribute key 7 `fromEpoch` (attributes appended mid-lineage) | The verifier builders have no parameter for it yet; the credentials layout cases cover it (`cred-present-logged-old-len-after-append`), the issue-map world does not | Next run: a builder parameter |
 | Log-of-record vectors for verifiers (a verifier lineage absent from the ledger of record) | The deck world's second log mirrors the ledger of record and holds the deferred releases only | Extend the deck world's second log |
-| HPKE seals for evidence, issuance, the keybox, backups and join tickets | `cryptography` has no `aad` or export interface; the vectors carry the exact `info` and `aad` bytes and structural cases only | HPKE (above) |
+| Full proof-bearing evidence and join tickets | Sealing now executes; proof and credential contents still use opaque fixtures | BBS composite proof adapters above |
 | Retiring and successor markers | `manifest.md` assigns no envelope key | Manifest spec owner |
 | Tokens, breakdown part 7 at intake, daily count readers | Owner decisions in the specs | — |
 
 ### Chat vectors that need a live MLS implementation
 
-From `chat.md` §16, these sets cannot be generated without an MLS stack and remain pending; the owner approved OpenMLS 0.9.0 for core and `mls-rs` 0.56.0 through uniffi for reference generation; the integration is still missing: `chat/credential`, `chat/exporter`, `chat/frank`, `chat/stamp` (needs a `PrivateMessage` to stamp), `chat/tokens`, `chat/join`, `chat/roles` (the commit acceptance matrix; the `roles` message bytes and signature are in `chat/content`), `chat/ignore`, `chat/promote` (as a message sequence), `chat/directory` (replay), `chat/agent-limits`, `chat/history`, `chat/ds-api`, `chat/no-votes` (needs `ballot.md` structures in message bodies). Generated now: `chat/content` (every content type's bytes and drop rules) and `chat/derivations` (message ids, padding, authenticated data, safety code).
+From `chat.md` §16, these sets cannot be generated without an MLS stack and remain pending; the owner approved OpenMLS 0.9.0 for core and `mls-rs` 0.56.0 through uniffi for reference generation; live primitive integration exists in `tools/mls-reference`, but complete Hum suites remain pending: `chat/credential`, `chat/exporter`, `chat/frank`, `chat/stamp` (needs a `PrivateMessage` to stamp), `chat/tokens`, `chat/join`, `chat/roles` (the commit acceptance matrix; the `roles` message bytes and signature are in `chat/content`), `chat/ignore`, `chat/promote` (as a message sequence), `chat/directory` (replay), `chat/agent-limits`, `chat/history`, `chat/ds-api`, `chat/no-votes` (needs `ballot.md` structures in message bodies). Generated now: `chat/content` (every content type's bytes and drop rules) and `chat/derivations` (message ids, padding, authenticated data, safety code).
 
 ### Applied owner decisions, and what they changed
 
@@ -319,7 +321,7 @@ Resolution status is stated per item; owner decisions remain open. W0-11 closes 
 28. **`release.md` R6, rating part 3 and `n`.** Resolved: vote parts 1–3 use their own `n` for unlocks; rating part 3 unlocks iff part 0 does. A recorded rating part 3 requires `n` but does not use it for unlock. R1 enforces required `n` on recorded parts 0–3 when `nHat` is present, rejects boolean `n`, and has a missing-rating-`n` vector.
 29. **Rating release at `nHat` 400.** Resolved: `release.md` names `release-valid-rating-nhat-400` and states that it checks the manifest unlock and part record only. Group-cell filtering at 300 remains under the Parquet gap; this vector does not claim table-content coverage.
 30. **`services.md` logging rows.** Superseded by L-6 (item 26): per-deck counts for `malformed`, `too_large`, `rejected`, `forbidden` only, `closed` and `conflict` at no grain, intake paths identified by `/ballots`. Resolved with 26.
-31. **`services.md` V-4 evidence failures.** Resolved: every failure to open evidence (wrong request, session, item name or verifier) ends the session with `rejected`, rule `V-4`, and no issuance. No detail string is normative. Generated mismatch vectors no longer require the reference diagnostic in an error body; actual HPKE opening remains a coverage gap.
+31. **`services.md` V-4 evidence failures.** Resolved: every failure to open evidence (wrong request, session, item name or verifier) ends the session with `rejected`, rule `V-4`, and no issuance. No detail string is normative. Generated mismatch vectors no longer require the reference diagnostic in an error body; the library follow-up now exercises actual HPKE opening in `verifier/evidence`.
 32. **`services.md` O-6 selection fixtures.** Resolved: the normative relay set contains distinct authorities, selection is uniform, retries exclude failures, and total failure waits without direct fallback. Set order, kind labels and deterministic random-stream picks belong to the reference harness, not the protocol. The spec and vector notes say which outputs are advisory.
 33. **`chat.md` §2.5 timing.** Resolved: sequence number orders records; delivery-service receive time measures pending age. A retry can reuse its record only at age less than 3,600 seconds; exactly 3,600 requires a fresh sequenced record and another pre-commit check. This closes the reference’s former inclusive-endpoint race. The no-record backstop’s fetch bound is inclusive at 600 seconds (599 keeps the leaf). Boundary and snapshot cases are generated.
 

@@ -1,0 +1,10 @@
+{
+  "libhum_android_blst_probe.so": {
+    "sha256": "4f9cf441705129756f333adad9b51de05849f1033a3f2cae152f3e3557d08017",
+    "bytes": 902080
+  },
+  "android-probe": {
+    "sha256": "42b3e2d78baad1d79dc9ca46dbb1ae5b960d33008619424638f30596133739b9",
+    "bytes": 836648
+  }
+}

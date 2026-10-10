@@ -1,0 +1,36 @@
+{
+  "passed": 26,
+  "checks": [
+    "private_add_commit",
+    "welcome_wire_format",
+    "out_of_band_ratchet_tree",
+    "private_group_info_extension_roundtrip",
+    "absent_extension",
+    "exporter_agreement_hum/keyring/1",
+    "exporter_agreement_hum/delivery/1",
+    "exporter_label_separation",
+    "exporter_context_separation",
+    "private_application_library_one_byte",
+    "aad_and_plaintext_roundtrip_library_one_byte",
+    "replayed_message_library_one_byte",
+    "private_application_profile_33_byte_shape",
+    "aad_and_plaintext_roundtrip_profile_33_byte_shape",
+    "replayed_message_profile_33_byte_shape",
+    "aad_present_in_frame",
+    "tampered_authenticated_data",
+    "truncated_frame",
+    "private_proposal",
+    "private_epoch_commit",
+    "exporter_epoch_rotation",
+    "exporter_agreement_after_commit",
+    "private_remove_commit",
+    "keyring_export_after_removal",
+    "removed_member_cannot_decrypt",
+    "remaining_member_can_decrypt"
+  ],
+  "scope": "live MLS primitive integration; not full Hum-profile conformance",
+  "known_limitations": [
+    "upstream consumes receive generation on failed authentication; later original frame cannot decrypt"
+  ],
+  "secrets_or_random_bytes_recorded": false
+}

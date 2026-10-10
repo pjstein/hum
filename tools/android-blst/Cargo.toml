@@ -1,0 +1,23 @@
+[package]
+name = "hum-android-blst-probe"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# Isolated feasibility harness: deliberately not a production workspace member.
+[workspace]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+bindgen = ["uniffi/cli"]
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/bin/uniffi-bindgen.rs"
+required-features = ["bindgen"]
+
+[dependencies]
+blst = "=0.3.17"
+uniffi = "=0.32.2"

@@ -1,7 +1,7 @@
 """Vectors for docs/specs/release.md manifests, built on deck_vectors' world.
 
 Tables are opaque placeholder blobs (no Parquet in this run), so R15 is pending; the keybox
-is a placeholder public blob because the HPKE seal needs a library (pending). Noise is an
+contains actual HPKE-encrypted sealed references. Noise is an
 input: nHat, each part's n and the receipt padding draws are fixed numbers.
 """
 
@@ -13,7 +13,7 @@ import random
 from fractions import Fraction
 from typing import Any
 
-from .. import cbor, cose, fixtures, services, storage
+from .. import cbor, cose, fixtures, hpke, services, storage
 from .. import manifest as m
 from .. import release as rmath
 from ..bodies import context as c
@@ -29,7 +29,6 @@ S_LOG = "Validation rules (R13's clock half, at the ledger)"
 DAY = 86_400
 WINDOW = dk.DEFAULT_ROUND_WINDOW
 NOW = fixtures.NOW
-SEALED_KEY = bytes.fromhex("5ea1ed5ea1ed5ea1ed5ea1ed5ea1ed00")
 
 
 # ---------------------------------------------------------------- building release versions
@@ -40,6 +39,7 @@ class Builder:
 
     def __init__(self, wd) -> None:
         self.wd = wd
+        self.table_references: dict[bytes, storage.SealedReference] = {}
         self.cases: list[tuple[str, str, str | None, m.Bundle]] = []  # (name, desc, rule, b)
         self.extra: dict[str, dict] = {}
         # deck cases this builder creates (D16's clock-free half): (suffix, desc, rule, bundle)
@@ -57,7 +57,12 @@ class Builder:
     def table_blob(self, label: str, sealed: bool) -> bytes:
         data = cbor.encode({"hum-vector-table": label})
         if sealed:
-            data = storage.seal(data, SEALED_KEY)
+            reference, data = storage.SealedReference.direct(
+                data,
+                fixtures.fixed_bytes("release-table-key-" + label, 16),
+                "application/vnd.apache.parquet",
+            )
+            self.table_references[reference.cid] = reference
         return self.wd.w.put_blob(data)
 
     def receipt_root(self, label: str, count: int = 5) -> tuple[bytes, bytes]:
@@ -165,9 +170,18 @@ class Builder:
                 refs[f"receipts/{r}"] = root_cid
         if sealed:
             refs["keybox"] = wd.w.put_blob(
-                b"\x01"
-                + fixtures.fixed_bytes(f"enc-{name}")
-                + fixtures.fixed_bytes(f"ct-{name}", 80)
+                hpke.seal_keybox(
+                    cbody[c.RESULTS_KEY],
+                    deck.cid,
+                    cbor.encode(
+                        [
+                            self.table_references[refs[k]].to_item()
+                            for k in sorted(refs)
+                            if k.startswith("t/")
+                        ]
+                    ),
+                    ephemeral_private=fixtures.fixed_bytes(f"keybox-ephemeral-{name}"),
+                )
             )
         groups_k = 2 if (stage >= 3 and not (stage == 3 and final)) else None
         body = rb.body(
@@ -985,7 +999,7 @@ def manifests_file(wd, bld: Builder) -> File:
         "manifests",
         "Release manifests (release.md Vectors): the valid scenarios and one invalid case per "
         "rule sub-condition. Tables are placeholder blobs (R15 pending Parquet); the keybox is a "
-        "placeholder public blob (HPKE pending). Rating releases and R10's rating case are pending "
+        "real HPKE public blob. Rating releases and R10's rating case are pending "
         "the take module. Invalid releases other than R9's were appended by a misbehaving log.",
     )
     for name, desc, rule, b in bld.cases:
@@ -1068,8 +1082,7 @@ def receipts_file() -> File:
         "receipts",
         "Receipt padding (release.md Receipts): integer ⌈σ_8⌉ from the exact rational σ², "
         "Y_r = 6·⌈σ_8⌉ + Z_r clamped at 0 with Z_r an input, and a padded tree with its pages. Dummy leaves "
-        "here are fixed bytes; a real aggregator draws them. The keybox seal is pending an HPKE library; only "
-        "its info and aad bytes are given.",
+        "here are fixed bytes; a real aggregator draws them. The keybox has a real HPKE seal.",
     )
     for d2, rho in (
         (4, Fraction(1, 200)),
@@ -1096,8 +1109,26 @@ def receipts_file() -> File:
            "page_cids": [hexify(x) for x in pages["page_cids"]], "root_blob": hexify(pages["root_blob"])})  # fmt: skip
     deck_cid = compute_cid(b"a deck")
     info, aad = rb.keybox_info(deck_cid)
-    f.add("keybox-layout", "HPKE info and aad for the keybox (the seal itself is pending)", "Members-only results",
-          {"deck_cid": hexify(deck_cid)}, {"info": hexify(info), "aad": hexify(aad), "pending": "HPKE seal needs a library"})  # fmt: skip
+    private = fixtures.fixed_bytes("release-keybox-private")
+    ephemeral = fixtures.fixed_bytes("release-keybox-ephemeral")
+    plaintext = cbor.encode([])
+    sealed = hpke.seal_keybox(
+        hpke.public_key(private), deck_cid, plaintext, ephemeral_private=ephemeral
+    )
+    assert hpke.open_keybox(private, deck_cid, sealed) == plaintext
+    f.add(
+        "keybox-layout",
+        "HPKE seal and open of an empty keybox",
+        "Members-only results",
+        {
+            "deck_cid": hexify(deck_cid),
+            "recipient_private": private.hex(),
+            "recipient_public": hpke.public_key(private).hex(),
+            "ephemeral_private": ephemeral.hex(),
+            "plaintext": plaintext.hex(),
+        },
+        {"info": hexify(info), "aad": hexify(aad), "sealed": sealed.hex()},
+    )
     return f
 
 

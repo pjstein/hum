@@ -63,6 +63,8 @@ Answered by the owner directly. The seam diffs still get the owner's read before
 
 ## Adopted in the docs
 
+- **Approved-library reference evidence (ADR 0112).** Seven lanes now have executable reference helpers or isolated probes, with explicit remaining gaps. This activates prior library approvals, not new protocol decisions. See `docs/decisions/0112-w0-library-reference-evidence.md` and `docs/handoff/library-lanes.md`.
+
 - **Wave 0 closeout clarifications (ADR 0111).** Rating part-3 counts and unlocks, greeter record timing and snapshot-aware admission checks, logging domains, and the normative boundaries of evidence/relay vectors. Independently reviewed; owner seam review remains required. No open owner decision is accepted by this entry. See `docs/decisions/0111-w0-11-closeout-clarifications.md`.
 
 - Manifest envelope: deterministic CBOR, CIDs (0x01 + SHA-256), detached COSE_Sign with Ed25519 under the `hum/manifest/1` domain string, keyset lineages with pre-rotation, pinning by CID, transparency logs with witness cosignatures. See `docs/specs/manifest.md`.
@@ -128,13 +130,15 @@ Answered by the owner directly. The seam diffs still get the owner's read before
 
 ## Open
 
+- **Library integration follow-ups (ADR 0112):** reviewed resolution of pinned BBS blind/nym draft inconsistencies; exact verifier WIT import ABI; backup phrase/outer-envelope encoding. Recommendations and evidence are in `docs/handoff/library-lanes.md`. Existing owner decisions below remain unchanged.
+
 - **Operator and Helper:** who runs the reference network, and which independent party runs the second aggregator.
 - **OHTTP relay operators:** the arrangement is accepted (two relays, never the operator); who runs them is open. See `docs/decisions/0073-w0-07-ohttp-relay-operator.md`.
 - **Privacy targets:** ε per release (drafted at ε 4 / ρ 0.254) and the yearly shield (placeholder ε 20).
 - **Witnesses at launch:** who runs them, and whether two cosignatures is enough.
 - **Licenses:** code (AGPL-3.0 or Apache-2.0), specs and release data (CC BY 4.0 suggested).
 - **Outside cryptography review:** who, and when before real users. Its first questions are filed by W0-02: the hidden-predicate extension (ADR 0022) and carrying the nym secret across renewal (ADR 0026). The in-house BBS crate is in its scope (ADR 0110).
-- **Under ADR 0110:** an Android build of `blst` for the in-house BBS crate.
+- **Under ADR 0110:** Android arm64 blst cross-build and Kotlin generation now pass (`docs/research/android-blst-feasibility.md`); actual Android Kotlin execution and the Hum BBS wrapper remain.
 - **Alternatives kept off in draft 0.1 (owner, 2026-10-07), open for a later decision:** direct phone-to-phone transfer of hand and shield, two voting devices, and device-bound cards (ADR 0023); the "I did not vote in this deck" control after a restore (ADR 0025); breakdowns (part 7) in phase 1 (`ballot.md`). The design doc's "per-context pseudonym", "Semaphore-style" and "issuer never sees the credential" wording is in the `design.md` edit list below (ADRs 0020, 0021).
 - **Hosting** for the reference services.
 - **First contexts** to launch with.

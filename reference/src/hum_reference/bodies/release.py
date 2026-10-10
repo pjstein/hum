@@ -1,8 +1,9 @@
 """The ``release`` body: docs/specs/release.md.
 
 R1 to R8 and R10 to R14 run at step 10; R9 replaces step 6 (both aggregator keysets). R15
-reads Parquet tables, which this run does not produce: tables are opaque placeholder blobs
-and R15 is pending. The keybox needs HPKE and is pending too; only its ``info``/``aad`` byte
+reads opened Parquet tables. The standalone ``parquet_tables`` validator now covers
+explicit trusted contracts; this world still uses opaque table blobs, so end-to-end R15
+remains pending. The keybox generator now uses real HPKE; its ``info``/``aad`` byte
 layout is here. Noise is never drawn: receipt padding takes ``Z_r`` as an input.
 """
 
@@ -169,7 +170,7 @@ def receipt_padding(sigma_sq_receipts: Fraction, z_r: int) -> int:
 
 
 def keybox_info(deck_cid: bytes) -> tuple[bytes, bytes]:
-    """(HPKE ``info``, ``aad``) for the keybox. The HPKE seal itself is pending a library."""
+    """Keybox info/AAD; the HPKE seal is implemented in ``hum_reference.hpke``."""
     return KEYBOX_INFO + deck_cid, deck_cid
 
 
@@ -631,7 +632,8 @@ def rules(view: m.Resolved) -> None:
             if env[m.ISSUED] - YEAR <= other[m.ISSUED] <= env[m.ISSUED]:
                 spent += rat_value(other_deck[m.BODY][dk.PLAN][dk.P_RHO])
         require(spent <= floors["rhoYear"], "R14", "yearly rho floor exceeded")
-    # R15: pending (Parquet tables are not produced in this run).
+    # R15: world integration pending; parquet_tables validates opened files
+    # against a trusted contract.
 
 
 def record_log(view: m.Resolved) -> bytes | None:
