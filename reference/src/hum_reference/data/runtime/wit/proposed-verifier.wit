@@ -1,0 +1,39 @@
+// PROPOSED ABI: requires owner acceptance before changing code.abi.
+// Dotted semantic import names map to kebab-case functions on this interface.
+package hum:verifier@0.1.0;
+
+interface host {
+    record evidence-value {
+        schema: string,
+        text: option<string>,
+        number: option<s64>,
+        day: option<u32>,
+        image: option<list<u8>>,
+    }
+    record attribute-claim { authority: list<u8>, name: string, value: u64 }
+    record device-claim { platform: string, level: u8 }
+    record dataset-record {
+        fields: list<tuple<string, string>>,
+        salt: list<u8>,
+        proof: list<list<u8>>,
+        index: u64,
+    }
+    manifest-body: func() -> list<u8>;
+    manifest-version: func() -> u64;
+    evidence-get: func(name: string) -> option<evidence-value>;
+    evidence-credential: func(name: string) -> option<list<attribute-claim>>;
+    evidence-device: func(name: string) -> option<device-claim>;
+    dataset-lookup: func(name: string, key: list<u8>) -> option<dataset-record>;
+    dataset-root: func(name: string) -> list<u8>;
+    time-day: func() -> u32;
+}
+
+world module {
+    import host;
+    record decision {
+        attributes: list<tuple<string, u64>>,
+        dedup-keys: list<list<u8>>,
+    }
+    record rejection { code: u16, retry: bool }
+    export decide: func() -> result<decision, rejection>;
+}

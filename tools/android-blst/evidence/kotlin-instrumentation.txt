@@ -1,0 +1,2 @@
+INSTRUMENTATION_RESULT: hum_result=PASS: 20 Kotlin-UniFFI-blst calls, 120 assertions
+INSTRUMENTATION_CODE: -1

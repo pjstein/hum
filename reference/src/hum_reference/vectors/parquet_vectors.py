@@ -12,7 +12,7 @@ def generate() -> list[File]:
     f = File(
         "release",
         "parquet",
-        "Parquet bytes are transport examples, not canonical bytes. Compare decoded rows, logical types and metadata. This standalone R15 helper requires a trusted complete contract; release-world integration remains pending.",
+        "Parquet bytes are transport examples, not canonical bytes. Compare decoded rows, logical types and metadata. This standalone R15 helper requires a trusted complete contract; release/opened-tables covers verified-manifest world integration.",
     )
     cards = tuple(b"\x01" + bytes([i]) * 32 for i in range(18))
     rows = [

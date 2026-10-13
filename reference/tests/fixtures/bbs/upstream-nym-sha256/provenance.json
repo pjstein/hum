@@ -1,0 +1,21 @@
+{
+  "repository": "https://github.com/cfrg/draft-irtf-cfrg-bbs-pseudonyms",
+  "commit": "fcbba956b7f8ed573c7589192f10decd3d2b8fc4",
+  "retrieved": "2026-10-13",
+  "source_directory": "fixtures/fixture_data/bls12-381-sha-256",
+  "sha256": {
+    "nymCommit/nymCommit001.json": "1f97533301bdf7c7455525728ae3cf36418213737d661bfb53c979b56dee9404",
+    "nymCommit/nymCommit002.json": "0a26deda35fe33a6b1296bec331748e92b623b2f1cd84a4a1574296f8d9f4a96",
+    "nymSignature/nymSignature001.json": "b7ab06f3c7695059d7d1274959a45e6bac99fb204b9c7ba00dd8a0abc5fac925",
+    "nymSignature/nymSignature002.json": "a9f68677e41a4290638ff53f9cb43f1196cd2737aa62a4c9e481e668a556beb8",
+    "nymSignature/nymSignature003.json": "f7a39948a541441866026cdf4d5201d05ecf2993764e067a3d30d6eca5d0251e",
+    "nymSignature/nymSignature004.json": "e6dccdded4cbec354c317f15cccb04f03e89feb57d0bd896a4789e3e7c0825ea",
+    "nymProof/nymProof001.json": "996a66de493e2276f137665d4bb49a755271d12a84d7a3469c7934d0ec6f154e",
+    "nymProof/nymProof002.json": "a01b936e707aef88a7b7faa783459c8ed931e958103aa6876d113cd99078935a",
+    "nymProof/nymProof003.json": "d23099bef17a87c2bdb3e3e0f08c1f03770777a3f4d6c4aff4bc7468728238a2",
+    "nymProof/nymProof004.json": "7ce927655540deebc7ea16707275074461c87e5d5210ec5eb2251df5f003d9ed",
+    "nymProof/nymProof005.json": "e6b6be050cf514de9cf9cbf8d60673de92ac8995d22b8111858ed90e63f16a64",
+    "nymProof/nymProof006.json": "3c222464e0913263d193f0e5ac2ec9c9d1d5ada152e54ae19b1457e687269bbb",
+    "nymProof/nymProof007.json": "70f97451c75679ec5ac512f715461109278da5c68856a245205f7ccc817c9e73"
+  }
+}

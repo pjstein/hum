@@ -1,0 +1,166 @@
+{
+ "spec": "services",
+ "file": "token-policy",
+ "notes": "Actual pinned privacypass library outputs; public synthetic keys/nonces/blinds only. DLEQ proof randomness is not serialized. P4 membership and key-lifetime decisions remain external boundaries.",
+ "cases": [
+  {
+   "id": "services/token-policy/channel-derive-issue-001",
+   "description": "Derive RFC9497 issuer and finalize actual channel token",
+   "section": "chat \u00a712; T-2",
+   "inputs": {
+    "master_secret": "7373737373737373737373737373737373737373737373737373737373737373",
+    "group_id": "6767676767676767676767676767676767676767676767676767676767676767",
+    "nonce": "6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e",
+    "blind": "8e7fd80970b8a00b0931b801a2e22d9903d83bd5597c6a4dc1496ed2b17ef820445ef3bd223f3ab2c4f54c5d1c956909",
+    "issuer_name": "delivery.example"
+   },
+   "expected": {
+    "seed": "219b371bbb0ab48e81f707427df0af64ef831f3963d7ebde5c874d660e8aaeb1",
+    "challenge": "0001001064656c69766572792e6578616d706c65000000",
+    "challenge_digest": "5337a8ae63316bba438b34268c4c49b73c5486e2050a76661c60edd35cbd04d0",
+    "key_id": "bc5a77605237d4154a25bcc8f0966da0f65a7f277bbb94ec8c10766946ca1e8b",
+    "nonce": "6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e",
+    "public_key": "0232d893f4aa64449226f861b772ad474ae9cdb6bbfcf3973bf735d4e87b57bb8df9460dc0d34470cd7261f640d81c134c",
+    "request": "00018b03b18a381a8085de793f325ade136da66ebc1b1a4fef42e0a0b624fb4bdf757a0c5fe4962ce0e7ea383be5f9f448f04040",
+    "token": "00016e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e5337a8ae63316bba438b34268c4c49b73c5486e2050a76661c60edd35cbd04d0bc5a77605237d4154a25bcc8f0966da0f65a7f277bbb94ec8c10766946ca1e8b7bca6d29ee3a170bdd0a37ae0a813b0de08af27c1587b0a2a465a9f9e0c8f9f1e770fdaa249e5a4224e851d30b50b9a4"
+   }
+  },
+  {
+   "id": "services/token-policy/wrong-context-002",
+   "description": "Reject policy mismatch without consuming the valid nonce",
+   "section": "T-1\u2013T-4",
+   "inputs": {
+    "token": "00016e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e5337a8ae63316bba438b34268c4c49b73c5486e2050a76661c60edd35cbd04d0bc5a77605237d4154a25bcc8f0966da0f65a7f277bbb94ec8c10766946ca1e8b7bca6d29ee3a170bdd0a37ae0a813b0de08af27c1587b0a2a465a9f9e0c8f9f1e770fdaa249e5a4224e851d30b50b9a4",
+    "mutation": "wrong-context",
+    "setup": {
+     "master_secret": "7373737373737373737373737373737373737373737373737373737373737373",
+     "group_id": "6767676767676767676767676767676767676767676767676767676767676767",
+     "nonce": "6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e",
+     "blind": "8e7fd80970b8a00b0931b801a2e22d9903d83bd5597c6a4dc1496ed2b17ef820445ef3bd223f3ab2c4f54c5d1c956909",
+     "issuer_name": "delivery.example"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "issuer_context_binding"
+   }
+  },
+  {
+   "id": "services/token-policy/unaccepted-authority-003",
+   "description": "Reject policy mismatch without consuming the valid nonce",
+   "section": "T-1\u2013T-4",
+   "inputs": {
+    "token": "00016e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e5337a8ae63316bba438b34268c4c49b73c5486e2050a76661c60edd35cbd04d0bc5a77605237d4154a25bcc8f0966da0f65a7f277bbb94ec8c10766946ca1e8b7bca6d29ee3a170bdd0a37ae0a813b0de08af27c1587b0a2a465a9f9e0c8f9f1e770fdaa249e5a4224e851d30b50b9a4",
+    "mutation": "unaccepted-authority",
+    "setup": {
+     "master_secret": "7373737373737373737373737373737373737373737373737373737373737373",
+     "group_id": "6767676767676767676767676767676767676767676767676767676767676767",
+     "nonce": "6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e",
+     "blind": "8e7fd80970b8a00b0931b801a2e22d9903d83bd5597c6a4dc1496ed2b17ef820445ef3bd223f3ab2c4f54c5d1c956909",
+     "issuer_name": "delivery.example"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "issuer_context_binding"
+   }
+  },
+  {
+   "id": "services/token-policy/same-connection-004",
+   "description": "Reject policy mismatch without consuming the valid nonce",
+   "section": "T-1\u2013T-4",
+   "inputs": {
+    "token": "00016e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e5337a8ae63316bba438b34268c4c49b73c5486e2050a76661c60edd35cbd04d0bc5a77605237d4154a25bcc8f0966da0f65a7f277bbb94ec8c10766946ca1e8b7bca6d29ee3a170bdd0a37ae0a813b0de08af27c1587b0a2a465a9f9e0c8f9f1e770fdaa249e5a4224e851d30b50b9a4",
+    "mutation": "same-connection",
+    "setup": {
+     "master_secret": "7373737373737373737373737373737373737373737373737373737373737373",
+     "group_id": "6767676767676767676767676767676767676767676767676767676767676767",
+     "nonce": "6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e",
+     "blind": "8e7fd80970b8a00b0931b801a2e22d9903d83bd5597c6a4dc1496ed2b17ef820445ef3bd223f3ab2c4f54c5d1c956909",
+     "issuer_name": "delivery.example"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "connection_separation"
+   }
+  },
+  {
+   "id": "services/token-policy/wrong-challenge-005",
+   "description": "Reject policy mismatch without consuming the valid nonce",
+   "section": "T-1\u2013T-4",
+   "inputs": {
+    "token": "00016e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e5337a8ae63316bba438b34268c4c49b73c5486e2050a76661c60edd35cbd04d0bc5a77605237d4154a25bcc8f0966da0f65a7f277bbb94ec8c10766946ca1e8b7bca6d29ee3a170bdd0a37ae0a813b0de08af27c1587b0a2a465a9f9e0c8f9f1e770fdaa249e5a4224e851d30b50b9a4",
+    "mutation": "wrong-challenge",
+    "setup": {
+     "master_secret": "7373737373737373737373737373737373737373737373737373737373737373",
+     "group_id": "6767676767676767676767676767676767676767676767676767676767676767",
+     "nonce": "6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e",
+     "blind": "8e7fd80970b8a00b0931b801a2e22d9903d83bd5597c6a4dc1496ed2b17ef820445ef3bd223f3ab2c4f54c5d1c956909",
+     "issuer_name": "delivery.example"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "issuer_key_challenge_binding"
+   }
+  },
+  {
+   "id": "services/token-policy/wrong-key-006",
+   "description": "Reject policy mismatch without consuming the valid nonce",
+   "section": "T-1\u2013T-4",
+   "inputs": {
+    "token": "00016e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e5337a8ae63316bba438b34268c4c49b73c5486e2050a76661c60edd35cbd04d0bc5a77605237d4154a25bcc8f0966da0f65a7f277bbb94ec8c10766946ca1e8b7bca6d29ee3a170bdd0a37ae0a813b0de08af27c1587b0a2a465a9f9e0c8f9f1e770fdaa249e5a4224e851d30b50b9a4",
+    "mutation": "wrong-key",
+    "setup": {
+     "master_secret": "7373737373737373737373737373737373737373737373737373737373737373",
+     "group_id": "6767676767676767676767676767676767676767676767676767676767676767",
+     "nonce": "6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e",
+     "blind": "8e7fd80970b8a00b0931b801a2e22d9903d83bd5597c6a4dc1496ed2b17ef820445ef3bd223f3ab2c4f54c5d1c956909",
+     "issuer_name": "delivery.example"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "issuer_key_challenge_binding"
+   }
+  },
+  {
+   "id": "services/token-policy/first-spend-007",
+   "description": "Accept after all policy rejections leave nonce unspent",
+   "section": "T-1",
+   "inputs": {
+    "token": "00016e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e5337a8ae63316bba438b34268c4c49b73c5486e2050a76661c60edd35cbd04d0bc5a77605237d4154a25bcc8f0966da0f65a7f277bbb94ec8c10766946ca1e8b7bca6d29ee3a170bdd0a37ae0a813b0de08af27c1587b0a2a465a9f9e0c8f9f1e770fdaa249e5a4224e851d30b50b9a4",
+    "setup": {
+     "master_secret": "7373737373737373737373737373737373737373737373737373737373737373",
+     "group_id": "6767676767676767676767676767676767676767676767676767676767676767",
+     "nonce": "6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e",
+     "blind": "8e7fd80970b8a00b0931b801a2e22d9903d83bd5597c6a4dc1496ed2b17ef820445ef3bd223f3ab2c4f54c5d1c956909",
+     "issuer_name": "delivery.example"
+    }
+   },
+   "expected": {
+    "accepted": true
+   }
+  },
+  {
+   "id": "services/token-policy/persistent-repeat-008",
+   "description": "Reject repeat after reopening nonce database",
+   "section": "T-1",
+   "inputs": {
+    "token": "00016e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e5337a8ae63316bba438b34268c4c49b73c5486e2050a76661c60edd35cbd04d0bc5a77605237d4154a25bcc8f0966da0f65a7f277bbb94ec8c10766946ca1e8b7bca6d29ee3a170bdd0a37ae0a813b0de08af27c1587b0a2a465a9f9e0c8f9f1e770fdaa249e5a4224e851d30b50b9a4",
+    "setup": {
+     "master_secret": "7373737373737373737373737373737373737373737373737373737373737373",
+     "group_id": "6767676767676767676767676767676767676767676767676767676767676767",
+     "nonce": "6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6e",
+     "blind": "8e7fd80970b8a00b0931b801a2e22d9903d83bd5597c6a4dc1496ed2b17ef820445ef3bd223f3ab2c4f54c5d1c956909",
+     "issuer_name": "delivery.example"
+    }
+   },
+   "rejection": {
+    "step": null,
+    "check": "token_spent"
+   }
+  }
+ ]
+}

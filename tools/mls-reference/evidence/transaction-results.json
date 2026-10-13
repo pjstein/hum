@@ -1,0 +1,19 @@
+{
+  "passed": 12,
+  "replays": 2,
+  "checks": [
+    "tampered_rejected_without_memory_or_storage_change",
+    "wrong_control_aad_rejected_without_memory_or_storage_change",
+    "public_control_rejected_without_memory_or_storage_change",
+    "wrong_app_aad_rejected_without_memory_or_storage_change",
+    "original_after_auth_failure_decrypts_and_frank_verifies",
+    "accepted_message_replay_rejected",
+    "persistent_replay_rejected_after_reload",
+    "valid_control_applies_exactly_once",
+    "private_proposal_with_required_control_aad",
+    "past_epoch_auth_failure_preserves_stored_generation",
+    "frank_rejects_group_epoch_content_changes",
+    "stamp_verifies_and_rejects_changed_sequence_or_aad"
+  ],
+  "fixture_kind": "captured synthetic state, exact deterministic replay; not deterministic setup"
+}

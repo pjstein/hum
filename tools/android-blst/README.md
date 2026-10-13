@@ -23,14 +23,51 @@ and exported UniFFI symbol. `out/android/` contains artifacts, hashes and inspec
 reports; generated files and binaries are ignored by Git. The lockfile is tracked.
 
 The host binding test exercises the actual UniFFI call and record serialization.
-It does not imply Kotlin/JNA or Android runtime execution. Kotlin binding source
-is generated but not compiled into an APK in this probe.
+The cross-build command alone does not imply Kotlin/JNA or Android runtime
+execution. The separate runtime harness below compiles and exercises that boundary.
 
 With a connected development Android device or emulator selected by `adb`, run
 `tools/android-blst/run-device.sh` to execute the cross-built native probe. That
 optional command executes the Rust/blst code on Android but still does not test a
-Kotlin-to-UniFFI call. The outstanding app integration check needs an Android test
-APK using the generated Kotlin, JNA and arm64 `.so`.
+Kotlin-to-UniFFI call. The separate `run-kotlin.sh` command tests Kotlin-to-UniFFI calls.
 
 See [feasibility findings](../../docs/research/android-blst-feasibility.md) for the
 actual run and its limits.
+
+## Kotlin runtime probe
+
+The isolated `runtime/` Gradle project packages generated Kotlin from `out/android/`
+and the same arm64 `.so`, with JNA 5.18.1. It is a synthetic test APK with no
+network permission, user data or production app dependency. Its instrumentation
+calls `runProbe()` twenty times and asserts all six returned fields (120 checks).
+`run-kotlin.sh` requires explicit instrumentation success, not merely adb exit 0.
+
+On Apple Silicon macOS, after the existing cross-build:
+
+```sh
+tools/android-blst/install-runtime-macos.sh
+python3 tools/android-blst/run-emulator.py
+```
+
+The installer verifies pinned JDK 21, Android command-line tools and Gradle 8.13
+archives, then installs Google's SDK packages (with license prompts). Everything
+lives under `~/Library/Caches/hum-android-runtime`; override with
+`HUM_ANDROID_RUNTIME_CACHE`. Python 3.12+ is required. SDK package revisions are
+recorded in evidence; Google's unversioned emulator/package download endpoints
+can supply newer revisions on a later run. Gradle uses AGP 8.13.2, Kotlin 2.2.21
+and the checked-in dependency lockfile.
+
+`run-emulator.py` creates its own API-35 arm64 AVD, refuses occupied ports 5580/5581,
+boots without a window, bounds boot/test time, and stops only the process it
+created. To run on another explicitly selected development target instead:
+
+```sh
+ANDROID_HOME=/path/to/sdk JAVA_HOME=/path/to/jdk \
+  GRADLE=/path/to/gradle-8.13/bin/gradle ANDROID_SERIAL=emulator-5554 \
+  tools/android-blst/run-kotlin.sh
+```
+
+Results and APK/build/emulator output are under ignored `out/runtime/` and
+`runtime/app/build/`. This demonstrates the BLS probe's Kotlin/JNA/UniFFI loader
+and execution path only; Hum BBS integration, real device performance and outside
+cryptography review remain separate work.

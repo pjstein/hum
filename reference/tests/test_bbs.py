@@ -146,7 +146,7 @@ def test_commit_generation_and_rejection():
     for invalid in [b"", encoded[:-1], encoded + b"\0", bytes(48) + encoded[48:]]:
         assert not bbs_commit.verify_commitment(invalid)
     with pytest.raises(ValueError):
-        bbs_commit.commit_scalars([123], [7, 0, 13])
+        bbs_commit.commit_scalars([123], [7, 0, 0])
 
 
 def test_draft_keygen_and_generators():

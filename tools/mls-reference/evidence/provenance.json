@@ -14,13 +14,31 @@
   },
   "files": {
     "uniffi-hum-profile.patch": {
-      "sha256": "2952e87a6c91b2b11ae06e92f93e6b630fd05a423dba349d05df7e16d65ec8fd"
+      "sha256": "85144799c66165c1f8095de87cfc778cb8a8438e77dbd8fddc5fe3c9beda7489"
     },
     "upstream.Cargo.lock": {
       "sha256": "4929bd58021f8310a268ffeb68dc3b482844de71e4468279742dfed64d835cb2"
     },
     "profile_checks.py": {
       "sha256": "ed35259ae60401f74f4db185b24793e1217af525da027a160477a1f6bbd7e1f3"
+    },
+    "transaction_checks.py": {
+      "sha256": "b43282e2a6eea3ab57ef755fc040a28bf2f3cb196a0c74552a5aaacc9611901e"
+    },
+    "hum_policy.py": {
+      "sha256": "4c9350ef6dba87e9de9b6638f0eb144f4cb7ac3e85294c787369ac293bc3adab"
+    },
+    "fixtures/synthetic-replay.json": {
+      "sha256": "028faa2a3032c14c180ff7d91e60d180adca6a61a5e0eccdad81b47c8a2c0cc4"
+    },
+    "run.sh": {
+      "sha256": "4a47dc66a530a41c96e25cf628cc903894d9e9cf94134c24f63b2cc694344be3"
     }
+  },
+  "transactional_review": "parent reviewed clone/process/publish design before implementation, 2026-10-13",
+  "transaction_checks": {
+    "per_replay": 12,
+    "replays": 2,
+    "synthetic_fixture_contains_public_test_private_keys": true
   }
 }

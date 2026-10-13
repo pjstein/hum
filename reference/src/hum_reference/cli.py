@@ -23,6 +23,10 @@ One directory per spec area. Each file holds `cases`; a case has an `id`, a
 outputs or a `rejection` (`step` is normative, `reason` is advisory). How to
 run them and what counts as conformant is in `docs/specs/conformance.md`.
 
+The `experimental/` directory contains unadopted, executable protocol proposals.
+Its cases must remain reproducible, but are excluded from normative client/server
+conformance obligations until the owner adopts their protocol choices.
+
 | Directory | Spec | Files |
 | --- | --- | --- |
 {table}
@@ -55,6 +59,8 @@ def write_vectors(out: Path) -> dict:
 
 def _write_readme(out: Path, summary: dict) -> None:
     specs = {
+        "experimental": "Unadopted proposals; see "
+        "`docs/decisions/0113-bbs-and-backup-proposals.md` and the proposed verifier WIT",
         "manifest": "`docs/specs/manifest.md`",
         "log": "`docs/specs/manifest.md` (Transparency logs), `docs/specs/services.md` "
         "(The bundle, Log and ledger, Witness)",

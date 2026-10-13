@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "scope": "synthetic BLS feasibility; not Hum BBS or production app",
+  "abi": "arm64-v8a",
+  "android_release": "15",
+  "api": "35",
+  "emulator": true,
+  "page_size": "4096",
+  "kotlin_calls": 20,
+  "assertions": 120,
+  "apk_sha256": "7b1eccb77f793650daf1977a0f653f88c283bc98816d67ab1ec0034da4978516",
+  "native_sha256": "4f9cf441705129756f333adad9b51de05849f1033a3f2cae152f3e3557d08017",
+  "generated_kotlin_sha256": "0b80e586a5ecbdc79646376ba7f4f4034c1cf1b45b183ad7e9d26ee135511be9"
+}

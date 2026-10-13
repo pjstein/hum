@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="Hum blst runtime probe" android:allowBackup="false" android:hasCode="true" />
+    <instrumentation android:name="hum.blst.runtime.ProbeInstrumentation"
+        android:targetPackage="hum.blst.runtime" android:label="Kotlin UniFFI blst checks" />
+</manifest>

@@ -126,14 +126,19 @@ def write_all(out: Path) -> dict[str, dict[str, tuple[int, int]]]:
         manifest_vectors,
         parquet_vectors,
         privacy_pass_vectors,
+        proposed_backup_vectors,
+        proposed_bbs_vectors,
         rating_vectors,
         release_body_vectors,
+        release_table_vectors,
         release_vectors,
+        runtime_host_vectors,
         services_vectors,
         shield_vectors,
         storage_more_vectors,
         storage_vectors,
         take_vectors,
+        token_policy_vectors,
         trust_list_vectors,
         verifier_runtime_vectors,
         verifier_vectors,
@@ -165,6 +170,11 @@ def write_all(out: Path) -> dict[str, dict[str, tuple[int, int]]]:
     files += privacy_pass_vectors.generate()
     files += parquet_vectors.generate()
     files += component_runtime_vectors.generate()
+    files += runtime_host_vectors.generate()
+    files += release_table_vectors.generate()
+    files += token_policy_vectors.generate()
+    files += proposed_backup_vectors.generate()
+    files += proposed_bbs_vectors.generate()
     summary: dict[str, dict[str, tuple[int, int]]] = {}
     for f in files:
         f.write(out)

@@ -11,13 +11,17 @@ One directory per spec area. Each file holds `cases`; a case has an `id`, a
 outputs or a `rejection` (`step` is normative, `reason` is advisory). How to
 run them and what counts as conformant is in `docs/specs/conformance.md`.
 
+The `experimental/` directory contains unadopted, executable protocol proposals.
+Its cases must remain reproducible, but are excluded from normative client/server
+conformance obligations until the owner adopts their protocol choices.
+
 | Directory | Spec | Files |
 | --- | --- | --- |
 | `manifest/` | `docs/specs/manifest.md` | `cbor.json` (29+17), `cid.json` (5+5), `signature.json` (3+4), `keyset.json` (3+0), `world.json` (1+0), `verification.json` (14+57) |
 | `log/` | `docs/specs/manifest.md` (Transparency logs), `docs/specs/services.md` (The bundle, Log and ledger, Witness) | `merkle.json` (12+0), `inclusion.json` (19+7), `consistency.json` (10+6), `leaves.json` (10+0), `checkpoint.json` (7+4), `bundle.json` (2+1) |
-| `services/` | `docs/specs/services.md` | `service-manifests.json` (11+29), `bundle.json` (3+4), `leaves.json` (5+1), `step9-at-log.json` (2+1), `checkpoint.json` (1+5), `witness-protocol.json` (5+0), `signed-requests.json` (3+4), `aggregator.json` (13+5), `errors.json` (20+1), `relay.json` (23+5), `log-submission.json` (4+4), `bodies.json` (24+1), `host.json` (4+5), `logging.json` (19+35) |
+| `services/` | `docs/specs/services.md` | `service-manifests.json` (11+29), `bundle.json` (3+4), `leaves.json` (5+1), `step9-at-log.json` (2+1), `checkpoint.json` (1+5), `witness-protocol.json` (5+0), `signed-requests.json` (3+4), `aggregator.json` (13+5), `errors.json` (20+1), `relay.json` (23+5), `log-submission.json` (4+4), `bodies.json` (24+1), `host.json` (4+5), `logging.json` (19+35), `token-policy.json` (2+6) |
 | `storage/` | `docs/specs/storage.md` §1–4, §8.1 | `padding.json` (9+2), `sealed.json` (7+11), `cid.json` (5+0), `reference.json` (4+10), `keyring.json` (7+0), `delete.json` (1+2), `ranges.json` (5+2), `reference-more.json` (1+12), `keyring-share.json` (0+2), `folders.json` (3+0), `delete-order.json` (1+4), `store-api.json` (23+7), `privacy-pass-rfc9578.json` (10+10) |
-| `release/` | `docs/specs/deck.md` (release plan), `docs/specs/release.md` (noise, rounds), `docs/specs/context.md` (constants, floors) | `accounting.json` (18+0), `sigmas.json` (9+0), `plans.json` (4+20), `floors.json` (4+9), `cap.json` (6+1), `gates.json` (12+0), `shield.json` (6+0), `phone.json` (15+0), `ranking.json` (6+0), `sampler.json` (5+0), `manifests.json` (27+54), `receipts.json` (10+0), `rating.json` (3+7), `parquet.json` (1+11) |
+| `release/` | `docs/specs/deck.md` (release plan), `docs/specs/release.md` (noise, rounds), `docs/specs/context.md` (constants, floors) | `accounting.json` (18+0), `sigmas.json` (9+0), `plans.json` (4+20), `floors.json` (4+9), `cap.json` (6+1), `gates.json` (12+0), `shield.json` (6+0), `phone.json` (15+0), `ranking.json` (6+0), `sampler.json` (5+0), `manifests.json` (27+54), `receipts.json` (10+0), `rating.json` (3+7), `parquet.json` (1+11), `opened-tables.json` (10+2) |
 | `context/` | `docs/specs/context.md` | `world.json` (1+0), `manifests.json` (7+71), `policy-eval.json` (11+0), `count.json` (4+0), `results-key.json` (3+1) |
 | `deck/` | `docs/specs/deck.md` | `world.json` (1+0), `manifests.json` (8+64), `plan-math.json` (9+0), `rating.json` (3+16) |
 | `take/` | `docs/specs/take.md` | `world.json` (1+0), `manifests.json` (7+24), `numeric.json` (28+0) |
@@ -30,3 +34,4 @@ run them and what counts as conformant is in `docs/specs/conformance.md`.
 | `credentials/` | `docs/specs/credentials.md` (structure, epochs, scopes; BBS pending) | `epochs.json` (18+0), `layout.json` (16+0), `presentations.json` (22+42), `issuance.json` (8+9), `backup.json` (2+2), `bbs-base.json` (4+12), `hpke.json` (6+13) |
 | `ballot/` | `docs/specs/ballot.md` | `round0.json` (10+0), `rounds.json` (5+0), `receipts.json` (3+1), `invalid.json` (0+34), `client.json` (6+0) |
 | `shield/` | `docs/specs/shield.md` | `shield.json` (46+14) |
+| `experimental/` | Unadopted proposals; see `docs/decisions/0113-bbs-and-backup-proposals.md` and the proposed verifier WIT | `proposed-host.json` (10+2), `proposed-backup.json` (2+9), `proposed-bbs.json` (3+18) |

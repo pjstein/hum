@@ -184,7 +184,7 @@ def canonical_unlocked(
     """R6: the parts whose tables are published at this stage.
 
     In a rating deck part 3 is unlocked with part 0 (its group cells are filtered in
-    post-processing at GATE_CELL, which the reference does not model).
+    post-processing at GATE_CELL; see release_tables.rating_group_rows).
     """
     planned = set(plan[dk.P_PARTS])
     out: set[int] = set()

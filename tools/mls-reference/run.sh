@@ -32,3 +32,5 @@ cargo run --locked -p uniffi-bindgen -- generate --library "target/debug/$librar
   --language python --out-dir "$probe_dir/out/python" --no-format
 cp "target/debug/$library" "$probe_dir/out/python/"
 PYTHONPATH="$probe_dir/out/python" python3 "$probe_dir/profile_checks.py" | tee "$probe_dir/out/profile-results.json"
+
+PYTHONPATH="$probe_dir/out/python" python3 "$probe_dir/transaction_checks.py" | tee "$probe_dir/out/transaction-results.json"

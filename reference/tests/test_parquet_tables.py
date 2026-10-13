@@ -112,3 +112,27 @@ def test_wrong_logical_type_and_expected_coordinate_domain():
     raw = encode_table("tallies", rows, contract.required_metadata())
     with pytest.raises(TableError, match="coordinates"):
         validate_table(raw, replace(contract, expected_keys=((1,),)))
+
+
+def test_reference_writer_metadata_order_is_stable_across_hash_seeds():
+    import os
+    import subprocess
+    import sys
+
+    script = """
+import hashlib
+from hum_reference.parquet_tables import encode_table
+metadata = {key: "1" for key in {
+    "hum.lambda1", "hum.lambda2", "hum.half_x", "hum.half_y", "hum.grid", "hum.m"
+}}
+print(hashlib.sha256(encode_table("axes", [], metadata)).hexdigest())
+"""
+    outputs = [
+        subprocess.check_output(
+            [sys.executable, "-c", script],
+            env={**os.environ, "PYTHONHASHSEED": seed},
+            text=True,
+        )
+        for seed in ("1", "2")
+    ]
+    assert outputs[0] == outputs[1]

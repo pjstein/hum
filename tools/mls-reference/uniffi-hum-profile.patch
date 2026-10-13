@@ -1,11 +1,20 @@
 diff --git a/mls-rs-uniffi/src/lib.rs b/mls-rs-uniffi/src/lib.rs
-index 65096b1..9199646 100644
+index 65096b1..708fbee 100644
 --- a/mls-rs-uniffi/src/lib.rs
 +++ b/mls-rs-uniffi/src/lib.rs
-@@ -132,6 +132,15 @@ pub struct ExtensionList {
+@@ -54,6 +54,8 @@ fn arc_unwrap_or_clone<T: Clone>(arc: Arc<T>) -> T {
+ #[uniffi(flat_error)]
+ #[non_exhaustive]
+ pub enum Error {
++    #[error("Hum profile rejection: {reason}")]
++    HumPolicy { reason: String },
+     #[error("A mls-rs error occurred: {inner}")]
+     MlsError {
+         #[from]
+@@ -132,6 +134,15 @@ pub struct ExtensionList {
      _inner: mls_rs::ExtensionList,
  }
- 
+
 +#[uniffi::export]
 +impl ExtensionList {
 +    pub fn get_data(&self, extension_type: u16) -> Option<Vec<u8>> {
@@ -18,10 +27,10 @@ index 65096b1..9199646 100644
  impl From<mls_rs::ExtensionList> for ExtensionList {
      fn from(inner: mls_rs::ExtensionList) -> Self {
          Self { _inner: inner }
-@@ -183,6 +192,20 @@ pub struct Message {
+@@ -183,6 +194,20 @@ pub struct Message {
      inner: mls_rs::MlsMessage,
  }
- 
+
 +#[uniffi::export]
 +impl Message {
 +    #[uniffi::constructor]
@@ -39,15 +48,30 @@ index 65096b1..9199646 100644
  impl From<mls_rs::MlsMessage> for Message {
      fn from(inner: mls_rs::MlsMessage) -> Self {
          Self { inner }
-@@ -246,6 +269,7 @@ pub enum ReceivedMessage {
+@@ -246,12 +271,14 @@ pub enum ReceivedMessage {
      ApplicationMessage {
          sender: Arc<SigningIdentity>,
          data: Vec<u8>,
 +        authenticated_data: Vec<u8>,
      },
- 
+
      /// A new commit was processed creating a new group state.
-@@ -350,6 +374,16 @@ impl Client {
+     Commit {
+         committer: Arc<SigningIdentity>,
+         effect: CommitEffect,
++        authenticated_data: Vec<u8>,
+     },
+
+     // TODO(mgeisler): rename to `Proposal` when
+@@ -260,6 +287,7 @@ pub enum ReceivedMessage {
+     ReceivedProposal {
+         sender: Arc<SigningIdentity>,
+         proposal: Arc<Proposal>,
++        authenticated_data: Vec<u8>,
+     },
+     /// Validated GroupInfo object.
+     GroupInfo,
+@@ -350,6 +378,16 @@ impl Client {
          id: Vec<u8>,
          signature_keypair: SignatureKeypair,
          client_config: ClientConfig,
@@ -64,7 +88,7 @@ index 65096b1..9199646 100644
      ) -> Self {
          let cipher_suite = signature_keypair.cipher_suite;
          let public_key = signature_keypair.public_key;
-@@ -361,7 +395,12 @@ impl Client {
+@@ -361,7 +399,12 @@ impl Client {
          let commit_options = mls_rules::CommitOptions::default()
              .with_ratchet_tree_extension(client_config.use_ratchet_tree_extension)
              .with_single_welcome_message(true);
@@ -78,10 +102,10 @@ index 65096b1..9199646 100644
          let client = mls_rs::Client::builder()
              .crypto_provider(crypto_provider)
              .identity_provider(basic::BasicIdentityProvider::new())
-@@ -644,6 +683,25 @@ impl Group {
+@@ -644,6 +687,25 @@ impl Group {
          commit_output.try_into()
      }
- 
+
 +    /// Add members with one opaque GroupInfo extension in their encrypted Welcome.
 +    pub async fn add_members_with_group_info_extension(
 +        &self,
@@ -104,10 +128,10 @@ index 65096b1..9199646 100644
      /// Propose to add one or more members to this group.
      ///
      /// The members are representated by key packages. The result is
-@@ -735,6 +793,32 @@ impl Group {
+@@ -735,6 +797,120 @@ impl Group {
          Ok(mls_message.into())
      }
- 
+
 +    /// Expose the RFC 9420 exporter, without implementing a new KDF.
 +    pub async fn export_secret(
 +        &self,
@@ -134,10 +158,98 @@ index 65096b1..9199646 100644
 +            .into())
 +    }
 +
++    /// Process a candidate clone under the current group's lock. Publish state only on success.
++    /// This pinned provider stages persistence until explicit write_to_storage.
++    /// Hum policy here enforces wire format/AAD shape only, not franking or role policy.
++    pub async fn process_incoming_message_transactional(
++        &self,
++        message: Arc<Message>,
++        hum_policy: bool,
++    ) -> Result<ReceivedMessage, Error> {
++        let mut original = self.inner().await;
++        if hum_policy && message.inner.wire_format() != mls_rs::WireFormat::PrivateMessage {
++            return Err(Error::HumPolicy {
++                reason: "channel requires PrivateMessage".into(),
++            });
++        }
++        let candidate = Group {
++            inner: Arc::new(Mutex::new(original.clone())),
++        };
++        let received = candidate.process_incoming_message(message).await?;
++        if hum_policy {
++            let valid = match &received {
++                ReceivedMessage::ApplicationMessage {
++                    authenticated_data, ..
++                } => authenticated_data.len() == 33 && authenticated_data[0] == 1,
++                ReceivedMessage::Commit {
++                    authenticated_data, ..
++                }
++                | ReceivedMessage::ReceivedProposal {
++                    authenticated_data, ..
++                } => authenticated_data == &[0],
++                _ => false,
++            };
++            if !valid {
++                return Err(Error::HumPolicy {
++                    reason: "authenticated_data shape".into(),
++                });
++            }
++        }
++        *original = candidate.inner().await.clone();
++        Ok(received)
++    }
++
++    pub async fn commit_with_aad(
++        &self,
++        authenticated_data: Vec<u8>,
++    ) -> Result<CommitOutput, Error> {
++        self.inner()
++            .await
++            .commit(authenticated_data)
++            .await?
++            .try_into()
++    }
++
++    pub async fn add_members_with_aad(
++        &self,
++        key_packages: Vec<Arc<Message>>,
++        authenticated_data: Vec<u8>,
++    ) -> Result<CommitOutput, Error> {
++        let mut group = self.inner().await;
++        let mut builder = group
++            .commit_builder()
++            .authenticated_data(authenticated_data);
++        for key_package in key_packages {
++            builder = builder.add_member(arc_unwrap_or_clone(key_package).inner)?;
++        }
++        builder.build().await?.try_into()
++    }
++
++    pub async fn propose_add_members_with_aad(
++        &self,
++        key_packages: Vec<Arc<Message>>,
++        authenticated_data: Vec<u8>,
++    ) -> Result<Vec<Arc<Message>>, Error> {
++        let mut group = self.inner().await;
++        let mut messages = Vec::new();
++        for key_package in key_packages {
++            messages.push(Arc::new(
++                group
++                    .propose_add(
++                        arc_unwrap_or_clone(key_package).inner,
++                        authenticated_data.clone(),
++                    )
++                    .await?
++                    .into(),
++            ));
++        }
++        Ok(messages)
++    }
++
      /// Process an inbound message for this group.
      pub async fn process_incoming_message(
          &self,
-@@ -747,7 +831,11 @@ impl Group {
+@@ -747,7 +923,11 @@ impl Group {
                  let sender =
                      Arc::new(index_to_identity(&group, application_message.sender_index)?.into());
                  let data = application_message.data().to_vec();
@@ -150,10 +262,31 @@ index 65096b1..9199646 100644
              }
              group::ReceivedMessage::Commit(commit_message) => {
                  let committer =
-@@ -895,7 +983,10 @@ mod tests {
- 
+@@ -756,6 +936,7 @@ impl Group {
+                 Ok(ReceivedMessage::Commit {
+                     committer,
+                     effect: commit_message.effect.into(),
++                    authenticated_data: commit_message.authenticated_data,
+                 })
+             }
+             group::ReceivedMessage::Proposal(proposal_message) => {
+@@ -766,7 +947,11 @@ impl Group {
+                     _ => todo!("External and NewMember proposal senders are not supported"),
+                 };
+                 let proposal = Arc::new(proposal_message.proposal.into());
+-                Ok(ReceivedMessage::ReceivedProposal { sender, proposal })
++                Ok(ReceivedMessage::ReceivedProposal {
++                    sender,
++                    proposal,
++                    authenticated_data: proposal_message.authenticated_data,
++                })
+             }
+             // TODO: group::ReceivedMessage::GroupInfo does not have any
+             // public methods (unless the "ffi" Cargo feature is set).
+@@ -895,7 +1080,10 @@ mod tests {
+
          alice_group.write_to_storage()?;
- 
+
 -        let ReceivedMessage::ApplicationMessage { sender: _, data } = received_message else {
 +        let ReceivedMessage::ApplicationMessage {
 +            sender: _, data, ..

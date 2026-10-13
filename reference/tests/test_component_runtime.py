@@ -94,3 +94,29 @@ def test_host_validates_module_decision_in_order():
         runtime.validate_decision({"attributes": [("invite", 1)], "dedup_keys": []}, body)
         == "host-invalid-dedup"
     )
+
+
+def test_probe_result_payload_layout_and_failure_controls():
+    module = runtime.probe("rejection")
+    assert runtime.run(module, cid(module)).value == {"code": 2, "retry": False}
+    # A deliberately wrong NaN expectation must be observable as code 1.
+    for name, original, wrong in (
+        ("nan", "2143289344", "2143289345"),
+        ("memory-grow", "i32.const -1 i32.ne", "i32.const -2 i32.ne"),
+    ):
+        text = (runtime.PROBES / f"{name}.wat").read_text().replace(original, wrong)
+        import wasmtime
+
+        module = wasmtime.wat2wasm(text)
+        assert runtime.run(module, cid(module)).value == {"code": 1, "retry": False}
+
+
+def test_aggregate_linear_memory_cannot_multiply_per_memory_cap():
+    import wasmtime
+
+    text = """(component
+      (core module $memory (memory 600))
+      (core instance $a (instantiate $memory))
+      (core instance $b (instantiate $memory)))"""
+    module = wasmtime.wat2wasm(text)
+    assert runtime.run(module, cid(module)).status == "module-limit"

@@ -1,5 +1,8 @@
 # Wave 0 approved-library follow-up
 
+Continued on 2026-10-13 in [seven-lane integration](seven-lane-integration.md).
+The dated record below describes the earlier implementation and its then-open gaps.
+
 2026-10-09 · branch `wave-0/contracts` · follows commit `0ae01ca`
 
 The owner requested all seven lanes after W0-11. Each now has executable work and

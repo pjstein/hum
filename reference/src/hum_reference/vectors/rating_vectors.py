@@ -352,8 +352,6 @@ def rating_release_env(
     label = f"rating-release-{hexify(deck.cid)[:8]}"
     receipts = {}
     if not below:
-        for t in ("tallies", "group_tallies", "group_sizes"):
-            refs[f"t/{t}"] = wd.w.put_blob(cbor.encode({"hum-vector-table": f"{label}-{t}"}))
         # take.md: a rating release publishes tallies, group_tallies and group_sizes only (no
         # repness at stage 1; release.md R7 asks for repness at stage 4).
         from .. import services
@@ -382,6 +380,14 @@ def rating_release_env(
         # R7: no groupsK below the minimum (no group table); keep_groups_k builds the R7 case
         groups_k=None if (below and not keep_groups_k) else groups_k,
     )
+    if not below:
+        from ..release_tables import rating_fixture_tables
+
+        fixture_body = copy.deepcopy(body)
+        if type(groups_n) is not int:
+            fixture_body[rb.PARTS][dk.GROUPS][rb.PR_N] = 900
+        for table, data in rating_fixture_tables(deck.cid, deck_env, fixture_body).items():
+            refs[f"t/{table}"] = wd.w.put_blob(data)
     env = m.envelope("release", body, authority=ctx_env[m.BODY][8][0], issued=issued, refs=refs)
     if mutate:
         mutate(env)
@@ -413,9 +419,8 @@ def build_rating_releases(wd, valid_deck: m.Bundle, decks: dict[str, m.Bundle]):
             "valid-rating-nhat-400",
             "a rating release with nHat 400 and the groups part's n 400, below gate(1) 800: "
             "part 3 is unlocked with part 0 (R6, RT3) and unlocked is [0, 3, 8]. Its group "
-            "cells are filtered at GATE_CELL 300 in post-processing, which the tables (opaque "
-            "placeholder blobs here) would show; the manifest-level rule is what this case "
-            "checks",
+            "cells are filtered at GATE_CELL 300 in post-processing. Real Parquet blobs are "
+            "pinned here; opened-tables.json checks their decoded content and filtering",
             None,
             None,
             b,

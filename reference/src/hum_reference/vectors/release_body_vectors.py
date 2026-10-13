@@ -1,7 +1,7 @@
 """Vectors for docs/specs/release.md manifests, built on deck_vectors' world.
 
-Tables are opaque placeholder blobs (no Parquet in this run), so R15 is pending; the keybox
-contains actual HPKE-encrypted sealed references. Noise is an
+Tables are real synthetic Parquet transports with manifest-derived metadata; the keybox
+contains actual HPKE-encrypted sealed references. Derived columns are not oracle outputs. Noise is an
 input: nHat, each part's n and the receipt padding draws are fixed numbers.
 """
 
@@ -54,8 +54,7 @@ class Builder:
     def signers(self, names=("l1", "h1", "h2")):
         return [(n.encode(), self.wd.keys[n]) for n in names]
 
-    def table_blob(self, label: str, sealed: bool) -> bytes:
-        data = cbor.encode({"hum-vector-table": label})
+    def table_blob(self, label: str, sealed: bool, data: bytes) -> bytes:
         if sealed:
             reference, data = storage.SealedReference.direct(
                 data,
@@ -159,30 +158,12 @@ class Builder:
                 if k.startswith("t/") or k.startswith("receipts/"):
                     refs[k] = v
         must, _may = rb.required_tables(plan, unlocked, n_hat_eff, stage, final)
-        for t in sorted(must):
-            if f"t/{t}" not in refs:
-                refs[f"t/{t}"] = self.table_blob(f"{name}-{t}", sealed)
         receipts: dict[int, bytes] = dict(prev_body[rb.RECEIPTS]) if prev_body else {}
         for r in range(stage if unlocked else 0):  # no receipt tree below the minimum
             if r not in receipts:
                 root, root_cid = self.receipt_root(f"{name}-round-{r}")
                 receipts[r] = root
                 refs[f"receipts/{r}"] = root_cid
-        if sealed:
-            refs["keybox"] = wd.w.put_blob(
-                hpke.seal_keybox(
-                    cbody[c.RESULTS_KEY],
-                    deck.cid,
-                    cbor.encode(
-                        [
-                            self.table_references[refs[k]].to_item()
-                            for k in sorted(refs)
-                            if k.startswith("t/")
-                        ]
-                    ),
-                    ephemeral_private=fixtures.fixed_bytes(f"keybox-ephemeral-{name}"),
-                )
-            )
         groups_k = 2 if (stage >= 3 and not (stage == 3 and final)) else None
         body = rb.body(
             helper=cbody[c.AGGREGATORS][1],
@@ -204,6 +185,27 @@ class Builder:
             round_deadline=None if final else issued + window,
             groups_k=groups_k,
         )
+        from ..release_tables import fixture_tables
+
+        tables = fixture_tables(deck.cid, deck_env, body, must)
+        for t in sorted(must):
+            if f"t/{t}" not in refs:
+                refs[f"t/{t}"] = self.table_blob(f"{name}-{t}", sealed, tables[t])
+        if sealed:
+            refs["keybox"] = wd.w.put_blob(
+                hpke.seal_keybox(
+                    cbody[c.RESULTS_KEY],
+                    deck.cid,
+                    cbor.encode(
+                        [
+                            self.table_references[refs[k]].to_item()
+                            for k in sorted(refs)
+                            if k.startswith("t/")
+                        ]
+                    ),
+                    ephemeral_private=fixtures.fixed_bytes(f"keybox-ephemeral-{name}"),
+                )
+            )
         env = m.envelope(
             "release",
             body,
@@ -998,7 +1000,7 @@ def manifests_file(wd, bld: Builder) -> File:
         SPEC,
         "manifests",
         "Release manifests (release.md Vectors): the valid scenarios and one invalid case per "
-        "rule sub-condition. Tables are placeholder blobs (R15 pending Parquet); the keybox is a "
+        "rule sub-condition. Tables are synthetic Parquet transports; the keybox is a "
         "real HPKE public blob. Rating releases and R10's rating case are pending "
         "the take module. Invalid releases other than R9's were appended by a misbehaving log.",
     )

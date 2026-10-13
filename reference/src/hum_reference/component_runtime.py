@@ -1,8 +1,8 @@
-"""Isolated no-import verifier component execution and hostile sandbox probes.
+"""Isolated verifier component execution and hostile sandbox probes.
 
 This implements the normative decide result shape, but is deliberately not the
-five profile binaries or a complete host-world adapter. Until a pinned WIT ABI
-is available, imports fail closed. No issuer secrets or dedup state enter here.
+five profile binaries. The proposed WIT adapter is explicitly opt-in; without
+proposed_host, imports fail closed. No issuer secrets or dedup state enter here.
 A process boundary makes the deadline enforceable even while native/host code
 is running; each call has fresh memory and is reaped before returning.
 """
@@ -50,6 +50,8 @@ def engine():
 def _shape(ty):
     if isinstance(ty, component.RecordType):
         return [(name, _shape(value)) for name, value in ty.fields]
+    if isinstance(ty, component.OptionType):
+        return ("option", _shape(ty.payload))
     if isinstance(ty, component.ListType):
         return ("list", _shape(ty.element))
     if isinstance(ty, component.TupleType):
@@ -69,18 +71,26 @@ DECISION_SHAPE = (
 )
 
 
-def _worker(connection, module_bytes, fuel):
+def _worker(connection, module_bytes, fuel, proposed_host=None):
     try:
         runtime = engine()
         compiled = component.Component(runtime, module_bytes)
-        if compiled.type.imports(runtime):
+        from .runtime_host import Host, imports_allowed
+
+        if compiled.type.imports(runtime) and (
+            proposed_host is None or not imports_allowed(compiled, runtime, _shape)
+        ):
             connection.send(Outcome("module-import"))
             return
         store = wasmtime.Store(runtime)
         # At most one memory prevents multiplying the per-memory cap.
         store.set_limits(memory_size=MEMORY_BYTES, memories=1)
         store.set_fuel(fuel if fuel is not None else 2**64 - 1)
-        instance = component.Linker(runtime).instantiate(store, compiled)
+        linker = component.Linker(runtime)
+        host = Host(proposed_host) if proposed_host is not None else None
+        if host is not None:
+            host.link(linker)
+        instance = linker.instantiate(store, compiled)
         decide = instance.get_func(store, "decide")
         if decide is None:
             connection.send(Outcome("module-abi"))
@@ -96,7 +106,8 @@ def _worker(connection, module_bytes, fuel):
                 "attributes": answer.payload.attributes,
                 "dedup_keys": getattr(answer.payload, "dedup-keys"),
             }
-            connection.send(Outcome("decision", value))
+            invalid = validate_decision(value, host.body) if host is not None else None
+            connection.send(Outcome(invalid or "decision", None if invalid else value))
         else:
             code, retry = answer.payload.code, answer.payload.retry
             if code > 999 or 6 <= code < 100:
@@ -118,12 +129,21 @@ def _worker(connection, module_bytes, fuel):
         )
         connection.send(Outcome("module-limit" if limited else "module-invalid", retryable=limited))
     except wasmtime.Trap:
-        connection.send(Outcome("module-limit", retryable=True))
+        connection.send(Outcome("module-invalid"))
+    except (ValueError, TypeError, KeyError):
+        connection.send(Outcome("module-host-input"))
     finally:
         connection.close()
 
 
-def run(module_bytes: bytes, expected_cid: bytes, *, timeout=WALL_SECONDS, fuel=1_000_000):
+def run(
+    module_bytes: bytes,
+    expected_cid: bytes,
+    *,
+    timeout=WALL_SECONDS,
+    fuel=1_000_000,
+    proposed_host=None,
+):
     """Execute one isolated call. Shorter host deadlines/fuel may stop early.
 
     Compilation/startup count against this host's budget too (stricter than the
@@ -137,7 +157,9 @@ def run(module_bytes: bytes, expected_cid: bytes, *, timeout=WALL_SECONDS, fuel=
         return Outcome("module-cid")
     context = multiprocessing.get_context("spawn")
     receive, send = context.Pipe(duplex=False)
-    process = context.Process(target=_worker, args=(send, module_bytes, fuel), daemon=True)
+    process = context.Process(
+        target=_worker, args=(send, module_bytes, fuel, proposed_host), daemon=True
+    )
     started = time.monotonic()
     process.start()
     send.close()

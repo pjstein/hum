@@ -134,7 +134,7 @@ class Contract:
 def encode_table(name: str, rows: list[dict[str, Any]], metadata: dict[str, str]) -> bytes:
     """Reference writer; decoded content rather than these bytes is normative."""
     schema = pa.schema(
-        SCHEMAS[name], metadata={k.encode(): v.encode() for k, v in metadata.items()}
+        SCHEMAS[name], metadata={k.encode(): v.encode() for k, v in sorted(metadata.items())}
     )
     table = pa.Table.from_pylist(rows, schema=schema)
     out = pa.BufferOutputStream()
@@ -165,7 +165,17 @@ def validate_table(data: bytes, contract: Contract) -> list[dict[str, Any]]:
     if not required <= md.keys():
         raise TableError("required metadata missing")
     for key, value in expected.items():
-        if key == "hum.sigma":
+        if key in {
+            "hum.sigma",
+            "hum.noise_sd",
+            "hum.n_hat",
+            "hum.n",
+            "hum.grid",
+            "hum.m",
+            "hum.k",
+            "hum.cov_scale",
+            "hum.blur",
+        }:
             try:
                 same = Decimal(md[key]) == Decimal(value) and Decimal(md[key]).is_finite()
             except InvalidOperation:

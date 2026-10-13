@@ -11,6 +11,15 @@ owner-approved `py_ecc` 8.0.0. It is a variable-time test oracle and must not ha
 production secrets. Inputs and explicit deterministic randomness in generated
 vectors are public synthetic data.
 
+## October 13 follow-through
+
+[ADR 0113](../decisions/0113-bbs-and-backup-proposals.md) adds the explicit E1
+proposal and a pinned upstream corpus containing the private inputs omitted from
+the published text. The proposed implementation independently reproduces two
+commitments, four signatures and seven complete proofs. These results resolve
+the missing generation-input evidence, while the draft contradictions and owner
+adoption of the errata remain separate questions. No normative P4 path is changed.
+
 ## Verified scope
 
 The SHA-256 base implementation reproduces both signature fixtures and all three

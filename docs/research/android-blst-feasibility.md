@@ -1,13 +1,13 @@
 # Android blst and UniFFI feasibility
 
-2026-10-09 · ADR 0110 follow-up · `seam:` pairing-library integration and FFI
+2026-10-13 · ADR 0110 follow-up · `seam:` pairing-library integration and FFI
 
-**The approved blst 0.3.17 builds into an arm64 Android shared library with a
-UniFFI export.** Kotlin bindings were generated from that Android library. A host
-Python binding called the same exported Rust operation through UniFFI and passed
-the cryptographic checks. No Android device/emulator or Kotlin runtime call was
-executed, so this proves the cross-build and binding-generation portion of the
-ADR, not a finished phone integration or BBS implementation.
+**The approved blst 0.3.17 executes through generated Kotlin/JNA/UniFFI on an
+arm64 Android emulator.** The October 13 runtime probe compiled an APK using the
+Kotlin generated from the Android library, then passed 120 assertions over 20
+native calls on Android 15/API 35. Earlier host and cross-build checks also pass.
+This proves this synthetic BLS operation's loader and binding execution path;
+it does not implement Hum BBS or establish production phone integration.
 
 ## Probe and environment
 
@@ -83,21 +83,49 @@ committed evidence. Hashes identify this run; the scripts and lockfile make the
 probe repeatable, but bit-for-bit reproducibility across hosts and paths has not
 been established.
 
+## Kotlin runtime execution on October 13
+
+`python3 tools/android-blst/run-emulator.py` exited 0 after creating and booting
+its own disposable arm64 API-35 emulator and building/installing the test APK.
+The instrumented caller invoked `runProbe()` twenty times, asserting all four
+booleans and both encoding lengths each time. The runner explicitly checks the
+instrumentation result because an adb shell exit code alone can conceal test
+failure. Output:
+
+```text
+INSTRUMENTATION_RESULT: hum_result=PASS: 20 Kotlin-UniFFI-blst calls, 120 assertions
+INSTRUMENTATION_CODE: -1
+```
+
+The emulator ran Android 15, API 35, arm64-v8a, **4096-byte pages**. This is not
+16 KiB runtime validation. The APK's SHA-256 is
+`7b1eccb77f793650daf1977a0f653f88c283bc98816d67ab1ec0034da4978516`;
+the native library hash matches the earlier cross-build above. The emulator was
+terminated after the run. No personal device or application data was accessed.
+
+The isolated test harness uses JDK 21.0.12.1, Gradle 8.13, AGP 8.13.2, Kotlin
+2.2.21 and JNA 5.18.1, with locked Gradle dependencies. JDK/Gradle/command-line
+archives have pinned SHA-256 checks. The SDK package revisions actually tested
+are recorded in [runtime packages](../../tools/android-blst/evidence/runtime-packages.json),
+and [runtime result](../../tools/android-blst/evidence/kotlin-runtime.json) and
+[instrumentation output](../../tools/android-blst/evidence/kotlin-instrumentation.txt)
+provide durable evidence. SDK's emulator and image endpoints can change revisions
+on subsequent installs; this does not claim bit-for-bit reproducible APKs.
+Sources: [Android command-line tools](https://developer.android.com/studio#command-tools),
+[Android emulator CLI](https://developer.android.com/studio/run/emulator-commandline),
+[JNA 5.18.1](https://github.com/java-native-access/jna/tree/5.18.1).
+
 ## Remaining phone proof
 
-1. Compile the generated Kotlin with JNA into an Android instrumented test APK,
-   package the arm64 `.so`, and call `runProbe()` on a device/emulator. This
-   closes Android loader, Kotlin/JNA, generated ABI and runtime execution together.
-2. `run-device.sh` can separately push and execute the native test executable on
-   an explicitly selected development `adb` target. It has not been run here and
-   does not replace the Kotlin test.
-3. Integrate the actual Hum BBS wrapper into `hum-ffi`, run the published draft
+1. Integrate the actual Hum BBS wrapper into `hum-ffi`, run the published draft
    vectors and independent Python comparisons through that boundary, and measure
    performance on supported devices. This probe exercises BLS library operations,
    not BBS, blind issuance, pseudonyms, zeroization policy or constant-time review.
-4. Include the new unsafe wrapper and blst's unaudited newer code in the outside
-   cryptography review required by ADR 0110. A successful build is not that review.
+2. Exercise supported physical phones and 16 KiB runtime configurations. ELF
+   alignment checks alone are not evidence of execution on 16 KiB pages.
+3. Include the new unsafe wrapper and blst's unaudited newer code in the outside
+   cryptography review required by ADR 0110. Execution success is not that review.
 
-Recommendation: mark the **arm64 cross-build feasibility** proven and retain the
-**Android Kotlin runtime integration** follow-up. No app or production library
-choice beyond the already approved blst version is made by this harness.
+Both **arm64 cross-build feasibility** and **Android Kotlin runtime feasibility**
+are now demonstrated for this probe. No production app or library choice beyond
+the already approved blst version is made by this harness.

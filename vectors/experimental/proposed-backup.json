@@ -1,0 +1,327 @@
+{
+ "spec": "experimental",
+ "file": "proposed-backup",
+ "notes": "EXPERIMENTAL B1/E1 ADR0113 proposal only. All phrases, private keys and plaintext are public synthetic fixture material. Empty-card full backups and chat exports exercise complete file framing; this does not verify a restored BBS card or migrate old opaque cards. No normative existing backup vectors are replaced. Size limits are local receiver policy, not universal protocol constants.",
+ "cases": [
+  {
+   "id": "experimental/proposed-backup/full-001",
+   "description": "Complete proposed file roundtrip",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "mode": 1,
+    "phrase": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+    "salt": "1838883a30f0204073f4d319e72c9558",
+    "recipient_private": "100c807f6b0c32afc094edc7c32f427d228db0fb847d26a24a700d5cb4da3867",
+    "content_key": "7a11ac9b18486a4c0d6637c28b4a05b7",
+    "ephemeral_private": "5e61fd4100887e247e5f94a0f421c44d4b8be88635a40f015f99f96a6428d403",
+    "plaintext": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "6bdded9bff1ff39b9bc87e8368d2868503b19ee196386cc861a5497cfe329a67"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "af24ef50678c36d1d2bafbf6039e656ce9627f91739cdedad0bdabf9f540194b"
+       }
+      ],
+      [
+       3,
+       []
+      ],
+      [
+       4,
+       [
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "015448d82c74dda60002afb343f7af54c12c48c7dff6240d3b2aff2212bdf326c5"
+           }
+          ],
+          [
+           1,
+           100
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       5,
+       200
+      ]
+     ]
+    },
+    "max_envelope_bytes": 1000000
+   },
+   "expected": {
+    "canonical_phrase": "6162616e646f6e206162616e646f6e206162616e646f6e206162616e646f6e206162616e646f6e206162616e646f6e206162616e646f6e206162616e646f6e206162616e646f6e206162616e646f6e206162616e646f6e2061626f7574",
+    "wrapped_key": "322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238608864dc7207bdf5f9a0294c30cab9942f97e1e4b860a333720d5ee5015f9dae",
+    "sealed_blob": "01a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51b",
+    "envelope": "a50001010102501838883a30f0204073f4d319e72c9558035840322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238608864dc7207bdf5f9a0294c30cab9942f97e1e4b860a333720d5ee5015f9dae04589101a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51b",
+    "restored": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "6bdded9bff1ff39b9bc87e8368d2868503b19ee196386cc861a5497cfe329a67"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "af24ef50678c36d1d2bafbf6039e656ce9627f91739cdedad0bdabf9f540194b"
+       }
+      ],
+      [
+       3,
+       []
+      ],
+      [
+       4,
+       [
+        {
+         "map": [
+          [
+           0,
+           {
+            "hex": "015448d82c74dda60002afb343f7af54c12c48c7dff6240d3b2aff2212bdf326c5"
+           }
+          ],
+          [
+           1,
+           100
+          ]
+         ]
+        }
+       ]
+      ],
+      [
+       5,
+       200
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "experimental/proposed-backup/chat-only-002",
+   "description": "Complete proposed file roundtrip",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "mode": 2,
+    "phrase": null,
+    "salt": null,
+    "recipient_private": "a155695f81ffd0dbaacf37f4d19c89eed31875a4069d4a927e40fbe445b13d09",
+    "content_key": "7a11ac9b18486a4c0d6637c28b4a05b7",
+    "ephemeral_private": "5e61fd4100887e247e5f94a0f421c44d4b8be88635a40f015f99f96a6428d403",
+    "plaintext": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "6bdded9bff1ff39b9bc87e8368d2868503b19ee196386cc861a5497cfe329a67"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "af24ef50678c36d1d2bafbf6039e656ce9627f91739cdedad0bdabf9f540194b"
+       }
+      ]
+     ]
+    },
+    "max_envelope_bytes": 1000000
+   },
+   "expected": {
+    "canonical_phrase": null,
+    "wrapped_key": "322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238e3b6ca680ff1f7cc542a79f72b978f1367467463da13a96d4874829f050693ed",
+    "sealed_blob": "01a513de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f350f04fba60a19eb608ccb289e0827a800dc57df80d75d6c",
+    "envelope": "a400010102035840322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238e3b6ca680ff1f7cc542a79f72b978f1367467463da13a96d4874829f050693ed04586101a513de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f350f04fba60a19eb608ccb289e0827a800dc57df80d75d6c",
+    "restored": {
+     "map": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       {
+        "hex": "6bdded9bff1ff39b9bc87e8368d2868503b19ee196386cc861a5497cfe329a67"
+       }
+      ],
+      [
+       2,
+       {
+        "hex": "af24ef50678c36d1d2bafbf6039e656ce9627f91739cdedad0bdabf9f540194b"
+       }
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "id": "experimental/proposed-backup/version-003",
+   "description": "Reject malformed or unauthenticated proposed file",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "envelope": "a50002010102501838883a30f0204073f4d319e72c9558035840322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238608864dc7207bdf5f9a0294c30cab9942f97e1e4b860a333720d5ee5015f9dae04589101a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51b",
+    "phrase": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+    "max_envelope_bytes": 1000000
+   },
+   "rejection": {
+    "step": null,
+    "check": "proposed-backup",
+    "reason": "version"
+   }
+  },
+  {
+   "id": "experimental/proposed-backup/mode-004",
+   "description": "Reject malformed or unauthenticated proposed file",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "envelope": "a50001010302501838883a30f0204073f4d319e72c9558035840322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238608864dc7207bdf5f9a0294c30cab9942f97e1e4b860a333720d5ee5015f9dae04589101a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51b",
+    "phrase": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+    "max_envelope_bytes": 1000000
+   },
+   "rejection": {
+    "step": null,
+    "check": "proposed-backup",
+    "reason": "mode"
+   }
+  },
+  {
+   "id": "experimental/proposed-backup/salt-length-005",
+   "description": "Reject malformed or unauthenticated proposed file",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "envelope": "a500010101024f000000000000000000000000000000035840322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238608864dc7207bdf5f9a0294c30cab9942f97e1e4b860a333720d5ee5015f9dae04589101a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51b",
+    "phrase": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+    "max_envelope_bytes": 1000000
+   },
+   "rejection": {
+    "step": null,
+    "check": "proposed-backup",
+    "reason": "salt-length"
+   }
+  },
+  {
+   "id": "experimental/proposed-backup/wrap-length-006",
+   "description": "Reject malformed or unauthenticated proposed file",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "envelope": "a50001010102501838883a30f0204073f4d319e72c955803583f00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004589101a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51b",
+    "phrase": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+    "max_envelope_bytes": 1000000
+   },
+   "rejection": {
+    "step": null,
+    "check": "proposed-backup",
+    "reason": "wrap-length"
+   }
+  },
+  {
+   "id": "experimental/proposed-backup/unknown-field-007",
+   "description": "Reject malformed or unauthenticated proposed file",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "envelope": "a60001010102501838883a30f0204073f4d319e72c9558035840322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238608864dc7207bdf5f9a0294c30cab9942f97e1e4b860a333720d5ee5015f9dae04589101a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51b094b6e6f7420616c6c6f776564",
+    "phrase": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+    "max_envelope_bytes": 1000000
+   },
+   "rejection": {
+    "step": null,
+    "check": "proposed-backup",
+    "reason": "unknown-field"
+   }
+  },
+  {
+   "id": "experimental/proposed-backup/sealed-format-008",
+   "description": "Reject malformed or unauthenticated proposed file",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "envelope": "a50001010102501838883a30f0204073f4d319e72c9558035840322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238608864dc7207bdf5f9a0294c30cab9942f97e1e4b860a333720d5ee5015f9dae04589102a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51b",
+    "phrase": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+    "max_envelope_bytes": 1000000
+   },
+   "rejection": {
+    "step": null,
+    "check": "proposed-backup",
+    "reason": "sealed-format"
+   }
+  },
+  {
+   "id": "experimental/proposed-backup/tampered-blob-009",
+   "description": "Reject malformed or unauthenticated proposed file",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "envelope": "a50001010102501838883a30f0204073f4d319e72c9558035840322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238608864dc7207bdf5f9a0294c30cab9942f97e1e4b860a333720d5ee5015f9dae04589101a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51a",
+    "phrase": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+    "max_envelope_bytes": 1000000
+   },
+   "rejection": {
+    "step": null,
+    "check": "proposed-backup",
+    "reason": "tampered-blob"
+   }
+  },
+  {
+   "id": "experimental/proposed-backup/tampered-wrap-010",
+   "description": "Reject malformed or unauthenticated proposed file",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "envelope": "a50001010102501838883a30f0204073f4d319e72c9558035840322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238608864dc7207bdf5f9a0294c30cab9942f97e1e4b860a333720d5ee5015f9daf04589101a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51b",
+    "phrase": "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about",
+    "max_envelope_bytes": 1000000
+   },
+   "rejection": {
+    "step": null,
+    "check": "proposed-backup",
+    "reason": "tampered-wrap"
+   }
+  },
+  {
+   "id": "experimental/proposed-backup/full-to-chat-downgrade-011",
+   "description": "Authenticated full backup is not a chat export",
+   "section": "ADR0113 B1",
+   "inputs": {
+    "profile": "proposed-B1-E1-ADR0113",
+    "envelope": "a400010102035840322a8ef7bf4515fe79d34062d7251abd55d46ee69374f458e8f36f3e493bb238e3b6ca680ff1f7cc542a79f72b978f1367467463da13a96d4874829f050693ed04589101a013de36a3170c0069271bc8fbc7b64d0d1544435254a25c85c2e5f2da2aa33ff81388f9de79816159fa962c38d9714331b435c7a21da759bc00d0df4b73d9c2078ae9876e243a5f358c84ff27a819b3fdd6c35a6f55975b0b4b02c467691f1d39f03b734e166fb7ee4e6a6fd8839ce4cc51338ffbe265e4a3b0e2a09f9bd238409923a84fcd9486ffd7270477e0b51b",
+    "recipient_private": "a155695f81ffd0dbaacf37f4d19c89eed31875a4069d4a927e40fbe445b13d09",
+    "max_envelope_bytes": 1000000
+   },
+   "rejection": {
+    "step": null,
+    "check": "proposed-backup",
+    "reason": "wrong inner schema"
+   }
+  }
+ ]
+}

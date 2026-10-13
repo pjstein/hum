@@ -9,7 +9,7 @@ def generate():
     f = File(
         "verifier-runtime",
         "component-sandbox",
-        "Executable small components, inline as hex. These are sandbox probes, not the five profile binaries. decide uses result<decision,rejection>. A fresh subprocess enforces at most ten seconds including native execution; host-selected fuel may stop earlier. No imports are currently linked: the spec's dotted import names and @0.1 world version need a pinned valid WIT ABI. The adapter permits one linear memory, capped at 64 MiB, to prevent per-memory cap multiplication. Multi-memory profile support, all host-world import calls and five profile builds remain gaps.",
+        "Executable small components, inline as hex. These are sandbox probes, not the five profile binaries. decide uses result<decision,rejection>. A fresh subprocess enforces at most ten seconds including native execution; host-selected fuel may stop earlier. Default execution links no imports. Experimental proposed-host vectors separately exercise all eight imports under a proposed valid WIT ABI. The adapter permits one linear memory, capped at 64 MiB, to prevent per-memory cap multiplication. Multi-memory profile support, normative ABI adoption and five profile builds remain gaps.",
     )
     for name, status in (
         ("empty-decision", "decision"),

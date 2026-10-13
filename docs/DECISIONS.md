@@ -38,10 +38,10 @@ The owner reviewed the wave 0 breakdowns and accepted every recommendation made 
 
 | Use | Rust (core and services) | Python reference | Stated risk |
 | --- | --- | --- | --- |
-| MLS (ADR 0050) | OpenMLS 0.9.0, with the pure-ciphertext wire format policy. Not an earlier version: 0.9.0 fixes a commit-acceptance bug | `mls-rs` 0.56.0 through its uniffi bindings (`mls-rs-uniffi`, built from git), for reference vectors | No public audit of OpenMLS was found, and its API breaks between minor versions. `mls-rs` says it has had no full third-party audit; nobody has checked that the bindings expose authenticated data, exporters and private-use extensions |
+| MLS (ADR 0050) | OpenMLS 0.9.0, with the pure-ciphertext wire format policy. Not an earlier version: 0.9.0 fixes a commit-acceptance bug | `mls-rs` 0.56.0 through its uniffi bindings (`mls-rs-uniffi`, built from git), for reference vectors | No public audit of OpenMLS was found, and its API breaks between minor versions. `mls-rs` says it has had no full third-party audit. ADR 0114 records a tested wrapper exposing AAD, exporters and private extensions, with transactional receive checks |
 | HPKE | `hpke-rs` 0.7.0 | `pyhpke` 0.6.5 | Neither is audited. `hpke-rs` recently moved repositories and is MPL-2.0, which matters for the license decision |
 | Argon2id | `argon2` 0.6.0 (RustCrypto) | `cryptography` 50.0.2, already a dependency | No audit on record for the Rust crate. The 64 MiB setting is untested on a low-end phone |
-| Privacy Pass | `privacypass` 0.2.0-pre.3, pinned to the exact pre-release | No library: the RFC 9578 vectors | Pre-release, unaudited, one author, on a pre-release fork of the VOPRF crate. Nobody has checked that it exposes RFC 9497 `DeriveKeyPair`. Type 0x0001 issuance stays a gap in the reference |
+| Privacy Pass | `privacypass` 0.2.0-pre.3, pinned to the exact pre-release | Independent framing/type-2 verification plus an isolated bridge to the same approved Rust library for issuance/type-1 operations (ADR 0114) | Pre-release, unaudited, one author, on a pre-release fork of the VOPRF crate. RFC 9497 derivation and both issuance types now execute; this shared library path is not an independent cryptographic implementation |
 | DP noise | OpenDP 0.16.0, its exact discrete Gaussian sampler (`sample_discrete_gaussian`), with Hum's own ρ accounting | Draws no noise (ADR 0081) | The sampler takes σ, not σ², which item 20 settles. It cannot be seeded, so the statistical harness is the only test |
 | WebAssembly components | `wasmtime` 49.x | `wasmtime` (wasmtime-py) 49.x, same major | Audit status not researched. Fuel counts may differ between wasmtime majors, so fuel vectors may pin one version |
 | Parquet | `parquet` 60.0.0 (arrow-rs) | `pyarrow` 25.0.1, dev dependency | Audit status not researched. Bytes differ between writers, so tables are compared row-wise |
@@ -56,12 +56,14 @@ Answered by the owner directly. The seam diffs still get the owner's read before
 27. **Discovery and wire-format gaps (ADR 0107, every recommended item, applied).** `resolvers` and `relays` in the context manifest; bootstrap `service` bundles shipped with the app; integer keys for every `services.md` body; the receipt root blob and a `kid` on receipts; `hum/evidence/1`; rules for the `delivery` service kind; bound messages named where scopes are; `AUTHOR_WINDOW` everywhere; bucketed aggregator counts; the simulator's allow table. See `docs/decisions/0107-w0-10-discovery-and-wire-gaps.md`.
 28. **The two-phone residual risk: accept and disclose (ADR 0023).** A person who restores their backup onto a second phone and keeps voting from both can have up to twice the yearly shield spent across different decks. Accepted for draft 0.1, stated in the threat model and `shield.md`. Device-bound cards stay a filed alternative. See `docs/decisions/0023-w0-02-backup-and-voting-device.md`.
 29. **Independent check for the in-house BBS crate (ADR 0110).** A second implementation in the Python reference over a vetted pairing library, so vectors never come from the code under test. The pairing libraries are item 30. See `docs/decisions/0110-owner-bbs-in-house.md`.
-30. **Pairing libraries for the in-house BBS work (ADR 0110).** `blst` 0.3.17 for the Rust crate, behind one small Hum wrapper that holds all the unsafe code; `py_ecc` 8.0.0 for the Python reference. Both are in the Libraries table above with their risks. An Android build of `blst` is still open. See `docs/decisions/0110-owner-bbs-in-house.md`.
+30. **Pairing libraries for the in-house BBS work (ADR 0110).** `blst` 0.3.17 for the Rust crate, behind one small Hum wrapper that holds all the unsafe code; `py_ecc` 8.0.0 for the Python reference. Both are in the Libraries table above with their risks. Android arm64 cross-build and Kotlin runtime feasibility now pass (ADRs 0112 and 0114); the Hum BBS wrapper remains future work. See `docs/decisions/0110-owner-bbs-in-house.md`.
 31. **`CLAUDE.md` invariant 3 names the daily count exception.** Edited by the orchestrator on the owner's go-ahead; this was the last follow-up of ADR 0103 item 1.
 32. **A context's first log is frozen (review item TS7, option a).** `context.md` C11 freezes `logs[0].log` from version 1, so the yearly floor `rhoYear` and the rating-release count cannot be restarted by naming another log. A context that must move ledgers starts a new lineage. See `docs/specs/reviews/cross-spec.md` section 12.11.
 33. **Relay selection (review item TS10, option a).** A context-named relay carries only that context's requests, picked at random per connection together with the shipped relays, and never a request to an aggregator or a submission to a log; the services screen says what such a relay learns (`services.md` O-6). See `docs/specs/reviews/cross-spec.md` section 12.11.
 
 ## Adopted in the docs
+
+- **Seven-lane integration evidence (ADR 0114).** Verified-manifest Parquet readers, Android Kotlin execution, transactional MLS receives, Privacy Pass adapters and an opt-in verifier host. BBS E1, backup B1 and the WIT choice remain proposals; no owner decision is implied. See `docs/decisions/0114-seven-lane-integration-evidence.md` and `docs/decisions/0113-bbs-and-backup-proposals.md`.
 
 - **Approved-library reference evidence (ADR 0112).** Seven lanes now have executable reference helpers or isolated probes, with explicit remaining gaps. This activates prior library approvals, not new protocol decisions. See `docs/decisions/0112-w0-library-reference-evidence.md` and `docs/handoff/library-lanes.md`.
 
@@ -130,6 +132,8 @@ Answered by the owner directly. The seam diffs still get the owner's read before
 
 ## Open
 
+- **Consensus publication across release stages (ADR 0115):** recommend final versions only, with part 3 unlocked at stage 4. Existing R6/R7/R8 and the baseline reference conflict on locked-part and early-publication transitions. See `docs/decisions/0115-release-consensus-stage-transitions.md`.
+
 - **Library integration follow-ups (ADR 0112):** reviewed resolution of pinned BBS blind/nym draft inconsistencies; exact verifier WIT import ABI; backup phrase/outer-envelope encoding. Recommendations and evidence are in `docs/handoff/library-lanes.md`. Existing owner decisions below remain unchanged.
 
 - **Operator and Helper:** who runs the reference network, and which independent party runs the second aggregator.
@@ -138,7 +142,7 @@ Answered by the owner directly. The seam diffs still get the owner's read before
 - **Witnesses at launch:** who runs them, and whether two cosignatures is enough.
 - **Licenses:** code (AGPL-3.0 or Apache-2.0), specs and release data (CC BY 4.0 suggested).
 - **Outside cryptography review:** who, and when before real users. Its first questions are filed by W0-02: the hidden-predicate extension (ADR 0022) and carrying the nym secret across renewal (ADR 0026). The in-house BBS crate is in its scope (ADR 0110).
-- **Under ADR 0110:** Android arm64 blst cross-build and Kotlin generation now pass (`docs/research/android-blst-feasibility.md`); actual Android Kotlin execution and the Hum BBS wrapper remain.
+- **Under ADR 0110:** Android arm64 blst cross-build, Kotlin generation and emulator execution now pass (`docs/research/android-blst-feasibility.md`); the Hum BBS wrapper, physical-device and 16 KiB-page checks remain.
 - **Alternatives kept off in draft 0.1 (owner, 2026-10-07), open for a later decision:** direct phone-to-phone transfer of hand and shield, two voting devices, and device-bound cards (ADR 0023); the "I did not vote in this deck" control after a restore (ADR 0025); breakdowns (part 7) in phase 1 (`ballot.md`). The design doc's "per-context pseudonym", "Semaphore-style" and "issuer never sees the credential" wording is in the `design.md` edit list below (ADRs 0020, 0021).
 - **Hosting** for the reference services.
 - **First contexts** to launch with.
