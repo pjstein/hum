@@ -76,7 +76,10 @@ See [ADR 0114](../decisions/0114-seven-lane-integration-evidence.md) and the
 
 `seam:` credential issuance/presentation; key derivation/storage; sealed backups
 and keyboxes; release metadata and cell floors; token replay state; evidence
-projection; MLS receive state. Owner seam review is still required before merge.
+projection; MLS receive state. The owner approved merging this reviewed work
+with “I’m good with it. Let it rip.” This approves the integration as presented;
+the four protocol choices above remain proposals and outside cryptography review
+remains required before real users.
 
 ## Final verification
 
